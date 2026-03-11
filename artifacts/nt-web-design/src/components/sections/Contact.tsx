@@ -67,7 +67,7 @@ export function Contact() {
                     <h4 className="font-bold text-sm text-white uppercase tracking-wider mb-1">
                       {perk.title}
                     </h4>
-                    <p className="font-serif text-sm text-white/40">
+                    <p className="font-serif text-sm text-white/70">
                       {perk.desc}
                     </p>
                   </div>
