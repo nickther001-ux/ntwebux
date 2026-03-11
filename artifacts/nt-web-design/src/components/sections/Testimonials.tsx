@@ -1,47 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useLanguage } from '@/lib/i18n';
-
-const avatarColors = [
-  { bg: 'rgba(0,170,221,0.2)', text: '#00AADD' },
-  { bg: 'rgba(201,168,76,0.2)', text: '#C9A84C' },
-  { bg: 'rgba(0,140,255,0.15)', text: '#5A9AFF' },
-];
-
-function Avatar({ src, name, index }: { src: string; name: string; index: number }) {
-  const [failed, setFailed] = useState(false);
-  const initials = name.split(' ').map(n => n[0]).slice(0, 2).join('');
-  const color = avatarColors[index % avatarColors.length];
-
-  if (failed) {
-    return (
-      <div
-        className="w-12 h-12 rounded-full flex items-center justify-center text-sm font-bold shrink-0 border-2 border-border"
-        style={{ background: color.bg, color: color.text }}
-      >
-        {initials}
-      </div>
-    );
-  }
-
-  return (
-    <img
-      src={src}
-      alt={name}
-      className="w-12 h-12 rounded-full object-cover border-2 border-border shrink-0"
-      onError={() => setFailed(true)}
-    />
-  );
-}
 
 export function Testimonials() {
   const { t } = useLanguage();
   const items = t('testimonials.items') as { quote: string, name: string, role: string }[];
-
-  const avatars = [
-    '/images/avatar-1.png',
-    '/images/avatar-2.png',
-    '/images/avatar-3.png',
-  ];
 
   return (
     <section className="py-32 bg-[#07101F] relative z-10 border-y border-border/50">
@@ -69,12 +31,9 @@ export function Testimonials() {
                   </p>
                 </div>
                 
-                <div className="flex items-center gap-4">
-                  <Avatar src={avatars[i]} name={item.name} index={i} />
-                  <div>
-                    <h4 className="font-bold text-sm text-foreground uppercase tracking-wider">{item.name}</h4>
-                    <p className="text-xs text-muted mt-1">{item.role}</p>
-                  </div>
+                <div>
+                  <h4 className="font-bold text-sm text-foreground uppercase tracking-wider">{item.name}</h4>
+                  <p className="text-xs text-muted mt-1">{item.role}</p>
                 </div>
               </div>
             </div>
