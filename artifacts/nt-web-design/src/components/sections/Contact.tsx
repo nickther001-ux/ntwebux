@@ -55,7 +55,7 @@ export function Contact() {
             <h2 className="text-5xl lg:text-6xl font-display text-white leading-none mb-6">
               {t('contact.title')}
             </h2>
-            <p className="font-serif text-lg text-white/50 mb-12">
+            <p className="font-serif text-lg text-white/75 mb-12">
               {t('contact.desc')}
             </p>
 
