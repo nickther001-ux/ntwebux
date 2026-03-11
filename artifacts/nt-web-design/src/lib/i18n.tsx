@@ -57,9 +57,9 @@ const translations: Translations = {
     testimonials: {
       title: "Don't just take our word for it.",
       items: [
-        { quote: "Working with NT Web Design was a game-changer. They completely revamped our digital presence and our leads doubled in the first month.", name: "Jean-Michel Tremblay", role: "CEO, NexaCorp" },
-        { quote: "Fast, professional, and insanely talented. The team understood our vision instantly.", name: "Sophie Côté", role: "Founder, Bloom Studio" },
-        { quote: "Our e-commerce sales skyrocketed after the redesign. Highly recommended.", name: "David Larose", role: "Director, Urban Gear" }
+        { quote: "Working with NT Web Design was a game-changer. They completely revamped our digital presence and our leads doubled in the first month.", name: "Jean-Michel Tremblay", role: "Owner, Tremblay Excavation Inc." },
+        { quote: "Fast, professional, and insanely talented. The team understood our vision instantly.", name: "Sophie Côté", role: "Founder, SC Esthétique" },
+        { quote: "Our e-commerce sales skyrocketed after the redesign. Highly recommended.", name: "David Larose", role: "Director, Larose & Fils" }
       ]
     },
     contact: {
@@ -129,9 +129,9 @@ const translations: Translations = {
     testimonials: {
       title: "Ne nous croyez pas sur parole.",
       items: [
-        { quote: "Travailler avec NT Web Design a tout changé. Ils ont complètement repensé notre présence numérique et nos prospects ont doublé.", name: "Jean-Michel Tremblay", role: "PDG, NexaCorp" },
-        { quote: "Rapide, professionnel et incroyablement talentueux. L'équipe a compris notre vision instantanément.", name: "Sophie Côté", role: "Fondatrice, Bloom Studio" },
-        { quote: "Nos ventes en ligne ont explosé après la refonte. Fortement recommandé.", name: "David Larose", role: "Directeur, Urban Gear" }
+        { quote: "Travailler avec NT Web Design a tout changé. Ils ont complètement repensé notre présence numérique et nos prospects ont doublé.", name: "Jean-Michel Tremblay", role: "Propriétaire, Tremblay Excavation Inc." },
+        { quote: "Rapide, professionnel et incroyablement talentueux. L'équipe a compris notre vision instantanément.", name: "Sophie Côté", role: "Fondatrice, SC Esthétique" },
+        { quote: "Nos ventes en ligne ont explosé après la refonte. Fortement recommandé.", name: "David Larose", role: "Directeur, Larose & Fils" }
       ]
     },
     contact: {
