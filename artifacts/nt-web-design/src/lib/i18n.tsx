@@ -78,7 +78,7 @@ const translations: Translations = {
     footer: {
       tagline: "Crafting digital experiences that drive real business growth.",
       links1: "Services", links2: "Company", links3: "Legal",
-      copy: "© 2026 NT Web Design. All rights reserved."
+      copy: "© 2026 NT WebUX. All rights reserved."
     }
   },
   fr: {
@@ -150,7 +150,7 @@ const translations: Translations = {
     footer: {
       tagline: "Créer des expériences numériques qui stimulent la véritable croissance.",
       links1: "Services", links2: "Entreprise", links3: "Légal",
-      copy: "© 2026 NT Web Design. Tous droits réservés."
+      copy: "© 2026 NT WebUX. Tous droits réservés."
     }
   }
 };

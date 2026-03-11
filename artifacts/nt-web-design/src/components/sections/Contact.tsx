@@ -75,13 +75,24 @@ export function Contact() {
               ))}
             </div>
 
-            <div className="pt-8 border-t border-white/10">
-              <div className="font-bold text-sm text-white uppercase tracking-widest mb-2">Direct Contact</div>
-              <a href="mailto:info@ntwebdesign.ca" className="block font-display text-3xl text-accent hover:text-white transition-colors mb-2">
-                info@ntwebdesign.ca
+            <div className="pt-8 border-t border-white/10 flex flex-col gap-5">
+              <a href="tel:+14388067640" className="flex items-center gap-4 group">
+                <div className="w-10 h-10 rounded bg-accent/10 flex items-center justify-center shrink-0 group-hover:bg-accent/20 transition-colors">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00AADD" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.59 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.79a16 16 0 0 0 6 6l.87-.87a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.03z"/></svg>
+                </div>
+                <div>
+                  <div className="text-[10px] font-bold uppercase tracking-widest text-white/30 mb-0.5">Phone</div>
+                  <div className="text-base font-bold text-white group-hover:text-accent transition-colors">(438) 806-7640</div>
+                </div>
               </a>
-              <a href="tel:+14388067640" className="block font-display text-2xl text-white/60 hover:text-white transition-colors">
-                (438) 806-7640
+              <a href="mailto:nicktech@computer4u.com" className="flex items-center gap-4 group">
+                <div className="w-10 h-10 rounded bg-accent/10 flex items-center justify-center shrink-0 group-hover:bg-accent/20 transition-colors">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00AADD" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                </div>
+                <div>
+                  <div className="text-[10px] font-bold uppercase tracking-widest text-white/30 mb-0.5">Email</div>
+                  <div className="text-base font-bold text-white group-hover:text-accent transition-colors">nicktech@computer4u.com</div>
+                </div>
               </a>
             </div>
           </div>

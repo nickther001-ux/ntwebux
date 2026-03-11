@@ -26,7 +26,8 @@ export function Footer() {
                 <polygon points="100,110 156,170 134,170 78,110" fill="url(#f1)"/>
               </svg>
               <div className="font-sans text-sm font-extrabold tracking-widest uppercase leading-tight text-white">
-                NT Web Design
+                NT
+                <span className="block text-accent text-[0.72rem] tracking-[0.18em]">WebUX</span>
               </div>
             </a>
             <p className="font-serif text-sm text-white/40 max-w-xs">
@@ -69,7 +70,7 @@ export function Footer() {
             {t('footer.copy')}
           </p>
           <div className="text-xs text-white/30 font-medium">
-            Designed & Built by <span className="text-accent">NT Web Design</span>
+            Designed & Built by <span className="text-accent">NT WebUX</span>
           </div>
         </div>
       </div>

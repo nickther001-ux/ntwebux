@@ -53,8 +53,8 @@ export function Navbar() {
             <polygon points="100,44 152,44 152,88 100,88" fill="#020508" opacity="0.6"/>
           </svg>
           <div className="font-sans text-sm font-extrabold tracking-widest uppercase leading-tight text-foreground">
-            NT Web Design
-            <span className="block text-accent text-[0.65rem] tracking-[0.2em]">Web Design</span>
+            NT
+            <span className="block text-accent text-[0.72rem] tracking-[0.18em]">WebUX</span>
           </div>
         </a>
 
@@ -71,10 +71,10 @@ export function Navbar() {
 
         {/* Actions (Desktop) */}
         <div className="hidden md:flex items-center gap-6">
-          <div className="flex items-center gap-2 text-xs font-bold tracking-widest text-muted">
-            <button onClick={() => setLang('en')} className={`transition-colors ${lang === 'en' ? 'text-accent' : 'hover:text-foreground'}`}>EN</button>
-            <span className="opacity-50">|</span>
-            <button onClick={() => setLang('fr')} className={`transition-colors ${lang === 'fr' ? 'text-accent' : 'hover:text-foreground'}`}>FR</button>
+          <div className="flex items-center gap-4 text-xs font-bold tracking-widest text-muted">
+            <button onClick={() => setLang('en')} className={`px-1 transition-colors ${lang === 'en' ? 'text-accent' : 'hover:text-foreground'}`}>EN</button>
+            <span className="opacity-40">|</span>
+            <button onClick={() => setLang('fr')} className={`px-1 transition-colors ${lang === 'fr' ? 'text-accent' : 'hover:text-foreground'}`}>FR</button>
           </div>
           <a href="#contact" className="px-6 py-2.5 bg-accent text-white rounded font-bold uppercase tracking-wider text-xs hover:bg-accent/80 hover:-translate-y-0.5 hover:shadow-[0_4px_15px_rgba(0,170,221,0.3)] transition-all">
             {t('nav.quote')}
