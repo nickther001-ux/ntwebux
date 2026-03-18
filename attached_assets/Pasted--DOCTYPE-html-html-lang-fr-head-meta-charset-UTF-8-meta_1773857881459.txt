@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NT Web Design — Services & Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C96B;
+    --gold-dim: #7a6230;
+    --bg: #080808;
+    --bg2: #0e0e0e;
+    --bg3: #141414;
+    --text: #e8e0cc;
+    --text-dim: #7a7060;
+    --border: rgba(201,168,76,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ─── NOISE TEXTURE OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  section { position: relative; z-index: 1; }
+
+  /* ─── SECTION HEADER ─── */
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .section-label::before {
+    content: '';
+    width: 32px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+
+  .section-title span {
+    color: var(--gold);
+  }
+
+  /* ════════════════════════════════════
+     SERVICES & PRIX
+  ════════════════════════════════════ */
+  #services {
+    padding: 120px 5% 140px;
+    background: var(--bg);
+  }
+
+  .services-header {
+    max-width: 600px;
+    margin-bottom: 80px;
+  }
+
+  .services-header p {
+    margin-top: 20px;
+    color: var(--text-dim);
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  /* PRICING GRID */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2px;
+    max-width: 1100px;
+  }
+
+  .plan {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    padding: 48px 40px;
+    position: relative;
+    transition: border-color 0.3s, transform 0.3s;
+    overflow: hidden;
+  }
+
+  .plan::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .plan:hover {
+    border-color: var(--gold-dim);
+    transform: translateY(-4px);
+  }
+
+  .plan:hover::before { opacity: 1; }
+
+  .plan.featured {
+    background: var(--bg3);
+    border-color: var(--gold-dim);
+  }
+
+  .plan.featured::before { opacity: 1; }
+
+  .plan-badge {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    background: var(--gold);
+    color: #000;
+    padding: 4px 12px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    font-weight: 700;
+  }
+
+  .plan-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .plan-price {
+    font-family: 'Space Mono', monospace;
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--gold-light);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .plan-price sup {
+    font-size: 1.2rem;
+    vertical-align: super;
+  }
+
+  .plan-cycle {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    font-family: 'Space Mono', monospace;
+    margin-bottom: 32px;
+  }
+
+  .plan-features {
+    list-style: none;
+    margin-bottom: 40px;
+  }
+
+  .plan-features li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9rem;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .plan-features li::before {
+    content: '→';
+    color: var(--gold);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.8rem;
+    flex-shrink: 0;
+  }
+
+  .btn-plan {
+    display: block;
+    text-align: center;
+    padding: 14px 0;
+    border: 1px solid var(--gold-dim);
+    color: var(--gold-light);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .btn-plan:hover,
+  .plan.featured .btn-plan {
+    background: var(--gold);
+    color: #000;
+    border-color: var(--gold);
+  }
+
+  /* ════════════════════════════════════
+     PORTFOLIO
+  ════════════════════════════════════ */
+  #portfolio {
+    padding: 120px 5% 140px;
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+  }
+
+  .portfolio-header {
+    max-width: 600px;
+    margin-bottom: 80px;
+  }
+
+  .portfolio-header p {
+    margin-top: 20px;
+    color: var(--text-dim);
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  /* PORTFOLIO GRID — asymmetric */
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 2px;
+    max-width: 1100px;
+  }
+
+  .portfolio-item {
+    position: relative;
+    overflow: hidden;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    cursor: pointer;
+    aspect-ratio: unset;
+  }
+
+  .portfolio-item:first-child {
+    grid-row: span 2;
+  }
+
+  .portfolio-visual {
+    width: 100%;
+    height: 100%;
+    min-height: 240px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Simulated site previews using CSS art */
+  .mock-site {
+    width: 100%;
+    height: 100%;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: relative;
+  }
+
+  .mock-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .mock-logo-bar {
+    width: 60px;
+    height: 8px;
+    border-radius: 2px;
+  }
+
+  .mock-nav-links {
+    display: flex;
+    gap: 8px;
+  }
+
+  .mock-nav-links span {
+    width: 24px;
+    height: 4px;
+    border-radius: 2px;
+    background: rgba(255,255,255,0.15);
+  }
+
+  .mock-hero-txt {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .mock-h1 {
+    height: 12px;
+    width: 70%;
+    border-radius: 2px;
+  }
+
+  .mock-h1-2 {
+    height: 12px;
+    width: 50%;
+    border-radius: 2px;
+  }
+
+  .mock-p {
+    height: 6px;
+    width: 85%;
+    border-radius: 2px;
+    background: rgba(255,255,255,0.08);
+    margin-top: 6px;
+  }
+
+  .mock-p2 {
+    height: 6px;
+    width: 65%;
+    border-radius: 2px;
+    background: rgba(255,255,255,0.06);
+  }
+
+  .mock-btn {
+    width: 64px;
+    height: 20px;
+    border-radius: 2px;
+    margin-top: 12px;
+  }
+
+  .mock-cards {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .mock-card {
+    flex: 1;
+    height: 48px;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  /* Color themes for each mock */
+  .theme-dark-gold .mock-logo-bar { background: var(--gold); }
+  .theme-dark-gold .mock-h1 { background: var(--gold-light); }
+  .theme-dark-gold .mock-h1-2 { background: var(--gold-dim); }
+  .theme-dark-gold .mock-btn { background: var(--gold); }
+  .theme-dark-gold { background: #0a0a0a; }
+
+  .theme-blue .mock-logo-bar { background: #4A9EFF; }
+  .theme-blue .mock-h1 { background: #4A9EFF; }
+  .theme-blue .mock-h1-2 { background: #1a5fa8; }
+  .theme-blue .mock-btn { background: #4A9EFF; }
+  .theme-blue { background: #08101a; }
+
+  .theme-clean .mock-logo-bar { background: #1a1a1a; }
+  .theme-clean .mock-h1 { background: #1a1a1a; }
+  .theme-clean .mock-h1-2 { background: #555; }
+  .theme-clean .mock-btn { background: #222; }
+  .theme-clean { background: #f8f6f1; }
+  .theme-clean .mock-nav { border-color: rgba(0,0,0,0.1); }
+  .theme-clean .mock-p { background: rgba(0,0,0,0.08); }
+  .theme-clean .mock-p2 { background: rgba(0,0,0,0.05); }
+  .theme-clean .mock-card { background: rgba(0,0,0,0.04); border-color: rgba(0,0,0,0.08); }
+  .theme-clean .mock-nav-links span { background: rgba(0,0,0,0.15); }
+
+  .theme-green .mock-logo-bar { background: #2ECC71; }
+  .theme-green .mock-h1 { background: #2ECC71; }
+  .theme-green .mock-h1-2 { background: #1a7a44; }
+  .theme-green .mock-btn { background: #2ECC71; }
+  .theme-green { background: #060e08; }
+
+  /* Overlay on hover */
+  .portfolio-item-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 32px;
+    opacity: 0;
+    transition: opacity 0.35s;
+  }
+
+  .portfolio-item:hover .portfolio-item-overlay { opacity: 1; }
+
+  .portfolio-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .portfolio-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #fff;
+  }
+
+  .portfolio-desc {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.5;
+  }
+
+  .portfolio-arrow {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--gold-dim);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold);
+    font-size: 1rem;
+    transition: background 0.2s;
+  }
+
+  .portfolio-item:hover .portfolio-arrow {
+    background: var(--gold);
+    color: #000;
+    border-color: var(--gold);
+  }
+
+  /* CTA bar */
+  .portfolio-cta {
+    margin-top: 48px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .cta-text {
+    font-size: 0.9rem;
+    color: var(--text-dim);
+  }
+
+  .btn-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 28px;
+    background: transparent;
+    border: 1px solid var(--gold-dim);
+    color: var(--gold-light);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+
+  .btn-cta:hover {
+    background: var(--gold);
+    color: #000;
+    border-color: var(--gold);
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    .portfolio-grid {
+      grid-template-columns: 1fr;
+    }
+    .portfolio-item:first-child {
+      grid-row: span 1;
+    }
+    .pricing-grid {
+      grid-template-columns: 1fr;
+    }
+    .portfolio-item-overlay {
+      opacity: 1;
+      background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 60%);
+    }
+  }
+
+  /* ─── FADE IN ANIMATION ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .services-header, .pricing-grid,
+  .portfolio-header, .portfolio-grid {
+    animation: fadeUp 0.8s ease both;
+  }
+  .pricing-grid { animation-delay: 0.2s; }
+  .portfolio-grid { animation-delay: 0.2s; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════
+     SECTION SERVICES & PRIX
+════════════════════════════════════════ -->
+<section id="services">
+  <div class="services-header">
+    <div class="section-label">Services & Tarifs</div>
+    <h2 class="section-title">Des offres claires,<br><span>sans surprise</span></h2>
+    <p>Chaque forfait inclut l'hébergement, la maintenance et le support. Vous payez une fois, on s'occupe du reste.</p>
+  </div>
+
+  <div class="pricing-grid">
+
+    <!-- PLAN 1 — Lancement -->
+    <div class="plan">
+      <div class="plan-name">Lancement</div>
+      <div class="plan-price"><sup>$</sup>1 500</div>
+      <div class="plan-cycle">Paiement unique</div>
+      <ul class="plan-features">
+        <li>Site 5 pages responsive</li>
+        <li>Design personnalisé</li>
+        <li>SEO de base intégré</li>
+        <li>Formulaire de contact</li>
+        <li>Déploiement inclus</li>
+        <li>Formation 1h incluse</li>
+      </ul>
+      <a href="#contact" class="btn-plan">Démarrer</a>
+    </div>
+
+    <!-- PLAN 2 — Maintenance (FEATURED) -->
+    <div class="plan featured">
+      <div class="plan-badge">Le plus populaire</div>
+      <div class="plan-name">Maintenance</div>
+      <div class="plan-price"><sup>$</sup>500</div>
+      <div class="plan-cycle">/ mois</div>
+      <ul class="plan-features">
+        <li>Hébergement & domaine géré</li>
+        <li>Mises à jour illimitées</li>
+        <li>Sécurité & backups</li>
+        <li>Support prioritaire 48h</li>
+        <li>Rapport mensuel Analytics</li>
+        <li>Optimisation continue</li>
+      </ul>
+      <a href="#contact" class="btn-plan">Commencer</a>
+    </div>
+
+    <!-- PLAN 3 — Pack Complet -->
+    <div class="plan">
+      <div class="plan-name">Pack Complet</div>
+      <div class="plan-price"><sup>$</sup>997</div>
+      <div class="plan-cycle">+ $500 / mois</div>
+      <ul class="plan-features">
+        <li>Site complet (Lancement)</li>
+        <li>Maintenance mensuelle incluse</li>
+        <li>SEO avancé & Google Ads setup</li>
+        <li>Contenu mensuel (2 articles)</li>
+        <li>Support WhatsApp direct</li>
+        <li>Révisions illimitées (1re année)</li>
+      </ul>
+      <a href="#contact" class="btn-plan">Obtenir ce pack</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SECTION PORTFOLIO
+════════════════════════════════════════ -->
+<section id="portfolio">
+  <div class="portfolio-header">
+    <div class="section-label">Réalisations</div>
+    <h2 class="section-title">Ce qu'on a<br><span>construit</span></h2>
+    <p>Chaque projet est unique, conçu pour refléter l'identité du client et convertir les visiteurs en clients.</p>
+  </div>
+
+  <div class="portfolio-grid">
+
+    <!-- Item 1 — Large (spans 2 rows) -->
+    <div class="portfolio-item">
+      <div class="portfolio-visual">
+        <div class="mock-site theme-dark-gold">
+          <div class="mock-nav">
+            <div class="mock-logo-bar"></div>
+            <div class="mock-nav-links"><span></span><span></span><span></span></div>
+          </div>
+          <div class="mock-hero-txt">
+            <div class="mock-h1"></div>
+            <div class="mock-h1-2"></div>
+            <div class="mock-p"></div>
+            <div class="mock-p2"></div>
+            <div class="mock-btn"></div>
+          </div>
+          <div class="mock-cards">
+            <div class="mock-card"></div>
+            <div class="mock-card"></div>
+            <div class="mock-card"></div>
+          </div>
+        </div>
+      </div>
+      <div class="portfolio-item-overlay">
+        <div class="portfolio-arrow">→</div>
+        <div class="portfolio-tag">Excavation & Construction</div>
+        <div class="portfolio-title">Excavation Tremblay Inc.</div>
+        <div class="portfolio-desc">Site vitrine bilingue avec formulaire de soumission et galerie de projets.</div>
+      </div>
+    </div>
+
+    <!-- Item 2 -->
+    <div class="portfolio-item">
+      <div class="portfolio-visual">
+        <div class="mock-site theme-blue">
+          <div class="mock-nav">
+            <div class="mock-logo-bar"></div>
+            <div class="mock-nav-links"><span></span><span></span><span></span></div>
+          </div>
+          <div class="mock-hero-txt">
+            <div class="mock-h1"></div>
+            <div class="mock-h1-2"></div>
+            <div class="mock-p"></div>
+            <div class="mock-btn"></div>
+          </div>
+        </div>
+      </div>
+      <div class="portfolio-item-overlay">
+        <div class="portfolio-arrow">→</div>
+        <div class="portfolio-tag">Clinique Santé</div>
+        <div class="portfolio-title">Physio Optimal</div>
+        <div class="portfolio-desc">Prise de rendez-vous en ligne intégrée et SEO local optimisé.</div>
+      </div>
+    </div>
+
+    <!-- Item 3 -->
+    <div class="portfolio-item">
+      <div class="portfolio-visual">
+        <div class="mock-site theme-clean">
+          <div class="mock-nav">
+            <div class="mock-logo-bar"></div>
+            <div class="mock-nav-links"><span></span><span></span><span></span></div>
+          </div>
+          <div class="mock-hero-txt">
+            <div class="mock-h1"></div>
+            <div class="mock-h1-2"></div>
+            <div class="mock-p"></div>
+            <div class="mock-btn"></div>
+          </div>
+        </div>
+      </div>
+      <div class="portfolio-item-overlay">
+        <div class="portfolio-arrow">→</div>
+        <div class="portfolio-tag">Restaurant & Traiteur</div>
+        <div class="portfolio-title">Saveurs d'Haïti MTL</div>
+        <div class="portfolio-desc">Menu en ligne, réservations et commandes à emporter intégrés.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="portfolio-cta">
+    <p class="cta-text">Un projet en tête ?</p>
+    <a href="#contact" class="btn-cta">Discutons-en →</a>
+  </div>
+</section>
+
+</body>
+</html>

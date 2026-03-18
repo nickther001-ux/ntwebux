@@ -2,11 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { useLanguage } from '@/lib/i18n';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link, useLocation } from 'wouter';
 
 export function Navbar() {
   const { lang, setLang, t } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [location] = useLocation();
+  const isHome = location === '/';
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -15,10 +18,11 @@ export function Navbar() {
   }, []);
 
   const navLinks = [
-    { href: "#services", label: t('nav.services') },
-    { href: "#process", label: t('nav.process') },
-    { href: "#why-us", label: t('nav.whyUs') },
-    { href: "#contact", label: t('nav.contact') },
+    { href: isHome ? "#services" : "/#services", label: t('nav.services') },
+    { href: isHome ? "#process" : "/#process", label: t('nav.process') },
+    { href: isHome ? "#why-us" : "/#why-us", label: t('nav.whyUs') },
+    { href: "/services-portfolio", label: lang === 'fr' ? 'Portfolio' : 'Portfolio', isPage: true },
+    { href: isHome ? "#contact" : "/#contact", label: t('nav.contact') },
   ];
 
   return (
@@ -62,9 +66,15 @@ export function Navbar() {
         <ul className="hidden md:flex gap-8 items-center">
           {navLinks.map((link) => (
             <li key={link.href}>
-              <a href={link.href} className="text-sm font-bold tracking-widest uppercase text-foreground hover:text-accent transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-accent hover:after:w-full after:transition-all after:duration-300">
-                {link.label}
-              </a>
+              {link.isPage ? (
+                <Link href={link.href} className="text-sm font-bold tracking-widest uppercase text-foreground hover:text-accent transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-accent hover:after:w-full after:transition-all after:duration-300">
+                  {link.label}
+                </Link>
+              ) : (
+                <a href={link.href} className="text-sm font-bold tracking-widest uppercase text-foreground hover:text-accent transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-accent hover:after:w-full after:transition-all after:duration-300">
+                  {link.label}
+                </a>
+              )}
             </li>
           ))}
         </ul>
@@ -99,13 +109,23 @@ export function Navbar() {
             <ul className="flex flex-col gap-8 items-center mb-12">
               {navLinks.map((link) => (
                 <li key={link.href}>
-                  <a 
-                    href={link.href} 
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="text-2xl font-display tracking-widest uppercase text-foreground hover:text-accent transition-colors"
-                  >
-                    {link.label}
-                  </a>
+                  {link.isPage ? (
+                    <Link
+                      href={link.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="text-2xl font-display tracking-widest uppercase text-foreground hover:text-accent transition-colors"
+                    >
+                      {link.label}
+                    </Link>
+                  ) : (
+                    <a
+                      href={link.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="text-2xl font-display tracking-widest uppercase text-foreground hover:text-accent transition-colors"
+                    >
+                      {link.label}
+                    </a>
+                  )}
                 </li>
               ))}
             </ul>
