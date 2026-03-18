@@ -156,6 +156,16 @@ overrides:
 importers:
 
   .:
+    dependencies:
+      '@types/express':
+        specifier: ^5.0.6
+        version: 5.0.6
+      express:
+        specifier: ^5.2.1
+        version: 5.2.1
+      resend:
+        specifier: ^6.9.3
+        version: 6.9.3
     devDependencies:
       prettier:
         specifier: ^3.8.1

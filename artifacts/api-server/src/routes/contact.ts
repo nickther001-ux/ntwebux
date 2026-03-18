@@ -10,7 +10,7 @@ const resend = process.env.RESEND_API_KEY
   ? new Resend(process.env.RESEND_API_KEY)
   : null;
 
-const NOTIFY_EMAIL = "nicktech@computer4u.com";
+const NOTIFY_EMAIL = "nickther001@gmail.com";
 
 router.post("/contact", async (req, res) => {
   try {
