@@ -90,18 +90,18 @@ const translations: Translations = {
           {
             name: "Launch", price: "1,500", cycle: "One-time payment",
             features: ["5-page responsive website", "Custom design", "Basic SEO included", "Contact form", "Deployment included", "1h training included"],
-            cta: "Get Started", featured: false
+            ctaContact: "Contact Me", ctaBuy: "Buy Now", featured: false
           },
           {
             name: "Maintenance", price: "500", cycle: "/ month",
             badge: "Most Popular",
             features: ["Managed hosting & domain", "Unlimited updates", "Security & backups", "Priority support 48h", "Monthly analytics report", "Continuous optimization"],
-            cta: "Start Now", featured: true
+            ctaContact: "Contact Me", ctaBuy: "Buy Now", featured: true
           },
           {
             name: "Full Package", price: "997", cycle: "+ $500 / month",
             features: ["Full site (Launch)", "Monthly maintenance included", "Advanced SEO & Google Ads", "Monthly content (2 articles)", "Direct WhatsApp support", "Unlimited revisions (year 1)"],
-            cta: "Get This Package", featured: false
+            ctaContact: "Contact Me", ctaBuy: "Buy Now", featured: false
           }
         ]
       },
@@ -201,18 +201,18 @@ const translations: Translations = {
           {
             name: "Lancement", price: "1 500", cycle: "Paiement unique",
             features: ["Site 5 pages responsive", "Design personnalisé", "SEO de base intégré", "Formulaire de contact", "Déploiement inclus", "Formation 1h incluse"],
-            cta: "Démarrer", featured: false
+            ctaContact: "Me Contacter", ctaBuy: "Acheter", featured: false
           },
           {
             name: "Maintenance", price: "500", cycle: "/ mois",
             badge: "Le plus populaire",
             features: ["Hébergement & domaine géré", "Mises à jour illimitées", "Sécurité & backups", "Support prioritaire 48h", "Rapport mensuel Analytics", "Optimisation continue"],
-            cta: "Commencer", featured: true
+            ctaContact: "Me Contacter", ctaBuy: "Acheter", featured: true
           },
           {
             name: "Pack Complet", price: "997", cycle: "+ $500 / mois",
             features: ["Site complet (Lancement)", "Maintenance mensuelle incluse", "SEO avancé & Google Ads setup", "Contenu mensuel (2 articles)", "Support WhatsApp direct", "Révisions illimitées (1re année)"],
-            cta: "Obtenir ce pack", featured: false
+            ctaContact: "Me Contacter", ctaBuy: "Acheter", featured: false
           }
         ]
       },
