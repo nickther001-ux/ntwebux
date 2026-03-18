@@ -79,6 +79,45 @@ const translations: Translations = {
       tagline: "Crafting digital experiences that drive real business growth.",
       links1: "Services", links2: "Company", links3: "Legal",
       copy: "© 2026 NT WebUX. All rights reserved."
+    },
+    portfolio: {
+      services: {
+        eyebrow: "Services & Pricing",
+        title1: "Clear offers,",
+        title2: "no surprises",
+        desc: "Every package includes hosting, maintenance, and support. You pay once — we handle the rest.",
+        plans: [
+          {
+            name: "Launch", price: "1,500", cycle: "One-time payment",
+            features: ["5-page responsive website", "Custom design", "Basic SEO included", "Contact form", "Deployment included", "1h training included"],
+            cta: "Get Started", featured: false
+          },
+          {
+            name: "Maintenance", price: "500", cycle: "/ month",
+            badge: "Most Popular",
+            features: ["Managed hosting & domain", "Unlimited updates", "Security & backups", "Priority support 48h", "Monthly analytics report", "Continuous optimization"],
+            cta: "Start Now", featured: true
+          },
+          {
+            name: "Full Package", price: "997", cycle: "+ $500 / month",
+            features: ["Full site (Launch)", "Monthly maintenance included", "Advanced SEO & Google Ads", "Monthly content (2 articles)", "Direct WhatsApp support", "Unlimited revisions (year 1)"],
+            cta: "Get This Package", featured: false
+          }
+        ]
+      },
+      work: {
+        eyebrow: "Our Work",
+        title1: "What we've",
+        title2: "built",
+        desc: "Each project is unique, designed to reflect the client's identity and turn visitors into customers.",
+        items: [
+          { tag: "Excavation & Construction", title: "Tremblay Excavation Inc.", desc: "Bilingual showcase site with submission form and project gallery.", large: true },
+          { tag: "Health Clinic", title: "Physio Optimal", desc: "Integrated online booking and optimized local SEO.", large: false },
+          { tag: "Restaurant & Catering", title: "Saveurs d'Haïti MTL", desc: "Online menu, reservations and takeout orders integrated.", large: false }
+        ],
+        ctaText: "Have a project in mind?",
+        ctaBtn: "Let's Talk →"
+      }
     }
   },
   fr: {
@@ -151,6 +190,45 @@ const translations: Translations = {
       tagline: "Créer des expériences numériques qui stimulent la véritable croissance.",
       links1: "Services", links2: "Entreprise", links3: "Légal",
       copy: "© 2026 NT WebUX. Tous droits réservés."
+    },
+    portfolio: {
+      services: {
+        eyebrow: "Services & Tarifs",
+        title1: "Des offres claires,",
+        title2: "sans surprise",
+        desc: "Chaque forfait inclut l'hébergement, la maintenance et le support. Vous payez une fois, on s'occupe du reste.",
+        plans: [
+          {
+            name: "Lancement", price: "1 500", cycle: "Paiement unique",
+            features: ["Site 5 pages responsive", "Design personnalisé", "SEO de base intégré", "Formulaire de contact", "Déploiement inclus", "Formation 1h incluse"],
+            cta: "Démarrer", featured: false
+          },
+          {
+            name: "Maintenance", price: "500", cycle: "/ mois",
+            badge: "Le plus populaire",
+            features: ["Hébergement & domaine géré", "Mises à jour illimitées", "Sécurité & backups", "Support prioritaire 48h", "Rapport mensuel Analytics", "Optimisation continue"],
+            cta: "Commencer", featured: true
+          },
+          {
+            name: "Pack Complet", price: "997", cycle: "+ $500 / mois",
+            features: ["Site complet (Lancement)", "Maintenance mensuelle incluse", "SEO avancé & Google Ads setup", "Contenu mensuel (2 articles)", "Support WhatsApp direct", "Révisions illimitées (1re année)"],
+            cta: "Obtenir ce pack", featured: false
+          }
+        ]
+      },
+      work: {
+        eyebrow: "Réalisations",
+        title1: "Ce qu'on a",
+        title2: "construit",
+        desc: "Chaque projet est unique, conçu pour refléter l'identité du client et convertir les visiteurs en clients.",
+        items: [
+          { tag: "Excavation & Construction", title: "Excavation Tremblay Inc.", desc: "Site vitrine bilingue avec formulaire de soumission et galerie de projets.", large: true },
+          { tag: "Clinique Santé", title: "Physio Optimal", desc: "Prise de rendez-vous en ligne intégrée et SEO local optimisé.", large: false },
+          { tag: "Restaurant & Traiteur", title: "Saveurs d'Haïti MTL", desc: "Menu en ligne, réservations et commandes à emporter intégrés.", large: false }
+        ],
+        ctaText: "Un projet en tête ?",
+        ctaBtn: "Discutons-en →"
+      }
     }
   }
 };
