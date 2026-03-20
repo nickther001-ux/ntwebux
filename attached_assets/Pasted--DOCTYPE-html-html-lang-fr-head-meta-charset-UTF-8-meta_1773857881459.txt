@@ -563,10 +563,8 @@
         <li>Rapport mensuel Analytics</li>
         <li>Optimisation continue</li>
       </ul>
-<div style="display: flex; gap: 10px; margin-top: 20px;">
-  <a href="#contact" class="btn-plan" style="flex: 1; text-align: center;">Contact</a>
-  <a href="#" class="btn-plan" style="flex: 1; text-align: center; background: #00d2ff; color: #000; border-color: #00d2ff;">Acheter</a>
-</div>    </div>
+      <a href="#contact" class="btn-plan">Commencer</a>
+    </div>
 
     <!-- PLAN 3 — Pack Complet -->
     <div class="plan">
@@ -581,10 +579,8 @@
         <li>Support WhatsApp direct</li>
         <li>Révisions illimitées (1re année)</li>
       </ul>
-<div style="display: flex; gap: 10px; margin-top: 20px;">
-  <a href="#contact" class="btn-plan" style="flex: 1; text-align: center;">Contact</a>
-  <a href="#" class="btn-plan" style="flex: 1; text-align: center; background: #00d2ff; color: #000; border-color: #00d2ff;">Acheter</a>
-</div>    </div>
+      <a href="#contact" class="btn-plan">Obtenir ce pack</a>
+    </div>
 
   </div>
 </section>
@@ -599,27 +595,8 @@
     <p>Chaque projet est unique, conçu pour refléter l'identité du client et convertir les visiteurs en clients.</p>
   </div>
 
-<div class="portfolio-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+  <div class="portfolio-grid">
 
-  <div class="portfolio-item" style="padding: 40px; background: #0a0e17; border: 1px solid rgba(0, 210, 255, 0.2); border-radius: 8px;">
-    <div class="portfolio-tag" style="color: #00d2ff; font-size: 0.75rem; letter-spacing: 2px; margin-bottom: 10px;">EXCAVATION & CONSTRUCTION</div>
-    <h3 style="color: white; font-size: 1.5rem; margin-bottom: 15px;">Tremblay Excavation Inc.</h3>
-    <p style="color: #8892b0; font-size: 0.9rem; line-height: 1.6;">Site vitrine bilingue avec formulaire de soumission et galerie de projets.</p>
-  </div>
-
-  <div class="portfolio-item" style="padding: 40px; background: #0a0e17; border: 1px solid rgba(0, 210, 255, 0.2); border-radius: 8px;">
-    <div class="portfolio-tag" style="color: #00d2ff; font-size: 0.75rem; letter-spacing: 2px; margin-bottom: 10px;">CLINIQUE SANTÉ</div>
-    <h3 style="color: white; font-size: 1.5rem; margin-bottom: 15px;">Physio Optimal</h3>
-    <p style="color: #8892b0; font-size: 0.9rem; line-height: 1.6;">Prise de rendez-vous en ligne intégrée et SEO local optimisé.</p>
-  </div>
-
-  <div class="portfolio-item" style="padding: 40px; background: #0a0e17; border: 1px solid rgba(0, 210, 255, 0.2); border-radius: 8px;">
-    <div class="portfolio-tag" style="color: #00d2ff; font-size: 0.75rem; letter-spacing: 2px; margin-bottom: 10px;">RESTAURANT & TRAITEUR</div>
-    <h3 style="color: white; font-size: 1.5rem; margin-bottom: 15px;">Saveurs d'Haïti MTL</h3>
-    <p style="color: #8892b0; font-size: 0.9rem; line-height: 1.6;">Menu en ligne, réservations et commandes à emporter intégrés.</p>
-  </div>
-
-</div>
     <!-- Item 1 — Large (spans 2 rows) -->
     <div class="portfolio-item">
       <div class="portfolio-visual">
