@@ -1,149 +1,43 @@
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { useLanguage } from "@/lib/i18n";
 
-interface Message {
-  role: "user" | "assistant";
-  content: string;
-}
+const PHONE = "(438) 806-7640";
+const PHONE_RAW = "4388067640";
+const EMAIL = "nickther001@gmail.com";
+const WHATSAPP_URL = `https://wa.me/1${PHONE_RAW}`;
 
-const BASE_URL = import.meta.env.BASE_URL.replace(/\/$/, "");
-const API_BASE = BASE_URL.replace(/\/[^/]*$/, "");
-
-const WELCOME: Record<string, string> = {
-  en: "Hello! How can we help you today? Ask us about pricing, projects, or timelines.",
-  fr: "Bonjour! Comment pouvons-nous vous aider aujourd'hui? Posez-nous des questions sur nos tarifs, projets ou délais.",
-};
-
-const PLACEHOLDER: Record<string, string> = {
-  en: "Type your message…",
-  fr: "Tapez votre message…",
-};
-
-const TITLE: Record<string, string> = {
-  en: "NT WebUX Assistant",
-  fr: "Assistant NT WebUX",
+const LABELS: Record<string, { title: string; call: string; whatsapp: string; email: string; tagline: string }> = {
+  en: {
+    title: "Get in Touch",
+    call: "Call Us",
+    whatsapp: "WhatsApp",
+    email: "Email Us",
+    tagline: "We typically reply within a few hours.",
+  },
+  fr: {
+    title: "Nous contacter",
+    call: "Appeler",
+    whatsapp: "WhatsApp",
+    email: "Envoyer un email",
+    tagline: "Nous répondons généralement en quelques heures.",
+  },
 };
 
 export default function ChatWidget() {
   const { language } = useLanguage();
-  const lang = language || "en";
-
+  const lang = (language || "en") as "en" | "fr";
+  const t = LABELS[lang];
   const [open, setOpen] = useState(false);
-  const [input, setInput] = useState("");
-  const [messages, setMessages] = useState<Message[]>([]);
-  const [streaming, setStreaming] = useState(false);
-  const [unread, setUnread] = useState(false);
-  const bottomRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    if (open) {
-      setUnread(false);
-      setTimeout(() => inputRef.current?.focus(), 100);
-    }
-  }, [open]);
-
-  useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages, streaming]);
-
-  async function sendMessage() {
-    const text = input.trim();
-    if (!text || streaming) return;
-    setInput("");
-
-    const userMsg: Message = { role: "user", content: text };
-    const updatedHistory = [...messages, userMsg];
-    setMessages(updatedHistory);
-    setStreaming(true);
-
-    const assistantMsg: Message = { role: "assistant", content: "" };
-    setMessages([...updatedHistory, assistantMsg]);
-
-    try {
-      const res = await fetch(`${API_BASE}/api/chat`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          message: text,
-          history: messages.slice(-10),
-        }),
-      });
-
-      if (!res.ok || !res.body) throw new Error("Request failed");
-
-      const reader = res.body.getReader();
-      const decoder = new TextDecoder();
-      let buffer = "";
-      let fullContent = "";
-
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        buffer += decoder.decode(value, { stream: true });
-
-        const lines = buffer.split("\n");
-        buffer = lines.pop() ?? "";
-
-        for (const line of lines) {
-          if (!line.startsWith("data: ")) continue;
-          try {
-            const data = JSON.parse(line.slice(6));
-            if (data.content) {
-              fullContent += data.content;
-              setMessages((prev) => {
-                const next = [...prev];
-                next[next.length - 1] = { role: "assistant", content: fullContent };
-                return next;
-              });
-            }
-            if (data.error) {
-              setMessages((prev) => {
-                const next = [...prev];
-                next[next.length - 1] = { role: "assistant", content: data.error };
-                return next;
-              });
-            }
-          } catch {}
-        }
-      }
-    } catch {
-      setMessages((prev) => {
-        const next = [...prev];
-        next[next.length - 1] = {
-          role: "assistant",
-          content: lang === "fr"
-            ? "Désolé, une erreur s'est produite. Veuillez réessayer."
-            : "Sorry, something went wrong. Please try again.",
-        };
-        return next;
-      });
-    } finally {
-      setStreaming(false);
-      if (!open) setUnread(true);
-    }
-  }
-
-  function handleKey(e: React.KeyboardEvent) {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
-      sendMessage();
-    }
-  }
 
   return (
     <>
-      {/* Chat Window */}
       {open && (
         <div
           style={{
             position: "fixed",
             bottom: "88px",
             right: "24px",
-            width: "360px",
-            maxHeight: "520px",
-            display: "flex",
-            flexDirection: "column",
+            width: "260px",
             background: "#0a0f1e",
             border: "1px solid rgba(0,170,221,0.25)",
             borderRadius: "16px",
@@ -157,37 +51,21 @@ export default function ChatWidget() {
             style={{
               padding: "14px 18px",
               background: "linear-gradient(135deg, #060f24 0%, #0a1a38 100%)",
-              borderBottom: "1px solid rgba(0,170,221,0.2)",
+              borderBottom: "1px solid rgba(0,140,255,0.15)",
               display: "flex",
               alignItems: "center",
-              gap: "10px",
+              justifyContent: "space-between",
             }}
           >
-            <div
-              style={{
-                width: "10px",
-                height: "10px",
-                borderRadius: "50%",
-                background: "#00ddaa",
-                boxShadow: "0 0 6px #00ddaa",
-                flexShrink: 0,
-              }}
-            />
-            <span
-              style={{
-                color: "#fff",
-                fontWeight: 700,
-                fontSize: "14px",
-                letterSpacing: "0.03em",
-                flex: 1,
-              }}
-            >
-              <span style={{ color: "#fff" }}>NT</span>
-              <span style={{ color: "#00aadd" }}>WebUX</span>
-              <span style={{ color: "rgba(180,200,230,0.7)", fontWeight: 400, marginLeft: "8px", fontSize: "12px" }}>
-                {lang === "fr" ? "Assistant" : "Assistant"}
-              </span>
-            </span>
+            <div>
+              <div style={{ color: "#fff", fontWeight: 700, fontSize: "14px" }}>
+                <span>NT</span>
+                <span style={{ color: "#00aadd" }}>WebUX</span>
+              </div>
+              <div style={{ color: "rgba(180,210,240,0.6)", fontSize: "11px", marginTop: "2px" }}>
+                {t.title}
+              </div>
+            </div>
             <button
               onClick={() => setOpen(false)}
               style={{
@@ -195,7 +73,7 @@ export default function ChatWidget() {
                 border: "none",
                 color: "rgba(180,200,230,0.5)",
                 cursor: "pointer",
-                fontSize: "18px",
+                fontSize: "20px",
                 lineHeight: 1,
                 padding: "2px 4px",
               }}
@@ -204,126 +82,62 @@ export default function ChatWidget() {
             </button>
           </div>
 
-          {/* Messages */}
-          <div
-            style={{
-              flex: 1,
-              overflowY: "auto",
-              padding: "16px",
-              display: "flex",
-              flexDirection: "column",
-              gap: "12px",
-              minHeight: "200px",
-              maxHeight: "360px",
-            }}
-          >
-            {/* Welcome bubble */}
-            <div
-              style={{
-                alignSelf: "flex-start",
-                background: "rgba(0,140,255,0.08)",
-                border: "1px solid rgba(0,140,255,0.15)",
-                borderRadius: "12px 12px 12px 2px",
-                padding: "10px 14px",
-                color: "#c8deff",
-                fontSize: "13px",
-                lineHeight: "1.5",
-                maxWidth: "88%",
-              }}
+          {/* Links */}
+          <div style={{ padding: "14px", display: "flex", flexDirection: "column", gap: "8px" }}>
+            <a
+              href={`tel:+1${PHONE_RAW}`}
+              style={linkStyle("#00aadd")}
             >
-              {WELCOME[lang]}
-            </div>
-
-            {messages.map((msg, i) => (
-              <div
-                key={i}
-                style={{
-                  alignSelf: msg.role === "user" ? "flex-end" : "flex-start",
-                  background:
-                    msg.role === "user"
-                      ? "linear-gradient(135deg, #0066cc 0%, #00aadd 100%)"
-                      : "rgba(0,140,255,0.08)",
-                  border: msg.role === "user" ? "none" : "1px solid rgba(0,140,255,0.15)",
-                  borderRadius:
-                    msg.role === "user"
-                      ? "12px 12px 2px 12px"
-                      : "12px 12px 12px 2px",
-                  padding: "10px 14px",
-                  color: msg.role === "user" ? "#fff" : "#c8deff",
-                  fontSize: "13px",
-                  lineHeight: "1.5",
-                  maxWidth: "88%",
-                  whiteSpace: "pre-wrap",
-                }}
-              >
-                {msg.content}
-                {streaming && i === messages.length - 1 && msg.role === "assistant" && msg.content === "" && (
-                  <span style={{ opacity: 0.5 }}>
-                    {lang === "fr" ? "En train d'écrire…" : "Typing…"}
-                  </span>
-                )}
+              <PhoneIcon />
+              <div>
+                <div style={{ fontWeight: 600, fontSize: "13px", color: "#d8e8ff" }}>{t.call}</div>
+                <div style={{ fontSize: "11px", color: "rgba(180,210,240,0.6)", marginTop: "1px" }}>{PHONE}</div>
               </div>
-            ))}
-            <div ref={bottomRef} />
+            </a>
+
+            <a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={linkStyle("#25d366")}
+            >
+              <WhatsAppIcon />
+              <div>
+                <div style={{ fontWeight: 600, fontSize: "13px", color: "#d8e8ff" }}>{t.whatsapp}</div>
+                <div style={{ fontSize: "11px", color: "rgba(180,210,240,0.6)", marginTop: "1px" }}>{PHONE}</div>
+              </div>
+            </a>
+
+            <a
+              href={`mailto:${EMAIL}`}
+              style={linkStyle("#00aadd")}
+            >
+              <EmailIcon />
+              <div>
+                <div style={{ fontWeight: 600, fontSize: "13px", color: "#d8e8ff" }}>{t.email}</div>
+                <div style={{ fontSize: "11px", color: "rgba(180,210,240,0.6)", marginTop: "1px" }}>{EMAIL}</div>
+              </div>
+            </a>
           </div>
 
-          {/* Input */}
           <div
             style={{
-              padding: "12px 14px",
-              borderTop: "1px solid rgba(0,140,255,0.12)",
-              background: "#070d1c",
-              display: "flex",
-              gap: "8px",
-              alignItems: "center",
+              padding: "10px 16px 14px",
+              fontSize: "11px",
+              color: "rgba(140,170,210,0.5)",
+              textAlign: "center",
+              borderTop: "1px solid rgba(0,140,255,0.08)",
             }}
           >
-            <input
-              ref={inputRef}
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={handleKey}
-              placeholder={PLACEHOLDER[lang]}
-              disabled={streaming}
-              style={{
-                flex: 1,
-                background: "rgba(0,140,255,0.06)",
-                border: "1px solid rgba(0,140,255,0.2)",
-                borderRadius: "8px",
-                padding: "9px 12px",
-                color: "#d8e8ff",
-                fontSize: "13px",
-                outline: "none",
-                opacity: streaming ? 0.5 : 1,
-              }}
-            />
-            <button
-              onClick={sendMessage}
-              disabled={streaming || !input.trim()}
-              style={{
-                background: input.trim() && !streaming
-                  ? "linear-gradient(135deg, #0066cc, #00aadd)"
-                  : "rgba(0,140,255,0.15)",
-                border: "none",
-                borderRadius: "8px",
-                padding: "9px 14px",
-                color: "#fff",
-                cursor: input.trim() && !streaming ? "pointer" : "not-allowed",
-                fontSize: "13px",
-                fontWeight: 600,
-                transition: "background 0.2s",
-                flexShrink: 0,
-              }}
-            >
-              {streaming ? "…" : "→"}
-            </button>
+            {t.tagline}
           </div>
         </div>
       )}
 
-      {/* Toggle Button */}
+      {/* Toggle button */}
       <button
         onClick={() => setOpen((o) => !o)}
+        aria-label={open ? "Close contact" : "Contact us"}
         style={{
           position: "fixed",
           bottom: "24px",
@@ -332,7 +146,7 @@ export default function ChatWidget() {
           height: "56px",
           borderRadius: "50%",
           background: open
-            ? "rgba(0,100,200,0.8)"
+            ? "rgba(0,100,200,0.85)"
             : "linear-gradient(135deg, #0055bb 0%, #00aadd 100%)",
           border: "1px solid rgba(0,170,221,0.4)",
           boxShadow: "0 4px 20px rgba(0,140,255,0.4)",
@@ -341,24 +155,9 @@ export default function ChatWidget() {
           alignItems: "center",
           justifyContent: "center",
           zIndex: 10000,
-          transition: "all 0.25s",
+          transition: "background 0.2s",
         }}
-        aria-label={open ? "Close chat" : "Open chat"}
       >
-        {unread && !open && (
-          <span
-            style={{
-              position: "absolute",
-              top: "4px",
-              right: "4px",
-              width: "10px",
-              height: "10px",
-              background: "#ff4466",
-              borderRadius: "50%",
-              border: "2px solid #060a14",
-            }}
-          />
-        )}
         {open ? (
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round">
             <line x1="18" y1="6" x2="6" y2="18" />
@@ -366,10 +165,51 @@ export default function ChatWidget() {
           </svg>
         ) : (
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.39 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.36 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.34 1.85.573 2.81.7A2 2 0 0 1 21.5 16.92z" />
           </svg>
         )}
       </button>
     </>
+  );
+}
+
+function linkStyle(accentColor: string): React.CSSProperties {
+  return {
+    display: "flex",
+    alignItems: "center",
+    gap: "12px",
+    padding: "10px 12px",
+    background: "rgba(0,140,255,0.06)",
+    border: `1px solid rgba(0,140,255,0.12)`,
+    borderRadius: "10px",
+    textDecoration: "none",
+    cursor: "pointer",
+    transition: "background 0.15s",
+    color: accentColor,
+  };
+}
+
+function PhoneIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.39 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.36 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.34 1.85.573 2.81.7A2 2 0 0 1 21.5 16.92z" />
+    </svg>
+  );
+}
+
+function WhatsAppIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style={{ flexShrink: 0 }}>
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+    </svg>
+  );
+}
+
+function EmailIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2-2-2z" />
+      <polyline points="22,6 12,13 2,6" />
+    </svg>
   );
 }
