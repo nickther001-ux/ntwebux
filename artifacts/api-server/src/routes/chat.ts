@@ -1,261 +1,77 @@
 import { Router, type IRouter, type Request, type Response } from "express";
-import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
-import cookieParser from "cookie-parser";
 
 const router: IRouter = Router();
-router.use(cookieParser());
-
-// ── CONFIG ──
-const JWT_SECRET = process.env.JWT_SECRET || "ntwebdesign-chat-secret-key";
-const JWT_EXPIRES_IN = "7d";
-const COOKIE_NAME = "chat_token";
 
 // ── IN-MEMORY STORAGE ──
-interface ChatCustomer {
-  id: string;
-  name: string;
-  email: string;
-  passwordHash: string;
-  createdAt: Date;
-}
-
 interface ChatMessage {
   id: string;
-  customerId: string;
+  sessionId: string;
   role: "user" | "bot";
   content: string;
   timestamp: Date;
 }
 
-const customers = new Map<string, ChatCustomer>();
-const messagesByCustomer = new Map<string, ChatMessage[]>();
+const messagesBySession = new Map<string, ChatMessage[]>();
 let nextId = 1;
 
 function generateId(): string {
   return `chat_${nextId++}_${Date.now()}`;
 }
 
-// ── AUTH MIDDLEWARE ──
-interface AuthRequest extends Request {
-  customer?: ChatCustomer;
-}
-
-function authMiddleware(req: AuthRequest, res: Response, next: () => void): void {
-  const token =
-    req.cookies?.[COOKIE_NAME] ||
-    (req.headers.authorization?.startsWith("Bearer ")
-      ? req.headers.authorization.slice(7)
-      : null);
-
-  if (!token) {
-    res.status(401).json({ error: "Please log in to continue." });
+// ── SEND MESSAGE & GET BOT RESPONSE ──
+router.post("/chat/message", (req: Request, res: Response) => {
+  const { message, sessionId } = req.body as { message?: string; sessionId?: string };
+  if (!message || !message.trim()) {
+    res.status(400).json({ error: "Message cannot be empty." });
     return;
   }
 
-  try {
-    const decoded = jwt.verify(token, JWT_SECRET) as { id: string; email: string };
-    const customer = customers.get(decoded.id);
-    if (!customer) {
-      res.status(401).json({ error: "Session expired. Please log in again." });
-      return;
-    }
-    req.customer = customer;
-    next();
-  } catch {
-    res.status(401).json({ error: "Invalid session. Please log in again." });
-  }
-}
+  const sid = sessionId || generateId();
+  const messages = messagesBySession.get(sid) || [];
 
-// ── REGISTER ──
-router.post("/chat/register", async (req: Request, res: Response) => {
-  try {
-    const { name, email, password } = req.body as {
-      name?: string;
-      email?: string;
-      password?: string;
-    };
+  const userMsg: ChatMessage = {
+    id: generateId(),
+    sessionId: sid,
+    role: "user",
+    content: message.trim(),
+    timestamp: new Date(),
+  };
+  messages.push(userMsg);
 
-    if (!name || !email || !password) {
-      res.status(400).json({ error: "Name, email, and password are required." });
-      return;
-    }
+  const botReply = generateBotResponse(message.trim());
+  const botMsg: ChatMessage = {
+    id: generateId(),
+    sessionId: sid,
+    role: "bot",
+    content: botReply,
+    timestamp: new Date(),
+  };
+  messages.push(botMsg);
 
-    if (password.length < 6) {
-      res.status(400).json({ error: "Password must be at least 6 characters." });
-      return;
-    }
+  messagesBySession.set(sid, messages);
 
-    const emailLower = email.toLowerCase().trim();
-    const existing = Array.from(customers.values()).find(
-      (c) => c.email === emailLower,
-    );
-    if (existing) {
-      res.status(409).json({ error: "An account with this email already exists." });
-      return;
-    }
-
-    const passwordHash = await bcrypt.hash(password, 10);
-    const id = generateId();
-    const customer: ChatCustomer = {
-      id,
-      name: name.trim(),
-      email: emailLower,
-      passwordHash,
-      createdAt: new Date(),
-    };
-
-    customers.set(id, customer);
-    messagesByCustomer.set(id, []);
-
-    const token = jwt.sign({ id, email: emailLower }, JWT_SECRET, {
-      expiresIn: JWT_EXPIRES_IN,
-    });
-
-    res.cookie(COOKIE_NAME, token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
-      maxAge: 7 * 24 * 60 * 60 * 1000,
-    });
-
-    res.json({
-      success: true,
-      customer: { id, name: customer.name, email: customer.email },
-      token,
-    });
-  } catch {
-    res.status(500).json({ error: "Registration failed. Please try again." });
-  }
-});
-
-// ── LOGIN ──
-router.post("/chat/login", async (req: Request, res: Response) => {
-  try {
-    const { email, password } = req.body as {
-      email?: string;
-      password?: string;
-    };
-
-    if (!email || !password) {
-      res.status(400).json({ error: "Email and password are required." });
-      return;
-    }
-
-    const emailLower = email.toLowerCase().trim();
-    const customer = Array.from(customers.values()).find(
-      (c) => c.email === emailLower,
-    );
-
-    if (!customer) {
-      res.status(401).json({ error: "Invalid email or password." });
-      return;
-    }
-
-    const valid = await bcrypt.compare(password, customer.passwordHash);
-    if (!valid) {
-      res.status(401).json({ error: "Invalid email or password." });
-      return;
-    }
-
-    const token = jwt.sign(
-      { id: customer.id, email: customer.email },
-      JWT_SECRET,
-      { expiresIn: JWT_EXPIRES_IN },
-    );
-
-    res.cookie(COOKIE_NAME, token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
-      maxAge: 7 * 24 * 60 * 60 * 1000,
-    });
-
-    res.json({
-      success: true,
-      customer: {
-        id: customer.id,
-        name: customer.name,
-        email: customer.email,
-      },
-      token,
-    });
-  } catch {
-    res.status(500).json({ error: "Login failed. Please try again." });
-  }
-});
-
-// ── LOGOUT ──
-router.post("/chat/logout", (_req: Request, res: Response) => {
-  res.clearCookie(COOKIE_NAME);
-  res.json({ success: true });
-});
-
-// ── GET CURRENT USER ──
-router.get("/chat/me", authMiddleware as any, (req: AuthRequest, res: Response) => {
-  const c = req.customer!;
   res.json({
-    customer: { id: c.id, name: c.name, email: c.email },
+    sessionId: sid,
+    userMessage: { id: userMsg.id, content: userMsg.content, timestamp: userMsg.timestamp },
+    botMessage: { id: botMsg.id, content: botMsg.content, timestamp: botMsg.timestamp },
   });
 });
 
-// ── SEND MESSAGE & GET BOT RESPONSE ──
-router.post(
-  "/chat/message",
-  authMiddleware as any,
-  (req: AuthRequest, res: Response) => {
-    const { message } = req.body as { message?: string };
-    if (!message || !message.trim()) {
-      res.status(400).json({ error: "Message cannot be empty." });
-      return;
-    }
-
-    const customerId = req.customer!.id;
-    const messages = messagesByCustomer.get(customerId) || [];
-
-    const userMsg: ChatMessage = {
-      id: generateId(),
-      customerId,
-      role: "user",
-      content: message.trim(),
-      timestamp: new Date(),
-    };
-    messages.push(userMsg);
-
-    const botReply = generateBotResponse(message.trim());
-    const botMsg: ChatMessage = {
-      id: generateId(),
-      customerId,
-      role: "bot",
-      content: botReply,
-      timestamp: new Date(),
-    };
-    messages.push(botMsg);
-
-    messagesByCustomer.set(customerId, messages);
-
-    res.json({
-      userMessage: { id: userMsg.id, content: userMsg.content, timestamp: userMsg.timestamp },
-      botMessage: { id: botMsg.id, content: botMsg.content, timestamp: botMsg.timestamp },
-    });
-  },
-);
-
 // ── GET CHAT HISTORY ──
-router.get(
-  "/chat/history",
-  authMiddleware as any,
-  (req: AuthRequest, res: Response) => {
-    const customerId = req.customer!.id;
-    const messages = (messagesByCustomer.get(customerId) || []).map((m) => ({
-      id: m.id,
-      role: m.role,
-      content: m.content,
-      timestamp: m.timestamp,
-    }));
-    res.json({ messages });
-  },
-);
+router.get("/chat/history", (req: Request, res: Response) => {
+  const sessionId = req.query.sessionId as string | undefined;
+  if (!sessionId) {
+    res.json({ messages: [] });
+    return;
+  }
+  const messages = (messagesBySession.get(sessionId) || []).map((m) => ({
+    id: m.id,
+    role: m.role,
+    content: m.content,
+    timestamp: m.timestamp,
+  }));
+  res.json({ messages });
+});
 
 // ── INTELLIGENT BOT RESPONSE ENGINE ──
 function generateBotResponse(userMessage: string): string {
