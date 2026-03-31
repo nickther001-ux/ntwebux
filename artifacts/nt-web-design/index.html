@@ -794,33 +794,10 @@
         border-radius: 50%;
         box-shadow: 0 0 8px var(--teal);
       }
-      .chat-header-user {
-        font-size: 0.7rem;
-        color: var(--muted);
-        margin-left: 1rem;
-      }
       .chat-header-actions {
         display: flex;
         align-items: center;
         gap: 0.5rem;
-      }
-      .chat-logout-btn {
-        background: none;
-        border: 1px solid rgba(255,255,255,0.1);
-        color: var(--muted);
-        font-size: 0.65rem;
-        font-family: inherit;
-        font-weight: 600;
-        padding: 0.25rem 0.6rem;
-        border-radius: 4px;
-        cursor: pointer;
-        transition: all 0.2s;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-      }
-      .chat-logout-btn:hover {
-        color: #fff;
-        border-color: var(--teal);
       }
       .chat-close {
         background: none;
@@ -832,117 +809,6 @@
       }
       .chat-close:hover {
         color: #fff;
-      }
-
-      /* ── AUTH FORM STYLES ── */
-      .chat-auth {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        padding: 1.5rem;
-        overflow-y: auto;
-      }
-      .chat-auth-tabs {
-        display: flex;
-        gap: 0;
-        margin-bottom: 1.5rem;
-        border-radius: 8px;
-        overflow: hidden;
-        border: 1px solid rgba(255,255,255,0.1);
-      }
-      .chat-auth-tab {
-        flex: 1;
-        padding: 0.6rem;
-        background: transparent;
-        border: none;
-        color: var(--muted);
-        font-family: inherit;
-        font-size: 0.8rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.2s;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-      }
-      .chat-auth-tab.active {
-        background: rgba(0, 229, 255, 0.1);
-        color: var(--teal);
-      }
-      .chat-auth-tab:hover:not(.active) {
-        color: #fff;
-        background: rgba(255,255,255,0.03);
-      }
-      .chat-auth-form {
-        display: flex;
-        flex-direction: column;
-        gap: 0.8rem;
-      }
-      .chat-auth-form input {
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 8px;
-        padding: 0.75rem 1rem;
-        color: #fff;
-        font-family: inherit;
-        font-size: 0.85rem;
-        outline: none;
-        transition: border-color 0.2s;
-      }
-      .chat-auth-form input:focus {
-        border-color: var(--teal);
-      }
-      .chat-auth-form input::placeholder {
-        color: rgba(255,255,255,0.3);
-      }
-      .chat-auth-submit {
-        background: var(--teal);
-        color: #000;
-        border: none;
-        border-radius: 8px;
-        padding: 0.75rem;
-        font-family: inherit;
-        font-size: 0.85rem;
-        font-weight: 700;
-        cursor: pointer;
-        transition: all 0.2s;
-        margin-top: 0.3rem;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-      }
-      .chat-auth-submit:hover {
-        background: #fff;
-        transform: translateY(-1px);
-      }
-      .chat-auth-submit:disabled {
-        opacity: 0.6;
-        cursor: not-allowed;
-        transform: none;
-      }
-      .chat-auth-error {
-        color: #ff6b6b;
-        font-size: 0.78rem;
-        padding: 0.5rem 0.8rem;
-        background: rgba(255, 107, 107, 0.1);
-        border-radius: 6px;
-        border: 1px solid rgba(255, 107, 107, 0.2);
-        display: none;
-      }
-      .chat-auth-error.visible {
-        display: block;
-      }
-      .chat-auth-welcome {
-        text-align: center;
-        margin-bottom: 1rem;
-      }
-      .chat-auth-welcome h4 {
-        color: #fff;
-        font-size: 1.1rem;
-        margin-bottom: 0.4rem;
-      }
-      .chat-auth-welcome p {
-        color: var(--muted);
-        font-size: 0.8rem;
-        line-height: 1.5;
       }
 
       /* ── CHAT MESSAGES ── */
@@ -2981,46 +2847,14 @@
               NTWEBDESIGN
               <span style="color:var(--muted);font-weight:400;margin-left:4px">Assistant</span>
             </div>
-            <span class="chat-header-user chat-hidden" id="chatHeaderUser"></span>
           </div>
           <div class="chat-header-actions">
-            <button class="chat-logout-btn chat-hidden" id="chatLogoutBtn" onclick="chatLogout()" data-en="Logout" data-fr="Quitter">Logout</button>
             <button class="chat-close" onclick="toggleChat()">✕</button>
           </div>
         </div>
 
-        <!-- AUTH VIEW (Login / Register) -->
-        <div class="chat-auth" id="chatAuthView">
-          <div class="chat-auth-welcome">
-            <h4 data-en="Welcome!" data-fr="Bienvenue !">Welcome!</h4>
-            <p data-en="Log in or create an account to chat about pricing, projects &amp; timelines." data-fr="Connectez-vous ou cr&eacute;ez un compte pour discuter prix, projets et d&eacute;lais.">Log in or create an account to chat about pricing, projects &amp; timelines.</p>
-          </div>
-
-          <div class="chat-auth-tabs">
-            <button class="chat-auth-tab active" id="tabLogin" onclick="switchAuthTab('login')" data-en="Log In" data-fr="Connexion">Log In</button>
-            <button class="chat-auth-tab" id="tabRegister" onclick="switchAuthTab('register')" data-en="Sign Up" data-fr="Inscription">Sign Up</button>
-          </div>
-
-          <div class="chat-auth-error" id="chatAuthError"></div>
-
-          <!-- Login Form -->
-          <form class="chat-auth-form" id="loginForm" onsubmit="handleLogin(event)">
-            <input type="email" id="loginEmail" placeholder="Email" required autocomplete="email" />
-            <input type="password" id="loginPassword" placeholder="Password" required autocomplete="current-password" />
-            <button type="submit" class="chat-auth-submit" id="loginSubmitBtn" data-en="Log In" data-fr="Se connecter">Log In</button>
-          </form>
-
-          <!-- Register Form -->
-          <form class="chat-auth-form chat-hidden" id="registerForm" onsubmit="handleRegister(event)">
-            <input type="text" id="registerName" placeholder="Full Name" required autocomplete="name" />
-            <input type="email" id="registerEmail" placeholder="Email" required autocomplete="email" />
-            <input type="password" id="registerPassword" placeholder="Password (min 6 chars)" required minlength="6" autocomplete="new-password" />
-            <button type="submit" class="chat-auth-submit" id="registerSubmitBtn" data-en="Create Account" data-fr="Cr&eacute;er un compte">Create Account</button>
-          </form>
-        </div>
-
-        <!-- CHAT VIEW (after login) -->
-        <div class="chat-hidden" id="chatView" style="flex:1;display:flex;flex-direction:column;">
+        <!-- CHAT VIEW -->
+        <div id="chatView" style="flex:1;display:flex;flex-direction:column;">
           <div class="chat-messages" id="chatMessages"></div>
 
           <div class="chat-quick-replies" id="chatQuickReplies">
@@ -3054,8 +2888,7 @@
       const CHAT_API_BASE = (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
         ? "http://localhost:5000/api"
         : "/api";
-      let chatToken = localStorage.getItem("chat_token") || null;
-      let chatCustomer = JSON.parse(localStorage.getItem("chat_customer") || "null");
+      let chatSessionId = localStorage.getItem("chat_session_id") || null;
 
       function setLang(lang) {
         activeLang = lang;
@@ -3117,138 +2950,6 @@
         document.getElementById("chatBox").classList.toggle("open");
       }
 
-      // ── AUTH TAB SWITCHING ──
-      function switchAuthTab(tab) {
-        var errEl = document.getElementById("chatAuthError");
-        errEl.classList.remove("visible");
-        errEl.textContent = "";
-        if (tab === "login") {
-          document.getElementById("tabLogin").classList.add("active");
-          document.getElementById("tabRegister").classList.remove("active");
-          document.getElementById("loginForm").classList.remove("chat-hidden");
-          document.getElementById("registerForm").classList.add("chat-hidden");
-        } else {
-          document.getElementById("tabRegister").classList.add("active");
-          document.getElementById("tabLogin").classList.remove("active");
-          document.getElementById("registerForm").classList.remove("chat-hidden");
-          document.getElementById("loginForm").classList.add("chat-hidden");
-        }
-      }
-
-      function showAuthError(msg) {
-        var errEl = document.getElementById("chatAuthError");
-        errEl.textContent = msg;
-        errEl.classList.add("visible");
-      }
-
-      // ── LOGIN ──
-      function handleLogin(e) {
-        e.preventDefault();
-        var email = document.getElementById("loginEmail").value.trim();
-        var password = document.getElementById("loginPassword").value;
-        var btn = document.getElementById("loginSubmitBtn");
-        btn.disabled = true;
-        btn.textContent = "...";
-
-        fetch(CHAT_API_BASE + "/chat/login", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email: email, password: password }),
-        })
-          .then(function(r) { return r.json().then(function(d) { return { ok: r.ok, data: d }; }); })
-          .then(function(res) {
-            btn.disabled = false;
-            btn.textContent = activeLang === "fr" ? "Se connecter" : "Log In";
-            if (!res.ok) {
-              showAuthError(res.data.error || "Login failed.");
-              return;
-            }
-            chatToken = res.data.token;
-            chatCustomer = res.data.customer;
-            localStorage.setItem("chat_token", chatToken);
-            localStorage.setItem("chat_customer", JSON.stringify(chatCustomer));
-            enterChatView();
-          })
-          .catch(function() {
-            btn.disabled = false;
-            btn.textContent = activeLang === "fr" ? "Se connecter" : "Log In";
-            showAuthError("Connection error. Please try again.");
-          });
-      }
-
-      // ── REGISTER ──
-      function handleRegister(e) {
-        e.preventDefault();
-        var name = document.getElementById("registerName").value.trim();
-        var email = document.getElementById("registerEmail").value.trim();
-        var password = document.getElementById("registerPassword").value;
-        var btn = document.getElementById("registerSubmitBtn");
-        btn.disabled = true;
-        btn.textContent = "...";
-
-        fetch(CHAT_API_BASE + "/chat/register", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name: name, email: email, password: password }),
-        })
-          .then(function(r) { return r.json().then(function(d) { return { ok: r.ok, data: d }; }); })
-          .then(function(res) {
-            btn.disabled = false;
-            btn.textContent = activeLang === "fr" ? "Créer un compte" : "Create Account";
-            if (!res.ok) {
-              showAuthError(res.data.error || "Registration failed.");
-              return;
-            }
-            chatToken = res.data.token;
-            chatCustomer = res.data.customer;
-            localStorage.setItem("chat_token", chatToken);
-            localStorage.setItem("chat_customer", JSON.stringify(chatCustomer));
-            enterChatView();
-          })
-          .catch(function() {
-            btn.disabled = false;
-            btn.textContent = activeLang === "fr" ? "Créer un compte" : "Create Account";
-            showAuthError("Connection error. Please try again.");
-          });
-      }
-
-      // ── LOGOUT ──
-      function chatLogout() {
-        fetch(CHAT_API_BASE + "/chat/logout", {
-          method: "POST",
-          headers: chatToken ? { "Authorization": "Bearer " + chatToken } : {},
-        }).catch(function() {});
-        chatToken = null;
-        chatCustomer = null;
-        localStorage.removeItem("chat_token");
-        localStorage.removeItem("chat_customer");
-        exitChatView();
-      }
-
-      // ── VIEW TRANSITIONS ──
-      function enterChatView() {
-        document.getElementById("chatAuthView").classList.add("chat-hidden");
-        document.getElementById("chatView").classList.remove("chat-hidden");
-        document.getElementById("chatLogoutBtn").classList.remove("chat-hidden");
-        var userEl = document.getElementById("chatHeaderUser");
-        if (chatCustomer) {
-          userEl.textContent = chatCustomer.name;
-          userEl.classList.remove("chat-hidden");
-        }
-        loadChatHistory();
-      }
-
-      function exitChatView() {
-        document.getElementById("chatAuthView").classList.remove("chat-hidden");
-        document.getElementById("chatView").classList.add("chat-hidden");
-        document.getElementById("chatLogoutBtn").classList.add("chat-hidden");
-        document.getElementById("chatHeaderUser").classList.add("chat-hidden");
-        document.getElementById("chatMessages").innerHTML = "";
-        document.getElementById("loginForm").reset();
-        document.getElementById("registerForm").reset();
-        switchAuthTab("login");
-      }
-
       // ── CHAT MESSAGING ──
       function appendMessage(text, sender) {
         var chatMessages = document.getElementById("chatMessages");
@@ -3275,10 +2976,14 @@
       }
 
       function loadChatHistory() {
-        if (!chatToken) return;
-        fetch(CHAT_API_BASE + "/chat/history", {
-          headers: { "Authorization": "Bearer " + chatToken },
-        })
+        if (!chatSessionId) {
+          var welcomeMsg = activeLang === "fr"
+            ? "Bonjour ! Comment pouvons-nous vous aider aujourd'hui ? Posez-nous vos questions sur les tarifs, les projets ou les délais."
+            : "Hello! How can we help you today? Ask us about pricing, projects, or timelines.";
+          appendMessage(welcomeMsg, "bot");
+          return;
+        }
+        fetch(CHAT_API_BASE + "/chat/history?sessionId=" + encodeURIComponent(chatSessionId))
           .then(function(r) { return r.json(); })
           .then(function(data) {
             var chatMessages = document.getElementById("chatMessages");
@@ -3289,8 +2994,8 @@
               });
             } else {
               var welcomeMsg = activeLang === "fr"
-                ? "Bonjour " + (chatCustomer ? chatCustomer.name : "") + " ! Comment pouvons-nous vous aider aujourd'hui ? Posez-nous vos questions sur les tarifs, les projets ou les délais."
-                : "Hello " + (chatCustomer ? chatCustomer.name : "") + "! How can we help you today? Ask us about pricing, projects, or timelines.";
+                ? "Bonjour ! Comment pouvons-nous vous aider aujourd'hui ? Posez-nous vos questions sur les tarifs, les projets ou les délais."
+                : "Hello! How can we help you today? Ask us about pricing, projects, or timelines.";
               appendMessage(welcomeMsg, "bot");
             }
           })
@@ -3309,17 +3014,21 @@
         inputEl.value = "";
         showTyping();
 
+        var payload = { message: text };
+        if (chatSessionId) payload.sessionId = chatSessionId;
+
         fetch(CHAT_API_BASE + "/chat/message", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": "Bearer " + chatToken,
-          },
-          body: JSON.stringify({ message: text }),
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
         })
           .then(function(r) { return r.json(); })
           .then(function(data) {
             removeTyping();
+            if (data.sessionId) {
+              chatSessionId = data.sessionId;
+              localStorage.setItem("chat_session_id", chatSessionId);
+            }
             if (data.botMessage) {
               appendMessage(data.botMessage.content, "bot");
             } else if (data.error) {
@@ -3346,10 +3055,8 @@
         document.getElementById("chatForm").dispatchEvent(new Event("submit", { cancelable: true }));
       }
 
-      // ── AUTO-RESTORE SESSION ON LOAD ──
-      if (chatToken && chatCustomer) {
-        enterChatView();
-      }
+      // ── LOAD WELCOME MESSAGE ON INIT ──
+      loadChatHistory();
 
       const counters = document.querySelectorAll(".counter");
       const statObserver = new IntersectionObserver(
