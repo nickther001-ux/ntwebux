@@ -10,6 +10,7 @@ import ProcessPage from "@/pages/ProcessPage";
 import WhyUsPage from "@/pages/WhyUsPage";
 import ContactPage from "@/pages/ContactPage";
 import NotFound from "@/pages/not-found";
+import ChatWidget from "@/components/ChatWidget";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +34,7 @@ function App() {
             </Switch>
           </WouterRouter>
           <Toaster />
+          <ChatWidget />
         </TooltipProvider>
       </LanguageProvider>
     </QueryClientProvider>
