@@ -744,8 +744,8 @@
         height: 28px;
       }
       .chat-box {
-        width: 350px;
-        height: 450px;
+        width: 380px;
+        height: 520px;
         background: rgba(6, 15, 26, 0.95);
         backdrop-filter: blur(20px);
         border: 1px solid rgba(0, 229, 255, 0.2);
@@ -766,12 +766,17 @@
         transform: translateY(0) scale(1);
       }
       .chat-header {
-        padding: 1.2rem;
+        padding: 1rem 1.2rem;
         background: rgba(0, 229, 255, 0.05);
         border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         display: flex;
         justify-content: space-between;
         align-items: center;
+      }
+      .chat-header-left {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
       }
       .chat-header-title {
         font-weight: 700;
@@ -789,6 +794,34 @@
         border-radius: 50%;
         box-shadow: 0 0 8px var(--teal);
       }
+      .chat-header-user {
+        font-size: 0.7rem;
+        color: var(--muted);
+        margin-left: 1rem;
+      }
+      .chat-header-actions {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .chat-logout-btn {
+        background: none;
+        border: 1px solid rgba(255,255,255,0.1);
+        color: var(--muted);
+        font-size: 0.65rem;
+        font-family: inherit;
+        font-weight: 600;
+        padding: 0.25rem 0.6rem;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      .chat-logout-btn:hover {
+        color: #fff;
+        border-color: var(--teal);
+      }
       .chat-close {
         background: none;
         border: none;
@@ -800,13 +833,126 @@
       .chat-close:hover {
         color: #fff;
       }
+
+      /* ── AUTH FORM STYLES ── */
+      .chat-auth {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        padding: 1.5rem;
+        overflow-y: auto;
+      }
+      .chat-auth-tabs {
+        display: flex;
+        gap: 0;
+        margin-bottom: 1.5rem;
+        border-radius: 8px;
+        overflow: hidden;
+        border: 1px solid rgba(255,255,255,0.1);
+      }
+      .chat-auth-tab {
+        flex: 1;
+        padding: 0.6rem;
+        background: transparent;
+        border: none;
+        color: var(--muted);
+        font-family: inherit;
+        font-size: 0.8rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      .chat-auth-tab.active {
+        background: rgba(0, 229, 255, 0.1);
+        color: var(--teal);
+      }
+      .chat-auth-tab:hover:not(.active) {
+        color: #fff;
+        background: rgba(255,255,255,0.03);
+      }
+      .chat-auth-form {
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+      }
+      .chat-auth-form input {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        padding: 0.75rem 1rem;
+        color: #fff;
+        font-family: inherit;
+        font-size: 0.85rem;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      .chat-auth-form input:focus {
+        border-color: var(--teal);
+      }
+      .chat-auth-form input::placeholder {
+        color: rgba(255,255,255,0.3);
+      }
+      .chat-auth-submit {
+        background: var(--teal);
+        color: #000;
+        border: none;
+        border-radius: 8px;
+        padding: 0.75rem;
+        font-family: inherit;
+        font-size: 0.85rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s;
+        margin-top: 0.3rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      .chat-auth-submit:hover {
+        background: #fff;
+        transform: translateY(-1px);
+      }
+      .chat-auth-submit:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+      }
+      .chat-auth-error {
+        color: #ff6b6b;
+        font-size: 0.78rem;
+        padding: 0.5rem 0.8rem;
+        background: rgba(255, 107, 107, 0.1);
+        border-radius: 6px;
+        border: 1px solid rgba(255, 107, 107, 0.2);
+        display: none;
+      }
+      .chat-auth-error.visible {
+        display: block;
+      }
+      .chat-auth-welcome {
+        text-align: center;
+        margin-bottom: 1rem;
+      }
+      .chat-auth-welcome h4 {
+        color: #fff;
+        font-size: 1.1rem;
+        margin-bottom: 0.4rem;
+      }
+      .chat-auth-welcome p {
+        color: var(--muted);
+        font-size: 0.8rem;
+        line-height: 1.5;
+      }
+
+      /* ── CHAT MESSAGES ── */
       .chat-messages {
         flex: 1;
-        padding: 1.2rem;
+        padding: 1rem;
         overflow-y: auto;
         display: flex;
         flex-direction: column;
-        gap: 1rem;
+        gap: 0.8rem;
       }
       .chat-messages::-webkit-scrollbar {
         width: 4px;
@@ -817,11 +963,12 @@
       }
       .msg-bubble {
         max-width: 85%;
-        padding: 0.8rem 1rem;
-        font-size: 0.85rem;
-        line-height: 1.5;
+        padding: 0.7rem 0.9rem;
+        font-size: 0.82rem;
+        line-height: 1.55;
         border-radius: 12px;
         animation: msgPop 0.3s ease;
+        white-space: pre-line;
       }
       .msg-bot {
         background: rgba(255, 255, 255, 0.05);
@@ -837,8 +984,36 @@
         border-bottom-right-radius: 2px;
         font-weight: 500;
       }
+
+      /* ── QUICK REPLY BUTTONS ── */
+      .chat-quick-replies {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+        padding: 0.6rem 1rem 0;
+      }
+      .chat-quick-btn {
+        background: rgba(0, 229, 255, 0.08);
+        border: 1px solid rgba(0, 229, 255, 0.2);
+        color: var(--teal);
+        font-family: inherit;
+        font-size: 0.72rem;
+        font-weight: 600;
+        padding: 0.35rem 0.7rem;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: all 0.2s;
+        white-space: nowrap;
+      }
+      .chat-quick-btn:hover {
+        background: rgba(0, 229, 255, 0.15);
+        border-color: var(--teal);
+        transform: translateY(-1px);
+      }
+
+      /* ── CHAT INPUT ── */
       .chat-input-area {
-        padding: 1rem;
+        padding: 0.8rem 1rem;
         border-top: 1px solid rgba(255, 255, 255, 0.05);
         display: flex;
         gap: 0.5rem;
@@ -915,6 +1090,9 @@
         }
       }
 
+      /* ── HIDDEN UTILITY ── */
+      .chat-hidden { display: none !important; }
+
       @media (max-width: 580px) {
         .modal-features {
           grid-template-columns: 1fr;
@@ -927,6 +1105,7 @@
           right: 2vw;
           bottom: 80px;
           position: fixed;
+          height: 70vh;
         }
       }
 
@@ -2789,60 +2968,81 @@
 
     <div class="chat-widget">
       <button class="chat-toggle" id="chatToggle" onclick="toggleChat()">
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <path
-            d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
-          ></path>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
         </svg>
       </button>
 
       <div class="chat-box" id="chatBox">
+        <!-- HEADER -->
         <div class="chat-header">
-          <div class="chat-header-title">
-            NTWEBDESIGN
-            <span
-              style="color: var(--muted); font-weight: 400; margin-left: 4px"
-              >Assistant</span
-            >
+          <div class="chat-header-left">
+            <div class="chat-header-title">
+              NTWEBDESIGN
+              <span style="color:var(--muted);font-weight:400;margin-left:4px">Assistant</span>
+            </div>
+            <span class="chat-header-user chat-hidden" id="chatHeaderUser"></span>
           </div>
-          <button class="chat-close" onclick="toggleChat()">✕</button>
-        </div>
-
-        <div class="chat-messages" id="chatMessages">
-          <div class="msg-bubble msg-bot" id="chatWelcome">
-            Hello! How can we help you start your next project?
+          <div class="chat-header-actions">
+            <button class="chat-logout-btn chat-hidden" id="chatLogoutBtn" onclick="chatLogout()" data-en="Logout" data-fr="Quitter">Logout</button>
+            <button class="chat-close" onclick="toggleChat()">✕</button>
           </div>
         </div>
 
-        <form id="chatForm" onsubmit="handleChatSubmit(event)">
-          <div class="chat-input-area" id="chatInputArea">
-            <input
-              type="text"
-              id="chatInput"
-              placeholder="Type your message..."
-              required
-              autocomplete="off"
-            />
-            <button type="submit" class="chat-send-btn">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <line x1="22" y1="2" x2="11" y2="13"></line>
-                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-              </svg>
-            </button>
+        <!-- AUTH VIEW (Login / Register) -->
+        <div class="chat-auth" id="chatAuthView">
+          <div class="chat-auth-welcome">
+            <h4 data-en="Welcome!" data-fr="Bienvenue !">Welcome!</h4>
+            <p data-en="Log in or create an account to chat about pricing, projects &amp; timelines." data-fr="Connectez-vous ou cr&eacute;ez un compte pour discuter prix, projets et d&eacute;lais.">Log in or create an account to chat about pricing, projects &amp; timelines.</p>
           </div>
-        </form>
+
+          <div class="chat-auth-tabs">
+            <button class="chat-auth-tab active" id="tabLogin" onclick="switchAuthTab('login')" data-en="Log In" data-fr="Connexion">Log In</button>
+            <button class="chat-auth-tab" id="tabRegister" onclick="switchAuthTab('register')" data-en="Sign Up" data-fr="Inscription">Sign Up</button>
+          </div>
+
+          <div class="chat-auth-error" id="chatAuthError"></div>
+
+          <!-- Login Form -->
+          <form class="chat-auth-form" id="loginForm" onsubmit="handleLogin(event)">
+            <input type="email" id="loginEmail" placeholder="Email" required autocomplete="email" />
+            <input type="password" id="loginPassword" placeholder="Password" required autocomplete="current-password" />
+            <button type="submit" class="chat-auth-submit" id="loginSubmitBtn" data-en="Log In" data-fr="Se connecter">Log In</button>
+          </form>
+
+          <!-- Register Form -->
+          <form class="chat-auth-form chat-hidden" id="registerForm" onsubmit="handleRegister(event)">
+            <input type="text" id="registerName" placeholder="Full Name" required autocomplete="name" />
+            <input type="email" id="registerEmail" placeholder="Email" required autocomplete="email" />
+            <input type="password" id="registerPassword" placeholder="Password (min 6 chars)" required minlength="6" autocomplete="new-password" />
+            <button type="submit" class="chat-auth-submit" id="registerSubmitBtn" data-en="Create Account" data-fr="Cr&eacute;er un compte">Create Account</button>
+          </form>
+        </div>
+
+        <!-- CHAT VIEW (after login) -->
+        <div class="chat-hidden" id="chatView" style="flex:1;display:flex;flex-direction:column;">
+          <div class="chat-messages" id="chatMessages"></div>
+
+          <div class="chat-quick-replies" id="chatQuickReplies">
+            <button class="chat-quick-btn" onclick="sendQuickReply('pricing')" data-en="Pricing" data-fr="Tarifs">Pricing</button>
+            <button class="chat-quick-btn" onclick="sendQuickReply('projects')" data-en="Projects" data-fr="Projets">Projects</button>
+            <button class="chat-quick-btn" onclick="sendQuickReply('timeline')" data-en="Timelines" data-fr="D&eacute;lais">Timelines</button>
+            <button class="chat-quick-btn" onclick="sendQuickReply('process')" data-en="Process" data-fr="Processus">Process</button>
+            <button class="chat-quick-btn" onclick="sendQuickReply('tech')" data-en="Tech Stack" data-fr="Technologies">Tech Stack</button>
+          </div>
+
+          <form id="chatForm" onsubmit="handleChatSubmit(event)">
+            <div class="chat-input-area" id="chatInputArea">
+              <input type="text" id="chatInput" placeholder="Type your message..." required autocomplete="off" />
+              <button type="submit" class="chat-send-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="22" y1="2" x2="11" y2="13"></line>
+                  <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
 
@@ -2850,193 +3050,305 @@
       let activeLang = "en";
       let currentModalId = null;
 
-      const chatTranslations = {
-        en: {
-          welcome: "Hello! How can we help you start your next project?",
-          askEmail:
-            "Got it! Please provide your email address so our team can reach out to you.",
-          success: "Message sent! We'll be in touch within 24 hours.",
-          error: "Oops, something went wrong. Please use the contact form.",
-          phMsg: "Type your message...",
-          phEmail: "Your email address...",
-        },
-        fr: {
-          welcome: "Bonjour ! Comment pouvons-nous vous aider aujourd'hui ?",
-          askEmail:
-            "C'est noté ! Veuillez indiquer votre courriel pour que notre équipe puisse vous répondre.",
-          success: "Message envoyé ! Nous vous contacterons sous 24 heures.",
-          error:
-            "Oups, une erreur est survenue. Utilisez le formulaire principal.",
-          phMsg: "Écrivez votre message...",
-          phEmail: "Votre courriel...",
-        },
-      };
-
-      let chatStep = 0;
-      let savedChatMessage = "";
+      // ── CHAT API CONFIG ──
+      const CHAT_API_BASE = (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
+        ? "http://localhost:5000/api"
+        : "/api";
+      let chatToken = localStorage.getItem("chat_token") || null;
+      let chatCustomer = JSON.parse(localStorage.getItem("chat_customer") || "null");
 
       function setLang(lang) {
         activeLang = lang;
-        document
-          .getElementById("btn-en")
-          .classList.toggle("active", lang === "en");
-        document
-          .getElementById("btn-fr")
-          .classList.toggle("active", lang === "fr");
+        document.getElementById("btn-en").classList.toggle("active", lang === "en");
+        document.getElementById("btn-fr").classList.toggle("active", lang === "fr");
         document.documentElement.lang = lang;
-        document.querySelectorAll("[data-en]").forEach((el) => {
-          const val = el.getAttribute("data-" + lang);
+        document.querySelectorAll("[data-en]").forEach(function(el) {
+          var val = el.getAttribute("data-" + lang);
           if (val !== null) el.innerHTML = val;
         });
 
-        if (
-          currentModalId &&
-          document.getElementById("service-modal").classList.contains("active")
-        ) {
+        if (currentModalId && document.getElementById("service-modal").classList.contains("active")) {
           openServiceModal(currentModalId);
-        }
-
-        if (chatStep === 0) {
-          document.getElementById("chatWelcome").innerText =
-            chatTranslations[lang].welcome;
-          document.getElementById("chatInput").placeholder =
-            chatTranslations[lang].phMsg;
-        } else if (chatStep === 1) {
-          document.getElementById("chatInput").placeholder =
-            chatTranslations[lang].phEmail;
         }
       }
 
       function toggleMenu() {
         document.getElementById("mobile-menu").style.display =
-          document.getElementById("mobile-menu").style.display === "flex"
-            ? "none"
-            : "flex";
+          document.getElementById("mobile-menu").style.display === "flex" ? "none" : "flex";
       }
 
       function toggleFaq(btn) {
-        const item = btn.closest(".faq-item");
-        const wasOpen = item.classList.contains("open");
-        document
-          .querySelectorAll(".faq-item")
-          .forEach((i) => i.classList.remove("open"));
+        var item = btn.closest(".faq-item");
+        var wasOpen = item.classList.contains("open");
+        document.querySelectorAll(".faq-item").forEach(function(i) { i.classList.remove("open"); });
         if (!wasOpen) item.classList.add("open");
       }
 
       function submitContact(e, form) {
         e.preventDefault();
-        const btn = document.getElementById("submitBtn");
-        const orig = btn.innerHTML;
+        var btn = document.getElementById("submitBtn");
+        var orig = btn.innerHTML;
         btn.innerHTML = "Sending...";
 
         fetch("https://formsubmit.co/ajax/nickther001@gmail.com", {
           method: "POST",
           body: new FormData(form),
         })
-          .then((response) => response.json())
-          .then((data) => {
+          .then(function(response) { return response.json(); })
+          .then(function(data) {
             btn.innerHTML = "Message Sent ✓";
             btn.style.background = "#fff";
             btn.style.color = "#000";
             form.reset();
-            setTimeout(() => {
+            setTimeout(function() {
               btn.innerHTML = orig;
               btn.style.background = "";
               btn.style.color = "";
             }, 4000);
           })
-          .catch((error) => {
+          .catch(function(error) {
             btn.innerHTML = "Error Sending";
-            setTimeout(() => {
-              btn.innerHTML = orig;
-            }, 3000);
+            setTimeout(function() { btn.innerHTML = orig; }, 3000);
           });
       }
 
+      // ── CHAT TOGGLE ──
       function toggleChat() {
         document.getElementById("chatBox").classList.toggle("open");
       }
 
+      // ── AUTH TAB SWITCHING ──
+      function switchAuthTab(tab) {
+        var errEl = document.getElementById("chatAuthError");
+        errEl.classList.remove("visible");
+        errEl.textContent = "";
+        if (tab === "login") {
+          document.getElementById("tabLogin").classList.add("active");
+          document.getElementById("tabRegister").classList.remove("active");
+          document.getElementById("loginForm").classList.remove("chat-hidden");
+          document.getElementById("registerForm").classList.add("chat-hidden");
+        } else {
+          document.getElementById("tabRegister").classList.add("active");
+          document.getElementById("tabLogin").classList.remove("active");
+          document.getElementById("registerForm").classList.remove("chat-hidden");
+          document.getElementById("loginForm").classList.add("chat-hidden");
+        }
+      }
+
+      function showAuthError(msg) {
+        var errEl = document.getElementById("chatAuthError");
+        errEl.textContent = msg;
+        errEl.classList.add("visible");
+      }
+
+      // ── LOGIN ──
+      function handleLogin(e) {
+        e.preventDefault();
+        var email = document.getElementById("loginEmail").value.trim();
+        var password = document.getElementById("loginPassword").value;
+        var btn = document.getElementById("loginSubmitBtn");
+        btn.disabled = true;
+        btn.textContent = "...";
+
+        fetch(CHAT_API_BASE + "/chat/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: email, password: password }),
+        })
+          .then(function(r) { return r.json().then(function(d) { return { ok: r.ok, data: d }; }); })
+          .then(function(res) {
+            btn.disabled = false;
+            btn.textContent = activeLang === "fr" ? "Se connecter" : "Log In";
+            if (!res.ok) {
+              showAuthError(res.data.error || "Login failed.");
+              return;
+            }
+            chatToken = res.data.token;
+            chatCustomer = res.data.customer;
+            localStorage.setItem("chat_token", chatToken);
+            localStorage.setItem("chat_customer", JSON.stringify(chatCustomer));
+            enterChatView();
+          })
+          .catch(function() {
+            btn.disabled = false;
+            btn.textContent = activeLang === "fr" ? "Se connecter" : "Log In";
+            showAuthError("Connection error. Please try again.");
+          });
+      }
+
+      // ── REGISTER ──
+      function handleRegister(e) {
+        e.preventDefault();
+        var name = document.getElementById("registerName").value.trim();
+        var email = document.getElementById("registerEmail").value.trim();
+        var password = document.getElementById("registerPassword").value;
+        var btn = document.getElementById("registerSubmitBtn");
+        btn.disabled = true;
+        btn.textContent = "...";
+
+        fetch(CHAT_API_BASE + "/chat/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name: name, email: email, password: password }),
+        })
+          .then(function(r) { return r.json().then(function(d) { return { ok: r.ok, data: d }; }); })
+          .then(function(res) {
+            btn.disabled = false;
+            btn.textContent = activeLang === "fr" ? "Créer un compte" : "Create Account";
+            if (!res.ok) {
+              showAuthError(res.data.error || "Registration failed.");
+              return;
+            }
+            chatToken = res.data.token;
+            chatCustomer = res.data.customer;
+            localStorage.setItem("chat_token", chatToken);
+            localStorage.setItem("chat_customer", JSON.stringify(chatCustomer));
+            enterChatView();
+          })
+          .catch(function() {
+            btn.disabled = false;
+            btn.textContent = activeLang === "fr" ? "Créer un compte" : "Create Account";
+            showAuthError("Connection error. Please try again.");
+          });
+      }
+
+      // ── LOGOUT ──
+      function chatLogout() {
+        fetch(CHAT_API_BASE + "/chat/logout", {
+          method: "POST",
+          headers: chatToken ? { "Authorization": "Bearer " + chatToken } : {},
+        }).catch(function() {});
+        chatToken = null;
+        chatCustomer = null;
+        localStorage.removeItem("chat_token");
+        localStorage.removeItem("chat_customer");
+        exitChatView();
+      }
+
+      // ── VIEW TRANSITIONS ──
+      function enterChatView() {
+        document.getElementById("chatAuthView").classList.add("chat-hidden");
+        document.getElementById("chatView").classList.remove("chat-hidden");
+        document.getElementById("chatLogoutBtn").classList.remove("chat-hidden");
+        var userEl = document.getElementById("chatHeaderUser");
+        if (chatCustomer) {
+          userEl.textContent = chatCustomer.name;
+          userEl.classList.remove("chat-hidden");
+        }
+        loadChatHistory();
+      }
+
+      function exitChatView() {
+        document.getElementById("chatAuthView").classList.remove("chat-hidden");
+        document.getElementById("chatView").classList.add("chat-hidden");
+        document.getElementById("chatLogoutBtn").classList.add("chat-hidden");
+        document.getElementById("chatHeaderUser").classList.add("chat-hidden");
+        document.getElementById("chatMessages").innerHTML = "";
+        document.getElementById("loginForm").reset();
+        document.getElementById("registerForm").reset();
+        switchAuthTab("login");
+      }
+
+      // ── CHAT MESSAGING ──
       function appendMessage(text, sender) {
-        const chatMessages = document.getElementById("chatMessages");
-        const msgDiv = document.createElement("div");
-        msgDiv.className = `msg-bubble msg-${sender}`;
-        msgDiv.innerText = text;
+        var chatMessages = document.getElementById("chatMessages");
+        var msgDiv = document.createElement("div");
+        msgDiv.className = "msg-bubble msg-" + sender;
+        msgDiv.textContent = text;
         chatMessages.appendChild(msgDiv);
         chatMessages.scrollTop = chatMessages.scrollHeight;
       }
 
       function showTyping() {
-        const chatMessages = document.getElementById("chatMessages");
-        const msgDiv = document.createElement("div");
-        msgDiv.className = `msg-bubble msg-bot`;
+        var chatMessages = document.getElementById("chatMessages");
+        var msgDiv = document.createElement("div");
+        msgDiv.className = "msg-bubble msg-bot";
         msgDiv.id = "typingIndicator";
-        msgDiv.innerHTML =
-          '<span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span>';
+        msgDiv.innerHTML = '<span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span>';
         chatMessages.appendChild(msgDiv);
         chatMessages.scrollTop = chatMessages.scrollHeight;
       }
 
       function removeTyping() {
-        const indicator = document.getElementById("typingIndicator");
+        var indicator = document.getElementById("typingIndicator");
         if (indicator) indicator.remove();
+      }
+
+      function loadChatHistory() {
+        if (!chatToken) return;
+        fetch(CHAT_API_BASE + "/chat/history", {
+          headers: { "Authorization": "Bearer " + chatToken },
+        })
+          .then(function(r) { return r.json(); })
+          .then(function(data) {
+            var chatMessages = document.getElementById("chatMessages");
+            chatMessages.innerHTML = "";
+            if (data.messages && data.messages.length > 0) {
+              data.messages.forEach(function(m) {
+                appendMessage(m.content, m.role === "user" ? "user" : "bot");
+              });
+            } else {
+              var welcomeMsg = activeLang === "fr"
+                ? "Bonjour " + (chatCustomer ? chatCustomer.name : "") + " ! Comment pouvons-nous vous aider aujourd'hui ? Posez-nous vos questions sur les tarifs, les projets ou les délais."
+                : "Hello " + (chatCustomer ? chatCustomer.name : "") + "! How can we help you today? Ask us about pricing, projects, or timelines.";
+              appendMessage(welcomeMsg, "bot");
+            }
+          })
+          .catch(function() {
+            appendMessage("Welcome! How can we help you today?", "bot");
+          });
       }
 
       function handleChatSubmit(e) {
         e.preventDefault();
-        const inputEl = document.getElementById("chatInput");
-        const text = inputEl.value.trim();
+        var inputEl = document.getElementById("chatInput");
+        var text = inputEl.value.trim();
         if (!text) return;
 
         appendMessage(text, "user");
         inputEl.value = "";
+        showTyping();
 
-        if (chatStep === 0) {
-          savedChatMessage = text;
-          chatStep = 1;
-          inputEl.placeholder = chatTranslations[activeLang].phEmail;
-          showTyping();
-          setTimeout(() => {
+        fetch(CHAT_API_BASE + "/chat/message", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + chatToken,
+          },
+          body: JSON.stringify({ message: text }),
+        })
+          .then(function(r) { return r.json(); })
+          .then(function(data) {
             removeTyping();
-            appendMessage(chatTranslations[activeLang].askEmail, "bot");
-          }, 800);
-        } else if (chatStep === 1) {
-          if (!text.includes("@")) {
-            appendMessage(
-              activeLang === "en"
-                ? "Please enter a valid email."
-                : "Veuillez entrer un courriel valide.",
-              "bot",
-            );
-            return;
-          }
-
-          document.getElementById("chatInputArea").style.display = "none";
-          showTyping();
-
-          const formData = new FormData();
-          formData.append("Email", text);
-          formData.append(
-            "Message",
-            savedChatMessage + "\n\n---\nSent via Chatbot",
-          );
-          formData.append("_subject", "New Lead from Chatbot!");
-
-          fetch("https://formsubmit.co/ajax/nickther001@gmail.com", {
-            method: "POST",
-            body: formData,
+            if (data.botMessage) {
+              appendMessage(data.botMessage.content, "bot");
+            } else if (data.error) {
+              appendMessage(data.error, "bot");
+            }
           })
-            .then((response) => response.json())
-            .then((data) => {
-              removeTyping();
-              appendMessage(chatTranslations[activeLang].success, "bot");
-            })
-            .catch((error) => {
-              removeTyping();
-              appendMessage(chatTranslations[activeLang].error, "bot");
-              document.getElementById("chatInputArea").style.display = "flex";
-            });
-        }
+          .catch(function() {
+            removeTyping();
+            appendMessage("Sorry, something went wrong. Please try again.", "bot");
+          });
+      }
+
+      // ── QUICK REPLY BUTTONS ──
+      function sendQuickReply(topic) {
+        var messages = {
+          pricing: "What are your pricing packages?",
+          projects: "What types of projects do you handle?",
+          timeline: "How long does it take to build a website?",
+          process: "How does your development process work?",
+          tech: "What technologies do you use?",
+        };
+        var inputEl = document.getElementById("chatInput");
+        inputEl.value = messages[topic] || topic;
+        document.getElementById("chatForm").dispatchEvent(new Event("submit", { cancelable: true }));
+      }
+
+      // ── AUTO-RESTORE SESSION ON LOAD ──
+      if (chatToken && chatCustomer) {
+        enterChatView();
       }
 
       const counters = document.querySelectorAll(".counter");
@@ -3345,13 +3657,13 @@
       }
 
       // ── AUTO-OPEN CHATBOT AFTER DELAY ──
-      window.addEventListener("DOMContentLoaded", () => {
-        setTimeout(() => {
-          const chatBox = document.getElementById("chatBox");
-          if (chatStep === 0 && !chatBox.classList.contains("open")) {
+      window.addEventListener("DOMContentLoaded", function() {
+        setTimeout(function() {
+          var chatBox = document.getElementById("chatBox");
+          if (!chatBox.classList.contains("open")) {
             toggleChat();
           }
-        }, 1500); // Waits 1.5 seconds after load
+        }, 1500);
       });
     </script>
   </body>
