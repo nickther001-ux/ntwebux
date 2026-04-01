@@ -7,10 +7,10 @@ const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 const PROJECTS = [
   {
-    img: `${BASE}/portfolio/proj-restaurant.png`,
-    category: { en: 'Restaurant', fr: 'Restaurant' },
-    title: { en: 'Le Quartier Brasserie', fr: 'Le Quartier Brasserie' },
-    tags: { en: ['Brand Identity', 'Web Design'], fr: ['Image de marque', 'Web Design'] },
+    img: `${BASE}/portfolio/proj-audreyrh.png`,
+    category: { en: 'HR Consulting', fr: 'Conseil RH' },
+    title: { en: 'AudreyRh.com', fr: 'AudreyRh.com' },
+    tags: { en: ['HR Consultant', 'Personal Brand'], fr: ['Conseil RH', 'Image personnelle'] },
     wide: true,
   },
   {
@@ -77,10 +77,10 @@ const PROJECTS = [
     wide: false,
   },
   {
-    img: `${BASE}/portfolio/proj-audreyrh.png`,
-    category: { en: 'HR Consulting', fr: 'Conseil RH' },
-    title: { en: 'AudreyRh.com', fr: 'AudreyRh.com' },
-    tags: { en: ['HR Consultant', 'Personal Brand'], fr: ['Conseil RH', 'Image personnelle'] },
+    img: `${BASE}/portfolio/proj-restaurant.png`,
+    category: { en: 'Restaurant', fr: 'Restaurant' },
+    title: { en: 'Le Quartier Brasserie', fr: 'Le Quartier Brasserie' },
+    tags: { en: ['Brand Identity', 'Web Design'], fr: ['Image de marque', 'Web Design'] },
     wide: false,
   },
 ];
