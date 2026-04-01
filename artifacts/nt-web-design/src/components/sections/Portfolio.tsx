@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { useState, useEffect, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '@/lib/i18n';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, X, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
 
@@ -50,7 +50,158 @@ const PROJECTS = [
   },
 ];
 
-function ProjectCard({ project, index }: { project: typeof PROJECTS[0]; index: number }) {
+/* ── Lightbox ─────────────────────────────────────────── */
+function Lightbox({
+  projects, index, onClose, onPrev, onNext,
+}: {
+  projects: typeof PROJECTS;
+  index: number;
+  onClose: () => void;
+  onPrev: () => void;
+  onNext: () => void;
+}) {
+  const { lang } = useLanguage();
+  const p = projects[index];
+  const l = lang as 'en' | 'fr';
+
+  // Keyboard nav
+  useEffect(() => {
+    const handle = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+      if (e.key === 'ArrowLeft') onPrev();
+      if (e.key === 'ArrowRight') onNext();
+    };
+    window.addEventListener('keydown', handle);
+    return () => window.removeEventListener('keydown', handle);
+  }, [onClose, onPrev, onNext]);
+
+  return (
+    <motion.div
+      key="lightbox-backdrop"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.22 }}
+      onClick={onClose}
+      style={{
+        position: 'fixed', inset: 0, zIndex: 200,
+        background: 'rgba(2,6,18,0.92)',
+        backdropFilter: 'blur(18px)',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        padding: '24px',
+      }}
+    >
+      {/* Panel */}
+      <motion.div
+        key={index}
+        initial={{ opacity: 0, scale: 0.94, y: 16 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.94, y: 16 }}
+        transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+        onClick={e => e.stopPropagation()}
+        style={{
+          maxWidth: '900px', width: '100%',
+          background: '#0a1628',
+          border: '1px solid rgba(59,130,246,0.2)',
+          borderRadius: '20px',
+          overflow: 'hidden',
+          boxShadow: '0 32px 100px rgba(0,0,0,0.9)',
+        }}
+      >
+        {/* Image */}
+        <div style={{ position: 'relative', background: '#060d1a' }}>
+          <img
+            src={p.img}
+            alt={p.title[l]}
+            style={{ width: '100%', display: 'block', maxHeight: '520px', objectFit: 'cover' }}
+          />
+          {/* Category badge */}
+          <div style={{
+            position: 'absolute', top: '14px', left: '14px',
+            background: 'rgba(6,13,26,0.8)', backdropFilter: 'blur(10px)',
+            border: '1px solid rgba(59,130,246,0.25)', borderRadius: '100px',
+            padding: '4px 11px', fontSize: '10px', fontWeight: 700,
+            letterSpacing: '0.08em', textTransform: 'uppercase', color: '#93c5fd',
+          }}>
+            {p.category[l]}
+          </div>
+          {/* Close */}
+          <button
+            onClick={onClose}
+            style={{
+              position: 'absolute', top: '14px', right: '14px',
+              width: '34px', height: '34px', borderRadius: '10px',
+              background: 'rgba(6,13,26,0.75)', backdropFilter: 'blur(10px)',
+              border: '1px solid rgba(255,255,255,0.12)',
+              cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
+              color: 'rgba(255,255,255,0.7)',
+            }}
+          >
+            <X size={15} />
+          </button>
+        </div>
+
+        {/* Footer row */}
+        <div style={{
+          padding: '18px 22px',
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '16px',
+        }}>
+          <div>
+            <div style={{ fontSize: '17px', fontWeight: 800, color: '#fff', marginBottom: '8px' }}>
+              {p.title[l]}
+            </div>
+            <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+              {p.tags[l].map(tag => (
+                <span key={tag} style={{
+                  fontSize: '10px', fontWeight: 600, color: 'rgba(255,255,255,0.45)',
+                  background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)',
+                  borderRadius: '6px', padding: '3px 9px', letterSpacing: '0.04em',
+                }}>{tag}</span>
+              ))}
+            </div>
+          </div>
+
+          {/* Prev / Next */}
+          <div style={{ display: 'flex', gap: '8px', flexShrink: 0 }}>
+            <button onClick={onPrev} style={{
+              width: '38px', height: '38px', borderRadius: '10px',
+              background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)',
+              cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
+              color: 'rgba(255,255,255,0.6)',
+            }}><ChevronLeft size={17} /></button>
+            <button onClick={onNext} style={{
+              width: '38px', height: '38px', borderRadius: '10px',
+              background: 'rgba(59,130,246,0.12)', border: '1px solid rgba(59,130,246,0.25)',
+              cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
+              color: '#93c5fd',
+            }}><ChevronRight size={17} /></button>
+          </div>
+        </div>
+
+        {/* Dot indicators */}
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '6px', paddingBottom: '16px' }}>
+          {projects.map((_, i) => (
+            <div key={i} style={{
+              width: i === index ? '20px' : '6px', height: '6px',
+              borderRadius: '3px',
+              background: i === index ? '#3b82f6' : 'rgba(255,255,255,0.15)',
+              transition: 'width 0.25s, background 0.25s',
+            }} />
+          ))}
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+/* ── Project card ─────────────────────────────────────── */
+function ProjectCard({
+  project, index, onOpen,
+}: {
+  project: typeof PROJECTS[0];
+  index: number;
+  onOpen: () => void;
+}) {
   const { lang } = useLanguage();
   const [hovered, setHovered] = useState(false);
 
@@ -62,6 +213,7 @@ function ProjectCard({ project, index }: { project: typeof PROJECTS[0]; index: n
       transition={{ delay: index * 0.07, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      onClick={onOpen}
       style={{
         position: 'relative',
         borderRadius: '16px',
@@ -167,6 +319,11 @@ function ProjectCard({ project, index }: { project: typeof PROJECTS[0]; index: n
 
 export function Portfolio() {
   const { lang } = useLanguage();
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
+  const closeLightbox = useCallback(() => setLightboxIndex(null), []);
+  const prevProject   = useCallback(() => setLightboxIndex(i => i === null ? null : (i - 1 + PROJECTS.length) % PROJECTS.length), []);
+  const nextProject   = useCallback(() => setLightboxIndex(i => i === null ? null : (i + 1) % PROJECTS.length), []);
 
   const eyebrow = lang === 'fr' ? 'Notre Travail' : 'Our Work';
   const title   = lang === 'fr' ? 'Des projets qui parlent\nd\'eux-mêmes.' : 'Projects that speak\nfor themselves.';
@@ -217,10 +374,23 @@ export function Portfolio() {
           className="portfolio-grid"
         >
           {PROJECTS.map((p, i) => (
-            <ProjectCard key={p.title.en} project={p} index={i} />
+            <ProjectCard key={p.title.en} project={p} index={i} onOpen={() => setLightboxIndex(i)} />
           ))}
         </div>
       </div>
+
+      {/* Lightbox */}
+      <AnimatePresence>
+        {lightboxIndex !== null && (
+          <Lightbox
+            projects={PROJECTS}
+            index={lightboxIndex}
+            onClose={closeLightbox}
+            onPrev={prevProject}
+            onNext={nextProject}
+          />
+        )}
+      </AnimatePresence>
 
       <style>{`
         @media (max-width: 900px) {
