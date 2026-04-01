@@ -69,14 +69,14 @@ export function Services() {
             }}
           >
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '20px' }}>
-              <div style={{ width: '44px', height: '44px', borderRadius: '10px', background: 'rgba(124,58,237,0.12)', border: '1px solid rgba(124,58,237,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#a78bfa' }}>
+              <div style={{ width: '44px', height: '44px', borderRadius: '10px', background: 'rgba(16,185,129,0.12)', border: '1px solid rgba(16,185,129,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#6ee7b7' }}>
                 <s.icon size={20} />
               </div>
               <span style={{ fontSize: '28px', fontWeight: 800, color: 'rgba(255,255,255,0.05)', letterSpacing: '-0.04em' }}>{s.id}</span>
             </div>
             <div style={{ fontSize: '15px', fontWeight: 700, color: '#fff', marginBottom: '8px' }}>{s.title}</div>
             <div style={{ fontSize: '13px', color: 'rgba(255,255,255,0.45)', lineHeight: 1.6, marginBottom: '16px' }}>{s.short}</div>
-            <div style={{ fontSize: '12px', color: '#a78bfa', fontWeight: 600, marginTop: 'auto' }}>{learnMore}</div>
+            <div style={{ fontSize: '12px', color: '#6ee7b7', fontWeight: 600, marginTop: 'auto' }}>{learnMore}</div>
           </motion.button>
         ))}
       </div>
@@ -106,10 +106,10 @@ export function Services() {
                 width: '90vw',
                 maxWidth: '440px',
                 background: '#111',
-                border: '1px solid rgba(124,58,237,0.25)',
+                border: '1px solid rgba(16,185,129,0.25)',
                 borderRadius: '20px',
                 padding: '36px 32px',
-                boxShadow: '0 24px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(124,58,237,0.1)',
+                boxShadow: '0 24px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(16,185,129,0.1)',
               }}
             >
               <button
@@ -122,7 +122,7 @@ export function Services() {
               </button>
 
               <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '24px' }}>
-                <div style={{ width: '52px', height: '52px', borderRadius: '12px', background: 'rgba(124,58,237,0.14)', border: '1px solid rgba(124,58,237,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#a78bfa', flexShrink: 0 }}>
+                <div style={{ width: '52px', height: '52px', borderRadius: '12px', background: 'rgba(16,185,129,0.14)', border: '1px solid rgba(16,185,129,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#6ee7b7', flexShrink: 0 }}>
                   <active.icon size={24} />
                 </div>
                 <div>

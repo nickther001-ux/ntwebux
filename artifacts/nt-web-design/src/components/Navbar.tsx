@@ -54,12 +54,12 @@ export function Navbar() {
           <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ height: '36px', width: '36px' }}>
             <defs>
               <linearGradient id="vg1" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#a78bfa" />
-                <stop offset="100%" stopColor="#7c3aed" />
+                <stop offset="0%" stopColor="#6ee7b7" />
+                <stop offset="100%" stopColor="#10b981" />
               </linearGradient>
               <linearGradient id="vg2" x1="100%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="#f0abfc" />
-                <stop offset="100%" stopColor="#a78bfa" />
+                <stop offset="0%" stopColor="#bef264" />
+                <stop offset="100%" stopColor="#6ee7b7" />
               </linearGradient>
             </defs>
             <polygon points="22,30 46,30 46,170 22,170" fill="url(#vg1)" />
@@ -70,7 +70,7 @@ export function Navbar() {
           </svg>
           <div style={{ lineHeight: 1 }}>
             <div style={{ fontSize: '15px', fontWeight: 800, letterSpacing: '0.12em', color: '#fff', textTransform: 'uppercase' }}>
-              NT<span style={{ background: 'linear-gradient(135deg,#a78bfa,#f0abfc)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>WebUX</span>
+              NT<span style={{ background: 'linear-gradient(135deg,#10b981,#84cc16)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>WebUX</span>
             </div>
           </div>
         </a>
@@ -107,12 +107,12 @@ export function Navbar() {
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '12px', fontWeight: 600 }}>
             <button
               onClick={() => setLang('en')}
-              style={{ color: lang === 'en' ? '#a78bfa' : 'rgba(255,255,255,0.35)', background: 'none', border: 'none', cursor: 'pointer', fontWeight: 600, fontSize: '12px', letterSpacing: '0.08em' }}
+              style={{ color: lang === 'en' ? '#10b981' : 'rgba(255,255,255,0.35)', background: 'none', border: 'none', cursor: 'pointer', fontWeight: 600, fontSize: '12px', letterSpacing: '0.08em' }}
             >EN</button>
             <span style={{ color: 'rgba(255,255,255,0.15)' }}>|</span>
             <button
               onClick={() => setLang('fr')}
-              style={{ color: lang === 'fr' ? '#a78bfa' : 'rgba(255,255,255,0.35)', background: 'none', border: 'none', cursor: 'pointer', fontWeight: 600, fontSize: '12px', letterSpacing: '0.08em' }}
+              style={{ color: lang === 'fr' ? '#10b981' : 'rgba(255,255,255,0.35)', background: 'none', border: 'none', cursor: 'pointer', fontWeight: 600, fontSize: '12px', letterSpacing: '0.08em' }}
             >FR</button>
           </div>
           <a
@@ -165,9 +165,9 @@ export function Navbar() {
               </a>
             ))}
             <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginTop: '8px' }}>
-              <button onClick={() => setLang('en')} style={{ color: lang === 'en' ? '#a78bfa' : 'rgba(255,255,255,0.4)', background: 'none', border: 'none', cursor: 'pointer', fontSize: '14px', fontWeight: 700 }}>EN</button>
+              <button onClick={() => setLang('en')} style={{ color: lang === 'en' ? '#10b981' : 'rgba(255,255,255,0.4)', background: 'none', border: 'none', cursor: 'pointer', fontSize: '14px', fontWeight: 700 }}>EN</button>
               <span style={{ color: 'rgba(255,255,255,0.2)' }}>|</span>
-              <button onClick={() => setLang('fr')} style={{ color: lang === 'fr' ? '#a78bfa' : 'rgba(255,255,255,0.4)', background: 'none', border: 'none', cursor: 'pointer', fontSize: '14px', fontWeight: 700 }}>FR</button>
+              <button onClick={() => setLang('fr')} style={{ color: lang === 'fr' ? '#10b981' : 'rgba(255,255,255,0.4)', background: 'none', border: 'none', cursor: 'pointer', fontSize: '14px', fontWeight: 700 }}>FR</button>
             </div>
             <a href={isHome ? '#contact' : '/#contact'} onClick={() => setOpen(false)} className="btn-violet" style={{ padding: '14px 40px', fontSize: '15px', marginTop: '8px' }}>
               {t('nav.quote')}

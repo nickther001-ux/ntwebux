@@ -17,7 +17,7 @@ export function Hero() {
         position: 'absolute', top: '50%', left: '50%',
         transform: 'translate(-50%,-60%)',
         width: '700px', height: '400px', borderRadius: '50%',
-        background: 'radial-gradient(ellipse, rgba(124,58,237,0.14) 0%, transparent 70%)',
+        background: 'radial-gradient(ellipse, rgba(16,185,129,0.14) 0%, transparent 70%)',
         pointerEvents: 'none',
       }} />
 
@@ -99,7 +99,7 @@ export function Hero() {
               className="glass"
               style={{ padding: '14px 24px', borderRadius: '12px', textAlign: 'center', minWidth: '110px' }}
             >
-              <div style={{ fontSize: '22px', fontWeight: 800, background: 'linear-gradient(135deg,#c4b5fd,#f0abfc)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>{s.v}</div>
+              <div style={{ fontSize: '22px', fontWeight: 800, background: 'linear-gradient(135deg,#6ee7b7,#bef264)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>{s.v}</div>
               <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.4)', marginTop: '3px', fontWeight: 500 }}>{s.l}</div>
             </div>
           ))}

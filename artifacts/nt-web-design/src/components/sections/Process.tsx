@@ -9,7 +9,7 @@ export function Process() {
   return (
     <section id="process" style={{ padding: '120px 24px', position: 'relative', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
       {/* Background glow */}
-      <div style={{ position: 'absolute', top: '50%', right: 0, width: '500px', height: '500px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(217,70,239,0.07) 0%, transparent 65%)', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
+      <div style={{ position: 'absolute', top: '50%', right: 0, width: '500px', height: '500px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(132,204,22,0.07) 0%, transparent 65%)', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
 
       <div style={{ maxWidth: '1200px', margin: '0 auto', position: 'relative' }}>
         {/* Header */}
@@ -26,7 +26,7 @@ export function Process() {
         {/* Steps */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '24px', position: 'relative' }} className="process-grid">
           {/* Connector line */}
-          <div style={{ position: 'absolute', top: '28px', left: '12%', right: '12%', height: '1px', background: 'linear-gradient(90deg, transparent, rgba(124,58,237,0.3), transparent)' }} className="connector-line" />
+          <div style={{ position: 'absolute', top: '28px', left: '12%', right: '12%', height: '1px', background: 'linear-gradient(90deg, transparent, rgba(16,185,129,0.3), transparent)' }} className="connector-line" />
 
           {steps.map((step, i) => (
             <motion.div
@@ -42,14 +42,14 @@ export function Process() {
                 width: '56px',
                 height: '56px',
                 borderRadius: '50%',
-                background: 'rgba(124,58,237,0.1)',
-                border: '1px solid rgba(124,58,237,0.25)',
+                background: 'rgba(16,185,129,0.1)',
+                border: '1px solid rgba(16,185,129,0.25)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 fontSize: '18px',
                 fontWeight: 800,
-                color: '#a78bfa',
+                color: '#6ee7b7',
                 marginBottom: '24px',
               }}>
                 0{i + 1}

@@ -55,7 +55,7 @@ function AnimatedStat({ num, prefix = '', suffix, label, delay, borderRight }: S
       <div style={{
         fontSize: 'clamp(28px,4vw,42px)',
         fontWeight: 800,
-        background: 'linear-gradient(135deg,#c4b5fd,#f0abfc)',
+        background: 'linear-gradient(135deg,#6ee7b7,#bef264)',
         WebkitBackgroundClip: 'text',
         WebkitTextFillColor: 'transparent',
         lineHeight: 1,

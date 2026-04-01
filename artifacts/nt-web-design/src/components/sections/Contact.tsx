@@ -75,7 +75,7 @@ export function Contact() {
 
   return (
     <section id="contact" style={{ padding: '120px 24px', borderTop: '1px solid rgba(255,255,255,0.06)', position: 'relative' }}>
-      <div style={{ position: 'absolute', bottom: 0, left: '50%', transform: 'translateX(-50%)', width: '800px', height: '400px', borderRadius: '50%', background: 'radial-gradient(ellipse, rgba(124,58,237,0.1) 0%, transparent 65%)', pointerEvents: 'none' }} />
+      <div style={{ position: 'absolute', bottom: 0, left: '50%', transform: 'translateX(-50%)', width: '800px', height: '400px', borderRadius: '50%', background: 'radial-gradient(ellipse, rgba(16,185,129,0.1) 0%, transparent 65%)', pointerEvents: 'none' }} />
 
       <div style={{ maxWidth: '1100px', margin: '0 auto', position: 'relative' }}>
         <div style={{ textAlign: 'center', marginBottom: '64px' }}>
@@ -93,8 +93,8 @@ export function Contact() {
           <div>
             {perks.map((p, i) => (
               <div key={i} style={{ display: 'flex', gap: '16px', alignItems: 'flex-start', marginBottom: '24px' }}>
-                <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'rgba(124,58,237,0.12)', border: '1px solid rgba(124,58,237,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
+                <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'rgba(16,185,129,0.12)', border: '1px solid rgba(16,185,129,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#6ee7b7" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
                 </div>
                 <div>
                   <div style={{ fontSize: '14px', fontWeight: 700, color: '#fff', marginBottom: '3px' }}>{p.title}</div>
@@ -105,7 +105,7 @@ export function Contact() {
 
             <div style={{ borderTop: '1px solid rgba(255,255,255,0.07)', paddingTop: '28px', marginTop: '8px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <a href="tel:+14388067640" style={{ display: 'flex', alignItems: 'center', gap: '14px', textDecoration: 'none' }}>
-                <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'rgba(124,58,237,0.1)', border: '1px solid rgba(124,58,237,0.18)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#a78bfa' }}>
+                <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.18)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#6ee7b7' }}>
                   <Phone size={16} />
                 </div>
                 <div>
@@ -114,7 +114,7 @@ export function Contact() {
                 </div>
               </a>
               <a href="mailto:nickther001@gmail.com" style={{ display: 'flex', alignItems: 'center', gap: '14px', textDecoration: 'none' }}>
-                <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'rgba(124,58,237,0.1)', border: '1px solid rgba(124,58,237,0.18)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#a78bfa' }}>
+                <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.18)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#6ee7b7' }}>
                   <Mail size={16} />
                 </div>
                 <div>
@@ -129,7 +129,7 @@ export function Contact() {
           <div className="glass" style={{ borderRadius: '20px', padding: '36px' }}>
             {success ? (
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '360px', textAlign: 'center', gap: '16px' }}>
-                <CheckCircle2 size={56} color="#a78bfa" />
+                <CheckCircle2 size={56} color="#6ee7b7" />
                 <div style={{ fontSize: '24px', fontWeight: 800, color: '#fff' }}>
                   {lang === 'fr' ? 'Message envoyé !' : 'Message sent!'}
                 </div>
@@ -142,28 +142,28 @@ export function Contact() {
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }} className="name-grid">
                   <div>
                     <label style={labelStyle}>{formT.fn}</label>
-                    <input {...register('firstName')} style={inputStyle} onFocus={e => (e.target.style.borderColor = 'rgba(124,58,237,0.5)')} onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.1)')} />
+                    <input {...register('firstName')} style={inputStyle} onFocus={e => (e.target.style.borderColor = 'rgba(16,185,129,0.5)')} onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.1)')} />
                   </div>
                   <div>
                     <label style={labelStyle}>{formT.ln}</label>
-                    <input {...register('lastName')} style={inputStyle} onFocus={e => (e.target.style.borderColor = 'rgba(124,58,237,0.5)')} onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.1)')} />
+                    <input {...register('lastName')} style={inputStyle} onFocus={e => (e.target.style.borderColor = 'rgba(16,185,129,0.5)')} onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.1)')} />
                   </div>
                 </div>
 
                 <div>
                   <label style={labelStyle}>{formT.email} *</label>
-                  <input {...register('email')} type="email" style={{ ...inputStyle, borderColor: errors.email ? 'rgba(239,68,68,0.5)' : 'rgba(255,255,255,0.1)' }} onFocus={e => (e.target.style.borderColor = errors.email ? 'rgba(239,68,68,0.7)' : 'rgba(124,58,237,0.5)')} onBlur={e => (e.target.style.borderColor = errors.email ? 'rgba(239,68,68,0.5)' : 'rgba(255,255,255,0.1)')} />
+                  <input {...register('email')} type="email" style={{ ...inputStyle, borderColor: errors.email ? 'rgba(239,68,68,0.5)' : 'rgba(255,255,255,0.1)' }} onFocus={e => (e.target.style.borderColor = errors.email ? 'rgba(239,68,68,0.7)' : 'rgba(16,185,129,0.5)')} onBlur={e => (e.target.style.borderColor = errors.email ? 'rgba(239,68,68,0.5)' : 'rgba(255,255,255,0.1)')} />
                   {errors.email && <span style={{ fontSize: '12px', color: '#f87171', marginTop: '4px', display: 'block' }}>{errors.email.message}</span>}
                 </div>
 
                 <div>
                   <label style={labelStyle}>{formT.phone}</label>
-                  <input {...register('phone')} type="tel" style={inputStyle} onFocus={e => (e.target.style.borderColor = 'rgba(124,58,237,0.5)')} onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.1)')} />
+                  <input {...register('phone')} type="tel" style={inputStyle} onFocus={e => (e.target.style.borderColor = 'rgba(16,185,129,0.5)')} onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.1)')} />
                 </div>
 
                 <div>
                   <label style={labelStyle}>{formT.service}</label>
-                  <select {...register('service')} style={{ ...inputStyle, appearance: 'none', cursor: 'pointer' }} onFocus={e => (e.target.style.borderColor = 'rgba(124,58,237,0.5)')} onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.1)')}>
+                  <select {...register('service')} style={{ ...inputStyle, appearance: 'none', cursor: 'pointer' }} onFocus={e => (e.target.style.borderColor = 'rgba(16,185,129,0.5)')} onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.1)')}>
                     <option value="" style={{ background: '#111' }}>-- Select --</option>
                     {(formT.serviceOptions as string[]).map((opt: string) => (
                       <option key={opt} value={opt} style={{ background: '#111' }}>{opt}</option>
@@ -173,7 +173,7 @@ export function Contact() {
 
                 <div>
                   <label style={labelStyle}>{formT.msg} *</label>
-                  <textarea {...register('message')} rows={4} style={{ ...inputStyle, resize: 'none', borderColor: errors.message ? 'rgba(239,68,68,0.5)' : 'rgba(255,255,255,0.1)' }} onFocus={e => (e.target.style.borderColor = errors.message ? 'rgba(239,68,68,0.7)' : 'rgba(124,58,237,0.5)')} onBlur={e => (e.target.style.borderColor = errors.message ? 'rgba(239,68,68,0.5)' : 'rgba(255,255,255,0.1)')} />
+                  <textarea {...register('message')} rows={4} style={{ ...inputStyle, resize: 'none', borderColor: errors.message ? 'rgba(239,68,68,0.5)' : 'rgba(255,255,255,0.1)' }} onFocus={e => (e.target.style.borderColor = errors.message ? 'rgba(239,68,68,0.7)' : 'rgba(16,185,129,0.5)')} onBlur={e => (e.target.style.borderColor = errors.message ? 'rgba(239,68,68,0.5)' : 'rgba(255,255,255,0.1)')} />
                   {errors.message && <span style={{ fontSize: '12px', color: '#f87171', marginTop: '4px', display: 'block' }}>{errors.message.message}</span>}
                 </div>
 
