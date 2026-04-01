@@ -60,3 +60,9 @@ id = "koJ_9QE9q6PfSagB8dXij"
 uri = "file://artifacts/nt-web-design/public/portfolio/proj-construction.png"
 type = "image"
 title = "generated_image"
+
+[[generated]]
+id = "XE8qYZpTGGTPA5MPgY1eW"
+uri = "file://artifacts/nt-web-design/public/portfolio/proj-audreyrh.png"
+type = "image"
+title = "generated_image"

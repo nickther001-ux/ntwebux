@@ -76,6 +76,13 @@ const PROJECTS = [
     tags: { en: ['Corporate', 'Web Design'], fr: ['Corporate', 'Web Design'] },
     wide: false,
   },
+  {
+    img: `${BASE}/portfolio/proj-audreyrh.png`,
+    category: { en: 'HR Consulting', fr: 'Conseil RH' },
+    title: { en: 'AudreyRh.com', fr: 'AudreyRh.com' },
+    tags: { en: ['HR Consultant', 'Personal Brand'], fr: ['Conseil RH', 'Image personnelle'] },
+    wide: false,
+  },
 ];
 
 /* ── Lightbox ─────────────────────────────────────────── */
