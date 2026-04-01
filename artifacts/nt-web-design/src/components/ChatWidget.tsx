@@ -155,7 +155,7 @@ function HomeView({ lang, onStartChat }: { lang: string; onStartChat: () => void
 
       {/* Footer */}
       <div style={{ padding: "10px 18px 14px", textAlign: "center", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
-        <span style={{ fontSize: "10.5px", color: "rgba(255,255,255,0.2)", fontWeight: 500 }}>NT WebUX · Montréal</span>
+        <span style={{ fontSize: "10.5px", color: "rgba(255,255,255,0.2)", fontWeight: 500 }}>NT Web UX · Montréal</span>
       </div>
     </div>
   );
@@ -170,8 +170,8 @@ function ChatView({ lang, onBack }: { lang: string; onBack: () => void }) {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const greeting = lang === "fr"
-    ? "Bonjour ! Je suis l'assistant NT WebUX. Posez-moi n'importe quelle question sur nos services, tarifs ou délais de livraison."
-    : "Hi there! I'm the NT WebUX assistant. Ask me anything about our services, pricing, or turnaround times — happy to help!";
+    ? "Bonjour ! Je suis l'assistant NT Web UX. Posez-moi n'importe quelle question sur nos services, tarifs ou délais de livraison."
+    : "Hi there! I'm the NT Web UX assistant. Ask me anything about our services, pricing, or turnaround times — happy to help!";
 
   useEffect(() => {
     setMessages([{ role: "assistant", content: greeting }]);
@@ -238,7 +238,7 @@ function ChatView({ lang, onBack }: { lang: string; onBack: () => void }) {
           <Bot size={16} color="#fff" />
         </div>
         <div style={{ flex: 1 }}>
-          <div style={{ fontSize: "13px", fontWeight: 700, color: "#fff", lineHeight: 1 }}>{lang === "fr" ? "Assistant NT WebUX" : "NT WebUX Assistant"}</div>
+          <div style={{ fontSize: "13px", fontWeight: 700, color: "#fff", lineHeight: 1 }}>{lang === "fr" ? "Assistant NT Web UX" : "NT Web UX Assistant"}</div>
           <div style={{ fontSize: "11px", color: "rgba(147,197,253,0.65)", marginTop: "3px", display: "flex", alignItems: "center", gap: "5px" }}>
             <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#4ade80", display: "inline-block" }} />
             {lang === "fr" ? "En ligne · Répond instantanément" : "Online · Replies instantly"}

@@ -38,9 +38,9 @@ router.post("/contact", async (req, res) => {
       if (resend) {
         const fullName = [body.firstName, body.lastName].filter(Boolean).join(" ") || "Not provided";
         await resend.emails.send({
-          from: "NT WebUX <onboarding@resend.dev>",
+          from: "NT Web UX <onboarding@resend.dev>",
           to: NOTIFY_EMAIL,
-          subject: `New Inquiry from ${fullName} — NT WebUX`,
+          subject: `New Inquiry from ${fullName} — NT Web UX`,
           html: `
             <div style="font-family:sans-serif;max-width:600px;margin:0 auto;background:#060A14;color:#D8E8FF;padding:32px;border-radius:8px;">
               <h2 style="color:#00AADD;margin-bottom:24px;font-size:22px;">📬 New Project Inquiry</h2>
@@ -51,7 +51,7 @@ router.post("/contact", async (req, res) => {
                 <tr><td style="padding:10px 0;border-bottom:1px solid rgba(0,140,255,.15);color:#5A7DB5;font-size:13px;text-transform:uppercase;letter-spacing:.08em;">Service</td><td style="padding:10px 0;border-bottom:1px solid rgba(0,140,255,.15);font-size:15px;">${body.service || "—"}</td></tr>
                 <tr><td style="padding:14px 0;color:#5A7DB5;font-size:13px;text-transform:uppercase;letter-spacing:.08em;vertical-align:top;">Message</td><td style="padding:14px 0;font-size:15px;line-height:1.6;white-space:pre-wrap;">${body.message}</td></tr>
               </table>
-              <p style="margin-top:28px;font-size:12px;color:rgba(90,125,181,.6);">Sent from NT WebUX contact form (no DB — email only)</p>
+              <p style="margin-top:28px;font-size:12px;color:rgba(90,125,181,.6);">Sent from NT Web UX contact form (no DB — email only)</p>
             </div>
           `,
         }).catch((err) => console.error("Email send failed:", err));
@@ -74,9 +74,9 @@ router.post("/contact", async (req, res) => {
     if (resend) {
       const fullName = [body.firstName, body.lastName].filter(Boolean).join(" ") || "Not provided";
       await resend.emails.send({
-        from: "NT WebUX <onboarding@resend.dev>",
+        from: "NT Web UX <onboarding@resend.dev>",
         to: NOTIFY_EMAIL,
-        subject: `New Inquiry from ${fullName} — NT WebUX`,
+        subject: `New Inquiry from ${fullName} — NT Web UX`,
         html: `
           <div style="font-family:sans-serif;max-width:600px;margin:0 auto;background:#060A14;color:#D8E8FF;padding:32px;border-radius:8px;">
             <h2 style="color:#00AADD;margin-bottom:24px;font-size:22px;">📬 New Project Inquiry</h2>
@@ -87,7 +87,7 @@ router.post("/contact", async (req, res) => {
               <tr><td style="padding:10px 0;border-bottom:1px solid rgba(0,140,255,.15);color:#5A7DB5;font-size:13px;text-transform:uppercase;letter-spacing:.08em;">Service</td><td style="padding:10px 0;border-bottom:1px solid rgba(0,140,255,.15);font-size:15px;">${body.service || "—"}</td></tr>
               <tr><td style="padding:14px 0;color:#5A7DB5;font-size:13px;text-transform:uppercase;letter-spacing:.08em;vertical-align:top;">Message</td><td style="padding:14px 0;font-size:15px;line-height:1.6;white-space:pre-wrap;">${body.message}</td></tr>
             </table>
-            <p style="margin-top:28px;font-size:12px;color:rgba(90,125,181,.6);">Sent from NT WebUX contact form · Inquiry #${inserted.id}</p>
+            <p style="margin-top:28px;font-size:12px;color:rgba(90,125,181,.6);">Sent from NT Web UX contact form · Inquiry #${inserted.id}</p>
           </div>
         `,
       }).catch((err) => console.error("Email send failed:", err));

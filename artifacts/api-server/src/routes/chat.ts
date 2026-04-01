@@ -17,9 +17,9 @@ function getOpenAI(): OpenAI | null {
   return openai;
 }
 
-const SYSTEM_PROMPT = `You are the NT WebUX virtual assistant. You help potential clients learn about NT WebUX's web design services.
+const SYSTEM_PROMPT = `You are the NT Web UX virtual assistant. You help potential clients learn about NT Web UX's web design services.
 
-About NT WebUX:
+About NT Web UX:
 - We build modern, high-performance websites for SMEs and entrepreneurs worldwide
 - Contact: nicktech@computer4u.com | Phone: (438) 806-7640
 - We are bilingual (English / French)
@@ -35,7 +35,7 @@ Process:
 3. Development — built with modern tech for speed and SEO
 4. Launch — go live with full handoff and support
 
-Why NT WebUX:
+Why NT Web UX:
 - Fast turnaround (typically 2-3 weeks)
 - Clean, modern design with no templates
 - SEO-ready and mobile-first

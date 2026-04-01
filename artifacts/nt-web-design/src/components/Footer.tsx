@@ -74,7 +74,7 @@ export function Footer() {
         <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '28px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px' }}>
           <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.25)' }}>{t('footer.copy')}</p>
           <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.25)' }}>
-            Built with <span style={{ color: '#93c5fd' }}>♥</span> by NT WebUX
+            Built with <span style={{ color: '#93c5fd' }}>♥</span> by NT Web UX
           </p>
         </div>
       </div>

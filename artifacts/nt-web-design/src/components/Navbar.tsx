@@ -71,7 +71,7 @@ export function Navbar() {
           </svg>
           <div style={{ lineHeight: 1 }}>
             <div style={{ fontSize: '15px', fontWeight: 800, letterSpacing: '0.12em', color: '#fff', textTransform: 'uppercase' }}>
-              NT<span style={{ background: 'linear-gradient(135deg,#3b82f6,#60a5fa)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>WebUX</span>
+              NT <span style={{ background: 'linear-gradient(135deg,#3b82f6,#60a5fa)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Web UX</span>
             </div>
           </div>
         </a>
