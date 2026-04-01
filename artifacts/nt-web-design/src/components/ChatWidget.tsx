@@ -3,7 +3,9 @@ import { useLanguage } from "@/lib/i18n";
 import { motion, AnimatePresence } from "framer-motion";
 import { Send, X, Bot, ArrowLeft, MessageCircle, Mail, Phone, ChevronRight } from "lucide-react";
 
-const BASE_URL = import.meta.env.BASE_URL.replace(/\/$/, "");
+// VITE_API_URL lets you point to an externally deployed API (e.g. render.com backend service).
+// If not set, falls back to the same origin (works on Replit and local dev).
+const API_BASE = (import.meta.env.VITE_API_URL || import.meta.env.BASE_URL).replace(/\/$/, "");
 const PHONE = "(438) 806-7640";
 const PHONE_RAW = "14388067640";
 const EMAIL = "nicktech@computer4u.com";
@@ -192,7 +194,7 @@ function ChatView({ lang, onBack }: { lang: string; onBack: () => void }) {
     setLoading(true);
 
     try {
-      const res = await fetch(`${BASE_URL}/api/chat`, {
+      const res = await fetch(`${API_BASE}/api/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: text, history: messages.slice(-10) }),

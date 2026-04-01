@@ -7,13 +7,12 @@ let openai: OpenAI | null = null;
 
 function getOpenAI(): OpenAI | null {
   if (openai) return openai;
-  if (!process.env.AI_INTEGRATIONS_OPENAI_BASE_URL || !process.env.AI_INTEGRATIONS_OPENAI_API_KEY) {
-    return null;
-  }
-  openai = new OpenAI({
-    apiKey: process.env.AI_INTEGRATIONS_OPENAI_API_KEY,
-    baseURL: process.env.AI_INTEGRATIONS_OPENAI_BASE_URL,
-  });
+  // Support standard OPENAI_API_KEY (for render.com / external deployments)
+  // and Replit's managed AI integration credentials
+  const apiKey = process.env.OPENAI_API_KEY || process.env.AI_INTEGRATIONS_OPENAI_API_KEY;
+  const baseURL = process.env.AI_INTEGRATIONS_OPENAI_BASE_URL; // optional — omit for direct OpenAI
+  if (!apiKey) return null;
+  openai = new OpenAI({ apiKey, ...(baseURL ? { baseURL } : {}) });
   return openai;
 }
 
