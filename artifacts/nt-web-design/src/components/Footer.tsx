@@ -1,79 +1,92 @@
-import React from 'react';
 import { useLanguage } from '@/lib/i18n';
 
 export function Footer() {
   const { t } = useLanguage();
 
   return (
-    <footer className="bg-[#020508] pt-24 pb-8 relative z-10">
-      <div className="px-5 lg:px-8 max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-          
-          {/* Logo Column */}
-          <div className="lg:col-span-1">
-            <a href="#" className="flex items-center gap-3 group mb-6">
-              <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-12 w-12">
+    <footer style={{ borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '64px', paddingBottom: '40px', marginTop: '0' }}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1.6fr 1fr 1fr 1fr', gap: '48px', marginBottom: '48px' }} className="grid-footer">
+          {/* Brand */}
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
+              <svg viewBox="0 0 200 200" fill="none" style={{ height: '32px', width: '32px' }}>
                 <defs>
-                  <linearGradient id="f1" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" style={{ stopColor: '#0044dd' }}/>
-                    <stop offset="45%" style={{ stopColor: '#00aaee' }}/>
-                    <stop offset="100%" style={{ stopColor: '#00ff77' }}/>
+                  <linearGradient id="fg1" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#a78bfa" />
+                    <stop offset="100%" stopColor="#7c3aed" />
                   </linearGradient>
                 </defs>
-                <polygon points="22,30 46,30 46,170 22,170" fill="url(#f1)"/>
-                <polygon points="44,30 100,90 100,130 44,70" fill="url(#f1)"/>
-                <polygon points="154,30 178,30 178,170 154,170" fill="url(#f1)"/>
-                <polygon points="100,110 156,170 134,170 78,110" fill="url(#f1)"/>
+                <polygon points="22,30 46,30 46,170 22,170" fill="url(#fg1)" />
+                <polygon points="44,30 100,90 100,130 44,70" fill="url(#fg1)" />
+                <polygon points="154,30 178,30 178,170 154,170" fill="url(#fg1)" />
+                <polygon points="100,110 156,170 134,170 78,110" fill="url(#fg1)" />
               </svg>
-              <div className="font-sans text-sm font-extrabold tracking-widest uppercase leading-tight text-white">
-                NT
-                <span className="block text-accent text-[0.72rem] tracking-[0.18em]">WebUX</span>
-              </div>
-            </a>
-            <p className="font-serif text-sm text-white/40 max-w-xs">
+              <span style={{ fontSize: '15px', fontWeight: 800, color: '#fff', letterSpacing: '0.1em' }}>
+                NT<span style={{ background: 'linear-gradient(135deg,#a78bfa,#f0abfc)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>WebUX</span>
+              </span>
+            </div>
+            <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.38)', lineHeight: 1.7, maxWidth: '220px' }}>
               {t('footer.tagline')}
             </p>
           </div>
 
-          {/* Links Columns */}
+          {/* Links */}
           <div>
-            <h5 className="font-bold text-[10px] uppercase tracking-widest text-white/30 mb-6">{t('footer.links1')}</h5>
-            <ul className="flex flex-col gap-4">
-              <li><a href="#services" className="text-sm font-medium text-white/60 hover:text-white transition-colors">Business Websites</a></li>
-              <li><a href="#services" className="text-sm font-medium text-white/60 hover:text-white transition-colors">E-Commerce</a></li>
-              <li><a href="#services" className="text-sm font-medium text-white/60 hover:text-white transition-colors">Landing Pages</a></li>
-              <li><a href="#services" className="text-sm font-medium text-white/60 hover:text-white transition-colors">SEO & Performance</a></li>
+            <div style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.25)', marginBottom: '20px' }}>Services</div>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              {['Website Design', 'Development', 'eCommerce', 'SEO & Marketing', 'AI Integrations'].map(s => (
+                <li key={s}><a href="#services" style={{ fontSize: '13px', color: 'rgba(255,255,255,0.5)', textDecoration: 'none', transition: 'color 0.2s' }}
+                  onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
+                  onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.5)')}
+                >{s}</a></li>
+              ))}
             </ul>
           </div>
 
           <div>
-            <h5 className="font-bold text-[10px] uppercase tracking-widest text-white/30 mb-6">{t('footer.links2')}</h5>
-            <ul className="flex flex-col gap-4">
-              <li><a href="#process" className="text-sm font-medium text-white/60 hover:text-white transition-colors">Process</a></li>
-              <li><a href="#why-us" className="text-sm font-medium text-white/60 hover:text-white transition-colors">Why Us</a></li>
-              <li><a href="#contact" className="text-sm font-medium text-white/60 hover:text-white transition-colors">Contact</a></li>
+            <div style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.25)', marginBottom: '20px' }}>Company</div>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              {[['Process', '#process'], ['Why Us', '#why-us'], ['Contact', '#contact']].map(([label, href]) => (
+                <li key={href}><a href={href} style={{ fontSize: '13px', color: 'rgba(255,255,255,0.5)', textDecoration: 'none', transition: 'color 0.2s' }}
+                  onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
+                  onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.5)')}
+                >{label}</a></li>
+              ))}
             </ul>
           </div>
 
           <div>
-            <h5 className="font-bold text-[10px] uppercase tracking-widest text-white/30 mb-6">{t('footer.links3')}</h5>
-            <ul className="flex flex-col gap-4">
-              <li><a href="#" className="text-sm font-medium text-white/60 hover:text-white transition-colors">Privacy Policy</a></li>
-              <li><a href="#" className="text-sm font-medium text-white/60 hover:text-white transition-colors">Terms of Service</a></li>
+            <div style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.25)', marginBottom: '20px' }}>Contact</div>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              <li><a href="mailto:nickther001@gmail.com" style={{ fontSize: '13px', color: 'rgba(255,255,255,0.5)', textDecoration: 'none', transition: 'color 0.2s' }}
+                onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
+                onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.5)')}
+              >nickther001@gmail.com</a></li>
+              <li><a href="tel:+14388067640" style={{ fontSize: '13px', color: 'rgba(255,255,255,0.5)', textDecoration: 'none', transition: 'color 0.2s' }}
+                onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
+                onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.5)')}
+              >(438) 806-7640</a></li>
             </ul>
           </div>
-
         </div>
 
-        <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-white/30">
-            {t('footer.copy')}
+        <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '28px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px' }}>
+          <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.25)' }}>{t('footer.copy')}</p>
+          <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.25)' }}>
+            Built with <span style={{ color: '#a78bfa' }}>♥</span> by NT WebUX
           </p>
-          <div className="text-xs text-white/30 font-medium">
-            Designed & Built by <span className="text-accent">NT WebUX</span>
-          </div>
         </div>
       </div>
+
+      <style>{`
+        @media(max-width:768px){
+          .grid-footer { grid-template-columns: 1fr 1fr !important; }
+        }
+        @media(max-width:480px){
+          .grid-footer { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
     </footer>
   );
 }

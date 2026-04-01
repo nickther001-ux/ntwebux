@@ -1,45 +1,61 @@
-import React from 'react';
+import { motion } from 'framer-motion';
 import { useLanguage } from '@/lib/i18n';
 
 export function Testimonials() {
-  const { t } = useLanguage();
-  const items = t('testimonials.items') as { quote: string, name: string, role: string }[];
+  const { t, lang } = useLanguage();
+  const items = t('testimonials.items') as { quote: string; name: string; role: string }[];
+  const eyebrow = lang === 'fr' ? 'Témoignages' : 'Testimonials';
+  const heading = lang === 'fr' ? <>Ne nous croyez pas<br /><span className="gradient-text">sur parole.</span></> : <>Don't just take<br /><span className="gradient-text">our word for it.</span></>;
 
   return (
-    <section className="py-32 bg-[#07101F] relative z-10 border-y border-border/50">
-      <div className="px-5 lg:px-8 max-w-7xl mx-auto">
-        <h2 className="text-center text-4xl md:text-5xl font-display text-foreground mb-16">
-          {t('testimonials.title')}
-        </h2>
+    <section style={{ padding: '120px 24px', borderTop: '1px solid rgba(255,255,255,0.06)', position: 'relative' }}>
+      <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: '800px', height: '400px', borderRadius: '50%', background: 'radial-gradient(ellipse, rgba(124,58,237,0.06) 0%, transparent 70%)', pointerEvents: 'none' }} />
 
-        <div className="grid lg:grid-cols-3 gap-6">
+      <div style={{ maxWidth: '1200px', margin: '0 auto', position: 'relative' }}>
+        <div style={{ textAlign: 'center', marginBottom: '64px' }}>
+          <span className="pill-label" style={{ marginBottom: '24px', display: 'inline-flex' }}>{eyebrow}</span>
+          <h2 style={{ fontSize: 'clamp(2rem,5vw,3.5rem)', fontWeight: 800, letterSpacing: '-0.02em', marginTop: '16px' }}>
+            {heading}
+          </h2>
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '20px' }} className="testimonials-grid">
           {items.map((item, i) => (
-            <div 
-              key={i} 
-              className={`p-8 rounded-xl border border-border relative hover:-translate-y-2 hover:shadow-[0_15px_40px_rgba(0,0,0,0.3)] transition-all duration-300 ${
-                i === 0 ? 'lg:col-span-2 bg-[#0B1526]' : 'bg-background'
-              }`}
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1, duration: 0.55 }}
+              className="glass glass-hover"
+              style={{ padding: '32px', borderRadius: '16px', display: 'flex', flexDirection: 'column', gap: '20px', cursor: 'default' }}
             >
-              <div className="font-display text-6xl text-accent/30 absolute top-6 left-6 pointer-events-none select-none">
-                "
+              {/* Stars */}
+              <div style={{ display: 'flex', gap: '3px' }}>
+                {Array.from({ length: 5 }).map((_, j) => (
+                  <svg key={j} width="14" height="14" viewBox="0 0 24 24" fill="#a78bfa">
+                    <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />
+                  </svg>
+                ))}
               </div>
-              <div className="relative z-10 flex flex-col h-full justify-between">
-                <div className="mb-8">
-                  <div className="text-accent text-sm tracking-[0.2em] mb-4">★★★★★</div>
-                  <p className={`font-serif text-lg leading-relaxed ${i === 0 ? 'text-white/80' : 'text-muted'}`}>
-                    {item.quote}
-                  </p>
-                </div>
-                
-                <div>
-                  <h4 className="font-bold text-sm text-foreground uppercase tracking-wider">{item.name}</h4>
-                  <p className="text-xs text-muted mt-1">{item.role}</p>
-                </div>
+
+              <p style={{ fontSize: '15px', color: 'rgba(255,255,255,0.65)', lineHeight: 1.75, flex: 1 }}>
+                "{item.quote}"
+              </p>
+
+              <div style={{ borderTop: '1px solid rgba(255,255,255,0.07)', paddingTop: '20px' }}>
+                <div style={{ fontSize: '14px', fontWeight: 700, color: '#fff' }}>{item.name}</div>
+                <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.38)', marginTop: '3px' }}>{item.role}</div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
+
+      <style>{`
+        @media(max-width:900px){ .testimonials-grid { grid-template-columns: 1fr !important; } }
+        @media(max-width:600px){ .testimonials-grid { grid-template-columns: 1fr !important; } }
+      `}</style>
     </section>
   );
 }

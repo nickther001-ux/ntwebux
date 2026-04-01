@@ -1,187 +1,200 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useLanguage } from '@/lib/i18n';
-import { CheckCircle2 } from 'lucide-react';
+import { CheckCircle2, ArrowRight, Phone, Mail } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { useSubmitContactForm } from '@workspace/api-client-react';
 
 const formSchema = z.object({
   firstName: z.string().optional(),
   lastName: z.string().optional(),
-  email: z.string().email("Invalid email address"),
+  email: z.string().email('Invalid email address'),
   phone: z.string().optional(),
   service: z.string().optional(),
-  message: z.string().min(10, "Message must be at least 10 characters")
+  message: z.string().min(10, 'Message must be at least 10 characters'),
 });
 
 type FormData = z.infer<typeof formSchema>;
 
+const inputStyle: React.CSSProperties = {
+  width: '100%',
+  background: 'rgba(255,255,255,0.04)',
+  border: '1px solid rgba(255,255,255,0.1)',
+  borderRadius: '10px',
+  padding: '12px 16px',
+  fontSize: '14px',
+  color: '#fff',
+  outline: 'none',
+  transition: 'border-color 0.2s, background 0.2s',
+  fontFamily: 'inherit',
+};
+
+const labelStyle: React.CSSProperties = {
+  display: 'block',
+  fontSize: '11px',
+  fontWeight: 700,
+  letterSpacing: '0.1em',
+  textTransform: 'uppercase' as const,
+  color: 'rgba(255,255,255,0.3)',
+  marginBottom: '8px',
+};
+
 export function Contact() {
-  const { t } = useLanguage();
-  const [successMsg, setSuccessMsg] = useState('');
-  
-  const perks = t('contact.perks') as { title: string, desc: string }[];
-  const formT = t('contact.form');
+  const { t, lang } = useLanguage();
+  const [success, setSuccess] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const perks = t('contact.perks') as { title: string; desc: string }[];
+  const formT = t('contact.form') as any;
+  const eyebrow = lang === 'fr' ? 'Travaillons Ensemble' : "Let's Work Together";
 
   const { register, handleSubmit, reset, formState: { errors } } = useForm<FormData>({
-    resolver: zodResolver(formSchema)
+    resolver: zodResolver(formSchema),
   });
 
-  const { mutate: submitForm, isPending } = useSubmitContactForm({
-    mutation: {
-      onSuccess: (data) => {
-        setSuccessMsg(data.message || "Message sent successfully!");
+  const onSubmit = async (data: FormData) => {
+    setSubmitting(true);
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      if (res.ok) {
+        setSuccess(true);
         reset();
-        setTimeout(() => setSuccessMsg(''), 5000);
-      },
-      onError: () => {
-        alert("Failed to send message. Please try again later.");
+        setTimeout(() => setSuccess(false), 6000);
+      } else {
+        alert(lang === 'fr' ? 'Erreur. Veuillez réessayer.' : 'Error. Please try again.');
       }
+    } catch {
+      alert(lang === 'fr' ? 'Erreur. Veuillez réessayer.' : 'Error. Please try again.');
+    } finally {
+      setSubmitting(false);
     }
-  });
-
-  const onSubmit = (data: FormData) => {
-    submitForm({ data });
   };
 
   return (
-    <section id="contact" className="py-32 bg-[#030608] relative z-10 scroll-m-20 border-b border-border/50">
-      <div className="px-5 lg:px-8 max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
-          
-          {/* Info Side */}
+    <section id="contact" style={{ padding: '120px 24px', borderTop: '1px solid rgba(255,255,255,0.06)', position: 'relative' }}>
+      <div style={{ position: 'absolute', bottom: 0, left: '50%', transform: 'translateX(-50%)', width: '800px', height: '400px', borderRadius: '50%', background: 'radial-gradient(ellipse, rgba(124,58,237,0.1) 0%, transparent 65%)', pointerEvents: 'none' }} />
+
+      <div style={{ maxWidth: '1100px', margin: '0 auto', position: 'relative' }}>
+        <div style={{ textAlign: 'center', marginBottom: '64px' }}>
+          <span className="pill-label" style={{ marginBottom: '24px', display: 'inline-flex' }}>{eyebrow}</span>
+          <h2 style={{ fontSize: 'clamp(2rem,5vw,3.5rem)', fontWeight: 800, letterSpacing: '-0.02em', marginTop: '16px' }}>
+            {lang === 'fr' ? <>Prêt à <span className="gradient-text">passer à l'étape suivante?</span></> : <>Ready to <span className="gradient-text">level up?</span></>}
+          </h2>
+          <p style={{ fontSize: '16px', color: 'rgba(255,255,255,0.45)', marginTop: '16px', maxWidth: '480px', margin: '16px auto 0', lineHeight: 1.7 }}>
+            {t('contact.desc')}
+          </p>
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.3fr', gap: '48px', alignItems: 'start' }} className="contact-grid">
+          {/* Info */}
           <div>
-            <h2 className="text-5xl lg:text-6xl font-display text-white leading-none mb-6">
-              {t('contact.title')}
-            </h2>
-            <p className="font-serif text-lg text-white/75 mb-12">
-              {t('contact.desc')}
-            </p>
-
-            <div className="flex flex-col gap-6 mb-12">
-              {perks.map((perk, i) => (
-                <div key={i} className="flex gap-4 items-start">
-                  <div className="w-2 h-2 rounded-full bg-accent mt-2 shrink-0 shadow-[0_0_10px_rgba(0,170,221,0.8)]" />
-                  <div>
-                    <h4 className="font-bold text-sm text-white uppercase tracking-wider mb-1">
-                      {perk.title}
-                    </h4>
-                    <p className="font-serif text-sm text-white/70">
-                      {perk.desc}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="pt-8 border-t border-white/10 flex flex-col gap-5">
-              <a href="tel:+14388067640" className="flex items-center gap-4 group">
-                <div className="w-10 h-10 rounded bg-accent/10 flex items-center justify-center shrink-0 group-hover:bg-accent/20 transition-colors">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00AADD" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.59 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.79a16 16 0 0 0 6 6l.87-.87a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.03z"/></svg>
+            {perks.map((p, i) => (
+              <div key={i} style={{ display: 'flex', gap: '16px', alignItems: 'flex-start', marginBottom: '24px' }}>
+                <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'rgba(124,58,237,0.12)', border: '1px solid rgba(124,58,237,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
                 </div>
                 <div>
-                  <div className="text-[10px] font-bold uppercase tracking-widest text-white/30 mb-0.5">Phone</div>
-                  <div className="text-base font-bold text-white group-hover:text-accent transition-colors">(438) 806-7640</div>
+                  <div style={{ fontSize: '14px', fontWeight: 700, color: '#fff', marginBottom: '3px' }}>{p.title}</div>
+                  <div style={{ fontSize: '13px', color: 'rgba(255,255,255,0.42)', lineHeight: 1.6 }}>{p.desc}</div>
+                </div>
+              </div>
+            ))}
+
+            <div style={{ borderTop: '1px solid rgba(255,255,255,0.07)', paddingTop: '28px', marginTop: '8px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              <a href="tel:+14388067640" style={{ display: 'flex', alignItems: 'center', gap: '14px', textDecoration: 'none' }}>
+                <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'rgba(124,58,237,0.1)', border: '1px solid rgba(124,58,237,0.18)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#a78bfa' }}>
+                  <Phone size={16} />
+                </div>
+                <div>
+                  <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.25)', marginBottom: '2px' }}>Phone</div>
+                  <div style={{ fontSize: '15px', fontWeight: 600, color: '#fff' }}>(438) 806-7640</div>
                 </div>
               </a>
-              <a href="mailto:nickther001@gmail.com" className="flex items-center gap-4 group">
-                <div className="w-10 h-10 rounded bg-accent/10 flex items-center justify-center shrink-0 group-hover:bg-accent/20 transition-colors">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00AADD" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <a href="mailto:nickther001@gmail.com" style={{ display: 'flex', alignItems: 'center', gap: '14px', textDecoration: 'none' }}>
+                <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'rgba(124,58,237,0.1)', border: '1px solid rgba(124,58,237,0.18)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#a78bfa' }}>
+                  <Mail size={16} />
                 </div>
                 <div>
-                  <div className="text-[10px] font-bold uppercase tracking-widest text-white/30 mb-0.5">Email</div>
-                  <div className="text-base font-bold text-white group-hover:text-accent transition-colors">nickther001@gmail.com</div>
+                  <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.25)', marginBottom: '2px' }}>Email</div>
+                  <div style={{ fontSize: '15px', fontWeight: 600, color: '#fff' }}>nickther001@gmail.com</div>
                 </div>
               </a>
             </div>
           </div>
 
-          {/* Form Side */}
-          <div className="bg-card rounded-xl p-8 lg:p-10 border border-border shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
-            {successMsg ? (
-              <div className="flex flex-col items-center justify-center h-full min-h-[400px] text-center">
-                <CheckCircle2 size={64} className="text-green-400 mb-6" />
-                <h3 className="font-display text-3xl text-white mb-2">Success!</h3>
-                <p className="font-serif text-muted">{successMsg}</p>
+          {/* Form */}
+          <div className="glass" style={{ borderRadius: '20px', padding: '36px' }}>
+            {success ? (
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '360px', textAlign: 'center', gap: '16px' }}>
+                <CheckCircle2 size={56} color="#a78bfa" />
+                <div style={{ fontSize: '24px', fontWeight: 800, color: '#fff' }}>
+                  {lang === 'fr' ? 'Message envoyé !' : 'Message sent!'}
+                </div>
+                <div style={{ fontSize: '14px', color: 'rgba(255,255,255,0.45)' }}>
+                  {lang === 'fr' ? 'Nous vous répondrons dans les 24 heures.' : "We'll get back to you within 24 hours."}
+                </div>
               </div>
             ) : (
-              <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
-                <div className="grid grid-cols-2 gap-5">
+              <form onSubmit={handleSubmit(onSubmit)} style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }} className="name-grid">
                   <div>
-                    <label className="block text-[10px] font-bold uppercase tracking-widest text-white/40 mb-2">{formT.fn}</label>
-                    <input 
-                      {...register("firstName")}
-                      className="w-full bg-background border border-border rounded px-4 py-3 text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-accent transition-colors"
-                    />
+                    <label style={labelStyle}>{formT.fn}</label>
+                    <input {...register('firstName')} style={inputStyle} onFocus={e => (e.target.style.borderColor = 'rgba(124,58,237,0.5)')} onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.1)')} />
                   </div>
                   <div>
-                    <label className="block text-[10px] font-bold uppercase tracking-widest text-white/40 mb-2">{formT.ln}</label>
-                    <input 
-                      {...register("lastName")}
-                      className="w-full bg-background border border-border rounded px-4 py-3 text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-accent transition-colors"
-                    />
+                    <label style={labelStyle}>{formT.ln}</label>
+                    <input {...register('lastName')} style={inputStyle} onFocus={e => (e.target.style.borderColor = 'rgba(124,58,237,0.5)')} onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.1)')} />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-[10px] font-bold uppercase tracking-widest text-white/40 mb-2">{formT.email} *</label>
-                  <input 
-                    {...register("email")}
-                    type="email"
-                    className={`w-full bg-background border rounded px-4 py-3 text-sm text-white placeholder:text-white/20 focus:outline-none transition-colors ${errors.email ? 'border-red-500 focus:border-red-500' : 'border-border focus:border-accent'}`}
-                  />
-                  {errors.email && <span className="text-red-500 text-xs mt-1 block">{errors.email.message}</span>}
+                  <label style={labelStyle}>{formT.email} *</label>
+                  <input {...register('email')} type="email" style={{ ...inputStyle, borderColor: errors.email ? 'rgba(239,68,68,0.5)' : 'rgba(255,255,255,0.1)' }} onFocus={e => (e.target.style.borderColor = errors.email ? 'rgba(239,68,68,0.7)' : 'rgba(124,58,237,0.5)')} onBlur={e => (e.target.style.borderColor = errors.email ? 'rgba(239,68,68,0.5)' : 'rgba(255,255,255,0.1)')} />
+                  {errors.email && <span style={{ fontSize: '12px', color: '#f87171', marginTop: '4px', display: 'block' }}>{errors.email.message}</span>}
                 </div>
 
                 <div>
-                  <label className="block text-[10px] font-bold uppercase tracking-widest text-white/40 mb-2">{formT.phone}</label>
-                  <input 
-                    {...register("phone")}
-                    type="tel"
-                    className="w-full bg-background border border-border rounded px-4 py-3 text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-accent transition-colors"
-                  />
+                  <label style={labelStyle}>{formT.phone}</label>
+                  <input {...register('phone')} type="tel" style={inputStyle} onFocus={e => (e.target.style.borderColor = 'rgba(124,58,237,0.5)')} onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.1)')} />
                 </div>
 
                 <div>
-                  <label className="block text-[10px] font-bold uppercase tracking-widest text-white/40 mb-2">{formT.service}</label>
-                  <div className="relative">
-                    <select 
-                      {...register("service")}
-                      className="w-full bg-background border border-border rounded px-4 py-3 text-sm text-white focus:outline-none focus:border-accent transition-colors appearance-none"
-                    >
-                      <option value="">-- Select --</option>
-                      {(formT.serviceOptions as string[]).map((opt, i) => (
-                        <option key={i} value={opt}>{opt}</option>
-                      ))}
-                    </select>
-                    <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none border-t-4 border-l-4 border-r-4 border-t-white/40 border-l-transparent border-r-transparent"></div>
-                  </div>
+                  <label style={labelStyle}>{formT.service}</label>
+                  <select {...register('service')} style={{ ...inputStyle, appearance: 'none', cursor: 'pointer' }} onFocus={e => (e.target.style.borderColor = 'rgba(124,58,237,0.5)')} onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.1)')}>
+                    <option value="" style={{ background: '#111' }}>-- Select --</option>
+                    {(formT.serviceOptions as string[]).map((opt: string) => (
+                      <option key={opt} value={opt} style={{ background: '#111' }}>{opt}</option>
+                    ))}
+                  </select>
                 </div>
 
                 <div>
-                  <label className="block text-[10px] font-bold uppercase tracking-widest text-white/40 mb-2">{formT.msg} *</label>
-                  <textarea 
-                    {...register("message")}
-                    rows={4}
-                    className={`w-full bg-background border rounded px-4 py-3 text-sm text-white placeholder:text-white/20 focus:outline-none transition-colors resize-none ${errors.message ? 'border-red-500 focus:border-red-500' : 'border-border focus:border-accent'}`}
-                  />
-                  {errors.message && <span className="text-red-500 text-xs mt-1 block">{errors.message.message}</span>}
+                  <label style={labelStyle}>{formT.msg} *</label>
+                  <textarea {...register('message')} rows={4} style={{ ...inputStyle, resize: 'none', borderColor: errors.message ? 'rgba(239,68,68,0.5)' : 'rgba(255,255,255,0.1)' }} onFocus={e => (e.target.style.borderColor = errors.message ? 'rgba(239,68,68,0.7)' : 'rgba(124,58,237,0.5)')} onBlur={e => (e.target.style.borderColor = errors.message ? 'rgba(239,68,68,0.5)' : 'rgba(255,255,255,0.1)')} />
+                  {errors.message && <span style={{ fontSize: '12px', color: '#f87171', marginTop: '4px', display: 'block' }}>{errors.message.message}</span>}
                 </div>
 
-                <button 
+                <button
                   type="submit"
-                  disabled={isPending}
-                  className="w-full bg-accent text-white rounded font-bold uppercase tracking-wider text-sm py-4 hover:bg-accent/80 hover:-translate-y-0.5 hover:shadow-[0_4px_20px_rgba(0,170,221,0.3)] transition-all disabled:opacity-50 disabled:cursor-not-allowed mt-2"
+                  disabled={submitting}
+                  className="btn-violet"
+                  style={{ padding: '14px 0', fontSize: '14px', fontWeight: 600, width: '100%', borderRadius: '10px', gap: '8px', opacity: submitting ? 0.6 : 1, cursor: submitting ? 'not-allowed' : 'pointer', marginTop: '4px' }}
                 >
-                  {isPending ? formT.submitting : formT.submit}
+                  {submitting ? (lang === 'fr' ? 'Envoi...' : 'Sending...') : <>{formT.submit} <ArrowRight size={15} /></>}
                 </button>
               </form>
             )}
           </div>
-
         </div>
       </div>
+
+      <style>{`
+        @media(max-width:900px){ .contact-grid { grid-template-columns: 1fr !important; } }
+        @media(max-width:480px){ .name-grid { grid-template-columns: 1fr !important; } }
+      `}</style>
     </section>
   );
 }

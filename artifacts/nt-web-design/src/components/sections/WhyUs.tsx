@@ -1,65 +1,89 @@
-import React from 'react';
+import { motion } from 'framer-motion';
 import { useLanguage } from '@/lib/i18n';
-import { CheckCircle2 } from 'lucide-react';
+import { Check } from 'lucide-react';
 
 export function WhyUs() {
-  const { t } = useLanguage();
-  const pills = t('whyUs.pills') as { title: string, desc: string }[];
+  const { t, lang } = useLanguage();
+  const pills = t('whyUs.pills') as { title: string; desc: string }[];
+  const eyebrow = lang === 'fr' ? 'Pourquoi Nous' : 'Why Choose Us';
 
   return (
-    <section id="why-us" className="py-32 px-5 lg:px-8 max-w-7xl mx-auto relative z-10 scroll-m-20">
-      <div className="grid lg:grid-cols-2 gap-16 items-center">
-        
-        {/* Pills */}
-        <div className="flex flex-col gap-4 relative">
-          {/* Background large ghost text */}
-          <div className="absolute -top-16 -left-8 font-display text-[12rem] leading-none text-accent/5 pointer-events-none select-none">
-            WHY
-          </div>
-          
-          <h2 className="text-5xl font-display text-foreground leading-none mb-8 relative z-10">
-            {t('whyUs.title')}
-          </h2>
+    <section id="why-us" style={{ padding: '120px 24px', borderTop: '1px solid rgba(255,255,255,0.06)', position: 'relative' }}>
+      <div style={{ position: 'absolute', top: '50%', left: 0, width: '500px', height: '500px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(124,58,237,0.08) 0%, transparent 65%)', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
 
-          <div className="relative z-10 flex flex-col gap-4">
+      <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px', alignItems: 'center', position: 'relative' }} className="whyus-grid">
+        {/* Left */}
+        <div>
+          <span className="pill-label" style={{ marginBottom: '24px', display: 'inline-flex' }}>{eyebrow}</span>
+          <h2 style={{ fontSize: 'clamp(2rem,5vw,3.5rem)', fontWeight: 800, letterSpacing: '-0.02em', marginTop: '16px', marginBottom: '20px' }}>
+            {t('whyUs.title')} <span className="gradient-text">{lang === 'fr' ? 'Différemment.' : 'Differently.'}</span>
+          </h2>
+          <p style={{ fontSize: '15px', color: 'rgba(255,255,255,0.45)', lineHeight: 1.75, marginBottom: '48px', maxWidth: '400px' }}>
+            {lang === 'fr'
+              ? "Nous ne sommes pas une agence typique. Nous sommes vos partenaires de croissance digitale."
+              : "We're not a typical agency. We're your digital growth partners, obsessed with results."}
+          </p>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             {pills.map((pill, i) => (
-              <div key={i} className="flex gap-5 items-center p-5 rounded border border-border bg-card/50 hover:bg-card hover:border-accent transition-all hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,170,221,0.15)] group">
-                <div className="w-12 h-12 rounded bg-accent/10 flex items-center justify-center text-accent shrink-0 group-hover:scale-110 transition-transform">
-                  <CheckCircle2 size={24} />
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, x: -16 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08, duration: 0.5 }}
+                className="glass glass-hover"
+                style={{ display: 'flex', alignItems: 'flex-start', gap: '16px', padding: '18px 20px', borderRadius: '12px', cursor: 'default' }}
+              >
+                <div style={{ width: '28px', height: '28px', borderRadius: '50%', background: 'rgba(124,58,237,0.15)', border: '1px solid rgba(124,58,237,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: '1px' }}>
+                  <Check size={14} color="#a78bfa" />
                 </div>
                 <div>
-                  <h4 className="text-sm font-bold uppercase tracking-wider text-foreground mb-1">
-                    {pill.title}
-                  </h4>
-                  <p className="font-serif text-sm text-muted">
-                    {pill.desc}
-                  </p>
+                  <div style={{ fontSize: '14px', fontWeight: 700, color: '#fff', marginBottom: '4px' }}>{pill.title}</div>
+                  <div style={{ fontSize: '13px', color: 'rgba(255,255,255,0.45)', lineHeight: 1.6 }}>{pill.desc}</div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
 
-        {/* Image Side */}
-        <div className="hidden lg:block relative h-full min-h-[600px] rounded-2xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.5)] border border-border">
-          <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent z-10"></div>
-          <img 
-            src={`${import.meta.env.BASE_URL}images/why-us-bg.png`} 
-            alt="Abstract Web Design Elements" 
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute bottom-10 left-10 right-10 z-20">
-            <div className="bg-background/80 backdrop-blur-md border border-border rounded-xl p-8">
-              <div className="font-display text-4xl text-accent mb-2">100%</div>
-              <div className="text-sm font-bold uppercase tracking-wider text-foreground">Custom Engineered</div>
-              <div className="w-full h-1 bg-border mt-4 rounded overflow-hidden">
-                <div className="w-full h-full bg-accent"></div>
-              </div>
+        {/* Right — decorative stat card */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.96 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="whyus-visual"
+        >
+          <div className="glass" style={{ borderRadius: '24px', padding: '48px', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
+            <div style={{ position: 'absolute', top: '-60px', right: '-60px', width: '200px', height: '200px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(124,58,237,0.2) 0%, transparent 70%)', pointerEvents: 'none' }} />
+            <div style={{ fontSize: '80px', fontWeight: 900, background: 'linear-gradient(135deg,#c4b5fd,#f0abfc)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', lineHeight: 1, marginBottom: '12px' }}>100%</div>
+            <div style={{ fontSize: '16px', fontWeight: 700, color: '#fff', marginBottom: '8px' }}>{lang === 'fr' ? 'Sur Mesure' : 'Custom Built'}</div>
+            <div style={{ fontSize: '13px', color: 'rgba(255,255,255,0.4)', lineHeight: 1.7, maxWidth: '260px', margin: '0 auto' }}>
+              {lang === 'fr' ? 'Aucun template préfabriqué. Chaque projet est unique.' : 'No templates. No cookie-cutter. Every project is built from scratch.'}
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginTop: '36px' }}>
+              {[
+                { n: '200+', l: lang === 'fr' ? 'Projets' : 'Projects' },
+                { n: '98%', l: lang === 'fr' ? 'Satisfaction' : 'Satisfaction' },
+                { n: '14d', l: lang === 'fr' ? 'Délai' : 'Turnaround' },
+                { n: '5★', l: lang === 'fr' ? 'Notes' : 'Rating' },
+              ].map(({ n, l }) => (
+                <div key={n} style={{ padding: '16px', background: 'rgba(255,255,255,0.04)', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.06)' }}>
+                  <div style={{ fontSize: '22px', fontWeight: 800, color: '#c4b5fd' }}>{n}</div>
+                  <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.35)', marginTop: '4px' }}>{l}</div>
+                </div>
+              ))}
             </div>
           </div>
-        </div>
-        
+        </motion.div>
       </div>
+
+      <style>{`
+        @media(max-width:900px){ .whyus-grid { grid-template-columns: 1fr !important; gap: 40px !important; } }
+        @media(max-width:900px){ .whyus-visual { display: none; } }
+      `}</style>
     </section>
   );
 }

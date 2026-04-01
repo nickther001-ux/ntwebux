@@ -1,8 +1,11 @@
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/sections/Hero";
-import { StatsAndMarquee } from "@/components/sections/StatsAndMarquee";
+import { Stats } from "@/components/sections/Stats";
 import { Services } from "@/components/sections/Services";
+import { Process } from "@/components/sections/Process";
+import { WhyUs } from "@/components/sections/WhyUs";
 import { Testimonials } from "@/components/sections/Testimonials";
+import { Contact } from "@/components/sections/Contact";
 import { Footer } from "@/components/Footer";
 
 export default function Home() {
@@ -11,9 +14,12 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
-        <StatsAndMarquee />
+        <Stats />
         <Services />
+        <Process />
+        <WhyUs />
         <Testimonials />
+        <Contact />
       </main>
       <Footer />
     </div>
