@@ -27,7 +27,7 @@ export function Hero() {
         <motion.div custom={0} variants={fadeUp} initial="hidden" animate="show" style={{ display: 'flex', justifyContent: 'center', marginBottom: '32px' }}>
           <span className="pill-label">
             <Sparkles size={11} />
-            {lang === 'fr' ? 'Studio Web Design · Montréal' : 'Web Design Studio · Montréal'}
+            {lang === 'fr' ? 'Studio Web Design' : 'Web Design Studio'}
           </span>
         </motion.div>
 
