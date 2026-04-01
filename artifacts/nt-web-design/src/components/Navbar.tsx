@@ -19,8 +19,9 @@ export function Navbar() {
 
   const links = [
     { href: isHome ? '#services' : '/#services', label: 'Services' },
-    { href: isHome ? '#process' : '/#process', label: 'Process' },
-    { href: '/services', label: 'Pricing', isPage: true },
+    { href: isHome ? '#portfolio' : '/#portfolio', label: lang === 'fr' ? 'Portfolio' : 'Portfolio' },
+    { href: isHome ? '#process' : '/#process', label: lang === 'fr' ? 'Processus' : 'Process' },
+    { href: '/services', label: lang === 'fr' ? 'Tarifs' : 'Pricing', isPage: true },
     { href: isHome ? '#contact' : '/#contact', label: 'Contact' },
   ];
 
