@@ -1,0 +1,31 @@
+# TASK: UI Polish & Chatbot Training for NTWEBDESIGN
+
+Please apply the following three specific updates to the `index.html` and `server.js` files. STRICT REQUIREMENT: Do NOT alter the overall design, pricing structure, Stripe logic, or remove any existing sections.
+
+## 1. FIX THE MODAL CLOSE BUTTON ('X')
+The user cannot close the modals using an 'X'.
+- **Update CSS:** Add `position: relative;` to `.modal-box`. 
+- **Add New CSS:**
+  `.modal-close { position: absolute; top: 1.2rem; right: 1.5rem; background: transparent; border: none; color: var(--muted); font-size: 1.5rem; cursor: pointer; transition: 0.2s; }`
+  `.modal-close:hover { color: var(--white); }`
+- **Update HTML:** Add the following button immediately inside the `<div class="modal-box">` for both the `service-modal` and the `onboarding-overlay`:
+  `<button class="modal-close" onclick="this.closest('.modal-overlay, #onboarding-overlay').style.display='none'">✕</button>`
+
+## 2. EXPAND SERVICE MODAL DESCRIPTIONS
+Update the `onclick="openModal(...)"` attributes in the Services grid for the following four cards so they have complete, professional paragraphs:
+- **Development:** `onclick="openModal('Development', 'Custom web development using modern, lightning-fast frameworks. We build scalable architectures optimized for speed, security, and flawless performance across all mobile and desktop devices.')"`
+- **CMS Integration:** `onclick="openModal('CMS Integration', 'Take full control of your website. We integrate intuitive Content Management Systems (CMS) allowing you to easily update text, manage blogs, and upload images without touching a single line of code.')"`
+- **Maintenance (Support):** `onclick="openModal('Maintenance', 'Enjoy peace of mind with our dedicated support. We provide monthly security updates, daily cloud backups, bug fixes, and 24/7 uptime monitoring so your site never goes down.')"`
+- **AI Integrations:** `onclick="openModal('AI Integrations', 'Supercharge your business with custom AI solutions. We integrate smart chatbots, automated customer service workflows, and advanced AI agents tailored to save you time and drive conversions.')"`
+
+## 3. TRAIN THE CHATBOT (SYSTEM PROMPT)
+Update the chatbot initialization in the frontend `<script>` (the `conversation` array) AND the backend `server.js` to strictly follow this behavior matrix.
+
+**Inject this exact System Prompt into the AI's context:**
+`You are the NT Assistant for NT Digital Group in Montreal. Keep answers brief and professional.
+1. GREETING: If the user says "hi", "hello", "hey", respond exactly with: "Hello! How can I help you today?"
+2. BUILDING A SITE: If they want to build a website, tell them to choose a plan from the Pricing section to get started immediately.
+3. PRICING FACTS: Starter ($99), Growth ($299), Premium Basic ($500), Full Scope ($899), Enterprise Pro ($1500).
+4. FAQ - TIMEFRAME: Key-in-hand plans (Growth & Full Scope) are delivered in exactly 72 hours after assets are submitted.
+5. FAQ - OWNERSHIP: Clients own 100% of the code and assets once paid.
+6. FALLBACK: If asked anything else, politely direct them to the General Inquiry contact form on the site.`
