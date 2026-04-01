@@ -52,23 +52,11 @@ export function Navbar() {
       >
         {/* Logo */}
         <a href={isHome ? '#' : '/'} style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }}>
-          <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ height: '36px', width: '36px' }}>
-            <defs>
-              <linearGradient id="vg1" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#93c5fd" />
-                <stop offset="100%" stopColor="#3b82f6" />
-              </linearGradient>
-              <linearGradient id="vg2" x1="100%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="#bfdbfe" />
-                <stop offset="100%" stopColor="#93c5fd" />
-              </linearGradient>
-            </defs>
-            <polygon points="22,30 46,30 46,170 22,170" fill="url(#vg1)" />
-            <polygon points="44,30 100,90 100,130 44,70" fill="url(#vg1)" />
-            <polygon points="100,90 156,30 178,30 122,90" fill="url(#vg2)" opacity="0.85" />
-            <polygon points="154,30 178,30 178,170 154,170" fill="url(#vg1)" />
-            <polygon points="100,110 156,170 134,170 78,110" fill="url(#vg1)" />
-          </svg>
+          <img
+            src={`${import.meta.env.BASE_URL}logo.png`}
+            alt="NT Web UX"
+            style={{ height: '38px', width: '38px', objectFit: 'contain', borderRadius: '8px' }}
+          />
           <div style={{ lineHeight: 1 }}>
             <div style={{ fontSize: '15px', fontWeight: 800, letterSpacing: '0.12em', color: '#fff', textTransform: 'uppercase' }}>
               NT <span style={{ background: 'linear-gradient(135deg,#3b82f6,#60a5fa)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Web UX</span>
