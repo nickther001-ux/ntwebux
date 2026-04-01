@@ -37,7 +37,7 @@ interface StatItem {
 function AnimatedStat({ num, prefix = '', suffix, label, delay, borderRight }: StatItem & { delay: number; borderRight: boolean }) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: '-60px' });
-  const count = useCountUp(num, 1800, inView);
+  const count = useCountUp(num, 10000, inView);
 
   return (
     <motion.div
