@@ -85,13 +85,13 @@ export function Contact() {
                   <div className="text-base font-bold text-white group-hover:text-accent transition-colors">(438) 806-7640</div>
                 </div>
               </a>
-              <a href="mailto:nicktech@computer4u.com" className="flex items-center gap-4 group">
+              <a href="mailto:nickther001@gmail.com" className="flex items-center gap-4 group">
                 <div className="w-10 h-10 rounded bg-accent/10 flex items-center justify-center shrink-0 group-hover:bg-accent/20 transition-colors">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00AADD" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                 </div>
                 <div>
                   <div className="text-[10px] font-bold uppercase tracking-widest text-white/30 mb-0.5">Email</div>
-                  <div className="text-base font-bold text-white group-hover:text-accent transition-colors">nicktech@computer4u.com</div>
+                  <div className="text-base font-bold text-white group-hover:text-accent transition-colors">nickther001@gmail.com</div>
                 </div>
               </a>
             </div>

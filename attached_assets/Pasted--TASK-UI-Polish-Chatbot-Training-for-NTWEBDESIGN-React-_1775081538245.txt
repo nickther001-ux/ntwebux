@@ -1,0 +1,41 @@
+# TASK: UI Polish & Chatbot Training for NTWEBDESIGN (React/TS Architecture)
+
+Please apply the following updates to my existing React components and backend API. STRICT REQUIREMENT: Do NOT rewrite the architecture or replace the site with static HTML. Integrate these changes into the current React/TypeScript structure.
+
+## 1. FIX THE MODAL CLOSE BUTTON ('X')
+The user cannot close the modals/boxes using the 'X' button. 
+- Locate the Modal/Overlay components used for Services and Onboarding.
+- Ensure the 'X' button has a proper `onClick` handler tied to the component's state to close the modal (e.g., `setIsOpen(false)`).
+- Ensure the 'X' button has proper CSS styling so it is visible: `position: absolute; top: 1rem; right: 1.5rem; cursor: pointer; background: transparent; border: none; z-index: 50;`
+
+## 2. EXPAND SERVICE MODAL DESCRIPTIONS & PRICING
+Update the text data in the components to match these exact descriptions:
+- **Website Design**: "Modern, user-focused design tailored to your brand. We focus on conversion and clean engineering."
+- **Development**: "Custom web development using modern, lightning-fast frameworks. Scalable architectures optimized for speed and security."
+- **eCommerce**: "Secure online stores with high-end payment integrations and inventory management."
+- **CMS Integration**: "Take full control of your website. Intuitive CMS allowing you to easily update text, manage blogs, and upload images."
+- **SEO & Marketing**: "Ranking you where it matters. Technical SEO and keyword strategy included."
+- **Maintenance (Support)**: "Enjoy peace of mind. Monthly security updates, daily cloud backups, bug fixes, and 24/7 uptime monitoring."
+- **Enterprise SaaS**: "Scalable, multi-tenant cloud applications engineered for high performance."
+- **AI Integrations**: "Supercharge your business with custom AI solutions. Smart chatbots, automated workflows, and advanced AI agents."
+
+Update the Pricing components to these 5 tiers:
+- Starter: $99/mo 
+- Growth: $299/mo
+- Premium Basic: $500/mo
+- Full Scope: $899/mo
+- Enterprise Pro: Contact Us
+
+## 3. TRAIN THE CHATBOT (SYSTEM PROMPT)
+Locate the backend API route handling the Google Generative AI logic. Inject this exact System Prompt into the AI model's instructions so it knows how to answer user queries:
+
+"You are the NT Assistant for NT Digital Group in Montreal. Keep answers brief and professional. 
+1. GREETING: If user says 'hi', 'hello', or 'hey', respond exactly with: 'Hello! How can I help you today?' 
+2. BUILD SITE: If they ask to build a website, direct them to choose a plan from the Pricing section. 
+3. PRICING: Starter ($99), Growth ($299), Premium Basic ($500), Full Scope ($899), Enterprise Pro (Contact Us for custom pricing). 
+4. TIMEFRAME: Key-in-hand plans are delivered in 72 hours. 
+5. OWNERSHIP: Clients own 100% of code/assets once paid. 
+6. FALLBACK: If asked anything else, politely direct them to the General Inquiry form."
+
+## 4. ONBOARDING & CONTACT FORMS
+Ensure all Contact and Onboarding forms submit via standard POST request to: `https://formsubmit.co/nicktech@computer4u.com`. Include hidden inputs for `_honey` and `_captcha` (value="false").

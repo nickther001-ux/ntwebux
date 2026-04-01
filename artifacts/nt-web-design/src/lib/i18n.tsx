@@ -27,12 +27,14 @@ const translations: Translations = {
     services: {
       eyebrow: "Our Expertise", title: "Everything you need to dominate your market.",
       items: [
-        { title: "Business Website", desc: "Custom, responsive sites built to convert visitors into loyal clients." },
-        { title: "E-Commerce Store", desc: "Scalable online stores optimized for sales and seamless checkout." },
-        { title: "Landing Pages", desc: "High-converting single pages for your marketing campaigns and ads." },
-        { title: "SEO Optimization", desc: "Rank higher on Google and get found by customers actively searching for you." },
-        { title: "Mobile-First Design", desc: "Flawless experiences across all devices, prioritizing mobile users." },
-        { title: "Hosting & Support", desc: "Secure, lightning-fast hosting with ongoing technical support and maintenance." }
+        { title: "Website Design", desc: "Modern, user-focused design tailored to your brand. We focus on conversion and clean engineering." },
+        { title: "Development", desc: "Custom web development using modern, lightning-fast frameworks. Scalable architectures optimized for speed and security." },
+        { title: "eCommerce", desc: "Secure online stores with high-end payment integrations and inventory management." },
+        { title: "CMS Integration", desc: "Take full control of your website. Intuitive CMS allowing you to easily update text, manage blogs, and upload images." },
+        { title: "SEO & Marketing", desc: "Ranking you where it matters. Technical SEO and keyword strategy included." },
+        { title: "Maintenance & Support", desc: "Monthly security updates, daily cloud backups, bug fixes, and 24/7 uptime monitoring." },
+        { title: "Enterprise SaaS", desc: "Scalable, multi-tenant cloud applications engineered for high performance." },
+        { title: "AI Integrations", desc: "Supercharge your business with custom AI solutions. Smart chatbots, automated workflows, and advanced AI agents." }
       ]
     },
     process: {
@@ -88,20 +90,30 @@ const translations: Translations = {
         desc: "Every package includes hosting, maintenance, and support. You pay once — we handle the rest.",
         plans: [
           {
-            name: "Launch", price: "1,500", cycle: "One-time payment",
-            features: ["5-page responsive website", "Custom design", "Basic SEO included", "Contact form", "Deployment included", "1h training included"],
+            name: "Starter", price: "99", cycle: "/ month",
+            features: ["1-page responsive website", "Custom design", "Contact form", "Basic SEO", "Free domain 1st year", "Email support"],
             ctaContact: "Contact Me", ctaBuy: "Buy Now", featured: false
           },
           {
-            name: "Maintenance", price: "500", cycle: "/ month",
+            name: "Growth", price: "299", cycle: "/ month",
+            features: ["5-page responsive website", "Custom design", "Advanced SEO included", "Contact & booking form", "Deployment included", "Delivered in 72 hours"],
+            ctaContact: "Contact Me", ctaBuy: "Buy Now", featured: false
+          },
+          {
+            name: "Premium Basic", price: "500", cycle: "/ month",
             badge: "Most Popular",
-            features: ["Managed hosting & domain", "Unlimited updates", "Security & backups", "Priority support 48h", "Monthly analytics report", "Continuous optimization"],
+            features: ["Up to 10 pages", "CMS integration", "eCommerce ready", "Google Ads setup", "Priority support 48h", "Monthly analytics report"],
             ctaContact: "Contact Me", ctaBuy: "Buy Now", featured: true
           },
           {
-            name: "Full Package", price: "997", cycle: "+ $500 / month",
-            features: ["Full site (Launch)", "Monthly maintenance included", "Advanced SEO & Google Ads", "Monthly content (2 articles)", "Direct WhatsApp support", "Unlimited revisions (year 1)"],
+            name: "Full Scope", price: "899", cycle: "/ month",
+            features: ["Unlimited pages", "Full eCommerce", "AI chatbot integration", "Advanced SEO & content", "Direct WhatsApp support", "Delivered in 72 hours"],
             ctaContact: "Contact Me", ctaBuy: "Buy Now", featured: false
+          },
+          {
+            name: "Enterprise Pro", price: "—", cycle: "Custom pricing",
+            features: ["Enterprise SaaS / multi-tenant", "Custom AI integrations", "Dedicated project manager", "SLA & uptime guarantee", "Unlimited revisions", "Priority onboarding"],
+            ctaContact: "Contact Us", ctaBuy: "Get a Quote", featured: false
           }
         ]
       },
@@ -199,20 +211,30 @@ const translations: Translations = {
         desc: "Chaque forfait inclut l'hébergement, la maintenance et le support. Vous payez une fois, on s'occupe du reste.",
         plans: [
           {
-            name: "Lancement", price: "1 500", cycle: "Paiement unique",
-            features: ["Site 5 pages responsive", "Design personnalisé", "SEO de base intégré", "Formulaire de contact", "Déploiement inclus", "Formation 1h incluse"],
+            name: "Starter", price: "99", cycle: "/ mois",
+            features: ["Site 1 page responsive", "Design personnalisé", "Formulaire de contact", "SEO de base", "Domaine gratuit 1re année", "Support par email"],
             ctaContact: "Me Contacter", ctaBuy: "Acheter", featured: false
           },
           {
-            name: "Maintenance", price: "500", cycle: "/ mois",
+            name: "Growth", price: "299", cycle: "/ mois",
+            features: ["Site 5 pages responsive", "Design personnalisé", "SEO avancé intégré", "Formulaire & réservation", "Déploiement inclus", "Livré en 72 heures"],
+            ctaContact: "Me Contacter", ctaBuy: "Acheter", featured: false
+          },
+          {
+            name: "Premium Basic", price: "500", cycle: "/ mois",
             badge: "Le plus populaire",
-            features: ["Hébergement & domaine géré", "Mises à jour illimitées", "Sécurité & backups", "Support prioritaire 48h", "Rapport mensuel Analytics", "Optimisation continue"],
+            features: ["Jusqu'à 10 pages", "Intégration CMS", "Prêt pour e-commerce", "Configuration Google Ads", "Support prioritaire 48h", "Rapport mensuel Analytics"],
             ctaContact: "Me Contacter", ctaBuy: "Acheter", featured: true
           },
           {
-            name: "Pack Complet", price: "997", cycle: "+ $500 / mois",
-            features: ["Site complet (Lancement)", "Maintenance mensuelle incluse", "SEO avancé & Google Ads setup", "Contenu mensuel (2 articles)", "Support WhatsApp direct", "Révisions illimitées (1re année)"],
+            name: "Full Scope", price: "899", cycle: "/ mois",
+            features: ["Pages illimitées", "E-commerce complet", "Intégration chatbot IA", "SEO avancé & contenu", "Support WhatsApp direct", "Livré en 72 heures"],
             ctaContact: "Me Contacter", ctaBuy: "Acheter", featured: false
+          },
+          {
+            name: "Enterprise Pro", price: "—", cycle: "Tarif sur mesure",
+            features: ["SaaS enterprise / multi-tenant", "Intégrations IA personnalisées", "Chef de projet dédié", "SLA & garantie de disponibilité", "Révisions illimitées", "Onboarding prioritaire"],
+            ctaContact: "Nous Contacter", ctaBuy: "Obtenir un Devis", featured: false
           }
         ]
       },

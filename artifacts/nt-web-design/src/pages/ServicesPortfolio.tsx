@@ -2,7 +2,7 @@ import React from 'react';
 import { useLanguage } from '@/lib/i18n';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
-import { Globe, Wrench, Package } from 'lucide-react';
+import { Globe, Wrench, Package, Building2, Bot } from 'lucide-react';
 
 const css = `
   .sp-root {
@@ -172,7 +172,7 @@ const css = `
   }
 `;
 
-const PLAN_ICONS = [Globe, Wrench, Package];
+const PLAN_ICONS = [Globe, Wrench, Package, Building2, Bot];
 
 export default function ServicesPortfolio() {
   const { t } = useLanguage();
