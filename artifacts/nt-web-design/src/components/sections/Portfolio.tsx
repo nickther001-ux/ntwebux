@@ -7,7 +7,7 @@ const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 const PROJECTS = [
   {
-    img: `${BASE}/portfolio/proj-audreyrh-v2.png`,
+    img: `${BASE}/portfolio/proj-audreyrh-v3.png`,
     category: { en: 'HR Consulting', fr: 'Conseil RH' },
     title: { en: 'AudreyRh.com', fr: 'AudreyRh.com' },
     tags: { en: ['HR Consultant', 'Personal Brand'], fr: ['Conseil RH', 'Image personnelle'] },
