@@ -104,7 +104,7 @@ export function Navbar() {
         </nav>
 
         {/* Right */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }} className="hidden md:flex">
+        <div style={{ display: 'flex', alignItems: 'center', gap: '20px', borderLeft: '1px solid rgba(255,255,255,0.1)', paddingLeft: '32px', marginLeft: '8px' }} className="hidden md:flex">
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '12px', fontWeight: 600 }}>
             <button
               onClick={() => setLang('en')}
