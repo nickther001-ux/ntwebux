@@ -36,3 +36,27 @@ id = "UuCMONRCwevlEnhcrWFAg"
 uri = "file://artifacts/nt-web-design/public/portfolio/proj-realestate.png"
 type = "image"
 title = "generated_image"
+
+[[generated]]
+id = "oaJo_03EDNsLNUQH2quF8"
+uri = "file://artifacts/nt-web-design/public/portfolio/proj-startup.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "i9YZfLY5D0QYhZmepfcls"
+uri = "file://artifacts/nt-web-design/public/portfolio/proj-medical.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "fosdbnIuxijnIbBjSGUE6"
+uri = "file://artifacts/nt-web-design/public/portfolio/proj-photography.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "koJ_9QE9q6PfSagB8dXij"
+uri = "file://artifacts/nt-web-design/public/portfolio/proj-construction.png"
+type = "image"
+title = "generated_image"

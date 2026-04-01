@@ -48,6 +48,34 @@ const PROJECTS = [
     tags: { en: ['Real Estate', 'CMS'], fr: ['Immobilier', 'CMS'] },
     wide: false,
   },
+  {
+    img: `${BASE}/portfolio/proj-startup.png`,
+    category: { en: 'Tech Startup', fr: 'Startup Tech' },
+    title: { en: 'Orion Launch Platform', fr: 'Plateforme Orion Launch' },
+    tags: { en: ['Landing Page', 'SaaS'], fr: ['Page de lancement', 'SaaS'] },
+    wide: true,
+  },
+  {
+    img: `${BASE}/portfolio/proj-medical.png`,
+    category: { en: 'Healthcare', fr: 'Santé' },
+    title: { en: 'Clinique Santé Moderne', fr: 'Clinique Santé Moderne' },
+    tags: { en: ['Medical', 'Booking'], fr: ['Médical', 'Réservation'] },
+    wide: false,
+  },
+  {
+    img: `${BASE}/portfolio/proj-photography.png`,
+    category: { en: 'Photography', fr: 'Photographie' },
+    title: { en: 'Lumière Studio Portfolio', fr: 'Portfolio Lumière Studio' },
+    tags: { en: ['Portfolio', 'Gallery'], fr: ['Portfolio', 'Galerie'] },
+    wide: false,
+  },
+  {
+    img: `${BASE}/portfolio/proj-construction.png`,
+    category: { en: 'Construction', fr: 'Construction' },
+    title: { en: 'Bâtisseurs Nordiques Inc.', fr: 'Bâtisseurs Nordiques Inc.' },
+    tags: { en: ['Corporate', 'Web Design'], fr: ['Corporate', 'Web Design'] },
+    wide: false,
+  },
 ];
 
 /* ── Lightbox ─────────────────────────────────────────── */
