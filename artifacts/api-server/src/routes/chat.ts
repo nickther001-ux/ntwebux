@@ -21,7 +21,7 @@ const SYSTEM_PROMPT = `You are the NT WebUX virtual assistant. You help potentia
 
 About NT WebUX:
 - We build modern, high-performance websites for SMEs and entrepreneurs worldwide
-- Contact: nickther001@gmail.com | Phone: (438) 806-7640
+- Contact: nicktech@computer4u.com | Phone: (438) 806-7640
 - We are bilingual (English / French)
 
 Services & Pricing:

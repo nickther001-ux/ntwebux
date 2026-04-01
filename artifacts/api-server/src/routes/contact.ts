@@ -8,7 +8,7 @@ const resend = process.env.RESEND_API_KEY
   ? new Resend(process.env.RESEND_API_KEY)
   : null;
 
-const NOTIFY_EMAIL = "nickther001@gmail.com";
+const NOTIFY_EMAIL = "nicktech@computer4u.com";
 
 // Lazily initialised so the server starts even without DATABASE_URL
 let db: any = null;

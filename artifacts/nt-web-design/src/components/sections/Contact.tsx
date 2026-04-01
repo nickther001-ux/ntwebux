@@ -113,13 +113,13 @@ export function Contact() {
                   <div style={{ fontSize: '15px', fontWeight: 600, color: '#fff' }}>(438) 806-7640</div>
                 </div>
               </a>
-              <a href="mailto:nickther001@gmail.com" style={{ display: 'flex', alignItems: 'center', gap: '14px', textDecoration: 'none' }}>
+              <a href="mailto:nicktech@computer4u.com" style={{ display: 'flex', alignItems: 'center', gap: '14px', textDecoration: 'none' }}>
                 <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'rgba(59,130,246,0.1)', border: '1px solid rgba(59,130,246,0.18)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#93c5fd' }}>
                   <Mail size={16} />
                 </div>
                 <div>
                   <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.25)', marginBottom: '2px' }}>Email</div>
-                  <div style={{ fontSize: '15px', fontWeight: 600, color: '#fff' }}>nickther001@gmail.com</div>
+                  <div style={{ fontSize: '15px', fontWeight: 600, color: '#fff' }}>nicktech@computer4u.com</div>
                 </div>
               </a>
             </div>

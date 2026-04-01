@@ -6,7 +6,7 @@ import { Send, X, Bot, ArrowLeft, MessageCircle, Mail, Phone, ChevronRight } fro
 const BASE_URL = import.meta.env.BASE_URL.replace(/\/$/, "");
 const PHONE = "(438) 806-7640";
 const PHONE_RAW = "14388067640";
-const EMAIL = "nickther001@gmail.com";
+const EMAIL = "nicktech@computer4u.com";
 
 interface Message {
   role: "user" | "assistant";
