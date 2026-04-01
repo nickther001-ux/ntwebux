@@ -31,7 +31,7 @@ export default function ChatWidget() {
               border: '1px solid rgba(255,255,255,0.1)',
               borderRadius: '18px',
               padding: '20px',
-              boxShadow: '0 24px 64px rgba(0,0,0,0.7), 0 0 0 1px rgba(16,185,129,0.12)',
+              boxShadow: '0 24px 64px rgba(0,0,0,0.7), 0 0 0 1px rgba(59,130,246,0.12)',
             }}
           >
             <div style={{ fontSize: '14px', fontWeight: 700, color: '#fff', marginBottom: '4px' }}>{label}</div>
@@ -39,7 +39,7 @@ export default function ChatWidget() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
               <a
                 href={`tel:+${PHONE_RAW}`}
-                style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '10px 14px', background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.2)', borderRadius: '10px', textDecoration: 'none', color: '#6ee7b7', fontSize: '13px', fontWeight: 500 }}
+                style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '10px 14px', background: 'rgba(59,130,246,0.1)', border: '1px solid rgba(59,130,246,0.2)', borderRadius: '10px', textDecoration: 'none', color: '#93c5fd', fontSize: '13px', fontWeight: 500 }}
               >
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.39 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.36 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.34 1.85.573 2.81.7A2 2 0 0 1 21.5 16.92z" /></svg>
                 {PHONE}
@@ -72,13 +72,13 @@ export default function ChatWidget() {
           width: '52px',
           height: '52px',
           borderRadius: '50%',
-          background: 'linear-gradient(135deg,#10b981,#6d28d9)',
+          background: 'linear-gradient(135deg,#3b82f6,#6d28d9)',
           border: 'none',
           cursor: 'pointer',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          boxShadow: '0 4px 24px rgba(16,185,129,0.45)',
+          boxShadow: '0 4px 24px rgba(59,130,246,0.45)',
           color: '#fff',
           transition: 'transform 0.2s, box-shadow 0.2s',
         }}

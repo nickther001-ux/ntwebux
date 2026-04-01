@@ -9,7 +9,7 @@ export function Testimonials() {
 
   return (
     <section style={{ padding: '120px 24px', borderTop: '1px solid rgba(255,255,255,0.06)', position: 'relative' }}>
-      <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: '800px', height: '400px', borderRadius: '50%', background: 'radial-gradient(ellipse, rgba(16,185,129,0.06) 0%, transparent 70%)', pointerEvents: 'none' }} />
+      <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: '800px', height: '400px', borderRadius: '50%', background: 'radial-gradient(ellipse, rgba(59,130,246,0.06) 0%, transparent 70%)', pointerEvents: 'none' }} />
 
       <div style={{ maxWidth: '1200px', margin: '0 auto', position: 'relative' }}>
         <div style={{ textAlign: 'center', marginBottom: '64px' }}>
@@ -33,7 +33,7 @@ export function Testimonials() {
               {/* Stars */}
               <div style={{ display: 'flex', gap: '3px' }}>
                 {Array.from({ length: 5 }).map((_, j) => (
-                  <svg key={j} width="14" height="14" viewBox="0 0 24 24" fill="#6ee7b7">
+                  <svg key={j} width="14" height="14" viewBox="0 0 24 24" fill="#93c5fd">
                     <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />
                   </svg>
                 ))}

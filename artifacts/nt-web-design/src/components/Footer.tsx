@@ -13,8 +13,8 @@ export function Footer() {
               <svg viewBox="0 0 200 200" fill="none" style={{ height: '32px', width: '32px' }}>
                 <defs>
                   <linearGradient id="fg1" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#6ee7b7" />
-                    <stop offset="100%" stopColor="#10b981" />
+                    <stop offset="0%" stopColor="#93c5fd" />
+                    <stop offset="100%" stopColor="#3b82f6" />
                   </linearGradient>
                 </defs>
                 <polygon points="22,30 46,30 46,170 22,170" fill="url(#fg1)" />
@@ -23,7 +23,7 @@ export function Footer() {
                 <polygon points="100,110 156,170 134,170 78,110" fill="url(#fg1)" />
               </svg>
               <span style={{ fontSize: '15px', fontWeight: 800, color: '#fff', letterSpacing: '0.1em' }}>
-                NT<span style={{ background: 'linear-gradient(135deg,#6ee7b7,#bef264)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>WebUX</span>
+                NT<span style={{ background: 'linear-gradient(135deg,#93c5fd,#bfdbfe)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>WebUX</span>
               </span>
             </div>
             <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.38)', lineHeight: 1.7, maxWidth: '220px' }}>
@@ -74,7 +74,7 @@ export function Footer() {
         <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '28px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px' }}>
           <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.25)' }}>{t('footer.copy')}</p>
           <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.25)' }}>
-            Built with <span style={{ color: '#6ee7b7' }}>♥</span> by NT WebUX
+            Built with <span style={{ color: '#93c5fd' }}>♥</span> by NT WebUX
           </p>
         </div>
       </div>

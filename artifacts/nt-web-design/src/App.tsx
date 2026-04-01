@@ -23,7 +23,7 @@ function App() {
             width: "700px",
             height: "700px",
             borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(16,185,129,0.18) 0%, transparent 65%)",
+            background: "radial-gradient(circle, rgba(59,130,246,0.18) 0%, transparent 65%)",
             filter: "blur(1px)",
           }}
         />
@@ -35,7 +35,7 @@ function App() {
             width: "600px",
             height: "600px",
             borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(132,204,22,0.10) 0%, transparent 65%)",
+            background: "radial-gradient(circle, rgba(147,197,253,0.10) 0%, transparent 65%)",
             filter: "blur(1px)",
           }}
         />
@@ -48,7 +48,7 @@ function App() {
             width: "900px",
             height: "600px",
             borderRadius: "50%",
-            background: "radial-gradient(ellipse, rgba(16,185,129,0.06) 0%, transparent 60%)",
+            background: "radial-gradient(ellipse, rgba(59,130,246,0.06) 0%, transparent 60%)",
           }}
         />
       </div>
