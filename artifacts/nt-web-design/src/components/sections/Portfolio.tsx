@@ -12,7 +12,6 @@ const PROJECTS = [
     title: { en: 'AudreyRh.com', fr: 'AudreyRh.com' },
     tags: { en: ['HR Consultant', 'Personal Brand'], fr: ['Conseil RH', 'Image personnelle'] },
     wide: true,
-    accent: '#8b5cf6',
   },
   {
     img: `${BASE}/portfolio/proj-ecommerce.png`,
@@ -20,7 +19,6 @@ const PROJECTS = [
     title: { en: 'Maison Luxe Boutique', fr: 'Maison Luxe Boutique' },
     tags: { en: ['E-Commerce', 'Shopify'], fr: ['E-Commerce', 'Shopify'] },
     wide: false,
-    accent: '#ec4899',
   },
   {
     img: `${BASE}/portfolio/proj-saas.png`,
@@ -28,7 +26,6 @@ const PROJECTS = [
     title: { en: 'Flux Analytics Platform', fr: 'Plateforme Flux Analytics' },
     tags: { en: ['Dashboard', 'SaaS UI'], fr: ['Tableau de bord', 'SaaS UI'] },
     wide: false,
-    accent: '#06b6d4',
   },
   {
     img: `${BASE}/portfolio/proj-law.png`,
@@ -36,7 +33,6 @@ const PROJECTS = [
     title: { en: 'Beaumont & Associés', fr: 'Beaumont & Associés' },
     tags: { en: ['Web Design', 'SEO'], fr: ['Web Design', 'SEO'] },
     wide: false,
-    accent: '#f59e0b',
   },
   {
     img: `${BASE}/portfolio/proj-fitness.png`,
@@ -44,7 +40,6 @@ const PROJECTS = [
     title: { en: 'Apex Fitness Studio', fr: 'Apex Fitness Studio' },
     tags: { en: ['Web Design', 'Booking'], fr: ['Web Design', 'Réservation'] },
     wide: false,
-    accent: '#10b981',
   },
   {
     img: `${BASE}/portfolio/proj-realestate.png`,
@@ -52,7 +47,6 @@ const PROJECTS = [
     title: { en: 'Prestige Realty Group', fr: 'Prestige Realty Group' },
     tags: { en: ['Real Estate', 'CMS'], fr: ['Immobilier', 'CMS'] },
     wide: false,
-    accent: '#f97316',
   },
   {
     img: `${BASE}/portfolio/proj-startup.png`,
@@ -60,7 +54,6 @@ const PROJECTS = [
     title: { en: 'Orion Launch Platform', fr: 'Plateforme Orion Launch' },
     tags: { en: ['Landing Page', 'SaaS'], fr: ['Page de lancement', 'SaaS'] },
     wide: true,
-    accent: '#6366f1',
   },
   {
     img: `${BASE}/portfolio/proj-medical.png`,
@@ -68,7 +61,6 @@ const PROJECTS = [
     title: { en: 'Clinique Santé Moderne', fr: 'Clinique Santé Moderne' },
     tags: { en: ['Medical', 'Booking'], fr: ['Médical', 'Réservation'] },
     wide: false,
-    accent: '#14b8a6',
   },
   {
     img: `${BASE}/portfolio/proj-photography.png`,
@@ -76,7 +68,6 @@ const PROJECTS = [
     title: { en: 'Lumière Studio Portfolio', fr: 'Portfolio Lumière Studio' },
     tags: { en: ['Portfolio', 'Gallery'], fr: ['Portfolio', 'Galerie'] },
     wide: false,
-    accent: '#d946ef',
   },
   {
     img: `${BASE}/portfolio/proj-construction.png`,
@@ -84,7 +75,6 @@ const PROJECTS = [
     title: { en: 'Bâtisseurs Nordiques Inc.', fr: 'Bâtisseurs Nordiques Inc.' },
     tags: { en: ['Corporate', 'Web Design'], fr: ['Corporate', 'Web Design'] },
     wide: false,
-    accent: '#84cc16',
   },
   {
     img: `${BASE}/portfolio/proj-restaurant.png`,
@@ -92,7 +82,6 @@ const PROJECTS = [
     title: { en: 'Le Quartier Brasserie', fr: 'Le Quartier Brasserie' },
     tags: { en: ['Brand Identity', 'Web Design'], fr: ['Image de marque', 'Web Design'] },
     wide: false,
-    accent: '#f43f5e',
   },
   {
     img: `${BASE}/portfolio/proj-law.png`,
@@ -100,7 +89,6 @@ const PROJECTS = [
     title: { en: 'Dubois Legal Group', fr: 'Cabinet Dubois' },
     tags: { en: ['Law Firm', 'Professional'], fr: ['Cabinet d\'avocats', 'Professionnel'] },
     wide: false,
-    accent: '#0ea5e9',
   },
   {
     img: `${BASE}/portfolio/proj-ecommerce.png`,
@@ -108,7 +96,6 @@ const PROJECTS = [
     title: { en: 'Éclat Beauty Studio', fr: 'Studio Beauté Éclat' },
     tags: { en: ['Booking System', 'Branding'], fr: ['Réservation', 'Image de marque'] },
     wide: false,
-    accent: '#e879f9',
   },
 ];
 
@@ -257,13 +244,6 @@ function Lightbox({
 }
 
 /* ── Project card ─────────────────────────────────────── */
-function hexToRgb(hex: string) {
-  const r = parseInt(hex.slice(1, 3), 16);
-  const g = parseInt(hex.slice(3, 5), 16);
-  const b = parseInt(hex.slice(5, 7), 16);
-  return `${r},${g},${b}`;
-}
-
 function ProjectCard({
   project, index, onOpen,
 }: {
@@ -273,8 +253,6 @@ function ProjectCard({
 }) {
   const { lang } = useLanguage();
   const [hovered, setHovered] = useState(false);
-  const accent = project.accent;
-  const rgb = hexToRgb(accent);
 
   return (
     <motion.div
@@ -289,12 +267,13 @@ function ProjectCard({
         position: 'relative',
         borderRadius: '16px',
         overflow: 'hidden',
-        background: hovered ? `rgba(${rgb},0.04)` : 'rgba(255,255,255,0.025)',
-        border: `1px solid ${hovered ? `rgba(${rgb},0.45)` : 'rgba(255,255,255,0.07)'}`,
+        background: 'rgba(255,255,255,0.03)',
+        border: '1px solid rgba(255,255,255,0.07)',
         cursor: 'pointer',
         gridColumn: project.wide ? 'span 2' : 'span 1',
-        transition: 'border-color 0.28s, box-shadow 0.28s, background 0.28s',
-        boxShadow: hovered ? `0 0 0 1px rgba(${rgb},0.12), 0 20px 56px rgba(${rgb},0.15)` : 'none',
+        transition: 'border-color 0.25s, box-shadow 0.25s',
+        borderColor: hovered ? 'rgba(59,130,246,0.35)' : 'rgba(255,255,255,0.07)',
+        boxShadow: hovered ? '0 0 0 1px rgba(59,130,246,0.1), 0 16px 48px rgba(0,0,0,0.5)' : 'none',
       }}
     >
       {/* Image */}
@@ -303,75 +282,69 @@ function ProjectCard({
           src={project.img}
           alt={project.title[lang as 'en' | 'fr']}
           style={{
-            width: '100%', height: '100%', objectFit: 'cover', display: 'block',
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            display: 'block',
             transition: 'transform 0.55s cubic-bezier(0.22,1,0.36,1)',
             transform: hovered ? 'scale(1.04)' : 'scale(1)',
           }}
         />
 
-        {/* Hover overlay — tinted with accent */}
+        {/* Hover overlay */}
         <div style={{
           position: 'absolute', inset: 0,
-          background: `linear-gradient(135deg, rgba(6,13,26,0.82) 0%, rgba(${rgb},0.35) 100%)`,
+          background: 'linear-gradient(135deg, rgba(6,13,26,0.85) 0%, rgba(37,99,235,0.3) 100%)',
           opacity: hovered ? 1 : 0,
           transition: 'opacity 0.3s',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
         }}>
           <div style={{
-            width: '48px', height: '48px', borderRadius: '50%',
-            background: `rgba(${rgb},0.25)`,
+            width: '44px', height: '44px', borderRadius: '50%',
+            background: 'rgba(255,255,255,0.15)',
             backdropFilter: 'blur(8px)',
-            border: `1px solid rgba(${rgb},0.5)`,
+            border: '1px solid rgba(255,255,255,0.25)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            transform: hovered ? 'scale(1)' : 'scale(0.65)',
-            transition: 'transform 0.32s cubic-bezier(0.22,1,0.36,1)',
+            transform: hovered ? 'scale(1)' : 'scale(0.7)',
+            transition: 'transform 0.3s cubic-bezier(0.22,1,0.36,1)',
           }}>
-            <ArrowUpRight size={20} color="#fff" />
+            <ArrowUpRight size={18} color="#fff" />
           </div>
         </div>
 
-        {/* Category pill */}
+        {/* Category pill — always visible */}
         <div style={{
           position: 'absolute', top: '12px', left: '12px',
-          background: 'rgba(6,13,26,0.8)',
+          background: 'rgba(6,13,26,0.75)',
           backdropFilter: 'blur(12px)',
-          border: `1px solid rgba(${rgb},0.35)`,
+          border: '1px solid rgba(59,130,246,0.2)',
           borderRadius: '100px',
           padding: '4px 10px',
           fontSize: '10px', fontWeight: 700,
           letterSpacing: '0.08em', textTransform: 'uppercase',
-          color: accent,
+          color: '#93c5fd',
         }}>
           {project.category[lang as 'en' | 'fr']}
         </div>
       </div>
 
-      {/* Accent bottom bar */}
-      <div style={{
-        height: '2px',
-        background: `linear-gradient(90deg, transparent, ${accent}, transparent)`,
-        opacity: hovered ? 1 : 0.3,
-        transition: 'opacity 0.3s',
-      }} />
-
       {/* Card footer */}
       <div style={{ padding: '16px 18px 18px' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px' }}>
-          <div style={{ flex: 1, minWidth: 0 }}>
+          <div>
             <div style={{ fontSize: '15px', fontWeight: 700, color: '#fff', marginBottom: '8px', lineHeight: 1.3 }}>
               {project.title[lang as 'en' | 'fr']}
             </div>
-            <div style={{ display: 'flex', gap: '5px', flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
               {project.tags[lang as 'en' | 'fr'].map(tag => (
                 <span key={tag} style={{
                   fontSize: '10px', fontWeight: 600,
-                  color: hovered ? accent : 'rgba(255,255,255,0.4)',
-                  background: hovered ? `rgba(${rgb},0.1)` : 'rgba(255,255,255,0.05)',
-                  border: `1px solid ${hovered ? `rgba(${rgb},0.3)` : 'rgba(255,255,255,0.08)'}`,
+                  color: 'rgba(255,255,255,0.4)',
+                  background: 'rgba(255,255,255,0.05)',
+                  border: '1px solid rgba(255,255,255,0.08)',
                   borderRadius: '6px',
                   padding: '3px 8px',
                   letterSpacing: '0.04em',
-                  transition: 'color 0.25s, background 0.25s, border-color 0.25s',
                 }}>
                   {tag}
                 </span>
@@ -380,12 +353,12 @@ function ProjectCard({
           </div>
           <div style={{
             width: '32px', height: '32px', borderRadius: '50%', flexShrink: 0,
-            background: hovered ? `rgba(${rgb},0.15)` : 'rgba(255,255,255,0.04)',
-            border: `1px solid ${hovered ? `rgba(${rgb},0.4)` : 'rgba(255,255,255,0.08)'}`,
+            background: hovered ? 'rgba(59,130,246,0.15)' : 'rgba(255,255,255,0.04)',
+            border: `1px solid ${hovered ? 'rgba(59,130,246,0.35)' : 'rgba(255,255,255,0.08)'}`,
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            transition: 'background 0.22s, border-color 0.22s',
+            transition: 'background 0.2s, border-color 0.2s',
           }}>
-            <ArrowUpRight size={14} color={hovered ? accent : 'rgba(255,255,255,0.3)'} style={{ transition: 'color 0.22s' }} />
+            <ArrowUpRight size={14} color={hovered ? '#93c5fd' : 'rgba(255,255,255,0.3)'} style={{ transition: 'color 0.2s' }} />
           </div>
         </div>
       </div>
