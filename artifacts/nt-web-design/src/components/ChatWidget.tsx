@@ -313,6 +313,20 @@ export default function ChatWidget() {
   const { lang } = useLanguage();
   const [open, setOpen] = useState(false);
   const [view, setView] = useState<View>("home");
+  const [pulsing, setPulsing] = useState(false);
+
+  // Auto-open once per session after 4 s
+  useEffect(() => {
+    if (sessionStorage.getItem("silas_opened")) return;
+    // Pulse the FAB at 3 s to draw attention, then open at 4 s
+    const pulseTimer = setTimeout(() => setPulsing(true), 3000);
+    const openTimer  = setTimeout(() => {
+      setPulsing(false);
+      setOpen(true);
+      sessionStorage.setItem("silas_opened", "1");
+    }, 4000);
+    return () => { clearTimeout(pulseTimer); clearTimeout(openTimer); };
+  }, []);
 
   // Reset to home when closed
   function close() { setOpen(false); setTimeout(() => setView("home"), 300); }
@@ -366,25 +380,43 @@ export default function ChatWidget() {
       </AnimatePresence>
 
       {/* FAB toggle */}
-      <motion.button
-        onClick={() => open ? close() : setOpen(true)}
-        whileHover={{ scale: 1.08 }}
-        whileTap={{ scale: 0.95 }}
-        aria-label="Contact"
-        style={{ width: "52px", height: "52px", borderRadius: "50%", background: "linear-gradient(135deg,#3b82f6,#2563eb)", border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 4px 28px rgba(59,130,246,0.55)", color: "#fff" }}
-      >
-        <AnimatePresence mode="wait">
-          {open ? (
-            <motion.span key="x" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.15 }}>
-              <X size={20} />
-            </motion.span>
-          ) : (
-            <motion.span key="msg" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.15 }}>
-              <MessageCircle size={22} />
-            </motion.span>
-          )}
-        </AnimatePresence>
-      </motion.button>
+      <div style={{ position: "relative", display: "inline-flex" }}>
+        {/* Pulse ring */}
+        {pulsing && (
+          <>
+            <span style={{ position: "absolute", inset: "-6px", borderRadius: "50%", border: "2px solid rgba(59,130,246,0.5)", animation: "silasPing 0.9s cubic-bezier(0,0,0.2,1) infinite", pointerEvents: "none" }} />
+            <span style={{ position: "absolute", inset: "-14px", borderRadius: "50%", border: "1.5px solid rgba(59,130,246,0.25)", animation: "silasPing 0.9s cubic-bezier(0,0,0.2,1) infinite 0.25s", pointerEvents: "none" }} />
+          </>
+        )}
+        <motion.button
+          onClick={() => { setPulsing(false); open ? close() : setOpen(true); sessionStorage.setItem("silas_opened", "1"); }}
+          whileHover={{ scale: 1.08 }}
+          whileTap={{ scale: 0.95 }}
+          animate={pulsing ? { scale: [1, 1.06, 1] } : {}}
+          transition={pulsing ? { duration: 0.9, repeat: Infinity } : {}}
+          aria-label="Chat with Silas"
+          style={{ position: "relative", width: "52px", height: "52px", borderRadius: "50%", background: "linear-gradient(135deg,#3b82f6,#2563eb)", border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: pulsing ? "0 4px 32px rgba(59,130,246,0.8)" : "0 4px 28px rgba(59,130,246,0.55)", color: "#fff", transition: "box-shadow 0.3s" }}
+        >
+          <AnimatePresence mode="wait">
+            {open ? (
+              <motion.span key="x" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.15 }}>
+                <X size={20} />
+              </motion.span>
+            ) : (
+              <motion.span key="msg" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.15 }}>
+                <MessageCircle size={22} />
+              </motion.span>
+            )}
+          </AnimatePresence>
+        </motion.button>
+      </div>
+      <style>{`
+        @keyframes silasPing {
+          0%   { transform: scale(1); opacity: 0.8; }
+          80%  { transform: scale(1.6); opacity: 0; }
+          100% { transform: scale(1.6); opacity: 0; }
+        }
+      `}</style>
     </div>
   );
 }
