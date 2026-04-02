@@ -65,10 +65,14 @@ router.post("/chat", async (req, res) => {
     });
 
     // Convert history to Gemini format (assistant → model)
-    const geminiHistory = history.slice(-10).map((m) => ({
+    // Gemini requires history to start with a 'user' turn — drop any leading model messages
+    const rawHistory = history.slice(-10).map((m) => ({
       role: m.role === "assistant" ? "model" : "user",
       parts: [{ text: m.content }],
     }));
+    // Gemini requires history to start with 'user' — strip any leading model turns
+    const firstUserIdx = rawHistory.findIndex((m) => m.role === "user");
+    const geminiHistory = firstUserIdx === -1 ? [] : rawHistory.slice(firstUserIdx);
 
     const chat = model.startChat({ history: geminiHistory });
     const result = await chat.sendMessageStream(message.trim());
