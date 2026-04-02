@@ -82,9 +82,13 @@ router.post("/chat", async (req, res) => {
 
     res.write(`data: ${JSON.stringify({ done: true })}\n\n`);
     res.end();
-  } catch (err) {
-    console.error("Chat error:", err);
-    res.write(`data: ${JSON.stringify({ error: "Sorry, something went wrong. Please try again." })}\n\n`);
+  } catch (err: any) {
+    console.error("Chat error:", err?.message || err);
+    const is429 = err?.message?.includes("429") || err?.status === 429;
+    const msg = is429
+      ? "The AI assistant has reached its free usage limit for today. Please try again tomorrow, or contact us directly at nicktech@computer4u.com or (438) 806-7640."
+      : "Sorry, something went wrong. Please try again.";
+    res.write(`data: ${JSON.stringify({ error: msg })}\n\n`);
     res.end();
   }
 });
