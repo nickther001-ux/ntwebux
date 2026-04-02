@@ -98,16 +98,20 @@ export function Hero() {
             { v: '28%',  l: 'of small businesses still don\'t', sub: 'have an online presence' },
             { v: '1B+',  l: 'active websites worldwide',     sub: 'and growing daily' },
             { v: '3×',   l: 'more leads',                    sub: 'with a pro website' },
-          ]).map((s) => (
-            <div
+          ]).map((s, i) => (
+            <motion.div
               key={s.v}
               className="glass"
-              style={{ padding: '14px 20px', borderRadius: '12px', textAlign: 'center', minWidth: '120px' }}
+              initial={{ opacity: 0, y: 18, scale: 0.92 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ delay: 0.55 + i * 0.1, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              whileHover={{ y: -4, scale: 1.04, transition: { duration: 0.2, ease: 'easeOut' } }}
+              style={{ padding: '14px 20px', borderRadius: '12px', textAlign: 'center', minWidth: '120px', cursor: 'default' }}
             >
               <div style={{ fontSize: '22px', fontWeight: 800, background: 'linear-gradient(135deg,#93c5fd,#bfdbfe)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', lineHeight: 1 }}>{s.v}</div>
               <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.55)', marginTop: '5px', fontWeight: 600, lineHeight: 1.35 }}>{s.l}</div>
               <div style={{ fontSize: '10px', color: 'rgba(255,255,255,0.28)', marginTop: '2px', lineHeight: 1.3 }}>{s.sub}</div>
-            </div>
+            </motion.div>
           ))}
         </motion.div>
       </div>
