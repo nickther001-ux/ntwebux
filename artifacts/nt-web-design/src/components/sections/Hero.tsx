@@ -1,6 +1,55 @@
-import { motion } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import { useLanguage } from '@/lib/i18n';
+import { useEffect, useRef, useState } from 'react';
+
+function useCountUp(target: number, duration = 1200, active = false) {
+  const [val, setVal] = useState(0);
+  const started = useRef(false);
+  useEffect(() => {
+    if (!active || started.current) return;
+    started.current = true;
+    const t0 = performance.now();
+    const tick = (now: number) => {
+      const p = Math.min((now - t0) / duration, 1);
+      const e = 1 - Math.pow(1 - p, 3);
+      setVal(Math.round(e * target));
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }, [active, target, duration]);
+  return val;
+}
+
+function StatCard({ v, num, suffix, l, sub, delay }: { v: string; num: number | null; suffix: string; l: string; sub: string; delay: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true });
+  const count = useCountUp(num ?? 0, 1100, inView && num !== null);
+  const display = num !== null ? `${count}${suffix}` : v;
+
+  return (
+    <motion.div
+      ref={ref}
+      className="glass"
+      initial={{ opacity: 0, y: 24, scale: 0.88 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{ delay, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+      whileHover={{ y: -5, scale: 1.05, transition: { duration: 0.18, ease: 'easeOut' } }}
+      style={{ padding: '20px 28px', borderRadius: '14px', textAlign: 'center', minWidth: '150px', cursor: 'default' }}
+    >
+      <div style={{
+        fontSize: '32px', fontWeight: 900,
+        background: 'linear-gradient(135deg,#93c5fd,#bfdbfe)',
+        WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
+        lineHeight: 1, fontVariantNumeric: 'tabular-nums', letterSpacing: '-0.02em',
+      }}>
+        {display}
+      </div>
+      <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.7)', marginTop: '8px', fontWeight: 700, lineHeight: 1.4 }}>{l}</div>
+      <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.35)', marginTop: '3px', lineHeight: 1.3 }}>{sub}</div>
+    </motion.div>
+  );
+}
 
 const fadeUp = { hidden: { opacity: 0, y: 22 }, show: (i: number) => ({ opacity: 1, y: 0, transition: { delay: i * 0.12, duration: 0.6, ease: [0.22, 1, 0.36, 1] } }) };
 
@@ -89,29 +138,17 @@ export function Hero() {
           style={{ marginTop: '72px', display: 'flex', justifyContent: 'center', gap: '14px', flexWrap: 'wrap' }}
         >
           {(lang === 'fr' ? [
-            { v: '72%',  l: 'des entreprises ont un site',    sub: 'en 2024–2025' },
-            { v: '28%',  l: 'des PME n\'ont toujours pas',   sub: 'de présence en ligne' },
-            { v: '1Md+', l: 'de sites web actifs',            sub: 'dans le monde' },
-            { v: '3×',   l: 'plus de prospects',              sub: 'avec un site pro' },
+            { v: '72%',  num: 72,   suffix: '%',   l: 'des entreprises ont un site',      sub: 'en 2024–2025' },
+            { v: '28%',  num: 28,   suffix: '%',   l: 'des PME n\'ont toujours pas',      sub: 'de présence en ligne' },
+            { v: '1Md+', num: null, suffix: '',    l: 'de sites web actifs',              sub: 'dans le monde' },
+            { v: '3×',   num: 3,    suffix: '×',   l: 'plus de prospects',                sub: 'avec un site pro' },
           ] : [
-            { v: '72%',  l: 'of businesses have a website',  sub: 'as of 2024–2025' },
-            { v: '28%',  l: 'of small businesses still don\'t', sub: 'have an online presence' },
-            { v: '1B+',  l: 'active websites worldwide',     sub: 'and growing daily' },
-            { v: '3×',   l: 'more leads',                    sub: 'with a pro website' },
+            { v: '72%',  num: 72,   suffix: '%',   l: 'of businesses have a website',    sub: 'as of 2024–2025' },
+            { v: '28%',  num: 28,   suffix: '%',   l: 'of small businesses still don\'t', sub: 'have an online presence' },
+            { v: '1B+',  num: null, suffix: '',    l: 'active websites worldwide',        sub: 'and growing daily' },
+            { v: '3×',   num: 3,    suffix: '×',   l: 'more leads',                      sub: 'with a pro website' },
           ]).map((s, i) => (
-            <motion.div
-              key={s.v}
-              className="glass"
-              initial={{ opacity: 0, y: 18, scale: 0.92 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ delay: 0.55 + i * 0.1, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              whileHover={{ y: -4, scale: 1.04, transition: { duration: 0.2, ease: 'easeOut' } }}
-              style={{ padding: '14px 20px', borderRadius: '12px', textAlign: 'center', minWidth: '120px', cursor: 'default' }}
-            >
-              <div style={{ fontSize: '22px', fontWeight: 800, background: 'linear-gradient(135deg,#93c5fd,#bfdbfe)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', lineHeight: 1 }}>{s.v}</div>
-              <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.55)', marginTop: '5px', fontWeight: 600, lineHeight: 1.35 }}>{s.l}</div>
-              <div style={{ fontSize: '10px', color: 'rgba(255,255,255,0.28)', marginTop: '2px', lineHeight: 1.3 }}>{s.sub}</div>
-            </motion.div>
+            <StatCard key={s.v} {...s} delay={0.55 + i * 0.12} />
           ))}
         </motion.div>
       </div>
