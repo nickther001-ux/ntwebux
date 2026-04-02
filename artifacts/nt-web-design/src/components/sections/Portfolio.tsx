@@ -256,6 +256,7 @@ function ProjectCard({
 
   return (
     <motion.div
+      data-wide={project.wide ? 'true' : undefined}
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
@@ -277,10 +278,11 @@ function ProjectCard({
       }}
     >
       {/* Image */}
-      <div style={{ position: 'relative', overflow: 'hidden', aspectRatio: project.wide ? '21/9' : '16/9' }}>
+      <div className="portfolio-img" style={{ position: 'relative', overflow: 'hidden', aspectRatio: project.wide ? '21/9' : '16/9' }}>
         <img
           src={project.img}
           alt={project.title[lang as 'en' | 'fr']}
+          loading="lazy"
           style={{
             width: '100%',
             height: '100%',
@@ -444,11 +446,13 @@ export function Portfolio() {
       <style>{`
         @media (max-width: 900px) {
           .portfolio-grid { grid-template-columns: repeat(2,1fr) !important; }
-          .portfolio-grid > *[style*="span 2"] { grid-column: span 2 !important; }
+          .portfolio-grid > [data-wide="true"] { grid-column: span 2 !important; }
         }
         @media (max-width: 600px) {
           .portfolio-grid { grid-template-columns: 1fr !important; }
-          .portfolio-grid > *[style*="span 2"] { grid-column: span 1 !important; }
+          .portfolio-grid > [data-wide="true"] { grid-column: span 1 !important; }
+          .portfolio-grid > [data-wide="true"] .portfolio-img { aspect-ratio: 16/9 !important; }
+          .portfolio-grid img { width: 100% !important; height: 100% !important; object-fit: cover !important; }
         }
       `}</style>
     </section>

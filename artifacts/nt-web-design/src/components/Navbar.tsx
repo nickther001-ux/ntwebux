@@ -57,15 +57,15 @@ export function Navbar() {
             alt="NT Web UX"
             style={{ height: '38px', width: '38px', objectFit: 'contain', borderRadius: '8px' }}
           />
-          <div style={{ lineHeight: 1 }}>
-            <div style={{ fontSize: '15px', fontWeight: 800, letterSpacing: '0.12em', color: '#fff', textTransform: 'uppercase' }}>
+          <div style={{ lineHeight: 1, whiteSpace: 'nowrap' }}>
+            <div style={{ fontSize: '15px', fontWeight: 800, letterSpacing: '0.12em', color: '#fff', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>
               NT <span style={{ background: 'linear-gradient(135deg,#3b82f6,#60a5fa)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Web UX</span>
             </div>
           </div>
         </a>
 
         {/* Desktop Nav */}
-        <nav style={{ display: 'flex', alignItems: 'center', gap: '36px' }} className="hidden md:flex">
+        <nav className="navbar-desktop" style={{ alignItems: 'center', gap: '36px' }}>
           {links.map((link) =>
             link.isPage ? (
               <a
@@ -92,7 +92,7 @@ export function Navbar() {
         </nav>
 
         {/* Right */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '20px', borderLeft: '1px solid rgba(255,255,255,0.1)', paddingLeft: '32px', marginLeft: '8px' }} className="hidden md:flex">
+        <div className="navbar-desktop" style={{ alignItems: 'center', gap: '20px', borderLeft: '1px solid rgba(255,255,255,0.1)', paddingLeft: '32px', marginLeft: '8px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '12px', fontWeight: 600 }}>
             <button
               onClick={() => setLang('en')}
@@ -115,13 +115,22 @@ export function Navbar() {
 
         {/* Mobile toggle */}
         <button
-          className="md:hidden"
+          className="navbar-mobile-btn"
           onClick={() => setOpen(!open)}
           style={{ background: 'none', border: 'none', color: '#fff', cursor: 'pointer', padding: '4px' }}
         >
           {open ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
+
+      <style>{`
+        .navbar-desktop { display: none; }
+        .navbar-mobile-btn { display: flex; align-items: center; }
+        @media (min-width: 768px) {
+          .navbar-desktop { display: flex; }
+          .navbar-mobile-btn { display: none; }
+        }
+      `}</style>
 
       {/* Mobile menu */}
       <AnimatePresence>
