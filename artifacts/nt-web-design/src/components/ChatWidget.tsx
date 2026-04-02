@@ -13,6 +13,7 @@ const EMAIL = "nicktech@computer4u.com";
 interface Message {
   role: "user" | "assistant";
   content: string;
+  local?: boolean; // true = client-side only, never sent to the API
 }
 
 type View = "home" | "chat";
@@ -176,7 +177,7 @@ function ChatView({ lang, onBack }: { lang: string; onBack: () => void }) {
     : "Hi there! I'm Silas, the AI assistant for NT Web UX. Ask me anything about our services, pricing, or turnaround times — happy to help!";
 
   useEffect(() => {
-    setMessages([{ role: "assistant", content: greeting }]);
+    setMessages([{ role: "assistant", content: greeting, local: true }]);
     setTimeout(() => inputRef.current?.focus(), 100);
   }, []);
 
@@ -197,7 +198,7 @@ function ChatView({ lang, onBack }: { lang: string; onBack: () => void }) {
       const res = await fetch(`${API_BASE}/api/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: text, history: messages.slice(-10) }),
+        body: JSON.stringify({ message: text, history: messages.filter(m => !m.local).slice(-10) }),
       });
       if (!res.ok) throw new Error();
       const reader = res.body!.getReader();
