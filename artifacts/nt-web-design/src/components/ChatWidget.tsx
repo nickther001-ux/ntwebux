@@ -332,7 +332,7 @@ export default function ChatWidget() {
   function close() { setOpen(false); setTimeout(() => setView("home"), 300); }
 
   return (
-    <div style={{ position: "fixed", bottom: "28px", right: "28px", zIndex: 100 }}>
+    <div className="chat-widget-root" style={{ position: "fixed", bottom: "24px", right: "16px", zIndex: 100 }}>
       <AnimatePresence>
         {open && (
           <motion.div
@@ -342,9 +342,9 @@ export default function ChatWidget() {
             transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
             style={{
               position: "absolute", bottom: "68px", right: 0,
-              width: "340px",
-              height: view === "chat" ? "500px" : "auto",
-              maxHeight: "560px",
+              width: "min(340px, calc(100vw - 32px))",
+              height: view === "chat" ? "min(500px, 75vh)" : "auto",
+              maxHeight: "min(560px, 80vh)",
               background: "#0a1628",
               border: "1px solid rgba(59,130,246,0.18)",
               borderRadius: "22px",
