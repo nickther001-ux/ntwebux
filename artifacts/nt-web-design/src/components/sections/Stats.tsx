@@ -15,7 +15,6 @@ function useCountUp(target: number, duration = 2000, inView = false) {
     function tick(now: number) {
       const elapsed = now - startTime;
       const progress = Math.min(elapsed / duration, 1);
-      // ease-out cubic
       const eased = 1 - Math.pow(1 - progress, 3);
       setCount(Math.round(eased * target));
       if (progress < 1) requestAnimationFrame(tick);
@@ -82,16 +81,16 @@ export function Stats() {
 
   const items: StatItem[] = lang === 'fr'
     ? [
-        { num: 200, suffix: '+',    label: 'Sites Livrés' },
-        { num: 14,  suffix: 'j',    label: 'Délai Moyen' },
-        { num: 98,  suffix: '%',    label: 'Satisfaction Client' },
-        { num: 5,   suffix: '★',   label: 'Note Moyenne' },
+        { num: 200, suffix: '+',  label: 'Sites Livrés' },
+        { num: 14,  suffix: 'j',  label: 'Délai Moyen' },
+        { num: 98,  suffix: '%',  label: 'Satisfaction Client' },
+        { num: 5,   suffix: '★', label: 'Note Moyenne' },
       ]
     : [
-        { num: 200, suffix: '+',    label: 'Websites Delivered' },
-        { num: 14,  suffix: 'd',    label: 'Avg. Turnaround' },
-        { num: 98,  suffix: '%',    label: 'Client Satisfaction' },
-        { num: 5,   suffix: '★',   label: 'Average Rating' },
+        { num: 200, suffix: '+',  label: 'Websites Delivered' },
+        { num: 14,  suffix: 'd',  label: 'Avg. Turnaround' },
+        { num: 98,  suffix: '%',  label: 'Client Satisfaction' },
+        { num: 5,   suffix: '★', label: 'Average Rating' },
       ];
 
   return (

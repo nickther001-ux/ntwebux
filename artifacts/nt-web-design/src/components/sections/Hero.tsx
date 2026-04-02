@@ -80,27 +80,33 @@ export function Hero() {
           </a>
         </motion.div>
 
-        {/* Floating stat cards */}
+        {/* Industry reality cards */}
         <motion.div
           custom={4}
           variants={fadeUp}
           initial="hidden"
           animate="show"
-          style={{ marginTop: '72px', display: 'flex', justifyContent: 'center', gap: '16px', flexWrap: 'wrap' }}
+          style={{ marginTop: '72px', display: 'flex', justifyContent: 'center', gap: '14px', flexWrap: 'wrap' }}
         >
-          {[
-            { v: '200+', l: lang === 'fr' ? 'Sites Livrés' : 'Websites Delivered' },
-            { v: '14d', l: lang === 'fr' ? 'Délai Moyen' : 'Avg. Turnaround' },
-            { v: '98%', l: lang === 'fr' ? 'Satisfaction' : 'Client Satisfaction' },
-            { v: '5★', l: lang === 'fr' ? 'Note Moyenne' : 'Average Rating' },
-          ].map((s) => (
+          {(lang === 'fr' ? [
+            { v: '72%',  l: 'des entreprises ont un site',    sub: 'en 2024–2025' },
+            { v: '28%',  l: 'des PME n\'ont toujours pas',   sub: 'de présence en ligne' },
+            { v: '1Md+', l: 'de sites web actifs',            sub: 'dans le monde' },
+            { v: '3×',   l: 'plus de prospects',              sub: 'avec un site pro' },
+          ] : [
+            { v: '72%',  l: 'of businesses have a website',  sub: 'as of 2024–2025' },
+            { v: '28%',  l: 'of small businesses still don\'t', sub: 'have an online presence' },
+            { v: '1B+',  l: 'active websites worldwide',     sub: 'and growing daily' },
+            { v: '3×',   l: 'more leads',                    sub: 'with a pro website' },
+          ]).map((s) => (
             <div
               key={s.v}
               className="glass"
-              style={{ padding: '14px 24px', borderRadius: '12px', textAlign: 'center', minWidth: '110px' }}
+              style={{ padding: '14px 20px', borderRadius: '12px', textAlign: 'center', minWidth: '120px' }}
             >
-              <div style={{ fontSize: '22px', fontWeight: 800, background: 'linear-gradient(135deg,#93c5fd,#bfdbfe)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>{s.v}</div>
-              <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.4)', marginTop: '3px', fontWeight: 500 }}>{s.l}</div>
+              <div style={{ fontSize: '22px', fontWeight: 800, background: 'linear-gradient(135deg,#93c5fd,#bfdbfe)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', lineHeight: 1 }}>{s.v}</div>
+              <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.55)', marginTop: '5px', fontWeight: 600, lineHeight: 1.35 }}>{s.l}</div>
+              <div style={{ fontSize: '10px', color: 'rgba(255,255,255,0.28)', marginTop: '2px', lineHeight: 1.3 }}>{s.sub}</div>
             </div>
           ))}
         </motion.div>
