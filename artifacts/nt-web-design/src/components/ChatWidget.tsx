@@ -60,7 +60,7 @@ function HomeView({ lang, onStartChat }: { lang: string; onStartChat: () => void
       bg: "rgba(59,130,246,0.08)",
       border: "rgba(59,130,246,0.18)",
       title: lang === "fr" ? "Discutez avec nous" : "Chat with us",
-      detail: lang === "fr" ? "Réponse instantanée par IA" : "Instant AI replies",
+      detail: lang === "fr" ? "Discutez avec Silas — IA" : "Chat with Silas — AI",
       note: lang === "fr" ? "Disponible 24h/24, 7j/7" : "Available 24/7",
       action: onStartChat,
       highlight: true,
@@ -92,13 +92,13 @@ function HomeView({ lang, onStartChat }: { lang: string; onStartChat: () => void
 
         {/* Avatar row */}
         <div style={{ display: "flex", gap: "-6px", marginBottom: "14px" }}>
-          {["NT"].map((init) => (
+          {["S"].map((init) => (
             <div key={init} style={{
               width: "40px", height: "40px", borderRadius: "50%",
               background: "linear-gradient(135deg,#3b82f6,#2563eb)",
               border: "2px solid rgba(255,255,255,0.15)",
               display: "flex", alignItems: "center", justifyContent: "center",
-              fontSize: "13px", fontWeight: 800, color: "#fff",
+              fontSize: "15px", fontWeight: 800, color: "#fff",
             }}>{init}</div>
           ))}
         </div>
@@ -172,8 +172,8 @@ function ChatView({ lang, onBack }: { lang: string; onBack: () => void }) {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const greeting = lang === "fr"
-    ? "Bonjour ! Je suis l'assistant NT Web UX. Posez-moi n'importe quelle question sur nos services, tarifs ou délais de livraison."
-    : "Hi there! I'm the NT Web UX assistant. Ask me anything about our services, pricing, or turnaround times — happy to help!";
+    ? "Bonjour ! Je m'appelle Silas, l'assistant IA de NT Web UX. Posez-moi n'importe quelle question sur nos services, tarifs ou délais de livraison."
+    : "Hi there! I'm Silas, the AI assistant for NT Web UX. Ask me anything about our services, pricing, or turnaround times — happy to help!";
 
   useEffect(() => {
     setMessages([{ role: "assistant", content: greeting }]);
@@ -248,7 +248,7 @@ function ChatView({ lang, onBack }: { lang: string; onBack: () => void }) {
           <Bot size={16} color="#fff" />
         </div>
         <div style={{ flex: 1 }}>
-          <div style={{ fontSize: "13px", fontWeight: 700, color: "#fff", lineHeight: 1 }}>{lang === "fr" ? "Assistant NT Web UX" : "NT Web UX Assistant"}</div>
+          <div style={{ fontSize: "13px", fontWeight: 700, color: "#fff", lineHeight: 1 }}>Silas <span style={{ fontSize: "11px", fontWeight: 500, color: "rgba(147,197,253,0.6)" }}>· NT Web UX AI</span></div>
           <div style={{ fontSize: "11px", color: "rgba(147,197,253,0.65)", marginTop: "3px", display: "flex", alignItems: "center", gap: "5px" }}>
             <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#4ade80", display: "inline-block" }} />
             {lang === "fr" ? "En ligne · Répond instantanément" : "Online · Replies instantly"}
