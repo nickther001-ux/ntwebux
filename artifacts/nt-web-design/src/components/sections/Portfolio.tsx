@@ -83,6 +83,20 @@ const PROJECTS = [
     tags: { en: ['Brand Identity', 'Web Design'], fr: ['Image de marque', 'Web Design'] },
     wide: false,
   },
+  {
+    img: `${BASE}/portfolio/proj-law.png`,
+    category: { en: 'Legal Services', fr: 'Services Juridiques' },
+    title: { en: 'Dubois Legal Group', fr: 'Cabinet Dubois' },
+    tags: { en: ['Law Firm', 'Professional'], fr: ['Cabinet d\'avocats', 'Professionnel'] },
+    wide: false,
+  },
+  {
+    img: `${BASE}/portfolio/proj-ecommerce.png`,
+    category: { en: 'Wellness & Beauty', fr: 'Bien-être & Beauté' },
+    title: { en: 'Éclat Beauty Studio', fr: 'Studio Beauté Éclat' },
+    tags: { en: ['Booking System', 'Branding'], fr: ['Réservation', 'Image de marque'] },
+    wide: false,
+  },
 ];
 
 /* ── Lightbox ─────────────────────────────────────────── */

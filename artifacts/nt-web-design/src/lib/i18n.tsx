@@ -53,15 +53,19 @@ const translations: Translations = {
         { title: "Fast Turnaround", desc: "Launch in weeks, not months." },
         { title: "Real Humans, Real Support", desc: "Direct communication with your design team." },
         { title: "Built to Convert", desc: "We design for ROI, not just aesthetics." },
-        { title: "Transparent Pricing", desc: "No hidden fees or surprise invoices." }
+        { title: "Transparent Pricing", desc: "No hidden fees or surprise invoices." },
+        { title: "SEO Built-In", desc: "Every site is optimized to rank from day one." }
       ]
     },
     testimonials: {
       title: "Don't just take our word for it.",
       items: [
         { quote: "Working with NT Web Design was a game-changer. They completely revamped our digital presence and our leads doubled in the first month.", name: "Jean-Michel Tremblay", role: "Owner, Tremblay Excavation Inc." },
-        { quote: "Fast, professional, and insanely talented. The team understood our vision instantly.", name: "Sophie Côté", role: "Founder, SC Esthétique" },
-        { quote: "Our e-commerce sales skyrocketed after the redesign. Highly recommended.", name: "David Larose", role: "Director, Larose & Fils" }
+        { quote: "Fast, professional, and insanely talented. The team understood our vision instantly and delivered beyond expectations.", name: "Sophie Côté", role: "Founder, SC Esthétique" },
+        { quote: "Our e-commerce sales skyrocketed after the redesign. Clean code, beautiful design, and zero headaches. Highly recommended.", name: "David Larose", role: "Director, Larose & Fils" },
+        { quote: "We went from zero online presence to fully booked in 6 weeks. The ROI on this website has been incredible.", name: "Karine Beaumont", role: "CEO, Beaumont Wellness Clinic" },
+        { quote: "They built our SaaS dashboard from scratch and it looks like a million dollars. Clients always compliment our platform.", name: "Alexis Fontaine", role: "Co-Founder, Flux Analytics" },
+        { quote: "The bilingual website they built for us is exactly what we needed to reach both English and French markets in Montréal.", name: "Marc-André Ouellet", role: "Owner, Bâtisseurs Nordiques Inc." }
       ]
     },
     contact: {
@@ -174,15 +178,19 @@ const translations: Translations = {
         { title: "Délais Rapides", desc: "Lancez-vous en quelques semaines, pas en quelques mois." },
         { title: "De Vrais Humains, Un Vrai Support", desc: "Communication directe avec votre équipe de conception." },
         { title: "Conçu pour Convertir", desc: "Nous concevons pour le ROI, pas seulement pour l'esthétique." },
-        { title: "Tarification Transparente", desc: "Pas de frais cachés ni de factures surprises." }
+        { title: "Tarification Transparente", desc: "Pas de frais cachés ni de factures surprises." },
+        { title: "SEO Intégré", desc: "Chaque site est optimisé pour se classer dès le premier jour." }
       ]
     },
     testimonials: {
       title: "Ne nous croyez pas sur parole.",
       items: [
-        { quote: "Travailler avec NT Web Design a tout changé. Ils ont complètement repensé notre présence numérique et nos prospects ont doublé.", name: "Jean-Michel Tremblay", role: "Propriétaire, Tremblay Excavation Inc." },
-        { quote: "Rapide, professionnel et incroyablement talentueux. L'équipe a compris notre vision instantanément.", name: "Sophie Côté", role: "Fondatrice, SC Esthétique" },
-        { quote: "Nos ventes en ligne ont explosé après la refonte. Fortement recommandé.", name: "David Larose", role: "Directeur, Larose & Fils" }
+        { quote: "Travailler avec NT Web Design a tout changé. Ils ont complètement repensé notre présence numérique et nos prospects ont doublé dès le premier mois.", name: "Jean-Michel Tremblay", role: "Propriétaire, Tremblay Excavation Inc." },
+        { quote: "Rapide, professionnel et incroyablement talentueux. L'équipe a compris notre vision instantanément et a livré au-delà de nos attentes.", name: "Sophie Côté", role: "Fondatrice, SC Esthétique" },
+        { quote: "Nos ventes en ligne ont explosé après la refonte. Code propre, design magnifique, aucun problème. Fortement recommandé.", name: "David Larose", role: "Directeur, Larose & Fils" },
+        { quote: "Nous sommes passés de zéro présence en ligne à complet en 6 semaines. Le retour sur investissement de ce site est incroyable.", name: "Karine Beaumont", role: "PDG, Clinique Beaumont Santé" },
+        { quote: "Ils ont construit notre tableau de bord SaaS de zéro et ça ressemble à un million de dollars. Nos clients complimentent toujours notre plateforme.", name: "Alexis Fontaine", role: "Co-Fondateur, Flux Analytics" },
+        { quote: "Le site bilingue qu'ils ont construit pour nous est exactement ce qu'il nous fallait pour atteindre les marchés anglophone et francophone.", name: "Marc-André Ouellet", role: "Propriétaire, Bâtisseurs Nordiques Inc." }
       ]
     },
     contact: {

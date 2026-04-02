@@ -8,7 +8,6 @@ export function Process() {
 
   return (
     <section id="process" style={{ padding: '120px 24px', position: 'relative', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-      {/* Background glow */}
       <div style={{ position: 'absolute', top: '50%', right: 0, width: '500px', height: '500px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(147,197,253,0.07) 0%, transparent 65%)', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
 
       <div style={{ maxWidth: '1200px', margin: '0 auto', position: 'relative' }}>
@@ -25,7 +24,6 @@ export function Process() {
 
         {/* Steps */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '24px', position: 'relative' }} className="process-grid">
-          {/* Connector line */}
           <div style={{ position: 'absolute', top: '28px', left: '12%', right: '12%', height: '1px', background: 'linear-gradient(90deg, transparent, rgba(59,130,246,0.3), transparent)' }} className="connector-line" />
 
           {steps.map((step, i) => (
@@ -37,20 +35,11 @@ export function Process() {
               transition={{ delay: i * 0.1, duration: 0.5 }}
               style={{ position: 'relative', zIndex: 1, padding: '0 8px' }}
             >
-              {/* Number circle */}
               <div style={{
-                width: '56px',
-                height: '56px',
-                borderRadius: '50%',
-                background: 'rgba(59,130,246,0.1)',
-                border: '1px solid rgba(59,130,246,0.25)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '18px',
-                fontWeight: 800,
-                color: '#93c5fd',
-                marginBottom: '24px',
+                width: '56px', height: '56px', borderRadius: '50%',
+                background: 'rgba(59,130,246,0.1)', border: '1px solid rgba(59,130,246,0.25)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                fontSize: '18px', fontWeight: 800, color: '#93c5fd', marginBottom: '24px',
               }}>
                 0{i + 1}
               </div>
@@ -59,6 +48,32 @@ export function Process() {
             </motion.div>
           ))}
         </div>
+
+        {/* Bottom CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.55 }}
+          style={{ marginTop: '80px', textAlign: 'center', padding: '48px 40px', background: 'rgba(59,130,246,0.04)', border: '1px solid rgba(59,130,246,0.12)', borderRadius: '20px' }}
+        >
+          <div style={{ fontSize: '12px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(147,197,253,0.6)', marginBottom: '14px' }}>
+            {lang === 'fr' ? 'Prêt à Commencer ?' : 'Ready to Get Started?'}
+          </div>
+          <h3 style={{ fontSize: 'clamp(1.4rem,3vw,2rem)', fontWeight: 800, color: '#fff', marginBottom: '12px', letterSpacing: '-0.02em', lineHeight: 1.15 }}>
+            {lang === 'fr'
+              ? <>Votre projet mérite une<br /><span className="gradient-text">vraie stratégie.</span></>
+              : <>Your project deserves a<br /><span className="gradient-text">real strategy.</span></>}
+          </h3>
+          <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.4)', maxWidth: '420px', margin: '0 auto 28px', lineHeight: 1.7 }}>
+            {lang === 'fr'
+              ? "Réservez un appel de découverte gratuit de 30 minutes. Aucun engagement, que de la valeur."
+              : "Book a free 30-minute discovery call. No commitment, just value."}
+          </p>
+          <a href="#contact" className="btn-violet" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '14px 32px', fontSize: '14px', fontWeight: 600, borderRadius: '10px', textDecoration: 'none' }}>
+            {lang === 'fr' ? 'Réserver un Appel Gratuit' : 'Book a Free Call'} →
+          </a>
+        </motion.div>
       </div>
 
       <style>{`

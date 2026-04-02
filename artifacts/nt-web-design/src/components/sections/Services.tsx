@@ -81,6 +81,16 @@ export function Services() {
         ))}
       </div>
 
+      {/* Bottom CTA */}
+      <div style={{ marginTop: '64px', textAlign: 'center' }}>
+        <p style={{ fontSize: '15px', color: 'rgba(255,255,255,0.4)', marginBottom: '20px' }}>
+          {lang === 'fr' ? 'Pas sûr de ce dont vous avez besoin ?' : "Not sure what you need?"}
+        </p>
+        <a href="#contact" className="btn-violet" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '14px 32px', fontSize: '14px', fontWeight: 600, borderRadius: '10px', textDecoration: 'none' }}>
+          {lang === 'fr' ? 'Obtenir un Devis Gratuit' : 'Get a Free Quote'} <ArrowRight size={15} />
+        </a>
+      </div>
+
       {/* Modal */}
       <AnimatePresence>
         {active && (
