@@ -60,7 +60,7 @@ router.post("/chat", async (req, res) => {
 
   try {
     const model = client.getGenerativeModel({
-      model: "gemini-1.5-flash",
+      model: "gemini-flash-lite-latest",
       systemInstruction: SYSTEM_PROMPT,
     });
 
