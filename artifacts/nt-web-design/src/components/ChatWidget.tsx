@@ -210,11 +210,19 @@ function ChatView({ lang, onBack }: { lang: string; onBack: () => void }) {
         if (done) break;
         for (const line of decoder.decode(value).split("\n").filter(l => l.startsWith("data: "))) {
           try {
-            const d = JSON.parse(line.slice(6));
-            if (d.content) { text2 += d.content; setMessages([...history, { role: "assistant", content: text2 }]); }
-            if (d.error)   setMessages([...history, { role: "assistant", content: d.error }]);
+            const raw = line.slice(6);
+            const d = JSON.parse(raw);
+            console.log("[chat SSE]", d);
+            // Handle all common field names the server might use
+            const chunk = d.content ?? d.message ?? d.assistant ?? d.text ?? null;
+            if (chunk) { text2 += chunk; setMessages([...history, { role: "assistant", content: text2 }]); }
+            if (d.error) setMessages([...history, { role: "assistant", content: d.error }]);
           } catch {}
         }
+      }
+      // Safety net: if stream ended but nothing was written, show a fallback instead of a stuck empty bubble
+      if (!text2) {
+        setMessages([...history, { role: "assistant", content: lang === "fr" ? "Désolé, une erreur est survenue. Contactez-nous par email." : "Sorry, something went wrong. Please try again or email us." }]);
       }
     } catch {
       setLoading(false);
