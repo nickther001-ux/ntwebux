@@ -167,12 +167,20 @@ export default function ServicesPortfolio() {
                   {/* Portfolio image */}
                   <div style={{ position: 'relative', height: i === 0 ? '220px' : '160px', overflow: 'hidden', flexShrink: 0 }}>
                     {previewImg ? (
-                      <img
-                        src={previewImg}
-                        alt={item.title}
-                        loading="lazy"
-                        style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top', display: 'block' }}
-                      />
+                      <>
+                        <img
+                          src={previewImg}
+                          alt={item.title}
+                          loading="lazy"
+                          style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top', display: 'block' }}
+                        />
+                        {/* Cover browser chrome + page header (Framer branding area) */}
+                        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '56px', background: '#02040a', zIndex: 2 }} />
+                        {/* Smooth fade-in from top cover to content */}
+                        <div style={{ position: 'absolute', top: '56px', left: 0, right: 0, height: '20px', background: 'linear-gradient(to bottom, #02040a, transparent)', zIndex: 2 }} />
+                        {/* Blur any watermark at bottom */}
+                        <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '32px', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)', background: 'rgba(2,4,10,0.65)', zIndex: 2 }} />
+                      </>
                     ) : (
                       <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, rgba(59,130,246,0.15), rgba(30,58,138,0.2))', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         <Globe size={40} color="rgba(59,130,246,0.3)" />

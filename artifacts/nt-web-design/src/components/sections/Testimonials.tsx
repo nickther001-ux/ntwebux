@@ -79,6 +79,12 @@ export function Testimonials() {
                   loading="lazy"
                   style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top', display: 'block' }}
                 />
+                {/* Cover browser chrome + page header (Framer branding area) */}
+                <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '56px', background: '#02040a', zIndex: 2 }} />
+                {/* Smooth fade from cover to content */}
+                <div style={{ position: 'absolute', top: '56px', left: 0, right: 0, height: '20px', background: 'linear-gradient(to bottom, #02040a, transparent)', zIndex: 2 }} />
+                {/* Blur any watermark at bottom */}
+                <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '32px', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)', background: 'rgba(2,4,10,0.65)', zIndex: 2 }} />
                 {/* Industry tag overlay */}
                 <div style={{ position: 'absolute', bottom: '8px', left: '10px', zIndex: 2, background: 'rgba(59,130,246,0.85)', color: '#fff', fontSize: '10px', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', padding: '3px 8px', borderRadius: '4px' }}>
                   {item.industry}
