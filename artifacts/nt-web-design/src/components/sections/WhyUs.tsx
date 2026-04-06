@@ -127,7 +127,7 @@ export function WhyUs() {
               {[
                 { raw: '200+', l: lang === 'fr' ? 'Projets' : 'Projects' },
                 { raw: '98%', l: lang === 'fr' ? 'Satisfaction' : 'Satisfaction' },
-                { raw: '14d', l: lang === 'fr' ? 'Délai' : 'Turnaround' },
+                { raw: '72h', l: lang === 'fr' ? 'Délai' : 'Turnaround' },
                 { raw: '5★', l: lang === 'fr' ? 'Notes' : 'Rating' },
               ].map(({ raw, l }) => (
                 <AnimatedStat key={raw} raw={raw} label={l} inView={inView} />

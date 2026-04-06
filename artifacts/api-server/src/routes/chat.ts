@@ -31,8 +31,13 @@ Process:
 3. Development — built with modern tech for speed and SEO
 4. Launch — go live with full handoff and support
 
+Turnaround / Delivery:
+- Standard delivery: 72 hours (3 days) for most projects
+- Larger or more complex projects: 1–3 weeks depending on scope
+- When asked about timeframes, always lead with "72 hours" and mention that larger projects may take 1–3 weeks
+
 Why NT Web UX:
-- Fast turnaround (typically 2-3 weeks)
+- Fast turnaround — as little as 72 hours
 - Clean, modern design with no templates
 - SEO-ready and mobile-first
 - Bilingual EN/FR support

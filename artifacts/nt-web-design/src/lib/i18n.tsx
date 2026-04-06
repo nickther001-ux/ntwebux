@@ -20,7 +20,7 @@ const translations: Translations = {
     },
     stats: {
       s1: { v: "200+", l: "Websites Delivered" },
-      s2: { v: "14", l: "Day Avg. Turnaround" },
+      s2: { v: "72h", l: "Avg. Turnaround" },
       s3: { v: "98%", l: "Client Satisfaction" },
       s4: { v: "5★", l: "Average Review" }
     },
@@ -50,7 +50,7 @@ const translations: Translations = {
       title: "Built differently.",
       pills: [
         { title: "No Cookie-Cutter Templates", desc: "100% custom designs tailored to your brand." },
-        { title: "Fast Turnaround", desc: "Launch in weeks, not months." },
+        { title: "Fast Turnaround", desc: "Most projects delivered in 72 hours." },
         { title: "Real Humans, Real Support", desc: "Direct communication with your design team." },
         { title: "Built to Convert", desc: "We design for ROI, not just aesthetics." },
         { title: "Transparent Pricing", desc: "No hidden fees or surprise invoices." },
@@ -147,7 +147,7 @@ const translations: Translations = {
     },
     stats: {
       s1: { v: "200+", l: "Sites Livrés" },
-      s2: { v: "14", l: "Jours en Moyenne" },
+      s2: { v: "72h", l: "Délai Moyen" },
       s3: { v: "98%", l: "Clients Satisfaits" },
       s4: { v: "5★", l: "Avis Moyen" }
     },
@@ -175,7 +175,7 @@ const translations: Translations = {
       title: "Conçu différemment.",
       pills: [
         { title: "Pas de Modèles Préfabriqués", desc: "Des designs 100% sur mesure adaptés à votre marque." },
-        { title: "Délais Rapides", desc: "Lancez-vous en quelques semaines, pas en quelques mois." },
+        { title: "Délais Rapides", desc: "La plupart des projets livrés en 72 heures." },
         { title: "De Vrais Humains, Un Vrai Support", desc: "Communication directe avec votre équipe de conception." },
         { title: "Conçu pour Convertir", desc: "Nous concevons pour le ROI, pas seulement pour l'esthétique." },
         { title: "Tarification Transparente", desc: "Pas de frais cachés ni de factures surprises." },

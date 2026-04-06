@@ -82,13 +82,13 @@ export function Stats() {
   const items: StatItem[] = lang === 'fr'
     ? [
         { num: 200, suffix: '+',  label: 'Sites Livrés' },
-        { num: 14,  suffix: 'j',  label: 'Délai Moyen' },
+        { num: 72,  suffix: 'h',  label: 'Délai Moyen' },
         { num: 98,  suffix: '%',  label: 'Satisfaction Client' },
         { num: 5,   suffix: '★', label: 'Note Moyenne' },
       ]
     : [
         { num: 200, suffix: '+',  label: 'Websites Delivered' },
-        { num: 14,  suffix: 'd',  label: 'Avg. Turnaround' },
+        { num: 72,  suffix: 'h',  label: 'Avg. Turnaround' },
         { num: 98,  suffix: '%',  label: 'Client Satisfaction' },
         { num: 5,   suffix: '★', label: 'Average Rating' },
       ];
