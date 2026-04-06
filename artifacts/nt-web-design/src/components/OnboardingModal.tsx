@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ArrowRight, ArrowLeft, Check, MessageCircle, CheckCircle2 } from 'lucide-react';
+import { X, ArrowRight, ArrowLeft, Check, Send, CheckCircle2, Loader2 } from 'lucide-react';
 import { useLanguage } from '@/lib/i18n';
 
-const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
-const WA_BASE = 'https://wa.me/14388067640?text=';
+const BASE     = import.meta.env.BASE_URL.replace(/\/$/, '');
+const API_BASE = (import.meta.env.VITE_API_URL || import.meta.env.BASE_URL).replace(/\/$/, '');
 
 /* ─── Website type options ─────────────────────────────────────── */
 const SITE_TYPES = [
@@ -87,7 +87,9 @@ export function OnboardingModal({ plan, onClose }: Props) {
   const [step, setStep]   = useState(0);
   const [dir, setDir]     = useState(1);
   const [data, setData]   = useState<FormData>(EMPTY);
-  const [done, setDone]   = useState(false);
+  const [done, setDone]       = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError]     = useState('');
   const fr = lang === 'fr';
 
   if (!plan) return null;
@@ -113,65 +115,26 @@ export function OnboardingModal({ plan, onClose }: Props) {
     return true;
   };
 
-  /* Build WhatsApp message & submit */
-  const handleSubmit = () => {
-    const type = SITE_TYPES.find(s => s.id === data.siteType);
-    const typeName = type ? (fr ? type.fr : type.en) : data.siteType;
-    const planLabel = `${plan.name}${plan.price !== '—' ? ` ($${plan.price}/mo)` : ' (custom pricing)'}`;
-
-    const msg = fr
-      ? `Bonjour NT Web UX! Je souhaite commander le forfait *${planLabel}*.
-
-📋 *MON PROJET*
-Type de site : ${typeName}
-Industrie : ${data.industry || typeName}
-Style : ${data.style === 'custom' ? 'Site personnalisé' : 'À partir d\'un exemple'}
-
-👤 *À MON SUJET*
-Nom : ${data.name}
-Entreprise : ${data.business || '—'}
-Description : ${data.description || '—'}
-Ville : ${data.city || '—'}
-
-🎯 *MES OBJECTIFS*
-Objectifs : ${data.goals.join(', ') || '—'}
-Logo existant : ${data.hasLogo === 'yes' ? 'Oui' : data.hasLogo === 'no' ? 'Non' : '—'}
-Contenu prêt : ${data.hasContent || '—'}
-Site existant : ${data.hasExistingSite === 'yes' ? `Oui — ${data.existingUrl || 'URL à fournir'}` : 'Non'}
-
-📞 *ME JOINDRE*
-Téléphone : ${data.phone || '—'}
-Meilleur moment : ${data.bestTime || '—'}
-Méthode préférée : ${data.method || '—'}
-Notes : ${data.notes || '—'}`
-      : `Hi NT Web UX! I'd like to order the *${planLabel}*.
-
-📋 *MY PROJECT*
-Website type: ${typeName}
-Industry: ${data.industry || typeName}
-Style: ${data.style === 'custom' ? 'Custom design' : 'Based on a sample'}
-
-👤 *ABOUT ME*
-Name: ${data.name}
-Business: ${data.business || '—'}
-What we do: ${data.description || '—'}
-City: ${data.city || '—'}
-
-🎯 *MY GOALS*
-Goals: ${data.goals.join(', ') || '—'}
-Have a logo: ${data.hasLogo === 'yes' ? 'Yes' : data.hasLogo === 'no' ? 'No' : '—'}
-Content ready: ${data.hasContent || '—'}
-Existing site: ${data.hasExistingSite === 'yes' ? `Yes — ${data.existingUrl || 'URL to share'}` : 'No'}
-
-📞 *REACH ME*
-Phone: ${data.phone || '—'}
-Best time: ${data.bestTime || '—'}
-Preferred method: ${data.method || '—'}
-Notes: ${data.notes || '—'}`;
-
-    // Open immediately — browsers block window.open inside setTimeout
-    window.open(`${WA_BASE}${encodeURIComponent(msg)}`, '_blank');
-    setDone(true);
+  /* Submit — send emails via API */
+  const handleSubmit = async () => {
+    setLoading(true);
+    setError('');
+    try {
+      const res = await fetch(`${API_BASE}/api/intake`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...data, plan, lang }),
+      });
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({}));
+        throw new Error((body as any).error || 'Server error');
+      }
+      setDone(true);
+    } catch (e: any) {
+      setError(e.message || (fr ? 'Erreur réseau. Veuillez réessayer.' : 'Network error. Please try again.'));
+    } finally {
+      setLoading(false);
+    }
   };
 
   /* ── Pill select helper ── */
@@ -511,7 +474,7 @@ Notes: ${data.notes || '—'}`;
     of:    fr ? 'sur'      : 'of',
     back:  fr ? 'Retour'   : 'Back',
     next:  fr ? 'Continuer' : 'Next',
-    send:  fr ? 'Envoyer sur WhatsApp' : 'Send via WhatsApp',
+    send:  fr ? 'Envoyer ma demande' : 'Submit my request',
     close: fr ? 'Fermer'  : 'Close',
     plan:  fr ? 'Forfait sélectionné' : 'Selected plan',
   };
@@ -591,13 +554,19 @@ Notes: ${data.notes || '—'}`;
                   <CheckCircle2 size={36} color="#93c5fd" />
                 </div>
                 <div style={{ fontSize: '22px', fontWeight: 800 }}>
-                  {fr ? 'Parfait! Ouverture de WhatsApp...' : 'Opening WhatsApp...'}
+                  {fr ? '🎉 Demande envoyée!' : '🎉 Request sent!'}
                 </div>
                 <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.45)', maxWidth: '380px', lineHeight: 1.7 }}>
                   {fr
-                    ? 'Votre résumé de projet est prêt. Envoyez-le via WhatsApp et nous démarrons dans les 2 heures.'
-                    : 'Your project brief is ready. Send it via WhatsApp and we start within 2 hours.'}
+                    ? `Un email de confirmation a été envoyé à ${data.email}. Nous vous contacterons dans les 2 heures pour démarrer votre projet.`
+                    : `A confirmation email was sent to ${data.email}. We'll reach out within 2 hours to kick off your project.`}
                 </p>
+                <button
+                  onClick={onClose}
+                  style={{ marginTop: '8px', padding: '11px 28px', borderRadius: '10px', fontSize: '13px', fontWeight: 700, cursor: 'pointer', border: 'none', background: '#3b82f6', color: '#fff' }}
+                >
+                  {fr ? 'Fermer' : 'Close'}
+                </button>
               </motion.div>
             ) : (
               <AnimatePresence mode="wait" initial={false}>
@@ -608,49 +577,58 @@ Notes: ${data.notes || '—'}`;
 
           {/* Footer */}
           {!done && (
-            <div style={{
-              padding: '16px 24px 20px', flexShrink: 0,
-              borderTop: '1px solid rgba(255,255,255,0.06)',
-              display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '12px',
-            }}>
-              <button
-                onClick={step === 0 ? onClose : goPrev}
-                style={{
-                  padding: '11px 20px', borderRadius: '10px', fontSize: '13px', fontWeight: 600,
-                  cursor: 'pointer', border: '1px solid rgba(255,255,255,0.1)',
-                  background: 'rgba(255,255,255,0.04)', color: 'rgba(255,255,255,0.55)',
-                  display: 'flex', alignItems: 'center', gap: '6px', transition: 'all 0.18s',
-                }}
-              >
-                {step === 0 ? <><X size={14} /> {L.close}</> : <><ArrowLeft size={14} /> {L.back}</>}
-              </button>
-
-              {step < totalSteps - 1 ? (
+            <div style={{ padding: '12px 24px 20px', flexShrink: 0, borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+              {error && (
+                <p style={{ fontSize: '13px', color: '#f87171', margin: '0 0 10px', textAlign: 'center' }}>
+                  ⚠ {error}
+                </p>
+              )}
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '12px' }}>
                 <button
-                  onClick={goNext}
-                  disabled={!canNext()}
+                  onClick={step === 0 ? onClose : goPrev}
+                  disabled={loading}
                   style={{
-                    padding: '11px 24px', borderRadius: '10px', fontSize: '13px', fontWeight: 700,
-                    cursor: canNext() ? 'pointer' : 'not-allowed', border: 'none',
-                    background: canNext() ? '#3b82f6' : 'rgba(59,130,246,0.2)',
-                    color: canNext() ? '#fff' : 'rgba(255,255,255,0.3)',
+                    padding: '11px 20px', borderRadius: '10px', fontSize: '13px', fontWeight: 600,
+                    cursor: loading ? 'not-allowed' : 'pointer', border: '1px solid rgba(255,255,255,0.1)',
+                    background: 'rgba(255,255,255,0.04)', color: 'rgba(255,255,255,0.55)',
                     display: 'flex', alignItems: 'center', gap: '6px', transition: 'all 0.18s',
                   }}
                 >
-                  {L.next} <ArrowRight size={14} />
+                  {step === 0 ? <><X size={14} /> {L.close}</> : <><ArrowLeft size={14} /> {L.back}</>}
                 </button>
-              ) : (
-                <button
-                  onClick={handleSubmit}
-                  style={{
-                    padding: '11px 24px', borderRadius: '10px', fontSize: '13px', fontWeight: 700,
-                    cursor: 'pointer', border: 'none', background: '#25d366',
-                    color: '#fff', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.18s',
-                  }}
-                >
-                  <MessageCircle size={16} /> {L.send}
-                </button>
-              )}
+
+                {step < totalSteps - 1 ? (
+                  <button
+                    onClick={goNext}
+                    disabled={!canNext()}
+                    style={{
+                      padding: '11px 24px', borderRadius: '10px', fontSize: '13px', fontWeight: 700,
+                      cursor: canNext() ? 'pointer' : 'not-allowed', border: 'none',
+                      background: canNext() ? '#3b82f6' : 'rgba(59,130,246,0.2)',
+                      color: canNext() ? '#fff' : 'rgba(255,255,255,0.3)',
+                      display: 'flex', alignItems: 'center', gap: '6px', transition: 'all 0.18s',
+                    }}
+                  >
+                    {L.next} <ArrowRight size={14} />
+                  </button>
+                ) : (
+                  <button
+                    onClick={handleSubmit}
+                    disabled={loading}
+                    style={{
+                      padding: '11px 24px', borderRadius: '10px', fontSize: '13px', fontWeight: 700,
+                      cursor: loading ? 'not-allowed' : 'pointer', border: 'none',
+                      background: loading ? 'rgba(59,130,246,0.4)' : '#3b82f6',
+                      color: '#fff', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.18s',
+                    }}
+                  >
+                    {loading
+                      ? <><Loader2 size={15} style={{ animation: 'spin 1s linear infinite' }} /> {fr ? 'Envoi...' : 'Sending...'}</>
+                      : <><Send size={15} /> {L.send}</>
+                    }
+                  </button>
+                )}
+              </div>
             </div>
           )}
         </motion.div>
