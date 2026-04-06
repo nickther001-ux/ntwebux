@@ -169,10 +169,9 @@ Best time: ${data.bestTime || '—'}
 Preferred method: ${data.method || '—'}
 Notes: ${data.notes || '—'}`;
 
+    // Open immediately — browsers block window.open inside setTimeout
+    window.open(`${WA_BASE}${encodeURIComponent(msg)}`, '_blank');
     setDone(true);
-    setTimeout(() => {
-      window.open(`${WA_BASE}${encodeURIComponent(msg)}`, '_blank');
-    }, 800);
   };
 
   /* ── Pill select helper ── */
