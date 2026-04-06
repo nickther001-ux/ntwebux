@@ -1,11 +1,12 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/lib/i18n';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { Globe, Wrench, Package, Building2, Bot, ArrowRight, Check, MessageCircle } from 'lucide-react';
+import { OnboardingModal } from '@/components/OnboardingModal';
 
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
-const WA_BASE = 'https://wa.me/14388067640?text=';
 
 const WORK_IMAGES: Record<string, string> = {
   'Tremblay Excavation Inc.':   `${BASE}/portfolio/proj-construction.png`,
@@ -25,6 +26,7 @@ const fadeUp = (delay = 0) => ({
 
 export default function ServicesPortfolio() {
   const { t, lang } = useLanguage();
+  const [activePlan, setActivePlan] = useState<{ name: string; price: string | number } | null>(null);
   const svc   = t('portfolio.services') as any;
   const work  = t('portfolio.work')     as any;
   const plans: any[] = svc.plans;
@@ -55,11 +57,6 @@ export default function ServicesPortfolio() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '16px' }} className="pricing-grid">
             {plans.map((plan, i) => {
               const Icon = PLAN_ICONS[i];
-              const waMsg = encodeURIComponent(
-                lang === 'fr'
-                  ? `Bonjour, je suis intéressé(e) par le forfait ${plan.name} à ${plan.price !== '—' ? '$' + plan.price : 'tarif sur mesure'}. Pouvez-vous me contacter?`
-                  : `Hi, I'm interested in the ${plan.name} plan at ${plan.price !== '—' ? '$' + plan.price : 'custom pricing'}. Please contact me.`
-              );
               return (
                 <motion.div
                   key={plan.name}
@@ -122,16 +119,14 @@ export default function ServicesPortfolio() {
                     >
                       {plan.ctaContact}
                     </a>
-                    <a
-                      href={`${WA_BASE}${waMsg}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                    <button
+                      onClick={() => setActivePlan({ name: plan.name, price: plan.price })}
                       className="btn-violet"
-                      style={{ padding: '12px 16px', fontSize: '13px', borderRadius: '10px', textDecoration: 'none', textAlign: 'center', gap: '8px' }}
+                      style={{ padding: '12px 16px', fontSize: '13px', borderRadius: '10px', border: 'none', cursor: 'pointer', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', width: '100%' }}
                     >
                       <MessageCircle size={14} />
                       {plan.ctaBuy}
-                    </a>
+                    </button>
                   </div>
                 </motion.div>
               );
@@ -225,6 +220,12 @@ export default function ServicesPortfolio() {
           .pricing-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>
+
+      {/* Onboarding intake modal */}
+      <OnboardingModal
+        plan={activePlan}
+        onClose={() => setActivePlan(null)}
+      />
     </div>
   );
 }
