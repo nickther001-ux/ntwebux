@@ -108,17 +108,24 @@ export function Services() {
               onClick={() => setActive(null)}
               style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.75)', backdropFilter: 'blur(8px)', zIndex: 200 }}
             />
+            <div
+              style={{
+                position: 'fixed',
+                inset: 0,
+                zIndex: 201,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                pointerEvents: 'none',
+              }}
+            >
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 16 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 16 }}
               transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
               style={{
-                position: 'fixed',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%,-50%)',
-                zIndex: 201,
+                pointerEvents: 'all',
                 width: '90vw',
                 maxWidth: '440px',
                 background: '#111',
@@ -160,6 +167,7 @@ export function Services() {
                 {ctaLabel} <ArrowRight size={15} />
               </a>
             </motion.div>
+            </div>
           </>
         )}
       </AnimatePresence>
