@@ -60,12 +60,12 @@ const translations: Translations = {
     testimonials: {
       title: "Don't just take our word for it.",
       items: [
-        { quote: "Working with NT Web Design was a game-changer. They completely revamped our digital presence and our leads doubled in the first month.", name: "Jean-Michel Tremblay", role: "Owner, Tremblay Excavation Inc." },
-        { quote: "Fast, professional, and insanely talented. The team understood our vision instantly and delivered beyond expectations.", name: "Sophie Côté", role: "Founder, SC Esthétique" },
-        { quote: "Our e-commerce sales skyrocketed after the redesign. Clean code, beautiful design, and zero headaches. Highly recommended.", name: "David Larose", role: "Director, Larose & Fils" },
-        { quote: "We went from zero online presence to fully booked in 6 weeks. The ROI on this website has been incredible.", name: "Karine Beaumont", role: "CEO, Beaumont Wellness Clinic" },
-        { quote: "They built our SaaS dashboard from scratch and it looks like a million dollars. Clients always compliment our platform.", name: "Alexis Fontaine", role: "Co-Founder, Flux Analytics" },
-        { quote: "The bilingual website they built for us is exactly what we needed to reach both English and French markets in Montréal.", name: "Marc-André Ouellet", role: "Owner, Bâtisseurs Nordiques Inc." }
+        { quote: "They revamped our entire digital presence. Our lead form submissions doubled in the first month and the site was live in under 72 hours. Incredible value.", name: "Jean-Michel Tremblay", role: "Owner, Tremblay Excavation Inc.", metric: "2× leads", metricLabel: "in 30 days", img: "proj-construction.png", industry: "Construction" },
+        { quote: "Our booking system went from phone-only to fully online. We're at 95% capacity every week now. The site basically runs the front desk for us.", name: "Dr. Aline Côté", role: "Founder, Physio Optimal", metric: "95% capacity", metricLabel: "since launch", img: "proj-medical.png", industry: "Healthcare" },
+        { quote: "NT Web UX built our online presence from scratch. We're taking reservations and takeout orders 24/7 now — revenue is up 40% since we launched.", name: "Marie-Claire Joseph", role: "Owner, Saveurs d'Haïti MTL", metric: "+40% revenue", metricLabel: "since launch", img: "proj-restaurant.png", industry: "Restaurant" },
+        { quote: "We went from zero online presence to fully booked in 6 weeks. The ROI on this website has been incredible. Best investment we've made.", name: "Karine Beaumont", role: "CEO, Beaumont Wellness Clinic", metric: "6 weeks", metricLabel: "to fully booked", img: "proj-fitness.png", industry: "Wellness" },
+        { quote: "They built our SaaS dashboard from scratch and it looks like a million dollars. Clients constantly compliment our platform's design.", name: "Alexis Fontaine", role: "Co-Founder, Flux Analytics", metric: "5★", metricLabel: "client rating", img: "proj-saas.png", industry: "SaaS" },
+        { quote: "The bilingual site they built for us is exactly what we needed to reach both English and French markets. Our organic traffic jumped 67%.", name: "Marc-André Ouellet", role: "Owner, Bâtisseurs Nordiques Inc.", metric: "+67% traffic", metricLabel: "organic growth", img: "proj-construction.png", industry: "Construction" }
       ]
     },
     contact: {
@@ -185,12 +185,12 @@ const translations: Translations = {
     testimonials: {
       title: "Ne nous croyez pas sur parole.",
       items: [
-        { quote: "Travailler avec NT Web Design a tout changé. Ils ont complètement repensé notre présence numérique et nos prospects ont doublé dès le premier mois.", name: "Jean-Michel Tremblay", role: "Propriétaire, Tremblay Excavation Inc." },
-        { quote: "Rapide, professionnel et incroyablement talentueux. L'équipe a compris notre vision instantanément et a livré au-delà de nos attentes.", name: "Sophie Côté", role: "Fondatrice, SC Esthétique" },
-        { quote: "Nos ventes en ligne ont explosé après la refonte. Code propre, design magnifique, aucun problème. Fortement recommandé.", name: "David Larose", role: "Directeur, Larose & Fils" },
-        { quote: "Nous sommes passés de zéro présence en ligne à complet en 6 semaines. Le retour sur investissement de ce site est incroyable.", name: "Karine Beaumont", role: "PDG, Clinique Beaumont Santé" },
-        { quote: "Ils ont construit notre tableau de bord SaaS de zéro et ça ressemble à un million de dollars. Nos clients complimentent toujours notre plateforme.", name: "Alexis Fontaine", role: "Co-Fondateur, Flux Analytics" },
-        { quote: "Le site bilingue qu'ils ont construit pour nous est exactement ce qu'il nous fallait pour atteindre les marchés anglophone et francophone.", name: "Marc-André Ouellet", role: "Propriétaire, Bâtisseurs Nordiques Inc." }
+        { quote: "Ils ont complètement repensé notre présence numérique. Nos demandes ont doublé le premier mois et le site était en ligne en moins de 72 heures. Une valeur incroyable.", name: "Jean-Michel Tremblay", role: "Propriétaire, Tremblay Excavation Inc.", metric: "2× clients", metricLabel: "en 30 jours", img: "proj-construction.png", industry: "Construction" },
+        { quote: "Notre système de réservation est passé du téléphone au 100% en ligne. On est à 95% de capacité chaque semaine. Le site fait le travail de la réceptionniste.", name: "Dre. Aline Côté", role: "Fondatrice, Physio Optimal", metric: "95% capacité", metricLabel: "depuis le lancement", img: "proj-medical.png", industry: "Santé" },
+        { quote: "NT Web UX a créé notre présence en ligne de zéro. On prend des réservations et commandes 24/7 maintenant — les revenus ont augmenté de 40% depuis le lancement.", name: "Marie-Claire Joseph", role: "Propriétaire, Saveurs d'Haïti MTL", metric: "+40% revenus", metricLabel: "depuis le lancement", img: "proj-restaurant.png", industry: "Restaurant" },
+        { quote: "On est passé de zéro présence en ligne à complet en 6 semaines. Le retour sur investissement de ce site est incroyable. Meilleur investissement qu'on ait fait.", name: "Karine Beaumont", role: "PDG, Clinique Beaumont Santé", metric: "6 semaines", metricLabel: "pour complet", img: "proj-fitness.png", industry: "Bien-être" },
+        { quote: "Ils ont construit notre tableau de bord SaaS de zéro et ça ressemble à un million de dollars. Nos clients complimentent toujours le design de notre plateforme.", name: "Alexis Fontaine", role: "Co-Fondateur, Flux Analytics", metric: "5★", metricLabel: "satisfaction client", img: "proj-saas.png", industry: "SaaS" },
+        { quote: "Le site bilingue qu'ils ont construit est exactement ce qu'il nous fallait. Notre trafic organique a bondi de 67% en quelques mois.", name: "Marc-André Ouellet", role: "Propriétaire, Bâtisseurs Nordiques Inc.", metric: "+67% trafic", metricLabel: "croissance organique", img: "proj-construction.png", industry: "Construction" }
       ]
     },
     contact: {
