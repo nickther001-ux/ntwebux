@@ -33,11 +33,7 @@
   html { scroll-behavior: smooth; }
 
   body {
-    background-color: #030609;
-    background-image:
-      radial-gradient(ellipse 900px 700px at 50% -80px, rgba(59,130,246,0.42) 0%, rgba(37,99,235,0.18) 38%, transparent 68%),
-      radial-gradient(ellipse 600px 400px at 75% 100%, rgba(29,78,216,0.18) 0%, transparent 60%),
-      radial-gradient(ellipse 500px 300px at 20% 80%, rgba(59,130,246,0.1) 0%, transparent 60%);
+    background-color: #02040a;
     color: #ffffff;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -45,23 +41,36 @@
     overflow-x: hidden;
   }
 
-  /* Grain noise texture overlay — same as Landio */
+  /* Grain texture — Landio signature */
   body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23n)' opacity='0.45'/%3E%3C/svg%3E");
+    opacity: 0.032;
+  }
+
+  /* Dot grid overlay — very subtle */
+  body::after {
     content: '';
     position: fixed;
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
-    opacity: 0.028;
+    background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px);
+    background-size: 32px 32px;
+    opacity: 0.5;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
   }
 
   * { box-sizing: border-box; }
 
-  ::-webkit-scrollbar { width: 6px; }
-  ::-webkit-scrollbar-track { background: #030609; }
-  ::-webkit-scrollbar-thumb { background: rgba(59,130,246,0.4); border-radius: 99px; }
-  ::-webkit-scrollbar-thumb:hover { background: rgba(59,130,246,0.7); }
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: #02040a; }
+  ::-webkit-scrollbar-thumb { background: rgba(59,130,246,0.35); border-radius: 99px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(59,130,246,0.65); }
 }
 
 @layer utilities {
@@ -155,4 +164,33 @@
 @keyframes shimmer {
   0% { background-position: -300% center; }
   100% { background-position: 300% center; }
+}
+
+/* ── Landio orb animations ── */
+@keyframes orb-breathe {
+  0%, 100% { transform: translateX(-50%) scale(1);   opacity: 0.85; }
+  50%       { transform: translateX(-50%) scale(1.1); opacity: 1;    }
+}
+
+@keyframes orb-drift-right {
+  0%, 100% { transform: translate(0, 0) scale(1);    opacity: 0.5; }
+  33%      { transform: translate(40px, -30px) scale(1.06); opacity: 0.65; }
+  66%      { transform: translate(-20px, 20px) scale(0.96); opacity: 0.45; }
+}
+
+@keyframes orb-drift-left {
+  0%, 100% { transform: translate(0, 0) scale(1);     opacity: 0.4; }
+  50%      { transform: translate(-35px, 25px) scale(1.05); opacity: 0.55; }
+}
+
+/* ── Marquee ── */
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ── Fade-in-up utility (used by hero + sections) ── */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
 }

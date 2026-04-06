@@ -15,44 +15,47 @@ const queryClient = new QueryClient();
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Background gradient orbs */}
-      <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none" aria-hidden>
-        <div
-          style={{
-            position: "absolute",
-            top: "-200px",
-            left: "-200px",
-            width: "700px",
-            height: "700px",
-            borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(59,130,246,0.18) 0%, transparent 65%)",
-            filter: "blur(1px)",
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            bottom: "-150px",
-            right: "-150px",
-            width: "600px",
-            height: "600px",
-            borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(147,197,253,0.10) 0%, transparent 65%)",
-            filter: "blur(1px)",
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%,-50%)",
-            width: "900px",
-            height: "600px",
-            borderRadius: "50%",
-            background: "radial-gradient(ellipse, rgba(59,130,246,0.06) 0%, transparent 60%)",
-          }}
-        />
+      {/* ── Landio-style animated blur orbs ── */}
+      <div style={{ position: "fixed", inset: 0, zIndex: 0, overflow: "hidden", pointerEvents: "none" }} aria-hidden>
+        {/* Hero orb — massive, breathes */}
+        <div style={{
+          position: "absolute",
+          top: "-260px",
+          left: "50%",
+          width: "1100px",
+          height: "820px",
+          borderRadius: "50%",
+          background: "radial-gradient(ellipse at center, rgba(59,130,246,0.55) 0%, rgba(37,99,235,0.28) 32%, transparent 62%)",
+          filter: "blur(90px)",
+          willChange: "transform, opacity",
+          animation: "orb-breathe 9s ease-in-out infinite",
+        }} />
+        {/* Bottom-right accent orb — drifts */}
+        <div style={{
+          position: "absolute",
+          bottom: "-100px",
+          right: "-120px",
+          width: "700px",
+          height: "700px",
+          borderRadius: "50%",
+          background: "radial-gradient(ellipse at center, rgba(29,78,216,0.4) 0%, rgba(17,51,160,0.15) 40%, transparent 65%)",
+          filter: "blur(80px)",
+          willChange: "transform, opacity",
+          animation: "orb-drift-right 14s ease-in-out infinite",
+        }} />
+        {/* Mid-left accent — subtle */}
+        <div style={{
+          position: "absolute",
+          top: "45%",
+          left: "-180px",
+          width: "600px",
+          height: "500px",
+          borderRadius: "50%",
+          background: "radial-gradient(ellipse at center, rgba(59,130,246,0.22) 0%, transparent 65%)",
+          filter: "blur(70px)",
+          willChange: "transform, opacity",
+          animation: "orb-drift-left 18s ease-in-out infinite",
+        }} />
       </div>
 
       <LanguageProvider>
