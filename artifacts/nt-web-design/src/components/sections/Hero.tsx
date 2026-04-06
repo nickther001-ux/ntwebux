@@ -61,12 +61,20 @@ export function Hero() {
       {/* Dot grid */}
       <div className="dot-grid" style={{ position: 'absolute', inset: 0, opacity: 0.6, pointerEvents: 'none' }} />
 
-      {/* Glow ring behind headline */}
+      {/* Tight focal glow behind headline — adds depth on top of the body glow */}
       <div style={{
-        position: 'absolute', top: '50%', left: '50%',
-        transform: 'translate(-50%,-60%)',
-        width: '700px', height: '400px', borderRadius: '50%',
-        background: 'radial-gradient(ellipse, rgba(59,130,246,0.14) 0%, transparent 70%)',
+        position: 'absolute', top: 0, left: '50%',
+        transform: 'translateX(-50%)',
+        width: '860px', height: '460px', borderRadius: '50%',
+        background: 'radial-gradient(ellipse at 50% 30%, rgba(96,165,250,0.22) 0%, rgba(59,130,246,0.08) 45%, transparent 70%)',
+        pointerEvents: 'none',
+      }} />
+      {/* Soft horizon line glow */}
+      <div style={{
+        position: 'absolute', bottom: 0, left: '50%',
+        transform: 'translateX(-50%)',
+        width: '100%', height: '1px',
+        background: 'linear-gradient(90deg, transparent, rgba(59,130,246,0.25), transparent)',
         pointerEvents: 'none',
       }} />
 
