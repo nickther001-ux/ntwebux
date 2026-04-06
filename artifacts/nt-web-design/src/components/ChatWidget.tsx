@@ -333,19 +333,30 @@ export default function ChatWidget() {
   function close() { setOpen(false); setTimeout(() => setView("home"), 300); }
 
   return (
-    <div className="chat-widget-root" style={{ position: "fixed", bottom: "24px", right: "16px", zIndex: 100 }}>
+    <div
+      className="chat-widget-root"
+      style={{
+        position: "fixed",
+        bottom: "calc(20px + env(safe-area-inset-bottom, 0px))",
+        right: "calc(16px + env(safe-area-inset-right, 0px))",
+        zIndex: 100,
+      }}
+    >
       <AnimatePresence>
         {open && (
           <motion.div
+            className="chat-panel"
             initial={{ opacity: 0, scale: 0.93, y: 14 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.93, y: 14 }}
             transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
             style={{
-              position: "absolute", bottom: "68px", right: 0,
+              position: "fixed",
+              bottom: "calc(88px + env(safe-area-inset-bottom, 0px))",
+              right: "calc(16px + env(safe-area-inset-right, 0px))",
               width: "min(340px, calc(100vw - 32px))",
-              height: view === "chat" ? "min(500px, 75vh)" : "auto",
-              maxHeight: "min(560px, 80vh)",
+              height: view === "chat" ? "min(500px, 70vh)" : "auto",
+              maxHeight: "min(560px, 75vh)",
               background: "#0a1628",
               border: "1px solid rgba(59,130,246,0.18)",
               borderRadius: "22px",

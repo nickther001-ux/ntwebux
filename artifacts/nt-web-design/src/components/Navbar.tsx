@@ -126,7 +126,7 @@ export function Navbar() {
       <style>{`
         .navbar-desktop { display: none; }
         .navbar-mobile-btn { display: flex; align-items: center; }
-        @media (min-width: 768px) {
+        @media (min-width: 960px) {
           .navbar-desktop { display: flex; }
           .navbar-mobile-btn { display: none; }
         }
