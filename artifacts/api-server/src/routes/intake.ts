@@ -205,23 +205,40 @@ router.post("/intake", async (req, res) => {
       return res.json({ success: true });
     }
 
-    await Promise.all([
+    const [ownerResult, clientResult] = await Promise.allSettled([
       resend.emails.send({
-        from:        FROM,
-        to:          OWNER_EMAIL,
-        replyTo:     b.email,
-        subject:     `🎯 New intake: ${b.plan.name} — ${b.name}${b.business ? ` (${b.business})` : ""}`,
-        html:        ownerHtml,
+        from:    FROM,
+        to:      OWNER_EMAIL,
+        replyTo: b.email,
+        subject: `New intake: ${b.plan.name} - ${b.name}${b.business ? ` (${b.business})` : ""}`,
+        html:    ownerHtml,
       }),
       resend.emails.send({
-        from:        FROM,
-        to:          b.email,
-        subject:     fr
-          ? "✅ Votre demande NT Web UX a bien été reçue"
-          : "✅ Your NT Web UX request was received",
-        html:        confirmHtml,
+        from:    FROM,
+        to:      b.email,
+        bcc:     OWNER_EMAIL,
+        subject: fr
+          ? "Votre demande NT Web UX a bien ete recue"
+          : "Your NT Web UX request was received",
+        html:    confirmHtml,
       }),
     ]);
+
+    if (ownerResult.status === "rejected") {
+      console.error("Owner notification FAILED:", ownerResult.reason);
+    } else {
+      const r = ownerResult.value as any;
+      if (r?.error) console.error("Owner notification Resend error:", r.error);
+      else console.log("Owner notification sent OK, id:", r?.data?.id ?? r?.id);
+    }
+
+    if (clientResult.status === "rejected") {
+      console.error("Client confirmation FAILED:", clientResult.reason);
+    } else {
+      const r = clientResult.value as any;
+      if (r?.error) console.error("Client confirmation Resend error:", r.error);
+      else console.log("Client confirmation sent OK, id:", r?.data?.id ?? r?.id);
+    }
 
     res.json({ success: true });
   } catch (err) {
