@@ -164,15 +164,8 @@ export default function ServicesPortfolio() {
                   className="glass glass-hover"
                   style={{ borderRadius: '18px', overflow: 'hidden', display: 'flex', flexDirection: 'column', position: 'relative' }}
                 >
-                  {/* Browser mockup image */}
+                  {/* Portfolio image */}
                   <div style={{ position: 'relative', height: i === 0 ? '220px' : '160px', overflow: 'hidden', flexShrink: 0 }}>
-                    {/* Browser chrome */}
-                    <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '24px', background: 'rgba(6,9,26,0.9)', display: 'flex', alignItems: 'center', gap: '5px', padding: '0 12px', zIndex: 2, borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
-                      {['#ff5f57','#febc2e','#28c840'].map(c => (
-                        <div key={c} style={{ width: '8px', height: '8px', borderRadius: '50%', background: c }} />
-                      ))}
-                      <div style={{ flex: 1, height: '10px', background: 'rgba(255,255,255,0.06)', borderRadius: '4px', marginLeft: '8px', maxWidth: '160px' }} />
-                    </div>
                     {previewImg ? (
                       <img
                         src={previewImg}

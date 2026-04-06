@@ -71,15 +71,8 @@ export function Testimonials() {
               className="glass glass-hover"
               style={{ borderRadius: '18px', overflow: 'hidden', display: 'flex', flexDirection: 'column', cursor: 'default' }}
             >
-              {/* Mini browser mockup preview */}
+              {/* Portfolio image preview */}
               <div style={{ position: 'relative', height: '140px', overflow: 'hidden', flexShrink: 0 }}>
-                {/* Browser chrome bar */}
-                <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '22px', background: 'rgba(0,0,0,0.7)', display: 'flex', alignItems: 'center', gap: '5px', padding: '0 10px', zIndex: 2 }}>
-                  {['#ff5f57','#febc2e','#28c840'].map(c => (
-                    <div key={c} style={{ width: '8px', height: '8px', borderRadius: '50%', background: c }} />
-                  ))}
-                  <div style={{ flex: 1, height: '10px', background: 'rgba(255,255,255,0.08)', borderRadius: '4px', marginLeft: '8px' }} />
-                </div>
                 <img
                   src={`${BASE}/portfolio/${item.img}`}
                   alt={item.role}
