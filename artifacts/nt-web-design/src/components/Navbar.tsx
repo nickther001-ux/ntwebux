@@ -33,10 +33,17 @@ export function Navbar() {
         left: 0,
         right: 0,
         zIndex: 50,
-        transition: 'background 0.3s, border-color 0.3s, backdrop-filter 0.3s',
-        background: scrolled ? 'rgba(6,13,26,0.85)' : 'transparent',
+        /* Always blur — never toggle backdrop-filter on/off (destroys+recreates
+           the GPU layer mid-scroll causing a visible stutter). Just fade the
+           background fill instead. */
+        backdropFilter: 'blur(20px)',
+        WebkitBackdropFilter: 'blur(20px)',
+        transition: 'background 0.35s ease, border-color 0.35s ease',
+        background: scrolled ? 'rgba(6,13,26,0.82)' : 'rgba(6,13,26,0)',
         borderBottom: scrolled ? '1px solid rgba(255,255,255,0.07)' : '1px solid transparent',
-        backdropFilter: scrolled ? 'blur(20px)' : 'none',
+        /* Own GPU compositing layer — never repaints due to scroll */
+        transform: 'translateZ(0)',
+        willChange: 'background',
       }}
     >
       <div

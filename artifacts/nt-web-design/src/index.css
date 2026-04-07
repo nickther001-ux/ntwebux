@@ -85,6 +85,19 @@
 
   * { box-sizing: border-box; }
 
+  /* Contain each section — browser won't re-layout the whole page
+     when anything changes inside a section during scroll */
+  section {
+    contain: layout paint;
+  }
+
+  /* Promote fixed elements to their own compositor layer upfront so
+     the scroll layer never triggers repaints on them */
+  [style*="position: fixed"],
+  [style*="position:fixed"] {
+    transform: translateZ(0);
+  }
+
   ::-webkit-scrollbar { width: 5px; }
   ::-webkit-scrollbar-track { background: #02040a; }
   ::-webkit-scrollbar-thumb { background: rgba(59,130,246,0.35); border-radius: 99px; }

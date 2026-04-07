@@ -81,11 +81,17 @@ function App() {
         }} />
       </div>
       <style>{`
-        /* Mobile: smaller blur = much cheaper GPU compositing during scroll */
+        /* Desktop: reduce blur — visually identical, much cheaper GPU compositing */
+        @media (min-width: 769px) {
+          .orb-hero  { filter: blur(55px) !important; }
+          .orb-right { filter: blur(48px) !important; }
+          .orb-left  { filter: blur(40px) !important; }
+        }
+        /* Mobile: even smaller blur + smaller elements */
         @media (max-width: 768px) {
-          .orb-hero  { filter: blur(40px) !important; width: 600px !important; height: 500px !important; }
-          .orb-right { filter: blur(35px) !important; width: 400px !important; height: 400px !important; }
-          .orb-left  { filter: blur(30px) !important; width: 350px !important; height: 300px !important; }
+          .orb-hero  { filter: blur(32px) !important; width: 560px !important; height: 460px !important; }
+          .orb-right { filter: blur(28px) !important; width: 380px !important; height: 380px !important; }
+          .orb-left  { filter: blur(24px) !important; width: 320px !important; height: 280px !important; }
         }
       `}</style>
 
