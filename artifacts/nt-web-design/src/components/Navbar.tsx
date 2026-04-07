@@ -2,13 +2,13 @@ import { useState, useEffect } from 'react';
 import { useLanguage } from '@/lib/i18n';
 import { Menu, X, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useLocation } from 'wouter';
+import { useLocation, Link } from 'wouter';
 
 export function Navbar() {
   const { lang, setLang, t } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const [location] = useLocation();
+  const [location, navigate] = useLocation();
   const isHome = location === '/';
 
   useEffect(() => {
@@ -68,15 +68,15 @@ export function Navbar() {
         <nav className="navbar-desktop" style={{ alignItems: 'center', gap: '36px' }}>
           {links.map((link) =>
             link.isPage ? (
-              <a
+              <Link
                 key={link.href}
                 href={link.href}
                 style={{ fontSize: '14px', fontWeight: 500, color: 'rgba(255,255,255,0.6)', textDecoration: 'none', transition: 'color 0.2s' }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = '#fff')}
-                onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.6)')}
+                onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = '#fff')}
+                onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.6)')}
               >
                 {link.label}
-              </a>
+              </Link>
             ) : (
               <a
                 key={link.href}
@@ -172,33 +172,61 @@ export function Navbar() {
 
             {/* Nav links */}
             <nav style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '0 28px', gap: '4px' }}>
-              {links.map((link, i) => (
-                <motion.a
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setOpen(false)}
-                  initial={{ opacity: 0, x: 24 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.08 + i * 0.06, duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
-                  style={{
-                    display: 'flex', alignItems: 'center', gap: '18px',
-                    padding: '18px 0',
-                    textDecoration: 'none',
-                    borderBottom: i < links.length - 1 ? '1px solid rgba(255,255,255,0.06)' : 'none',
-                    position: 'relative',
-                  }}
-                  onMouseEnter={e => { (e.currentTarget.querySelector('.mob-link-text') as HTMLElement)!.style.color = '#3b82f6'; }}
-                  onMouseLeave={e => { (e.currentTarget.querySelector('.mob-link-text') as HTMLElement)!.style.color = '#fff'; }}
-                >
-                  <span style={{ fontSize: '11px', fontWeight: 700, color: 'rgba(59,130,246,0.5)', letterSpacing: '0.08em', width: '20px', flexShrink: 0 }}>
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                  <span className="mob-link-text" style={{ fontSize: '26px', fontWeight: 800, color: '#fff', letterSpacing: '-0.02em', lineHeight: 1, transition: 'color 0.2s' }}>
-                    {link.label}
-                  </span>
-                  <ArrowRight size={16} color="rgba(59,130,246,0.4)" style={{ marginLeft: 'auto', flexShrink: 0 }} />
-                </motion.a>
-              ))}
+              {links.map((link, i) => {
+                const innerContent = (
+                  <>
+                    <span style={{ fontSize: '11px', fontWeight: 700, color: 'rgba(59,130,246,0.5)', letterSpacing: '0.08em', width: '20px', flexShrink: 0 }}>
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <span className="mob-link-text" style={{ fontSize: '26px', fontWeight: 800, color: '#fff', letterSpacing: '-0.02em', lineHeight: 1, transition: 'color 0.2s' }}>
+                      {link.label}
+                    </span>
+                    <ArrowRight size={16} color="rgba(59,130,246,0.4)" style={{ marginLeft: 'auto', flexShrink: 0 }} />
+                  </>
+                );
+                const sharedStyle: React.CSSProperties = {
+                  display: 'flex', alignItems: 'center', gap: '18px',
+                  padding: '18px 0',
+                  textDecoration: 'none',
+                  borderBottom: i < links.length - 1 ? '1px solid rgba(255,255,255,0.06)' : 'none',
+                  position: 'relative',
+                };
+                const hoverHandlers = {
+                  onMouseEnter: (e: React.MouseEvent) => { (e.currentTarget.querySelector('.mob-link-text') as HTMLElement)!.style.color = '#3b82f6'; },
+                  onMouseLeave: (e: React.MouseEvent) => { (e.currentTarget.querySelector('.mob-link-text') as HTMLElement)!.style.color = '#fff'; },
+                };
+                const motionProps = {
+                  initial: { opacity: 0, x: 24 },
+                  animate: { opacity: 1, x: 0 },
+                  transition: { delay: 0.08 + i * 0.06, duration: 0.38, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
+                };
+
+                if (link.isPage) {
+                  return (
+                    <motion.div
+                      key={link.href}
+                      {...motionProps}
+                      style={{ ...sharedStyle, cursor: 'pointer' }}
+                      onClick={() => { navigate(link.href); setOpen(false); }}
+                      {...hoverHandlers}
+                    >
+                      {innerContent}
+                    </motion.div>
+                  );
+                }
+                return (
+                  <motion.a
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setOpen(false)}
+                    {...motionProps}
+                    style={sharedStyle}
+                    {...hoverHandlers}
+                  >
+                    {innerContent}
+                  </motion.a>
+                );
+              })}
             </nav>
 
             {/* Footer — lang + CTA */}
