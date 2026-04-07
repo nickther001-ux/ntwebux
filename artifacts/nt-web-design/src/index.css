@@ -86,9 +86,11 @@
   * { box-sizing: border-box; }
 
   /* Contain each section — browser won't re-layout the whole page
-     when anything changes inside a section during scroll */
+     when anything changes inside a section during scroll.
+     position: relative needed for Framer Motion scroll tracking */
   section {
     contain: layout paint;
+    position: relative;
   }
 
   /* Promote fixed elements to their own compositor layer upfront so

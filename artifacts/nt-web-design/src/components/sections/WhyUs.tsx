@@ -82,10 +82,10 @@ export function WhyUs() {
             {pills.map((pill, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, x: -16 }}
+                initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08, duration: 0.5 }}
+                viewport={{ once: true, margin: '-60px' }}
+                transition={{ delay: i * 0.1, duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
                 className="glass glass-hover"
                 style={{ display: 'flex', alignItems: 'flex-start', gap: '16px', padding: '18px 20px', borderRadius: '12px', cursor: 'default' }}
               >
@@ -104,10 +104,10 @@ export function WhyUs() {
         {/* Right — stat card with count-up */}
         <motion.div
           ref={cardRef}
-          initial={{ opacity: 0, scale: 0.96 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
+          initial={{ opacity: 0, scale: 0.97, y: 16 }}
+          whileInView={{ opacity: 1, scale: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
           className="whyus-visual"
         >
           <div className="glass" style={{ borderRadius: '24px', padding: '48px', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>

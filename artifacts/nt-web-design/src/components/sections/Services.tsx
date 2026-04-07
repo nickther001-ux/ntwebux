@@ -59,10 +59,10 @@ export function Services() {
           <motion.button
             key={s.id}
             onClick={() => setActive(s)}
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.06, duration: 0.5 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ delay: i * 0.07, duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
             className="glass-hover"
             style={{
               background: 'rgba(255,255,255,0.025)',

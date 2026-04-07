@@ -390,10 +390,10 @@ export function Portfolio() {
       <div style={{ maxWidth: '1200px', margin: '0 auto', position: 'relative' }}>
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.55 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           style={{ marginBottom: '56px', textAlign: 'center' }}
         >
           <span className="pill-label" style={{ marginBottom: '20px', display: 'inline-flex' }}>

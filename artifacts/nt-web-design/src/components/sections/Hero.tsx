@@ -1,4 +1,4 @@
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import { useLanguage } from '@/lib/i18n';
 import { useEffect, useRef, useState } from 'react';
@@ -56,8 +56,13 @@ const fadeUp = { hidden: { opacity: 0, y: 22 }, show: (i: number) => ({ opacity:
 export function Hero() {
   const { t, lang } = useLanguage();
 
+  // Parallax: hero content drifts up at 40% of scroll speed → depth effect
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start start', 'end start'] });
+  const contentY = useTransform(scrollYProgress, [0, 1], ['0px', '-70px']);
+
   return (
-    <section style={{ position: 'relative', width: '100%', paddingTop: '160px', paddingBottom: '120px', overflow: 'hidden', textAlign: 'center' }}>
+    <section ref={sectionRef} style={{ position: 'relative', width: '100%', paddingTop: '160px', paddingBottom: '120px', overflow: 'hidden', textAlign: 'center' }}>
       {/* Dot grid */}
       <div className="dot-grid" style={{ position: 'absolute', inset: 0, opacity: 0.6, pointerEvents: 'none' }} />
 
@@ -78,7 +83,7 @@ export function Hero() {
         pointerEvents: 'none',
       }} />
 
-      <div style={{ maxWidth: '900px', margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 1 }}>
+      <motion.div style={{ y: contentY, maxWidth: '900px', margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 1 }}>
 
         {/* Badge */}
         <motion.div custom={0} variants={fadeUp} initial="hidden" animate="show" style={{ display: 'flex', justifyContent: 'center', marginBottom: '32px' }}>
@@ -159,7 +164,7 @@ export function Hero() {
             <StatCard key={s.v} {...s} delay={0.55 + i * 0.12} />
           ))}
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 }
