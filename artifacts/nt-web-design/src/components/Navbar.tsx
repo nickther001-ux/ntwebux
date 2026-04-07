@@ -113,22 +113,52 @@ export function Navbar() {
           </a>
         </div>
 
-        {/* Mobile toggle */}
-        <button
-          className="navbar-mobile-btn"
-          onClick={() => setOpen(!open)}
-          style={{ background: 'none', border: 'none', color: '#fff', cursor: 'pointer', padding: '4px' }}
-        >
-          {open ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        {/* Mobile right — lang toggle + hamburger */}
+        <div className="navbar-mobile-right" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          {/* EN / FR always visible on mobile */}
+          <div className="navbar-mobile-lang" style={{
+            display: 'flex', alignItems: 'center',
+            background: 'rgba(255,255,255,0.06)',
+            border: '1px solid rgba(255,255,255,0.12)',
+            borderRadius: '8px',
+            overflow: 'hidden',
+          }}>
+            {(['en', 'fr'] as const).map((l, i) => (
+              <button
+                key={l}
+                onClick={() => setLang(l)}
+                style={{
+                  padding: '5px 10px',
+                  fontSize: '11px', fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase',
+                  background: lang === l ? 'rgba(59,130,246,0.3)' : 'transparent',
+                  color: lang === l ? '#93c5fd' : 'rgba(255,255,255,0.45)',
+                  border: 'none',
+                  borderRight: i === 0 ? '1px solid rgba(255,255,255,0.1)' : 'none',
+                  cursor: 'pointer',
+                  transition: 'background 0.15s, color 0.15s',
+                }}
+              >{l.toUpperCase()}</button>
+            ))}
+          </div>
+
+          <button
+            className="navbar-mobile-btn"
+            onClick={() => setOpen(!open)}
+            style={{ background: 'none', border: 'none', color: '#fff', cursor: 'pointer', padding: '4px' }}
+          >
+            {open ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
 
       <style>{`
         .navbar-desktop { display: none; }
+        .navbar-mobile-right { display: flex; }
+        .navbar-mobile-lang { display: flex; }
         .navbar-mobile-btn { display: flex; align-items: center; }
         @media (min-width: 960px) {
           .navbar-desktop { display: flex; }
-          .navbar-mobile-btn { display: none; }
+          .navbar-mobile-right { display: none; }
         }
       `}</style>
 
