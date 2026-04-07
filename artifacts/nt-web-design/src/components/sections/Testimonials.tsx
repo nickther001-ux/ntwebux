@@ -22,7 +22,7 @@ export function Testimonials() {
     : <><span className="gradient-text">Real results.</span><br />Real clients.</>;
 
   return (
-    <section style={{ padding: '120px 24px', borderTop: '1px solid rgba(255,255,255,0.06)', position: 'relative' }}>
+    <section style={{ width: '100%', padding: '120px 24px', borderTop: '1px solid rgba(255,255,255,0.06)', position: 'relative' }}>
       <div style={{
         position: 'absolute', top: '30%', left: '50%', transform: 'translate(-50%,-50%)',
         width: '900px', height: '500px', borderRadius: '50%',

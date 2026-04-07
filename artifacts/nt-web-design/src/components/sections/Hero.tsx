@@ -35,7 +35,7 @@ function StatCard({ v, num, suffix, l, sub, delay }: { v: string; num: number | 
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ delay, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
       whileHover={{ y: -5, scale: 1.05, transition: { duration: 0.18, ease: 'easeOut' } }}
-      style={{ padding: '20px 28px', borderRadius: '14px', textAlign: 'center', minWidth: '150px', cursor: 'default' }}
+      style={{ padding: '20px 16px', borderRadius: '14px', textAlign: 'center', cursor: 'default', width: '100%' }}
     >
       <div style={{
         fontSize: '32px', fontWeight: 900,
@@ -57,7 +57,7 @@ export function Hero() {
   const { t, lang } = useLanguage();
 
   return (
-    <section style={{ position: 'relative', paddingTop: '160px', paddingBottom: '120px', overflow: 'hidden', textAlign: 'center' }}>
+    <section style={{ position: 'relative', width: '100%', paddingTop: '160px', paddingBottom: '120px', overflow: 'hidden', textAlign: 'center' }}>
       {/* Dot grid */}
       <div className="dot-grid" style={{ position: 'absolute', inset: 0, opacity: 0.6, pointerEvents: 'none' }} />
 
@@ -143,7 +143,7 @@ export function Hero() {
           variants={fadeUp}
           initial="hidden"
           animate="show"
-          style={{ marginTop: '72px', display: 'flex', justifyContent: 'center', gap: '14px', flexWrap: 'wrap' }}
+          style={{ marginTop: '72px', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(130px, 1fr))', gap: '14px' }}
         >
           {(lang === 'fr' ? [
             { v: '72%',  num: 72,   suffix: '%',   l: 'des entreprises ont un site',      sub: 'en 2024–2025' },

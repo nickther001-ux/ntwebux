@@ -37,7 +37,8 @@ export function Services() {
   const heading = lang === 'fr' ? <>Tout ce dont vous avez besoin pour<br /><span className="gradient-text">dominer votre marché.</span></> : <>Everything you need to<br /><span className="gradient-text">dominate your market.</span></>;
 
   return (
-    <section id="services" style={{ padding: '120px 24px', maxWidth: '1200px', margin: '0 auto' }}>
+    <section id="services" style={{ width: '100%', padding: '120px 24px' }}>
+    <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: 28 }}
@@ -176,6 +177,7 @@ export function Services() {
         @media(max-width:900px){ .services-grid { grid-template-columns: repeat(2,1fr) !important; } }
         @media(max-width:500px){ .services-grid { grid-template-columns: 1fr !important; } }
       `}</style>
+    </div>
     </section>
   );
 }

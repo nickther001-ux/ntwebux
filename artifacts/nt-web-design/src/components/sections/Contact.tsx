@@ -77,7 +77,7 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" style={{ padding: '120px 24px', borderTop: '1px solid rgba(255,255,255,0.06)', position: 'relative' }}>
+    <section id="contact" style={{ width: '100%', padding: '120px 24px', borderTop: '1px solid rgba(255,255,255,0.06)', position: 'relative' }}>
       <div style={{ position: 'absolute', bottom: 0, left: '50%', transform: 'translateX(-50%)', width: '800px', height: '400px', borderRadius: '50%', background: 'radial-gradient(ellipse, rgba(59,130,246,0.1) 0%, transparent 65%)', pointerEvents: 'none' }} />
 
       <div style={{ maxWidth: '1100px', margin: '0 auto', position: 'relative' }}>

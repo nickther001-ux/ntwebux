@@ -7,7 +7,7 @@ export function Process() {
   const eyebrow = lang === 'fr' ? 'Comment Nous Travaillons' : 'How We Work';
 
   return (
-    <section id="process" style={{ padding: '120px 24px', position: 'relative', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+    <section id="process" style={{ width: '100%', padding: '120px 24px', position: 'relative', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
       <div style={{ position: 'absolute', top: '50%', right: 0, width: '500px', height: '500px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(147,197,253,0.07) 0%, transparent 65%)', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
 
       <div style={{ maxWidth: '1200px', margin: '0 auto', position: 'relative' }}>

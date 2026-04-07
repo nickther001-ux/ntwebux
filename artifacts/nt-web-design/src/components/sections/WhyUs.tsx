@@ -62,7 +62,7 @@ export function WhyUs() {
   const inView = useInView(cardRef, { once: true, margin: '-80px' });
 
   return (
-    <section id="why-us" style={{ padding: '120px 24px', borderTop: '1px solid rgba(255,255,255,0.06)', position: 'relative' }}>
+    <section id="why-us" style={{ width: '100%', padding: '120px 24px', borderTop: '1px solid rgba(255,255,255,0.06)', position: 'relative' }}>
       <div style={{ position: 'absolute', top: '50%', left: 0, width: '500px', height: '500px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 65%)', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
 
       <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px', alignItems: 'center', position: 'relative' }} className="whyus-grid">

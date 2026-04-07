@@ -383,7 +383,7 @@ export function Portfolio() {
     : 'Every site is built custom — no templates, no shortcuts.';
 
   return (
-    <section id="portfolio" style={{ padding: '120px 24px', position: 'relative' }}>
+    <section id="portfolio" style={{ width: '100%', padding: '120px 24px', position: 'relative' }}>
       {/* Ambient orb */}
       <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: '900px', height: '500px', borderRadius: '50%', background: 'radial-gradient(ellipse, rgba(37,99,235,0.06) 0%, transparent 65%)', pointerEvents: 'none' }} />
 
