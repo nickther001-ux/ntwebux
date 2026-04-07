@@ -31,16 +31,15 @@
 
 @layer base {
   html {
-    scroll-behavior: smooth;
+    /* Do NOT set scroll-behavior: smooth globally — it fights native momentum
+       scrolling on iOS/Android and causes the rubbery/stuttering feel.
+       Anchor-link smooth scrolling is handled per-element via JS. */
     width: 100%;
     min-height: 100%;
-    /* overflow-x on html (not body) — safe in all browsers including FB webview */
     overflow-x: clip;
   }
 
   body {
-    /* NO overflow-x: hidden on body — it collapses computed width in FB/Instagram
-       in-app browsers and breaks margin:auto centering */
     width: 100%;
     min-height: 100%;
     background-color: #02040a;
@@ -48,12 +47,15 @@
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    /* iOS momentum (rubber-band) scroll */
+    -webkit-overflow-scrolling: touch;
+    /* Hint to browser: promote scroll to its own GPU layer */
+    will-change: scroll-position;
   }
 
   #root {
     width: 100%;
     min-height: 100vh;
-    /* Clip horizontal bleed here instead of on body */
     overflow-x: clip;
   }
 
@@ -101,6 +103,18 @@
     background: rgba(255,255,255,0.035);
     border: 1px solid rgba(255,255,255,0.08);
     backdrop-filter: blur(16px);
+    /* GPU compositing layer — prevents repaint during scroll */
+    transform: translateZ(0);
+  }
+  /* On mobile, backdrop-filter causes GPU read-back on every scroll frame.
+     Replace with a slightly opaque solid background — visually identical
+     on a dark page and eliminates the jank entirely. */
+  @media (max-width: 768px) {
+    .glass {
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      background: rgba(255,255,255,0.07);
+    }
   }
 
   .glass-hover {

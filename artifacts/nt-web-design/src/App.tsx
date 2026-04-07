@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Switch, Route, Router as WouterRouter } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { LanguageProvider } from "@/lib/i18n";
@@ -12,13 +13,35 @@ import ChatWidget from "@/components/ChatWidget";
 
 const queryClient = new QueryClient();
 
+// Intercept anchor-link clicks and smooth-scroll without setting
+// scroll-behavior: smooth on <html> (which breaks native momentum scroll on mobile)
+function useSmoothAnchorScroll() {
+  useEffect(() => {
+    function handle(e: MouseEvent) {
+      const a = (e.target as HTMLElement).closest('a[href^="#"]');
+      if (!a) return;
+      const href = a.getAttribute("href");
+      if (!href || href === "#") return;
+      const el = document.querySelector(href);
+      if (!el) return;
+      e.preventDefault();
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+    document.addEventListener("click", handle);
+    return () => document.removeEventListener("click", handle);
+  }, []);
+}
+
 function App() {
+  useSmoothAnchorScroll();
   return (
     <QueryClientProvider client={queryClient}>
       {/* ── Landio-style animated blur orbs ── */}
-      <div style={{ position: "fixed", inset: 0, zIndex: 0, overflow: "hidden", pointerEvents: "none" }} aria-hidden>
-        {/* Hero orb — massive, breathes */}
-        <div style={{
+      {/* isolation:isolate + transform:translateZ(0) puts this on its own GPU
+          compositing layer, so scroll never triggers a repaint of the orbs */}
+      <div className="orb-layer" style={{ position: "fixed", inset: 0, zIndex: 0, overflow: "hidden", pointerEvents: "none", isolation: "isolate", transform: "translateZ(0)" }} aria-hidden>
+        {/* Hero orb */}
+        <div className="orb orb-hero" style={{
           position: "absolute",
           top: "-260px",
           left: "50%",
@@ -30,8 +53,8 @@ function App() {
           willChange: "transform, opacity",
           animation: "orb-breathe 9s ease-in-out infinite",
         }} />
-        {/* Bottom-right accent orb — drifts */}
-        <div style={{
+        {/* Bottom-right accent */}
+        <div className="orb orb-right" style={{
           position: "absolute",
           bottom: "-100px",
           right: "-120px",
@@ -40,11 +63,11 @@ function App() {
           borderRadius: "50%",
           background: "radial-gradient(ellipse at center, rgba(29,78,216,0.4) 0%, rgba(17,51,160,0.15) 40%, transparent 65%)",
           filter: "blur(80px)",
-          willChange: "transform, opacity",
+          willChange: "transform",
           animation: "orb-drift-right 14s ease-in-out infinite",
         }} />
-        {/* Mid-left accent — subtle */}
-        <div style={{
+        {/* Mid-left accent */}
+        <div className="orb orb-left" style={{
           position: "absolute",
           top: "45%",
           left: "-180px",
@@ -53,10 +76,18 @@ function App() {
           borderRadius: "50%",
           background: "radial-gradient(ellipse at center, rgba(59,130,246,0.22) 0%, transparent 65%)",
           filter: "blur(70px)",
-          willChange: "transform, opacity",
+          willChange: "transform",
           animation: "orb-drift-left 18s ease-in-out infinite",
         }} />
       </div>
+      <style>{`
+        /* Mobile: smaller blur = much cheaper GPU compositing during scroll */
+        @media (max-width: 768px) {
+          .orb-hero  { filter: blur(40px) !important; width: 600px !important; height: 500px !important; }
+          .orb-right { filter: blur(35px) !important; width: 400px !important; height: 400px !important; }
+          .orb-left  { filter: blur(30px) !important; width: 350px !important; height: 300px !important; }
+        }
+      `}</style>
 
       <LanguageProvider>
         <TooltipProvider>
