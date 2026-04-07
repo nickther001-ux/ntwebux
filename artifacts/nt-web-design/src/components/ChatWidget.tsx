@@ -315,11 +315,18 @@ export default function ChatWidget() {
   const [open, setOpen] = useState(false);
   const [view, setView] = useState<View>("home");
   const [pulsing, setPulsing] = useState(false);
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth < 768);
 
-  // Auto-open once per session after 4 s
   useEffect(() => {
+    const update = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener("resize", update, { passive: true });
+    return () => window.removeEventListener("resize", update);
+  }, []);
+
+  // Auto-open once per session — desktop only
+  useEffect(() => {
+    if (isMobile) return;
     if (sessionStorage.getItem("silas_opened")) return;
-    // Pulse the FAB at 3 s to draw attention, then open at 4 s
     const pulseTimer = setTimeout(() => setPulsing(true), 3000);
     const openTimer  = setTimeout(() => {
       setPulsing(false);
@@ -327,48 +334,87 @@ export default function ChatWidget() {
       sessionStorage.setItem("silas_opened", "1");
     }, 4000);
     return () => { clearTimeout(pulseTimer); clearTimeout(openTimer); };
-  }, []);
+  }, [isMobile]);
 
   // Reset to home when closed
   function close() { setOpen(false); setTimeout(() => setView("home"), 300); }
 
-  return (
-    <div
-      className="chat-widget-root"
-      style={{
+  /* ── Panel positioning: bottom-sheet on mobile, floating on desktop ── */
+  const panelStyle: React.CSSProperties = isMobile
+    ? {
         position: "fixed",
-        bottom: "calc(20px + env(safe-area-inset-bottom, 0px))",
+        bottom: 0,
+        left: 0,
+        right: 0,
+        width: "100%",
+        height: view === "chat" ? "75vh" : "auto",
+        maxHeight: "80vh",
+        background: "#0a1628",
+        border: "none",
+        borderTop: "1px solid rgba(59,130,246,0.22)",
+        borderRadius: "22px 22px 0 0",
+        boxShadow: "0 -12px 60px rgba(0,0,0,0.7)",
+        overflow: "hidden",
+        display: "flex",
+        flexDirection: "column",
+        zIndex: 200,
+      }
+    : {
+        position: "fixed",
+        bottom: "calc(88px + env(safe-area-inset-bottom, 0px))",
         right: "calc(16px + env(safe-area-inset-right, 0px))",
-        zIndex: 100,
-      }}
-    >
+        width: "min(340px, calc(100vw - 32px))",
+        height: view === "chat" ? "min(500px, 70vh)" : "auto",
+        maxHeight: "min(560px, 75vh)",
+        background: "#0a1628",
+        border: "1px solid rgba(59,130,246,0.18)",
+        borderRadius: "22px",
+        boxShadow: "0 24px 80px rgba(0,0,0,0.85), 0 0 0 1px rgba(59,130,246,0.06)",
+        overflow: "hidden",
+        display: "flex",
+        flexDirection: "column",
+        zIndex: 200,
+      };
+
+  return (
+    <>
+      {/* Mobile backdrop */}
+      <AnimatePresence>
+        {open && isMobile && (
+          <motion.div
+            key="backdrop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            onClick={close}
+            style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.55)", zIndex: 199 }}
+          />
+        )}
+      </AnimatePresence>
+
       <AnimatePresence>
         {open && (
           <motion.div
+            key="panel"
             className="chat-panel"
-            initial={{ opacity: 0, scale: 0.93, y: 14 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.93, y: 14 }}
-            transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-            style={{
-              position: "fixed",
-              bottom: "calc(88px + env(safe-area-inset-bottom, 0px))",
-              right: "calc(16px + env(safe-area-inset-right, 0px))",
-              width: "min(340px, calc(100vw - 32px))",
-              height: view === "chat" ? "min(500px, 70vh)" : "auto",
-              maxHeight: "min(560px, 75vh)",
-              background: "#0a1628",
-              border: "1px solid rgba(59,130,246,0.18)",
-              borderRadius: "22px",
-              boxShadow: "0 24px 80px rgba(0,0,0,0.85), 0 0 0 1px rgba(59,130,246,0.06)",
-              overflow: "hidden",
-              display: "flex", flexDirection: "column",
-            }}
+            initial={isMobile ? { opacity: 1, y: "100%" } : { opacity: 0, scale: 0.93, y: 14 }}
+            animate={isMobile ? { opacity: 1, y: 0 } : { opacity: 1, scale: 1, y: 0 }}
+            exit={isMobile ? { opacity: 1, y: "100%" } : { opacity: 0, scale: 0.93, y: 14 }}
+            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+            style={panelStyle}
           >
+            {/* Mobile drag handle */}
+            {isMobile && (
+              <div style={{ display: "flex", justifyContent: "center", padding: "10px 0 4px" }}>
+                <div style={{ width: "36px", height: "4px", borderRadius: "2px", background: "rgba(255,255,255,0.18)" }} />
+              </div>
+            )}
+
             {/* Close button */}
             <button
               onClick={close}
-              style={{ position: "absolute", top: "13px", right: "14px", zIndex: 10, background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "8px", width: "28px", height: "28px", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", color: "rgba(255,255,255,0.55)", transition: "background 0.15s" }}
+              style={{ position: "absolute", top: isMobile ? "14px" : "13px", right: "14px", zIndex: 10, background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "8px", width: "28px", height: "28px", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", color: "rgba(255,255,255,0.55)", transition: "background 0.15s" }}
               onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,255,255,0.14)")}
               onMouseLeave={e => (e.currentTarget.style.background = "rgba(255,255,255,0.08)")}
             >
@@ -382,7 +428,7 @@ export default function ChatWidget() {
                   <HomeView lang={lang} onStartChat={() => setView("chat")} />
                 </motion.div>
               ) : (
-                <motion.div key="chat" initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 16 }} transition={{ duration: 0.18 }} style={{ flex: 1, display: "flex", flexDirection: "column", height: "500px" }}>
+                <motion.div key="chat" initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 16 }} transition={{ duration: 0.18 }} style={{ flex: 1, display: "flex", flexDirection: "column", minHeight: 0 }}>
                   <ChatView lang={lang} onBack={() => setView("home")} />
                 </motion.div>
               )}
@@ -392,35 +438,45 @@ export default function ChatWidget() {
       </AnimatePresence>
 
       {/* FAB toggle */}
-      <div style={{ position: "relative", display: "inline-flex" }}>
-        {/* Pulse ring */}
-        {pulsing && (
-          <>
-            <span style={{ position: "absolute", inset: "-6px", borderRadius: "50%", border: "2px solid rgba(59,130,246,0.5)", animation: "silasPing 0.9s cubic-bezier(0,0,0.2,1) infinite", pointerEvents: "none" }} />
-            <span style={{ position: "absolute", inset: "-14px", borderRadius: "50%", border: "1.5px solid rgba(59,130,246,0.25)", animation: "silasPing 0.9s cubic-bezier(0,0,0.2,1) infinite 0.25s", pointerEvents: "none" }} />
-          </>
-        )}
-        <motion.button
-          onClick={() => { setPulsing(false); open ? close() : setOpen(true); sessionStorage.setItem("silas_opened", "1"); }}
-          whileHover={{ scale: 1.08 }}
-          whileTap={{ scale: 0.95 }}
-          animate={pulsing ? { scale: [1, 1.06, 1] } : {}}
-          transition={pulsing ? { duration: 0.9, repeat: Infinity } : {}}
-          aria-label="Chat with Silas"
-          style={{ position: "relative", width: "52px", height: "52px", borderRadius: "50%", background: "linear-gradient(135deg,#3b82f6,#2563eb)", border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: pulsing ? "0 4px 32px rgba(59,130,246,0.8)" : "0 4px 28px rgba(59,130,246,0.55)", color: "#fff", transition: "box-shadow 0.3s" }}
-        >
-          <AnimatePresence mode="wait">
-            {open ? (
-              <motion.span key="x" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.15 }}>
-                <X size={20} />
-              </motion.span>
-            ) : (
-              <motion.span key="msg" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.15 }}>
-                <MessageCircle size={22} />
-              </motion.span>
-            )}
-          </AnimatePresence>
-        </motion.button>
+      <div
+        style={{
+          position: "fixed",
+          bottom: "calc(20px + env(safe-area-inset-bottom, 0px))",
+          right: "calc(16px + env(safe-area-inset-right, 0px))",
+          zIndex: 201,
+          display: "inline-flex",
+        }}
+      >
+        <div style={{ position: "relative", display: "inline-flex" }}>
+          {/* Pulse ring */}
+          {pulsing && (
+            <>
+              <span style={{ position: "absolute", inset: "-6px", borderRadius: "50%", border: "2px solid rgba(59,130,246,0.5)", animation: "silasPing 0.9s cubic-bezier(0,0,0.2,1) infinite", pointerEvents: "none" }} />
+              <span style={{ position: "absolute", inset: "-14px", borderRadius: "50%", border: "1.5px solid rgba(59,130,246,0.25)", animation: "silasPing 0.9s cubic-bezier(0,0,0.2,1) infinite 0.25s", pointerEvents: "none" }} />
+            </>
+          )}
+          <motion.button
+            onClick={() => { setPulsing(false); open ? close() : setOpen(true); sessionStorage.setItem("silas_opened", "1"); }}
+            whileHover={{ scale: 1.08 }}
+            whileTap={{ scale: 0.95 }}
+            animate={pulsing ? { scale: [1, 1.06, 1] } : {}}
+            transition={pulsing ? { duration: 0.9, repeat: Infinity } : {}}
+            aria-label="Chat with Silas"
+            style={{ position: "relative", width: "52px", height: "52px", borderRadius: "50%", background: "linear-gradient(135deg,#3b82f6,#2563eb)", border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: pulsing ? "0 4px 32px rgba(59,130,246,0.8)" : "0 4px 28px rgba(59,130,246,0.55)", color: "#fff", transition: "box-shadow 0.3s" }}
+          >
+            <AnimatePresence mode="wait">
+              {open ? (
+                <motion.span key="x" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.15 }}>
+                  <X size={20} />
+                </motion.span>
+              ) : (
+                <motion.span key="msg" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.15 }}>
+                  <MessageCircle size={22} />
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </motion.button>
+        </div>
       </div>
       <style>{`
         @keyframes silasPing {
@@ -429,6 +485,6 @@ export default function ChatWidget() {
           100% { transform: scale(1.6); opacity: 0; }
         }
       `}</style>
-    </div>
+    </>
   );
 }
