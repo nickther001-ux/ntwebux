@@ -93,12 +93,10 @@
     position: relative;
   }
 
-  /* Promote fixed elements to their own compositor layer upfront so
-     the scroll layer never triggers repaints on them */
-  [style*="position: fixed"],
-  [style*="position:fixed"] {
-    transform: translateZ(0);
-  }
+  /* NOTE: Do NOT add transform to fixed-position elements via a blanket rule.
+     transform on a parent makes it the containing block for position:fixed
+     children — the mobile nav menu would be clipped to the header height.
+     GPU layer promotion is handled selectively via the orb-layer container. */
 
   ::-webkit-scrollbar { width: 5px; }
   ::-webkit-scrollbar-track { background: #02040a; }

@@ -41,9 +41,9 @@ export function Navbar() {
         transition: 'background 0.35s ease, border-color 0.35s ease',
         background: scrolled ? 'rgba(6,13,26,0.82)' : 'rgba(6,13,26,0)',
         borderBottom: scrolled ? '1px solid rgba(255,255,255,0.07)' : '1px solid transparent',
-        /* Own GPU compositing layer — never repaints due to scroll */
-        transform: 'translateZ(0)',
-        willChange: 'background',
+        /* NOTE: NO transform here — adding transform to a parent makes it the
+           containing block for position:fixed children, which clips the mobile
+           menu to the navbar's 68px height instead of full-screen. */
       }}
     >
       <div
