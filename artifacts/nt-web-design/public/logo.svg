@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <defs>
+    <!-- Background gradient: deep navy to midnight blue -->
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d1f3c"/>
+      <stop offset="100%" stop-color="#060f22"/>
+    </linearGradient>
+    <!-- Letter gradient: cobalt blue accent -->
+    <linearGradient id="letterN" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#93c5fd"/>
+    </linearGradient>
+    <!-- Accent stroke gradient -->
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <!-- Border glow -->
+    <linearGradient id="border" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.9"/>
+      <stop offset="50%" stop-color="#60a5fa" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#1d4ed8" stop-opacity="0.8"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="1.5" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Background rounded square -->
+  <rect x="2" y="2" width="96" height="96" rx="20" ry="20" fill="url(#bg)"/>
+
+  <!-- Border ring with gradient -->
+  <rect x="2" y="2" width="96" height="96" rx="20" ry="20"
+        fill="none" stroke="url(#border)" stroke-width="1.5"/>
+
+  <!-- Subtle inner highlight top edge -->
+  <rect x="3" y="3" width="94" height="20" rx="18" ry="18"
+        fill="white" fill-opacity="0.04"/>
+
+  <!-- N letter — bold geometric, manually drawn for crisp result -->
+  <!-- Left vertical bar -->
+  <rect x="18" y="26" width="11" height="48" rx="2" fill="url(#letterN)"/>
+  <!-- Right vertical bar -->
+  <rect x="51" y="26" width="11" height="48" rx="2" fill="url(#letterN)"/>
+  <!-- Diagonal stroke: top-left to bottom-right -->
+  <polygon points="29,26 40,26 62,74 51,74" fill="url(#letterN)"/>
+
+  <!-- T letter — clean geometric -->
+  <!-- Horizontal top bar -->
+  <rect x="67" y="26" width="15" height="10" rx="2" fill="url(#accentGrad)"/>
+  <!-- Vertical stem -->
+  <rect x="71.5" y="36" width="6" height="38" rx="2" fill="url(#accentGrad)"/>
+
+  <!-- Small cobalt accent dot bottom-right -->
+  <circle cx="85" cy="84" r="3" fill="#3b82f6" fill-opacity="0.7"/>
+</svg>

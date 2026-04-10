@@ -77,9 +77,9 @@ export function Navbar() {
         {/* Logo */}
         <a href={isHome ? '#' : '/'} style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }}>
           <img
-            src={`${import.meta.env.BASE_URL}logo.png`}
+            src={`${import.meta.env.BASE_URL}logo.svg`}
             alt="NT Web UX"
-            style={{ height: '38px', width: '38px', objectFit: 'contain', borderRadius: '8px' }}
+            style={{ height: '38px', width: '38px', objectFit: 'contain', borderRadius: '10px' }}
           />
           <div style={{ lineHeight: 1, whiteSpace: 'nowrap' }}>
             <div style={{ fontSize: '15px', fontWeight: 800, letterSpacing: '0.12em', color: '#fff', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>
@@ -213,7 +213,7 @@ export function Navbar() {
             {/* Top bar — logo + close */}
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 24px', height: '68px', borderBottom: '1px solid rgba(255,255,255,0.06)', flexShrink: 0 }}>
               <a href={isHome ? '#' : '/'} style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }} onClick={() => setOpen(false)}>
-                <img src={`${import.meta.env.BASE_URL}logo.png`} alt="NT Web UX" style={{ height: '32px', width: '32px', objectFit: 'contain', borderRadius: '7px' }} />
+                <img src={`${import.meta.env.BASE_URL}logo.svg`} alt="NT Web UX" style={{ height: '32px', width: '32px', objectFit: 'contain', borderRadius: '8px' }} />
                 <span style={{ fontSize: '14px', fontWeight: 800, letterSpacing: '0.12em', color: '#fff', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>
                   NT <span style={{ background: 'linear-gradient(135deg,#3b82f6,#60a5fa)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Web UX</span>
                 </span>
