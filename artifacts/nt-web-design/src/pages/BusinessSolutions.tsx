@@ -6,7 +6,6 @@ import { ROICalculator } from "@/components/ROICalculator";
 import { SoftwareIntakeModal } from "@/components/SoftwareIntakeModal";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/lib/i18n";
-import { Link } from "wouter";
 import { ArrowRight, Zap } from "lucide-react";
 
 /* ─── bilingual copy ──────────────────────────────────────── */
@@ -192,7 +191,7 @@ export default function BusinessSolutions() {
                 >
                   {bi(copy.hero.cta, l)} <ArrowRight size={15} />
                 </button>
-                <Link
+                <a
                   href="/#contact"
                   style={{
                     display: 'inline-flex', alignItems: 'center', gap: '8px',
@@ -203,11 +202,11 @@ export default function BusinessSolutions() {
                     textDecoration: 'none',
                     transition: 'background 0.18s, color 0.18s',
                   }}
-                  onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => { e.currentTarget.style.background = 'rgba(255,255,255,0.09)'; e.currentTarget.style.color = '#fff'; }}
-                  onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => { e.currentTarget.style.background = 'rgba(255,255,255,0.05)'; e.currentTarget.style.color = 'rgba(255,255,255,0.72)'; }}
+                  onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.09)'; e.currentTarget.style.color = '#fff'; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.05)'; e.currentTarget.style.color = 'rgba(255,255,255,0.72)'; }}
                 >
                   {bi(copy.hero.ctaSec, l)}
-                </Link>
+                </a>
               </div>
             </motion.div>
           </section>
