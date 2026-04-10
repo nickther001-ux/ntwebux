@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/lib/i18n';
@@ -32,7 +33,34 @@ export default function ServicesPortfolio() {
   const plans: any[] = svc.plans;
   const items: any[] = work.items;
 
+  const PT = "Project Showcase | NT Digital Group | SaaS & AI Engineering";
+  const PD = "Explore our latest case studies, from custom AI integrations to scalable software architectures. See how we deliver elite digital infrastructure at speed.";
+  const PU = "https://ntwebux.com/portfolio";
+  const PI = "https://ntwebux.com/logo.png";
+
   return (
+    <>
+      <Helmet>
+        <title>{PT}</title>
+        <meta name="description" content={PD} />
+        <link rel="canonical" href={PU} />
+
+        {/* OpenGraph */}
+        <meta property="og:type"        content="website" />
+        <meta property="og:url"         content={PU} />
+        <meta property="og:title"       content={PT} />
+        <meta property="og:description" content={PD} />
+        <meta property="og:image"       content={PI} />
+        <meta property="og:locale"      content="en_CA" />
+        <meta property="og:site_name"   content="NT Digital Group" />
+
+        {/* Twitter / X */}
+        <meta name="twitter:card"        content="summary_large_image" />
+        <meta name="twitter:title"       content={PT} />
+        <meta name="twitter:description" content={PD} />
+        <meta name="twitter:image"       content={PI} />
+      </Helmet>
+
     <div style={{ minHeight: '100vh', color: '#ffffff', overflowX: 'hidden' }}>
       <Navbar />
 
@@ -227,5 +255,6 @@ export default function ServicesPortfolio() {
         onClose={() => setActivePlan(null)}
       />
     </div>
+    </>
   );
 }

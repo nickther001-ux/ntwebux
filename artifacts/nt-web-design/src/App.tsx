@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Switch, Route, Router as WouterRouter } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { HelmetProvider } from "react-helmet-async";
 import { LanguageProvider } from "@/lib/i18n";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster } from "@/components/ui/toaster";
@@ -95,21 +96,23 @@ function App() {
         }
       `}</style>
 
-      <LanguageProvider>
-        <TooltipProvider>
-          <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-            <Switch>
-              <Route path="/" component={Home} />
-              <Route path="/services" component={ServicesPortfolio} />
-              <Route path="/industry/:slug" component={IndustryPage} />
-              <Route path="/locations/:slug" component={LocationPage} />
-              <Route component={NotFound} />
-            </Switch>
-          </WouterRouter>
-          <Toaster />
-          <ChatWidget />
-        </TooltipProvider>
-      </LanguageProvider>
+      <HelmetProvider>
+        <LanguageProvider>
+          <TooltipProvider>
+            <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+              <Switch>
+                <Route path="/" component={Home} />
+                <Route path="/services" component={ServicesPortfolio} />
+                <Route path="/industry/:slug" component={IndustryPage} />
+                <Route path="/locations/:slug" component={LocationPage} />
+                <Route component={NotFound} />
+              </Switch>
+            </WouterRouter>
+            <Toaster />
+            <ChatWidget />
+          </TooltipProvider>
+        </LanguageProvider>
+      </HelmetProvider>
     </QueryClientProvider>
   );
 }
