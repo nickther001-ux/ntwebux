@@ -8,7 +8,7 @@ const resend = process.env.RESEND_API_KEY
   : null;
 
 const OWNER_EMAIL = "info@ntwebux.com";
-const FROM        = "NT Web UX <onboarding@resend.dev>";
+const FROM        = "NT Web UX <noreply@ntwebux.com>";
 
 /* ── Row helper ── */
 const row = (label: string, value: string) => `

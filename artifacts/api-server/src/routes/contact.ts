@@ -38,7 +38,7 @@ router.post("/contact", async (req, res) => {
       if (resend) {
         const fullName = [body.firstName, body.lastName].filter(Boolean).join(" ") || "Not provided";
         await resend.emails.send({
-          from: "NT Web UX <onboarding@resend.dev>",
+          from: "NT Web UX <noreply@ntwebux.com>",
           to: NOTIFY_EMAIL,
           subject: `New Inquiry from ${fullName} — NT Web UX`,
           html: `
@@ -74,7 +74,7 @@ router.post("/contact", async (req, res) => {
     if (resend) {
       const fullName = [body.firstName, body.lastName].filter(Boolean).join(" ") || "Not provided";
       await resend.emails.send({
-        from: "NT Web UX <onboarding@resend.dev>",
+        from: "NT Web UX <noreply@ntwebux.com>",
         to: NOTIFY_EMAIL,
         subject: `New Inquiry from ${fullName} — NT Web UX`,
         html: `
