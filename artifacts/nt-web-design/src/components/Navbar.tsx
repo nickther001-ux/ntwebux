@@ -1,8 +1,16 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useLanguage } from '@/lib/i18n';
 import { Menu, X, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLocation, Link } from 'wouter';
+
+/* Smooth-scroll to an anchor id without CSS scroll-behavior (which fights iOS) */
+function smoothScrollTo(id: string) {
+  const el = document.getElementById(id);
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
 
 export function Navbar() {
   const { lang, setLang, t } = useLanguage();
@@ -10,6 +18,14 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
   const [location, navigate] = useLocation();
   const isHome = location === '/';
+
+  /* Intercept anchor clicks for butter-smooth JS scroll */
+  const handleAnchorClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (!href.startsWith('#')) return;
+    e.preventDefault();
+    setOpen(false);
+    smoothScrollTo(href.slice(1));
+  }, []);
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 30);
@@ -88,6 +104,7 @@ export function Navbar() {
               <a
                 key={link.href}
                 href={link.href}
+                onClick={(e) => handleAnchorClick(e, link.href)}
                 style={{ fontSize: '14px', fontWeight: 500, color: 'rgba(255,255,255,0.6)', textDecoration: 'none', transition: 'color 0.2s' }}
                 onMouseEnter={(e) => (e.currentTarget.style.color = '#fff')}
                 onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.6)')}
@@ -113,6 +130,7 @@ export function Navbar() {
           </div>
           <a
             href={isHome ? '#contact' : '/#contact'}
+            onClick={(e) => handleAnchorClick(e, isHome ? '#contact' : '')}
             className="btn-violet"
             style={{ padding: '9px 20px', fontSize: '13px', fontWeight: 600, letterSpacing: '0.02em' }}
           >
@@ -255,7 +273,7 @@ export function Navbar() {
                   <motion.a
                     key={link.href}
                     href={link.href}
-                    onClick={() => setOpen(false)}
+                    onClick={(e) => handleAnchorClick(e as React.MouseEvent<HTMLAnchorElement>, link.href)}
                     {...motionProps}
                     style={sharedStyle}
                     {...hoverHandlers}
@@ -297,7 +315,7 @@ export function Navbar() {
               {/* CTA */}
               <a
                 href={isHome ? '#contact' : '/#contact'}
-                onClick={() => setOpen(false)}
+                onClick={(e) => handleAnchorClick(e, isHome ? '#contact' : '')}
                 className="btn-violet"
                 style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', padding: '16px', fontSize: '15px', fontWeight: 700, borderRadius: '12px', textDecoration: 'none' }}
               >

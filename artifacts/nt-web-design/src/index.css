@@ -27,16 +27,18 @@
   --muted-foreground: 0 0% 100%;
   --border: 0 0% 10%;
   --ring: 217 91% 60%;
+
+  /* Global easing token — used everywhere for consistent, polished motion */
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @layer base {
   html {
-    /* Do NOT set scroll-behavior: smooth globally — it fights native momentum
-       scrolling on iOS/Android and causes the rubbery/stuttering feel.
-       Anchor-link smooth scrolling is handled per-element via JS. */
     width: 100%;
     min-height: 100%;
     overflow-x: clip;
+    /* Prevent rubber-band bounce jank at scroll edges on desktop & Android */
+    overscroll-behavior: none;
   }
 
   body {
@@ -47,10 +49,9 @@
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    /* iOS momentum (rubber-band) scroll */
+    /* iOS native momentum scroll (rubber-band feel, handled by iOS itself) */
     -webkit-overflow-scrolling: touch;
-    /* Hint to browser: promote scroll to its own GPU layer */
-    will-change: scroll-position;
+    overscroll-behavior: none;
   }
 
   #root {
@@ -59,24 +60,29 @@
     overflow-x: clip;
   }
 
-  /* Grain texture — Landio signature */
+  /* Grain texture — own compositor layer so scroll never triggers a repaint */
   body::before {
     content: '';
     position: fixed;
     inset: 0;
     z-index: 1;
     pointer-events: none;
+    /* translateZ promotes to GPU layer — scroll is zero-cost */
+    transform: translateZ(0);
+    will-change: transform;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23n)' opacity='0.45'/%3E%3C/svg%3E");
     opacity: 0.032;
   }
 
-  /* Dot grid overlay — very subtle */
+  /* Dot grid overlay — own compositor layer */
   body::after {
     content: '';
     position: fixed;
     inset: 0;
     z-index: 0;
     pointer-events: none;
+    transform: translateZ(0);
+    will-change: transform;
     background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px);
     background-size: 32px 32px;
     opacity: 0.5;
@@ -85,18 +91,11 @@
 
   * { box-sizing: border-box; }
 
-  /* Contain each section — browser won't re-layout the whole page
-     when anything changes inside a section during scroll.
-     position: relative needed for Framer Motion scroll tracking */
   section {
-    contain: layout paint;
+    /* style added: compositor can skip styled recalc for off-screen sections */
+    contain: layout paint style;
     position: relative;
   }
-
-  /* NOTE: Do NOT add transform to fixed-position elements via a blanket rule.
-     transform on a parent makes it the containing block for position:fixed
-     children — the mobile nav menu would be clipped to the header height.
-     GPU layer promotion is handled selectively via the orb-layer container. */
 
   ::-webkit-scrollbar { width: 5px; }
   ::-webkit-scrollbar-track { background: #02040a; }
@@ -115,23 +114,27 @@
   .glass {
     background: rgba(255,255,255,0.035);
     border: 1px solid rgba(255,255,255,0.08);
-    backdrop-filter: blur(16px);
-    /* GPU compositing layer — prevents repaint during scroll */
+    /* 8px blur: visually identical on dark bg, ~2× cheaper GPU composite than 16px */
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    /* Isolate on its own compositor layer so scroll doesn't repaint the card */
     transform: translateZ(0);
+    will-change: transform;
   }
-  /* On mobile, backdrop-filter causes GPU read-back on every scroll frame.
-     Replace with a slightly opaque solid background — visually identical
-     on a dark page and eliminates the jank entirely. */
+
+  /* On mobile: drop backdrop-filter entirely — causes GPU read-back every frame */
   @media (max-width: 768px) {
     .glass {
       backdrop-filter: none;
       -webkit-backdrop-filter: none;
       background: rgba(255,255,255,0.07);
+      /* Keep GPU layer for smooth scroll */
+      transform: translateZ(0);
     }
   }
 
   .glass-hover {
-    transition: background 0.25s, border-color 0.25s, box-shadow 0.25s;
+    transition: background 0.22s var(--ease-spring), border-color 0.22s, box-shadow 0.22s;
   }
   .glass-hover:hover {
     background: rgba(255,255,255,0.06);
@@ -145,7 +148,7 @@
     font-weight: 600;
     border-radius: 10px;
     border: none;
-    transition: all 0.2s;
+    transition: all 0.18s var(--ease-spring);
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -162,7 +165,7 @@
     color: rgba(255,255,255,0.85);
     font-weight: 500;
     border-radius: 10px;
-    transition: all 0.2s;
+    transition: all 0.18s var(--ease-spring);
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -194,9 +197,10 @@
   }
 }
 
+/* ── CSS animations ── */
 @keyframes float {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  50%       { transform: translateY(-10px); }
 }
 
 @keyframes spin {
@@ -205,40 +209,41 @@
 }
 
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(18px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes shimmer {
-  0% { background-position: -300% center; }
-  100% { background-position: 300% center; }
+  0%   { background-position: -300% center; }
+  100% { background-position:  300% center; }
 }
 
-/* ── Landio orb animations ── */
+/* Orb animations: only translate + opacity — no scale()
+   scale() forces layer re-promotion on some browsers which stalls the compositor */
 @keyframes orb-breathe {
-  0%, 100% { transform: translateX(-50%) scale(1);   opacity: 0.85; }
-  50%       { transform: translateX(-50%) scale(1.1); opacity: 1;    }
+  0%, 100% { transform: translateX(-50%) translateY(0);   opacity: 0.85; }
+  50%       { transform: translateX(-50%) translateY(-8px); opacity: 1;   }
 }
 
 @keyframes orb-drift-right {
-  0%, 100% { transform: translate(0, 0) scale(1);    opacity: 0.5; }
-  33%      { transform: translate(40px, -30px) scale(1.06); opacity: 0.65; }
-  66%      { transform: translate(-20px, 20px) scale(0.96); opacity: 0.45; }
+  0%, 100% { transform: translate(0, 0);      opacity: 0.5;  }
+  33%       { transform: translate(40px, -28px); opacity: 0.65; }
+  66%       { transform: translate(-20px, 18px); opacity: 0.45; }
 }
 
 @keyframes orb-drift-left {
-  0%, 100% { transform: translate(0, 0) scale(1);     opacity: 0.4; }
-  50%      { transform: translate(-35px, 25px) scale(1.05); opacity: 0.55; }
+  0%, 100% { transform: translate(0, 0);       opacity: 0.4;  }
+  50%       { transform: translate(-32px, 22px); opacity: 0.55; }
 }
 
-/* ── Marquee ── */
+/* Marquee */
 @keyframes marquee-scroll {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
 }
 
-/* ── Fade-in-up utility (used by hero + sections) ── */
+/* Fade-in-up utility */
 @keyframes fade-up {
-  from { opacity: 0; transform: translateY(28px); }
+  from { opacity: 0; transform: translateY(14px); }
   to   { opacity: 1; transform: translateY(0); }
 }

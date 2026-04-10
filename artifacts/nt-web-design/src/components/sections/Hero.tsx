@@ -31,10 +31,10 @@ function StatCard({ v, num, suffix, l, sub, delay }: { v: string; num: number | 
     <motion.div
       ref={ref}
       className="glass"
-      initial={{ opacity: 0, y: 24, scale: 0.88 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ delay, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-      whileHover={{ y: -5, scale: 1.05, transition: { duration: 0.18, ease: 'easeOut' } }}
+      initial={{ opacity: 0, y: 18 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay, duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+      whileHover={{ y: -4, transition: { duration: 0.16, ease: 'easeOut' } }}
       style={{ padding: '20px 16px', borderRadius: '14px', textAlign: 'center', cursor: 'default', width: '100%' }}
     >
       <div style={{
@@ -51,7 +51,7 @@ function StatCard({ v, num, suffix, l, sub, delay }: { v: string; num: number | 
   );
 }
 
-const fadeUp = { hidden: { opacity: 0, y: 22 }, show: (i: number) => ({ opacity: 1, y: 0, transition: { delay: i * 0.12, duration: 0.6, ease: [0.22, 1, 0.36, 1] } }) };
+const fadeUp = { hidden: { opacity: 0, y: 14 }, show: (i: number) => ({ opacity: 1, y: 0, transition: { delay: i * 0.1, duration: 0.5, ease: [0.16, 1, 0.3, 1] } }) };
 
 export function Hero() {
   const { t, lang } = useLanguage();
@@ -59,7 +59,7 @@ export function Hero() {
   // Parallax: hero content drifts up at 40% of scroll speed → depth effect
   const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start start', 'end start'] });
-  const contentY = useTransform(scrollYProgress, [0, 1], ['0px', '-70px']);
+  const contentY = useTransform(scrollYProgress, [0, 1], ['0px', '-40px']);
 
   return (
     <section ref={sectionRef} style={{ position: 'relative', width: '100%', paddingTop: '160px', paddingBottom: '120px', overflow: 'hidden', textAlign: 'center' }}>
