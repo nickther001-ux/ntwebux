@@ -35,6 +35,18 @@ function useSmoothAnchorScroll() {
 
 function App() {
   useSmoothAnchorScroll();
+
+  // On every fresh page load, scroll to the very top regardless of any URL hash.
+  // Anchor-link scrolling is handled intentionally via useSmoothAnchorScroll /
+  // Navbar handleAnchorClick — never via the browser's default hash behaviour.
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
+    // Strip the hash so the browser doesn't re-jump if the user refreshes
+    if (window.location.hash) {
+      window.history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       {/* ── Landio-style animated blur orbs ── */}
