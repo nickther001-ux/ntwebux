@@ -38,6 +38,7 @@ export function Navbar() {
     { href: isHome ? '#portfolio' : '/#portfolio', label: lang === 'fr' ? 'Portfolio' : 'Portfolio' },
     { href: isHome ? '#process' : '/#process', label: lang === 'fr' ? 'Processus' : 'Process' },
     { href: '/services', label: lang === 'fr' ? 'Tarifs' : 'Pricing', isPage: true },
+    { href: '/business', label: lang === 'fr' ? 'Solutions' : 'Solutions', isPage: true },
     { href: isHome ? '#contact' : '/#contact', label: 'Contact' },
   ];
 

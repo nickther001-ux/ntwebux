@@ -1,0 +1,52 @@
+import React, { useState } from 'react';
+
+const ROICalculator = () => {
+  const [jobValue, setJobValue] = useState(500);
+  const [missedCalls, setMissedCalls] = useState(5);
+  const subscriptionCost = 297; // Your FieldOps Pro Price
+
+  const monthlyLost = jobValue * missedCalls * 4;
+  const yearlyGain = monthlyLost * 12;
+  const roi = ((yearlyGain - (subscriptionCost * 12)) / (subscriptionCost * 12) * 100).toFixed(0);
+
+  return (
+    <div className="p-8 rounded-3xl bg-slate-900/50 backdrop-blur-xl border border-white/10 shadow-2xl text-white max-w-2xl mx-auto my-20">
+      <h2 className="text-3xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
+        Stop Leaving Money on the Table
+      </h2>
+      
+      <div className="space-y-8">
+        <div>
+          <label className="block text-sm font-medium mb-2">Average Job Value: ${jobValue}</label>
+          <input type="range" min="100" max="5000" step="50" value={jobValue} onChange={(e) => setJobValue(e.target.value)} 
+                 className="w-full h-2 bg-blue-900 rounded-lg appearance-none cursor-pointer accent-blue-500" />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium mb-2">Missed Calls per Week: {missedCalls}</label>
+          <input type="range" min="1" max="50" value={missedCalls} onChange={(e) => setMissedCalls(e.target.value)} 
+                 className="w-full h-2 bg-blue-900 rounded-lg appearance-none cursor-pointer accent-blue-500" />
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 border-t border-white/10">
+          <div className="p-4 bg-red-500/10 rounded-2xl border border-red-500/20">
+            <p className="text-xs uppercase tracking-wider text-red-400">Monthly Revenue Lost</p>
+            <p className="text-3xl font-bold text-red-500">${monthlyLost.toLocaleString()}</p>
+          </div>
+          <div className="p-4 bg-green-500/10 rounded-2xl border border-green-500/20">
+            <p className="text-xs uppercase tracking-wider text-green-400">Yearly Opportunity</p>
+            <p className="text-3xl font-bold text-green-500">${yearlyGain.toLocaleString()}</p>
+          </div>
+        </div>
+
+        <div className="text-center p-6 bg-blue-600 rounded-2xl">
+          <p className="text-lg font-semibold">FieldOps Pro Estimated ROI</p>
+          <p className="text-5xl font-black">{roi}%</p>
+          <p className="text-sm mt-2 opacity-80 text-white/90">Based on a $297/mo subscription</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ROICalculator;

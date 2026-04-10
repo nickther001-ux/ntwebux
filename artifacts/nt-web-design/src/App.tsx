@@ -7,6 +7,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster } from "@/components/ui/toaster";
 import Home from "@/pages/Home";
 import ServicesPortfolio from "@/pages/ServicesPortfolio";
+import BusinessSolutions from "@/pages/BusinessSolutions";
 import IndustryPage from "@/pages/IndustryPage";
 import LocationPage from "@/pages/LocationPage";
 import NotFound from "@/pages/not-found";
@@ -115,6 +116,7 @@ function App() {
               <Switch>
                 <Route path="/" component={Home} />
                 <Route path="/services" component={ServicesPortfolio} />
+                <Route path="/business" component={BusinessSolutions} />
                 <Route path="/industry/:slug" component={IndustryPage} />
                 <Route path="/locations/:slug" component={LocationPage} />
                 <Route component={NotFound} />

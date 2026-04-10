@@ -9,6 +9,7 @@ import { WhyUs } from "@/components/sections/WhyUs";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { Contact } from "@/components/sections/Contact";
 import { Footer } from "@/components/Footer";
+import { ROICalculator } from "@/components/ROICalculator";
 
 const TITLE = "NT Web Design";
 const DESC  = "Premium web design and AI-driven solutions delivered in exactly 72 hours. Specializing in high-performance websites and SaaS for startups in Canada & USA. 100% code ownership.";
@@ -70,6 +71,7 @@ export default function Home() {
           <Hero />
           <Stats />
           <Services />
+          <ROICalculator />
           <Portfolio />
           <Process />
           <WhyUs />
