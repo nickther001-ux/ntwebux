@@ -10,10 +10,32 @@ import { Testimonials } from "@/components/sections/Testimonials";
 import { Contact } from "@/components/sections/Contact";
 import { Footer } from "@/components/Footer";
 
-const TITLE = "NT Digital Group | Turnkey Web Design Montreal | 72h Delivery";
+const TITLE = "NT Web Design";
 const DESC  = "Premium web design and AI-driven solutions delivered in exactly 72 hours. Specializing in high-performance websites and SaaS for startups in Canada & USA. 100% code ownership.";
 const URL   = "https://ntwebux.com/";
 const IMG   = "https://ntwebux.com/logo.png";
+
+const SCHEMA = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "NT Web Design",
+  "url": "https://ntwebux.com/",
+  "description": DESC,
+  "publisher": {
+    "@type": "LocalBusiness",
+    "name": "NT Web Design",
+    "url": "https://ntwebux.com/",
+    "logo": "https://ntwebux.com/logo.png",
+    "email": "info@ntwebux.com",
+    "telephone": "+14388067640",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Montréal",
+      "addressRegion": "QC",
+      "addressCountry": "CA"
+    }
+  }
+});
 
 export default function Home() {
   return (
@@ -23,6 +45,9 @@ export default function Home() {
         <meta name="description" content={DESC} />
         <link rel="canonical" href={URL} />
 
+        {/* WebSite structured data — tells Google the official site name */}
+        <script type="application/ld+json">{SCHEMA}</script>
+
         {/* OpenGraph */}
         <meta property="og:type"        content="website" />
         <meta property="og:url"         content={URL} />
@@ -30,7 +55,7 @@ export default function Home() {
         <meta property="og:description" content={DESC} />
         <meta property="og:image"       content={IMG} />
         <meta property="og:locale"      content="en_CA" />
-        <meta property="og:site_name"   content="NT Digital Group" />
+        <meta property="og:site_name"   content="NT Web Design" />
 
         {/* Twitter / X */}
         <meta name="twitter:card"        content="summary_large_image" />
