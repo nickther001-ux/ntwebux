@@ -34,10 +34,11 @@ router.post("/contact", async (req, res) => {
     const database = await getDb();
 
     if (!database || !contactsTable) {
-      // DB unavailable — still send the notification email if Resend is configured
+      // Respond immediately — fire email in background
+      res.json({ success: true, message: "Thank you! We'll be in touch within 24 hours.", id: null });
       if (resend) {
         const fullName = [body.firstName, body.lastName].filter(Boolean).join(" ") || "Not provided";
-        await resend.emails.send({
+        resend.emails.send({
           from: "NT Web UX <noreply@ntwebux.com>",
           to: NOTIFY_EMAIL,
           subject: `New Inquiry from ${fullName} — NT Web UX`,
@@ -56,7 +57,7 @@ router.post("/contact", async (req, res) => {
           `,
         }).catch((err) => console.error("Email send failed:", err));
       }
-      return res.json({ success: true, message: "Thank you! We'll be in touch within 24 hours.", id: null });
+      return;
     }
 
     const [inserted] = await database
@@ -71,9 +72,18 @@ router.post("/contact", async (req, res) => {
       })
       .returning({ id: contactsTable.id });
 
+    // Respond immediately after DB insert
+    const data = SubmitContactFormResponse.parse({
+      success: true,
+      message: "Thank you! We'll be in touch within 24 hours.",
+      id: inserted.id,
+    });
+    res.json(data);
+
+    // Fire notification email in background — don't block the response
     if (resend) {
       const fullName = [body.firstName, body.lastName].filter(Boolean).join(" ") || "Not provided";
-      await resend.emails.send({
+      resend.emails.send({
         from: "NT Web UX <noreply@ntwebux.com>",
         to: NOTIFY_EMAIL,
         subject: `New Inquiry from ${fullName} — NT Web UX`,
@@ -92,14 +102,6 @@ router.post("/contact", async (req, res) => {
         `,
       }).catch((err) => console.error("Email send failed:", err));
     }
-
-    const data = SubmitContactFormResponse.parse({
-      success: true,
-      message: "Thank you! We'll be in touch within 24 hours.",
-      id: inserted.id,
-    });
-
-    res.json(data);
   } catch (err) {
     console.error("Contact route error:", err);
     res.status(400).json({ error: "Invalid request. Please check your inputs." });
