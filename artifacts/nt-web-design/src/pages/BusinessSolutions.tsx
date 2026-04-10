@@ -1,7 +1,9 @@
+import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { ROICalculator } from "@/components/ROICalculator";
+import { SoftwareIntakeModal } from "@/components/SoftwareIntakeModal";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/lib/i18n";
 import { Link } from "wouter";
@@ -15,7 +17,7 @@ const copy = {
                 fr: "Automatisez votre croissance.\nNe perdez plus un seul client." },
     sub:     { en: "The all-in-one AI engine built for Montreal's top contractors (HVAC, Roofing, Auto Detailing).",
                 fr: "Le moteur IA tout-en-un conçu pour les meilleurs entrepreneurs de Montréal (CVAC, Toiture, Esthétique Automobile)." },
-    cta:     { en: "Start 14-Day Free Trial",  fr: "Essai Gratuit (14 Jours)" },
+    cta:     { en: "Let's Build Your Software", fr: "Construisons votre logiciel" },
     ctaSec:  { en: "Talk to a Strategist",     fr: "Parler à un conseiller" },
   },
   features: {
@@ -50,7 +52,7 @@ const copy = {
   footer: {
     text:    { en: "Stop leaving money on the table. We set up your entire system in 72 hours.",
                 fr: "Arrêtez de laisser de l'argent sur la table. Nous configurons votre système complet en 72 heures." },
-    cta:     { en: "Claim Your Beta Setup",   fr: "Réclamez votre configuration Beta" },
+    cta:     { en: "Let's Build Your Software", fr: "Construisons votre logiciel" },
   },
 };
 
@@ -68,6 +70,7 @@ function bi(obj: { en: string; fr: string }, lang: LangKey) { return obj[lang]; 
 export default function BusinessSolutions() {
   const { lang } = useLanguage();
   const l = lang as LangKey;
+  const [modalOpen, setModalOpen] = useState(false);
 
   const TITLE_TAG =
     l === 'fr'
@@ -173,15 +176,14 @@ export default function BusinessSolutions() {
 
               {/* CTAs */}
               <div style={{ display: 'flex', gap: '14px', justifyContent: 'center', flexWrap: 'wrap' }}>
-                <a
-                  href="#cta"
-                  onClick={(e) => { e.preventDefault(); document.getElementById('cta')?.scrollIntoView({ behavior: 'smooth', block: 'start' }); }}
+                <button
+                  onClick={() => setModalOpen(true)}
                   style={{
                     display: 'inline-flex', alignItems: 'center', gap: '8px',
                     background: 'linear-gradient(135deg, #1d4ed8, #3b82f6)',
                     color: '#fff', fontWeight: 700, fontSize: '15px',
                     padding: '14px 28px', borderRadius: '12px',
-                    textDecoration: 'none',
+                    border: 'none', cursor: 'pointer',
                     boxShadow: '0 8px 28px rgba(59,130,246,0.4)',
                     transition: 'transform 0.18s, box-shadow 0.18s',
                   }}
@@ -189,7 +191,7 @@ export default function BusinessSolutions() {
                   onMouseLeave={(e) => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = '0 8px 28px rgba(59,130,246,0.4)'; }}
                 >
                   {bi(copy.hero.cta, l)} <ArrowRight size={15} />
-                </a>
+                </button>
                 <Link
                   href="/#contact"
                   style={{
@@ -356,23 +358,23 @@ export default function BusinessSolutions() {
                 {bi(copy.footer.text, l)}
               </p>
 
-              <Link
-                href="/#contact"
+              <button
+                onClick={() => setModalOpen(true)}
                 style={{
                   display: 'inline-flex', alignItems: 'center', gap: '10px',
                   background: 'linear-gradient(135deg, #1d4ed8, #3b82f6)',
                   color: '#fff', fontWeight: 700, fontSize: '16px',
                   padding: '16px 36px', borderRadius: '14px',
-                  textDecoration: 'none',
+                  border: 'none', cursor: 'pointer',
                   boxShadow: '0 8px 32px rgba(59,130,246,0.42)',
                   transition: 'transform 0.18s, box-shadow 0.18s',
                   letterSpacing: '0.01em',
                 }}
-                onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 16px 42px rgba(59,130,246,0.55)'; }}
-                onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = '0 8px 32px rgba(59,130,246,0.42)'; }}
+                onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 16px 42px rgba(59,130,246,0.55)'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = '0 8px 32px rgba(59,130,246,0.42)'; }}
               >
                 {bi(copy.footer.cta, l)} <ArrowRight size={16} />
-              </Link>
+              </button>
 
               <p style={{ marginTop: '20px', fontSize: '12px', color: 'rgba(255,255,255,0.22)' }}>
                 {l === 'fr'
@@ -388,6 +390,8 @@ export default function BusinessSolutions() {
 
         <Footer />
       </div>
+
+      <SoftwareIntakeModal open={modalOpen} onClose={() => setModalOpen(false)} />
     </>
   );
 }
