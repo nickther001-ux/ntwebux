@@ -8,7 +8,7 @@ import { Send, X, Bot, ArrowLeft, MessageCircle, Mail, Phone, ChevronRight } fro
 const API_BASE = (import.meta.env.VITE_API_URL || import.meta.env.BASE_URL).replace(/\/$/, "");
 const PHONE = "(438) 806-7640";
 const PHONE_RAW = "14388067640";
-const EMAIL = "nicktech@computer4u.com";
+const EMAIL = "info@ntwebux.com";
 
 interface Message {
   role: "user" | "assistant";

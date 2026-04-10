@@ -7,7 +7,7 @@ const resend = process.env.RESEND_API_KEY
   ? new Resend(process.env.RESEND_API_KEY)
   : null;
 
-const OWNER_EMAIL = "nicktech@computer4u.com";
+const OWNER_EMAIL = "info@ntwebux.com";
 const FROM        = "NT Web UX <onboarding@resend.dev>";
 
 /* ── Row helper ── */

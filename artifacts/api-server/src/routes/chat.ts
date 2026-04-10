@@ -17,7 +17,7 @@ const SYSTEM_PROMPT = `You are Silas, the AI assistant for NT Web UX. You help p
 
 About NT Web UX:
 - We build modern, high-performance websites for SMEs and entrepreneurs worldwide
-- Contact: nicktech@computer4u.com | Phone: (438) 806-7640
+- Contact: info@ntwebux.com | Phone: (438) 806-7640
 - We are bilingual (English / French)
 
 Services & Pricing:
@@ -95,7 +95,7 @@ router.post("/chat", async (req, res) => {
     console.error("Chat error:", err?.message || err);
     const is429 = err?.message?.includes("429") || err?.status === 429;
     const msg = is429
-      ? "The AI assistant has reached its free usage limit for today. Please try again tomorrow, or contact us directly at nicktech@computer4u.com or (438) 806-7640."
+      ? "The AI assistant has reached its free usage limit for today. Please try again tomorrow, or contact us directly at info@ntwebux.com or (438) 806-7640."
       : "Sorry, something went wrong. Please try again.";
     res.write(`data: ${JSON.stringify({ error: msg })}\n\n`);
     res.end();
