@@ -50,34 +50,83 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* ── Global Landio master layout ── */}
-      <div className="min-h-screen w-full bg-[#050507] text-white relative overflow-x-hidden font-sans">
-
-        {/* Fixed dot-grid texture (persists across pages & scroll) */}
-        <div className="fixed inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none z-0" />
-
-        {/* Fixed Framer-style glow (persists across pages & scroll) */}
-        <div className="fixed top-[-10%] left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-blue-600/15 rounded-full blur-[120px] pointer-events-none z-0" />
-
-        <HelmetProvider>
-          <LanguageProvider>
-            <TooltipProvider>
-              <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-                <Switch>
-                  <Route path="/" component={Home} />
-                  <Route path="/services" component={ServicesPortfolio} />
-                  <Route path="/business" component={BusinessSolutions} />
-                  <Route path="/industry/:slug" component={IndustryPage} />
-                  <Route path="/locations/:slug" component={LocationPage} />
-                  <Route component={NotFound} />
-                </Switch>
-              </WouterRouter>
-              <Toaster />
-              <ChatWidget />
-            </TooltipProvider>
-          </LanguageProvider>
-        </HelmetProvider>
+      {/* ── Landio-style animated blur orbs ── */}
+      {/* isolation:isolate + transform:translateZ(0) puts this on its own GPU
+          compositing layer, so scroll never triggers a repaint of the orbs */}
+      <div className="orb-layer" style={{ position: "fixed", inset: 0, zIndex: 0, overflow: "hidden", pointerEvents: "none", isolation: "isolate", transform: "translateZ(0)" }} aria-hidden>
+        {/* Hero orb */}
+        <div className="orb orb-hero" style={{
+          position: "absolute",
+          top: "-260px",
+          left: "50%",
+          width: "1100px",
+          height: "820px",
+          borderRadius: "50%",
+          background: "radial-gradient(ellipse at center, rgba(59,130,246,0.55) 0%, rgba(37,99,235,0.28) 32%, transparent 62%)",
+          filter: "blur(90px)",
+          willChange: "transform, opacity",
+          animation: "orb-breathe 9s ease-in-out infinite",
+        }} />
+        {/* Bottom-right accent */}
+        <div className="orb orb-right" style={{
+          position: "absolute",
+          bottom: "-100px",
+          right: "-120px",
+          width: "700px",
+          height: "700px",
+          borderRadius: "50%",
+          background: "radial-gradient(ellipse at center, rgba(29,78,216,0.4) 0%, rgba(17,51,160,0.15) 40%, transparent 65%)",
+          filter: "blur(80px)",
+          willChange: "transform",
+          animation: "orb-drift-right 14s ease-in-out infinite",
+        }} />
+        {/* Mid-left accent */}
+        <div className="orb orb-left" style={{
+          position: "absolute",
+          top: "45%",
+          left: "-180px",
+          width: "600px",
+          height: "500px",
+          borderRadius: "50%",
+          background: "radial-gradient(ellipse at center, rgba(59,130,246,0.22) 0%, transparent 65%)",
+          filter: "blur(70px)",
+          willChange: "transform",
+          animation: "orb-drift-left 18s ease-in-out infinite",
+        }} />
       </div>
+      <style>{`
+        /* Desktop: reduce blur — visually identical, much cheaper GPU compositing */
+        @media (min-width: 769px) {
+          .orb-hero  { filter: blur(55px) !important; }
+          .orb-right { filter: blur(48px) !important; }
+          .orb-left  { filter: blur(40px) !important; }
+        }
+        /* Mobile: even smaller blur + smaller elements */
+        @media (max-width: 768px) {
+          .orb-hero  { filter: blur(32px) !important; width: 560px !important; height: 460px !important; }
+          .orb-right { filter: blur(28px) !important; width: 380px !important; height: 380px !important; }
+          .orb-left  { filter: blur(24px) !important; width: 320px !important; height: 280px !important; }
+        }
+      `}</style>
+
+      <HelmetProvider>
+        <LanguageProvider>
+          <TooltipProvider>
+            <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+              <Switch>
+                <Route path="/" component={Home} />
+                <Route path="/services" component={ServicesPortfolio} />
+                <Route path="/business" component={BusinessSolutions} />
+                <Route path="/industry/:slug" component={IndustryPage} />
+                <Route path="/locations/:slug" component={LocationPage} />
+                <Route component={NotFound} />
+              </Switch>
+            </WouterRouter>
+            <Toaster />
+            <ChatWidget />
+          </TooltipProvider>
+        </LanguageProvider>
+      </HelmetProvider>
     </QueryClientProvider>
   );
 }

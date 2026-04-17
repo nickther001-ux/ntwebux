@@ -93,13 +93,13 @@ export default function BusinessSolutions() {
         <meta property="og:image"       content="https://ntwebux.com/logo.png" />
       </Helmet>
 
-      <div className="relative z-10 w-full min-h-screen bg-transparent">
+      <div className="relative w-full min-h-screen">
         <Navbar />
 
         <main>
           {/* ══ HERO — Landio 4-layer composition ════════════════ */}
-          {/* Layer 1: Transparent canvas (global bg + glow bleed through) */}
-          <section className="relative w-full overflow-hidden bg-transparent min-h-[80vh] flex flex-col items-center justify-center pt-32 pb-20 px-4">
+          {/* Layer 1: Dark canvas */}
+          <section className="relative w-full overflow-hidden bg-[#0a0a0c] min-h-[80vh] flex flex-col items-center justify-center pt-32 pb-20 px-4">
 
             {/* Layer 2: Framer glow */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] max-w-[800px] h-[400px] bg-blue-600/20 rounded-full blur-[120px] pointer-events-none -z-10" />

@@ -65,15 +65,13 @@ export function Navbar() {
     >
       <div
         style={{
-          maxWidth: '1280px',
+          maxWidth: '1200px',
           margin: '0 auto',
           padding: '0 24px',
-          minHeight: '68px',
+          height: '68px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          flexWrap: 'wrap',
-          gap: '16px',
         }}
       >
         {/* Logo */}
@@ -91,7 +89,7 @@ export function Navbar() {
         </a>
 
         {/* Desktop Nav */}
-        <nav className="navbar-desktop" style={{ alignItems: 'center', gap: '24px', flexWrap: 'wrap' }}>
+        <nav className="navbar-desktop" style={{ alignItems: 'center', gap: '36px' }}>
           {links.map((link) =>
             link.isPage ? (
               <Link
@@ -119,7 +117,7 @@ export function Navbar() {
         </nav>
 
         {/* Right */}
-        <div className="navbar-desktop" style={{ alignItems: 'center', gap: '16px', borderLeft: '1px solid rgba(255,255,255,0.1)', paddingLeft: '20px', flexShrink: 0 }}>
+        <div className="navbar-desktop" style={{ alignItems: 'center', gap: '20px', borderLeft: '1px solid rgba(255,255,255,0.1)', paddingLeft: '32px', marginLeft: '8px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '12px', fontWeight: 600 }}>
             <button
               onClick={() => setLang('en')}

@@ -44,7 +44,7 @@
   body {
     width: 100%;
     min-height: 100%;
-    /* Background color now lives on the global App.tsx master container */
+    background-color: #02040a;
     color: #ffffff;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -74,7 +74,20 @@
     opacity: 0.032;
   }
 
-  /* Dot grid overlay is now rendered globally in App.tsx (Landio master layout) */
+  /* Dot grid overlay — own compositor layer */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    transform: translateZ(0);
+    will-change: transform;
+    background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px);
+    background-size: 32px 32px;
+    opacity: 0.5;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+  }
 
   * { box-sizing: border-box; }
 
