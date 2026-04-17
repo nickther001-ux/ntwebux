@@ -42,7 +42,7 @@ export function Footer() {
           <div>
             <div style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.25)', marginBottom: '20px' }}>Company</div>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '12px' }}>
-              {[['Process', '#process'], ['Why Us', '#why-us'], ['Contact', '#contact']].map(([label, href]) => (
+              {[['Process', '#process'], ['Why Us', '#why-us'], ['Contact', '#contact'], ['Privacy Policy', `${import.meta.env.BASE_URL}privacy`]].map(([label, href]) => (
                 <li key={href}><a href={href} style={{ fontSize: '13px', color: 'rgba(255,255,255,0.5)', textDecoration: 'none', transition: 'color 0.2s' }}
                   onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
                   onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.5)')}
