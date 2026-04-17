@@ -69,9 +69,10 @@ export function WhyUs() {
         {/* Left */}
         <div>
           <span className="pill-label" style={{ marginBottom: '24px', display: 'inline-flex' }}>{eyebrow}</span>
-          <h2 style={{ fontSize: 'clamp(2rem,5vw,3.5rem)', fontWeight: 800, letterSpacing: '-0.02em', marginTop: '16px', marginBottom: '20px' }}>
-            {t('whyUs.title')} <span className="gradient-text">{lang === 'fr' ? 'Différemment.' : 'Differently.'}</span>
-          </h2>
+          <h1 className="text-5xl font-bold text-white mb-4">
+            Digital growth. <br />
+            <span className="text-blue-400">Engineered custom.</span>
+          </h1>
           <p style={{ fontSize: '15px', color: 'rgba(255,255,255,0.45)', lineHeight: 1.75, marginBottom: '48px', maxWidth: '400px' }}>
             {lang === 'fr'
               ? "Nous ne sommes pas une agence typique. Nous sommes vos partenaires de croissance digitale."
