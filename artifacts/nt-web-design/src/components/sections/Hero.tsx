@@ -35,27 +35,27 @@ function StatCard({ v, num, suffix, l, sub, detail, source, delay }: { v: string
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay, duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
       whileHover={{ y: -4, transition: { duration: 0.16, ease: 'easeOut' } }}
-      style={{ padding: '22px 18px', borderRadius: '14px', textAlign: 'left', cursor: 'default', width: '100%' }}
+      style={{ padding: '26px 22px', borderRadius: '14px', textAlign: 'left', cursor: 'default', width: '100%' }}
     >
       <div style={{
-        fontSize: '34px', fontWeight: 900,
+        fontSize: '40px', fontWeight: 900,
         background: 'linear-gradient(135deg,#93c5fd,#bfdbfe)',
         WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
         lineHeight: 1, fontVariantNumeric: 'tabular-nums', letterSpacing: '-0.02em',
       }}>
         {display}
       </div>
-      <div style={{ fontSize: '13px', color: 'rgba(255,255,255,0.85)', marginTop: '10px', fontWeight: 700, lineHeight: 1.35 }}>{l}</div>
-      <div style={{ fontSize: '11.5px', color: 'rgba(255,255,255,0.42)', marginTop: '3px', lineHeight: 1.35 }}>{sub}</div>
+      <div style={{ fontSize: '15px', color: 'rgba(255,255,255,0.9)', marginTop: '12px', fontWeight: 700, lineHeight: 1.35 }}>{l}</div>
+      <div style={{ fontSize: '13px', color: 'rgba(255,255,255,0.5)', marginTop: '4px', lineHeight: 1.4 }}>{sub}</div>
       <div style={{
-        fontSize: '11px', color: 'rgba(255,255,255,0.55)',
-        marginTop: '10px', paddingTop: '10px',
+        fontSize: '13px', color: 'rgba(255,255,255,0.65)',
+        marginTop: '14px', paddingTop: '12px',
         borderTop: '1px solid rgba(255,255,255,0.07)',
-        lineHeight: 1.5,
+        lineHeight: 1.6,
       }}>{detail}</div>
       <div style={{
-        fontSize: '9.5px', color: 'rgba(147,197,253,0.45)',
-        marginTop: '6px', fontWeight: 600, letterSpacing: '0.05em', textTransform: 'uppercase',
+        fontSize: '11px', color: 'rgba(147,197,253,0.55)',
+        marginTop: '8px', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase',
       }}>{source}</div>
     </motion.div>
   );
