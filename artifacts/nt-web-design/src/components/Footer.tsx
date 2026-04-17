@@ -9,22 +9,12 @@ export function Footer() {
         <div style={{ display: 'grid', gridTemplateColumns: '1.6fr 1fr 1fr 1fr', gap: '48px', marginBottom: '48px' }} className="grid-footer">
           {/* Brand */}
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
-              <svg viewBox="0 0 200 200" fill="none" style={{ height: '32px', width: '32px' }}>
-                <defs>
-                  <linearGradient id="fg1" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#93c5fd" />
-                    <stop offset="100%" stopColor="#3b82f6" />
-                  </linearGradient>
-                </defs>
-                <polygon points="22,30 46,30 46,170 22,170" fill="url(#fg1)" />
-                <polygon points="44,30 100,90 100,130 44,70" fill="url(#fg1)" />
-                <polygon points="154,30 178,30 178,170 154,170" fill="url(#fg1)" />
-                <polygon points="100,110 156,170 134,170 78,110" fill="url(#fg1)" />
-              </svg>
-              <span style={{ fontSize: '15px', fontWeight: 800, color: '#fff', letterSpacing: '0.1em' }}>
-                NT<span style={{ background: 'linear-gradient(135deg,#93c5fd,#bfdbfe)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>WebUX</span>
-              </span>
+            <div style={{ display: 'flex', alignItems: 'center', marginBottom: '16px' }}>
+              <img
+                src={`${import.meta.env.BASE_URL}logo.png`}
+                alt="NT Web UX"
+                style={{ height: '38px', width: 'auto', objectFit: 'contain', display: 'block', filter: 'brightness(0) invert(1)' }}
+              />
             </div>
             <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.38)', lineHeight: 1.7, maxWidth: '220px' }}>
               {t('footer.tagline')}
