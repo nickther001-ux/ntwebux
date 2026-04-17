@@ -91,7 +91,7 @@ const PROJECTS = [
     wide: false,
   },
   {
-    img: `${BASE}/portfolio/proj-ecommerce.png`,
+    img: `${BASE}/portfolio/proj-wellness.png`,
     category: { en: 'Wellness & Beauty', fr: 'Bien-être & Beauté' },
     title: { en: 'Éclat Beauty Studio', fr: 'Studio Beauté Éclat' },
     tags: { en: ['Booking System', 'Branding'], fr: ['Réservation', 'Image de marque'] },
