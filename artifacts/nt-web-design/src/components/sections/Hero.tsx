@@ -21,7 +21,7 @@ function useCountUp(target: number, duration = 1200, active = false) {
   return val;
 }
 
-function StatCard({ v, num, suffix, l, sub, delay }: { v: string; num: number | null; suffix: string; l: string; sub: string; delay: number }) {
+function StatCard({ v, num, suffix, l, sub, detail, source, delay }: { v: string; num: number | null; suffix: string; l: string; sub: string; detail: string; source: string; delay: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true });
   const count = useCountUp(num ?? 0, 1100, inView && num !== null);
@@ -35,18 +35,28 @@ function StatCard({ v, num, suffix, l, sub, delay }: { v: string; num: number | 
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay, duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
       whileHover={{ y: -4, transition: { duration: 0.16, ease: 'easeOut' } }}
-      style={{ padding: '20px 16px', borderRadius: '14px', textAlign: 'center', cursor: 'default', width: '100%' }}
+      style={{ padding: '22px 18px', borderRadius: '14px', textAlign: 'left', cursor: 'default', width: '100%' }}
     >
       <div style={{
-        fontSize: '32px', fontWeight: 900,
+        fontSize: '34px', fontWeight: 900,
         background: 'linear-gradient(135deg,#93c5fd,#bfdbfe)',
         WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
         lineHeight: 1, fontVariantNumeric: 'tabular-nums', letterSpacing: '-0.02em',
       }}>
         {display}
       </div>
-      <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.7)', marginTop: '8px', fontWeight: 700, lineHeight: 1.4 }}>{l}</div>
-      <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.35)', marginTop: '3px', lineHeight: 1.3 }}>{sub}</div>
+      <div style={{ fontSize: '13px', color: 'rgba(255,255,255,0.85)', marginTop: '10px', fontWeight: 700, lineHeight: 1.35 }}>{l}</div>
+      <div style={{ fontSize: '11.5px', color: 'rgba(255,255,255,0.42)', marginTop: '3px', lineHeight: 1.35 }}>{sub}</div>
+      <div style={{
+        fontSize: '11px', color: 'rgba(255,255,255,0.55)',
+        marginTop: '10px', paddingTop: '10px',
+        borderTop: '1px solid rgba(255,255,255,0.07)',
+        lineHeight: 1.5,
+      }}>{detail}</div>
+      <div style={{
+        fontSize: '9.5px', color: 'rgba(147,197,253,0.45)',
+        marginTop: '6px', fontWeight: 600, letterSpacing: '0.05em', textTransform: 'uppercase',
+      }}>{source}</div>
     </motion.div>
   );
 }
@@ -153,18 +163,34 @@ export function Hero({ onStart }: { onStart?: () => void } = {}) {
           variants={fadeUp}
           initial="hidden"
           animate="show"
-          style={{ marginTop: '72px', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(130px, 1fr))', gap: '14px' }}
+          style={{ marginTop: '72px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '16px' }}
         >
           {(lang === 'fr' ? [
-            { v: '72%',  num: 72,   suffix: '%',   l: 'des entreprises ont un site',      sub: 'en 2024–2025' },
-            { v: '28%',  num: 28,   suffix: '%',   l: 'des PME n\'ont toujours pas',      sub: 'de présence en ligne' },
-            { v: '1Md+', num: null, suffix: '',    l: 'de sites web actifs',              sub: 'dans le monde' },
-            { v: '3×',   num: 3,    suffix: '×',   l: 'plus de prospects',                sub: 'avec un site pro' },
+            { v: '72%',  num: 72,   suffix: '%',   l: 'des entreprises ont un site',      sub: 'en 2024–2025',
+              detail: 'Aux États-Unis et au Canada, près de 3 entreprises sur 4 disposent désormais d\u2019une présence en ligne professionnelle pour acquérir et fidéliser leurs clients.',
+              source: 'Forbes Advisor · 2024' },
+            { v: '28%',  num: 28,   suffix: '%',   l: 'des PME n\'ont toujours pas',      sub: 'de présence en ligne',
+              detail: 'Cela représente plus de 9 millions de petites entreprises qui passent à côté de clients qui les cherchent activement sur Google chaque jour.',
+              source: 'Statista · 2024' },
+            { v: '1Md+', num: null, suffix: '',    l: 'de sites web actifs',              sub: 'dans le monde',
+              detail: 'Pour vous démarquer, votre site doit être rapide, sécurisé, optimisé SEO et conçu pour la conversion — pas juste « en ligne ».',
+              source: 'Internet Live Stats · 2025' },
+            { v: '3×',   num: 3,    suffix: '×',   l: 'plus de prospects',                sub: 'avec un site pro',
+              detail: 'Les entreprises avec un site professionnel et bien optimisé génèrent en moyenne 3 fois plus de demandes qualifiées que celles avec un site basique ou aucun site.',
+              source: 'HubSpot Research · 2024' },
           ] : [
-            { v: '72%',  num: 72,   suffix: '%',   l: 'of businesses have a website',    sub: 'as of 2024–2025' },
-            { v: '28%',  num: 28,   suffix: '%',   l: 'of small businesses still don\'t', sub: 'have an online presence' },
-            { v: '1B+',  num: null, suffix: '',    l: 'active websites worldwide',        sub: 'and growing daily' },
-            { v: '3×',   num: 3,    suffix: '×',   l: 'more leads',                      sub: 'with a pro website' },
+            { v: '72%',  num: 72,   suffix: '%',   l: 'of businesses have a website',    sub: 'as of 2024–2025',
+              detail: 'In the U.S. and Canada, nearly 3 out of 4 businesses now run a professional online presence to acquire and retain customers.',
+              source: 'Forbes Advisor · 2024' },
+            { v: '28%',  num: 28,   suffix: '%',   l: 'of small businesses still don\'t', sub: 'have an online presence',
+              detail: 'That\u2019s over 9 million small businesses missing out on customers actively searching for them on Google every single day.',
+              source: 'Statista · 2024' },
+            { v: '1B+',  num: null, suffix: '',    l: 'active websites worldwide',        sub: 'and growing daily',
+              detail: 'To stand out, your site must be fast, secure, SEO-optimized and built to convert — not just “online”.',
+              source: 'Internet Live Stats · 2025' },
+            { v: '3×',   num: 3,    suffix: '×',   l: 'more leads',                      sub: 'with a pro website',
+              detail: 'Businesses with a professional, well-optimized website generate on average 3× more qualified inquiries than those with a basic site or no site at all.',
+              source: 'HubSpot Research · 2024' },
           ]).map((s, i) => (
             <StatCard key={s.v} {...s} delay={0.55 + i * 0.12} />
           ))}
