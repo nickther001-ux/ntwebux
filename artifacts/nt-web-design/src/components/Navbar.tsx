@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import { useLanguage } from '@/lib/i18n';
 import { Menu, X, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -183,7 +184,9 @@ export function Navbar() {
         }
       `}</style>
 
-      {/* Mobile menu */}
+      {/* Mobile menu — portaled to <body> so it escapes the header's backdrop-filter
+          containing block (otherwise position:fixed inset:0 gets clipped to 68px). */}
+      {createPortal(
       <AnimatePresence>
         {open && (
           <motion.div
@@ -195,7 +198,7 @@ export function Navbar() {
               position: 'fixed',
               inset: 0,
               background: '#060d1a',
-              zIndex: 49,
+              zIndex: 100,
               display: 'flex',
               flexDirection: 'column',
               overflow: 'hidden',
@@ -319,7 +322,9 @@ export function Navbar() {
             </motion.div>
           </motion.div>
         )}
-      </AnimatePresence>
+      </AnimatePresence>,
+      document.body
+      )}
     </header>
   );
 }
