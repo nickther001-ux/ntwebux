@@ -97,48 +97,84 @@ export default function BusinessSolutions() {
         <Navbar />
 
         <main>
-          {/* ══ HERO — Landio-style ═══════════════════════════ */}
-          <section className="relative min-h-screen bg-[#050507] overflow-hidden flex flex-col items-center justify-center text-center px-4">
-            {/* Landio glow effect */}
-            <div className="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[600px] sm:w-[800px] h-[300px] sm:h-[500px] bg-blue-600/20 blur-[120px] rounded-full pointer-events-none" />
+          {/* ══ HERO ══════════════════════════════════════════ */}
+          <section style={{
+            minHeight: '92vh',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            textAlign: 'center',
+            padding: '120px 24px 80px',
+            position: 'relative',
+            overflow: 'hidden',
+          }}>
+            {/* Subtle ring accent */}
+            <div style={{
+              position: 'absolute', top: '50%', left: '50%',
+              transform: 'translate(-50%,-55%)',
+              width: '680px', height: '680px', borderRadius: '50%',
+              border: '1px solid rgba(59,130,246,0.08)',
+              pointerEvents: 'none',
+            }} />
 
             <motion.div
               variants={fadeUp} initial="hidden" animate="show"
               transition={{ duration: 0.6, ease }}
-              className="relative z-10 flex flex-col items-center"
+              style={{ maxWidth: '860px' }}
             >
               {/* Badge */}
-              <span
-                className="inline-flex items-center gap-[7px] mb-6 uppercase relative z-10"
-                style={{
-                  fontSize: '11px', fontWeight: 700, letterSpacing: '0.14em',
-                  color: '#3b82f6',
-                  background: 'rgba(59,130,246,0.08)',
-                  border: '1px solid rgba(59,130,246,0.22)',
-                  borderRadius: '20px', padding: '5px 16px',
-                }}
-              >
+              <span style={{
+                display: 'inline-flex', alignItems: 'center', gap: '7px',
+                marginBottom: '22px',
+                fontSize: '11px', fontWeight: 700, letterSpacing: '0.14em',
+                textTransform: 'uppercase', color: '#3b82f6',
+                background: 'rgba(59,130,246,0.08)',
+                border: '1px solid rgba(59,130,246,0.22)',
+                borderRadius: '20px', padding: '5px 16px',
+              }}>
                 <Zap size={11} /> {bi(copy.hero.badge, l)}
               </span>
 
-              {/* H1 — Landio gradient + blue keyword accent */}
-              <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter z-10 relative mb-6 whitespace-pre-line leading-[1.05]">
-                <span className="text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-400">
+              {/* H1 */}
+              <h1 style={{
+                fontSize: 'clamp(34px, 6.5vw, 68px)',
+                fontWeight: 900,
+                letterSpacing: '-0.03em',
+                lineHeight: 1.06,
+                margin: '0 0 24px',
+                whiteSpace: 'pre-line',
+              }}>
+                <span style={{
+                  background: 'linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.78) 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                }}>
                   {bi(copy.hero.h1, l).split('\n')[0]}
                 </span>
                 <br />
-                <span className="text-blue-500">
+                <span style={{
+                  background: 'linear-gradient(135deg, #93c5fd 0%, #3b82f6 55%, #60a5fa 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                }}>
                   {bi(copy.hero.h1, l).split('\n')[1]}
                 </span>
               </h1>
 
               {/* Subheading */}
-              <p className="text-lg md:text-xl text-gray-400 max-w-2xl font-medium tracking-wide z-10 relative mb-10">
+              <p style={{
+                fontSize: 'clamp(15px, 2.4vw, 18px)',
+                color: 'rgba(255,255,255,0.48)',
+                maxWidth: '600px',
+                margin: '0 auto 38px',
+                lineHeight: 1.68,
+              }}>
                 {bi(copy.hero.sub, l)}
               </p>
 
               {/* CTAs */}
-              <div className="flex flex-wrap gap-[14px] justify-center z-10 relative">
+              <div style={{ display: 'flex', gap: '14px', justifyContent: 'center', flexWrap: 'wrap' }}>
                 <button
                   onClick={() => setModalOpen(true)}
                   style={{

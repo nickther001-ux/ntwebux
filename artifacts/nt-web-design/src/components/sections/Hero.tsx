@@ -1,5 +1,5 @@
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Sparkles } from 'lucide-react';
 import { useLanguage } from '@/lib/i18n';
 import { useEffect, useRef, useState } from 'react';
 
@@ -62,97 +62,66 @@ export function Hero() {
   const contentY = useTransform(scrollYProgress, [0, 1], ['0px', '-40px']);
 
   return (
-    <section ref={sectionRef} style={{ position: 'relative', width: '100%', paddingTop: '140px', paddingBottom: '120px', overflow: 'hidden', textAlign: 'center', background: '#000000' }}>
-      {/* Atmospheric mist — soft horizon haze instead of bright blue glow (Landio signature) */}
-      <div className="hero-mist" />
+    <section ref={sectionRef} style={{ position: 'relative', width: '100%', paddingTop: '160px', paddingBottom: '120px', overflow: 'hidden', textAlign: 'center' }}>
+      {/* Dot grid */}
+      <div className="dot-grid" style={{ position: 'absolute', inset: 0, opacity: 0.6, pointerEvents: 'none' }} />
 
-      {/* Dot grid — very subtle */}
-      <div className="dot-grid" style={{ position: 'absolute', inset: 0, opacity: 0.35, pointerEvents: 'none', maskImage: 'radial-gradient(ellipse 70% 70% at 50% 50%, black 20%, transparent 80%)' }} />
-
+      {/* Tight focal glow behind headline — adds depth on top of the body glow */}
+      <div style={{
+        position: 'absolute', top: 0, left: '50%',
+        transform: 'translateX(-50%)',
+        width: '860px', height: '460px', borderRadius: '50%',
+        background: 'radial-gradient(ellipse at 50% 30%, rgba(96,165,250,0.22) 0%, rgba(59,130,246,0.08) 45%, transparent 70%)',
+        pointerEvents: 'none',
+      }} />
       {/* Soft horizon line glow */}
       <div style={{
         position: 'absolute', bottom: 0, left: '50%',
         transform: 'translateX(-50%)',
         width: '100%', height: '1px',
-        background: 'linear-gradient(90deg, transparent, rgba(120,140,180,0.25), transparent)',
+        background: 'linear-gradient(90deg, transparent, rgba(59,130,246,0.25), transparent)',
         pointerEvents: 'none',
       }} />
 
-      <motion.div style={{ y: contentY, maxWidth: '960px', margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 1 }}>
+      <motion.div style={{ y: contentY, maxWidth: '900px', margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 1 }}>
 
-        {/* Glowing icon badge — Landio signature element */}
-        <motion.div
-          custom={0}
-          variants={fadeUp}
-          initial="hidden"
-          animate="show"
-          style={{ display: 'flex', justifyContent: 'center', marginBottom: '22px' }}
-        >
-          <div style={{
-            position: 'relative',
-            width: '64px', height: '64px',
-            borderRadius: '14px',
-            background: 'linear-gradient(180deg, rgba(30,40,60,0.9), rgba(10,15,25,0.9))',
-            border: '1px solid rgba(120,140,180,0.25)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            boxShadow:
-              '0 0 0 1px rgba(255,255,255,0.04) inset, ' +
-              '0 8px 32px rgba(96,165,250,0.25), ' +
-              '0 0 60px rgba(96,165,250,0.18)',
-          }}>
-            <img
-              src={`${import.meta.env.BASE_URL}logo.svg`}
-              alt=""
-              style={{ width: '34px', height: '34px', borderRadius: '6px' }}
-            />
-            {/* Underglow */}
-            <div style={{
-              position: 'absolute', bottom: '-18px', left: '50%',
-              transform: 'translateX(-50%)',
-              width: '90%', height: '24px',
-              background: 'radial-gradient(ellipse, rgba(96,165,250,0.55) 0%, transparent 70%)',
-              filter: 'blur(8px)',
-              pointerEvents: 'none',
-            }} />
-          </div>
-        </motion.div>
-
-        {/* Muted pill label */}
-        <motion.div custom={1} variants={fadeUp} initial="hidden" animate="show" style={{ display: 'flex', justifyContent: 'center', marginBottom: '36px' }}>
-          <span className="pill-muted">
+        {/* Badge */}
+        <motion.div custom={0} variants={fadeUp} initial="hidden" animate="show" style={{ display: 'flex', justifyContent: 'center', marginBottom: '32px' }}>
+          <span className="pill-label">
+            <Sparkles size={11} />
             {lang === 'fr' ? 'Studio Web Design' : 'Web Design Studio'}
           </span>
         </motion.div>
 
-        {/* Headline — light weight, silvery, with italic serif accent on last word */}
+        {/* Headline */}
         <motion.h1
-          custom={2}
+          custom={1}
           variants={fadeUp}
           initial="hidden"
           animate="show"
-          className="silver-text"
           style={{
-            fontSize: 'clamp(2.6rem, 7.6vw, 6rem)',
-            fontWeight: 500,
-            lineHeight: 1.06,
-            letterSpacing: '-0.035em',
+            fontSize: 'clamp(3rem, 8vw, 6.5rem)',
+            fontWeight: 900,
+            lineHeight: 1.04,
+            letterSpacing: '-0.03em',
+            color: '#ffffff',
             marginBottom: '28px',
           }}
         >
           {lang === 'fr' ? (
-            <>Votre business en ligne. Fait pour <span className="serif-italic">convertir.</span></>
+            <>Votre business en ligne.<br /><span className="gradient-text">Fait pour convertir.</span></>
           ) : (
-            <>Your business online. Built to <span className="serif-italic">convert.</span></>
+            <>Your business online.<br /><span className="gradient-text">Built to convert.</span></>
           )}
         </motion.h1>
 
         {/* Subtitle */}
         <motion.p
-          custom={3}
+          custom={2}
           variants={fadeUp}
           initial="hidden"
           animate="show"
-          style={{ fontSize: '17px', color: 'rgba(255,255,255,0.55)', lineHeight: 1.65, maxWidth: '540px', margin: '0 auto 40px', fontWeight: 400 }}
+          style={{ fontSize: '18px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.7, maxWidth: '560px', margin: '0 auto 44px' }}
         >
           {t('hero.sub')}
         </motion.p>
