@@ -76,16 +76,21 @@ export function Navbar() {
         }}
       >
         {/* Logo */}
-        <a href={isHome ? '#' : '/'} style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+        <a href={isHome ? '#' : '/'} style={{ display: 'flex', alignItems: 'center', gap: '6px', textDecoration: 'none', flexShrink: 0 }}>
           <img
-            src={`${import.meta.env.BASE_URL}logo.png`}
-            alt="NT Web UX"
-            style={{ height: '42px', width: 'auto', objectFit: 'contain', display: 'block', filter: 'brightness(0) invert(1)' }}
+            src={`${import.meta.env.BASE_URL}icon.png`}
+            alt=""
+            style={{ height: '30px', width: 'auto', objectFit: 'contain', display: 'block', filter: 'brightness(0) invert(1)' }}
+          />
+          <img
+            src={`${import.meta.env.BASE_URL}wordmark.png`}
+            alt="NTWebUX"
+            style={{ height: '30px', width: 'auto', objectFit: 'contain', display: 'block' }}
           />
         </a>
 
         {/* Desktop Nav */}
-        <nav className="navbar-desktop" style={{ alignItems: 'center', gap: '36px' }}>
+        <nav className="navbar-desktop" style={{ alignItems: 'center', gap: '28px', whiteSpace: 'nowrap' }}>
           {links.map((link) =>
             link.isPage ? (
               <Link
@@ -211,8 +216,9 @@ export function Navbar() {
 
             {/* Top bar — logo + close */}
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 24px', height: '68px', borderBottom: '1px solid rgba(255,255,255,0.06)', flexShrink: 0 }}>
-              <a href={isHome ? '#' : '/'} style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }} onClick={() => setOpen(false)}>
-                <img src={`${import.meta.env.BASE_URL}logo.png`} alt="NT Web UX" style={{ height: '36px', width: 'auto', objectFit: 'contain', display: 'block', filter: 'brightness(0) invert(1)' }} />
+              <a href={isHome ? '#' : '/'} style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none' }} onClick={() => setOpen(false)}>
+                <img src={`${import.meta.env.BASE_URL}icon.png`} alt="" style={{ height: '30px', width: 'auto', objectFit: 'contain', display: 'block', filter: 'brightness(0) invert(1)' }} />
+                <img src={`${import.meta.env.BASE_URL}wordmark.png`} alt="NTWebUX" style={{ height: '20px', width: 'auto', objectFit: 'contain', display: 'block' }} />
               </a>
               <button
                 onClick={() => setOpen(false)}

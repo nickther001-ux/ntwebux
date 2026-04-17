@@ -9,11 +9,16 @@ export function Footer() {
         <div style={{ display: 'grid', gridTemplateColumns: '1.6fr 1fr 1fr 1fr', gap: '48px', marginBottom: '48px' }} className="grid-footer">
           {/* Brand */}
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', marginBottom: '16px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
               <img
-                src={`${import.meta.env.BASE_URL}logo.png`}
-                alt="NT Web UX"
-                style={{ height: '38px', width: 'auto', objectFit: 'contain', display: 'block', filter: 'brightness(0) invert(1)' }}
+                src={`${import.meta.env.BASE_URL}icon.png`}
+                alt=""
+                style={{ height: '34px', width: 'auto', objectFit: 'contain', display: 'block', filter: 'brightness(0) invert(1)' }}
+              />
+              <img
+                src={`${import.meta.env.BASE_URL}wordmark.png`}
+                alt="NTWebUX"
+                style={{ height: '38px', width: 'auto', objectFit: 'contain', display: 'block' }}
               />
             </div>
             <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.38)', lineHeight: 1.7, maxWidth: '220px' }}>
