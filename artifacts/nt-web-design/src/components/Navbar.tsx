@@ -119,16 +119,31 @@ export function Navbar() {
 
         {/* Right */}
         <div className="navbar-desktop" style={{ alignItems: 'center', gap: '20px', borderLeft: '1px solid rgba(255,255,255,0.1)', paddingLeft: '32px', marginLeft: '8px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '12px', fontWeight: 600 }}>
-            <button
-              onClick={() => setLang('en')}
-              style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: lang === 'en' ? '#3b82f6' : 'rgba(255,255,255,0.35)', background: 'none', border: 'none', cursor: 'pointer', fontWeight: 600, fontSize: '12px', letterSpacing: '0.08em' }}
-            ><span style={{ fontSize: '14px', lineHeight: 1 }}>🇨🇦</span>EN</button>
-            <span style={{ color: 'rgba(255,255,255,0.15)' }}>|</span>
-            <button
-              onClick={() => setLang('fr')}
-              style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: lang === 'fr' ? '#3b82f6' : 'rgba(255,255,255,0.35)', background: 'none', border: 'none', cursor: 'pointer', fontWeight: 600, fontSize: '12px', letterSpacing: '0.08em' }}
-            ><span style={{ fontSize: '14px', lineHeight: 1 }}>🇫🇷</span>FR</button>
+          <div style={{
+            display: 'flex', alignItems: 'center',
+            background: 'rgba(255,255,255,0.06)',
+            border: '1px solid rgba(255,255,255,0.12)',
+            borderRadius: '8px',
+            overflow: 'hidden',
+          }}>
+            {(['en', 'fr'] as const).map((l, i) => (
+              <button
+                key={l}
+                onClick={() => setLang(l)}
+                style={{
+                  display: 'inline-flex', alignItems: 'center', gap: '7px',
+                  padding: '6px 12px',
+                  fontSize: '12px', fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase',
+                  background: lang === l ? 'rgba(59,130,246,0.3)' : 'transparent',
+                  color: lang === l ? '#93c5fd' : 'rgba(255,255,255,0.55)',
+                  border: 'none',
+                  borderRight: i === 0 ? '1px solid rgba(255,255,255,0.12)' : 'none',
+                  cursor: 'pointer',
+                  transition: 'background 0.15s, color 0.15s',
+                  fontFamily: '"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",system-ui,sans-serif',
+                }}
+              ><span style={{ fontSize: '16px', lineHeight: 1 }}>{l === 'en' ? '🇨🇦' : '🇫🇷'}</span>{l.toUpperCase()}</button>
+            ))}
           </div>
           <a
             href={isHome ? '#contact' : '/#contact'}
