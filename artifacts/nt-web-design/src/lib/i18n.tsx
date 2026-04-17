@@ -65,7 +65,7 @@ const translations: Translations = {
         { quote: "NT Web UX built our online presence from scratch. We're taking reservations and takeout orders 24/7 now — revenue is up 40% since we launched.", name: "Marie-Claire Joseph", role: "Owner, Saveurs d'Haïti MTL", metric: "+40% revenue", metricLabel: "since launch", img: "proj-restaurant.png", industry: "Restaurant" },
         { quote: "We went from zero online presence to fully booked in 6 weeks. The ROI on this website has been incredible. Best investment we've made.", name: "Karine Beaumont", role: "CEO, Beaumont Wellness Clinic", metric: "6 weeks", metricLabel: "to fully booked", img: "proj-wellness.png", industry: "Wellness" },
         { quote: "They built our SaaS dashboard from scratch and it looks like a million dollars. Clients constantly compliment our platform's design.", name: "Alexis Fontaine", role: "Co-Founder, Flux Analytics", metric: "5★", metricLabel: "client rating", img: "proj-saas.png", industry: "SaaS" },
-        { quote: "The bilingual site they built for us is exactly what we needed to reach both English and French markets. Our organic traffic jumped 67%.", name: "Marc-André Ouellet", role: "Owner, Bâtisseurs Nordiques Inc.", metric: "+67% traffic", metricLabel: "organic growth", img: "proj-construction.png", industry: "Construction" }
+        { quote: "The bilingual site they built for us is exactly what we needed to reach both English and French markets. Our organic traffic jumped 67%.", name: "Marc-André Ouellet", role: "Owner, Bâtisseurs Nordiques Inc.", metric: "+67% traffic", metricLabel: "organic growth", img: "proj-construction2.png", industry: "Construction" }
       ]
     },
     contact: {
@@ -190,7 +190,7 @@ const translations: Translations = {
         { quote: "NT Web UX a créé notre présence en ligne de zéro. On prend des réservations et commandes 24/7 maintenant — les revenus ont augmenté de 40% depuis le lancement.", name: "Marie-Claire Joseph", role: "Propriétaire, Saveurs d'Haïti MTL", metric: "+40% revenus", metricLabel: "depuis le lancement", img: "proj-restaurant.png", industry: "Restaurant" },
         { quote: "On est passé de zéro présence en ligne à complet en 6 semaines. Le retour sur investissement de ce site est incroyable. Meilleur investissement qu'on ait fait.", name: "Karine Beaumont", role: "PDG, Clinique Beaumont Santé", metric: "6 semaines", metricLabel: "pour complet", img: "proj-wellness.png", industry: "Bien-être" },
         { quote: "Ils ont construit notre tableau de bord SaaS de zéro et ça ressemble à un million de dollars. Nos clients complimentent toujours le design de notre plateforme.", name: "Alexis Fontaine", role: "Co-Fondateur, Flux Analytics", metric: "5★", metricLabel: "satisfaction client", img: "proj-saas.png", industry: "SaaS" },
-        { quote: "Le site bilingue qu'ils ont construit est exactement ce qu'il nous fallait. Notre trafic organique a bondi de 67% en quelques mois.", name: "Marc-André Ouellet", role: "Propriétaire, Bâtisseurs Nordiques Inc.", metric: "+67% trafic", metricLabel: "croissance organique", img: "proj-construction.png", industry: "Construction" }
+        { quote: "Le site bilingue qu'ils ont construit est exactement ce qu'il nous fallait. Notre trafic organique a bondi de 67% en quelques mois.", name: "Marc-André Ouellet", role: "Propriétaire, Bâtisseurs Nordiques Inc.", metric: "+67% trafic", metricLabel: "croissance organique", img: "proj-construction2.png", industry: "Construction" }
       ]
     },
     contact: {
