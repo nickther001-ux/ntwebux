@@ -75,17 +75,12 @@ export function Navbar() {
         }}
       >
         {/* Logo */}
-        <a href={isHome ? '#' : '/'} style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }}>
+        <a href={isHome ? '#' : '/'} style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
           <img
-            src={`${import.meta.env.BASE_URL}logo.svg`}
+            src={`${import.meta.env.BASE_URL}logo.png`}
             alt="NT Web UX"
-            style={{ height: '38px', width: '38px', objectFit: 'contain', borderRadius: '10px' }}
+            style={{ height: '42px', width: 'auto', objectFit: 'contain', display: 'block' }}
           />
-          <div style={{ lineHeight: 1, whiteSpace: 'nowrap' }}>
-            <div style={{ fontSize: '15px', fontWeight: 800, letterSpacing: '0.12em', color: '#fff', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>
-              NT <span style={{ background: 'linear-gradient(135deg,#3b82f6,#60a5fa)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Web UX</span>
-            </div>
-          </div>
         </a>
 
         {/* Desktop Nav */}
@@ -212,11 +207,8 @@ export function Navbar() {
 
             {/* Top bar — logo + close */}
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 24px', height: '68px', borderBottom: '1px solid rgba(255,255,255,0.06)', flexShrink: 0 }}>
-              <a href={isHome ? '#' : '/'} style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }} onClick={() => setOpen(false)}>
-                <img src={`${import.meta.env.BASE_URL}logo.svg`} alt="NT Web UX" style={{ height: '32px', width: '32px', objectFit: 'contain', borderRadius: '8px' }} />
-                <span style={{ fontSize: '14px', fontWeight: 800, letterSpacing: '0.12em', color: '#fff', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>
-                  NT <span style={{ background: 'linear-gradient(135deg,#3b82f6,#60a5fa)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Web UX</span>
-                </span>
+              <a href={isHome ? '#' : '/'} style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }} onClick={() => setOpen(false)}>
+                <img src={`${import.meta.env.BASE_URL}logo.png`} alt="NT Web UX" style={{ height: '36px', width: 'auto', objectFit: 'contain', display: 'block' }} />
               </a>
               <button
                 onClick={() => setOpen(false)}
