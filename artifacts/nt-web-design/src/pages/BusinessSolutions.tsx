@@ -97,118 +97,46 @@ export default function BusinessSolutions() {
         <Navbar />
 
         <main>
-          {/* ══ HERO ══════════════════════════════════════════ */}
-          <section style={{
-            minHeight: '92vh',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            textAlign: 'center',
-            padding: '120px 24px 80px',
-            position: 'relative',
-            overflow: 'hidden',
-          }}>
-            {/* Subtle ring accent */}
-            <div style={{
-              position: 'absolute', top: '50%', left: '50%',
-              transform: 'translate(-50%,-55%)',
-              width: '680px', height: '680px', borderRadius: '50%',
-              border: '1px solid rgba(59,130,246,0.08)',
-              pointerEvents: 'none',
-            }} />
+          {/* ══ HERO — Landio aesthetic (exact Tailwind structure) ══ */}
+          <section className="relative min-h-screen w-full bg-[#050507] overflow-hidden flex flex-col items-center pt-32 pb-20 px-4 font-sans">
 
-            <motion.div
-              variants={fadeUp} initial="hidden" animate="show"
-              transition={{ duration: 0.6, ease }}
-              style={{ maxWidth: '860px' }}
-            >
-              {/* Badge */}
-              <span style={{
-                display: 'inline-flex', alignItems: 'center', gap: '7px',
-                marginBottom: '22px',
-                fontSize: '11px', fontWeight: 700, letterSpacing: '0.14em',
-                textTransform: 'uppercase', color: '#3b82f6',
-                background: 'rgba(59,130,246,0.08)',
-                border: '1px solid rgba(59,130,246,0.22)',
-                borderRadius: '20px', padding: '5px 16px',
-              }}>
-                <Zap size={11} /> {bi(copy.hero.badge, l)}
+            {/* Landio background glow */}
+            <div className="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[600px] sm:w-[800px] h-[300px] sm:h-[500px] bg-blue-600/20 blur-[120px] rounded-full pointer-events-none" />
+
+            {/* Top badge */}
+            <div className="z-10 relative mb-8 px-5 py-2 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-xs md:text-sm font-semibold tracking-widest uppercase flex items-center gap-2">
+              <Zap className="w-4 h-4" />
+              {bi(copy.hero.badge, l)}
+            </div>
+
+            {/* Hero typography */}
+            <h1 className="z-10 relative text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter text-center leading-[1.1] mb-8">
+              <span className="text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-400">
+                {bi(copy.hero.h1, l).split('\n')[0]}<br />
               </span>
+              <span className="text-blue-500">{bi(copy.hero.h1, l).split('\n')[1]}</span>
+            </h1>
 
-              {/* H1 */}
-              <h1 style={{
-                fontSize: 'clamp(34px, 6.5vw, 68px)',
-                fontWeight: 900,
-                letterSpacing: '-0.03em',
-                lineHeight: 1.06,
-                margin: '0 0 24px',
-                whiteSpace: 'pre-line',
-              }}>
-                <span style={{
-                  background: 'linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.78) 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                }}>
-                  {bi(copy.hero.h1, l).split('\n')[0]}
-                </span>
-                <br />
-                <span style={{
-                  background: 'linear-gradient(135deg, #93c5fd 0%, #3b82f6 55%, #60a5fa 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                }}>
-                  {bi(copy.hero.h1, l).split('\n')[1]}
-                </span>
-              </h1>
+            <p className="z-10 relative text-lg md:text-xl text-gray-400 max-w-2xl text-center font-medium tracking-wide mb-12">
+              {bi(copy.hero.sub, l)}
+            </p>
 
-              {/* Subheading */}
-              <p style={{
-                fontSize: 'clamp(15px, 2.4vw, 18px)',
-                color: 'rgba(255,255,255,0.48)',
-                maxWidth: '600px',
-                margin: '0 auto 38px',
-                lineHeight: 1.68,
-              }}>
-                {bi(copy.hero.sub, l)}
-              </p>
-
-              {/* CTAs */}
-              <div style={{ display: 'flex', gap: '14px', justifyContent: 'center', flexWrap: 'wrap' }}>
-                <button
-                  onClick={() => setModalOpen(true)}
-                  style={{
-                    display: 'inline-flex', alignItems: 'center', gap: '8px',
-                    background: 'linear-gradient(135deg, #1d4ed8, #3b82f6)',
-                    color: '#fff', fontWeight: 700, fontSize: '15px',
-                    padding: '14px 28px', borderRadius: '12px',
-                    border: 'none', cursor: 'pointer',
-                    boxShadow: '0 8px 28px rgba(59,130,246,0.4)',
-                    transition: 'transform 0.18s, box-shadow 0.18s',
-                  }}
-                  onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 14px 36px rgba(59,130,246,0.52)'; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = '0 8px 28px rgba(59,130,246,0.4)'; }}
-                >
-                  {bi(copy.hero.cta, l)} <ArrowRight size={15} />
-                </button>
-                <a
-                  href="/#contact"
-                  style={{
-                    display: 'inline-flex', alignItems: 'center', gap: '8px',
-                    background: 'rgba(255,255,255,0.05)',
-                    border: '1px solid rgba(255,255,255,0.12)',
-                    color: 'rgba(255,255,255,0.72)', fontWeight: 600, fontSize: '15px',
-                    padding: '14px 28px', borderRadius: '12px',
-                    textDecoration: 'none',
-                    transition: 'background 0.18s, color 0.18s',
-                  }}
-                  onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.09)'; e.currentTarget.style.color = '#fff'; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.05)'; e.currentTarget.style.color = 'rgba(255,255,255,0.72)'; }}
-                >
-                  {bi(copy.hero.ctaSec, l)}
-                </a>
-              </div>
-            </motion.div>
+            {/* Buttons */}
+            <div className="z-10 relative flex flex-col sm:flex-row gap-5 w-full sm:w-auto">
+              <button
+                onClick={() => setModalOpen(true)}
+                className="px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl transition-all text-center flex items-center justify-center gap-2"
+              >
+                {bi(copy.hero.cta, l)}
+                <ArrowRight className="w-5 h-5" />
+              </button>
+              <a
+                href="/#contact"
+                className="px-8 py-4 bg-[#050507] border border-gray-700 hover:border-gray-500 text-gray-300 hover:text-white font-semibold rounded-xl transition-all text-center"
+              >
+                {bi(copy.hero.ctaSec, l)}
+              </a>
+            </div>
           </section>
 
           {/* ══ ANTI-MISSED-CALL FEATURES ════════════════════ */}

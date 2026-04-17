@@ -1,0 +1,53 @@
+Stop trying to modify the existing file. Please completely overwrite the BusinessSolutions.jsx file with the exact code below. Do not change the Tailwind classes.
+JavaScript
+
+import React from 'react';
+import { Link } from 'react-router-dom';
+// Ensure your ROICalculator import matches your file structure
+// import ROICalculator from '../components/ROICalculator'; 
+
+export default function BusinessSolutions() {
+  return (
+    <div className="relative min-h-screen w-full bg-[#050507] overflow-hidden flex flex-col items-center pt-32 pb-20 px-4 font-sans">
+      
+      {/* The Landio Background Glow */}
+      <div className="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[600px] sm:w-[800px] h-[300px] sm:h-[500px] bg-blue-600/20 blur-[120px] rounded-full pointer-events-none"></div>
+
+      {/* Top Badge */}
+      <div className="z-10 relative mb-8 px-5 py-2 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-xs md:text-sm font-semibold tracking-widest uppercase flex items-center gap-2">
+        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"></path></svg>
+        Business Software
+      </div>
+
+      {/* Hero Typography */}
+      <h1 className="z-10 relative text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter text-center leading-[1.1] mb-8">
+        <span className="text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-400">
+          Scale Your Operations.<br/>
+        </span>
+        <span className="text-blue-500">Stop Missing Leads.</span>
+      </h1>
+
+      <p className="z-10 relative text-lg md:text-xl text-gray-400 max-w-2xl text-center font-medium tracking-wide mb-12">
+        The all-in-one AI engine built for Montreal's top contractors (HVAC, Roofing, Auto Detailing).
+      </p>
+
+      {/* Buttons routed to /contact */}
+      <div className="z-10 relative flex flex-col sm:flex-row gap-5 w-full sm:w-auto">
+        <Link to="/contact" className="px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl transition-all text-center flex items-center justify-center gap-2">
+          Claim Your Free Setup
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+        </Link>
+        <Link to="/contact" className="px-8 py-4 bg-[#050507] border border-gray-700 hover:border-gray-500 text-gray-300 hover:text-white font-semibold rounded-xl transition-all text-center">
+          Talk to a Strategist
+        </Link>
+      </div>
+      
+      {/* Render your other components below this */}
+      {/* <div className="z-10 relative w-full max-w-6xl mt-24">
+          <ROICalculator />
+      </div> */}
+      
+    </div>
+  );
+}
+```"
