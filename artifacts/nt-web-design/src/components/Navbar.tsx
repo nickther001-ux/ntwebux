@@ -321,7 +321,7 @@ export function Navbar() {
                       transition: 'background 0.2s, color 0.2s',
                     }}
                   >
-                    {l === 'en' ? '🇨🇦 EN' : '🇫🇷 FR'}
+                    {l === 'en' ? 'EN' : 'FR'}
                   </button>
                 ))}
               </div>
