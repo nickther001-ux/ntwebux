@@ -72,7 +72,7 @@ export function Hero({ onStart }: { onStart?: () => void } = {}) {
   const contentY = useTransform(scrollYProgress, [0, 1], ['0px', '-40px']);
 
   return (
-    <section ref={sectionRef} style={{ position: 'relative', width: '100%', paddingTop: '160px', paddingBottom: '120px', overflow: 'hidden', textAlign: 'center' }}>
+    <section ref={sectionRef} style={{ position: 'relative', width: '100%', paddingTop: '120px', paddingBottom: '90px', overflow: 'hidden', textAlign: 'center' }}>
       {/* Dot grid */}
       <div className="dot-grid" style={{ position: 'absolute', inset: 0, opacity: 0.6, pointerEvents: 'none' }} />
 
@@ -110,9 +110,9 @@ export function Hero({ onStart }: { onStart?: () => void } = {}) {
           initial="hidden"
           animate="show"
           style={{
-            fontSize: 'clamp(3rem, 8vw, 6.5rem)',
+            fontSize: 'clamp(2.75rem, 6vw, 4.75rem)',
             fontWeight: 900,
-            lineHeight: 1.04,
+            lineHeight: 1.06,
             letterSpacing: '-0.03em',
             color: '#ffffff',
             marginBottom: '28px',
