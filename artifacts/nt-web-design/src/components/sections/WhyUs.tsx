@@ -70,8 +70,8 @@ export function WhyUs() {
         <div>
           <span className="pill-label" style={{ marginBottom: '24px', display: 'inline-flex' }}>{eyebrow}</span>
           <h1 className="text-5xl font-bold text-white mb-4">
-            Digital growth. <br />
-            <span className="text-blue-400">Engineered custom.</span>
+            {lang === 'fr' ? 'Croissance digitale.' : 'Digital growth.'} <br />
+            <span className="text-blue-400">{lang === 'fr' ? 'Conçue sur mesure.' : 'Engineered custom.'}</span>
           </h1>
           <p style={{ fontSize: '15px', color: 'rgba(255,255,255,0.45)', lineHeight: 1.75, marginBottom: '48px', maxWidth: '400px' }}>
             {lang === 'fr'
