@@ -117,13 +117,13 @@ export function Navbar() {
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '12px', fontWeight: 600 }}>
             <button
               onClick={() => setLang('en')}
-              style={{ color: lang === 'en' ? '#3b82f6' : 'rgba(255,255,255,0.35)', background: 'none', border: 'none', cursor: 'pointer', fontWeight: 600, fontSize: '12px', letterSpacing: '0.08em' }}
-            >EN</button>
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: lang === 'en' ? '#3b82f6' : 'rgba(255,255,255,0.35)', background: 'none', border: 'none', cursor: 'pointer', fontWeight: 600, fontSize: '12px', letterSpacing: '0.08em' }}
+            ><span style={{ fontSize: '14px', lineHeight: 1 }}>🇨🇦</span>EN</button>
             <span style={{ color: 'rgba(255,255,255,0.15)' }}>|</span>
             <button
               onClick={() => setLang('fr')}
-              style={{ color: lang === 'fr' ? '#3b82f6' : 'rgba(255,255,255,0.35)', background: 'none', border: 'none', cursor: 'pointer', fontWeight: 600, fontSize: '12px', letterSpacing: '0.08em' }}
-            >FR</button>
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: lang === 'fr' ? '#3b82f6' : 'rgba(255,255,255,0.35)', background: 'none', border: 'none', cursor: 'pointer', fontWeight: 600, fontSize: '12px', letterSpacing: '0.08em' }}
+            ><span style={{ fontSize: '14px', lineHeight: 1 }}>🇫🇷</span>FR</button>
           </div>
           <a
             href={isHome ? '#contact' : '/#contact'}
@@ -150,6 +150,7 @@ export function Navbar() {
                 key={l}
                 onClick={() => setLang(l)}
                 style={{
+                  display: 'inline-flex', alignItems: 'center', gap: '5px',
                   padding: '5px 10px',
                   fontSize: '11px', fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase',
                   background: lang === l ? 'rgba(59,130,246,0.3)' : 'transparent',
@@ -159,7 +160,7 @@ export function Navbar() {
                   cursor: 'pointer',
                   transition: 'background 0.15s, color 0.15s',
                 }}
-              >{l.toUpperCase()}</button>
+              ><span style={{ fontSize: '13px', lineHeight: 1 }}>{l === 'en' ? '🇨🇦' : '🇫🇷'}</span>{l.toUpperCase()}</button>
             ))}
           </div>
 
