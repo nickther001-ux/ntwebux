@@ -53,7 +53,7 @@ function StatCard({ v, num, suffix, l, sub, delay }: { v: string; num: number | 
 
 const fadeUp = { hidden: { opacity: 0, y: 14 }, show: (i: number) => ({ opacity: 1, y: 0, transition: { delay: i * 0.1, duration: 0.5, ease: [0.16, 1, 0.3, 1] } }) };
 
-export function Hero() {
+export function Hero({ onStart }: { onStart?: () => void } = {}) {
   const { t, lang } = useLanguage();
 
   // Parallax: hero content drifts up at 40% of scroll speed → depth effect
@@ -134,9 +134,14 @@ export function Hero() {
           animate="show"
           style={{ display: 'flex', gap: '14px', justifyContent: 'center', flexWrap: 'wrap' }}
         >
-          <a href="#contact" className="btn-violet" style={{ padding: '14px 28px', fontSize: '15px', gap: '8px' }}>
+          <button
+            type="button"
+            onClick={() => onStart?.()}
+            className="btn-violet"
+            style={{ padding: '14px 28px', fontSize: '15px', gap: '8px', display: 'inline-flex', alignItems: 'center', cursor: 'pointer', border: 'none' }}
+          >
             {t('hero.btn1')} <ArrowRight size={16} />
-          </a>
+          </button>
           <a href="#services" className="btn-outline" style={{ padding: '14px 28px', fontSize: '15px' }}>
             {t('hero.btn2')}
           </a>

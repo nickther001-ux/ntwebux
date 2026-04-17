@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/sections/Hero";
@@ -10,6 +11,7 @@ import { Testimonials } from "@/components/sections/Testimonials";
 import { Contact } from "@/components/sections/Contact";
 import { Footer } from "@/components/Footer";
 import { ROICalculator } from "@/components/ROICalculator";
+import { OnboardingModal } from "@/components/OnboardingModal";
 
 const TITLE = "NT Web Design";
 const DESC  = "Premium web design and AI-driven solutions delivered in exactly 72 hours. Specializing in high-performance websites and SaaS for startups in Canada & USA. 100% code ownership.";
@@ -39,6 +41,7 @@ const SCHEMA = JSON.stringify({
 });
 
 export default function Home() {
+  const [activePlan, setActivePlan] = useState<{ name: string; price: string | number } | null>(null);
   return (
     <>
       <Helmet>
@@ -68,7 +71,7 @@ export default function Home() {
       <div className="relative w-full min-h-screen">
         <Navbar />
         <main>
-          <Hero />
+          <Hero onStart={() => setActivePlan({ name: 'Custom Project', price: 'Custom' })} />
           <Stats />
           <Services />
           <ROICalculator />
@@ -80,6 +83,8 @@ export default function Home() {
         </main>
         <Footer />
       </div>
+
+      <OnboardingModal plan={activePlan} onClose={() => setActivePlan(null)} />
     </>
   );
 }
