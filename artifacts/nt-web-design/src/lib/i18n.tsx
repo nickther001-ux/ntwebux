@@ -106,7 +106,7 @@ const translations: Translations = {
           {
             name: "Premium Basic", price: "500", cycle: "/ month",
             badge: "Most Popular",
-            features: ["Up to 10 pages", "CMS integration", "eCommerce ready", "Google Ads setup", "Priority support 48h", "Monthly analytics report"],
+            features: ["Up to 10 pages", "CMS integration", "eCommerce ready", "Priority support 48h", "Monthly analytics report"],
             ctaContact: "Contact Me", ctaBuy: "Buy Now", featured: true
           },
           {
@@ -231,7 +231,7 @@ const translations: Translations = {
           {
             name: "Premium Basic", price: "500", cycle: "/ mois",
             badge: "Le plus populaire",
-            features: ["Jusqu'à 10 pages", "Intégration CMS", "Prêt pour e-commerce", "Configuration Google Ads", "Support prioritaire 48h", "Rapport mensuel Analytics"],
+            features: ["Jusqu'à 10 pages", "Intégration CMS", "Prêt pour e-commerce", "Support prioritaire 48h", "Rapport mensuel Analytics"],
             ctaContact: "Me Contacter", ctaBuy: "Acheter", featured: true
           },
           {
