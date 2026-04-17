@@ -1,0 +1,33 @@
+The previous styling attempt failed to capture the Landio Framer template aesthetic. Please refactor the Hero section of our .tsx file using this exact composition and Tailwind mapping. Do not alter the routing, functional components, or translations.
+
+Layer 1: The Dark Canvas
+
+    Composition: A deeply dark, full-width container that prevents the background glow from causing horizontal scrolling.
+
+    Tailwind: relative w-full overflow-hidden bg-[#0a0a0c] min-h-[80vh] flex flex-col items-center justify-center pt-32 pb-20
+
+Layer 2: The Framer Glow (Critical)
+
+    Composition: Framer achieves its lighting by placing an absolute, non-interactive div behind the text with massive blur and low opacity.
+
+    Tailwind: Add this as the first child of the canvas: <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] max-w-[800px] h-[400px] bg-blue-600/20 rounded-full blur-[120px] pointer-events-none -z-10"></div>
+
+Layer 3: The Typography
+
+    Composition: Huge, tightly compressed fonts with a vertical gradient applied to the text.
+
+    Tailwind for H1: text-5xl md:text-7xl font-black tracking-tighter text-center leading-[1.1] z-10
+
+    Tailwind for the H1 Gradient Text: text-transparent bg-clip-text bg-gradient-to-b from-white to-white/40
+
+    Tailwind for the Subheadline (p): mt-6 text-lg md:text-xl text-gray-400 font-medium tracking-wide max-w-2xl text-center z-10
+
+Layer 4: The Glassmorphism Badges & Buttons
+
+    Composition: Buttons and top-badges use semi-transparent backgrounds with very faint borders to look like glass.
+
+    Tailwind for Top Badge: inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 text-sm font-semibold text-blue-400 uppercase tracking-widest mb-8 backdrop-blur-sm z-10
+
+    Tailwind for Secondary Button: px-8 py-4 rounded-xl border border-white/10 bg-white/5 text-white font-semibold hover:bg-white/10 transition-colors backdrop-blur-sm
+
+Apply these exact classes to the respective elements in our Hero section

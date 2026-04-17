@@ -97,32 +97,33 @@ export default function BusinessSolutions() {
         <Navbar />
 
         <main>
-          {/* ══ HERO — Landio aesthetic (exact Tailwind structure) ══ */}
-          <section className="relative min-h-screen w-full bg-[#050507] overflow-hidden flex flex-col items-center pt-32 pb-20 px-4 font-sans">
+          {/* ══ HERO — Landio 4-layer composition ════════════════ */}
+          {/* Layer 1: Dark canvas */}
+          <section className="relative w-full overflow-hidden bg-[#0a0a0c] min-h-[80vh] flex flex-col items-center justify-center pt-32 pb-20 px-4">
 
-            {/* Landio background glow */}
-            <div className="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[600px] sm:w-[800px] h-[300px] sm:h-[500px] bg-blue-600/20 blur-[120px] rounded-full pointer-events-none" />
+            {/* Layer 2: Framer glow */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] max-w-[800px] h-[400px] bg-blue-600/20 rounded-full blur-[120px] pointer-events-none -z-10" />
 
-            {/* Top badge */}
-            <div className="z-10 relative mb-8 px-5 py-2 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-xs md:text-sm font-semibold tracking-widest uppercase flex items-center gap-2">
+            {/* Layer 4: Glass top badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 text-sm font-semibold text-blue-400 uppercase tracking-widest mb-8 backdrop-blur-sm z-10">
               <Zap className="w-4 h-4" />
               {bi(copy.hero.badge, l)}
             </div>
 
-            {/* Hero typography */}
-            <h1 className="z-10 relative text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter text-center leading-[1.1] mb-8">
-              <span className="text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-400">
+            {/* Layer 3: Hero typography */}
+            <h1 className="text-5xl md:text-7xl font-black tracking-tighter text-center leading-[1.1] z-10">
+              <span className="text-transparent bg-clip-text bg-gradient-to-b from-white to-white/40">
                 {bi(copy.hero.h1, l).split('\n')[0]}<br />
+                {bi(copy.hero.h1, l).split('\n')[1]}
               </span>
-              <span className="text-blue-500">{bi(copy.hero.h1, l).split('\n')[1]}</span>
             </h1>
 
-            <p className="z-10 relative text-lg md:text-xl text-gray-400 max-w-2xl text-center font-medium tracking-wide mb-12">
+            <p className="mt-6 text-lg md:text-xl text-gray-400 font-medium tracking-wide max-w-2xl text-center z-10">
               {bi(copy.hero.sub, l)}
             </p>
 
             {/* Buttons */}
-            <div className="z-10 relative flex flex-col sm:flex-row gap-5 w-full sm:w-auto">
+            <div className="mt-10 z-10 flex flex-col sm:flex-row gap-5 w-full sm:w-auto">
               <button
                 onClick={() => setModalOpen(true)}
                 className="px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl transition-all text-center flex items-center justify-center gap-2"
@@ -132,7 +133,7 @@ export default function BusinessSolutions() {
               </button>
               <a
                 href="/#contact"
-                className="px-8 py-4 bg-[#050507] border border-gray-700 hover:border-gray-500 text-gray-300 hover:text-white font-semibold rounded-xl transition-all text-center"
+                className="px-8 py-4 rounded-xl border border-white/10 bg-white/5 text-white font-semibold hover:bg-white/10 transition-colors backdrop-blur-sm text-center"
               >
                 {bi(copy.hero.ctaSec, l)}
               </a>
