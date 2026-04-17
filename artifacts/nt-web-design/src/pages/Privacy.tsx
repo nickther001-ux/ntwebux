@@ -188,16 +188,10 @@ export default function Privacy() {
                     background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)',
                   }}>
                     <p style={{ margin: '0 0 6px', fontSize: '15px', fontWeight: 600, color: '#fff' }}>
-                      Jean Nickson Thermidor
+                      Nickson Thermidor
                     </p>
-                    <p style={{ margin: '0 0 10px', fontSize: '13px', color: 'rgba(255,255,255,0.55)' }}>
-                      {bi('Founder & Privacy Officer, NT Digital Group', 'Fondateur et responsable de la vie privée, NT Digital Group', lang)}
-                    </p>
-                    <p style={{ margin: 0, fontSize: '14px', color: 'rgba(255,255,255,0.7)' }}>
-                      Email:&nbsp;
-                      <a href="mailto:info@ntwebux.com" style={{ color: '#93c5fd', textDecoration: 'none' }}>
-                        info@ntwebux.com
-                      </a>
+                    <p style={{ margin: 0, fontSize: '13px', color: 'rgba(255,255,255,0.55)' }}>
+                      {bi('Founder, NT Digital Group', 'Fondateur, NT Digital Group', lang)}
                     </p>
                   </div>
                 )}
