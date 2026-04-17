@@ -79,7 +79,7 @@ export function Navbar() {
           <img
             src={`${import.meta.env.BASE_URL}logo.png`}
             alt="NT Web UX"
-            style={{ height: '42px', width: 'auto', objectFit: 'contain', display: 'block', filter: 'invert(1) brightness(1.1)' }}
+            style={{ height: '42px', width: 'auto', objectFit: 'contain', display: 'block', filter: 'brightness(0) invert(1)' }}
           />
         </a>
 
@@ -208,7 +208,7 @@ export function Navbar() {
             {/* Top bar — logo + close */}
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 24px', height: '68px', borderBottom: '1px solid rgba(255,255,255,0.06)', flexShrink: 0 }}>
               <a href={isHome ? '#' : '/'} style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }} onClick={() => setOpen(false)}>
-                <img src={`${import.meta.env.BASE_URL}logo.png`} alt="NT Web UX" style={{ height: '36px', width: 'auto', objectFit: 'contain', display: 'block', filter: 'invert(1) brightness(1.1)' }} />
+                <img src={`${import.meta.env.BASE_URL}logo.png`} alt="NT Web UX" style={{ height: '36px', width: 'auto', objectFit: 'contain', display: 'block', filter: 'brightness(0) invert(1)' }} />
               </a>
               <button
                 onClick={() => setOpen(false)}
