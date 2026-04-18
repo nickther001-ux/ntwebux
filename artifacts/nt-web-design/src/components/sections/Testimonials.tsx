@@ -1,7 +1,9 @@
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/lib/i18n';
-
-const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
+import {
+  HardHat, Wrench, Stethoscope, Scale,
+  ShoppingBag, Cloud, Utensils, Sparkles,
+} from 'lucide-react';
 
 interface TestimonialItem {
   quote: string;
@@ -13,18 +15,82 @@ interface TestimonialItem {
   industry: string;
 }
 
+/* Highlight numeric/result phrases inside a quote.
+   Returns an array of React-friendly fragments (string | JSX). */
+function highlightMetrics(quote: string): Array<string | { mark: string }> {
+  /* Matches: 95%, +40%, +67%, 2× leads, 24/7, 6 weeks, 6 semaines,
+     72 hours, doubled, doublé, tripled, triplé, $X, X stars, 5★ */
+  const re = /(\+?\d+(?:[.,]\d+)?\s?%|\b\d+\s?[×x]\s?[\p{L}]+|\d+\/\d+|\b\d+\s?(?:weeks?|semaines?|hours?|heures?|days?|jours?|months?|mois|fois)\b|\bdoubled?\b|\bdoubl[ée]e?s?\b|\btripled?\b|\btripl[ée]e?s?\b|\$\s?\d+[KkMm]?|\d+★|\b5\s?stars?\b)/giu;
+  const out: Array<string | { mark: string }> = [];
+  let last = 0;
+  let m: RegExpExecArray | null;
+  while ((m = re.exec(quote)) !== null) {
+    if (m.index > last) out.push(quote.slice(last, m.index));
+    out.push({ mark: m[0] });
+    last = m.index + m[0].length;
+  }
+  if (last < quote.length) out.push(quote.slice(last));
+  return out;
+}
+
+/* Industry → icon mapping (works in both EN and FR) */
+function industryIcon(industry: string) {
+  const i = industry.toLowerCase();
+  if (i.includes('construction'))                    return HardHat;
+  if (i.includes('hvac') || i.includes('cvc'))       return Wrench;
+  if (i.includes('health') || i.includes('santé') ||
+      i.includes('sante')  || i.includes('medical')) return Stethoscope;
+  if (i.includes('legal') || i.includes('droit'))    return Scale;
+  if (i.includes('commerce'))                        return ShoppingBag;
+  if (i.includes('saas'))                            return Cloud;
+  if (i.includes('restaurant'))                      return Utensils;
+  return Sparkles; /* Wellness / Bien-être / fallback */
+}
+
 export function Testimonials() {
   const { t, lang } = useLanguage();
   const items = t('testimonials.items') as TestimonialItem[];
+
+  /* Bilingual chrome strings */
   const eyebrow = lang === 'fr' ? 'Témoignages' : 'Testimonials';
+  const liveTag = lang === 'fr'
+    ? 'RETOURS EN DIRECT DE NOS PARTENAIRES MONDIAUX'
+    : 'LIVE FEEDBACK FROM OUR GLOBAL PARTNERS';
+  const verifiedLabel = lang === 'fr' ? 'Vérifié' : 'Verified';
+  const tickerLabel   = lang === 'fr' ? 'Industries servies' : 'Industries served';
   const heading = lang === 'fr'
     ? <><span className="gradient-text">Résultats réels.</span><br />Clients réels.</>
     : <><span className="gradient-text">Real results.</span><br />Real clients.</>;
 
+  /* Logo cloud — bilingual industry labels with monochrome icons */
+  const tickerItems: Array<{ label: string; Icon: typeof HardHat }> = lang === 'fr'
+    ? [
+        { label: 'Construction', Icon: HardHat },
+        { label: 'CVC',          Icon: Wrench },
+        { label: 'Santé',        Icon: Stethoscope },
+        { label: 'Juridique',    Icon: Scale },
+        { label: 'E-commerce',   Icon: ShoppingBag },
+        { label: 'SaaS',         Icon: Cloud },
+      ]
+    : [
+        { label: 'Construction', Icon: HardHat },
+        { label: 'HVAC',         Icon: Wrench },
+        { label: 'Medical',      Icon: Stethoscope },
+        { label: 'Legal',        Icon: Scale },
+        { label: 'E-commerce',   Icon: ShoppingBag },
+        { label: 'SaaS',         Icon: Cloud },
+      ];
+
   return (
-    <section style={{ width: '100%', padding: '120px 24px', borderTop: '1px solid rgba(255,255,255,0.06)', position: 'relative' }}>
-      <div style={{
-        position: 'absolute', top: '30%', left: '50%', transform: 'translate(-50%,-50%)',
+    <section id="testimonials" style={{
+      width: '100%', padding: '120px 24px',
+      borderTop: '1px solid rgba(255,255,255,0.06)',
+      position: 'relative',
+    }}>
+      {/* soft ambient glow */}
+      <div aria-hidden="true" style={{
+        position: 'absolute', top: '20%', left: '50%',
+        transform: 'translate(-50%,-50%)',
         width: '900px', height: '500px', borderRadius: '50%',
         background: 'radial-gradient(ellipse, rgba(59,130,246,0.07) 0%, transparent 70%)',
         pointerEvents: 'none',
@@ -32,117 +98,348 @@ export function Testimonials() {
 
       <div style={{ maxWidth: '1200px', margin: '0 auto', position: 'relative' }}>
 
-        {/* Header + Google badge */}
-        <div style={{ textAlign: 'center', marginBottom: '64px' }}>
-          <span className="pill-label" style={{ marginBottom: '24px', display: 'inline-flex' }}>{eyebrow}</span>
-          <h2 style={{ fontSize: 'clamp(2rem,5vw,3.5rem)', fontWeight: 800, letterSpacing: '-0.02em', marginTop: '16px', marginBottom: '24px' }}>
+        {/* ── Header ──────────────────────────────────────────── */}
+        <div style={{ textAlign: 'center', marginBottom: '56px' }}>
+          <span className="pill-label" style={{ marginBottom: '20px', display: 'inline-flex' }}>
+            {eyebrow}
+          </span>
+
+          <h2 style={{
+            fontSize: 'clamp(2rem,5vw,3.5rem)', fontWeight: 800,
+            letterSpacing: '-0.02em', marginTop: '12px', marginBottom: '20px',
+          }}>
             {heading}
           </h2>
 
-          {/* 5★ Google badge */}
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '99px', padding: '8px 18px 8px 12px' }}>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-              <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
-              <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
-              <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
-              <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
-            </svg>
-            <div style={{ display: 'flex', gap: '2px' }}>
-              {[1,2,3,4,5].map(i => (
-                <svg key={i} width="13" height="13" viewBox="0 0 24 24" fill="#FBBC05">
-                  <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />
-                </svg>
-              ))}
-            </div>
-            <span style={{ fontSize: '13px', fontWeight: 700, color: '#fff' }}>5.0</span>
-            <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)' }}>Google</span>
+          {/* LIVE FEEDBACK status pill */}
+          <div className="wol-live-pill">
+            <span className="wol-live-dot" />
+            {liveTag}
           </div>
         </div>
 
-        {/* Cards grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '20px' }} className="testimonials-grid">
-          {items.map((item, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.09, duration: 0.55, ease: [0.22,1,0.36,1] }}
-              className="glass glass-hover"
-              style={{ borderRadius: '18px', overflow: 'hidden', display: 'flex', flexDirection: 'column', cursor: 'default' }}
-            >
-              {/* Portfolio image preview */}
-              <div style={{ position: 'relative', height: '140px', overflow: 'hidden', flexShrink: 0 }}>
-                <img
-                  src={`${BASE}/portfolio/${item.img}`}
-                  alt={item.role}
-                  loading="lazy"
-                  style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top', display: 'block' }}
-                />
-                {/* Cover browser chrome + page header (Framer branding area) */}
-                <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '56px', background: '#02040a', zIndex: 2 }} />
-                {/* Smooth fade from cover to content */}
-                <div style={{ position: 'absolute', top: '56px', left: 0, right: 0, height: '20px', background: 'linear-gradient(to bottom, #02040a, transparent)', zIndex: 2 }} />
-                {/* Blur any watermark at bottom */}
-                <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '32px', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)', background: 'rgba(2,4,10,0.65)', zIndex: 2 }} />
-                {/* Industry tag overlay */}
-                <div style={{ position: 'absolute', bottom: '8px', left: '10px', zIndex: 2, background: 'rgba(59,130,246,0.85)', color: '#fff', fontSize: '10px', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', padding: '3px 8px', borderRadius: '4px' }}>
+        {/* ── Masonry Wall of Love ───────────────────────────── */}
+        <div className="wol-masonry">
+          {items.map((item, i) => {
+            const IndustryIcon = industryIcon(item.industry);
+            const fragments    = highlightMetrics(item.quote);
+            return (
+              <motion.article
+                key={i}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ delay: (i % 3) * 0.08, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                className="wol-card"
+              >
+                {/* Industry tag (top-right) */}
+                <div className="wol-industry-tag">
+                  <IndustryIcon size={11} strokeWidth={2} />
                   {item.industry}
                 </div>
-              </div>
-
-              {/* Card body */}
-              <div style={{ padding: '22px 24px 24px', display: 'flex', flexDirection: 'column', gap: '16px', flex: 1 }}>
 
                 {/* Metric pill */}
-                <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px' }}>
-                  <span style={{
-                    fontSize: '22px', fontWeight: 900, lineHeight: 1,
-                    background: 'linear-gradient(135deg,#93c5fd,#bfdbfe)',
-                    WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
-                  }}>{item.metric}</span>
-                  <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.4)', fontWeight: 500 }}>{item.metricLabel}</span>
+                <div className="wol-metric">
+                  <span className="wol-metric-value">{item.metric}</span>
+                  <span className="wol-metric-label">{item.metricLabel}</span>
                 </div>
 
-                {/* Quote */}
-                <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.62)', lineHeight: 1.75, flex: 1, margin: 0 }}>
-                  "{item.quote}"
+                {/* Quote — with metric phrases highlighted */}
+                <p className="wol-quote">
+                  <span className="wol-quote-mark" aria-hidden="true">“</span>
+                  {fragments.map((f, idx) =>
+                    typeof f === 'string'
+                      ? <span key={idx}>{f}</span>
+                      : <mark key={idx} className="wol-highlight">{f.mark}</mark>
+                  )}
+                  <span className="wol-quote-mark" aria-hidden="true">”</span>
                 </p>
 
-                {/* Author */}
-                <div style={{ borderTop: '1px solid rgba(255,255,255,0.07)', paddingTop: '16px', display: 'flex', alignItems: 'center', gap: '12px' }}>
-                  {/* Avatar */}
-                  <div style={{
-                    width: '36px', height: '36px', borderRadius: '50%', flexShrink: 0,
-                    background: 'linear-gradient(135deg,rgba(59,130,246,0.4),rgba(37,99,235,0.6))',
-                    border: '1px solid rgba(59,130,246,0.3)',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    fontSize: '13px', fontWeight: 800, color: '#93c5fd',
-                  }}>
-                    {item.name.split(' ').map(n => n[0]).join('').slice(0,2)}
+                {/* Author block */}
+                <footer className="wol-author">
+                  <div className="wol-avatar">
+                    {item.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
                   </div>
-                  <div>
-                    <div style={{ fontSize: '13px', fontWeight: 700, color: '#fff' }}>{item.name}</div>
-                    <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.35)', marginTop: '2px' }}>{item.role}</div>
+                  <div style={{ minWidth: 0, flex: 1 }}>
+                    <div className="wol-author-name">
+                      <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                        {item.name}
+                      </span>
+                      {/* Verified checkmark */}
+                      <span className="wol-verified" title={verifiedLabel} aria-label={verifiedLabel}>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                          <path d="M12 2 L14.39 4.42 L17.74 3.79 L18.91 6.99 L22 8.5 L21.09 11.79 L23 14.5 L20.39 16.79 L20.5 20 L17.21 19.91 L15.5 22.62 L12 21 L8.5 22.62 L6.79 19.91 L3.5 20 L3.61 16.79 L1 14.5 L2.91 11.79 L2 8.5 L5.09 6.99 L6.26 3.79 L9.61 4.42 Z"
+                            fill="#22d3ee" stroke="rgba(34,211,238,0.5)" strokeWidth="0.5" strokeLinejoin="round" />
+                          <path d="M8 12.2 L11 15.2 L16.2 9.5" stroke="#02040a" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+                        </svg>
+                      </span>
+                    </div>
+                    <div className="wol-author-role">{item.role}</div>
                   </div>
                   {/* 5 stars */}
-                  <div style={{ display: 'flex', gap: '2px', marginLeft: 'auto', flexShrink: 0 }}>
-                    {[1,2,3,4,5].map(j => (
-                      <svg key={j} width="11" height="11" viewBox="0 0 24 24" fill="#93c5fd">
+                  <div className="wol-stars">
+                    {[1, 2, 3, 4, 5].map(j => (
+                      <svg key={j} width="11" height="11" viewBox="0 0 24 24" fill="#fbbf24">
                         <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />
                       </svg>
                     ))}
                   </div>
-                </div>
+                </footer>
+              </motion.article>
+            );
+          })}
+        </div>
+
+        {/* ── Industry Ticker (logo cloud) ───────────────────── */}
+        <div className="wol-ticker-wrap" aria-label={tickerLabel}>
+          <div className="wol-ticker-fade wol-ticker-fade--left"  />
+          <div className="wol-ticker-fade wol-ticker-fade--right" />
+          <div className="wol-ticker-track">
+            {[...tickerItems, ...tickerItems, ...tickerItems].map(({ label, Icon }, idx) => (
+              <div key={idx} className="wol-ticker-item">
+                <Icon size={18} strokeWidth={1.6} />
+                <span>{label}</span>
               </div>
-            </motion.div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
 
       <style>{`
-        @media(max-width:900px){ .testimonials-grid { grid-template-columns: 1fr 1fr !important; } }
-        @media(max-width:600px){ .testimonials-grid { grid-template-columns: 1fr !important; } }
+        /* ─── Live feedback header pill ─── */
+        .wol-live-pill {
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          padding: 7px 16px 7px 14px;
+          border-radius: 999px;
+          background: rgba(16,185,129,0.06);
+          border: 1px solid rgba(16,185,129,0.30);
+          color: #6ee7b7;
+          font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+          font-size: 11px;
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          box-shadow: 0 0 22px rgba(16,185,129,0.10);
+        }
+        .wol-live-dot {
+          width: 8px; height: 8px; border-radius: 50%;
+          background: #10b981;
+          box-shadow: 0 0 0 0 rgba(16,185,129,0.7);
+          animation: wol-live-pulse 1.6s ease-out infinite;
+        }
+        @keyframes wol-live-pulse {
+          0%   { box-shadow: 0 0 0 0 rgba(16,185,129,0.6); transform: scale(1); }
+          70%  { box-shadow: 0 0 0 10px rgba(16,185,129,0); transform: scale(1.05); }
+          100% { box-shadow: 0 0 0 0 rgba(16,185,129,0); transform: scale(1); }
+        }
+
+        /* ─── Masonry grid (CSS columns) ─── */
+        .wol-masonry {
+          column-count: 3;
+          column-gap: 22px;
+        }
+        @media (max-width: 980px) { .wol-masonry { column-count: 2; } }
+        @media (max-width: 640px) { .wol-masonry { column-count: 1; } }
+
+        .wol-card {
+          break-inside: avoid;
+          -webkit-column-break-inside: avoid;
+          page-break-inside: avoid;
+          margin: 0 0 22px;
+          padding: 22px 22px 18px;
+          border-radius: 16px;
+          background-color: rgba(255,255,255,0.02);
+          backdrop-filter: blur(14px);
+          -webkit-backdrop-filter: blur(14px);
+          border: 1px solid rgba(255,255,255,0.10);
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          gap: 14px;
+          transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+        }
+        .wol-card:hover {
+          border-color: rgba(34,211,238,0.45);
+          background-color: rgba(255,255,255,0.035);
+          box-shadow:
+            0 0 0 1px rgba(34,211,238,0.18),
+            0 0 32px rgba(34,211,238,0.15),
+            0 12px 40px -12px rgba(0,0,0,0.6);
+          transform: translateY(-2px);
+        }
+
+        /* Industry tag (top-right of each card) */
+        .wol-industry-tag {
+          align-self: flex-end;
+          display: inline-flex;
+          align-items: center;
+          gap: 5px;
+          padding: 3px 9px;
+          border-radius: 999px;
+          background: rgba(255,255,255,0.04);
+          border: 1px solid rgba(255,255,255,0.10);
+          font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+          font-size: 9.5px;
+          font-weight: 600;
+          letter-spacing: 0.10em;
+          text-transform: uppercase;
+          color: rgba(255,255,255,0.55);
+          margin-bottom: -4px;
+        }
+        .wol-industry-tag svg { color: rgba(147,197,253,0.85); }
+
+        /* Headline metric */
+        .wol-metric {
+          display: flex;
+          align-items: baseline;
+          gap: 10px;
+        }
+        .wol-metric-value {
+          font-size: 24px;
+          font-weight: 900;
+          line-height: 1;
+          letter-spacing: -0.02em;
+          background: linear-gradient(135deg, #67e8f9 0%, #818cf8 100%);
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+          color: transparent;
+        }
+        .wol-metric-label {
+          font-size: 11px;
+          color: rgba(255,255,255,0.42);
+          font-weight: 500;
+        }
+
+        /* Quote */
+        .wol-quote {
+          font-size: 14.5px;
+          color: rgba(255,255,255,0.72);
+          line-height: 1.72;
+          margin: 0;
+          flex: 1;
+        }
+        .wol-quote-mark {
+          color: rgba(34,211,238,0.45);
+          font-family: Georgia, 'Times New Roman', serif;
+          font-size: 18px;
+          line-height: 0;
+          margin: 0 2px;
+          vertical-align: -2px;
+        }
+        .wol-highlight {
+          background: linear-gradient(180deg, transparent 60%, rgba(34,211,238,0.22) 60%);
+          color: #e5e7eb;
+          font-weight: 700;
+          padding: 0 2px;
+          border-radius: 2px;
+        }
+
+        /* Author footer */
+        .wol-author {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          padding-top: 14px;
+          border-top: 1px solid rgba(255,255,255,0.07);
+        }
+        .wol-avatar {
+          width: 36px; height: 36px;
+          border-radius: 50%;
+          flex-shrink: 0;
+          background: linear-gradient(135deg, rgba(34,211,238,0.30), rgba(99,102,241,0.40));
+          border: 1px solid rgba(34,211,238,0.30);
+          display: flex; align-items: center; justify-content: center;
+          font-size: 12px; font-weight: 800;
+          color: #ecfeff;
+          letter-spacing: 0.02em;
+        }
+        .wol-author-name {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          font-size: 13px;
+          font-weight: 700;
+          color: #fff;
+          max-width: 100%;
+        }
+        .wol-verified {
+          display: inline-flex;
+          align-items: center;
+          flex-shrink: 0;
+          filter: drop-shadow(0 0 4px rgba(34,211,238,0.45));
+        }
+        .wol-author-role {
+          font-size: 11px;
+          color: rgba(255,255,255,0.40);
+          margin-top: 2px;
+          line-height: 1.3;
+        }
+        .wol-stars {
+          display: flex;
+          gap: 1.5px;
+          margin-left: auto;
+          flex-shrink: 0;
+        }
+
+        /* ─── Industry ticker / logo cloud ─── */
+        .wol-ticker-wrap {
+          position: relative;
+          margin-top: 56px;
+          padding: 22px 0;
+          border-top: 1px solid rgba(255,255,255,0.06);
+          border-bottom: 1px solid rgba(255,255,255,0.06);
+          overflow: hidden;
+        }
+        .wol-ticker-fade {
+          position: absolute;
+          top: 0; bottom: 0;
+          width: 120px;
+          z-index: 2;
+          pointer-events: none;
+        }
+        .wol-ticker-fade--left {
+          left: 0;
+          background: linear-gradient(to right, #02040a 0%, transparent 100%);
+        }
+        .wol-ticker-fade--right {
+          right: 0;
+          background: linear-gradient(to left, #02040a 0%, transparent 100%);
+        }
+        .wol-ticker-track {
+          display: flex;
+          align-items: center;
+          gap: 64px;
+          width: max-content;
+          animation: wol-ticker 38s linear infinite;
+          will-change: transform;
+        }
+        .wol-ticker-item {
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          color: rgba(255,255,255,0.42);
+          font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+          font-size: 12.5px;
+          font-weight: 600;
+          letter-spacing: 0.16em;
+          text-transform: uppercase;
+          transition: color 0.25s ease;
+          white-space: nowrap;
+        }
+        .wol-ticker-item:hover { color: #67e8f9; }
+        .wol-ticker-item svg   { opacity: 0.85; }
+        @keyframes wol-ticker {
+          from { transform: translate3d(0, 0, 0); }
+          /* Triple-tile the list, advance by exactly one tile (-33.333%) for a seamless loop */
+          to   { transform: translate3d(-33.3333%, 0, 0); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .wol-ticker-track,
+          .wol-live-dot { animation: none !important; }
+        }
       `}</style>
     </section>
   );
