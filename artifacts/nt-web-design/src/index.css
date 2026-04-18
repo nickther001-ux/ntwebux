@@ -95,6 +95,26 @@
     /* style added: compositor can skip styled recalc for off-screen sections */
     contain: layout paint style;
     position: relative;
+    /* Silicon Valley spacing: more vertical breathing room (py-32). !important
+       wins over inline section padding set by individual components. */
+    padding-block: 128px !important;
+  }
+
+  @media (max-width: 768px) {
+    section {
+      padding-block: 80px !important;
+    }
+  }
+
+  /* Silicon Valley typography: tighter tracking on display headings */
+  h1, h2 {
+    letter-spacing: -0.05em;
+  }
+
+  /* Smooth, polished micro-transitions on every interactive element. Component
+     classes with their own `transition:` rule take over where defined. */
+  button, a {
+    transition: all 300ms ease-in-out;
   }
 
   ::-webkit-scrollbar { width: 5px; }
