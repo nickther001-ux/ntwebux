@@ -342,6 +342,7 @@ function BentoCard({ s, i, learnMore, onClick }: BentoCardProps) {
       {/* ── AI Integrations — neural mesh + glowing radial behind icon ── */}
       {isNeural && (
         <>
+          <div className="ai-neural-cube" aria-hidden="true" />
           <div className="ai-neural-mesh" aria-hidden="true" />
           <svg className="ai-neural-svg" viewBox="0 0 320 480" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
             <g stroke="rgba(96,165,250,0.18)" strokeWidth="0.5" fill="none">
@@ -859,6 +860,26 @@ export function Services() {
           pointer-events: none;
           z-index: 0;
           animation: ai-grid-scroll 28s linear infinite;
+        }
+
+        /* ── AI Integrations — buried hero cube image ── */
+        .ai-neural-cube {
+          position: absolute;
+          inset: 0;
+          background-image: url('${import.meta.env.BASE_URL}decor/ai-cube.png');
+          background-repeat: no-repeat;
+          background-position: center 60%;
+          background-size: 95% auto;
+          opacity: 0.42;
+          filter: brightness(1.1) contrast(1.05) saturate(1.2);
+          mix-blend-mode: screen;
+          mask-image: radial-gradient(ellipse at 50% 60%, #000 50%, transparent 95%);
+          -webkit-mask-image: radial-gradient(ellipse at 50% 60%, #000 50%, transparent 95%);
+          pointer-events: none;
+          z-index: 0;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .ai-neural-cube { opacity: 0.35; }
         }
 
         /* ── AI Integrations — Neural mesh background ── */
