@@ -175,18 +175,6 @@ export const LOCATION_PAGES: LocationPage[] = [
     neighborhoods: ['Downtown Toronto', 'North York', 'Scarborough', 'Etobicoke', 'Mississauga', 'Brampton', 'Markham', 'Richmond Hill'],
   },
   {
-    slug: 'montreal-web-design',
-    city: 'Montréal',
-    province: 'Québec',
-    badge: 'Montréal, QC',
-    accent: '#6366f1',
-    metaTitle: 'Web Design Montréal — NT Web UX | Sites bilingues EN/FR',
-    metaDesc: 'Agence web design Montréal. Sites web bilingues EN/FR, e-commerce et SEO pour entreprises montréalaises. Livraison rapide, 0 gabarit.',
-    h1: 'Agence Web Design Montréal — Sites Bilingues Qui Convertissent',
-    intro: "Montréal est un marché dynamique qui exige une présence numérique irréprochable en français ET en anglais. NT Web UX conçoit des sites web bilingues sur mesure pour les entreprises montréalaises prêtes à se démarquer.",
-    neighborhoods: ['Plateau-Mont-Royal', 'Mile End', 'Griffintown', 'Rosemont', 'Saint-Laurent', 'Laval', 'Longueuil', 'Brossard'],
-  },
-  {
     slug: 'vancouver-web-design',
     city: 'Vancouver',
     province: 'British Columbia',
