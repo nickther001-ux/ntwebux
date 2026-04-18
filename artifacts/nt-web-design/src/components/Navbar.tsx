@@ -1,9 +1,10 @@
 import { useState, useEffect, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import { useLanguage } from '@/lib/i18n';
-import { Menu, X, ArrowRight } from 'lucide-react';
+import { Menu, X, ArrowRight, Search } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLocation, Link } from 'wouter';
+import { CommandPalette } from '@/components/CommandPalette';
 
 /* Smooth-scroll to an anchor id without CSS scroll-behavior (which fights iOS) */
 function smoothScrollTo(id: string) {
@@ -17,8 +18,22 @@ export function Navbar() {
   const { lang, setLang, t } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [cmdOpen, setCmdOpen] = useState(false);
   const [location, navigate] = useLocation();
   const isHome = location === '/';
+  const isMac = typeof navigator !== 'undefined' && /Mac|iPhone|iPad/i.test(navigator.platform);
+
+  /* Global ⌘K / Ctrl+K shortcut */
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        setCmdOpen(prev => !prev);
+      }
+    };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, []);
 
   /* Intercept anchor clicks for butter-smooth JS scroll */
   const handleAnchorClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -129,7 +144,43 @@ export function Navbar() {
         </nav>
 
         {/* Right */}
-        <div className="navbar-desktop" style={{ alignItems: 'center', gap: '14px' }}>
+        <div className="navbar-desktop" style={{ alignItems: 'center', gap: '12px' }}>
+          {/* ⌘K search trigger */}
+          <button
+            onClick={() => setCmdOpen(true)}
+            aria-label="Open command palette"
+            style={{
+              display: 'inline-flex', alignItems: 'center', gap: '8px',
+              padding: '6px 8px 6px 10px',
+              background: 'rgba(255,255,255,0.05)',
+              border: '1px solid rgba(255,255,255,0.1)',
+              borderRadius: '8px',
+              color: 'rgba(255,255,255,0.55)',
+              cursor: 'pointer',
+              transition: 'background 0.18s, color 0.18s, border-color 0.18s',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'rgba(255,255,255,0.08)';
+              e.currentTarget.style.color = '#fff';
+              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.18)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'rgba(255,255,255,0.05)';
+              e.currentTarget.style.color = 'rgba(255,255,255,0.55)';
+              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
+            }}
+          >
+            <Search size={13} />
+            <span style={{
+              fontSize: '10px', fontWeight: 600, letterSpacing: '0.06em',
+              padding: '2px 5px', borderRadius: '4px',
+              background: 'rgba(255,255,255,0.06)',
+              border: '1px solid rgba(255,255,255,0.08)',
+              color: 'rgba(255,255,255,0.6)',
+              whiteSpace: 'nowrap',
+              fontFamily: 'inherit',
+            }}>{isMac ? '⌘K' : 'Ctrl+K'}</span>
+          </button>
           <div style={{
             display: 'flex', alignItems: 'center',
             background: 'rgba(255,255,255,0.06)',
@@ -164,8 +215,22 @@ export function Navbar() {
           </a>
         </div>
 
-        {/* Mobile right — lang toggle + hamburger */}
-        <div className="navbar-mobile-right" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        {/* Mobile right — search + lang toggle + hamburger */}
+        <div className="navbar-mobile-right" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <button
+            onClick={() => setCmdOpen(true)}
+            aria-label="Search"
+            style={{
+              width: '34px', height: '34px', borderRadius: '8px',
+              background: 'rgba(255,255,255,0.05)',
+              border: '1px solid rgba(255,255,255,0.1)',
+              color: 'rgba(255,255,255,0.7)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              cursor: 'pointer',
+            }}
+          >
+            <Search size={15} />
+          </button>
           <div style={{
             display: 'flex', alignItems: 'center',
             background: 'rgba(255,255,255,0.06)',
@@ -354,6 +419,9 @@ export function Navbar() {
       </AnimatePresence>,
       document.body
       )}
+
+      {/* ⌘K command palette */}
+      <CommandPalette open={cmdOpen} onClose={() => setCmdOpen(false)} />
     </header>
   );
 }
