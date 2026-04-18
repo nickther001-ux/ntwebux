@@ -283,9 +283,9 @@ function ShowreelBackground() {
 
       {/* Three parallax columns */}
       <div className="showreel-grid">
-        <Col items={colA} dur={6.5} />
-        <Col items={colB} dur={5}   delay={1.2} />
-        <Col items={colC} dur={7.5} delay={0.6} />
+        <Col items={colA} dur={5.05} />
+        <Col items={colB} dur={3.9}  delay={1.2} />
+        <Col items={colC} dur={5.85} delay={0.6} />
       </div>
 
       {/* Vertical speed-line streaks */}
@@ -675,7 +675,7 @@ export function Services() {
           );
           mask-image: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.7) 30%, rgba(0,0,0,0.7) 70%, transparent 100%);
           -webkit-mask-image: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.7) 30%, rgba(0,0,0,0.7) 70%, transparent 100%);
-          animation: showreel-streaks 0.6s linear infinite;
+          animation: showreel-streaks 0.47s linear infinite;
         }
         @keyframes showreel-streaks {
           from { transform: translate3d(0, 0, 0); }
