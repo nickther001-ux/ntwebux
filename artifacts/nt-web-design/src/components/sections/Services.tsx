@@ -64,7 +64,6 @@ interface BentoCardProps {
   s: Service;
   i: number;
   learnMore: string;
-  liveBadge: string;
   onClick: () => void;
 }
 
@@ -84,6 +83,19 @@ const GENERIC_IMAGES = [
   'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=520&q=70&auto=format&fit=crop',
   'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=520&q=70&auto=format&fit=crop',
   'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=520&q=70&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=520&q=70&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=520&q=70&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=520&q=70&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=520&q=70&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1552664730-d307ca884978?w=520&q=70&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=520&q=70&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1542744094-24638eff58bb?w=520&q=70&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1551434678-e076c223a692?w=520&q=70&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=520&q=70&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=520&q=70&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=520&q=70&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1556155092-490a1ba16284?w=520&q=70&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1542626991-cbc4e32524cc?w=520&q=70&auto=format&fit=crop',
 ];
 
 const SHOWREEL_IMAGES: string[] = [
@@ -285,7 +297,7 @@ function ShowreelBackground() {
   );
 }
 
-function BentoCard({ s, i, learnMore, liveBadge, onClick }: BentoCardProps) {
+function BentoCard({ s, i, learnMore, onClick }: BentoCardProps) {
   const isLarge = s.span === 'lg';
   const glow = GLOW_RGB[s.glow ?? 'blue'];
   return (
@@ -351,26 +363,6 @@ function BentoCard({ s, i, learnMore, liveBadge, onClick }: BentoCardProps) {
             justifyContent: 'flex-end',
             maxWidth: isLarge ? '70%' : '70%',
           }}>
-            {/* Live Portfolio Feed badge — only on the large Website Design card */}
-            {isLarge && (
-              <span className="live-feed-badge" style={{
-                fontSize: '10px', fontWeight: 700, letterSpacing: '0.08em',
-                padding: '3px 9px 3px 7px',
-                borderRadius: '999px',
-                background: 'rgba(34,211,238,0.08)',
-                border: '1px solid rgba(34,211,238,0.35)',
-                color: '#67e8f9',
-                whiteSpace: 'nowrap',
-                fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace',
-                lineHeight: 1.4,
-                display: 'inline-flex', alignItems: 'center', gap: '6px',
-                boxShadow: '0 0 18px rgba(34,211,238,0.18)',
-                textTransform: 'uppercase',
-              }}>
-                <span className="live-dot" />
-                {liveBadge}
-              </span>
-            )}
             {s.badges.map((b) => (
               <span key={b} style={{
                 fontSize: '10px', fontWeight: 600, letterSpacing: '0.04em',
@@ -406,7 +398,6 @@ export function Services() {
   const ctaLabel  = lang === 'fr' ? 'Obtenir un Devis Gratuit' : 'Get a Free Quote';
   const learnMore = lang === 'fr' ? 'En savoir plus →'         : 'Learn more →';
   const eyebrow   = lang === 'fr' ? 'Notre Expertise'          : 'Our Expertise';
-  const liveBadge = lang === 'fr' ? 'Flux Portfolio Live · 3.5×' : 'Live Portfolio Feed · 3.5×';
   const heading   = lang === 'fr'
     ? <>Tout ce dont vous avez besoin pour<br /><span className="gradient-text">dominer votre marché.</span></>
     : <>Everything you need to<br /><span className="gradient-text">dominate your market.</span></>;
@@ -491,7 +482,7 @@ export function Services() {
             gap: '14px',
           }}>
             {cluster.items.map((s, i) => (
-              <BentoCard key={s.id} s={s} i={i} learnMore={learnMore} liveBadge={liveBadge} onClick={() => setActive(s)} />
+              <BentoCard key={s.id} s={s} i={i} learnMore={learnMore} onClick={() => setActive(s)} />
             ))}
           </div>
         </div>
