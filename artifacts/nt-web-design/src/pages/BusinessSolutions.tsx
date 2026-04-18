@@ -6,7 +6,7 @@ import { ROICalculator } from "@/components/ROICalculator";
 import { SoftwareIntakeModal } from "@/components/SoftwareIntakeModal";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/lib/i18n";
-import { ArrowRight, Zap } from "lucide-react";
+import { ArrowRight, Zap, MessageSquare, CalendarCheck, Star } from "lucide-react";
 
 /* ─── bilingual copy ──────────────────────────────────────── */
 const copy = {
@@ -25,22 +25,22 @@ const copy = {
                 fr: "Trois fonctionnalités qui se rentabilisent seules" },
     cards: [
       {
-        emoji: "⚡",
-        title: { en: "AI Text-Back",          fr: "Réponse SMS IA" },
-        desc:  { en: "Miss a call? Our system texts them back in 60 seconds.",
-                  fr: "Un appel manqué ? Notre système répond par SMS en 60 secondes." },
+        spec:  { en: "01 / Conversational AI",  fr: "01 / IA Conversationnelle" },
+        title: { en: "AI Text-Back",            fr: "Réponse SMS Intelligente" },
+        desc:  { en: "Stop lead leakage. Our AI instantly detects missed calls and initiates a conversational SMS sequence. It qualifies the prospect's needs and keeps them engaged so they don't call your competitor.",
+                  fr: "Stoppez la fuite de prospects. Notre IA détecte instantanément les appels manqués et déclenche une séquence SMS conversationnelle. Elle qualifie les besoins du client et le garde engagé pour qu'il n'appelle pas votre concurrent." },
       },
       {
-        emoji: "📅",
-        title: { en: "Auto-Booking",          fr: "Prise de Rendez-vous" },
-        desc:  { en: "The AI qualifies the lead and books your calendar.",
-                  fr: "L'IA qualifie le client et l'ajoute à votre calendrier." },
+        spec:  { en: "02 / Calendar Sync",      fr: "02 / Synchronisation Agenda" },
+        title: { en: "Auto-Booking",            fr: "Prise de Rendez-vous Auto" },
+        desc:  { en: "Direct calendar integration. Syncs with Google/Outlook to book qualified estimates in real-time, eliminating the back-and-forth.",
+                  fr: "Intégration directe avec votre agenda. Se synchronise avec Google et Outlook pour réserver des estimations qualifiées en temps réel, en éliminant les allers-retours." },
       },
       {
-        emoji: "⭐",
-        title: { en: "Review Engine",         fr: "Moteur d'Avis Google" },
-        desc:  { en: "Automated 5-star review requests after every job.",
-                  fr: "Demandes d'avis automatisées après chaque contrat." },
+        spec:  { en: "03 / Local SEO Engine",   fr: "03 / Moteur SEO Local" },
+        title: { en: "Review Engine",           fr: "Moteur d'Avis Google" },
+        desc:  { en: "Dominate local search. Automated SMS review requests are triggered the moment a job is completed, boosting your Google ranking and authority on autopilot.",
+                  fr: "Dominez la recherche locale. Des demandes d'avis SMS sont déclenchées dès qu'un contrat est terminé, propulsant votre classement Google et votre autorité en pilote automatique." },
       },
     ],
   },
@@ -170,60 +170,133 @@ export default function BusinessSolutions() {
                 </h2>
               </motion.div>
 
-              {/* 3-card grid */}
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(270px, 1fr))', gap: '24px' }}>
-                {copy.features.cards.map((card, i) => (
-                  <motion.div
-                    key={i}
-                    variants={fadeUp} initial="hidden"
-                    whileInView="show" viewport={{ once: true, margin: '-40px' }}
-                    transition={{ duration: 0.52, delay: i * 0.1, ease }}
-                    style={{
-                      padding: '36px 30px',
-                      background: 'rgba(10,20,42,0.6)',
-                      backdropFilter: 'blur(14px)',
-                      WebkitBackdropFilter: 'blur(14px)',
-                      border: '1px solid rgba(59,130,246,0.16)',
-                      borderRadius: '20px',
-                      boxShadow: '0 0 0 1px rgba(59,130,246,0.08), 0 20px 48px rgba(0,0,0,0.28)',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      gap: '14px',
-                      transition: 'border-color 0.2s, transform 0.2s',
-                    }}
-                    whileHover={{ y: -4, transition: { duration: 0.22, ease: 'easeOut' } }}
-                  >
-                    {/* Emoji icon */}
-                    <div style={{
-                      width: '52px', height: '52px',
-                      borderRadius: '14px',
-                      background: 'rgba(59,130,246,0.12)',
-                      border: '1px solid rgba(59,130,246,0.22)',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      fontSize: '22px',
-                    }}>
-                      {card.emoji}
-                    </div>
+              {/* Asymmetrical Bento Grid: 3-cols desktop, stacks on mobile */}
+              <div className="bento-features-grid">
+                {(() => {
+                  const icons = [MessageSquare, CalendarCheck, Star];
+                  const spans = [
+                    { col: 'span 2', row: 'span 1' },  // AI Text-Back: wide top-left
+                    { col: 'span 1', row: 'span 1' },  // Auto-Booking: small top-right
+                    { col: 'span 3', row: 'span 1' },  // Review Engine: full-width bottom
+                  ];
+                  return copy.features.cards.map((card, i) => {
+                    const Icon = icons[i];
+                    return (
+                      <motion.article
+                        key={i}
+                        variants={fadeUp} initial="hidden"
+                        whileInView="show" viewport={{ once: true, margin: '-40px' }}
+                        transition={{ duration: 0.52, delay: i * 0.08, ease }}
+                        whileHover={{ y: -3, transition: { duration: 0.22, ease: 'easeOut' } }}
+                        className="bento-feature-card"
+                        style={{
+                          gridColumn: spans[i].col,
+                          gridRow: spans[i].row,
+                        }}
+                      >
+                        {/* Tech-spec eyebrow */}
+                        <div style={{
+                          display: 'inline-flex', alignItems: 'center', gap: '8px',
+                          fontSize: '10.5px', fontWeight: 600, letterSpacing: '0.16em',
+                          textTransform: 'uppercase',
+                          color: 'rgba(147,197,253,0.78)',
+                          fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace',
+                        }}>
+                          <span style={{
+                            width: '6px', height: '6px', borderRadius: '50%',
+                            background: '#3b82f6',
+                            boxShadow: '0 0 8px rgba(59,130,246,0.7)',
+                          }} />
+                          {bi(card.spec, l)}
+                        </div>
 
-                    <h3 style={{
-                      fontSize: '18px', fontWeight: 700,
-                      color: '#fff', margin: 0,
-                      letterSpacing: '-0.015em',
-                    }}>
-                      {bi(card.title, l)}
-                    </h3>
+                        {/* Icon */}
+                        <div style={{
+                          width: '46px', height: '46px',
+                          borderRadius: '12px',
+                          background: 'linear-gradient(135deg, rgba(59,130,246,0.18) 0%, rgba(59,130,246,0.04) 100%)',
+                          border: '1px solid rgba(59,130,246,0.24)',
+                          display: 'flex', alignItems: 'center', justifyContent: 'center',
+                          color: '#93c5fd',
+                        }}>
+                          <Icon size={20} strokeWidth={1.6} />
+                        </div>
 
-                    <p style={{
-                      fontSize: '14px',
-                      color: 'rgba(255,255,255,0.5)',
-                      lineHeight: 1.68, margin: 0,
-                    }}>
-                      {bi(card.desc, l)}
-                    </p>
-                  </motion.div>
-                ))}
+                        <h3 style={{
+                          fontSize: 'clamp(20px, 2.4vw, 26px)',
+                          fontWeight: 700,
+                          color: '#fff', margin: 0,
+                          letterSpacing: '-0.03em',
+                          lineHeight: 1.15,
+                        }}>
+                          {bi(card.title, l)}
+                        </h3>
+
+                        <p style={{
+                          fontSize: '15px',
+                          color: 'rgb(156,163,175)', /* text-gray-400 */
+                          lineHeight: 1.7, margin: 0,
+                          maxWidth: '62ch',
+                        }}>
+                          {bi(card.desc, l)}
+                        </p>
+                      </motion.article>
+                    );
+                  });
+                })()}
               </div>
             </div>
+
+            <style>{`
+              .bento-features-grid {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 18px;
+              }
+              @media (min-width: 820px) {
+                .bento-features-grid {
+                  grid-template-columns: repeat(3, 1fr);
+                  gap: 22px;
+                }
+              }
+              .bento-feature-card {
+                position: relative;
+                padding: 32px;
+                background-color: rgba(255,255,255,0.02);
+                background-image: radial-gradient(circle at center, rgba(255,255,255,0.05) 1px, transparent 1px);
+                background-size: 20px 20px;
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                border: 1px solid rgba(255,255,255,0.1);
+                border-radius: 20px;
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+                overflow: hidden;
+                transition: border-color 0.25s ease, background-color 0.25s ease;
+              }
+              .bento-feature-card::before {
+                content: '';
+                position: absolute; inset: 0;
+                border-radius: inherit;
+                pointer-events: none;
+                background: radial-gradient(120% 80% at 0% 0%, rgba(59,130,246,0.08), transparent 55%);
+                opacity: 0;
+                transition: opacity 0.3s ease;
+              }
+              .bento-feature-card:hover {
+                border-color: rgba(255,255,255,0.18);
+                background-color: rgba(255,255,255,0.035);
+              }
+              .bento-feature-card:hover::before { opacity: 1; }
+              /* On mobile, stack — all cards full-width */
+              @media (max-width: 819px) {
+                .bento-feature-card {
+                  grid-column: span 1 !important;
+                  padding: 28px 24px;
+                }
+              }
+            `}</style>
           </section>
 
           {/* ══ ROI CALCULATOR ═══════════════════════════════ */}
