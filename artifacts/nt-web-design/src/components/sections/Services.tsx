@@ -28,7 +28,7 @@ const SERVICES_EN: Service[] = [
   { icon: Database,     title: 'CMS Integration',       short: 'Take full control — no code needed.',                        desc: 'Take full control of your website. Intuitive CMS integration lets you easily update text, manage blogs, and upload images without touching a single line of code.', id: '04', cluster: 'foundations', span: 'sm', glow: 'cyan',     badges: ['Headless', 'Sanity'] },
   { icon: Search,       title: 'SEO & Marketing',       short: 'Rank where it matters. Be found.',                           desc: 'Ranking you where it matters. Technical SEO, keyword strategy, and performance optimization included — so the right people find you at exactly the right moment.', id: '05', cluster: 'foundations', span: 'md', glow: 'emerald',  badges: ['Google Core Web Vitals'] },
   { icon: Wrench,       title: 'Maintenance & Support', short: 'Peace of mind — we handle the rest.',                        desc: 'Enjoy peace of mind with our dedicated support. Monthly security updates, daily cloud backups, bug fixes, and 24/7 uptime monitoring so your site never goes down.', id: '06', cluster: 'foundations', span: 'md', glow: 'amber',    badges: ['24/7 Uptime', 'Daily Backups'] },
-  { icon: Building2,    title: 'Enterprise SaaS',       short: 'Multi-tenant cloud apps at scale.',                          desc: 'Scalable, multi-tenant cloud applications engineered for high performance. We architect and build enterprise-grade SaaS platforms ready to handle thousands of concurrent users.', id: '07', cluster: 'ai',          span: 'tall', glow: 'blue',   badges: ['Multi-tenant', 'Postgres'] },
+  { icon: Building2,    title: 'Enterprise SaaS',       short: 'Multi-tenant cloud apps at scale.',                          desc: 'Scalable, multi-tenant cloud applications engineered for high performance. We architect and build enterprise-grade SaaS platforms ready to handle thousands of concurrent users.', id: '07', cluster: 'ai',          span: 'tall', glow: 'blue',   badges: ['ARCH: MULTI-TENANT', 'Postgres'] },
   { icon: Bot,          title: 'AI Integrations',       short: 'Smart automation that drives conversions.',                  desc: 'Supercharge your business with custom AI solutions. Smart chatbots, automated customer service workflows, and advanced AI agents tailored to save you time and drive conversions.', id: '08', cluster: 'ai',          span: 'tall', glow: 'purple', badges: ['GPT-4', 'Claude', 'Gemini'] },
 ];
 
@@ -40,7 +40,7 @@ const SERVICES_FR: Service[] = [
   { icon: Database,     title: 'Intégration CMS',       short: 'Contrôle total, sans code.',                 desc: "Prenez le contrôle de votre site. L'intégration CMS intuitive vous permet de mettre à jour le contenu, gérer les blogs et télécharger des images sans toucher au code.", id: '04', cluster: 'foundations', span: 'sm', glow: 'cyan',     badges: ['Headless', 'Sanity'] },
   { icon: Search,       title: 'SEO & Marketing',       short: 'Classez-vous là où ça compte.',              desc: 'Positionnement là où ça compte. SEO technique, stratégie de mots-clés et optimisation des performances inclus pour attirer exactement les bons clients.', id: '05', cluster: 'foundations', span: 'md', glow: 'emerald',  badges: ['Google Core Web Vitals'] },
   { icon: Wrench,       title: 'Maintenance & Support', short: "Tranquillité d'esprit garantie.",            desc: "Tranquillité d'esprit avec notre support dédié. Mises à jour de sécurité mensuelles, sauvegardes quotidiennes, corrections de bugs et surveillance 24/7.", id: '06', cluster: 'foundations', span: 'md', glow: 'amber',    badges: ['Surveillance 24/7', 'Sauvegardes'] },
-  { icon: Building2,    title: 'SaaS Entreprise',       short: 'Applications cloud multi-tenant.',           desc: 'Applications cloud scalables et multi-tenant conçues pour la haute performance. Nous architecturons des plateformes SaaS de niveau entreprise.', id: '07', cluster: 'ai',          span: 'tall', glow: 'blue',   badges: ['Multi-tenant', 'Postgres'] },
+  { icon: Building2,    title: 'SaaS Entreprise',       short: 'Applications cloud multi-tenant.',           desc: 'Applications cloud scalables et multi-tenant conçues pour la haute performance. Nous architecturons des plateformes SaaS de niveau entreprise.', id: '07', cluster: 'ai',          span: 'tall', glow: 'blue',   badges: ['ARCH: MULTI-TENANT', 'Postgres'] },
   { icon: Bot,          title: 'Intégrations IA',       short: 'Automatisation intelligente.',               desc: 'Boostez votre entreprise avec des solutions IA sur mesure. Chatbots intelligents, workflows automatisés et agents IA avancés pour gagner du temps et augmenter les conversions.', id: '08', cluster: 'ai',          span: 'tall', glow: 'purple', badges: ['GPT-4', 'Claude', 'Gemini'] },
 ];
 
@@ -299,6 +299,9 @@ function ShowreelBackground() {
 
 function BentoCard({ s, i, learnMore, onClick }: BentoCardProps) {
   const isLarge = s.span === 'lg';
+  const isAi    = s.cluster === 'ai';
+  const isSchema  = isAi && s.id === '07';
+  const isNeural  = isAi && s.id === '08';
   const glow = GLOW_RGB[s.glow ?? 'blue'];
   return (
     <motion.button
@@ -307,11 +310,11 @@ function BentoCard({ s, i, learnMore, onClick }: BentoCardProps) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
       transition={{ delay: i * 0.06, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className="bento-card"
+      className={`bento-card${isSchema ? ' bento-ai-schema' : ''}${isNeural ? ' bento-ai-neural' : ''}`}
       style={{
         ...SPAN_STYLE[s.span],
         position: 'relative',
-        background: 'rgba(255,255,255,0.02)',
+        background: isAi ? 'rgba(2,6,23,0.5)' : 'rgba(255,255,255,0.02)',
         border: '1px solid rgba(255,255,255,0.05)',
         borderRadius: '20px',
         padding: isLarge ? '40px 36px' : '28px 26px',
@@ -320,12 +323,49 @@ function BentoCard({ s, i, learnMore, onClick }: BentoCardProps) {
         display: 'flex',
         flexDirection: 'column',
         overflow: 'hidden',
-        backdropFilter: 'blur(12px)',
-        WebkitBackdropFilter: 'blur(12px)',
+        backdropFilter: isAi ? 'blur(20px)' : 'blur(12px)',
+        WebkitBackdropFilter: isAi ? 'blur(20px)' : 'blur(12px)',
       }}
     >
       {/* Digital Showreel: multi-layer scrolling portfolio grid (large card only) */}
       {isLarge && <ShowreelBackground />}
+
+      {/* ── Enterprise SaaS — animated schema grid background ── */}
+      {isSchema && (
+        <>
+          <div className="ai-schema-grid"  aria-hidden="true" />
+          <div className="ai-schema-nodes" aria-hidden="true" />
+        </>
+      )}
+
+      {/* ── AI Integrations — neural mesh + glowing radial behind icon ── */}
+      {isNeural && (
+        <>
+          <div className="ai-neural-mesh" aria-hidden="true" />
+          <svg className="ai-neural-svg" viewBox="0 0 320 480" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <g stroke="rgba(96,165,250,0.18)" strokeWidth="0.5" fill="none">
+              <line x1="40"  y1="80"  x2="160" y2="160" />
+              <line x1="160" y1="160" x2="280" y2="100" />
+              <line x1="160" y1="160" x2="80"  y2="280" />
+              <line x1="160" y1="160" x2="240" y2="280" />
+              <line x1="80"  y1="280" x2="240" y2="280" />
+              <line x1="80"  y1="280" x2="60"  y2="400" />
+              <line x1="240" y1="280" x2="280" y2="400" />
+              <line x1="60"  y1="400" x2="280" y2="400" />
+            </g>
+            <g fill="#60a5fa">
+              <circle cx="40"  cy="80"  r="2.2" className="ai-neural-node" style={{ animationDelay: '0s'   }} />
+              <circle cx="160" cy="160" r="2.8" className="ai-neural-node" style={{ animationDelay: '0.4s' }} />
+              <circle cx="280" cy="100" r="2.2" className="ai-neural-node" style={{ animationDelay: '0.9s' }} />
+              <circle cx="80"  cy="280" r="2.4" className="ai-neural-node" style={{ animationDelay: '1.3s' }} />
+              <circle cx="240" cy="280" r="2.4" className="ai-neural-node" style={{ animationDelay: '1.7s' }} />
+              <circle cx="60"  cy="400" r="2"   className="ai-neural-node" style={{ animationDelay: '2.1s' }} />
+              <circle cx="280" cy="400" r="2"   className="ai-neural-node" style={{ animationDelay: '2.5s' }} />
+            </g>
+          </svg>
+          <div className="ai-neural-radial" aria-hidden="true" />
+        </>
+      )}
 
       {/* Ambient radial glow behind icon */}
       <div
@@ -383,8 +423,20 @@ function BentoCard({ s, i, learnMore, onClick }: BentoCardProps) {
       </div>
 
       <div style={{ position: 'relative', zIndex: 2, marginTop: 'auto' }}>
-        <div style={{ fontSize: isLarge ? '24px' : '16px', fontWeight: 700, color: '#fff', marginBottom: '10px', letterSpacing: '-0.02em' }}>{s.title}</div>
-        <div style={{ fontSize: isLarge ? '15px' : '13px', color: 'rgba(255,255,255,0.55)', lineHeight: 1.65, marginBottom: '18px', maxWidth: isLarge ? '480px' : 'none' }}>{s.short}</div>
+        <div style={{
+          fontSize: isAi ? '26px' : (isLarge ? '24px' : '16px'),
+          fontWeight: isAi ? 800 : 700,
+          color: '#fff',
+          marginBottom: '10px',
+          letterSpacing: isAi ? '-0.035em' : '-0.02em',
+        }}>{s.title}</div>
+        <div style={{
+          fontSize: isAi ? '14px' : (isLarge ? '15px' : '13px'),
+          color: isAi ? 'rgba(148,163,184,0.95)' : 'rgba(255,255,255,0.55)',
+          lineHeight: 1.65,
+          marginBottom: '18px',
+          maxWidth: isLarge ? '480px' : 'none',
+        }}>{s.short}</div>
         <div style={{ fontSize: '12px', color: `rgb(${glow})`, fontWeight: 600, letterSpacing: '0.02em', opacity: 0.9 }}>{learnMore}</div>
       </div>
     </motion.button>
@@ -443,7 +495,11 @@ export function Services() {
 
       {/* Bento clusters */}
       {clusters.map((cluster, ci) => (
-        <div key={ci} style={{ marginBottom: ci === 0 ? '88px' : '0' }}>
+        <div
+          key={ci}
+          className={cluster.items[0]?.cluster === 'ai' ? 'cluster-ai-wrap' : ''}
+          style={{ marginBottom: ci === 0 ? '88px' : '0', position: 'relative' }}
+        >
           {/* Cluster header */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -711,6 +767,128 @@ export function Services() {
 
         @media (prefers-reduced-motion: reduce) {
           .showreel-col, .showreel-speedlines, .live-feed-badge .live-dot {
+            animation: none !important;
+          }
+        }
+
+        /* ─────────────────────────────────────────────────────────
+           ENTERPRISE AI cluster — section depth + per-card layers
+           ───────────────────────────────────────────────────────── */
+
+        /* Section depth: massive dim radial glow + travelling scanner line */
+        .cluster-ai-wrap { isolation: isolate; }
+        .cluster-ai-wrap::before {
+          content: '';
+          position: absolute;
+          inset: -120px -80px;
+          background: radial-gradient(ellipse at center, rgba(49,46,129,0.22) 0%, rgba(49,46,129,0) 60%);
+          filter: blur(120px);
+          pointer-events: none;
+          z-index: -1;
+        }
+        .cluster-ai-wrap::after {
+          content: '';
+          position: absolute;
+          left: 0; right: 0;
+          top: 0;
+          height: 1px;
+          background: linear-gradient(90deg, transparent 0%, rgba(147,197,253,0.55) 50%, transparent 100%);
+          opacity: 0.10;
+          pointer-events: none;
+          z-index: 1;
+          animation: ai-scanner 9s linear infinite;
+        }
+        @keyframes ai-scanner {
+          0%   { transform: translateY(0); opacity: 0; }
+          8%   { opacity: 0.10; }
+          92%  { opacity: 0.10; }
+          100% { transform: translateY(100%); opacity: 0; }
+        }
+
+        /* ── Enterprise SaaS — schema grid background ── */
+        .ai-schema-grid {
+          position: absolute;
+          inset: -2px;
+          background-image:
+            linear-gradient(rgba(96,165,250,0.07) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(96,165,250,0.07) 1px, transparent 1px);
+          background-size: 28px 28px;
+          opacity: 0.5;
+          pointer-events: none;
+          z-index: 0;
+          animation: ai-grid-scroll 28s linear infinite;
+          mask-image: radial-gradient(ellipse at 50% 60%, #000 30%, transparent 95%);
+          -webkit-mask-image: radial-gradient(ellipse at 50% 60%, #000 30%, transparent 95%);
+        }
+        @keyframes ai-grid-scroll {
+          from { background-position: 0 0; }
+          to   { background-position: 0 -560px; }
+        }
+        .ai-schema-nodes {
+          position: absolute;
+          inset: 0;
+          background-image:
+            radial-gradient(circle at 14% 22%, rgba(96,165,250,0.55) 0 1.4px, transparent 2px),
+            radial-gradient(circle at 78% 18%, rgba(96,165,250,0.55) 0 1.4px, transparent 2px),
+            radial-gradient(circle at 30% 64%, rgba(96,165,250,0.55) 0 1.4px, transparent 2px),
+            radial-gradient(circle at 70% 78%, rgba(96,165,250,0.55) 0 1.4px, transparent 2px),
+            radial-gradient(circle at 50% 42%, rgba(96,165,250,0.55) 0 1.4px, transparent 2px),
+            radial-gradient(circle at 88% 56%, rgba(96,165,250,0.55) 0 1.4px, transparent 2px);
+          opacity: 0.05;
+          pointer-events: none;
+          z-index: 0;
+          animation: ai-grid-scroll 28s linear infinite;
+        }
+
+        /* ── AI Integrations — Neural mesh background ── */
+        .ai-neural-mesh {
+          position: absolute;
+          inset: 0;
+          background-image: radial-gradient(circle, rgba(147,197,253,0.16) 1px, transparent 1.5px);
+          background-size: 22px 22px;
+          opacity: 0.6;
+          pointer-events: none;
+          z-index: 0;
+          mask-image: radial-gradient(ellipse at 50% 50%, #000 40%, transparent 92%);
+          -webkit-mask-image: radial-gradient(ellipse at 50% 50%, #000 40%, transparent 92%);
+        }
+        .ai-neural-svg {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          pointer-events: none;
+          z-index: 0;
+          opacity: 0.85;
+        }
+        .ai-neural-node {
+          transform-box: fill-box;
+          transform-origin: center;
+          animation: ai-node-pulse 2.6s ease-in-out infinite;
+          filter: drop-shadow(0 0 4px rgba(96,165,250,0.7));
+        }
+        @keyframes ai-node-pulse {
+          0%, 100% { opacity: 0.35; transform: scale(0.8); }
+          50%      { opacity: 1;    transform: scale(1.5); }
+        }
+        /* Glowing electric-blue radial behind the robot icon */
+        .ai-neural-radial {
+          position: absolute;
+          top: 28px;
+          left: 28px;
+          width: 200px;
+          height: 200px;
+          background: radial-gradient(circle, rgba(59,130,246,0.20) 0%, rgba(59,130,246,0) 70%);
+          filter: blur(48px);
+          pointer-events: none;
+          z-index: 0;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .cluster-ai-wrap::after,
+          .ai-schema-grid,
+          .ai-schema-nodes,
+          .ai-neural-node {
             animation: none !important;
           }
         }
