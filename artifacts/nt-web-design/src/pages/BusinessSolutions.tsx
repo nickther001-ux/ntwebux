@@ -14,8 +14,8 @@ const copy = {
     badge:   { en: "Business Software",        fr: "Logiciels d'Affaires" },
     h1:      { en: "Scale Your Operations.\nStop Missing Leads.",
                 fr: "Automatisez votre croissance.\nNe perdez plus un seul client." },
-    sub:     { en: "The all-in-one AI engine built for Montreal's top contractors (HVAC, Roofing, Auto Detailing).",
-                fr: "Le moteur IA tout-en-un conçu pour les meilleurs entrepreneurs de Montréal (CVAC, Toiture, Esthétique Automobile)." },
+    sub:     { en: "The borderless AI operating system designed to automate lead acquisition and scale service operations for the next generation of global contractors.",
+                fr: "Le système d'exploitation IA sans frontières conçu pour automatiser l'acquisition de leads et propulser les opérations des entrepreneurs de nouvelle génération à l'échelle mondiale." },
     cta:     { en: "Let's Build Your Software", fr: "Construisons votre logiciel" },
     ctaSec:  { en: "Talk to a Strategist",     fr: "Parler à un conseiller" },
   },
@@ -77,8 +77,8 @@ export default function BusinessSolutions() {
       : "Business Software — FieldOps Pro | NT Web Design";
   const DESC_TAG =
     l === 'fr'
-      ? "Le moteur IA tout-en-un pour les entrepreneurs de Montréal : SMS automatique, prise de rendez-vous IA, moteur d'avis Google."
-      : "All-in-one AI engine for Montreal contractors: automated text-back, AI booking, and Google review automation.";
+      ? "Le système d'exploitation IA sans frontières pour les entrepreneurs internationaux : SMS automatique, prise de rendez-vous IA, moteur d'avis Google."
+      : "The borderless AI operating system for global contractors: automated text-back, AI booking, and Google review automation.";
 
   return (
     <>

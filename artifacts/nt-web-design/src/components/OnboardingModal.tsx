@@ -276,7 +276,7 @@ export function OnboardingModal({ plan, onClose }: Props) {
           <label style={{ display: 'block', fontSize: '11px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.35)', marginBottom: '6px' }}>
             {fr ? 'Ville / Province' : 'City / Province'}
           </label>
-          <input value={data.city} onChange={e => set('city', e.target.value)} placeholder={fr ? 'Ex: Montréal, QC' : 'e.g. Montreal, QC'} style={inp} />
+          <input value={data.city} onChange={e => set('city', e.target.value)} placeholder={fr ? 'Ex: Paris, France' : 'e.g. New York, NY'} style={inp} />
         </div>
       </div>
     </motion.div>,

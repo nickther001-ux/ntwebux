@@ -158,7 +158,7 @@ function HomeView({ lang, onStartChat }: { lang: string; onStartChat: () => void
 
       {/* Footer */}
       <div style={{ padding: "10px 18px 14px", textAlign: "center", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
-        <span style={{ fontSize: "10.5px", color: "rgba(255,255,255,0.2)", fontWeight: 500 }}>NT Web UX · Montréal</span>
+        <span style={{ fontSize: "10.5px", color: "rgba(255,255,255,0.2)", fontWeight: 500 }}>NT Web UX · Global</span>
       </div>
     </div>
   );

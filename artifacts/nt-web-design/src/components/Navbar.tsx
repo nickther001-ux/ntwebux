@@ -336,7 +336,7 @@ export function Navbar() {
                 {t('nav.quote')} <ArrowRight size={15} />
               </a>
 
-              <p style={{ textAlign: 'center', fontSize: '11px', color: 'rgba(255,255,255,0.18)', margin: 0 }}>NT Web UX · Montréal · info@ntwebux.com</p>
+              <p style={{ textAlign: 'center', fontSize: '11px', color: 'rgba(255,255,255,0.18)', margin: 0 }}>NT Web UX · Global · info@ntwebux.com</p>
             </motion.div>
           </motion.div>
         )}
