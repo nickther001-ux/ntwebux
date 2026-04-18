@@ -23,6 +23,12 @@ const copy = {
     eyebrow: { en: "Anti-Missed-Call System",  fr: "Système Anti-Appels-Manqués" },
     title:   { en: "Three Features That Pay for Themselves",
                 fr: "Trois fonctionnalités qui se rentabilisent seules" },
+    /* tech-spec micro-badges (per-card top-right pills) */
+    badges: {
+      systemOnline:   { en: "SYSTEM ONLINE",       fr: "SYSTÈME EN LIGNE" },
+      realTimeSync:   { en: "Real-Time Sync",      fr: "Sync Temps Réel" },
+      revenueRecovered:{ en: "REVENUE RECOVERED",  fr: "REVENU RÉCUPÉRÉ" },
+    },
     cards: [
       {
         spec:  { en: "01 / Conversational AI",  fr: "01 / IA Conversationnelle" },
@@ -42,6 +48,49 @@ const copy = {
         desc:  { en: "Dominate local search. Automated SMS review requests are triggered the moment a job is completed, boosting your Google ranking and authority on autopilot.",
                   fr: "Dominez la recherche locale. Des demandes d'avis SMS sont déclenchées dès qu'un contrat est terminé, propulsant votre classement Google et votre autorité en pilote automatique." },
       },
+    ],
+  },
+  /* Bilingual log lines for the AI Text-Back live activity console */
+  consoleLog: {
+    en: [
+      "[14:02:11] Missed call from +1 (514) 555-0142",
+      "[14:02:12] AI Text-Back sequence initiated",
+      "[14:02:14] SMS sent — qualifying prospect intent",
+      "[14:02:47] Reply received: 'kitchen remodel quote'",
+      "[14:02:48] Lead scored 87 / 100 — high intent",
+      "[14:02:51] Calendar sync: 3 slots offered",
+      "[14:03:09] Booking confirmed — Thu 10:30 AM",
+      "[14:03:10] CRM record created · ID #LD-9241",
+      "[14:03:11] Slack notification dispatched",
+      "[14:03:12] Owner alerted via push",
+      "[14:04:02] Missed call from +1 (438) 555-0188",
+      "[14:04:03] AI Text-Back sequence initiated",
+      "[14:04:18] Reply received: 'pricing for re-roof'",
+      "[14:04:19] Lead scored 92 / 100 — high intent",
+      "[14:04:22] Estimate auto-booked — Sat 9:00 AM",
+      "[14:05:33] Review request queued (post-job)",
+      "[14:05:34] Google review posted ★★★★★",
+      "[14:06:01] Pipeline value updated: +$14,200",
+    ],
+    fr: [
+      "[14:02:11] Appel manqué de +1 (514) 555-0142",
+      "[14:02:12] Séquence Réponse SMS IA initiée",
+      "[14:02:14] SMS envoyé — qualification du prospect",
+      "[14:02:47] Réponse reçue : « devis rénovation cuisine »",
+      "[14:02:48] Score du lead : 87 / 100 — fort intérêt",
+      "[14:02:51] Sync agenda : 3 créneaux proposés",
+      "[14:03:09] RDV confirmé — jeu. 10 h 30",
+      "[14:03:10] Fiche CRM créée · ID #LD-9241",
+      "[14:03:11] Notification Slack envoyée",
+      "[14:03:12] Propriétaire alerté par notification",
+      "[14:04:02] Appel manqué de +1 (438) 555-0188",
+      "[14:04:03] Séquence Réponse SMS IA initiée",
+      "[14:04:18] Réponse reçue : « tarifs pour toiture »",
+      "[14:04:19] Score du lead : 92 / 100 — fort intérêt",
+      "[14:04:22] Estimation auto-réservée — sam. 9 h 00",
+      "[14:05:33] Demande d'avis en file (post-contrat)",
+      "[14:05:34] Avis Google publié ★★★★★",
+      "[14:06:01] Valeur du pipeline mise à jour : +14 200 $",
     ],
   },
   calc: {
@@ -64,6 +113,162 @@ const ease = [0.16, 1, 0.3, 1] as [number, number, number, number];
 
 type LangKey = 'en' | 'fr';
 function bi(obj: { en: string; fr: string }, lang: LangKey) { return obj[lang]; }
+
+/* ─── Card visualizations ─────────────────────────────────── */
+
+/* Live Activity Console (AI Text-Back card)
+   Fast-scrolling vertical log of system actions, monospaced, blurred. */
+function LiveActivityConsole({ lines }: { lines: string[] }) {
+  return (
+    <div className="live-console" aria-hidden="true">
+      <div className="live-console__inner">
+        {[...lines, ...lines].map((line, i) => (
+          <div key={i} className="live-console__line">{line}</div>
+        ))}
+      </div>
+      {/* Scanline overlay + edge fade for a CRT/terminal feel */}
+      <div className="live-console__scanlines" />
+      <div className="live-console__mask" />
+    </div>
+  );
+}
+
+/* Neural Map (Auto-Booking card)
+   Dots connected by glowing lines with light pulses traveling between them. */
+function NeuralMap() {
+  /* Hand-tuned node positions inside a 200x140 viewBox */
+  const nodes: Array<[number, number]> = [
+    [22, 32], [78, 18], [140, 40], [188, 24],
+    [40, 78], [100, 64], [160, 88],
+    [60, 118], [124, 110], [186, 112],
+  ];
+  /* Edges between node indices */
+  const edges: Array<[number, number]> = [
+    [0, 1], [1, 2], [2, 3],
+    [0, 4], [1, 5], [2, 5], [3, 6],
+    [4, 5], [5, 6],
+    [4, 7], [5, 7], [5, 8], [6, 8], [6, 9], [8, 9],
+    [7, 8],
+  ];
+  return (
+    <div className="neural-map" aria-hidden="true">
+      <svg
+        viewBox="0 0 200 140"
+        preserveAspectRatio="xMidYMid slice"
+        style={{ width: '100%', height: '100%', display: 'block' }}
+      >
+        <defs>
+          <radialGradient id="nm-pulse" cx="50%" cy="50%" r="50%">
+            <stop offset="0%"  stopColor="#67e8f9" stopOpacity="1" />
+            <stop offset="60%" stopColor="#67e8f9" stopOpacity="0.4" />
+            <stop offset="100%" stopColor="#67e8f9" stopOpacity="0" />
+          </radialGradient>
+        </defs>
+
+        {/* edges */}
+        {edges.map(([a, b], i) => {
+          const [x1, y1] = nodes[a]; const [x2, y2] = nodes[b];
+          return (
+            <line key={`e${i}`}
+              x1={x1} y1={y1} x2={x2} y2={y2}
+              stroke="rgba(99,102,241,0.42)"
+              strokeWidth={0.5}
+            />
+          );
+        })}
+
+        {/* traveling pulses on selected edges */}
+        {[
+          { e: [0,1], dur: 2.6, delay: 0    },
+          { e: [1,2], dur: 2.4, delay: 0.6  },
+          { e: [4,5], dur: 2.2, delay: 1.1  },
+          { e: [5,8], dur: 2.8, delay: 0.3  },
+          { e: [3,6], dur: 2.5, delay: 1.4  },
+          { e: [6,9], dur: 2.0, delay: 0.9  },
+          { e: [7,8], dur: 2.3, delay: 1.7  },
+        ].map((p, i) => {
+          const [a, b] = p.e;
+          const [x1, y1] = nodes[a]; const [x2, y2] = nodes[b];
+          return (
+            <circle key={`p${i}`} r="2.4" fill="url(#nm-pulse)">
+              <animate attributeName="cx" from={x1} to={x2} dur={`${p.dur}s`} begin={`${p.delay}s`} repeatCount="indefinite" />
+              <animate attributeName="cy" from={y1} to={y2} dur={`${p.dur}s`} begin={`${p.delay}s`} repeatCount="indefinite" />
+              <animate attributeName="opacity" values="0;1;1;0" dur={`${p.dur}s`} begin={`${p.delay}s`} repeatCount="indefinite" />
+            </circle>
+          );
+        })}
+
+        {/* nodes */}
+        {nodes.map(([x, y], i) => (
+          <g key={`n${i}`}>
+            <circle cx={x} cy={y} r="3.2" fill="rgba(99,102,241,0.18)" />
+            <circle cx={x} cy={y} r="1.6" fill="#a5b4fc">
+              <animate attributeName="opacity" values="0.5;1;0.5" dur={`${2 + (i % 3) * 0.4}s`} repeatCount="indefinite" />
+            </circle>
+          </g>
+        ))}
+      </svg>
+    </div>
+  );
+}
+
+/* Ghost Analytics (Review Engine card)
+   A blurred line graph that pulses upward with a glowing label. */
+function GhostAnalytics({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="ghost-analytics" aria-hidden="true">
+      <svg
+        viewBox="0 0 600 160"
+        preserveAspectRatio="none"
+        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
+      >
+        <defs>
+          <linearGradient id="ga-line" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0%"   stopColor="#22d3ee" stopOpacity="0.0" />
+            <stop offset="20%"  stopColor="#22d3ee" stopOpacity="0.6" />
+            <stop offset="100%" stopColor="#a5b4fc" stopOpacity="1" />
+          </linearGradient>
+          <linearGradient id="ga-fill" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0%"   stopColor="#22d3ee" stopOpacity="0.28" />
+            <stop offset="100%" stopColor="#22d3ee" stopOpacity="0" />
+          </linearGradient>
+        </defs>
+        {/* baseline grid */}
+        {[0.25, 0.5, 0.75].map((t, i) => (
+          <line key={i} x1="0" x2="600" y1={160 * t} y2={160 * t}
+            stroke="rgba(255,255,255,0.04)" strokeWidth="0.5" strokeDasharray="3 5" />
+        ))}
+        {/* filled area */}
+        <path
+          className="ga-area"
+          d="M0,140 L40,128 L90,118 L150,124 L210,108 L270,96 L330,82 L390,72 L450,56 L510,42 L570,28 L600,18 L600,160 L0,160 Z"
+          fill="url(#ga-fill)"
+        />
+        {/* line */}
+        <path
+          className="ga-line"
+          d="M0,140 L40,128 L90,118 L150,124 L210,108 L270,96 L330,82 L390,72 L450,56 L510,42 L570,28 L600,18"
+          fill="none"
+          stroke="url(#ga-line)"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        {/* end-of-line glowing dot */}
+        <circle cx="600" cy="18" r="3.5" fill="#67e8f9">
+          <animate attributeName="r" values="3;5;3" dur="1.6s" repeatCount="indefinite" />
+        </circle>
+      </svg>
+
+      {/* Glowing analytics label pinned top-right */}
+      <div className="ghost-analytics__label">
+        <span className="ghost-analytics__pulse" />
+        <span className="ghost-analytics__label-text">{label}</span>
+        <span className="ghost-analytics__value">{value}</span>
+      </div>
+    </div>
+  );
+}
 
 /* ─── component ───────────────────────────────────────────── */
 export default function BusinessSolutions() {
@@ -179,8 +384,39 @@ export default function BusinessSolutions() {
                     { col: 'span 1', row: 'span 1' },  // Auto-Booking: small top-right
                     { col: 'span 3', row: 'span 1' },  // Review Engine: full-width bottom
                   ];
+                  /* Per-card accent: cyan, indigo, cyan+indigo blend */
+                  const accents: Array<{
+                    glow: string; iconBg: string; iconBorder: string;
+                    iconColor: string; dotColor: string; specColor: string;
+                  }> = [
+                    { /* card 0 — Electric Cyan */
+                      glow: 'radial-gradient(60% 60% at 30% 30%, rgba(34,211,238,0.30), transparent 70%)',
+                      iconBg: 'linear-gradient(135deg, rgba(34,211,238,0.20) 0%, rgba(34,211,238,0.04) 100%)',
+                      iconBorder: 'rgba(34,211,238,0.32)',
+                      iconColor: '#67e8f9',
+                      dotColor: '#22d3ee',
+                      specColor: 'rgba(165,243,252,0.78)',
+                    },
+                    { /* card 1 — Deep Indigo */
+                      glow: 'radial-gradient(60% 60% at 30% 30%, rgba(99,102,241,0.32), transparent 70%)',
+                      iconBg: 'linear-gradient(135deg, rgba(99,102,241,0.22) 0%, rgba(99,102,241,0.04) 100%)',
+                      iconBorder: 'rgba(99,102,241,0.36)',
+                      iconColor: '#a5b4fc',
+                      dotColor: '#818cf8',
+                      specColor: 'rgba(199,210,254,0.78)',
+                    },
+                    { /* card 2 — Cyan + Indigo blend */
+                      glow: 'radial-gradient(60% 60% at 30% 30%, rgba(34,211,238,0.26), transparent 60%), radial-gradient(50% 50% at 75% 70%, rgba(99,102,241,0.24), transparent 65%)',
+                      iconBg: 'linear-gradient(135deg, rgba(34,211,238,0.18) 0%, rgba(99,102,241,0.10) 100%)',
+                      iconBorder: 'rgba(34,211,238,0.30)',
+                      iconColor: '#67e8f9',
+                      dotColor: '#22d3ee',
+                      specColor: 'rgba(165,243,252,0.78)',
+                    },
+                  ];
                   return copy.features.cards.map((card, i) => {
                     const Icon = icons[i];
+                    const accent = accents[i];
                     return (
                       <motion.article
                         key={i}
@@ -194,35 +430,76 @@ export default function BusinessSolutions() {
                           gridRow: spans[i].row,
                         }}
                       >
-                        {/* Tech-spec eyebrow */}
+                        {/* ── Background visualization (per-card) ── */}
+                        {i === 0 && <LiveActivityConsole lines={copy.consoleLog[l]} />}
+                        {i === 1 && <NeuralMap />}
+                        {i === 2 && <GhostAnalytics
+                          label={bi(copy.features.badges.revenueRecovered, l)}
+                          value="$14,200"
+                        />}
+
+                        {/* Ambient cyan/indigo radial glow behind the icon */}
+                        <div aria-hidden="true" style={{
+                          position: 'absolute',
+                          left: '12px', top: '40px',
+                          width: '220px', height: '220px',
+                          background: accent.glow,
+                          filter: 'blur(28px)',
+                          opacity: 0.85,
+                          pointerEvents: 'none',
+                          zIndex: 0,
+                        }} />
+
+                        {/* ── Top row: spec eyebrow + tech badge ── */}
                         <div style={{
-                          display: 'inline-flex', alignItems: 'center', gap: '8px',
-                          fontSize: '10.5px', fontWeight: 600, letterSpacing: '0.16em',
-                          textTransform: 'uppercase',
-                          color: 'rgba(147,197,253,0.78)',
-                          fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace',
+                          position: 'relative', zIndex: 2,
+                          display: 'flex', alignItems: 'flex-start',
+                          justifyContent: 'space-between', gap: '12px',
                         }}>
-                          <span style={{
-                            width: '6px', height: '6px', borderRadius: '50%',
-                            background: '#3b82f6',
-                            boxShadow: '0 0 8px rgba(59,130,246,0.7)',
-                          }} />
-                          {bi(card.spec, l)}
+                          <div style={{
+                            display: 'inline-flex', alignItems: 'center', gap: '8px',
+                            fontSize: '10.5px', fontWeight: 600, letterSpacing: '0.16em',
+                            textTransform: 'uppercase',
+                            color: accent.specColor,
+                            fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace',
+                          }}>
+                            <span style={{
+                              width: '6px', height: '6px', borderRadius: '50%',
+                              background: accent.dotColor,
+                              boxShadow: `0 0 8px ${accent.dotColor}b0`,
+                            }} />
+                            {bi(card.spec, l)}
+                          </div>
+
+                          {/* Per-card top-right badge */}
+                          {i === 0 && (
+                            <span className="status-badge status-badge--green">
+                              <span className="status-dot status-dot--green" />
+                              {bi(copy.features.badges.systemOnline, l)}
+                            </span>
+                          )}
+                          {i === 1 && (
+                            <span className="status-badge status-badge--indigo">
+                              {bi(copy.features.badges.realTimeSync, l)}
+                            </span>
+                          )}
                         </div>
 
-                        {/* Icon */}
+                        {/* ── Icon ── */}
                         <div style={{
+                          position: 'relative', zIndex: 2,
                           width: '46px', height: '46px',
                           borderRadius: '12px',
-                          background: 'linear-gradient(135deg, rgba(59,130,246,0.18) 0%, rgba(59,130,246,0.04) 100%)',
-                          border: '1px solid rgba(59,130,246,0.24)',
+                          background: accent.iconBg,
+                          border: `1px solid ${accent.iconBorder}`,
                           display: 'flex', alignItems: 'center', justifyContent: 'center',
-                          color: '#93c5fd',
+                          color: accent.iconColor,
                         }}>
                           <Icon size={20} strokeWidth={1.6} />
                         </div>
 
                         <h3 style={{
+                          position: 'relative', zIndex: 2,
                           fontSize: 'clamp(20px, 2.4vw, 26px)',
                           fontWeight: 700,
                           color: '#fff', margin: 0,
@@ -233,6 +510,7 @@ export default function BusinessSolutions() {
                         </h3>
 
                         <p style={{
+                          position: 'relative', zIndex: 2,
                           fontSize: '15px',
                           color: 'rgb(156,163,175)', /* text-gray-400 */
                           lineHeight: 1.7, margin: 0,
@@ -294,6 +572,193 @@ export default function BusinessSolutions() {
                 .bento-feature-card {
                   grid-column: span 1 !important;
                   padding: 28px 24px;
+                }
+              }
+
+              /* ─── Status / tech badges (top-right corner) ─── */
+              .status-badge {
+                font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+                font-size: 10px;
+                font-weight: 700;
+                letter-spacing: 0.10em;
+                text-transform: uppercase;
+                padding: 3px 9px;
+                border-radius: 999px;
+                white-space: nowrap;
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+                line-height: 1.4;
+                position: relative;
+                z-index: 2;
+                flex-shrink: 0;
+              }
+              .status-badge--green {
+                background: rgba(16,185,129,0.10);
+                border: 1px solid rgba(16,185,129,0.40);
+                color: #6ee7b7;
+                box-shadow: 0 0 18px rgba(16,185,129,0.18);
+              }
+              .status-badge--indigo {
+                background: rgba(99,102,241,0.10);
+                border: 1px solid rgba(99,102,241,0.40);
+                color: #c7d2fe;
+                box-shadow: 0 0 16px rgba(99,102,241,0.16);
+              }
+              .status-dot {
+                width: 6px; height: 6px; border-radius: 50%;
+                animation: status-pulse 1.4s ease-in-out infinite;
+              }
+              .status-dot--green {
+                background: #10b981;
+                box-shadow: 0 0 8px #10b981, 0 0 14px rgba(16,185,129,0.6);
+              }
+              @keyframes status-pulse {
+                0%, 100% { opacity: 1; transform: scale(1); }
+                50%      { opacity: 0.45; transform: scale(0.85); }
+              }
+
+              /* ─── Live Activity Console (card 0) ─── */
+              .live-console {
+                position: absolute;
+                inset: 0;
+                overflow: hidden;
+                border-radius: inherit;
+                z-index: 0;
+                pointer-events: none;
+              }
+              .live-console__inner {
+                font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+                font-size: 11px;
+                line-height: 1.65;
+                color: #67e8f9;
+                opacity: 0.10;
+                filter: blur(0.9px);
+                white-space: nowrap;
+                padding: 14px 22px;
+                will-change: transform;
+                animation: console-scroll 14s linear infinite;
+              }
+              .live-console__line {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+              }
+              @keyframes console-scroll {
+                from { transform: translate3d(0, 0, 0); }
+                to   { transform: translate3d(0, -50%, 0); }
+              }
+              .live-console__scanlines {
+                position: absolute; inset: 0; z-index: 1;
+                background-image: repeating-linear-gradient(
+                  to bottom,
+                  rgba(255,255,255,0)    0px,
+                  rgba(255,255,255,0)    3px,
+                  rgba(34,211,238,0.025) 3px,
+                  rgba(34,211,238,0.025) 4px
+                );
+                mix-blend-mode: screen;
+              }
+              .live-console__mask {
+                position: absolute; inset: 0; z-index: 1;
+                background:
+                  linear-gradient(180deg,
+                    rgba(10,10,12,0.55) 0%,
+                    rgba(10,10,12,0.20) 30%,
+                    rgba(10,10,12,0.55) 70%,
+                    rgba(10,10,12,0.92) 100%
+                  ),
+                  radial-gradient(ellipse at 0% 100%, rgba(10,10,12,0.85), transparent 55%);
+              }
+
+              /* ─── Neural Map (card 1) ─── */
+              .neural-map {
+                position: absolute;
+                inset: 0;
+                overflow: hidden;
+                border-radius: inherit;
+                z-index: 0;
+                pointer-events: none;
+                opacity: 0.55;
+                filter: blur(0.6px);
+                mix-blend-mode: screen;
+                mask-image: radial-gradient(120% 110% at 60% 50%, #000 50%, transparent 100%);
+                -webkit-mask-image: radial-gradient(120% 110% at 60% 50%, #000 50%, transparent 100%);
+              }
+
+              /* ─── Ghost Analytics (card 2) ─── */
+              .ghost-analytics {
+                position: absolute;
+                inset: 0;
+                overflow: hidden;
+                border-radius: inherit;
+                z-index: 0;
+                pointer-events: none;
+              }
+              .ghost-analytics svg {
+                opacity: 0.55;
+                filter: blur(1px);
+                mix-blend-mode: screen;
+              }
+              .ghost-analytics .ga-line {
+                stroke-dasharray: 1500;
+                stroke-dashoffset: 0;
+                animation: ga-pulse 3.6s ease-in-out infinite;
+              }
+              .ghost-analytics .ga-area {
+                animation: ga-area-pulse 3.6s ease-in-out infinite;
+              }
+              @keyframes ga-pulse {
+                0%, 100% { filter: drop-shadow(0 0 6px rgba(34,211,238,0.5)); }
+                50%      { filter: drop-shadow(0 0 14px rgba(34,211,238,0.9)); }
+              }
+              @keyframes ga-area-pulse {
+                0%, 100% { opacity: 0.7; transform: translateY(2px); }
+                50%      { opacity: 1;   transform: translateY(0); }
+              }
+              .ghost-analytics__label {
+                position: absolute;
+                top: 22px; right: 22px;
+                z-index: 2;
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                padding: 6px 12px;
+                border-radius: 999px;
+                background: rgba(34,211,238,0.10);
+                border: 1px solid rgba(34,211,238,0.36);
+                box-shadow: 0 0 22px rgba(34,211,238,0.22);
+                font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+                font-size: 10.5px;
+                font-weight: 700;
+                letter-spacing: 0.09em;
+                text-transform: uppercase;
+                white-space: nowrap;
+              }
+              .ghost-analytics__pulse {
+                width: 7px; height: 7px; border-radius: 50%;
+                background: #22d3ee;
+                box-shadow: 0 0 10px #22d3ee, 0 0 18px rgba(34,211,238,0.7);
+                animation: status-pulse 1.4s ease-in-out infinite;
+              }
+              .ghost-analytics__label-text { color: rgba(165,243,252,0.85); }
+              .ghost-analytics__value      { color: #67e8f9; font-weight: 800; letter-spacing: 0.04em; }
+
+              @media (max-width: 819px) {
+                .ghost-analytics__label {
+                  top: auto; bottom: 18px; right: 18px;
+                  font-size: 10px;
+                  padding: 5px 10px;
+                }
+              }
+
+              @media (prefers-reduced-motion: reduce) {
+                .live-console__inner,
+                .ghost-analytics .ga-line,
+                .ghost-analytics .ga-area,
+                .status-dot,
+                .ghost-analytics__pulse {
+                  animation: none !important;
                 }
               }
             `}</style>
