@@ -68,7 +68,70 @@ interface BentoCardProps {
   onClick: () => void;
 }
 
-/* ─── Mini-site thumbnail presets ────────────────────────── */
+/* ─── Showreel image set ─────────────────────────────────── */
+import showcase1 from '@assets/image_1776497221120.png';
+import showcase2 from '@assets/image_1776497233864.png';
+import showcase3 from '@assets/image_1776497254763.png';
+
+/* Generic web/business filler imagery (Unsplash CDN) */
+const GENERIC_IMAGES = [
+  'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=520&q=70&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=520&q=70&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=520&q=70&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=520&q=70&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1559028012-481c04fa702d?w=520&q=70&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1481487196290-c152efe083f5?w=520&q=70&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=520&q=70&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=520&q=70&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=520&q=70&auto=format&fit=crop',
+];
+
+const SHOWREEL_IMAGES: string[] = [
+  showcase1, showcase2, showcase3,
+  ...GENERIC_IMAGES,
+];
+
+function ShowreelThumb({ src }: { src: string }) {
+  return (
+    <div
+      style={{
+        width: '100%',
+        aspectRatio: '16 / 10',
+        borderRadius: '6px',
+        overflow: 'hidden',
+        border: '1px solid rgba(255,255,255,0.08)',
+        boxShadow: '0 6px 18px rgba(0,0,0,0.4)',
+        flexShrink: 0,
+        background: '#0b1220',
+      }}
+    >
+      <img
+        src={src}
+        alt=""
+        loading="lazy"
+        style={{
+          width: '100%', height: '100%',
+          objectFit: 'cover',
+          display: 'block',
+          userSelect: 'none',
+          pointerEvents: 'none',
+        }}
+        onError={(e) => { (e.currentTarget as HTMLImageElement).style.opacity = '0'; }}
+      />
+    </div>
+  );
+}
+
+/* Pick N images from the pool starting at offset (cycles through) */
+function pickImages(offset: number, count: number): string[] {
+  const out: string[] = [];
+  for (let i = 0; i < count; i++) {
+    out.push(SHOWREEL_IMAGES[(offset + i) % SHOWREEL_IMAGES.length]);
+  }
+  return out;
+}
+
+/* ─── Legacy CSS mini-site presets (kept for fallback / reuse) ── */
 type ThumbKind = 'ecom' | 'saas' | 'consult' | 'brand' | 'agency' | 'editorial';
 
 function MiniSite({ kind }: { kind: ThumbKind }) {
@@ -184,17 +247,19 @@ function MiniSite({ kind }: { kind: ThumbKind }) {
   }
 }
 
-/* Three columns of mini-sites scrolling at different speeds. */
+/* Three columns of portfolio thumbs scrolling at different speeds. */
 function ShowreelBackground() {
-  const colA: ThumbKind[] = ['ecom', 'saas', 'consult', 'brand', 'agency', 'editorial'];
-  const colB: ThumbKind[] = ['saas', 'brand', 'editorial', 'consult', 'ecom', 'agency'];
-  const colC: ThumbKind[] = ['consult', 'agency', 'ecom', 'editorial', 'saas', 'brand'];
+  /* Three offset slices of the image pool — each column gets a different
+     ordering so the columns visually diverge instead of marching in lockstep. */
+  const colA = pickImages(0, 6);  // starts with attached showcase #1
+  const colB = pickImages(1, 6);  // starts with attached showcase #2
+  const colC = pickImages(2, 6);  // starts with attached showcase #3
 
-  const Col = ({ items, dur, delay = 0 }: { items: ThumbKind[]; dur: number; delay?: number }) => (
+  const Col = ({ items, dur, delay = 0 }: { items: string[]; dur: number; delay?: number }) => (
     <div className="showreel-col" style={{ animationDuration: `${dur}s`, animationDelay: `${-delay}s` }}>
       {/* Duplicate the list twice for seamless loop */}
-      {[...items, ...items].map((k, i) => (
-        <MiniSite key={i} kind={k} />
+      {[...items, ...items].map((src, i) => (
+        <ShowreelThumb key={i} src={src} />
       ))}
     </div>
   );
