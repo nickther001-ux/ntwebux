@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { useLanguage } from '@/lib/i18n';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
-import { Globe, Wrench, Package, Building2, Bot, ArrowRight, Check, MessageCircle } from 'lucide-react';
+import { Globe, Layers, Crown, Sparkles, Cpu, Rocket, ArrowRight, Check } from 'lucide-react';
 import { OnboardingModal } from '@/components/OnboardingModal';
 
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -16,7 +16,8 @@ const WORK_IMAGES: Record<string, string> = {
   "Saveurs d'Haïti MTL":       `${BASE}/portfolio/proj-restaurant.png`,
 };
 
-const PLAN_ICONS = [Globe, Wrench, Package, Building2, Bot];
+const WEB_ICONS = [Layers, Sparkles, Crown];
+const AI_ICONS  = [Cpu,    Rocket,    Crown];
 
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 28 },
@@ -28,10 +29,16 @@ const fadeUp = (delay = 0) => ({
 export default function ServicesPortfolio() {
   const { t, lang } = useLanguage();
   const [activePlan, setActivePlan] = useState<{ name: string; price: string | number } | null>(null);
+  const [track, setTrack] = useState<'web' | 'ai'>('web');
   const svc   = t('portfolio.services') as any;
   const work  = t('portfolio.work')     as any;
-  const plans: any[] = svc.plans;
+  const webPlans: any[] = svc.webPlans ?? [];
+  const aiPlans:  any[] = svc.aiPlans  ?? [];
+  const plans = track === 'web' ? webPlans : aiPlans;
+  const ICONS = track === 'web' ? WEB_ICONS : AI_ICONS;
   const items: any[] = work.items;
+  const popularLabel = lang === 'fr' ? 'Le plus populaire' : 'Most Popular';
+  const isAi = track === 'ai';
 
   const PT = "Project Showcase | NT Digital Group | SaaS & AI Engineering";
   const PD = "Explore our latest case studies, from custom AI integrations to scalable software architectures. See how we deliver elite digital infrastructure at speed.";
@@ -81,79 +88,142 @@ export default function ServicesPortfolio() {
 
       {/* ── PRICING PLANS ── */}
       <section style={{ padding: '0 24px 140px', position: 'relative' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '16px' }} className="pricing-grid">
+        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+
+          {/* Track toggle */}
+          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '56px' }}>
+            <div
+              role="tablist"
+              aria-label={lang === 'fr' ? 'Type de tarification' : 'Pricing track'}
+              style={{
+                display: 'inline-flex',
+                padding: '5px',
+                gap: '4px',
+                borderRadius: '999px',
+                background: 'rgba(255,255,255,0.04)',
+                border: '1px solid rgba(255,255,255,0.08)',
+                backdropFilter: 'blur(12px)',
+              }}
+              className="pricing-toggle"
+            >
+              {(['web', 'ai'] as const).map((opt) => {
+                const active = track === opt;
+                return (
+                  <button
+                    key={opt}
+                    role="tab"
+                    aria-selected={active}
+                    onClick={() => setTrack(opt)}
+                    style={{
+                      padding: '11px 22px',
+                      fontSize: '13px',
+                      fontWeight: 600,
+                      letterSpacing: '-0.01em',
+                      borderRadius: '999px',
+                      border: 'none',
+                      cursor: 'pointer',
+                      transition: 'all 200ms ease',
+                      color: active ? '#ffffff' : 'rgba(255,255,255,0.55)',
+                      background: active ? '#3b82f6' : 'transparent',
+                      boxShadow: active ? '0 6px 24px rgba(59,130,246,0.35)' : 'none',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    {svc.toggle?.[opt]}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          <div
+            key={track}
+            style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px', alignItems: 'stretch' }}
+            className="pricing-grid"
+          >
             {plans.map((plan, i) => {
-              const Icon = PLAN_ICONS[i];
+              const Icon = ICONS[i] ?? Globe;
+              const featured = !!plan.featured;
+              const isCustom = !!plan.isCustom;
               return (
                 <motion.div
-                  key={plan.name}
+                  key={`${track}-${plan.name}`}
                   {...fadeUp(i * 0.08)}
                   className="glass"
                   style={{
-                    borderRadius: '18px',
-                    padding: '32px 28px',
+                    borderRadius: '20px',
+                    padding: '36px 30px',
                     display: 'flex',
                     flexDirection: 'column',
                     position: 'relative',
                     overflow: 'hidden',
-                    border: plan.featured
-                      ? '1px solid rgba(59,130,246,0.45)'
+                    border: featured
+                      ? '1px solid rgba(59,130,246,0.5)'
                       : '1px solid rgba(255,255,255,0.08)',
-                    boxShadow: plan.featured
-                      ? '0 0 0 1px rgba(59,130,246,0.15), 0 24px 64px rgba(59,130,246,0.12)'
+                    boxShadow: featured
+                      ? '0 0 0 1px rgba(59,130,246,0.2), 0 28px 80px rgba(59,130,246,0.18)'
                       : 'none',
+                    transform: featured ? 'translateY(-8px)' : 'none',
+                    background: featured ? 'rgba(59,130,246,0.04)' : undefined,
                   }}
                 >
-                  {/* Top glow for featured */}
-                  {plan.featured && (
+                  {featured && (
                     <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '2px', background: 'linear-gradient(90deg, transparent, #3b82f6, transparent)' }} />
                   )}
 
                   {plan.badge && (
-                    <div style={{ position: 'absolute', top: '16px', right: '16px', background: '#3b82f6', color: '#fff', fontSize: '10px', fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', padding: '4px 10px', borderRadius: '99px' }}>
-                      {plan.badge}
+                    <div style={{ position: 'absolute', top: '18px', right: '18px', background: '#3b82f6', color: '#fff', fontSize: '10px', fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', padding: '5px 11px', borderRadius: '99px', boxShadow: '0 4px 12px rgba(59,130,246,0.4)' }}>
+                      {plan.badge ?? popularLabel}
                     </div>
                   )}
 
-                  {/* Icon */}
-                  <div style={{ width: '42px', height: '42px', borderRadius: '10px', background: 'rgba(59,130,246,0.12)', border: '1px solid rgba(59,130,246,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#60a5fa', marginBottom: '18px' }}>
-                    <Icon size={19} strokeWidth={1.5} />
+                  <div style={{ width: '44px', height: '44px', borderRadius: '11px', background: 'rgba(59,130,246,0.12)', border: '1px solid rgba(59,130,246,0.22)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#60a5fa', marginBottom: '20px' }}>
+                    <Icon size={20} strokeWidth={1.6} />
                   </div>
 
-                  <div style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.1em', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', marginBottom: '6px' }}>{plan.name}</div>
+                  <div style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.45)', textTransform: 'uppercase', marginBottom: '10px' }}>{plan.name}</div>
 
-                  <div style={{ display: 'flex', alignItems: 'baseline', gap: '2px', marginBottom: '4px' }}>
-                    {plan.price !== '—' && <span style={{ fontSize: '20px', fontWeight: 700, color: '#93c5fd' }}>$</span>}
-                    <span style={{ fontSize: '42px', fontWeight: 900, color: '#fff', lineHeight: 1 }}>{plan.price}</span>
+                  <div style={{ display: 'flex', alignItems: 'baseline', gap: '4px', marginBottom: '6px', flexWrap: 'wrap' }}>
+                    {!isCustom && <span style={{ fontSize: '22px', fontWeight: 700, color: '#93c5fd', lineHeight: 1 }}>$</span>}
+                    <span style={{ fontSize: isCustom ? '34px' : '46px', fontWeight: 900, color: '#fff', lineHeight: 1, letterSpacing: '-0.03em' }}>{plan.price}</span>
+                    {isAi && !isCustom && (
+                      <span style={{ fontSize: '14px', fontWeight: 600, color: 'rgba(255,255,255,0.45)', marginLeft: '2px' }}>/mo</span>
+                    )}
                   </div>
-                  <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.35)', marginBottom: '24px' }}>{plan.cycle}</div>
+                  <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', marginBottom: '26px', minHeight: '16px' }}>
+                    {isAi ? '' : plan.cycle}
+                  </div>
 
-                  <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 auto', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                  <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 auto', display: 'flex', flexDirection: 'column', gap: '12px' }}>
                     {plan.features.map((f: string) => (
-                      <li key={f} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', fontSize: '13px', color: 'rgba(255,255,255,0.65)', lineHeight: 1.5 }}>
-                        <Check size={13} color="#3b82f6" style={{ flexShrink: 0, marginTop: '2px' }} />
+                      <li key={f} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', fontSize: '13.5px', color: 'rgba(255,255,255,0.7)', lineHeight: 1.5 }}>
+                        <Check size={14} color="#3b82f6" style={{ flexShrink: 0, marginTop: '2px' }} />
                         {f}
                       </li>
                     ))}
                   </ul>
 
-                  {/* Action buttons */}
-                  <div style={{ marginTop: '28px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                    <a
-                      href="/#contact"
-                      className="btn-outline"
-                      style={{ padding: '12px 16px', fontSize: '13px', borderRadius: '10px', textDecoration: 'none', textAlign: 'center' }}
-                    >
-                      {plan.ctaContact}
-                    </a>
+                  <div style={{ marginTop: '32px' }}>
                     <button
                       onClick={() => setActivePlan({ name: plan.name, price: plan.price })}
-                      className="btn-violet"
-                      style={{ padding: '12px 16px', fontSize: '13px', borderRadius: '10px', border: 'none', cursor: 'pointer', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', width: '100%' }}
+                      className={featured ? 'btn-violet' : 'btn-outline'}
+                      style={{
+                        padding: '13px 18px',
+                        fontSize: '13.5px',
+                        fontWeight: 600,
+                        borderRadius: '11px',
+                        cursor: 'pointer',
+                        textAlign: 'center',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '8px',
+                        width: '100%',
+                        border: featured ? 'none' : undefined,
+                      }}
                     >
-                      <MessageCircle size={14} />
-                      {plan.ctaBuy}
+                      {plan.cta}
+                      <ArrowRight size={14} />
                     </button>
                   </div>
                 </motion.div>
@@ -240,12 +310,13 @@ export default function ServicesPortfolio() {
       <Footer />
 
       <style>{`
-        @media(max-width:960px){
-          .pricing-grid { grid-template-columns: repeat(2,1fr) !important; }
+        @media(max-width:900px){
+          .pricing-grid { grid-template-columns: 1fr !important; }
+          .pricing-grid > div { transform: none !important; }
           .work-grid { grid-template-columns: 1fr !important; }
         }
-        @media(max-width:600px){
-          .pricing-grid { grid-template-columns: 1fr !important; }
+        @media(max-width:520px){
+          .pricing-toggle button { padding: 10px 14px !important; font-size: 12px !important; }
         }
       `}</style>
 

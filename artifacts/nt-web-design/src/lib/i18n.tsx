@@ -92,32 +92,44 @@ const translations: Translations = {
         title1: "Clear offers,",
         title2: "no surprises",
         desc: "Every package includes hosting, maintenance, and support. You pay once — we handle the rest.",
-        plans: [
+        toggle: {
+          web: "Digital Foundations (Project)",
+          ai:  "Enterprise AI (Monthly SaaS)"
+        },
+        webPlans: [
           {
-            name: "Starter", price: "99", cycle: "/ month",
-            features: ["1-page responsive website", "Custom design", "Contact form", "Basic SEO", "Free domain 1st year", "Email support"],
-            ctaContact: "Contact Me", ctaBuy: "Buy Now", featured: false
+            name: "Starter", price: "997", cycle: "One-time project fee",
+            features: ["5-page responsive website", "Custom design", "Basic SEO", "Contact form"],
+            cta: "Start Project", featured: false
           },
           {
-            name: "Growth", price: "299", cycle: "/ month",
-            features: ["5-page responsive website", "Custom design", "Advanced SEO included", "Contact & booking form", "Deployment included", "Delivered in 72 hours"],
-            ctaContact: "Contact Me", ctaBuy: "Buy Now", featured: false
-          },
-          {
-            name: "Premium Basic", price: "500", cycle: "/ month",
+            name: "Growth", price: "2,497", cycle: "One-time project fee",
             badge: "Most Popular",
-            features: ["Up to 10 pages", "CMS integration", "eCommerce ready", "Priority support 48h", "Monthly analytics report"],
-            ctaContact: "Contact Me", ctaBuy: "Buy Now", featured: true
+            features: ["Up to 10 pages", "CMS integration", "E-commerce ready", "Advanced SEO"],
+            cta: "Start Project", featured: true
+          },
+          {
+            name: "Enterprise", price: "Custom", cycle: "Tailored scope",
+            features: ["Unlimited pages", "Custom web apps", "Dedicated project manager", "SLA & priority support"],
+            cta: "Talk to Sales", featured: false, isCustom: true
+          }
+        ],
+        aiPlans: [
+          {
+            name: "Starter", price: "97", cycle: "/ month",
+            features: ["Basic CRM", "AI Web Chat", "Email Support"],
+            cta: "Start Free Trial", featured: false
+          },
+          {
+            name: "Professional", price: "297", cycle: "/ month",
+            badge: "Most Popular",
+            features: ["Full AI Text-Back", "Auto-Booking", "Review Engine"],
+            cta: "Claim Beta Spot", featured: true
           },
           {
             name: "Full Scope", price: "899", cycle: "/ month",
-            features: ["Unlimited pages", "Full eCommerce", "AI chatbot integration", "Advanced SEO & content", "Direct WhatsApp support", "Delivered in 72 hours"],
-            ctaContact: "Contact Me", ctaBuy: "Buy Now", featured: false
-          },
-          {
-            name: "Enterprise Pro", price: "—", cycle: "Custom pricing",
-            features: ["Enterprise SaaS / multi-tenant", "Custom AI integrations", "Dedicated project manager", "SLA & uptime guarantee", "Unlimited revisions", "Priority onboarding"],
-            ctaContact: "Contact Us", ctaBuy: "Get a Quote", featured: false
+            features: ["Custom AI Voice Agents", "Multi-tenant SaaS setup", "WhatsApp Support"],
+            cta: "Talk to Sales", featured: false
           }
         ]
       },
@@ -217,32 +229,44 @@ const translations: Translations = {
         title1: "Des offres claires,",
         title2: "sans surprise",
         desc: "Chaque forfait inclut l'hébergement, la maintenance et le support. Vous payez une fois, on s'occupe du reste.",
-        plans: [
+        toggle: {
+          web: "Fondations Numériques (Projet)",
+          ai:  "IA Entreprise (SaaS Mensuel)"
+        },
+        webPlans: [
           {
-            name: "Starter", price: "99", cycle: "/ mois",
-            features: ["Site 1 page responsive", "Design personnalisé", "Formulaire de contact", "SEO de base", "Domaine gratuit 1re année", "Support par email"],
-            ctaContact: "Me Contacter", ctaBuy: "Acheter", featured: false
+            name: "Starter", price: "997", cycle: "Tarif unique du projet",
+            features: ["Site 5 pages responsive", "Design personnalisé", "SEO de base", "Formulaire de contact"],
+            cta: "Démarrer le Projet", featured: false
           },
           {
-            name: "Growth", price: "299", cycle: "/ mois",
-            features: ["Site 5 pages responsive", "Design personnalisé", "SEO avancé intégré", "Formulaire & réservation", "Déploiement inclus", "Livré en 72 heures"],
-            ctaContact: "Me Contacter", ctaBuy: "Acheter", featured: false
-          },
-          {
-            name: "Premium Basic", price: "500", cycle: "/ mois",
+            name: "Growth", price: "2 497", cycle: "Tarif unique du projet",
             badge: "Le plus populaire",
-            features: ["Jusqu'à 10 pages", "Intégration CMS", "Prêt pour e-commerce", "Support prioritaire 48h", "Rapport mensuel Analytics"],
-            ctaContact: "Me Contacter", ctaBuy: "Acheter", featured: true
+            features: ["Jusqu'à 10 pages", "Intégration CMS", "Prêt pour e-commerce", "SEO avancé"],
+            cta: "Démarrer le Projet", featured: true
+          },
+          {
+            name: "Enterprise", price: "Sur mesure", cycle: "Portée sur mesure",
+            features: ["Pages illimitées", "Applications web sur mesure", "Chef de projet dédié", "SLA & support prioritaire"],
+            cta: "Parler aux Ventes", featured: false, isCustom: true
+          }
+        ],
+        aiPlans: [
+          {
+            name: "Starter", price: "97", cycle: "/ mois",
+            features: ["CRM de base", "Chat Web IA", "Support par email"],
+            cta: "Essai Gratuit", featured: false
+          },
+          {
+            name: "Professional", price: "297", cycle: "/ mois",
+            badge: "Le plus populaire",
+            features: ["AI Text-Back complet", "Réservation auto", "Moteur d'avis clients"],
+            cta: "Réserver Bêta", featured: true
           },
           {
             name: "Full Scope", price: "899", cycle: "/ mois",
-            features: ["Pages illimitées", "E-commerce complet", "Intégration chatbot IA", "SEO avancé & contenu", "Support WhatsApp direct", "Livré en 72 heures"],
-            ctaContact: "Me Contacter", ctaBuy: "Acheter", featured: false
-          },
-          {
-            name: "Enterprise Pro", price: "—", cycle: "Tarif sur mesure",
-            features: ["SaaS enterprise / multi-tenant", "Intégrations IA personnalisées", "Chef de projet dédié", "SLA & garantie de disponibilité", "Révisions illimitées", "Onboarding prioritaire"],
-            ctaContact: "Nous Contacter", ctaBuy: "Obtenir un Devis", featured: false
+            features: ["Agents vocaux IA sur mesure", "SaaS multi-tenant", "Support WhatsApp"],
+            cta: "Parler aux Ventes", featured: false
           }
         ]
       },
