@@ -64,10 +64,163 @@ interface BentoCardProps {
   s: Service;
   i: number;
   learnMore: string;
+  liveBadge: string;
   onClick: () => void;
 }
 
-function BentoCard({ s, i, learnMore, onClick }: BentoCardProps) {
+/* ─── Mini-site thumbnail presets ────────────────────────── */
+type ThumbKind = 'ecom' | 'saas' | 'consult' | 'brand' | 'agency' | 'editorial';
+
+function MiniSite({ kind }: { kind: ThumbKind }) {
+  const wrap: React.CSSProperties = {
+    width: '100%',
+    aspectRatio: '4 / 3',
+    borderRadius: '6px',
+    overflow: 'hidden',
+    border: '1px solid rgba(255,255,255,0.06)',
+    display: 'flex',
+    flexDirection: 'column',
+    flexShrink: 0,
+  };
+
+  switch (kind) {
+    case 'ecom':
+      return (
+        <div style={{ ...wrap, background: '#fafaf9' }}>
+          <div style={{ height: '14%', background: '#1c1917', display: 'flex', alignItems: 'center', padding: '0 5px', gap: '3px' }}>
+            <div style={{ width: 14, height: 4, background: '#fff', borderRadius: 1 }} />
+            <div style={{ marginLeft: 'auto', width: 16, height: 4, background: '#f97316', borderRadius: 1 }} />
+          </div>
+          <div style={{ flex: 1, padding: '5px', display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '4px' }}>
+            {[0,1,2,3,4,5].map(i => (
+              <div key={i} style={{ background: i % 2 ? '#e7e5e4' : '#d6d3d1', borderRadius: 3 }} />
+            ))}
+          </div>
+        </div>
+      );
+    case 'saas':
+      return (
+        <div style={{ ...wrap, background: '#0b1220' }}>
+          <div style={{ height: '12%', background: '#0f172a', display: 'flex', alignItems: 'center', padding: '0 5px', gap: '3px' }}>
+            <div style={{ width: 5, height: 5, background: '#3b82f6', borderRadius: '50%' }} />
+            <div style={{ width: 18, height: 3, background: '#475569', borderRadius: 1 }} />
+          </div>
+          <div style={{ flex: 1, display: 'flex' }}>
+            <div style={{ width: '22%', background: '#0f172a', borderRight: '1px solid #1e293b', padding: '4px 3px', display: 'flex', flexDirection: 'column', gap: 3 }}>
+              <div style={{ height: 3, background: '#334155', borderRadius: 1 }} />
+              <div style={{ height: 3, background: '#1e40af', borderRadius: 1 }} />
+              <div style={{ height: 3, background: '#334155', borderRadius: 1 }} />
+              <div style={{ height: 3, background: '#334155', borderRadius: 1 }} />
+            </div>
+            <div style={{ flex: 1, padding: '5px', display: 'flex', flexDirection: 'column', gap: 4 }}>
+              <div style={{ display: 'flex', gap: 3 }}>
+                <div style={{ flex: 1, height: 8, background: 'linear-gradient(135deg,#1e3a8a,#3b82f6)', borderRadius: 2 }} />
+                <div style={{ flex: 1, height: 8, background: 'linear-gradient(135deg,#5b21b6,#8b5cf6)', borderRadius: 2 }} />
+              </div>
+              <div style={{ flex: 1, background: '#0f172a', borderRadius: 2, display: 'flex', alignItems: 'flex-end', padding: '0 3px 3px', gap: 2 }}>
+                {[6,9,4,11,7,5,10,8].map((h,i) => (
+                  <div key={i} style={{ flex: 1, height: `${h*4}%`, background: i === 3 ? '#3b82f6' : '#1e40af', borderRadius: 1 }} />
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    case 'consult':
+      return (
+        <div style={{ ...wrap, background: '#fffbeb' }}>
+          <div style={{ height: '50%', padding: '6px 7px', display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 3 }}>
+            <div style={{ height: 8, width: '70%', background: '#1c1917', borderRadius: 2 }} />
+            <div style={{ height: 4, width: '50%', background: '#78716c', borderRadius: 1 }} />
+            <div style={{ marginTop: 4, height: 8, width: '38%', background: '#a16207', borderRadius: 3 }} />
+          </div>
+          <div style={{ flex: 1, background: 'linear-gradient(135deg,#fde68a,#fcd34d)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ width: '60%', height: '60%', background: 'rgba(0,0,0,0.08)', borderRadius: 4 }} />
+          </div>
+        </div>
+      );
+    case 'brand':
+      return (
+        <div style={{ ...wrap, background: 'linear-gradient(135deg,#0f0f23,#312e81)', position: 'relative' }}>
+          <div style={{
+            position: 'absolute', inset: '15% 15% auto 15%',
+            height: '34%', borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(167,139,250,0.5), rgba(167,139,250,0))',
+          }} />
+          <div style={{ marginTop: 'auto', padding: '6px 7px', position: 'relative', display: 'flex', flexDirection: 'column', gap: 3 }}>
+            <div style={{ height: 6, width: '55%', background: '#fff', borderRadius: 1 }} />
+            <div style={{ height: 3, width: '40%', background: 'rgba(255,255,255,0.5)', borderRadius: 1 }} />
+            <div style={{ height: 3, width: '70%', background: 'rgba(255,255,255,0.3)', borderRadius: 1 }} />
+          </div>
+        </div>
+      );
+    case 'agency':
+      return (
+        <div style={{ ...wrap, background: '#fff' }}>
+          <div style={{ height: '14%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 6px' }}>
+            <div style={{ width: 6, height: 6, background: '#000', borderRadius: '50%' }} />
+            <div style={{ width: 26, height: 3, background: '#000', borderRadius: 1 }} />
+          </div>
+          <div style={{ flex: 1, padding: '6px 7px', display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 3 }}>
+            <div style={{ height: 11, width: '85%', background: '#000', borderRadius: 1 }} />
+            <div style={{ height: 11, width: '60%', background: '#000', borderRadius: 1 }} />
+            <div style={{ marginTop: 4, height: 4, width: '90%', background: '#9ca3af', borderRadius: 1 }} />
+          </div>
+        </div>
+      );
+    case 'editorial':
+      return (
+        <div style={{ ...wrap, background: '#0a0a0a' }}>
+          <div style={{ height: '52%', background: 'linear-gradient(135deg,#dc2626,#7f1d1d)', position: 'relative' }}>
+            <div style={{ position: 'absolute', bottom: 4, left: 6, right: 6, height: 4, background: '#fff', borderRadius: 1 }} />
+          </div>
+          <div style={{ flex: 1, padding: '5px 6px', display: 'flex', flexDirection: 'column', gap: 2.5 }}>
+            <div style={{ height: 3, width: '88%', background: '#e5e5e5', borderRadius: 1 }} />
+            <div style={{ height: 3, width: '70%', background: '#e5e5e5', borderRadius: 1 }} />
+            <div style={{ height: 3, width: '55%', background: '#737373', borderRadius: 1 }} />
+          </div>
+        </div>
+      );
+  }
+}
+
+/* Three columns of mini-sites scrolling at different speeds. */
+function ShowreelBackground() {
+  const colA: ThumbKind[] = ['ecom', 'saas', 'consult', 'brand', 'agency', 'editorial'];
+  const colB: ThumbKind[] = ['saas', 'brand', 'editorial', 'consult', 'ecom', 'agency'];
+  const colC: ThumbKind[] = ['consult', 'agency', 'ecom', 'editorial', 'saas', 'brand'];
+
+  const Col = ({ items, dur, delay = 0 }: { items: ThumbKind[]; dur: number; delay?: number }) => (
+    <div className="showreel-col" style={{ animationDuration: `${dur}s`, animationDelay: `${-delay}s` }}>
+      {/* Duplicate the list twice for seamless loop */}
+      {[...items, ...items].map((k, i) => (
+        <MiniSite key={i} kind={k} />
+      ))}
+    </div>
+  );
+
+  return (
+    <div className="showreel" aria-hidden="true">
+      {/* Cool cyan/blue ambient glow behind the entire assembly */}
+      <div className="showreel-ambient" />
+
+      {/* Three parallax columns */}
+      <div className="showreel-grid">
+        <Col items={colA} dur={6.5} />
+        <Col items={colB} dur={5}   delay={1.2} />
+        <Col items={colC} dur={7.5} delay={0.6} />
+      </div>
+
+      {/* Vertical speed-line streaks */}
+      <div className="showreel-speedlines" />
+
+      {/* Edge fade so thumbs don't hard-cut at top/bottom */}
+      <div className="showreel-mask" />
+    </div>
+  );
+}
+
+function BentoCard({ s, i, learnMore, liveBadge, onClick }: BentoCardProps) {
   const isLarge = s.span === 'lg';
   const glow = GLOW_RGB[s.glow ?? 'blue'];
   return (
@@ -94,67 +247,8 @@ function BentoCard({ s, i, learnMore, onClick }: BentoCardProps) {
         WebkitBackdropFilter: 'blur(12px)',
       }}
     >
-      {/* Ghost UI: minimalist browser frame + blurred wireframe (large card only) */}
-      {isLarge && (
-        <div
-          aria-hidden="true"
-          style={{
-            position: 'absolute',
-            inset: '60px 36px auto 36px',
-            height: '58%',
-            borderRadius: '10px',
-            border: '1px solid rgba(255,255,255,0.08)',
-            background: 'rgba(255,255,255,0.015)',
-            opacity: 0.4,
-            pointerEvents: 'none',
-            zIndex: 0,
-            overflow: 'hidden',
-            display: 'flex',
-            flexDirection: 'column',
-          }}
-        >
-          {/* Top bar with 3 dots */}
-          <div style={{
-            height: '22px', flexShrink: 0,
-            borderBottom: '1px solid rgba(255,255,255,0.05)',
-            display: 'flex', alignItems: 'center', gap: '6px',
-            padding: '0 10px',
-            background: 'rgba(255,255,255,0.015)',
-          }}>
-            <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: 'rgba(255,255,255,0.12)' }} />
-            <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: 'rgba(255,255,255,0.12)' }} />
-            <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: 'rgba(255,255,255,0.12)' }} />
-            <span style={{
-              marginLeft: '10px', flex: 1,
-              height: '8px', borderRadius: '3px',
-              background: 'rgba(255,255,255,0.04)',
-            }} />
-          </div>
-          {/* Wireframe blocks — opacity 0.05 so barely visible */}
-          <div style={{
-            flex: 1,
-            opacity: 0.05,
-            padding: '14px',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '8px',
-            filter: 'blur(0.4px)',
-          }}>
-            <div style={{ height: '14px', width: '40%', background: '#fff', borderRadius: '3px' }} />
-            <div style={{ height: '8px', width: '70%', background: '#fff', borderRadius: '3px' }} />
-            <div style={{ height: '8px', width: '60%', background: '#fff', borderRadius: '3px' }} />
-            <div style={{ display: 'flex', gap: '8px', marginTop: '8px' }}>
-              <div style={{ height: '24px', width: '90px', background: '#fff', borderRadius: '5px' }} />
-              <div style={{ height: '24px', width: '90px', background: 'transparent', border: '1px solid #fff', borderRadius: '5px' }} />
-            </div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '8px', marginTop: '12px', flex: 1 }}>
-              <div style={{ background: '#fff', borderRadius: '6px' }} />
-              <div style={{ background: '#fff', borderRadius: '6px' }} />
-              <div style={{ background: '#fff', borderRadius: '6px' }} />
-            </div>
-          </div>
-        </div>
-      )}
+      {/* Digital Showreel: multi-layer scrolling portfolio grid (large card only) */}
+      {isLarge && <ShowreelBackground />}
 
       {/* Ambient radial glow behind icon */}
       <div
@@ -190,8 +284,28 @@ function BentoCard({ s, i, learnMore, onClick }: BentoCardProps) {
           <div style={{
             display: 'flex', flexWrap: 'wrap', gap: '5px',
             justifyContent: 'flex-end',
-            maxWidth: isLarge ? '60%' : '70%',
+            maxWidth: isLarge ? '70%' : '70%',
           }}>
+            {/* Live Portfolio Feed badge — only on the large Website Design card */}
+            {isLarge && (
+              <span className="live-feed-badge" style={{
+                fontSize: '10px', fontWeight: 700, letterSpacing: '0.08em',
+                padding: '3px 9px 3px 7px',
+                borderRadius: '999px',
+                background: 'rgba(34,211,238,0.08)',
+                border: '1px solid rgba(34,211,238,0.35)',
+                color: '#67e8f9',
+                whiteSpace: 'nowrap',
+                fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace',
+                lineHeight: 1.4,
+                display: 'inline-flex', alignItems: 'center', gap: '6px',
+                boxShadow: '0 0 18px rgba(34,211,238,0.18)',
+                textTransform: 'uppercase',
+              }}>
+                <span className="live-dot" />
+                {liveBadge}
+              </span>
+            )}
             {s.badges.map((b) => (
               <span key={b} style={{
                 fontSize: '10px', fontWeight: 600, letterSpacing: '0.04em',
@@ -227,6 +341,7 @@ export function Services() {
   const ctaLabel  = lang === 'fr' ? 'Obtenir un Devis Gratuit' : 'Get a Free Quote';
   const learnMore = lang === 'fr' ? 'En savoir plus →'         : 'Learn more →';
   const eyebrow   = lang === 'fr' ? 'Notre Expertise'          : 'Our Expertise';
+  const liveBadge = lang === 'fr' ? 'Flux Portfolio Live · 3.5×' : 'Live Portfolio Feed · 3.5×';
   const heading   = lang === 'fr'
     ? <>Tout ce dont vous avez besoin pour<br /><span className="gradient-text">dominer votre marché.</span></>
     : <>Everything you need to<br /><span className="gradient-text">dominate your market.</span></>;
@@ -311,7 +426,7 @@ export function Services() {
             gap: '14px',
           }}>
             {cluster.items.map((s, i) => (
-              <BentoCard key={s.id} s={s} i={i} learnMore={learnMore} onClick={() => setActive(s)} />
+              <BentoCard key={s.id} s={s} i={i} learnMore={learnMore} liveBadge={liveBadge} onClick={() => setActive(s)} />
             ))}
           </div>
         </div>
@@ -439,6 +554,109 @@ export function Services() {
         @media (max-width: 900px) {
           .bento-grid { grid-template-columns: repeat(6,1fr) !important; grid-auto-rows: auto !important; }
           .bento-card { grid-column: span 6 !important; grid-row: auto !important; min-height: 200px !important; }
+        }
+
+        /* ─── Digital Showreel ────────────────────────────── */
+        .showreel {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          border-radius: 20px;
+          z-index: 0;
+          pointer-events: none;
+        }
+        .showreel-ambient {
+          position: absolute;
+          inset: -10%;
+          background:
+            radial-gradient(60% 50% at 30% 30%, rgba(34,211,238,0.18), transparent 70%),
+            radial-gradient(55% 55% at 75% 65%, rgba(59,130,246,0.20), transparent 70%);
+          filter: blur(36px);
+          z-index: 0;
+        }
+        .showreel-grid {
+          position: absolute;
+          inset: 0;
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 10px;
+          padding: 12px;
+          z-index: 1;
+          /* Motion blur baked into the entire grid */
+          filter: blur(2.4px) saturate(1.1);
+          opacity: 0.78;
+          transform: perspective(1000px) rotateX(2deg);
+          mix-blend-mode: lighten;
+        }
+        .showreel-col {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          will-change: transform;
+          animation-name: showreel-scroll;
+          animation-timing-function: linear;
+          animation-iteration-count: infinite;
+        }
+        .showreel-col:nth-child(2) {
+          margin-top: -28px; /* offset for parallax depth */
+        }
+        @keyframes showreel-scroll {
+          from { transform: translate3d(0, 0, 0); }
+          to   { transform: translate3d(0, -50%, 0); }
+        }
+        /* Vertical white speed-line streaks */
+        .showreel-speedlines {
+          position: absolute;
+          inset: 0;
+          z-index: 2;
+          pointer-events: none;
+          background-image: repeating-linear-gradient(
+            to bottom,
+            rgba(255,255,255,0)        0px,
+            rgba(255,255,255,0)        14px,
+            rgba(255,255,255,0.045)    14px,
+            rgba(255,255,255,0.045)    16px
+          );
+          mask-image: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.7) 30%, rgba(0,0,0,0.7) 70%, transparent 100%);
+          -webkit-mask-image: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.7) 30%, rgba(0,0,0,0.7) 70%, transparent 100%);
+          animation: showreel-streaks 0.6s linear infinite;
+        }
+        @keyframes showreel-streaks {
+          from { transform: translate3d(0, 0, 0); }
+          to   { transform: translate3d(0, -16px, 0); }
+        }
+        /* Edge fade + dark gradient to keep foreground text legible */
+        .showreel-mask {
+          position: absolute;
+          inset: 0;
+          z-index: 3;
+          pointer-events: none;
+          background:
+            linear-gradient(180deg,
+              rgba(2,4,10,0.55) 0%,
+              rgba(2,4,10,0.20) 30%,
+              rgba(2,4,10,0.65) 70%,
+              rgba(2,4,10,0.95) 100%
+            ),
+            radial-gradient(ellipse at 0% 100%, rgba(2,4,10,0.85), transparent 55%);
+        }
+
+        /* Live feed badge dot */
+        .live-feed-badge .live-dot {
+          width: 6px; height: 6px; border-radius: 50%;
+          background: #22d3ee;
+          box-shadow: 0 0 8px #22d3ee, 0 0 14px rgba(34,211,238,0.6);
+          animation: live-pulse 1.4s ease-in-out infinite;
+        }
+        @keyframes live-pulse {
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50%      { opacity: 0.45; transform: scale(0.85); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .showreel-col, .showreel-speedlines, .live-feed-badge .live-dot {
+            animation: none !important;
+          }
         }
       `}</style>
     </div>
