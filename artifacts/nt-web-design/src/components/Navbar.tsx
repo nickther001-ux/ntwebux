@@ -181,30 +181,6 @@ export function Navbar() {
               fontFamily: 'inherit',
             }}>{isMac ? '⌘K' : 'Ctrl+K'}</span>
           </button>
-          <div style={{
-            display: 'flex', alignItems: 'center',
-            background: 'rgba(255,255,255,0.06)',
-            border: '1px solid rgba(255,255,255,0.12)',
-            borderRadius: '8px',
-            overflow: 'hidden',
-          }}>
-            {(['en', 'fr'] as const).map((l, i) => (
-              <button
-                key={l}
-                onClick={() => setLang(l)}
-                style={{
-                  padding: '6px 12px',
-                  fontSize: '12px', fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase',
-                  background: lang === l ? 'rgba(59,130,246,0.3)' : 'transparent',
-                  color: lang === l ? '#93c5fd' : 'rgba(255,255,255,0.55)',
-                  border: 'none',
-                  borderRight: i === 0 ? '1px solid rgba(255,255,255,0.12)' : 'none',
-                  cursor: 'pointer',
-                  transition: 'background 0.15s, color 0.15s',
-                }}
-              >{l.toUpperCase()}</button>
-            ))}
-          </div>
           <a
             href={isHome ? '#contact' : '/#contact'}
             onClick={(e) => handleAnchorClick(e, isHome ? '#contact' : '')}
