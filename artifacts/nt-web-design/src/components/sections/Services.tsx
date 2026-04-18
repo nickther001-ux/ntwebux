@@ -813,17 +813,17 @@ export function Services() {
           background-image: url('${import.meta.env.BASE_URL}decor/rpa-diagram.png');
           background-repeat: no-repeat;
           background-position: center 58%;
-          background-size: 78% auto;
-          opacity: 0.07;
-          filter: blur(1.4px) grayscale(20%) brightness(1.4);
+          background-size: 85% auto;
+          opacity: 0.22;
+          filter: blur(0.4px) brightness(1.65) contrast(1.1);
           mix-blend-mode: screen;
-          mask-image: radial-gradient(ellipse at 50% 55%, #000 25%, transparent 80%);
-          -webkit-mask-image: radial-gradient(ellipse at 50% 55%, #000 25%, transparent 80%);
+          mask-image: radial-gradient(ellipse at 50% 55%, #000 45%, transparent 92%);
+          -webkit-mask-image: radial-gradient(ellipse at 50% 55%, #000 45%, transparent 92%);
           pointer-events: none;
           z-index: 0;
         }
         @media (prefers-reduced-motion: reduce) {
-          .ai-schema-rpa { opacity: 0.05; }
+          .ai-schema-rpa { opacity: 0.18; }
         }
 
         /* ── Enterprise SaaS — schema grid background ── */
