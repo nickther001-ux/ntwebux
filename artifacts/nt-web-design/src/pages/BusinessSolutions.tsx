@@ -28,6 +28,7 @@ const copy = {
       systemOnline:   { en: "SYSTEM ONLINE",       fr: "SYSTÈME EN LIGNE" },
       realTimeSync:   { en: "Real-Time Sync",      fr: "Sync Temps Réel" },
       revenueRecovered:{ en: "REVENUE RECOVERED",  fr: "REVENU RÉCUPÉRÉ" },
+      verifiedRoi:    { en: "Verified ROI",        fr: "ROI Vérifié" },
     },
     cards: [
       {
@@ -35,12 +36,16 @@ const copy = {
         title: { en: "AI Text-Back",            fr: "Réponse SMS Intelligente" },
         desc:  { en: "Stop lead leakage. Our AI instantly detects missed calls and initiates a conversational SMS sequence. It qualifies the prospect's needs and keeps them engaged so they don't call your competitor.",
                   fr: "Stoppez la fuite de prospects. Notre IA détecte instantanément les appels manqués et déclenche une séquence SMS conversationnelle. Elle qualifie les besoins du client et le garde engagé pour qu'il n'appelle pas votre concurrent." },
+        roi:   { en: "Average recovery: +22% closed deals",
+                  fr: "Récupération moyenne : +22 % de ventes conclues" },
       },
       {
         spec:  { en: "02 / Calendar Sync",      fr: "02 / Synchronisation Agenda" },
         title: { en: "Auto-Booking",            fr: "Prise de Rendez-vous Auto" },
         desc:  { en: "Direct calendar integration. Syncs with Google/Outlook to book qualified estimates in real-time, eliminating the back-and-forth.",
                   fr: "Intégration directe avec votre agenda. Se synchronise avec Google et Outlook pour réserver des estimations qualifiées en temps réel, en éliminant les allers-retours." },
+        roi:   { en: "Saves 14 hours/week on admin",
+                  fr: "Économise 14 h/semaine d'administratif" },
       },
       {
         spec:  { en: "03 / Local SEO Engine",   fr: "03 / Moteur SEO Local" },
@@ -92,6 +97,31 @@ const copy = {
       "[14:05:34] Avis Google publié ★★★★★",
       "[14:06:01] Valeur du pipeline mise à jour : +14 200 $",
     ],
+  },
+  architecture: {
+    eyebrow: { en: "The Architecture",        fr: "L'Architecture" },
+    title:   { en: "Two systems. One outcome you actually want.",
+                fr: "Deux systèmes. Un seul résultat qui compte vraiment." },
+    old: {
+      label:  { en: "The Old Way",             fr: "L'Ancienne Méthode" },
+      caption:{ en: "Manual, reactive, leaky. Every missed call is gone.",
+                fr: "Manuel, réactif, à fuites. Chaque appel manqué est perdu." },
+      steps: [
+        { en: "Missed Call",          fr: "Appel Manqué" },
+        { en: "Voicemail",            fr: "Boîte Vocale" },
+        { en: "Lost Lead",            fr: "Client Perdu" },
+      ],
+    },
+    automated: {
+      label:  { en: "The Automated System",    fr: "Le Système Automatisé" },
+      caption:{ en: "Real-time, autonomous, always-on. Nothing slips through.",
+                fr: "Temps réel, autonome, toujours actif. Rien ne passe entre les mailles." },
+      steps: [
+        { en: "Missed Call",            fr: "Appel Manqué" },
+        { en: "Instant AI Text",        fr: "SMS IA Instantané" },
+        { en: "Auto-Booked Appointment",fr: "RDV Réservé Auto" },
+      ],
+    },
   },
   calc: {
     heading: { en: "Calculate Your Lost Revenue",
@@ -518,6 +548,20 @@ export default function BusinessSolutions() {
                         }}>
                           {bi(card.desc, l)}
                         </p>
+
+                        {/* ── Verified ROI badge (cards 0 & 1) ── */}
+                        {(card as any).roi && (
+                          <div style={{ position: 'relative', zIndex: 2, marginTop: 'auto', paddingTop: '6px' }}>
+                            <span className="roi-badge">
+                              <span className="roi-badge__check" aria-hidden="true">✓</span>
+                              <span className="roi-badge__label">
+                                {bi(copy.features.badges.verifiedRoi, l)}
+                              </span>
+                              <span className="roi-badge__sep" aria-hidden="true">·</span>
+                              <span className="roi-badge__value">{bi((card as any).roi, l)}</span>
+                            </span>
+                          </div>
+                        )}
                       </motion.article>
                     );
                   });
@@ -531,7 +575,7 @@ export default function BusinessSolutions() {
                 grid-template-columns: 1fr;
                 gap: 18px;
               }
-              @media (min-width: 820px) {
+              @media (min-width: 900px) {
                 .bento-features-grid {
                   grid-template-columns: repeat(3, 1fr);
                   gap: 22px;
@@ -760,6 +804,292 @@ export default function BusinessSolutions() {
                 .ghost-analytics__pulse {
                   animation: none !important;
                 }
+              }
+            `}</style>
+          </section>
+
+          {/* ══ THE ARCHITECTURE — old vs automated ═══════════ */}
+          <section style={{ padding: '20px 24px 100px', position: 'relative' }}>
+            <div style={{ maxWidth: '1160px', margin: '0 auto' }}>
+              <motion.div
+                variants={fadeUp} initial="hidden"
+                whileInView="show" viewport={{ once: true, margin: '-60px' }}
+                transition={{ duration: 0.55, ease }}
+                style={{ textAlign: 'center', marginBottom: '52px' }}
+              >
+                <span style={{
+                  display: 'inline-block', marginBottom: '12px',
+                  fontSize: '11px', fontWeight: 700, letterSpacing: '0.14em',
+                  textTransform: 'uppercase', color: '#3b82f6',
+                  background: 'rgba(59,130,246,0.08)',
+                  border: '1px solid rgba(59,130,246,0.22)',
+                  borderRadius: '20px', padding: '4px 14px',
+                }}>
+                  {bi(copy.architecture.eyebrow, l)}
+                </span>
+                <h2 style={{
+                  fontSize: 'clamp(24px, 4vw, 40px)',
+                  fontWeight: 800, letterSpacing: '-0.025em',
+                  background: 'linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.72) 100%)',
+                  WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
+                  margin: '14px 0 0',
+                }}>
+                  {bi(copy.architecture.title, l)}
+                </h2>
+              </motion.div>
+
+              <div className="arch-grid">
+                {(['old', 'automated'] as const).map((key, ci) => {
+                  const block = copy.architecture[key];
+                  const isOld = key === 'old';
+                  return (
+                    <motion.div
+                      key={key}
+                      variants={fadeUp} initial="hidden"
+                      whileInView="show" viewport={{ once: true, margin: '-40px' }}
+                      transition={{ duration: 0.55, delay: ci * 0.1, ease }}
+                      className={`arch-card ${isOld ? 'arch-card--old' : 'arch-card--auto'}`}
+                    >
+                      <div className="arch-card__head">
+                        <span className={`arch-pill ${isOld ? 'arch-pill--old' : 'arch-pill--auto'}`}>
+                          {isOld ? '✕' : '✓'} {bi(block.label, l)}
+                        </span>
+                        <p className="arch-caption">{bi(block.caption, l)}</p>
+                      </div>
+
+                      <div className="arch-flow">
+                        {block.steps.map((step, si) => (
+                          <div key={si} className="arch-step-wrap">
+                            <div className={`arch-node ${isOld ? 'arch-node--old' : 'arch-node--auto'}`}>
+                              <span className="arch-node__num">{String(si + 1).padStart(2, '0')}</span>
+                              <span className="arch-node__label">{bi(step, l)}</span>
+                            </div>
+                            {si < block.steps.length - 1 && (
+                              <div className={`arch-line ${isOld ? 'arch-line--old' : 'arch-line--auto'}`} aria-hidden="true">
+                                <span className="arch-line__pulse" />
+                              </div>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </div>
+
+            <style>{`
+              /* ─── Verified ROI badge (cards 0 & 1) ─── */
+              .roi-badge {
+                display: inline-flex;
+                align-items: center;
+                gap: 7px;
+                padding: 6px 12px;
+                border-radius: 999px;
+                background: rgba(16,185,129,0.08);
+                border: 1px solid rgba(16,185,129,0.32);
+                box-shadow: 0 0 18px rgba(16,185,129,0.18), inset 0 0 12px rgba(16,185,129,0.05);
+                font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+                font-size: 11px;
+                font-weight: 600;
+                letter-spacing: 0.02em;
+                white-space: nowrap;
+                max-width: 100%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+              }
+              .roi-badge__check {
+                display: inline-flex; align-items: center; justify-content: center;
+                width: 14px; height: 14px;
+                border-radius: 50%;
+                background: rgba(16,185,129,0.22);
+                color: #6ee7b7;
+                font-size: 9px; font-weight: 800;
+                box-shadow: 0 0 6px rgba(16,185,129,0.5);
+              }
+              .roi-badge__label {
+                color: #6ee7b7;
+                text-transform: uppercase;
+                letter-spacing: 0.12em;
+                font-size: 10px;
+                font-weight: 700;
+              }
+              .roi-badge__sep { color: rgba(110,231,183,0.35); }
+              .roi-badge__value {
+                color: #a7f3d0;
+                font-weight: 600;
+                letter-spacing: 0.01em;
+              }
+
+              /* ─── Architecture grid ─── */
+              .arch-grid {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 22px;
+              }
+              @media (min-width: 900px) {
+                .arch-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+              }
+
+              .arch-card {
+                position: relative;
+                padding: 32px 28px;
+                background-color: rgba(255,255,255,0.02);
+                backdrop-filter: blur(18px);
+                -webkit-backdrop-filter: blur(18px);
+                border-radius: 20px;
+                overflow: hidden;
+                display: flex; flex-direction: column; gap: 28px;
+                min-height: 380px;
+              }
+              .arch-card--old {
+                border: 1px solid rgba(248,113,113,0.22);
+                box-shadow: inset 0 0 60px rgba(248,113,113,0.04);
+              }
+              .arch-card--old::before {
+                content: '';
+                position: absolute; inset: 0;
+                background: radial-gradient(70% 60% at 30% 20%, rgba(248,113,113,0.10), transparent 70%);
+                pointer-events: none;
+              }
+              .arch-card--auto {
+                border: 1px solid rgba(59,130,246,0.32);
+                box-shadow: inset 0 0 60px rgba(59,130,246,0.05), 0 0 40px rgba(59,130,246,0.10);
+              }
+              .arch-card--auto::before {
+                content: '';
+                position: absolute; inset: 0;
+                background: radial-gradient(70% 60% at 30% 20%, rgba(59,130,246,0.14), transparent 70%);
+                pointer-events: none;
+              }
+
+              .arch-card__head { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 12px; }
+              .arch-pill {
+                align-self: flex-start;
+                font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+                font-size: 11px; font-weight: 700;
+                letter-spacing: 0.12em; text-transform: uppercase;
+                padding: 5px 12px;
+                border-radius: 999px;
+                display: inline-flex; align-items: center; gap: 7px;
+              }
+              .arch-pill--old {
+                color: #fca5a5;
+                background: rgba(248,113,113,0.10);
+                border: 1px solid rgba(248,113,113,0.36);
+                box-shadow: 0 0 16px rgba(248,113,113,0.14);
+              }
+              .arch-pill--auto {
+                color: #93c5fd;
+                background: rgba(59,130,246,0.12);
+                border: 1px solid rgba(59,130,246,0.42);
+                box-shadow: 0 0 18px rgba(59,130,246,0.22);
+              }
+              .arch-caption {
+                margin: 0;
+                font-size: 14px;
+                color: rgba(255,255,255,0.55);
+                line-height: 1.6;
+              }
+
+              /* ─── Flow ─── */
+              .arch-flow {
+                position: relative; z-index: 2;
+                display: flex;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0;
+                margin-top: auto;
+              }
+              .arch-step-wrap { display: flex; flex-direction: column; align-items: stretch; }
+
+              .arch-node {
+                display: flex; align-items: center; gap: 14px;
+                padding: 14px 18px;
+                border-radius: 14px;
+                background: rgba(2,4,10,0.6);
+                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(8px);
+                font-weight: 600;
+                position: relative;
+                transition: transform 0.25s ease;
+              }
+              .arch-node__num {
+                font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+                font-size: 11px;
+                letter-spacing: 0.1em;
+                padding: 3px 8px;
+                border-radius: 6px;
+                font-weight: 700;
+              }
+              .arch-node__label { font-size: 15px; letter-spacing: -0.01em; }
+
+              .arch-node--old {
+                border: 1px solid rgba(248,113,113,0.30);
+                color: rgba(254,202,202,0.92);
+                box-shadow: 0 0 18px rgba(248,113,113,0.10), inset 0 0 12px rgba(248,113,113,0.04);
+              }
+              .arch-node--old .arch-node__num {
+                background: rgba(248,113,113,0.12);
+                color: #fca5a5;
+                border: 1px solid rgba(248,113,113,0.30);
+              }
+
+              .arch-node--auto {
+                border: 1px solid rgba(59,130,246,0.45);
+                color: #e0ecff;
+                box-shadow: 0 0 24px rgba(59,130,246,0.18), inset 0 0 14px rgba(59,130,246,0.06);
+              }
+              .arch-node--auto .arch-node__num {
+                background: rgba(59,130,246,0.16);
+                color: #93c5fd;
+                border: 1px solid rgba(59,130,246,0.42);
+              }
+
+              /* ─── Connector lines ─── */
+              .arch-line {
+                position: relative;
+                width: 2px;
+                height: 38px;
+                margin-left: 36px;
+                overflow: hidden;
+              }
+              .arch-line--old {
+                background: linear-gradient(to bottom, rgba(248,113,113,0.50), rgba(248,113,113,0.10));
+                opacity: 0.45;
+              }
+              .arch-line--auto {
+                background: linear-gradient(to bottom, rgba(59,130,246,0.55), rgba(59,130,246,0.10));
+              }
+              .arch-line__pulse {
+                position: absolute;
+                left: -3px; top: -8px;
+                width: 8px; height: 8px;
+                border-radius: 50%;
+                background: #3b82f6;
+                box-shadow: 0 0 12px #3b82f6, 0 0 24px rgba(59,130,246,0.7);
+                animation: arch-pulse-down 2.2s ease-in-out infinite;
+              }
+              .arch-line--old .arch-line__pulse {
+                background: rgba(248,113,113,0.5);
+                box-shadow: 0 0 8px rgba(248,113,113,0.4);
+                animation: arch-pulse-stutter 4s ease-in-out infinite;
+              }
+              @keyframes arch-pulse-down {
+                0%   { top: -8px;  opacity: 0; }
+                15%  { opacity: 1; }
+                85%  { opacity: 1; }
+                100% { top: 100%;  opacity: 0; }
+              }
+              @keyframes arch-pulse-stutter {
+                0%, 60%, 100% { top: -8px;  opacity: 0; }
+                70%           { opacity: 0.6; }
+                80%           { top: 50%;  opacity: 0.3; }
+                90%           { top: 70%;  opacity: 0; }
+              }
+
+              @media (prefers-reduced-motion: reduce) {
+                .arch-line__pulse { animation: none !important; opacity: 0.4; }
               }
             `}</style>
           </section>
