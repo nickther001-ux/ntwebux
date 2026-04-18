@@ -333,6 +333,7 @@ function BentoCard({ s, i, learnMore, onClick }: BentoCardProps) {
       {/* ── Enterprise SaaS — animated schema grid background ── */}
       {isSchema && (
         <>
+          <div className="ai-schema-rpa"   aria-hidden="true" />
           <div className="ai-schema-grid"  aria-hidden="true" />
           <div className="ai-schema-nodes" aria-hidden="true" />
         </>
@@ -803,6 +804,26 @@ export function Services() {
           8%   { opacity: 0.10; }
           92%  { opacity: 0.10; }
           100% { transform: translateY(100%); opacity: 0; }
+        }
+
+        /* ── Enterprise SaaS — buried RPA diagram (deep background) ── */
+        .ai-schema-rpa {
+          position: absolute;
+          inset: 0;
+          background-image: url('${import.meta.env.BASE_URL}decor/rpa-diagram.png');
+          background-repeat: no-repeat;
+          background-position: center 58%;
+          background-size: 78% auto;
+          opacity: 0.07;
+          filter: blur(1.4px) grayscale(20%) brightness(1.4);
+          mix-blend-mode: screen;
+          mask-image: radial-gradient(ellipse at 50% 55%, #000 25%, transparent 80%);
+          -webkit-mask-image: radial-gradient(ellipse at 50% 55%, #000 25%, transparent 80%);
+          pointer-events: none;
+          z-index: 0;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .ai-schema-rpa { opacity: 0.05; }
         }
 
         /* ── Enterprise SaaS — schema grid background ── */
