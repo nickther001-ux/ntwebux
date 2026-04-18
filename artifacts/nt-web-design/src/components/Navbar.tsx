@@ -46,33 +46,35 @@ export function Navbar() {
   return (
     <header
       style={{
+        /* Floating glass dock — detached from the top edge, centered horizontally.
+           translateX(-50%) makes this header a containing block, but the mobile
+           menu is portaled to <body> so it still renders fullscreen. */
         position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
+        top: scrolled ? '12px' : '20px',
+        left: '50%',
+        transform: 'translateX(-50%)',
         zIndex: 50,
-        /* Always blur — never toggle backdrop-filter on/off (destroys+recreates
-           the GPU layer mid-scroll causing a visible stutter). Just fade the
-           background fill instead. */
-        backdropFilter: 'blur(20px)',
-        WebkitBackdropFilter: 'blur(20px)',
-        transition: 'background 0.35s ease, border-color 0.35s ease',
-        background: scrolled ? 'rgba(6,13,26,0.82)' : 'rgba(6,13,26,0)',
-        borderBottom: scrolled ? '1px solid rgba(255,255,255,0.07)' : '1px solid transparent',
-        /* NOTE: NO transform here — adding transform to a parent makes it the
-           containing block for position:fixed children, which clips the mobile
-           menu to the navbar's 68px height instead of full-screen. */
+        width: 'min(1140px, calc(100vw - 24px))',
+        borderRadius: '999px',
+        background: scrolled ? 'rgba(0,0,0,0.55)' : 'rgba(0,0,0,0.4)',
+        border: '1px solid rgba(255,255,255,0.1)',
+        backdropFilter: 'blur(24px) saturate(140%)',
+        WebkitBackdropFilter: 'blur(24px) saturate(140%)',
+        boxShadow: scrolled
+          ? '0 12px 40px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.06)'
+          : '0 8px 28px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05)',
+        transition: 'top 0.4s cubic-bezier(0.22,1,0.36,1), background 0.35s ease, box-shadow 0.35s ease, height 0.35s ease',
       }}
     >
       <div
         style={{
-          maxWidth: '1200px',
           margin: '0 auto',
-          padding: '0 24px',
-          height: '68px',
+          padding: scrolled ? '0 18px 0 22px' : '0 22px 0 26px',
+          height: scrolled ? '54px' : '62px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
+          transition: 'height 0.35s cubic-bezier(0.22,1,0.36,1), padding 0.35s ease',
         }}
       >
         {/* Logo */}
@@ -90,15 +92,24 @@ export function Navbar() {
         </a>
 
         {/* Desktop Nav */}
-        <nav className="navbar-desktop" style={{ alignItems: 'center', gap: '28px', whiteSpace: 'nowrap' }}>
-          {links.map((link) =>
-            link.isPage ? (
+        <nav className="navbar-desktop" style={{ alignItems: 'center', gap: '24px', whiteSpace: 'nowrap' }}>
+          {links.map((link) => {
+            const linkStyle: React.CSSProperties = {
+              fontSize: '11px',
+              fontWeight: 600,
+              letterSpacing: '0.18em',
+              textTransform: 'uppercase',
+              color: 'rgba(255,255,255,0.65)',
+              textDecoration: 'none',
+              transition: 'color 0.2s',
+            };
+            return link.isPage ? (
               <Link
                 key={link.href}
                 href={link.href}
-                style={{ fontSize: '14px', fontWeight: 500, color: 'rgba(255,255,255,0.6)', textDecoration: 'none', transition: 'color 0.2s' }}
+                style={linkStyle}
                 onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = '#fff')}
-                onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.6)')}
+                onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.65)')}
               >
                 {link.label}
               </Link>
@@ -107,18 +118,18 @@ export function Navbar() {
                 key={link.href}
                 href={link.href}
                 onClick={(e) => handleAnchorClick(e, link.href)}
-                style={{ fontSize: '14px', fontWeight: 500, color: 'rgba(255,255,255,0.6)', textDecoration: 'none', transition: 'color 0.2s' }}
+                style={linkStyle}
                 onMouseEnter={(e) => (e.currentTarget.style.color = '#fff')}
-                onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.6)')}
+                onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.65)')}
               >
                 {link.label}
               </a>
-            )
-          )}
+            );
+          })}
         </nav>
 
         {/* Right */}
-        <div className="navbar-desktop" style={{ alignItems: 'center', gap: '20px', borderLeft: '1px solid rgba(255,255,255,0.1)', paddingLeft: '32px', marginLeft: '8px' }}>
+        <div className="navbar-desktop" style={{ alignItems: 'center', gap: '14px' }}>
           <div style={{
             display: 'flex', alignItems: 'center',
             background: 'rgba(255,255,255,0.06)',
