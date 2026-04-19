@@ -69,8 +69,9 @@ const row = (label: string, value: string) => `
                font-size:14px;line-height:1.6;color:#d8e8ff;">${value || "—"}</td>
   </tr>`;
 
-function meetLinkBlock(meetUrl: string, lang: "en" | "fr") {
-  return `
+function meetLinkBlock(meetUrl: string | undefined, lang: "en" | "fr") {
+  if (meetUrl) {
+    return `
   <div style="margin:28px 0;padding:20px 24px;border-radius:14px;
               background:linear-gradient(135deg,rgba(59,130,246,.14) 0%,rgba(29,78,216,.07) 100%);
               border:1px solid rgba(59,130,246,.30);">
@@ -89,9 +90,24 @@ function meetLinkBlock(meetUrl: string, lang: "en" | "fr") {
         : "Click the link above to join the meeting at the scheduled time."}
     </p>
   </div>`;
+  }
+
+  return `
+  <div style="margin:28px 0;padding:20px 24px;border-radius:14px;
+              background:rgba(59,130,246,.06);border:1px solid rgba(59,130,246,.22);">
+    <p style="margin:0 0 6px;font-size:12px;font-weight:700;letter-spacing:.1em;
+              text-transform:uppercase;color:#5a7db5;">
+      ${lang === "fr" ? "Lien Google Meet" : "Google Meet Link"}
+    </p>
+    <p style="margin:0;font-size:14px;color:rgba(255,255,255,.6);line-height:1.6;">
+      ${lang === "fr"
+        ? "Votre lien Google Meet vous sera envoyé par e-mail dans les <strong style='color:#93c5fd;'>2 heures</strong> suivant la confirmation."
+        : "Your Google Meet link will be sent to you by email within <strong style='color:#93c5fd;'>2 hours</strong> of this confirmation."}
+    </p>
+  </div>`;
 }
 
-function buildClientHtml(req: MeetingRequest, meetUrl: string): string {
+function buildClientHtml(req: MeetingRequest, meetUrl: string | undefined): string {
   const fr     = req.lang === "fr";
   const isPaid = req.consultationType === "paid";
   const amount = req.amountCents != null
@@ -148,7 +164,7 @@ function buildClientHtml(req: MeetingRequest, meetUrl: string): string {
   </div>`;
 }
 
-function buildOwnerHtml(req: MeetingRequest, meetUrl: string): string {
+function buildOwnerHtml(req: MeetingRequest, meetUrl: string | undefined): string {
   const isPaid = req.consultationType === "paid";
   const amount = req.amountCents != null ? `$${(req.amountCents / 100).toFixed(2)} CAD` : null;
   const dateStr = [req.preferredDate, req.preferredTime].filter(Boolean).join(" @ ") || "—";
@@ -209,64 +225,50 @@ export async function generateMeetingAndSendEmail(
 
   const endDateTime = new Date(startDateTime.getTime() + MEETING_DURATION_MINUTES * 60_000);
 
-  /* ── 2. Create Google Calendar event with Meet ── */
+  /* ── 2. Create Google Calendar event (no conferenceData — Google auto-injects hangoutLink) ── */
   let meetLink = "";
   let eventId  = "";
 
   const calendar = getCalendar();
   if (!calendar) {
     console.warn("Google Calendar credentials not set — skipping event creation.");
-    meetLink = "https://meet.google.com/placeholder-link";
+    meetLink = "";
   } else {
     try {
+      const eventBody: Record<string, any> = {
+        summary: `${req.consultationType === "paid" ? "Consultation Approfondie" : "Consultation Découverte"} — ${req.name}`,
+        description: [
+          `Client: ${req.name} <${req.email}>`,
+          req.phone   ? `Phone: ${req.phone}`   : "",
+          req.notes   ? `Notes: ${req.notes}`   : "",
+          req.lang    ? `Language: ${req.lang.toUpperCase()}` : "",
+          "",
+          "NOTE: Add a Google Meet link to this event from your calendar before sharing.",
+        ].filter((l, i, arr) => l !== "" || i < arr.length - 2).join("\n"),
+        start: { dateTime: startDateTime.toISOString(), timeZone: req.timezone || "America/Toronto" },
+        end:   { dateTime: endDateTime.toISOString(),   timeZone: req.timezone || "America/Toronto" },
+        reminders: {
+          useDefault: false,
+          overrides: [
+            { method: "email",  minutes: 1440 },
+            { method: "popup",  minutes: 15   },
+          ],
+        },
+      };
+
       const response = await calendar.events.insert({
         calendarId,
-        conferenceDataVersion: 1,
-        sendUpdates: "all",
-        requestBody: {
-          summary: `${req.consultationType === "paid" ? "Consultation Approfondie" : "Consultation Découverte"} — ${req.name}`,
-          description: [
-            `Client: ${req.name} <${req.email}>`,
-            req.phone   ? `Phone: ${req.phone}`   : "",
-            req.notes   ? `Notes: ${req.notes}`   : "",
-            req.lang    ? `Language: ${req.lang.toUpperCase()}` : "",
-          ].filter(Boolean).join("\n"),
-          start: { dateTime: startDateTime.toISOString(), timeZone: req.timezone || "America/Toronto" },
-          end:   { dateTime: endDateTime.toISOString(),   timeZone: req.timezone || "America/Toronto" },
-          attendees: [
-            { email: req.email,  displayName: req.name },
-            { email: OWNER_EMAIL, displayName: "NT Web UX" },
-          ],
-          conferenceData: {
-            createRequest: {
-              requestId: `ntwebux-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
-              conferenceSolutionKey: { type: "hangoutsMeet" },
-            },
-          },
-          reminders: {
-            useDefault: false,
-            overrides: [
-              { method: "email",  minutes: 1440 },
-              { method: "popup",  minutes: 15   },
-            ],
-          },
-        },
+        sendUpdates: "none",
+        requestBody: eventBody,
       });
 
-      meetLink = response.data.conferenceData?.entryPoints?.find(
-        (ep) => ep.entryPointType === "video"
-      )?.uri ?? "";
       eventId  = response.data.id ?? "";
+      meetLink = response.data.hangoutLink ?? "";
 
-      if (!meetLink) {
-        console.warn("Google Meet link not found in event response; using fallback.");
-        meetLink = response.data.hangoutLink ?? "https://meet.google.com/placeholder-link";
-      }
-
-      console.log("Calendar event created:", eventId, "| Meet:", meetLink);
+      console.log("Calendar event created:", eventId, "| hangoutLink:", meetLink || "(none — auto-add Meet in Google Calendar)");
     } catch (calErr) {
       console.error("Google Calendar event creation failed:", calErr);
-      meetLink = "https://meet.google.com/placeholder-link";
+      meetLink = "";
     }
   }
 
