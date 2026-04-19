@@ -36,9 +36,8 @@
   html {
     width: 100%;
     min-height: 100%;
-    overflow-x: clip;
-    /* Prevent rubber-band bounce jank at scroll edges on desktop & Android */
-    overscroll-behavior: none;
+    /* Use hidden instead of clip — clip has inconsistent scroll behaviour on Android/iOS */
+    overflow-x: hidden;
   }
 
   body {
@@ -49,40 +48,35 @@
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    /* iOS native momentum scroll (rubber-band feel, handled by iOS itself) */
+    /* Native momentum scroll on iOS */
     -webkit-overflow-scrolling: touch;
-    overscroll-behavior: none;
+    overflow-x: hidden;
   }
 
   #root {
     width: 100%;
     min-height: 100vh;
-    overflow-x: clip;
+    overflow-x: hidden;
   }
 
-  /* Grain texture — own compositor layer so scroll never triggers a repaint */
+  /* Grain texture — low z-index, pointer-events:none, no will-change (fixed, never moves) */
   body::before {
     content: '';
     position: fixed;
     inset: 0;
-    z-index: 1;
+    z-index: 0;
     pointer-events: none;
-    /* translateZ promotes to GPU layer — scroll is zero-cost */
-    transform: translateZ(0);
-    will-change: transform;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23n)' opacity='0.45'/%3E%3C/svg%3E");
     opacity: 0.032;
   }
 
-  /* Dot grid overlay — own compositor layer */
+  /* Dot grid overlay */
   body::after {
     content: '';
     position: fixed;
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    transform: translateZ(0);
-    will-change: transform;
     background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px);
     background-size: 32px 32px;
     opacity: 0.5;
@@ -92,11 +86,11 @@
   * { box-sizing: border-box; }
 
   section {
-    /* style added: compositor can skip styled recalc for off-screen sections */
-    contain: layout paint style;
+    /* contain:paint allows the browser to skip painting off-screen sections.
+       Removed 'layout' — it prevents contained sections from contributing to
+       body scroll-height, causing "static image" on Android/Samsung Browser. */
+    contain: paint style;
     position: relative;
-    /* Silicon Valley spacing: more vertical breathing room (py-32). !important
-       wins over inline section padding set by individual components. */
     padding-block: 128px !important;
   }
 
