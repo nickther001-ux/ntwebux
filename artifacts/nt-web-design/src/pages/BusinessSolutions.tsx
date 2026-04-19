@@ -584,11 +584,9 @@ export default function BusinessSolutions() {
               .bento-feature-card {
                 position: relative;
                 padding: 32px;
-                background-color: rgba(255,255,255,0.02);
+                background-color: rgba(12,15,24,0.55);
                 background-image: radial-gradient(circle at center, rgba(255,255,255,0.05) 1px, transparent 1px);
                 background-size: 20px 20px;
-                backdrop-filter: blur(20px);
-                -webkit-backdrop-filter: blur(20px);
                 border: 1px solid rgba(255,255,255,0.1);
                 border-radius: 20px;
                 display: flex;
@@ -934,9 +932,7 @@ export default function BusinessSolutions() {
               .arch-card {
                 position: relative;
                 padding: 32px 28px;
-                background-color: rgba(255,255,255,0.02);
-                backdrop-filter: blur(18px);
-                -webkit-backdrop-filter: blur(18px);
+                background-color: rgba(12,15,24,0.55);
                 border-radius: 20px;
                 overflow: hidden;
                 display: flex; flex-direction: column; gap: 28px;
@@ -1007,9 +1003,7 @@ export default function BusinessSolutions() {
                 display: flex; align-items: center; gap: 14px;
                 padding: 14px 18px;
                 border-radius: 14px;
-                background: rgba(2,4,10,0.6);
-                backdrop-filter: blur(8px);
-                -webkit-backdrop-filter: blur(8px);
+                background: rgba(2,4,10,0.85);
                 font-weight: 600;
                 position: relative;
                 transition: transform 0.25s ease;

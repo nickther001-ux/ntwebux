@@ -71,10 +71,10 @@ export function Navbar() {
         zIndex: 50,
         width: 'min(1140px, calc(100vw - 24px))',
         borderRadius: '999px',
-        background: scrolled ? 'rgba(0,0,0,0.55)' : 'rgba(0,0,0,0.4)',
+        background: scrolled ? 'rgba(0,0,0,0.78)' : 'rgba(0,0,0,0.62)',
         border: '1px solid rgba(255,255,255,0.1)',
-        backdropFilter: 'blur(24px) saturate(140%)',
-        WebkitBackdropFilter: 'blur(24px) saturate(140%)',
+        backdropFilter: 'blur(10px)',
+        WebkitBackdropFilter: 'blur(10px)',
         boxShadow: scrolled
           ? '0 12px 40px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.06)'
           : '0 8px 28px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05)',
