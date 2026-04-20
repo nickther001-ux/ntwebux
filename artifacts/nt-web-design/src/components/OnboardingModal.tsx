@@ -183,6 +183,7 @@ export function OnboardingModal({ plan, onClose }: Props) {
                 <img
                   src={`${BASE}/portfolio/${type.img}`}
                   alt={type.en}
+                  loading="lazy"
                   style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }}
                 />
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(2,4,10,0.3), rgba(2,4,10,0.7))' }} />

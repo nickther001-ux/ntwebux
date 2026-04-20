@@ -162,6 +162,7 @@ function Lightbox({
           <img
             src={p.img}
             alt={p.title[l]}
+            loading="lazy"
             style={{ width: '100%', display: 'block', maxHeight: '520px', objectFit: 'cover' }}
           />
           {/* Category badge */}

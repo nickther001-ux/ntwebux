@@ -3,11 +3,11 @@
 
 @theme inline {
   --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  --color-background: #030609;
+  --color-background: #020617;   /* slate-950 */
   --color-foreground: #ffffff;
   --color-muted: rgba(255,255,255,0.45);
   --color-card: rgba(255,255,255,0.035);
-  --color-border: rgba(255,255,255,0.08);
+  --color-border: rgba(255,255,255,0.10); /* border-white/10 */
   --color-primary: #3b82f6;
   --color-primary-light: #93c5fd;
   --color-accent: #3b82f6;
@@ -43,7 +43,7 @@
   body {
     width: 100%;
     min-height: 100%;
-    background-color: #02040a;
+    background-color: #020617;   /* slate-950 */
     color: #ffffff;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -127,7 +127,7 @@
 
   .glass {
     background: rgba(255,255,255,0.035);
-    border: 1px solid rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.10); /* border-white/10 */
     /* 8px blur: visually identical on dark bg, ~2× cheaper GPU composite than 16px */
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);

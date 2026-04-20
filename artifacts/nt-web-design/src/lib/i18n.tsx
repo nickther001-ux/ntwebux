@@ -82,20 +82,25 @@ const translations: Translations = {
       }
     },
     footer: {
-      tagline: "Technical architecture and AI automation for borderless enterprises.",
+      tagline: "Technical architecture and AI automation for borderless enterprises. We engineer digital foundations for high-performance service businesses.",
       hubsLabel: "Global Hubs",
       foundationsLabel: "Foundations",
       foundationsLinks: [
         { label: "Website Design",  href: "#services" },
         { label: "eCommerce",       href: "#services" },
         { label: "CMS Integration", href: "#services" },
-        { label: "Privacy Policy",  href: "/privacy"  },
       ],
-      solutionsLabel: "Solutions",
-      solutionsLinks: [
-        { label: "AI Text-Back",   href: "/business" },
-        { label: "Enterprise SaaS", href: "/business" },
-        { label: "ROI Audit",      href: "/business" },
+      aiLabel: "Enterprise AI",
+      aiLinks: [
+        { label: "AI Text-Back",    href: "/business" },
+        { label: "SaaS Development", href: "/business" },
+        { label: "ROI Audit",       href: "/business" },
+      ],
+      companyLabel: "Company",
+      companyLinks: [
+        { label: "About",           href: "#why-us"  },
+        { label: "Contact",         href: "#contact" },
+        { label: "Privacy Policy",  href: "/privacy" },
       ],
       statusLabel: "All Systems Operational",
       copy: "© 2026 NT Digital Group. All rights reserved.",
@@ -233,20 +238,25 @@ const translations: Translations = {
       }
     },
     footer: {
-      tagline: "Architecture technique et automatisation IA pour les entreprises sans frontières.",
+      tagline: "Architecture technique et automatisation IA pour les entreprises sans frontières. Nous construisons les fondations numériques pour les entreprises haute performance.",
       hubsLabel: "Bureaux Mondiaux",
       foundationsLabel: "Fondations",
       foundationsLinks: [
         { label: "Design Web",       href: "#services" },
         { label: "eCommerce",        href: "#services" },
         { label: "Intégration CMS",  href: "#services" },
-        { label: "Politique vie privée", href: "/privacy" },
       ],
-      solutionsLabel: "Solutions",
-      solutionsLinks: [
+      aiLabel: "IA Entreprise",
+      aiLinks: [
         { label: "IA Text-Back",     href: "/business" },
-        { label: "SaaS Entreprise",  href: "/business" },
+        { label: "Développement SaaS", href: "/business" },
         { label: "Audit ROI",        href: "/business" },
+      ],
+      companyLabel: "Entreprise",
+      companyLinks: [
+        { label: "À propos",         href: "#why-us"  },
+        { label: "Contact",          href: "#contact" },
+        { label: "Politique de confidentialité", href: "/privacy" },
       ],
       statusLabel: "Tous Systèmes Opérationnels",
       copy: "© 2026 NT Digital Group. Tous droits réservés.",
