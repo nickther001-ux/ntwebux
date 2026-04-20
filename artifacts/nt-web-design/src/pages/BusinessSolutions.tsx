@@ -368,6 +368,7 @@ export default function BusinessSolutions() {
               </button>
               <a
                 href="/#contact"
+                onClick={(e) => { e.preventDefault(); window.location.href = '/#contact'; }}
                 className="px-8 py-4 rounded-xl border border-white/10 bg-white/5 text-white font-semibold hover:bg-white/10 transition-colors backdrop-blur-sm text-center"
               >
                 {bi(copy.hero.ctaSec, l)}
