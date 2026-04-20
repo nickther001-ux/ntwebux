@@ -48,9 +48,19 @@ function matchReply(raw: string, rules: Record<string, string>): string {
     return rules.website;
   if (/hello|hi\b|who are you|bonjour|salut|qui [eê]tes|coucou|hey\b|good (morning|afternoon)/.test(t))
     return rules.hello;
-  if (/scale|foundation|fondation|build|construire|start/.test(t))
+  if (/montreal|africa|japan|bilingual|bilingue|abidjan|hub|global|borderless/.test(t))
+    return rules.global;
+  if (/\bcode\b|custom|template|engineer|bespoke|framework|next\.?js|performance|speed|securit/.test(t))
+    return rules.quality;
+  if (/\bwhy\b|benefit|help|result|pourquoi|b[eé]n[eé]fice|r[eé]sultat|advantage|diff[eé]rence/.test(t))
+    return rules.why;
+  if (/\bfast\b|how long|timeline|start|when|d[eé]lai|livraison|rapide|begin|launch/.test(t))
+    return rules.timeline;
+  if (/money|leak|revenue|audit|losing|miss|appel|manqu|revenu|argent|calculat/.test(t))
+    return rules.audit;
+  if (/scale|foundation|fondation|build|construire/.test(t))
     return rules.scale;
-  if (/automate|revenue|revenu|booking|r[eé]servation|roi|recover|recuper/.test(t))
+  if (/automate|booking|r[eé]servation|roi|recover|recuper/.test(t))
     return rules.automate;
   return rules.fallback;
 }
@@ -87,13 +97,13 @@ function ChatView({ lang, onBack, t }: { lang: string; onBack: () => void; t: (k
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef  = useRef<HTMLInputElement>(null);
 
-  /* Show welcome after 1-second typing animation */
+  /* Show welcome after 1.2-second typing animation */
   useEffect(() => {
     const id = setTimeout(() => {
       setTyping(false);
       setMessages([WELCOME]);
       setTimeout(() => inputRef.current?.focus(), 80);
-    }, 1000);
+    }, 1200);
     return () => clearTimeout(id);
   }, []);
 
@@ -112,7 +122,7 @@ function ChatView({ lang, onBack, t }: { lang: string; onBack: () => void; t: (k
     setTimeout(() => {
       setTyping(false);
       setMessages([...next, { role: "bot", content: matchReply(trimmed, rules) }]);
-    }, 1000);
+    }, 1200);
   }
 
   const BUBBLE_BOT: CSSProperties = {
