@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { useLanguage } from '@/lib/i18n';
 
+const API_BASE = (import.meta.env.VITE_API_URL || import.meta.env.BASE_URL).replace(/\/$/, '');
+
 type LangKey = 'en' | 'fr';
 type Step = 'choose' | 'contact' | 'generating' | 'success';
 
@@ -115,6 +117,44 @@ export function ProjectBriefModal({ open, onClose }: Props) {
     e.preventDefault();
     if (!email.trim()) return;
     setStep('generating');
+
+    const choiceTitle = selected !== null ? bi(choices[selected].title, l) : 'Vision Brief';
+    const choiceSub   = selected !== null ? bi(choices[selected].sub, l)   : '—';
+
+    fetch(`${API_BASE}/api/intake`, {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email,
+        name:            'Vision Brief',
+        plan:            { name: choiceTitle, price: '—' },
+        siteType:        choiceSub,
+        style:           'custom',
+        lang,
+        business:        '',
+        industry:        '',
+        description:     '',
+        city:            '',
+        goals:           [],
+        hasLogo:         '',
+        hasContent:      '',
+        hasExistingSite: '',
+        existingUrl:     '',
+        phone:           '',
+        bestTime:        '',
+        method:          'email',
+        notes:           '',
+      }),
+    }).then(async (res) => {
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({}));
+        console.error('[ProjectBriefModal] intake error:', body);
+      } else {
+        console.log('[ProjectBriefModal] intake sent OK');
+      }
+    }).catch((err) => {
+      console.error('[ProjectBriefModal] intake fetch failed:', err);
+    });
   }
 
   if (!open) return null;
