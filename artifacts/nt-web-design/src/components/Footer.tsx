@@ -35,10 +35,10 @@ function LiveClock({ timezone }: { timezone: string }) {
 
 /* ── Constants ───────────────────────────────────────────────── */
 const HUBS = [
-  { city: 'Montreal', tz: 'America/Toronto', label: 'EST' },
-  { city: 'Abidjan',  tz: 'Africa/Abidjan',  label: 'GMT' },
-  { city: 'Paris',    tz: 'Europe/Paris',     label: 'CET' },
-  { city: 'Tokyo',    tz: 'Asia/Tokyo',       label: 'JST' },
+  { city: 'Montreal', tz: 'America/Toronto',  label: 'EST' },
+  { city: 'Toronto',  tz: 'America/Toronto',  label: 'EST' },
+  { city: 'Paris',    tz: 'Europe/Paris',      label: 'CET' },
+  { city: 'Abidjan',  tz: 'Africa/Abidjan',   label: 'GMT' },
 ];
 
 const COL_HEAD: CSSProperties = {

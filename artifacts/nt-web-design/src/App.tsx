@@ -12,6 +12,7 @@ import IndustryPage from "@/pages/IndustryPage";
 import LocationPage from "@/pages/LocationPage";
 import Privacy from "@/pages/Privacy";
 import About from "@/pages/About";
+import { Toronto } from "@/pages/Toronto";
 import NotFound from "@/pages/not-found";
 import ChatWidget from "@/components/ChatWidget";
 
@@ -123,6 +124,7 @@ function App() {
                 <Route path="/locations/:slug" component={LocationPage} />
                 <Route path="/privacy" component={Privacy} />
                 <Route path="/about" component={About} />
+                <Route path="/toronto" component={Toronto} />
                 <Route path="/digital-policy" component={Privacy} />
                 <Route component={NotFound} />
               </Switch>

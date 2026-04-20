@@ -1,0 +1,44 @@
+Full Replit Agent Master Prompt
+"Execute a comprehensive architectural update to the platform to reflect a global Systems Engineering firm.
+
+1. Brand Identity Update:
+
+Perform a global find-and-replace: Remove 'Jean' and 'Jean Nickson'. The founder's name is now strictly Nickson Thermidor.
+
+Update the 'About Us' section to a Manifesto style: 'Stop building websites. Start engineering revenue engines.' Emphasize the Concordia Engineering background and the shift from physical to digital architecture.
+
+2. Strategic Node: /toronto (Luxury Real Estate):
+
+Create a new high-performance sub-route at /toronto.
+
+Hero Section: 'The Commission Recovery Engine for Toronto’s Elite Teams.'
+
+The Weapon (Commission Leak Calculator): >   - Inputs: Average Property Price (default $1.5M), Commission Rate (default 2.5%), Monthly Lead Volume (default 50), Estimated Lead Loss % (default 50%).
+
+Logic: Annual Leak = (((Price * Commission) * Leads) * Loss%) * 12.
+
+Display: A large, glowing red counter showing the 'Annual Lost Commission'.
+
+CTA: A 'Recover My Commission' button that triggers the existing Vision Briefing Modal.
+
+3. Statistics Bento Update:
+
+Add 2 new cards to the existing stats grid:
+
+Card 5 (Speed): '53% of mobile users abandon sites taking over 3s to load.' | Tag: [PERF: 100 LIGHTHOUSE].
+
+Card 6 (Response): '100x higher conversion rate if reached within 5 minutes.' | Tag: [AI: GPT-4o / SMS-LATENCY <2s].
+
+4. Technical Hardening & Global Footer:
+
+Global Clocks: Add four live digital clocks in the footer: MONTREAL (EST), TORONTO (EST), PARIS (CET), ABIDJAN (GMT).
+
+Technical Specs: Add dim, monospace tags to all service cards (e.g., [STACK: NEXT.JS / POSTGRES], [LATENCY: <200ms]).
+
+Scroll Fix: Apply scroll-margin-top: 100px; to all section anchors to prevent the sticky header from overlapping content when clicking 'Plug the Leak' or navigation links.
+
+5. UI/UX Refinement:
+
+Maintain the 'Dark Wealth' aesthetic: bg-slate-950, glassmorphism, and gold accents specifically for the Toronto currency displays.
+
+Ensure the 'Start Your Brief' flow remains email-only and low-friction.
