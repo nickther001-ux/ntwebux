@@ -1,10 +1,13 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/lib/i18n';
+import { ProjectBriefModal } from '@/components/ProjectBriefModal';
 
 export function Process() {
   const { t, lang } = useLanguage();
   const steps = t('process.steps') as { title: string; desc: string }[];
   const eyebrow = lang === 'fr' ? 'Comment Nous Travaillons' : 'How We Work';
+  const [briefOpen, setBriefOpen] = useState(false);
 
   return (
     <section id="process" style={{ width: '100%', padding: '120px 24px', position: 'relative', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
@@ -70,11 +73,33 @@ export function Process() {
               ? "Emploi du temps chargé ? Pas de temps à perdre au téléphone. Dites-nous ce que vous voulez, nous nous occupons d'élargir votre vision."
               : "Busy schedule? No time to be on the phone. Just tell us what you want, and we will expand your vision."}
           </p>
-          <a href="#contact" className="btn-violet" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '14px 32px', fontSize: '14px', fontWeight: 700, borderRadius: '10px', textDecoration: 'none', letterSpacing: '-0.01em' }}>
-            {lang === 'fr' ? 'Réserver un Appel →' : 'Book a Call →'}
-          </a>
+          <button
+            onClick={() => setBriefOpen(true)}
+            style={{
+              display: 'inline-flex', alignItems: 'center', gap: '8px',
+              padding: '15px 36px', fontSize: '14px', fontWeight: 700,
+              letterSpacing: '-0.01em', borderRadius: '12px', border: 'none',
+              cursor: 'pointer',
+              background: 'linear-gradient(135deg, #1d4ed8 0%, #3b82f6 100%)',
+              color: '#fff',
+              boxShadow: '0 0 0 1px rgba(59,130,246,0.35), 0 8px 32px rgba(59,130,246,0.45), 0 0 56px rgba(59,130,246,0.22)',
+              transition: 'box-shadow 0.2s, transform 0.15s',
+            }}
+            onMouseEnter={e => {
+              (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 0 0 1px rgba(59,130,246,0.5), 0 12px 40px rgba(59,130,246,0.6), 0 0 72px rgba(59,130,246,0.32)';
+              (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(-2px)';
+            }}
+            onMouseLeave={e => {
+              (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 0 0 1px rgba(59,130,246,0.35), 0 8px 32px rgba(59,130,246,0.45), 0 0 56px rgba(59,130,246,0.22)';
+              (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(0)';
+            }}
+          >
+            {lang === 'fr' ? 'Soumettre votre Vision →' : 'Start Your Brief →'}
+          </button>
         </motion.div>
       </div>
+
+      <ProjectBriefModal open={briefOpen} onClose={() => setBriefOpen(false)} />
 
       <style>{`
         @media(max-width:768px){ 
