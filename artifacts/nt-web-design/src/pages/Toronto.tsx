@@ -5,7 +5,7 @@ import { Footer } from '@/components/Footer';
 import { useLanguage } from '@/lib/i18n';
 import { ChevronDown, TrendingDown, Zap, Shield, Clock } from 'lucide-react';
 
-const WEBHOOK_URL = 'https://services.leadconnectorhq.com/hooks/2Tf3bk6VqhB7JukgrDrS/webhook-trigger/d8540795-784f-4424-b207-1c5073e84bb8';
+const WEBHOOK_URL = 'https://services.leadconnectorhq.com/hooks/2Tf3bk6VqhB7JukgrDrS/webhook-trigger/ba4df511-fbe1-4bf5-b0c0-faa2eb2150cf';
 
 /* ── Animated counter ──────────────────────────────────────────── */
 function useCountUp(target: number, duration = 1400, active = false) {
