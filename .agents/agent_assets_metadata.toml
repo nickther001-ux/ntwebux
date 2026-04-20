@@ -1,5 +1,4 @@
 uploads = []
-outputs = []
 
 [[generated]]
 id = "RNgq2Oi-c1wcZaIGhxOEm"
@@ -66,3 +65,9 @@ id = "XE8qYZpTGGTPA5MPgY1eW"
 uri = "file://artifacts/nt-web-design/public/portfolio/proj-audreyrh.png"
 type = "image"
 title = "generated_image"
+
+[[outputs]]
+id = "j2PlJ8cDdUPKISm5Im8pE"
+uri = "file://artifacts/nt-web-design/public/favicon.svg"
+type = "image"
+title = "New Favicon — NT (white on black)"
