@@ -34,8 +34,8 @@ const copy = {
       {
         spec:  { en: "01 / Conversational AI",  fr: "01 / IA Conversationnelle" },
         title: { en: "AI Text-Back",            fr: "Réponse SMS Intelligente" },
-        desc:  { en: "Stop lead leakage. Our AI instantly detects missed calls and initiates a conversational SMS sequence. It qualifies the prospect's needs and keeps them engaged so they don't call your competitor.",
-                  fr: "Stoppez la fuite de prospects. Notre IA détecte instantanément les appels manqués et déclenche une séquence SMS conversationnelle. Elle qualifie les besoins du client et le garde engagé pour qu'il n'appelle pas votre concurrent." },
+        desc:  { en: "Stop lead leakage. Our AI instantly detects missed calls and initiates a conversational SMS sequence. It qualifies the prospect's needs and keeps them engaged so they don't call your competitor. Estimated Lead Recovery Rate: 22%–35%.",
+                  fr: "Stoppez la fuite de prospects. Notre IA détecte instantanément les appels manqués et déclenche une séquence SMS conversationnelle. Elle qualifie les besoins du client et le garde engagé pour qu'il n'appelle pas votre concurrent. Taux de récupération de leads estimé : 22 %–35 %." },
         roi:   { en: "Average recovery: +22% closed deals",
                   fr: "Récupération moyenne : +22 % de ventes conclues" },
       },

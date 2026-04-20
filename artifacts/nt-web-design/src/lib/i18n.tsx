@@ -14,7 +14,7 @@ const translations: Translations = {
     hero: {
       eyebrow: "Web Design Studio",
       h1_1: "YOUR", h1_2: "BUSINESS", h1_3: "ONLINE.", h1_4: "DONE RIGHT.",
-      sub: "We build high-performance, conversion-focused websites for growing businesses. Stand out, attract more clients, and scale your brand with a stunning digital presence.",
+      sub: "High-Performance Digital Foundations + AI Lead Recovery for Borderless Enterprises. We build the systems that catch the money your business is currently leaking.",
       btn1: "Start My Project", btn2: "See How It Works",
       mockBadge: "+340% Avg. Traffic Increase"
     },
@@ -195,7 +195,7 @@ const translations: Translations = {
     hero: {
       eyebrow: "Studio Web Design",
       h1_1: "VOTRE", h1_2: "ENTREPRISE", h1_3: "EN LIGNE.", h1_4: "BIEN FAIT.",
-      sub: "Nous créons des sites web performants axés sur la conversion. Démarquez-vous, attirez plus de clients et propulsez votre marque avec une présence numérique exceptionnelle.",
+      sub: "Fondations Numériques Haute Performance + Récupération de Leads IA pour Entreprises Sans Frontières. Nous construisons les systèmes qui récupèrent l'argent que votre entreprise perd actuellement.",
       btn1: "Démarrer Mon Projet", btn2: "Comment Ça Marche",
       mockBadge: "+340% de Trafic en Moyenne"
     },

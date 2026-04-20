@@ -99,7 +99,7 @@ export function Hero({ onStart }: { onStart?: () => void } = {}) {
         <motion.div custom={0} variants={fadeUp} initial="hidden" animate="show" style={{ display: 'flex', justifyContent: 'center', marginBottom: '32px' }}>
           <span className="pill-label">
             <Sparkles size={11} />
-            {lang === 'fr' ? 'Studio Web Design' : 'Web Design Studio'}
+            {lang === 'fr' ? 'Studio d\'Architecture Technique' : 'Technical Architecture Studio'}
           </span>
         </motion.div>
 
@@ -119,9 +119,9 @@ export function Hero({ onStart }: { onStart?: () => void } = {}) {
           }}
         >
           {lang === 'fr' ? (
-            <>Votre business en ligne.<br /><span className="gradient-text">Fait pour convertir.</span></>
+            <>Nous concevons des<br /><span className="gradient-text">Moteurs de Revenus.</span></>
           ) : (
-            <>Your business online.<br /><span className="gradient-text">Built to convert.</span></>
+            <>We Engineer<br /><span className="gradient-text">Revenue Engines.</span></>
           )}
         </motion.h1>
 

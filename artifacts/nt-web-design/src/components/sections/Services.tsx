@@ -18,30 +18,31 @@ interface Service {
   span: Span;
   badges?: string[];
   glow?: GlowColor;
+  techFooter?: string;
 }
 
 const SERVICES_EN: Service[] = [
-  { icon: Layout,       title: 'Website Design',        short: 'High-performance, bespoke digital experiences engineered for conversion. We combine world-class aesthetics with the technical precision of a Silicon Valley startup to ensure your brand stands out in any market.',
-                                                          desc: 'High-performance, bespoke digital experiences engineered for conversion. We combine world-class aesthetics with the technical precision of a Silicon Valley startup to ensure your brand stands out in any market — from Montréal to Manhattan to Singapore.', id: '01', cluster: 'foundations', span: 'lg', glow: 'blue',     badges: ['Figma', 'Framer Motion', 'Conversion-First'] },
+  { icon: Layout,       title: 'Website Design',        short: 'High-performance, bespoke digital experiences engineered for conversion. Engineered for 1s globally. Optimized for high-conversion Google ranking.',
+                                                          desc: 'High-performance, bespoke digital experiences engineered for conversion. We combine world-class aesthetics with the technical precision of a Silicon Valley startup to ensure your brand stands out in any market — from Montréal to Manhattan to Singapore. Engineered for 1s globally. Optimized for high-conversion Google ranking.', id: '01', cluster: 'foundations', span: 'lg', glow: 'blue',     badges: ['Figma', 'Framer Motion', 'Conversion-First'], techFooter: '[VCP: VERCEL / BILINGUAL-L10N / 100 LIGHTHOUSE]' },
   { icon: Zap,          title: 'Development',           short: 'Lightning-fast frameworks, scalable & secure.',              desc: 'Custom web development using modern, lightning-fast frameworks. Scalable architectures optimized for speed and security — built to perform flawlessly on every device.', id: '02', cluster: 'foundations', span: 'md', glow: 'blue',     badges: ['Next.js', 'Tailwind'] },
   { icon: ShoppingCart, title: 'eCommerce',             short: 'High-conversion stores with seamless payments.',             desc: 'Secure online stores with high-end payment integrations and inventory management. We build eCommerce solutions that make buying effortless and selling more profitable.', id: '03', cluster: 'foundations', span: 'sm', glow: 'purple',   badges: ['Stripe', 'Shopify'] },
   { icon: Database,     title: 'CMS Integration',       short: 'Take full control — no code needed.',                        desc: 'Take full control of your website. Intuitive CMS integration lets you easily update text, manage blogs, and upload images without touching a single line of code.', id: '04', cluster: 'foundations', span: 'sm', glow: 'cyan',     badges: ['Headless', 'Sanity'] },
   { icon: Search,       title: 'SEO & Marketing',       short: 'Rank where it matters. Be found.',                           desc: 'Ranking you where it matters. Technical SEO, keyword strategy, and performance optimization included — so the right people find you at exactly the right moment.', id: '05', cluster: 'foundations', span: 'md', glow: 'emerald',  badges: ['Google Core Web Vitals'] },
   { icon: Wrench,       title: 'Maintenance & Support', short: 'Peace of mind — we handle the rest.',                        desc: 'Enjoy peace of mind with our dedicated support. Monthly security updates, daily cloud backups, bug fixes, and 24/7 uptime monitoring so your site never goes down.', id: '06', cluster: 'foundations', span: 'md', glow: 'amber',    badges: ['24/7 Uptime', 'Daily Backups'] },
-  { icon: Building2,    title: 'Enterprise SaaS',       short: 'Multi-tenant cloud apps at scale.',                          desc: 'Scalable, multi-tenant cloud applications engineered for high performance. We architect and build enterprise-grade SaaS platforms ready to handle thousands of concurrent users.', id: '07', cluster: 'ai',          span: 'tall', glow: 'blue',   badges: ['ARCH: MULTI-TENANT', 'Postgres'] },
-  { icon: Bot,          title: 'AI Integrations',       short: 'Smart automation that drives conversions.',                  desc: 'Supercharge your business with custom AI solutions. Smart chatbots, automated customer service workflows, and advanced AI agents tailored to save you time and drive conversions.', id: '08', cluster: 'ai',          span: 'tall', glow: 'purple', badges: ['GPT-4', 'Claude', 'Gemini'] },
+  { icon: Building2,    title: 'Enterprise SaaS',       short: 'Multi-tenant cloud apps at scale.',                          desc: 'Scalable, multi-tenant cloud applications engineered for high performance. We architect and build enterprise-grade SaaS platforms ready to handle thousands of concurrent users.', id: '07', cluster: 'ai',          span: 'tall', glow: 'blue',   badges: ['ARCH: MULTI-TENANT', 'Postgres'], techFooter: '[STACK: NEXT.JS / POSTGRES / MULTI-TENANT]' },
+  { icon: Bot,          title: 'AI Integrations',       short: 'Smart automation that drives conversions. Estimated Lead Recovery Rate: 22%–35%.',                  desc: 'Supercharge your business with custom AI solutions. Smart chatbots, automated customer service workflows, and advanced AI agents tailored to save you time and drive conversions. Estimated Lead Recovery Rate: 22%–35%.', id: '08', cluster: 'ai',          span: 'tall', glow: 'purple', badges: ['GPT-4', 'Claude', 'Gemini'], techFooter: '[MODELS: GPT-4o / CLAUDE 3.5 | LATENCY: <200ms]' },
 ];
 
 const SERVICES_FR: Service[] = [
-  { icon: Layout,       title: 'Design Web',            short: 'Expériences numériques sur mesure, hautes performances, conçues pour la conversion. Nous allions une esthétique de calibre mondial à la précision technique d\'une startup de la Silicon Valley pour que votre marque se démarque sur n\'importe quel marché.',
-                                                          desc: 'Expériences numériques sur mesure, hautes performances, conçues pour la conversion. Nous allions une esthétique de calibre mondial à la précision technique d\'une startup de la Silicon Valley pour que votre marque se démarque sur n\'importe quel marché — de Montréal à Manhattan en passant par Singapour.', id: '01', cluster: 'foundations', span: 'lg', glow: 'blue',     badges: ['Figma', 'Framer Motion', 'Axé Conversion'] },
+  { icon: Layout,       title: 'Design Web',            short: 'Expériences numériques sur mesure, hautes performances, conçues pour la conversion. Conçu pour 1s mondialement. Optimisé pour un classement Google haute conversion.',
+                                                          desc: 'Expériences numériques sur mesure, hautes performances, conçues pour la conversion. Nous allions une esthétique de calibre mondial à la précision technique d\'une startup de la Silicon Valley pour que votre marque se démarque sur n\'importe quel marché — de Montréal à Manhattan en passant par Singapour.', id: '01', cluster: 'foundations', span: 'lg', glow: 'blue',     badges: ['Figma', 'Framer Motion', 'Axé Conversion'], techFooter: '[VCP: VERCEL / BILINGUAL-L10N / 100 LIGHTHOUSE]' },
   { icon: Zap,          title: 'Développement',         short: 'Frameworks rapides, scalable et sécurisé.',  desc: 'Développement web sur mesure avec des frameworks modernes ultra-rapides. Architectures scalables optimisées pour la vitesse et la sécurité.', id: '02', cluster: 'foundations', span: 'md', glow: 'blue',     badges: ['Next.js', 'Tailwind'] },
   { icon: ShoppingCart, title: 'eCommerce',             short: 'Boutiques à haute conversion.',              desc: "Boutiques en ligne sécurisées avec intégrations de paiement haut de gamme et gestion des stocks. Nous construisons des solutions qui rendent l'achat facile.", id: '03', cluster: 'foundations', span: 'sm', glow: 'purple',   badges: ['Stripe', 'Shopify'] },
   { icon: Database,     title: 'Intégration CMS',       short: 'Contrôle total, sans code.',                 desc: "Prenez le contrôle de votre site. L'intégration CMS intuitive vous permet de mettre à jour le contenu, gérer les blogs et télécharger des images sans toucher au code.", id: '04', cluster: 'foundations', span: 'sm', glow: 'cyan',     badges: ['Headless', 'Sanity'] },
   { icon: Search,       title: 'SEO & Marketing',       short: 'Classez-vous là où ça compte.',              desc: 'Positionnement là où ça compte. SEO technique, stratégie de mots-clés et optimisation des performances inclus pour attirer exactement les bons clients.', id: '05', cluster: 'foundations', span: 'md', glow: 'emerald',  badges: ['Google Core Web Vitals'] },
   { icon: Wrench,       title: 'Maintenance & Support', short: "Tranquillité d'esprit garantie.",            desc: "Tranquillité d'esprit avec notre support dédié. Mises à jour de sécurité mensuelles, sauvegardes quotidiennes, corrections de bugs et surveillance 24/7.", id: '06', cluster: 'foundations', span: 'md', glow: 'amber',    badges: ['Surveillance 24/7', 'Sauvegardes'] },
-  { icon: Building2,    title: 'SaaS Entreprise',       short: 'Applications cloud multi-tenant.',           desc: 'Applications cloud scalables et multi-tenant conçues pour la haute performance. Nous architecturons des plateformes SaaS de niveau entreprise.', id: '07', cluster: 'ai',          span: 'tall', glow: 'blue',   badges: ['ARCH: MULTI-TENANT', 'Postgres'] },
-  { icon: Bot,          title: 'Intégrations IA',       short: 'Automatisation intelligente.',               desc: 'Boostez votre entreprise avec des solutions IA sur mesure. Chatbots intelligents, workflows automatisés et agents IA avancés pour gagner du temps et augmenter les conversions.', id: '08', cluster: 'ai',          span: 'tall', glow: 'purple', badges: ['GPT-4', 'Claude', 'Gemini'] },
+  { icon: Building2,    title: 'SaaS Entreprise',       short: 'Applications cloud multi-tenant.',           desc: 'Applications cloud scalables et multi-tenant conçues pour la haute performance. Nous architecturons des plateformes SaaS de niveau entreprise.', id: '07', cluster: 'ai',          span: 'tall', glow: 'blue',   badges: ['ARCH: MULTI-TENANT', 'Postgres'], techFooter: '[STACK: NEXT.JS / POSTGRES / MULTI-TENANT]' },
+  { icon: Bot,          title: 'Intégrations IA',       short: 'Automatisation intelligente. Taux de récupération de leads estimé : 22 %–35 %.',               desc: 'Boostez votre entreprise avec des solutions IA sur mesure. Chatbots intelligents, workflows automatisés et agents IA avancés pour gagner du temps et augmenter les conversions. Taux de récupération de leads estimé : 22 %–35 %.', id: '08', cluster: 'ai',          span: 'tall', glow: 'purple', badges: ['GPT-4', 'Claude', 'Gemini'], techFooter: '[MODELS: GPT-4o / CLAUDE 3.5 | LATENCY: <200ms]' },
 ];
 
 const GLOW_RGB: Record<GlowColor, string> = {
@@ -441,6 +442,25 @@ function BentoCard({ s, i, learnMore, onClick }: BentoCardProps) {
         }}>{s.short}</div>
         <div style={{ fontSize: '12px', color: `rgb(${glow})`, fontWeight: 600, letterSpacing: '0.02em', opacity: 0.9 }}>{learnMore}</div>
       </div>
+
+      {/* Technical spec footer */}
+      {s.techFooter && (
+        <div style={{
+          position: 'relative', zIndex: 2,
+          marginTop: '16px',
+          paddingTop: '12px',
+          borderTop: '1px solid rgba(255,255,255,0.06)',
+          fontFamily: "'Courier New', ui-monospace, SFMono-Regular, monospace",
+          fontSize: '10px',
+          fontWeight: 500,
+          letterSpacing: '0.06em',
+          color: 'rgba(148,163,184,0.38)',
+          lineHeight: 1.4,
+          userSelect: 'none',
+        }}>
+          {s.techFooter}
+        </div>
+      )}
     </motion.button>
   );
 }

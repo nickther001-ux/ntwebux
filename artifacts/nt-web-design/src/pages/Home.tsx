@@ -12,6 +12,7 @@ import { Testimonials } from "@/components/sections/Testimonials";
 import { Contact } from "@/components/sections/Contact";
 import { Footer } from "@/components/Footer";
 import { ROICalculator } from "@/components/ROICalculator";
+import { ActiveDeployments } from "@/components/sections/ActiveDeployments";
 import { OnboardingModal } from "@/components/OnboardingModal";
 
 const TITLE = "NT Web Design";
@@ -76,6 +77,7 @@ export default function Home() {
           <TrustBar />
           <Stats />
           <Services />
+          <ActiveDeployments />
           <ROICalculator />
           <Portfolio />
           <Process />
