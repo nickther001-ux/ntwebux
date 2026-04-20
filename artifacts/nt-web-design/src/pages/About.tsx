@@ -162,8 +162,8 @@ export default function About() {
   const heroH1a  = bi('Engineering the', 'Ingénierie du', lang);
   const heroH1b  = bi('Digital Borderless.', 'Numérique Sans Frontières.', lang);
   const heroSub  = bi(
-    'We are technical architects — not web designers. Every deployment is engineered with the same rigour as structural infrastructure: built to spec, built to last.',
-    'Nous sommes des architectes techniques — pas des designers web. Chaque déploiement est conçu avec la même rigueur qu\'une infrastructure structurelle : conforme aux spécifications, conçu pour durer.',
+    'We are technical architects — not just web designers. Every deployment is engineered with the same rigour as structural infrastructure: built to spec, built to last.',
+    'Nous sommes des architectes techniques — pas juste des designers web. Chaque déploiement est conçu avec la même rigueur qu\'une infrastructure structurelle : conforme aux spécifications, conçu pour durer.',
     lang,
   );
 
