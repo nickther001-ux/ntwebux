@@ -327,84 +327,127 @@ export default function About() {
             </motion.p>
           </section>
 
-          {/* ── FOUNDER BENTO CARD ────────────────────────────── */}
+          {/* ── MANIFESTO CARD ──────────────────────────────────── */}
           <section style={{ padding: '0 24px 96px', maxWidth: '1100px', margin: '0 auto' }}>
             <motion.div
               initial={{ opacity: 0, y: 32 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.65 }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
               style={{
                 position: 'relative',
-                background: 'rgba(255,255,255,0.026)',
-                border: '1px solid rgba(255,255,255,0.09)',
+                background: 'linear-gradient(160deg, rgba(2,8,20,0.96) 0%, rgba(5,15,35,0.94) 100%)',
+                border: '1px solid rgba(59,130,246,0.18)',
                 borderRadius: '24px',
-                padding: 'clamp(36px,5vw,64px)',
-                backdropFilter: 'blur(16px)',
-                WebkitBackdropFilter: 'blur(16px)',
+                padding: 'clamp(40px,5.5vw,72px)',
+                backdropFilter: 'blur(24px)',
+                WebkitBackdropFilter: 'blur(24px)',
                 overflow: 'hidden',
+                boxShadow: '0 0 80px rgba(59,130,246,0.07), inset 0 1px 0 rgba(255,255,255,0.05)',
               }}
             >
               <GridOverlay />
               <GearBlueprint />
 
-              {/* top accent bar */}
-              <div style={{
-                position: 'absolute', top: 0, left: '48px',
-                width: '80px', height: '2px',
-                background: 'linear-gradient(90deg,#3b82f6,#06b6d4)',
+              {/* Scanline overlay — subtle machine texture */}
+              <div aria-hidden="true" style={{
+                position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none',
+                backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(255,255,255,0.012) 3px, rgba(255,255,255,0.012) 4px)',
+                borderRadius: '24px',
               }} />
 
-              {/* label */}
+              {/* Left accent rail */}
+              <div style={{
+                position: 'absolute', top: '48px', bottom: '48px', left: 0,
+                width: '3px',
+                background: 'linear-gradient(180deg, transparent 0%, #3b82f6 20%, #06b6d4 80%, transparent 100%)',
+                borderRadius: '0 2px 2px 0',
+              }} />
+
+              {/* Top accent bar */}
+              <div style={{
+                position: 'absolute', top: 0, left: '48px',
+                width: '120px', height: '2px',
+                background: 'linear-gradient(90deg, #3b82f6, #06b6d4, transparent)',
+              }} />
+
+              {/* Doc label */}
               <div style={{
                 fontSize: '10px', fontWeight: 700,
-                letterSpacing: '0.14em', textTransform: 'uppercase',
+                letterSpacing: '0.18em', textTransform: 'uppercase',
                 color: '#60a5fa',
-                marginBottom: '32px',
-                display: 'flex', alignItems: 'center', gap: '8px',
+                marginBottom: '36px',
+                display: 'flex', alignItems: 'center', gap: '10px',
                 position: 'relative', zIndex: 1,
               }}>
-                <div style={{ width: 16, height: '1px', background: '#3b82f6' }} />
+                <div style={{ width: 20, height: '1px', background: 'linear-gradient(90deg,#3b82f6,transparent)' }} />
                 {manifestoLabel}
+                <div style={{ width: 20, height: '1px', background: 'linear-gradient(270deg,#06b6d4,transparent)' }} />
               </div>
 
-              <div style={{ maxWidth: '720px', position: 'relative', zIndex: 1 }}>
+              <div style={{ maxWidth: '740px', position: 'relative', zIndex: 1 }}>
 
-                {/* Lead line */}
+                {/* ── Lead quote — Playfair bold italic ── */}
                 <p style={{
-                  fontSize: 'clamp(20px,2.8vw,28px)',
+                  fontFamily: "'Playfair Display', Georgia, 'Times New Roman', serif",
+                  fontSize: 'clamp(24px,3.2vw,36px)',
                   fontWeight: 800,
-                  letterSpacing: '-0.025em',
-                  lineHeight: 1.3,
-                  color: 'rgba(255,255,255,0.95)',
-                  marginBottom: '28px',
-                  background: 'linear-gradient(135deg,#60a5fa 0%,#22d3ee 100%)',
+                  fontStyle: 'italic',
+                  lineHeight: 1.28,
+                  letterSpacing: '-0.01em',
+                  marginBottom: '36px',
+                  background: 'linear-gradient(135deg, #e2e8f0 0%, #60a5fa 55%, #22d3ee 100%)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   backgroundClip: 'text',
                 }}>
-                  {manifestoLead}
+                  "{manifestoLead}"
                 </p>
 
-                {/* Body paragraphs */}
-                <p style={{ fontSize: 'clamp(14px,1.55vw,16px)', lineHeight: 1.82, color: 'rgba(255,255,255,0.58)', marginBottom: '20px' }}>
-                  {manifestoP1}
-                </p>
-                <p style={{ fontSize: 'clamp(14px,1.55vw,16px)', lineHeight: 1.82, color: 'rgba(255,255,255,0.58)', marginBottom: '36px' }}>
-                  {manifestoP2}
-                </p>
+                {/* ── Body paragraph 1 — left border accent ── */}
+                <div style={{
+                  borderLeft: '2px solid rgba(59,130,246,0.35)',
+                  paddingLeft: '20px',
+                  marginBottom: '20px',
+                }}>
+                  <p style={{
+                    fontFamily: "'Inter', system-ui, sans-serif",
+                    fontSize: 'clamp(14px,1.55vw,16px)',
+                    lineHeight: 1.84,
+                    color: 'rgba(255,255,255,0.62)',
+                  }}>
+                    {manifestoP1}
+                  </p>
+                </div>
 
-                {/* Badges */}
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginBottom: '40px' }}>
+                {/* ── Body paragraph 2 — left border accent ── */}
+                <div style={{
+                  borderLeft: '2px solid rgba(6,182,212,0.3)',
+                  paddingLeft: '20px',
+                  marginBottom: '40px',
+                }}>
+                  <p style={{
+                    fontFamily: "'Inter', system-ui, sans-serif",
+                    fontSize: 'clamp(14px,1.55vw,16px)',
+                    lineHeight: 1.84,
+                    color: 'rgba(255,255,255,0.62)',
+                  }}>
+                    {manifestoP2}
+                  </p>
+                </div>
+
+                {/* Credential badges */}
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginBottom: '44px' }}>
                   {badges.map((b) => (
                     <span key={b} style={{
                       padding: '6px 14px',
-                      background: 'rgba(59,130,246,0.09)',
+                      background: 'rgba(59,130,246,0.08)',
                       border: '1px solid rgba(59,130,246,0.22)',
                       borderRadius: '999px',
-                      fontSize: '12px', fontWeight: 500,
+                      fontSize: '11px', fontWeight: 600,
                       color: '#93c5fd',
-                      letterSpacing: '0.02em',
+                      letterSpacing: '0.04em',
+                      fontFamily: "'Courier New', ui-monospace, monospace",
                     }}>
                       {b}
                     </span>
@@ -412,51 +455,70 @@ export default function About() {
                 </div>
 
                 {/* Divider */}
-                <div style={{ height: '1px', background: 'rgba(255,255,255,0.07)', marginBottom: '32px' }} />
+                <div style={{ height: '1px', background: 'linear-gradient(90deg, rgba(59,130,246,0.25), rgba(6,182,212,0.15), transparent)', marginBottom: '36px' }} />
 
-                {/* Closing statement */}
-                <p style={{ fontSize: 'clamp(14px,1.55vw,16px)', lineHeight: 1.82, color: 'rgba(255,255,255,0.55)', marginBottom: '28px', fontStyle: 'italic' }}>
+                {/* ── Closing statement — Playfair italic ── */}
+                <p style={{
+                  fontFamily: "'Playfair Display', Georgia, 'Times New Roman', serif",
+                  fontSize: 'clamp(16px,2vw,20px)',
+                  fontStyle: 'italic',
+                  fontWeight: 700,
+                  lineHeight: 1.68,
+                  color: 'rgba(255,255,255,0.72)',
+                  marginBottom: '36px',
+                }}>
                   {manifestoClosing}
                 </p>
 
-                {/* Signature */}
-                <div style={{
-                  display: 'flex', alignItems: 'center', gap: '14px',
-                  marginBottom: '32px',
-                }}>
-                  <div style={{ flex: 1, height: '1px', background: 'rgba(255,255,255,0.08)' }} />
+                {/* ── Signature — Playfair centered ── */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '36px' }}>
+                  <div style={{ flex: 1, height: '1px', background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.12))' }} />
                   <span style={{
-                    fontFamily: "'Courier New', ui-monospace, monospace",
-                    fontSize: '13px', fontWeight: 600,
-                    color: 'rgba(255,255,255,0.45)',
-                    letterSpacing: '0.08em',
+                    fontFamily: "'Playfair Display', Georgia, 'Times New Roman', serif",
+                    fontSize: 'clamp(15px,1.8vw,19px)',
+                    fontWeight: 700,
+                    fontStyle: 'italic',
+                    color: 'rgba(255,255,255,0.55)',
+                    letterSpacing: '0.03em',
                     whiteSpace: 'nowrap',
                   }}>
                     — Nickson Thermidor —
                   </span>
-                  <div style={{ flex: 1, height: '1px', background: 'rgba(255,255,255,0.08)' }} />
+                  <div style={{ flex: 1, height: '1px', background: 'linear-gradient(270deg, transparent, rgba(255,255,255,0.12))' }} />
                 </div>
 
-                {/* CTA line */}
-                <p style={{
-                  fontFamily: "'Courier New', ui-monospace, monospace",
-                  fontSize: '13px', fontWeight: 700,
-                  letterSpacing: '0.06em',
-                  color: '#22d3ee',
-                  opacity: 0.8,
+                {/* ── Final CTA — monospace terminal ── */}
+                <div style={{
+                  background: 'rgba(6,182,212,0.05)',
+                  border: '1px solid rgba(6,182,212,0.18)',
+                  borderRadius: '10px',
+                  padding: '16px 20px',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '10px',
                 }}>
-                  {manifestoCTA}
-                </p>
+                  <span style={{ color: '#22d3ee', fontFamily: 'monospace', fontSize: '12px', fontWeight: 700, opacity: 0.6 }}>›_</span>
+                  <p style={{
+                    fontFamily: "'Courier New', ui-monospace, monospace",
+                    fontSize: 'clamp(12px,1.3vw,14px)',
+                    fontWeight: 700,
+                    letterSpacing: '0.05em',
+                    color: '#22d3ee',
+                    margin: 0,
+                  }}>
+                    {manifestoCTA}
+                  </p>
+                </div>
               </div>
 
-              {/* monospace spec tag */}
+              {/* Bottom-right spec tag */}
               <div style={{
-                position: 'absolute', bottom: '26px', right: '30px',
-                fontSize: '10px', color: 'rgba(255,255,255,0.15)',
-                letterSpacing: '0.12em', textTransform: 'uppercase',
+                position: 'absolute', bottom: '24px', right: '28px',
+                fontSize: '9px', color: 'rgba(255,255,255,0.12)',
+                letterSpacing: '0.14em', textTransform: 'uppercase',
                 fontFamily: 'monospace', zIndex: 1,
               }}>
-                NT/ARCH/001 · REV 2.4
+                NT/ARCH/001 · REV 2.5
               </div>
             </motion.div>
           </section>
