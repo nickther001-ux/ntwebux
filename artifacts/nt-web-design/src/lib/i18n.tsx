@@ -121,7 +121,7 @@ const translations: Translations = {
       ],
       companyLabel: "Company",
       companyLinks: [
-        { label: "About",           href: "#why-us"  },
+        { label: "About",           href: "/about"   },
         { label: "Contact",         href: "#contact" },
         { label: "Privacy Policy",  href: "/privacy" },
       ],
@@ -300,7 +300,7 @@ const translations: Translations = {
       ],
       companyLabel: "Entreprise",
       companyLinks: [
-        { label: "À propos",         href: "#why-us"  },
+        { label: "À propos",         href: "/about"   },
         { label: "Contact",          href: "#contact" },
         { label: "Politique de confidentialité", href: "/privacy" },
       ],
