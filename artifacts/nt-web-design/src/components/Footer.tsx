@@ -38,6 +38,7 @@ const HUBS = [
   { city: 'Montreal', tz: 'America/Toronto', label: 'EST' },
   { city: 'Abidjan',  tz: 'Africa/Abidjan',  label: 'GMT' },
   { city: 'Paris',    tz: 'Europe/Paris',     label: 'CET' },
+  { city: 'Tokyo',    tz: 'Asia/Tokyo',       label: 'JST' },
 ];
 
 const COL_HEAD: CSSProperties = {
