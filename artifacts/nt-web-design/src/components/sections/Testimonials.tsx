@@ -1,3 +1,4 @@
+import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/lib/i18n';
 import {
@@ -33,6 +34,93 @@ function highlightMetrics(quote: string): Array<string | { mark: string }> {
   return out;
 }
 
+/* ── Animated star rating counter ──────────────────────────────── */
+function StarRatingCounter({ label }: { label: string }) {
+  const [count, setCount]     = useState(0);
+  const [started, setStarted] = useState(false);
+  const ref                   = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setStarted(true); observer.disconnect(); } },
+      { threshold: 0.6 },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!started) return;
+    setCount(0);
+    const DURATION = 3200;
+    const STEPS    = 160;
+    const INTERVAL = DURATION / STEPS;
+    let step = 0;
+    const iv = setInterval(() => {
+      step++;
+      setCount(Math.min(step * (5 / STEPS), 5));
+      if (step >= STEPS) clearInterval(iv);
+    }, INTERVAL);
+    return () => clearInterval(iv);
+  }, [started]);
+
+  const filled = Math.min(Math.floor(count + 0.12), 5);
+
+  return (
+    <div ref={ref} style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>
+      {/* Counting number */}
+      <span style={{
+        fontFamily: '"SF Mono","Fira Code","Cascadia Code","Courier New",monospace',
+        fontSize: '48px',
+        fontWeight: 800,
+        letterSpacing: '-0.04em',
+        color: '#fff',
+        lineHeight: 1,
+        minWidth: '80px',
+        textAlign: 'center',
+      }}>
+        {count.toFixed(1)}
+      </span>
+
+      {/* Accumulating stars */}
+      <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
+        {[1, 2, 3, 4, 5].map(i => (
+          <svg
+            key={i}
+            width="28" height="28" viewBox="0 0 24 24"
+            style={{
+              transition: 'opacity 0.25s ease, filter 0.4s ease, transform 0.3s cubic-bezier(0.34,1.56,0.64,1)',
+              opacity:    i <= filled ? 1 : 0.12,
+              filter:     i <= filled ? 'drop-shadow(0 0 8px rgba(251,191,36,0.7))' : 'none',
+              transform:  i <= filled ? 'scale(1.12)' : 'scale(0.88)',
+            }}
+          >
+            <polygon
+              points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"
+              fill={i <= filled ? '#fbbf24' : 'rgba(255,255,255,0.15)'}
+            />
+          </svg>
+        ))}
+      </div>
+
+      {/* Label */}
+      <span style={{
+        fontFamily: '"SF Mono","Fira Code","Cascadia Code","Courier New",monospace',
+        fontSize: '10px',
+        fontWeight: 700,
+        letterSpacing: '0.16em',
+        textTransform: 'uppercase',
+        color: 'rgba(255,255,255,0.3)',
+        marginTop: '2px',
+      }}>
+        {label}
+      </span>
+    </div>
+  );
+}
+
 /* Industry → icon mapping (works in both EN and FR) */
 function industryIcon(industry: string) {
   const i = industry.toLowerCase();
@@ -53,9 +141,7 @@ export function Testimonials() {
 
   /* Bilingual chrome strings */
   const eyebrow = lang === 'fr' ? 'Témoignages' : 'Testimonials';
-  const liveTag = lang === 'fr'
-    ? 'RETOURS EN DIRECT DE NOS PARTENAIRES MONDIAUX'
-    : 'LIVE FEEDBACK FROM OUR GLOBAL PARTNERS';
+  const ratingLabel = lang === 'fr' ? 'Note Clients' : 'Client Rating';
   const verifiedLabel = lang === 'fr' ? 'Vérifié' : 'Verified';
   const tickerLabel   = lang === 'fr' ? 'Industries servies' : 'Industries served';
   const heading = lang === 'fr'
@@ -111,11 +197,8 @@ export function Testimonials() {
             {heading}
           </h2>
 
-          {/* LIVE FEEDBACK status pill */}
-          <div className="wol-live-pill">
-            <span className="wol-live-dot" />
-            {liveTag}
-          </div>
+          {/* Animated star rating counter */}
+          <StarRatingCounter label={ratingLabel} />
         </div>
 
         {/* ── Masonry Wall of Love ───────────────────────────── */}
@@ -206,34 +289,6 @@ export function Testimonials() {
       </div>
 
       <style>{`
-        /* ─── Live feedback header pill ─── */
-        .wol-live-pill {
-          display: inline-flex;
-          align-items: center;
-          gap: 10px;
-          padding: 7px 16px 7px 14px;
-          border-radius: 999px;
-          background: rgba(16,185,129,0.06);
-          border: 1px solid rgba(16,185,129,0.30);
-          color: #6ee7b7;
-          font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-          font-size: 11px;
-          font-weight: 700;
-          letter-spacing: 0.12em;
-          box-shadow: 0 0 22px rgba(16,185,129,0.10);
-        }
-        .wol-live-dot {
-          width: 8px; height: 8px; border-radius: 50%;
-          background: #10b981;
-          box-shadow: 0 0 0 0 rgba(16,185,129,0.7);
-          animation: wol-live-pulse 1.6s ease-out infinite;
-        }
-        @keyframes wol-live-pulse {
-          0%   { box-shadow: 0 0 0 0 rgba(16,185,129,0.6); transform: scale(1); }
-          70%  { box-shadow: 0 0 0 10px rgba(16,185,129,0); transform: scale(1.05); }
-          100% { box-shadow: 0 0 0 0 rgba(16,185,129,0); transform: scale(1); }
-        }
-
         /* ─── Masonry grid (CSS columns) ─── */
         .wol-masonry {
           column-count: 3;
