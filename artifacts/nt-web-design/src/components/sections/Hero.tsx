@@ -21,7 +21,7 @@ function useCountUp(target: number, duration = 1200, active = false) {
   return val;
 }
 
-function StatCard({ v, num, suffix, l, sub, detail, source, delay }: { v: string; num: number | null; suffix: string; l: string; sub: string; detail: string; source: string; delay: number }) {
+function StatCard({ v, num, suffix, l, sub, detail, source, tech, delay }: { v: string; num: number | null; suffix: string; l: string; sub: string; detail: string; source: string; tech?: string; delay: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true });
   const count = useCountUp(num ?? 0, 1100, inView && num !== null);
@@ -57,6 +57,21 @@ function StatCard({ v, num, suffix, l, sub, detail, source, delay }: { v: string
         fontSize: '11px', color: 'rgba(147,197,253,0.55)',
         marginTop: '8px', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase',
       }}>{source}</div>
+      {tech && (
+        <div style={{
+          marginTop: '10px',
+          fontFamily: "'Courier New', monospace",
+          fontSize: '10px',
+          fontWeight: 700,
+          letterSpacing: '0.04em',
+          color: 'rgba(34,211,238,0.7)',
+          background: 'rgba(34,211,238,0.06)',
+          border: '1px solid rgba(34,211,238,0.18)',
+          borderRadius: '6px',
+          padding: '4px 8px',
+          display: 'inline-block',
+        }}>{tech}</div>
+      )}
     </motion.div>
   );
 }
@@ -163,7 +178,7 @@ export function Hero({ onStart }: { onStart?: () => void } = {}) {
           variants={fadeUp}
           initial="hidden"
           animate="show"
-          style={{ marginTop: '72px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '16px' }}
+          style={{ marginTop: '72px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '16px' }}
         >
           {(lang === 'fr' ? [
             { v: '72%',  num: 72,   suffix: '%',   l: 'des entreprises ont un site',      sub: 'en 2024–2025',
@@ -178,6 +193,14 @@ export function Hero({ onStart }: { onStart?: () => void } = {}) {
             { v: '3×',   num: 3,    suffix: '×',   l: 'plus de prospects',                sub: 'avec un site pro',
               detail: 'Les entreprises avec un site professionnel et bien optimisé génèrent en moyenne 3 fois plus de demandes qualifiées que celles avec un site basique ou aucun site.',
               source: 'HubSpot Research · 2024' },
+            { v: '53%',  num: 53,   suffix: '%',   l: 'des utilisateurs quittent après 3s', sub: 'un site lent est une fondation brisée',
+              detail: 'Nous concevons pour une performance sub-seconde — score 100 Lighthouse, déployé sur Vercel Edge pour une latence minimale partout dans le monde.',
+              source: 'Google Data · 2024',
+              tech: '[PERF: 100 LIGHTHOUSE / VERCEL EDGE]' },
+            { v: '100×', num: 100,  suffix: '×',   l: 'plus de conversions en moins de 5 min', sub: 'la vitesse de réponse détermine le client',
+              detail: 'Nos systèmes IA interceptent les leads en quelques secondes, vous garantissant d\'être toujours le premier à répondre — avant la concurrence.',
+              source: 'Harvard Business Review',
+              tech: '[AI: GPT-4o / SMS-LATENCY <2s]' },
           ] : [
             { v: '72%',  num: 72,   suffix: '%',   l: 'of businesses have a website',    sub: 'as of 2024–2025',
               detail: 'In the U.S. and Canada, nearly 3 out of 4 businesses now run a professional online presence to acquire and retain customers.',
@@ -191,6 +214,14 @@ export function Hero({ onStart }: { onStart?: () => void } = {}) {
             { v: '3×',   num: 3,    suffix: '×',   l: 'more leads',                      sub: 'with a pro website',
               detail: 'Businesses with a professional, well-optimized website generate on average 3× more qualified inquiries than those with a basic site or no site at all.',
               source: 'HubSpot Research · 2024' },
+            { v: '53%',  num: 53,   suffix: '%',   l: 'of mobile users abandon sites over 3s', sub: 'a slow site is a broken foundation',
+              detail: 'We engineer for sub-second performance — 100 Lighthouse score, deployed on Vercel Edge for minimal latency everywhere on the planet.',
+              source: 'Google Data · 2024',
+              tech: '[PERF: 100 LIGHTHOUSE / VERCEL EDGE]' },
+            { v: '100×', num: 100,  suffix: '×',   l: 'higher conversion if reached in 5 min', sub: 'speed to lead determines the client',
+              detail: 'Our AI systems catch leads in seconds, ensuring you are always the first to respond — before any competitor even sees the notification.',
+              source: 'Harvard Business Review',
+              tech: '[AI: GPT-4o / SMS-LATENCY <2s]' },
           ]).map((s, i) => (
             <StatCard key={s.v} {...s} delay={0.55 + i * 0.12} />
           ))}
