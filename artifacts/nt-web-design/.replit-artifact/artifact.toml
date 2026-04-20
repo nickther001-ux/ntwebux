@@ -1,31 +1,33 @@
 kind = "web"
-previewPath = "/"
-title = "NT Web Design"
-version = "1.0.0"
-id = "artifacts/nt-web-design"
-router = "path"
+  previewPath = "/"
+  title = "NT Web Design"
+  version = "1.0.0"
+  id = "artifacts/nt-web-design"
+  router = "path"
 
-[[integratedSkills]]
-name = "react-vite"
-version = "1.0.0"
+  [[integratedSkills]]
+  name = "react-vite"
+  version = "1.0.0"
 
-[[services]]
-localPort = 25715
-name = "web"
-paths = ["/"]
+  [[services]]
+  localPort = 25715
+  name = "web"
+  paths = ["/"]
 
-[services.development]
-run = "pnpm --filter @workspace/nt-web-design run dev"
+  [services.development]
+  run = "pnpm --filter @workspace/nt-web-design run dev"
 
-[services.env]
-PORT = "25715"
-BASE_PATH = "/"
+  [services.env]
+  PORT = "25715"
+  BASE_PATH = "/"
 
-[services.production]
-build = ["pnpm", "--filter", "@workspace/nt-web-design", "run", "build"]
-publicDir = "artifacts/nt-web-design/dist/public"
-serve = "static"
+  [services.production]
+  build = ["pnpm", "--filter", "@workspace/nt-web-design", "run", "build"]
 
-[[services.production.rewrites]]
-from = "/*"
-to = "/index.html"
+  [services.production.run]
+  args = ["pnpm", "--filter", "@workspace/nt-web-design", "run", "serve"]
+
+  [services.production.run.env]
+  PORT = "25715"
+  BASE_PATH = "/"
+  
