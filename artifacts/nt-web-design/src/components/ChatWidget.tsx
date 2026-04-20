@@ -289,8 +289,8 @@ function HomeView({ lang, onStartChat }: { lang: string; onStartChat: () => void
     {
       icon: <Cpu size={18} />,
       color: "#22d3ee", bg: "rgba(6,182,212,0.08)", border: "rgba(6,182,212,0.22)",
-      title: lang === "fr" ? "Parler à l'IA Architecte" : "Chat with AI Architect",
-      detail: lang === "fr" ? "L'Architecte IA — Instantané" : "AI Architect — Instant",
+      title: lang === "fr" ? "Parler à Jean 2.4" : "Chat with Jean 2.4",
+      detail: lang === "fr" ? "Jean 2.4 — Instantané" : "Jean 2.4 — Instant",
       note: lang === "fr" ? "Disponible 24h/24, 7j/7" : "Available 24/7",
       action: onStartChat,
       highlight: true,
@@ -522,7 +522,7 @@ export default function ChatWidget() {
             whileTap={{ scale: 0.94 }}
             animate={pulsing ? { scale: [1, 1.06, 1] } : {}}
             transition={pulsing ? { duration: 0.9, repeat: Infinity } : {}}
-            aria-label="Chat with AI Architect"
+            aria-label="Chat with Jean 2.4"
             style={{
               position: "relative", width: "52px", height: "52px", borderRadius: "50%",
               background: "linear-gradient(135deg,#0891b2,#06b6d4)",
