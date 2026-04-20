@@ -1,306 +1,268 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, type CSSProperties } from "react";
 import { useLanguage } from "@/lib/i18n";
 import { motion, AnimatePresence } from "framer-motion";
-import { Send, X, Bot, ArrowLeft, MessageCircle, Mail, Phone, ChevronRight } from "lucide-react";
+import { Send, X, ArrowLeft, MessageCircle, Mail, Phone, ChevronRight, Cpu } from "lucide-react";
 
-// VITE_API_URL lets you point to an externally deployed API (e.g. render.com backend service).
-// If not set, falls back to the same origin (works on Replit and local dev).
-const API_BASE = (import.meta.env.VITE_API_URL || import.meta.env.BASE_URL).replace(/\/$/, "");
-const PHONE = "(438) 806-7640";
+const PHONE     = "(438) 806-7640";
 const PHONE_RAW = "14388067640";
-const EMAIL = "info@ntwebux.com";
+const EMAIL     = "info@ntwebux.com";
 
+/* ─── Types ────────────────────────────────────────────────── */
 interface Message {
-  role: "user" | "assistant";
+  role: "user" | "bot";
   content: string;
-  local?: boolean; // true = client-side only, never sent to the API
+  chips?: string[];   // optional quick-reply chips attached to a bot message
 }
-
 type View = "home" | "chat";
 
+/* ─── Typing indicator ──────────────────────────────────────── */
 function TypingDots() {
   return (
-    <div style={{ display: "flex", gap: "4px", alignItems: "center", padding: "4px 2px" }}>
+    <div style={{ display: "flex", gap: "5px", alignItems: "center", padding: "4px 2px" }}>
       {[0, 1, 2].map((i) => (
         <div key={i} style={{
           width: "6px", height: "6px", borderRadius: "50%",
-          background: "rgba(147,197,253,0.6)",
-          animation: "chatDot 1.2s ease-in-out infinite",
-          animationDelay: `${i * 0.2}s`,
+          background: "rgba(34,211,238,0.55)",
+          animation: "chatDot 1.1s ease-in-out infinite",
+          animationDelay: `${i * 0.18}s`,
         }} />
       ))}
       <style>{`
         @keyframes chatDot {
-          0%,80%,100% { transform:scale(0.7); opacity:0.4; }
-          40% { transform:scale(1); opacity:1; }
+          0%,80%,100% { transform:scale(0.65); opacity:0.35; }
+          40%          { transform:scale(1);    opacity:1;    }
         }
       `}</style>
     </div>
   );
 }
 
-/* ── Home screen ────────────────────────────────────── */
-function HomeView({ lang, onStartChat }: { lang: string; onStartChat: () => void }) {
-  const hero = lang === "fr" ? "Comment pouvons-nous vous aider ?" : "How can we help you?";
-  const sub  = lang === "fr" ? "Choisissez comment nous contacter — nous sommes là pour vous." : "Choose how to reach us — we're here for you.";
+/* ─── Keyword-matching engine ───────────────────────────────── */
+function matchReply(raw: string, rules: Record<string, string>): string {
+  const t = raw.toLowerCase();
+  if (/price|cost|pricing|997|297|tarif|co[uû]t|prix|combien|how much|quel prix/.test(t))
+    return rules.price;
+  if (/\bai\b|automat|text.?back|\bia\b|automatisation|chatbot|voice.?agent|workflow/.test(t))
+    return rules.ai;
+  if (/website|web|portfolio|design|site|bento|showreel|page|landing/.test(t))
+    return rules.website;
+  if (/hello|hi\b|who are you|bonjour|salut|qui [eê]tes|coucou|hey\b|good (morning|afternoon)/.test(t))
+    return rules.hello;
+  if (/scale|foundation|fondation|build|construire|start/.test(t))
+    return rules.scale;
+  if (/automate|revenue|revenu|booking|r[eé]servation|roi|recover|recuper/.test(t))
+    return rules.automate;
+  return rules.fallback;
+}
 
-  const channels = [
-    {
-      icon: <Phone size={18} />,
-      color: "#3b82f6",
-      bg: "rgba(59,130,246,0.1)",
-      border: "rgba(59,130,246,0.2)",
-      title: lang === "fr" ? "Appelez-nous" : "Call us",
-      detail: PHONE,
-      note: lang === "fr" ? "Disponible lun–ven, 9h–18h" : "Available Mon–Fri, 9 am–6 pm",
-      action: () => { window.open(`tel:+${PHONE_RAW}`); },
-    },
-    {
-      icon: <MessageCircle size={18} />,
-      color: "#93c5fd",
-      bg: "rgba(59,130,246,0.08)",
-      border: "rgba(59,130,246,0.18)",
-      title: lang === "fr" ? "Discutez avec nous" : "Chat with us",
-      detail: lang === "fr" ? "Discutez avec Silas — IA" : "Chat with Silas — AI",
-      note: lang === "fr" ? "Disponible 24h/24, 7j/7" : "Available 24/7",
-      action: onStartChat,
-      highlight: true,
-    },
-    {
-      icon: <Mail size={18} />,
-      color: "rgba(255,255,255,0.7)",
-      bg: "rgba(255,255,255,0.04)",
-      border: "rgba(255,255,255,0.1)",
-      title: lang === "fr" ? "Envoyez-nous un email" : "Email us",
-      detail: EMAIL,
-      note: lang === "fr" ? "Réponse sous 24 h" : "Reply within 24 hours",
-      action: () => { window.open(`mailto:${EMAIL}`); },
-    },
-  ];
-
+/* ─── Cyan bot avatar ───────────────────────────────────────── */
+function BotAvatar({ size = 32 }: { size?: number }) {
   return (
-    <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
-      {/* Hero band */}
-      <div style={{
-        padding: "28px 22px 24px",
-        background: "linear-gradient(145deg, rgba(37,99,235,0.3) 0%, rgba(15,23,42,0.6) 100%)",
-        borderBottom: "1px solid rgba(59,130,246,0.15)",
-        position: "relative",
-        overflow: "hidden",
-      }}>
-        {/* Decorative orb */}
-        <div style={{ position: "absolute", top: "-40px", right: "-40px", width: "140px", height: "140px", borderRadius: "50%", background: "radial-gradient(circle, rgba(59,130,246,0.2) 0%, transparent 70%)", pointerEvents: "none" }} />
-
-        {/* Avatar row */}
-        <div style={{ display: "flex", gap: "-6px", marginBottom: "14px" }}>
-          {["S"].map((init) => (
-            <div key={init} style={{
-              width: "40px", height: "40px", borderRadius: "50%",
-              background: "linear-gradient(135deg,#3b82f6,#2563eb)",
-              border: "2px solid rgba(255,255,255,0.15)",
-              display: "flex", alignItems: "center", justifyContent: "center",
-              fontSize: "15px", fontWeight: 800, color: "#fff",
-            }}>{init}</div>
-          ))}
-        </div>
-
-        <div style={{ fontSize: "17px", fontWeight: 800, color: "#fff", marginBottom: "6px", lineHeight: 1.3 }}>{hero}</div>
-        <div style={{ fontSize: "12.5px", color: "rgba(147,197,253,0.75)", lineHeight: 1.5 }}>{sub}</div>
-      </div>
-
-      {/* Channel cards */}
-      <div style={{ padding: "14px 14px", display: "flex", flexDirection: "column", gap: "8px", flex: 1 }}>
-        {channels.map((ch) => (
-          <button
-            key={ch.title}
-            onClick={ch.action}
-            style={{
-              display: "flex", alignItems: "center", gap: "13px",
-              padding: "13px 14px",
-              background: ch.highlight ? "rgba(59,130,246,0.1)" : ch.bg,
-              border: `1px solid ${ch.highlight ? "rgba(59,130,246,0.3)" : ch.border}`,
-              borderRadius: "13px",
-              cursor: "pointer", width: "100%", textAlign: "left",
-              transition: "background 0.18s, border-color 0.18s, transform 0.15s",
-              position: "relative",
-            }}
-            onMouseEnter={e => {
-              (e.currentTarget as HTMLButtonElement).style.background = ch.highlight ? "rgba(59,130,246,0.18)" : "rgba(255,255,255,0.07)";
-              (e.currentTarget as HTMLButtonElement).style.transform = "translateY(-1px)";
-            }}
-            onMouseLeave={e => {
-              (e.currentTarget as HTMLButtonElement).style.background = ch.highlight ? "rgba(59,130,246,0.1)" : ch.bg;
-              (e.currentTarget as HTMLButtonElement).style.transform = "translateY(0)";
-            }}
-          >
-            {/* Icon */}
-            <div style={{
-              width: "38px", height: "38px", borderRadius: "10px",
-              background: ch.highlight ? "linear-gradient(135deg,#3b82f6,#2563eb)" : `rgba(255,255,255,0.06)`,
-              border: `1px solid ${ch.highlight ? "transparent" : "rgba(255,255,255,0.08)"}`,
-              display: "flex", alignItems: "center", justifyContent: "center",
-              flexShrink: 0, color: ch.highlight ? "#fff" : ch.color,
-            }}>
-              {ch.icon}
-            </div>
-
-            {/* Text */}
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <div style={{ fontSize: "13px", fontWeight: 700, color: "#fff", marginBottom: "2px" }}>{ch.title}</div>
-              <div style={{ fontSize: "11.5px", color: "rgba(255,255,255,0.45)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{ch.detail}</div>
-              <div style={{ fontSize: "10.5px", color: ch.highlight ? "rgba(147,197,253,0.65)" : "rgba(255,255,255,0.28)", marginTop: "2px" }}>{ch.note}</div>
-            </div>
-
-            <ChevronRight size={15} color="rgba(255,255,255,0.25)" style={{ flexShrink: 0 }} />
-          </button>
-        ))}
-      </div>
-
-      {/* Footer */}
-      <div style={{ padding: "10px 18px 14px", textAlign: "center", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
-        <span style={{ fontSize: "10.5px", color: "rgba(255,255,255,0.2)", fontWeight: 500 }}>NT Web UX · Global</span>
-      </div>
+    <div style={{
+      width: `${size}px`, height: `${size}px`, borderRadius: `${Math.round(size * 0.28)}px`,
+      background: "linear-gradient(135deg,#06b6d4,#0891b2)",
+      boxShadow: "0 0 16px rgba(6,182,212,0.55)",
+      display: "flex", alignItems: "center", justifyContent: "center",
+      flexShrink: 0,
+    }}>
+      <Cpu size={Math.round(size * 0.5)} color="#fff" strokeWidth={1.8} />
     </div>
   );
 }
 
-/* ── Chat screen ────────────────────────────────────── */
-function ChatView({ lang, onBack }: { lang: string; onBack: () => void }) {
+/* ─── Chat screen (rule-based, zero API) ────────────────────── */
+function ChatView({ lang, onBack, t }: { lang: string; onBack: () => void; t: (k: string) => any }) {
+  const chat = t("chat");
+  const rules: Record<string, string> = chat.rules;
+
+  const WELCOME: Message = {
+    role: "bot",
+    content: chat.welcome,
+    chips: [chat.scaleChip, chat.automateChip],
+  };
+
   const [messages, setMessages] = useState<Message[]>([]);
-  const [input, setInput] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [input, setInput]       = useState("");
+  const [typing, setTyping]     = useState(true);   // bot is "typing" on mount
   const bottomRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef  = useRef<HTMLInputElement>(null);
 
-  const greeting = lang === "fr"
-    ? "Bonjour ! Je m'appelle Silas, l'assistant IA de NT Web UX. Posez-moi n'importe quelle question sur nos services, tarifs ou délais de livraison."
-    : "Hi there! I'm Silas, the AI assistant for NT Web UX. Ask me anything about our services, pricing, or turnaround times — happy to help!";
-
+  /* Show welcome after 1-second typing animation */
   useEffect(() => {
-    setMessages([{ role: "assistant", content: greeting, local: true }]);
-    setTimeout(() => inputRef.current?.focus(), 100);
+    const id = setTimeout(() => {
+      setTyping(false);
+      setMessages([WELCOME]);
+      setTimeout(() => inputRef.current?.focus(), 80);
+    }, 1000);
+    return () => clearTimeout(id);
   }, []);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages, loading]);
+  }, [messages, typing]);
 
-  async function send() {
-    const text = input.trim();
-    if (!text || loading) return;
-    const userMsg: Message = { role: "user", content: text };
-    const history = [...messages, userMsg];
-    setMessages(history);
+  function send(text: string) {
+    const trimmed = text.trim();
+    if (!trimmed) return;
+    const userMsg: Message = { role: "user", content: trimmed };
+    const next = [...messages, userMsg];
+    setMessages(next);
     setInput("");
-    setLoading(true);
-
-    try {
-      const res = await fetch(`${API_BASE}/api/chat`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: text, history: messages.filter(m => !m.local).slice(-10) }),
-      });
-      if (!res.ok) throw new Error();
-      const reader = res.body!.getReader();
-      const decoder = new TextDecoder();
-      let text2 = "";
-      setMessages([...history, { role: "assistant", content: "" }]);
-      setLoading(false);
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        for (const line of decoder.decode(value).split("\n").filter(l => l.startsWith("data: "))) {
-          try {
-            const raw = line.slice(6);
-            const d = JSON.parse(raw);
-            console.log("[chat SSE]", d);
-            // Handle all common field names the server might use
-            const chunk = d.content ?? d.message ?? d.assistant ?? d.text ?? null;
-            if (chunk) { text2 += chunk; setMessages([...history, { role: "assistant", content: text2 }]); }
-            if (d.error) setMessages([...history, { role: "assistant", content: d.error }]);
-          } catch {}
-        }
-      }
-      // Safety net: if stream ended but nothing was written, show a fallback instead of a stuck empty bubble
-      if (!text2) {
-        setMessages([...history, { role: "assistant", content: lang === "fr" ? "Désolé, une erreur est survenue. Contactez-nous par email." : "Sorry, something went wrong. Please try again or email us." }]);
-      }
-    } catch {
-      setLoading(false);
-      setMessages([...history, { role: "assistant", content: lang === "fr" ? "Une erreur est survenue. Réessayez ou contactez-nous par email." : "Something went wrong. Please try again or email us." }]);
-    }
+    setTyping(true);
+    setTimeout(() => {
+      setTyping(false);
+      setMessages([...next, { role: "bot", content: matchReply(trimmed, rules) }]);
+    }, 1000);
   }
 
-  const placeholder = lang === "fr" ? "Écrivez votre message…" : "Write a message…";
+  const BUBBLE_BOT: CSSProperties = {
+    maxWidth: "86%", padding: "10px 13px",
+    borderRadius: "4px 14px 14px 14px",
+    background: "rgba(255,255,255,0.055)",
+    border: "1px solid rgba(255,255,255,0.10)",
+    fontSize: "13px", lineHeight: 1.58,
+    color: "rgba(255,255,255,0.88)",
+    whiteSpace: "pre-wrap", wordBreak: "break-word",
+  };
+  const BUBBLE_USER: CSSProperties = {
+    maxWidth: "82%", padding: "10px 13px",
+    borderRadius: "14px 4px 14px 14px",
+    background: "linear-gradient(135deg,#0891b2,#06b6d4)",
+    fontSize: "13px", lineHeight: 1.58,
+    color: "#fff", wordBreak: "break-word",
+  };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
-      {/* Chat header */}
+    <div style={{ display: "flex", flexDirection: "column", height: "100%", minHeight: 0 }}>
+
+      {/* Header */}
       <div style={{
-        padding: "14px 16px",
-        background: "linear-gradient(135deg, rgba(59,130,246,0.14), rgba(37,99,235,0.06))",
-        borderBottom: "1px solid rgba(59,130,246,0.15)",
-        display: "flex", alignItems: "center", gap: "11px",
+        padding: "13px 16px",
+        background: "linear-gradient(135deg,rgba(6,182,212,0.12),rgba(2,6,23,0.4))",
+        borderBottom: "1px solid rgba(255,255,255,0.10)",
+        display: "flex", alignItems: "center", gap: "11px", flexShrink: 0,
       }}>
-        <button onClick={onBack} style={{ background: "none", border: "none", cursor: "pointer", color: "rgba(147,197,253,0.7)", padding: "2px", display: "flex", flexShrink: 0 }}>
+        <button onClick={onBack} style={{ background: "none", border: "none", cursor: "pointer", color: "rgba(103,232,249,0.65)", padding: "2px", display: "flex", flexShrink: 0 }}>
           <ArrowLeft size={17} />
         </button>
-        <div style={{ width: "32px", height: "32px", borderRadius: "9px", background: "linear-gradient(135deg,#3b82f6,#2563eb)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-          <Bot size={16} color="#fff" />
-        </div>
-        <div style={{ flex: 1 }}>
-          <div style={{ fontSize: "13px", fontWeight: 700, color: "#fff", lineHeight: 1 }}>Silas <span style={{ fontSize: "11px", fontWeight: 500, color: "rgba(147,197,253,0.6)" }}>· NT Web UX AI</span></div>
-          <div style={{ fontSize: "11px", color: "rgba(147,197,253,0.65)", marginTop: "3px", display: "flex", alignItems: "center", gap: "5px" }}>
-            <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#4ade80", display: "inline-block" }} />
-            {lang === "fr" ? "En ligne · Répond instantanément" : "Online · Replies instantly"}
+        <BotAvatar size={34} />
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <div style={{ fontSize: "13px", fontWeight: 700, color: "#fff", lineHeight: 1 }}>
+            {chat.name}
+            <span style={{ fontSize: "11px", fontWeight: 400, color: "rgba(103,232,249,0.55)", marginLeft: "6px" }}>· {chat.subName}</span>
+          </div>
+          <div style={{ fontSize: "11px", color: "rgba(103,232,249,0.65)", marginTop: "3px", display: "flex", alignItems: "center", gap: "5px" }}>
+            <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#4ade80", display: "inline-block", boxShadow: "0 0 6px #4ade80" }} />
+            {chat.status}
           </div>
         </div>
       </div>
 
-      {/* Messages */}
-      <div style={{ flex: 1, overflowY: "auto", padding: "14px 12px", display: "flex", flexDirection: "column", gap: "9px", scrollbarWidth: "thin", scrollbarColor: "rgba(59,130,246,0.2) transparent" }}>
+      {/* Message list */}
+      <div style={{
+        flex: 1, overflowY: "auto", padding: "14px 13px",
+        display: "flex", flexDirection: "column", gap: "10px",
+        scrollbarWidth: "thin", scrollbarColor: "rgba(6,182,212,0.2) transparent",
+        minHeight: 0,
+      }}>
         {messages.map((m, i) => (
-          <div key={i} style={{ display: "flex", justifyContent: m.role === "user" ? "flex-end" : "flex-start" }}>
-            <div style={{
-              maxWidth: "82%", padding: "9px 13px",
-              borderRadius: m.role === "user" ? "14px 14px 4px 14px" : "14px 14px 14px 4px",
-              background: m.role === "user" ? "linear-gradient(135deg,#3b82f6,#2563eb)" : "rgba(255,255,255,0.06)",
-              border: m.role === "user" ? "none" : "1px solid rgba(255,255,255,0.08)",
-              fontSize: "13px", lineHeight: 1.55,
-              color: m.role === "user" ? "#fff" : "rgba(255,255,255,0.85)",
-              whiteSpace: "pre-wrap", wordBreak: "break-word",
-            }}>
-              {m.content || (m.role === "assistant" ? <TypingDots /> : null)}
+          <div key={`msg-${i}`}>
+            <div style={{ display: "flex", justifyContent: m.role === "user" ? "flex-end" : "flex-start" }}>
+              {m.role === "bot" && (
+                <div style={{ marginRight: "7px", marginTop: "2px", flexShrink: 0 }}>
+                  <BotAvatar size={24} />
+                </div>
+              )}
+              <div style={m.role === "bot" ? BUBBLE_BOT : BUBBLE_USER}>
+                {m.content}
+              </div>
             </div>
+            {/* Quick-reply chips */}
+            {m.chips && m.role === "bot" && (
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "7px", marginTop: "9px", paddingLeft: "31px" }}>
+                {m.chips.map((chip) => (
+                  <button
+                    key={chip}
+                    onClick={() => send(chip)}
+                    style={{
+                      background: "rgba(6,182,212,0.10)",
+                      border: "1px solid rgba(6,182,212,0.30)",
+                      borderRadius: "100px",
+                      padding: "5px 13px",
+                      fontSize: "11.5px", fontWeight: 600,
+                      color: "rgba(103,232,249,0.85)",
+                      cursor: "pointer",
+                      transition: "background 0.18s, border-color 0.18s",
+                    }}
+                    onMouseEnter={e => {
+                      (e.currentTarget as HTMLButtonElement).style.background = "rgba(6,182,212,0.20)";
+                      (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(6,182,212,0.55)";
+                    }}
+                    onMouseLeave={e => {
+                      (e.currentTarget as HTMLButtonElement).style.background = "rgba(6,182,212,0.10)";
+                      (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(6,182,212,0.30)";
+                    }}
+                  >
+                    {chip}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
         ))}
-        {loading && (
-          <div style={{ display: "flex", justifyContent: "flex-start" }}>
-            <div style={{ padding: "9px 13px", borderRadius: "14px 14px 14px 4px", background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.08)" }}>
+
+        {/* Typing indicator */}
+        {typing && (
+          <div style={{ display: "flex", alignItems: "flex-start", gap: "7px" }}>
+            <BotAvatar size={24} />
+            <div style={{ ...BUBBLE_BOT, padding: "10px 14px" }}>
               <TypingDots />
             </div>
           </div>
         )}
+
         <div ref={bottomRef} />
       </div>
 
-      {/* Input */}
-      <div style={{ padding: "10px 12px 12px", borderTop: "1px solid rgba(255,255,255,0.06)", display: "flex", gap: "8px", alignItems: "center" }}>
+      {/* Input bar */}
+      <div style={{
+        padding: "10px 12px 13px",
+        borderTop: "1px solid rgba(255,255,255,0.08)",
+        display: "flex", gap: "8px", alignItems: "center",
+        flexShrink: 0,
+      }}>
         <input
           ref={inputRef}
           value={input}
           onChange={e => setInput(e.target.value)}
-          onKeyDown={e => e.key === "Enter" && !e.shiftKey && (e.preventDefault(), send())}
-          placeholder={placeholder}
-          disabled={loading}
-          style={{ flex: 1, background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "10px", padding: "9px 13px", fontSize: "13px", color: "#fff", outline: "none", fontFamily: "inherit", transition: "border-color 0.2s" }}
-          onFocus={e => (e.target.style.borderColor = "rgba(59,130,246,0.5)")}
-          onBlur={e => (e.target.style.borderColor = "rgba(255,255,255,0.1)")}
+          onKeyDown={e => e.key === "Enter" && !e.shiftKey && (e.preventDefault(), send(input))}
+          placeholder={chat.placeholder}
+          disabled={typing}
+          style={{
+            flex: 1,
+            background: "rgba(255,255,255,0.055)",
+            border: "1px solid rgba(255,255,255,0.10)",
+            borderRadius: "10px",
+            padding: "9px 13px",
+            fontSize: "13px", color: "#fff",
+            outline: "none", fontFamily: "inherit",
+            transition: "border-color 0.18s",
+          }}
+          onFocus={e => (e.target.style.borderColor = "rgba(6,182,212,0.5)")}
+          onBlur={e =>  (e.target.style.borderColor = "rgba(255,255,255,0.10)")}
         />
         <button
-          onClick={send}
-          disabled={!input.trim() || loading}
-          style={{ width: "36px", height: "36px", borderRadius: "10px", background: input.trim() && !loading ? "linear-gradient(135deg,#3b82f6,#2563eb)" : "rgba(255,255,255,0.07)", border: "none", cursor: input.trim() && !loading ? "pointer" : "not-allowed", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, transition: "background 0.2s", color: input.trim() && !loading ? "#fff" : "rgba(255,255,255,0.25)" }}
+          onClick={() => send(input)}
+          disabled={!input.trim() || typing}
+          style={{
+            width: "36px", height: "36px", borderRadius: "10px", border: "none",
+            background: input.trim() && !typing ? "linear-gradient(135deg,#0891b2,#06b6d4)" : "rgba(255,255,255,0.07)",
+            cursor: input.trim() && !typing ? "pointer" : "not-allowed",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            flexShrink: 0, transition: "background 0.18s",
+            color: input.trim() && !typing ? "#fff" : "rgba(255,255,255,0.25)",
+            boxShadow: input.trim() && !typing ? "0 0 14px rgba(6,182,212,0.4)" : "none",
+          }}
         >
           <Send size={14} />
         </button>
@@ -309,11 +271,117 @@ function ChatView({ lang, onBack }: { lang: string; onBack: () => void }) {
   );
 }
 
-/* ── Root widget ────────────────────────────────────── */
+/* ─── Home screen ───────────────────────────────────────────── */
+function HomeView({ lang, onStartChat }: { lang: string; onStartChat: () => void }) {
+  const hero = lang === "fr" ? "Comment pouvons-nous vous aider ?" : "How can we help you?";
+  const sub  = lang === "fr" ? "Choisissez comment nous contacter — nous sommes là pour vous." : "Choose how to reach us — we're here for you.";
+
+  const channels = [
+    {
+      icon: <Phone size={18} />,
+      color: "#3b82f6", bg: "rgba(59,130,246,0.08)", border: "rgba(59,130,246,0.18)",
+      title: lang === "fr" ? "Appelez-nous" : "Call us",
+      detail: PHONE,
+      note: lang === "fr" ? "Disponible lun–ven, 9h–18h" : "Available Mon–Fri, 9 am–6 pm",
+      action: () => window.open(`tel:+${PHONE_RAW}`),
+      highlight: false,
+    },
+    {
+      icon: <Cpu size={18} />,
+      color: "#22d3ee", bg: "rgba(6,182,212,0.08)", border: "rgba(6,182,212,0.22)",
+      title: lang === "fr" ? "Parler à l'IA Architecte" : "Chat with AI Architect",
+      detail: lang === "fr" ? "L'Architecte IA — Instantané" : "AI Architect — Instant",
+      note: lang === "fr" ? "Disponible 24h/24, 7j/7" : "Available 24/7",
+      action: onStartChat,
+      highlight: true,
+    },
+    {
+      icon: <Mail size={18} />,
+      color: "rgba(255,255,255,0.6)", bg: "rgba(255,255,255,0.04)", border: "rgba(255,255,255,0.08)",
+      title: lang === "fr" ? "Envoyez-nous un email" : "Email us",
+      detail: EMAIL,
+      note: lang === "fr" ? "Réponse sous 24 h" : "Reply within 24 h",
+      action: () => window.open(`mailto:${EMAIL}`),
+      highlight: false,
+    },
+  ];
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
+      {/* Hero band */}
+      <div style={{
+        padding: "26px 22px 22px",
+        background: "linear-gradient(145deg,rgba(6,182,212,0.18) 0%,rgba(2,6,23,0.5) 100%)",
+        borderBottom: "1px solid rgba(255,255,255,0.10)",
+        position: "relative", overflow: "hidden",
+      }}>
+        <div style={{ position: "absolute", top: "-40px", right: "-40px", width: "140px", height: "140px", borderRadius: "50%", background: "radial-gradient(circle,rgba(6,182,212,0.18) 0%,transparent 70%)", pointerEvents: "none" }} />
+        <div style={{ marginBottom: "14px" }}>
+          <BotAvatar size={40} />
+        </div>
+        <div style={{ fontSize: "17px", fontWeight: 800, color: "#fff", marginBottom: "5px", lineHeight: 1.3 }}>{hero}</div>
+        <div style={{ fontSize: "12px", color: "rgba(103,232,249,0.65)", lineHeight: 1.5 }}>{sub}</div>
+      </div>
+
+      {/* Channel cards */}
+      <div style={{ padding: "13px", display: "flex", flexDirection: "column", gap: "8px", flex: 1 }}>
+        {channels.map((ch) => (
+          <button
+            key={ch.title}
+            onClick={ch.action}
+            style={{
+              display: "flex", alignItems: "center", gap: "13px",
+              padding: "12px 13px",
+              background: ch.highlight ? "rgba(6,182,212,0.08)" : ch.bg,
+              border: `1px solid ${ch.highlight ? "rgba(6,182,212,0.28)" : ch.border}`,
+              borderRadius: "13px",
+              cursor: "pointer", width: "100%", textAlign: "left",
+              transition: "background 0.18s, border-color 0.18s, transform 0.15s",
+            }}
+            onMouseEnter={e => {
+              (e.currentTarget as HTMLButtonElement).style.background = ch.highlight ? "rgba(6,182,212,0.16)" : "rgba(255,255,255,0.06)";
+              (e.currentTarget as HTMLButtonElement).style.transform = "translateY(-1px)";
+            }}
+            onMouseLeave={e => {
+              (e.currentTarget as HTMLButtonElement).style.background = ch.highlight ? "rgba(6,182,212,0.08)" : ch.bg;
+              (e.currentTarget as HTMLButtonElement).style.transform = "translateY(0)";
+            }}
+          >
+            <div style={{
+              width: "36px", height: "36px", borderRadius: "10px", flexShrink: 0,
+              background: ch.highlight ? "linear-gradient(135deg,#0891b2,#06b6d4)" : "rgba(255,255,255,0.06)",
+              border: `1px solid ${ch.highlight ? "transparent" : "rgba(255,255,255,0.08)"}`,
+              display: "flex", alignItems: "center", justifyContent: "center",
+              color: ch.highlight ? "#fff" : ch.color,
+              boxShadow: ch.highlight ? "0 0 14px rgba(6,182,212,0.40)" : "none",
+            }}>
+              {ch.icon}
+            </div>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ fontSize: "13px", fontWeight: 700, color: "#fff", marginBottom: "2px" }}>{ch.title}</div>
+              <div style={{ fontSize: "11.5px", color: "rgba(255,255,255,0.42)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{ch.detail}</div>
+              <div style={{ fontSize: "10.5px", color: ch.highlight ? "rgba(103,232,249,0.6)" : "rgba(255,255,255,0.25)", marginTop: "2px" }}>{ch.note}</div>
+            </div>
+            <ChevronRight size={14} color="rgba(255,255,255,0.22)" style={{ flexShrink: 0 }} />
+          </button>
+        ))}
+      </div>
+
+      {/* Footer */}
+      <div style={{ padding: "10px 18px 14px", textAlign: "center", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+        <span style={{ fontSize: "10px", color: "rgba(255,255,255,0.18)", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+          NT Digital Group · Global AI Architecture
+        </span>
+      </div>
+    </div>
+  );
+}
+
+/* ─── Root widget ───────────────────────────────────────────── */
 export default function ChatWidget() {
-  const { lang } = useLanguage();
-  const [open, setOpen] = useState(false);
-  const [view, setView] = useState<View>("home");
+  const { lang, t } = useLanguage();
+  const [open, setOpen]     = useState(false);
+  const [view, setView]     = useState<View>("home");
   const [pulsing, setPulsing] = useState(false);
   const [isMobile, setIsMobile] = useState(() => window.innerWidth < 768);
 
@@ -323,57 +391,50 @@ export default function ChatWidget() {
     return () => window.removeEventListener("resize", update);
   }, []);
 
-  // Auto-open once per session — desktop only
   useEffect(() => {
     if (isMobile) return;
-    if (sessionStorage.getItem("silas_opened")) return;
-    const pulseTimer = setTimeout(() => setPulsing(true), 3000);
+    if (sessionStorage.getItem("architect_opened")) return;
+    const pulseTimer = setTimeout(() => setPulsing(true), 3500);
     const openTimer  = setTimeout(() => {
       setPulsing(false);
       setOpen(true);
-      sessionStorage.setItem("silas_opened", "1");
-    }, 4000);
+      sessionStorage.setItem("architect_opened", "1");
+    }, 4500);
     return () => { clearTimeout(pulseTimer); clearTimeout(openTimer); };
   }, [isMobile]);
 
-  // Reset to home when closed
-  function close() { setOpen(false); setTimeout(() => setView("home"), 300); }
+  function close() { setOpen(false); setTimeout(() => setView("home"), 320); }
 
-  /* ── Panel positioning: bottom-sheet on mobile, floating on desktop ── */
-  const panelStyle: React.CSSProperties = isMobile
+  /* Panel style: bottom-sheet on mobile, floating on desktop */
+  const PANEL: CSSProperties = isMobile
     ? {
-        position: "fixed",
-        bottom: 0,
-        left: 0,
-        right: 0,
+        position: "fixed", bottom: 0, left: 0, right: 0,
         width: "100%",
-        height: view === "chat" ? "75vh" : "auto",
-        maxHeight: "80vh",
-        background: "#0a1628",
+        height: view === "chat" ? "76vh" : "auto",
+        maxHeight: "82vh",
+        background: "rgba(2,6,23,0.96)",
+        backdropFilter: "blur(20px)",
+        WebkitBackdropFilter: "blur(20px)",
         border: "none",
-        borderTop: "1px solid rgba(59,130,246,0.22)",
+        borderTop: "1px solid rgba(255,255,255,0.10)",
         borderRadius: "22px 22px 0 0",
-        boxShadow: "0 -12px 60px rgba(0,0,0,0.7)",
-        overflow: "hidden",
-        display: "flex",
-        flexDirection: "column",
-        zIndex: 200,
+        boxShadow: "0 -16px 60px rgba(0,0,0,0.75), 0 0 0 1px rgba(6,182,212,0.08)",
+        overflow: "hidden", display: "flex", flexDirection: "column", zIndex: 200,
       }
     : {
         position: "fixed",
-        bottom: "calc(88px + env(safe-area-inset-bottom, 0px))",
-        right: "calc(16px + env(safe-area-inset-right, 0px))",
+        bottom: "calc(88px + env(safe-area-inset-bottom,0px))",
+        right:  "calc(16px + env(safe-area-inset-right,0px))",
         width: "min(340px, calc(100vw - 32px))",
-        height: view === "chat" ? "min(500px, 70vh)" : "auto",
-        maxHeight: "min(560px, 75vh)",
-        background: "#0a1628",
-        border: "1px solid rgba(59,130,246,0.18)",
+        height: view === "chat" ? "min(520px,72vh)" : "auto",
+        maxHeight: "min(560px,76vh)",
+        background: "rgba(2,6,23,0.88)",
+        backdropFilter: "blur(16px)",
+        WebkitBackdropFilter: "blur(16px)",
+        border: "1px solid rgba(255,255,255,0.10)",
         borderRadius: "22px",
-        boxShadow: "0 24px 80px rgba(0,0,0,0.85), 0 0 0 1px rgba(59,130,246,0.06)",
-        overflow: "hidden",
-        display: "flex",
-        flexDirection: "column",
-        zIndex: 200,
+        boxShadow: "0 24px 80px rgba(0,0,0,0.80), 0 0 0 1px rgba(6,182,212,0.08)",
+        overflow: "hidden", display: "flex", flexDirection: "column", zIndex: 200,
       };
 
   return (
@@ -383,53 +444,57 @@ export default function ChatWidget() {
         {open && isMobile && (
           <motion.div
             key="backdrop"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
             onClick={close}
-            style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.55)", zIndex: 199 }}
+            style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.6)", zIndex: 199 }}
           />
         )}
       </AnimatePresence>
 
+      {/* Panel */}
       <AnimatePresence>
         {open && (
           <motion.div
             key="panel"
-            className="chat-panel"
-            initial={isMobile ? { opacity: 1, y: "100%" } : { opacity: 0, scale: 0.93, y: 14 }}
-            animate={isMobile ? { opacity: 1, y: 0 } : { opacity: 1, scale: 1, y: 0 }}
-            exit={isMobile ? { opacity: 1, y: "100%" } : { opacity: 0, scale: 0.93, y: 14 }}
+            initial={isMobile ? { y: "100%" } : { opacity: 0, scale: 0.93, y: 16 }}
+            animate={isMobile ? { y: 0 }     : { opacity: 1, scale: 1,    y: 0  }}
+            exit={isMobile    ? { y: "100%" } : { opacity: 0, scale: 0.93, y: 16 }}
             transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-            style={panelStyle}
+            style={PANEL}
           >
             {/* Mobile drag handle */}
             {isMobile && (
               <div style={{ display: "flex", justifyContent: "center", padding: "10px 0 4px" }}>
-                <div style={{ width: "36px", height: "4px", borderRadius: "2px", background: "rgba(255,255,255,0.18)" }} />
+                <div style={{ width: "36px", height: "4px", borderRadius: "2px", background: "rgba(255,255,255,0.16)" }} />
               </div>
             )}
 
             {/* Close button */}
             <button
               onClick={close}
-              style={{ position: "absolute", top: isMobile ? "14px" : "13px", right: "14px", zIndex: 10, background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "8px", width: "28px", height: "28px", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", color: "rgba(255,255,255,0.55)", transition: "background 0.15s" }}
-              onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,255,255,0.14)")}
-              onMouseLeave={e => (e.currentTarget.style.background = "rgba(255,255,255,0.08)")}
+              style={{
+                position: "absolute", top: isMobile ? "14px" : "13px", right: "14px", zIndex: 10,
+                background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.10)",
+                borderRadius: "8px", width: "28px", height: "28px",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                cursor: "pointer", color: "rgba(255,255,255,0.50)", transition: "background 0.15s",
+              }}
+              onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,255,255,0.13)")}
+              onMouseLeave={e => (e.currentTarget.style.background = "rgba(255,255,255,0.07)")}
             >
-              <X size={14} />
+              <X size={13} />
             </button>
 
             {/* View switcher */}
             <AnimatePresence mode="wait">
               {view === "home" ? (
-                <motion.div key="home" initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -16 }} transition={{ duration: 0.18 }} style={{ flex: 1, display: "flex", flexDirection: "column" }}>
+                <motion.div key="home" initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -16 }} transition={{ duration: 0.18 }} style={{ flex: 1, display: "flex", flexDirection: "column", minHeight: 0 }}>
                   <HomeView lang={lang} onStartChat={() => setView("chat")} />
                 </motion.div>
               ) : (
                 <motion.div key="chat" initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 16 }} transition={{ duration: 0.18 }} style={{ flex: 1, display: "flex", flexDirection: "column", minHeight: 0 }}>
-                  <ChatView lang={lang} onBack={() => setView("home")} />
+                  <ChatView lang={lang} onBack={() => setView("home")} t={t} />
                 </motion.div>
               )}
             </AnimatePresence>
@@ -437,52 +502,53 @@ export default function ChatWidget() {
         )}
       </AnimatePresence>
 
-      {/* FAB toggle */}
-      <div
-        style={{
-          position: "fixed",
-          bottom: "calc(20px + env(safe-area-inset-bottom, 0px))",
-          right: "calc(16px + env(safe-area-inset-right, 0px))",
-          zIndex: 201,
-          display: "inline-flex",
-        }}
-      >
+      {/* FAB */}
+      <div style={{
+        position: "fixed",
+        bottom: "calc(20px + env(safe-area-inset-bottom,0px))",
+        right:  "calc(16px + env(safe-area-inset-right,0px))",
+        zIndex: 201, display: "inline-flex",
+      }}>
         <div style={{ position: "relative", display: "inline-flex" }}>
-          {/* Pulse ring */}
           {pulsing && (
             <>
-              <span style={{ position: "absolute", inset: "-6px", borderRadius: "50%", border: "2px solid rgba(59,130,246,0.5)", animation: "silasPing 0.9s cubic-bezier(0,0,0.2,1) infinite", pointerEvents: "none" }} />
-              <span style={{ position: "absolute", inset: "-14px", borderRadius: "50%", border: "1.5px solid rgba(59,130,246,0.25)", animation: "silasPing 0.9s cubic-bezier(0,0,0.2,1) infinite 0.25s", pointerEvents: "none" }} />
+              <span style={{ position: "absolute", inset: "-6px",  borderRadius: "50%", border: "2px solid rgba(6,182,212,0.55)", animation: "archPing 0.9s cubic-bezier(0,0,0.2,1) infinite", pointerEvents: "none" }} />
+              <span style={{ position: "absolute", inset: "-14px", borderRadius: "50%", border: "1.5px solid rgba(6,182,212,0.25)", animation: "archPing 0.9s cubic-bezier(0,0,0.2,1) infinite 0.28s", pointerEvents: "none" }} />
             </>
           )}
           <motion.button
-            onClick={() => { setPulsing(false); open ? close() : setOpen(true); sessionStorage.setItem("silas_opened", "1"); }}
+            onClick={() => { setPulsing(false); open ? close() : setOpen(true); sessionStorage.setItem("architect_opened", "1"); }}
             whileHover={{ scale: 1.08 }}
-            whileTap={{ scale: 0.95 }}
+            whileTap={{ scale: 0.94 }}
             animate={pulsing ? { scale: [1, 1.06, 1] } : {}}
             transition={pulsing ? { duration: 0.9, repeat: Infinity } : {}}
-            aria-label="Chat with Silas"
-            style={{ position: "relative", width: "52px", height: "52px", borderRadius: "50%", background: "linear-gradient(135deg,#3b82f6,#2563eb)", border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: pulsing ? "0 4px 32px rgba(59,130,246,0.8)" : "0 4px 28px rgba(59,130,246,0.55)", color: "#fff", transition: "box-shadow 0.3s" }}
+            aria-label="Chat with AI Architect"
+            style={{
+              position: "relative", width: "52px", height: "52px", borderRadius: "50%",
+              background: "linear-gradient(135deg,#0891b2,#06b6d4)",
+              border: "none", cursor: "pointer",
+              display: "flex", alignItems: "center", justifyContent: "center",
+              boxShadow: pulsing
+                ? "0 4px 32px rgba(6,182,212,0.75)"
+                : "0 4px 24px rgba(6,182,212,0.50)",
+              color: "#fff", transition: "box-shadow 0.3s",
+            }}
           >
             <AnimatePresence mode="wait">
-              {open ? (
-                <motion.span key="x" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.15 }}>
-                  <X size={20} />
-                </motion.span>
-              ) : (
-                <motion.span key="msg" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.15 }}>
-                  <MessageCircle size={22} />
-                </motion.span>
-              )}
+              {open
+                ? <motion.span key="x"   initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.15 }}><X size={20} /></motion.span>
+                : <motion.span key="cpu" initial={{ rotate: 90, opacity: 0 }}  animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.15 }}><Cpu size={22} /></motion.span>
+              }
             </AnimatePresence>
           </motion.button>
         </div>
       </div>
+
       <style>{`
-        @keyframes silasPing {
-          0%   { transform: scale(1); opacity: 0.8; }
-          80%  { transform: scale(1.6); opacity: 0; }
-          100% { transform: scale(1.6); opacity: 0; }
+        @keyframes archPing {
+          0%   { transform:scale(1);   opacity:0.75; }
+          80%  { transform:scale(1.65); opacity:0;   }
+          100% { transform:scale(1.65); opacity:0;   }
         }
       `}</style>
     </>

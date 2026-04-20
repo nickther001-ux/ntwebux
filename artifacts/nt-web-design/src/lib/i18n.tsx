@@ -81,6 +81,24 @@ const translations: Translations = {
         msg: "Project Details", submit: "Send Inquiry", submitting: "Sending..."
       }
     },
+    chat: {
+      name: "AI Architect",
+      subName: "NT Digital Group",
+      status: "Online · Instant replies",
+      welcome: "Welcome to NT Digital Group. I am the AI Architect. Are you here to Scale a Foundation or Automate your Revenue?",
+      placeholder: "Write a message…",
+      scaleChip: "Scale a Foundation",
+      automateChip: "Automate Revenue",
+      rules: {
+        price:    "Our Digital Foundations start at $997, and our AI OS starts at $297/month. Would you like to see the pricing table?",
+        ai:       "We specialize in AI Text-Back and Auto-Booking systems that recover lost revenue. You can calculate your potential ROI using our Audit tool on this page.",
+        website:  "We build high-performance, bilingual sites with a Silicon Valley aesthetic. Check our showreel in the Foundations section above.",
+        hello:    "I am the NT Digital assistant. I can help you navigate our services or book a technical consultation with our team.",
+        scale:    "Digital Foundations start with Website Design, eCommerce, and CMS — all built with a Silicon Valley aesthetic and delivered in 72 hours.",
+        automate: "Our AI OS includes Text-Back automation, auto-booking, and review management — starting at $297/month. Use the ROI Audit above to see your numbers.",
+        fallback: "I can help with pricing, AI automation, or website design. Try asking about 'price', 'AI', or 'website'.",
+      },
+    },
     footer: {
       tagline: "Technical architecture and AI automation for borderless enterprises. We engineer digital foundations for high-performance service businesses.",
       hubsLabel: "Global Hubs",
@@ -236,6 +254,24 @@ const translations: Translations = {
         service: "Service Requis", serviceOptions: ["Site d'Entreprise", "Boutique E-Commerce", "Page de Destination", "Refonte de Site Web", "Optimisation SEO", "Pas Encore Sûr"],
         msg: "Détails du Projet", submit: "Envoyer la Demande", submitting: "Envoi en cours..."
       }
+    },
+    chat: {
+      name: "Architecte IA",
+      subName: "NT Digital Group",
+      status: "En ligne · Réponses instantanées",
+      welcome: "Bienvenue chez NT Digital Group. Je suis l'Architecte IA. Êtes-vous ici pour Construire des Fondations ou Automatiser vos Revenus ?",
+      placeholder: "Écrivez votre message…",
+      scaleChip: "Construire des Fondations",
+      automateChip: "Automatiser mes Revenus",
+      rules: {
+        price:    "Nos Fondations Numériques débutent à 997 $, et notre IA OS commence à 297 $/mois. Souhaitez-vous voir le tableau des tarifs ?",
+        ai:       "Nous sommes spécialisés dans les systèmes IA Text-Back et de réservation automatique qui récupèrent les revenus perdus. Calculez votre ROI potentiel avec l'outil d'audit sur cette page.",
+        website:  "Nous créons des sites haute performance et bilingues avec une esthétique Silicon Valley. Consultez notre showreel dans la section Fondations ci-dessus.",
+        hello:    "Je suis l'assistant NT Digital. Je peux vous aider à naviguer dans nos services ou à réserver une consultation technique.",
+        scale:    "Les Fondations Numériques incluent le design web, l'e-commerce et le CMS — livrés en 72h avec une esthétique Silicon Valley.",
+        automate: "Notre IA OS inclut l'automatisation Text-Back, la réservation automatique et la gestion des avis — à partir de 297 $/mois. Utilisez l'Audit ROI ci-dessus.",
+        fallback: "Je peux vous aider avec les tarifs, l'automatisation IA ou le design web. Essayez 'prix', 'IA' ou 'site'.",
+      },
     },
     footer: {
       tagline: "Architecture technique et automatisation IA pour les entreprises sans frontières. Nous construisons les fondations numériques pour les entreprises haute performance.",
