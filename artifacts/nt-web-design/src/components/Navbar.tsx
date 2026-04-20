@@ -6,12 +6,14 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useLocation, Link } from 'wouter';
 import { CommandPalette } from '@/components/CommandPalette';
 
-/* Smooth-scroll to an anchor id without CSS scroll-behavior (which fights iOS) */
+/* Smooth-scroll to an anchor id, compensating for the fixed navbar height */
+const NAVBAR_OFFSET = 88; // px — navbar height + comfortable gap
+
 function smoothScrollTo(id: string) {
   const el = document.getElementById(id);
-  if (el) {
-    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
+  if (!el) return;
+  const top = el.getBoundingClientRect().top + window.scrollY - NAVBAR_OFFSET;
+  window.scrollTo({ top, behavior: 'smooth' });
 }
 
 export function Navbar() {
@@ -55,6 +57,7 @@ export function Navbar() {
     { href: isHome ? '#process' : '/#process', label: lang === 'fr' ? 'Processus' : 'Process' },
     { href: '/services', label: lang === 'fr' ? 'Tarifs' : 'Pricing', isPage: true },
     { href: '/business', label: lang === 'fr' ? 'Logiciels' : 'Business Software', isPage: true },
+    { href: isHome ? '#roi-calculator' : '/#roi-calculator', label: lang === 'fr' ? 'Audit ROI' : 'ROI Audit' },
     { href: isHome ? '#contact' : '/#contact', label: 'Contact' },
   ];
 

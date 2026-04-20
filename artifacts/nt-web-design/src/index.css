@@ -92,6 +92,8 @@
     contain: paint style;
     position: relative;
     padding-block: 128px !important;
+    /* Offset anchor-link targets below the fixed navbar (88px height + 8px gap) */
+    scroll-margin-top: 88px;
   }
 
   @media (max-width: 768px) {

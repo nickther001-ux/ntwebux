@@ -25,7 +25,9 @@ interface Props {
 
 function smoothScrollTo(id: string) {
   const el = document.getElementById(id);
-  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  if (!el) return;
+  const top = el.getBoundingClientRect().top + window.scrollY - 88;
+  window.scrollTo({ top, behavior: 'smooth' });
 }
 
 export function CommandPalette({ open, onClose }: Props) {
@@ -43,6 +45,7 @@ export function CommandPalette({ open, onClose }: Props) {
       { id: 'process',    label: 'Process',           desc: 'How we deliver in 72 hours',          group: 'Sections', icon: Workflow,  href: '/#process',   isAnchor: true },
       { id: 'pricing',    label: 'Pricing',           desc: 'Plans & engagement options',          group: 'Pages',    icon: DollarSign,href: '/services',   isAnchor: false },
       { id: 'business',   label: 'Business Software', desc: 'FieldOps Pro & enterprise platforms', group: 'Pages',    icon: Cpu,       href: '/business',   isAnchor: false },
+      { id: 'roi',        label: 'ROI Audit',         desc: 'Calculate your revenue leak',         group: 'Sections', icon: DollarSign,href: '/#roi-calculator', isAnchor: true },
       { id: 'global',     label: 'Global Reach',      desc: 'Operating across 3 continents',       group: 'Sections', icon: Globe,     href: '/#services',  isAnchor: true },
       { id: 'contact',    label: 'Contact',           desc: 'Start a project / get a quote',       group: 'Actions',  icon: Mail,      href: '/#contact',   isAnchor: true },
       { id: 'privacy',    label: 'Privacy Policy',    desc: 'How we handle your data',             group: 'Pages',    icon: Shield,    href: '/privacy',    isAnchor: false },
@@ -54,6 +57,7 @@ export function CommandPalette({ open, onClose }: Props) {
       { id: 'process',    label: 'Processus',               desc: 'Comment nous livrons en 72h',                group: 'Sections', icon: Workflow,  href: '/#process',   isAnchor: true },
       { id: 'pricing',    label: 'Tarifs',                  desc: "Forfaits et options d'engagement",           group: 'Pages',    icon: DollarSign,href: '/services',   isAnchor: false },
       { id: 'business',   label: "Logiciels d'Entreprise",  desc: 'FieldOps Pro et plateformes entreprise',     group: 'Pages',    icon: Cpu,       href: '/business',   isAnchor: false },
+      { id: 'roi',        label: 'Audit ROI',               desc: 'Calculez votre fuite de revenus',            group: 'Sections', icon: DollarSign,href: '/#roi-calculator', isAnchor: true },
       { id: 'global',     label: 'Portée Mondiale',         desc: 'Opérations sur 3 continents',                group: 'Sections', icon: Globe,     href: '/#services',  isAnchor: true },
       { id: 'contact',    label: 'Contact',                 desc: 'Démarrer un projet / obtenir un devis',      group: 'Actions',  icon: Mail,      href: '/#contact',   isAnchor: true },
       { id: 'privacy',    label: 'Politique de Confidentialité', desc: 'Comment nous traitons vos données',     group: 'Pages',    icon: Shield,    href: '/privacy',    isAnchor: false },

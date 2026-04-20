@@ -102,6 +102,13 @@ export function ROICalculator() {
     setPhone('');
     setPain('');
     setStage('diag');
+    // Re-anchor so the diagnostic view is never behind the navbar
+    requestAnimationFrame(() => {
+      const el = document.getElementById('roi-calculator');
+      if (!el) return;
+      const top = el.getBoundingClientRect().top + window.scrollY - 88;
+      window.scrollTo({ top, behavior: 'smooth' });
+    });
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -120,7 +127,7 @@ export function ROICalculator() {
   ];
 
   return (
-    <section style={{ padding: '80px 24px' }}>
+    <section id="roi-calculator" style={{ padding: '80px 24px' }}>
       <div style={{ maxWidth: '780px', margin: '0 auto' }}>
 
         {/* ── CALCULATOR ── */}
