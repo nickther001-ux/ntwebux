@@ -145,6 +145,17 @@
       /* Keep GPU layer for smooth scroll */
       transform: translateZ(0);
     }
+
+    /* Suppress inline backdrop-filter on scroll-area cards and section elements.
+       Modals/overlays (position:fixed) are excluded so they keep their blur. */
+    *:not([style*="position: fixed"]):not([style*="position:fixed"]) {
+      --blur-suppressed: 1;
+    }
+  }
+
+  /* Mobile-safe image rendering */
+  img {
+    content-visibility: auto;
   }
 
   .glass-hover {

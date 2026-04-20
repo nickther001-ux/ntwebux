@@ -60,12 +60,12 @@ const translations: Translations = {
     testimonials: {
       title: "Don't just take our word for it.",
       items: [
-        { quote: "They revamped our entire digital presence. Our lead form submissions doubled in the first month and the site was live in under 72 hours. Incredible value.", name: "Jean-Michel Tremblay", role: "Owner, Tremblay Excavation Inc.", metric: "2× leads", metricLabel: "in 30 days", img: "proj-construction.png", industry: "Construction" },
-        { quote: "Our booking system went from phone-only to fully online. We're at 95% capacity every week now. The site basically runs the front desk for us.", name: "Dr. Aline Côté", role: "Founder, Physio Optimal", metric: "95% capacity", metricLabel: "since launch", img: "proj-medical.png", industry: "Healthcare" },
-        { quote: "NT Web UX built our online presence from scratch. We're taking reservations and takeout orders 24/7 now — revenue is up 40% since we launched.", name: "Marie-Claire Joseph", role: "Owner, Saveurs d'Haïti MTL", metric: "+40% revenue", metricLabel: "since launch", img: "proj-restaurant.png", industry: "Restaurant" },
-        { quote: "We went from zero online presence to fully booked in 6 weeks. The ROI on this website has been incredible. Best investment we've made.", name: "Karine Beaumont", role: "CEO, Beaumont Wellness Clinic", metric: "6 weeks", metricLabel: "to fully booked", img: "proj-wellness.png", industry: "Wellness" },
-        { quote: "They built our SaaS dashboard from scratch and it looks like a million dollars. Clients constantly compliment our platform's design.", name: "Alexis Fontaine", role: "Co-Founder, Flux Analytics", metric: "5★", metricLabel: "client rating", img: "proj-saas.png", industry: "SaaS" },
-        { quote: "The bilingual site they built for us is exactly what we needed to reach both English and French markets. Our organic traffic jumped 67%.", name: "Marc-André Ouellet", role: "Owner, Bâtisseurs Nordiques Inc.", metric: "+67% traffic", metricLabel: "organic growth", img: "proj-construction2.png", industry: "Construction" }
+        { quote: "They revamped our entire digital presence. Our lead form submissions doubled in the first month and the site was live in under 72 hours. Incredible value.", name: "Jean-Michel Tremblay", role: "Owner, Tremblay Excavation Inc.", metric: "2× leads", metricLabel: "in 30 days", img: "proj-construction.webp", industry: "Construction" },
+        { quote: "Our booking system went from phone-only to fully online. We're at 95% capacity every week now. The site basically runs the front desk for us.", name: "Dr. Aline Côté", role: "Founder, Physio Optimal", metric: "95% capacity", metricLabel: "since launch", img: "proj-medical.webp", industry: "Healthcare" },
+        { quote: "NT Web UX built our online presence from scratch. We're taking reservations and takeout orders 24/7 now — revenue is up 40% since we launched.", name: "Marie-Claire Joseph", role: "Owner, Saveurs d'Haïti MTL", metric: "+40% revenue", metricLabel: "since launch", img: "proj-restaurant.webp", industry: "Restaurant" },
+        { quote: "We went from zero online presence to fully booked in 6 weeks. The ROI on this website has been incredible. Best investment we've made.", name: "Karine Beaumont", role: "CEO, Beaumont Wellness Clinic", metric: "6 weeks", metricLabel: "to fully booked", img: "proj-wellness.webp", industry: "Wellness" },
+        { quote: "They built our SaaS dashboard from scratch and it looks like a million dollars. Clients constantly compliment our platform's design.", name: "Alexis Fontaine", role: "Co-Founder, Flux Analytics", metric: "5★", metricLabel: "client rating", img: "proj-saas.webp", industry: "SaaS" },
+        { quote: "The bilingual site they built for us is exactly what we needed to reach both English and French markets. Our organic traffic jumped 67%.", name: "Marc-André Ouellet", role: "Owner, Bâtisseurs Nordiques Inc.", metric: "+67% traffic", metricLabel: "organic growth", img: "proj-construction2.webp", industry: "Construction" }
       ]
     },
     contact: {
@@ -82,9 +82,23 @@ const translations: Translations = {
       }
     },
     footer: {
-      tagline: "Crafting digital experiences that drive real business growth.",
-      links1: "Services", links2: "Company", links3: "Legal",
-      copy: "© 2026 NT Web UX. All rights reserved."
+      tagline: "Technical architecture and AI automation for borderless enterprises.",
+      hubsLabel: "Global Hubs",
+      foundationsLabel: "Foundations",
+      foundationsLinks: [
+        { label: "Website Design",  href: "#services" },
+        { label: "eCommerce",       href: "#services" },
+        { label: "CMS Integration", href: "#services" },
+        { label: "Privacy Policy",  href: "/privacy"  },
+      ],
+      solutionsLabel: "Solutions",
+      solutionsLinks: [
+        { label: "AI Text-Back",   href: "/business" },
+        { label: "Enterprise SaaS", href: "/business" },
+        { label: "ROI Audit",      href: "/business" },
+      ],
+      statusLabel: "All Systems Operational",
+      copy: "© 2026 NT Digital Group. All rights reserved.",
     },
     portfolio: {
       services: {
@@ -197,12 +211,12 @@ const translations: Translations = {
     testimonials: {
       title: "Ne nous croyez pas sur parole.",
       items: [
-        { quote: "Ils ont complètement repensé notre présence numérique. Nos demandes ont doublé le premier mois et le site était en ligne en moins de 72 heures. Une valeur incroyable.", name: "Jean-Michel Tremblay", role: "Propriétaire, Tremblay Excavation Inc.", metric: "2× clients", metricLabel: "en 30 jours", img: "proj-construction.png", industry: "Construction" },
-        { quote: "Notre système de réservation est passé du téléphone au 100% en ligne. On est à 95% de capacité chaque semaine. Le site fait le travail de la réceptionniste.", name: "Dre. Aline Côté", role: "Fondatrice, Physio Optimal", metric: "95% capacité", metricLabel: "depuis le lancement", img: "proj-medical.png", industry: "Santé" },
-        { quote: "NT Web UX a créé notre présence en ligne de zéro. On prend des réservations et commandes 24/7 maintenant — les revenus ont augmenté de 40% depuis le lancement.", name: "Marie-Claire Joseph", role: "Propriétaire, Saveurs d'Haïti MTL", metric: "+40% revenus", metricLabel: "depuis le lancement", img: "proj-restaurant.png", industry: "Restaurant" },
-        { quote: "On est passé de zéro présence en ligne à complet en 6 semaines. Le retour sur investissement de ce site est incroyable. Meilleur investissement qu'on ait fait.", name: "Karine Beaumont", role: "PDG, Clinique Beaumont Santé", metric: "6 semaines", metricLabel: "pour complet", img: "proj-wellness.png", industry: "Bien-être" },
-        { quote: "Ils ont construit notre tableau de bord SaaS de zéro et ça ressemble à un million de dollars. Nos clients complimentent toujours le design de notre plateforme.", name: "Alexis Fontaine", role: "Co-Fondateur, Flux Analytics", metric: "5★", metricLabel: "satisfaction client", img: "proj-saas.png", industry: "SaaS" },
-        { quote: "Le site bilingue qu'ils ont construit est exactement ce qu'il nous fallait. Notre trafic organique a bondi de 67% en quelques mois.", name: "Marc-André Ouellet", role: "Propriétaire, Bâtisseurs Nordiques Inc.", metric: "+67% trafic", metricLabel: "croissance organique", img: "proj-construction2.png", industry: "Construction" }
+        { quote: "Ils ont complètement repensé notre présence numérique. Nos demandes ont doublé le premier mois et le site était en ligne en moins de 72 heures. Une valeur incroyable.", name: "Jean-Michel Tremblay", role: "Propriétaire, Tremblay Excavation Inc.", metric: "2× clients", metricLabel: "en 30 jours", img: "proj-construction.webp", industry: "Construction" },
+        { quote: "Notre système de réservation est passé du téléphone au 100% en ligne. On est à 95% de capacité chaque semaine. Le site fait le travail de la réceptionniste.", name: "Dre. Aline Côté", role: "Fondatrice, Physio Optimal", metric: "95% capacité", metricLabel: "depuis le lancement", img: "proj-medical.webp", industry: "Santé" },
+        { quote: "NT Web UX a créé notre présence en ligne de zéro. On prend des réservations et commandes 24/7 maintenant — les revenus ont augmenté de 40% depuis le lancement.", name: "Marie-Claire Joseph", role: "Propriétaire, Saveurs d'Haïti MTL", metric: "+40% revenus", metricLabel: "depuis le lancement", img: "proj-restaurant.webp", industry: "Restaurant" },
+        { quote: "On est passé de zéro présence en ligne à complet en 6 semaines. Le retour sur investissement de ce site est incroyable. Meilleur investissement qu'on ait fait.", name: "Karine Beaumont", role: "PDG, Clinique Beaumont Santé", metric: "6 semaines", metricLabel: "pour complet", img: "proj-wellness.webp", industry: "Bien-être" },
+        { quote: "Ils ont construit notre tableau de bord SaaS de zéro et ça ressemble à un million de dollars. Nos clients complimentent toujours le design de notre plateforme.", name: "Alexis Fontaine", role: "Co-Fondateur, Flux Analytics", metric: "5★", metricLabel: "satisfaction client", img: "proj-saas.webp", industry: "SaaS" },
+        { quote: "Le site bilingue qu'ils ont construit est exactement ce qu'il nous fallait. Notre trafic organique a bondi de 67% en quelques mois.", name: "Marc-André Ouellet", role: "Propriétaire, Bâtisseurs Nordiques Inc.", metric: "+67% trafic", metricLabel: "croissance organique", img: "proj-construction2.webp", industry: "Construction" }
       ]
     },
     contact: {
@@ -219,9 +233,23 @@ const translations: Translations = {
       }
     },
     footer: {
-      tagline: "Créer des expériences numériques qui stimulent la véritable croissance.",
-      links1: "Services", links2: "Entreprise", links3: "Légal",
-      copy: "© 2026 NT Web UX. Tous droits réservés."
+      tagline: "Architecture technique et automatisation IA pour les entreprises sans frontières.",
+      hubsLabel: "Bureaux Mondiaux",
+      foundationsLabel: "Fondations",
+      foundationsLinks: [
+        { label: "Design Web",       href: "#services" },
+        { label: "eCommerce",        href: "#services" },
+        { label: "Intégration CMS",  href: "#services" },
+        { label: "Politique vie privée", href: "/privacy" },
+      ],
+      solutionsLabel: "Solutions",
+      solutionsLinks: [
+        { label: "IA Text-Back",     href: "/business" },
+        { label: "SaaS Entreprise",  href: "/business" },
+        { label: "Audit ROI",        href: "/business" },
+      ],
+      statusLabel: "Tous Systèmes Opérationnels",
+      copy: "© 2026 NT Digital Group. Tous droits réservés.",
     },
     portfolio: {
       services: {

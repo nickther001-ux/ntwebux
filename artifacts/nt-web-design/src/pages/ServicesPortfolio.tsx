@@ -10,10 +10,10 @@ import { OnboardingModal } from '@/components/OnboardingModal';
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 const WORK_IMAGES: Record<string, string> = {
-  'Tremblay Excavation Inc.':   `${BASE}/portfolio/proj-construction.png`,
-  'Excavation Tremblay Inc.':   `${BASE}/portfolio/proj-construction.png`,
-  'Physio Optimal':             `${BASE}/portfolio/proj-medical.png`,
-  "Saveurs d'Haïti MTL":       `${BASE}/portfolio/proj-restaurant.png`,
+  'Tremblay Excavation Inc.':   `${BASE}/portfolio/proj-construction.webp`,
+  'Excavation Tremblay Inc.':   `${BASE}/portfolio/proj-construction.webp`,
+  'Physio Optimal':             `${BASE}/portfolio/proj-medical.webp`,
+  "Saveurs d'Haïti MTL":       `${BASE}/portfolio/proj-restaurant.webp`,
 };
 
 const WEB_ICONS = [Layers, Sparkles, Crown];

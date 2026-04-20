@@ -8,15 +8,15 @@ const API_BASE = (import.meta.env.VITE_API_URL || import.meta.env.BASE_URL).repl
 
 /* ─── Website type options ─────────────────────────────────────── */
 const SITE_TYPES = [
-  { id: 'business',   en: 'Business / Company',    fr: 'Entreprise / Compagnie',    img: 'proj-startup.png',      emoji: '🏢' },
-  { id: 'restaurant', en: 'Restaurant / Food',      fr: 'Restaurant / Alimentation', img: 'proj-restaurant.png',   emoji: '🍽️' },
-  { id: 'medical',    en: 'Medical / Health',       fr: 'Médical / Santé',           img: 'proj-medical.png',      emoji: '🏥' },
-  { id: 'ecommerce',  en: 'eCommerce / Store',      fr: 'Boutique en ligne',         img: 'proj-ecommerce.png',    emoji: '🛒' },
-  { id: 'portfolio',  en: 'Portfolio / Creative',   fr: 'Portfolio / Créatif',       img: 'proj-photography.png',  emoji: '🎨' },
-  { id: 'realestate', en: 'Real Estate',            fr: 'Immobilier',                img: 'proj-realestate.png',   emoji: '🏠' },
-  { id: 'fitness',    en: 'Fitness / Wellness',     fr: 'Fitness / Bien-être',       img: 'proj-fitness.png',      emoji: '💪' },
-  { id: 'saas',       en: 'SaaS / Tech App',        fr: 'SaaS / Application Tech',  img: 'proj-saas.png',         emoji: '💻' },
-  { id: 'law',        en: 'Law / Professional',     fr: 'Droit / Professionnel',     img: 'proj-law.png',          emoji: '⚖️' },
+  { id: 'business',   en: 'Business / Company',    fr: 'Entreprise / Compagnie',    img: 'proj-startup.webp',      emoji: '🏢' },
+  { id: 'restaurant', en: 'Restaurant / Food',      fr: 'Restaurant / Alimentation', img: 'proj-restaurant.webp',   emoji: '🍽️' },
+  { id: 'medical',    en: 'Medical / Health',       fr: 'Médical / Santé',           img: 'proj-medical.webp',      emoji: '🏥' },
+  { id: 'ecommerce',  en: 'eCommerce / Store',      fr: 'Boutique en ligne',         img: 'proj-ecommerce.webp',    emoji: '🛒' },
+  { id: 'portfolio',  en: 'Portfolio / Creative',   fr: 'Portfolio / Créatif',       img: 'proj-photography.webp',  emoji: '🎨' },
+  { id: 'realestate', en: 'Real Estate',            fr: 'Immobilier',                img: 'proj-realestate.webp',   emoji: '🏠' },
+  { id: 'fitness',    en: 'Fitness / Wellness',     fr: 'Fitness / Bien-être',       img: 'proj-fitness.webp',      emoji: '💪' },
+  { id: 'saas',       en: 'SaaS / Tech App',        fr: 'SaaS / Application Tech',  img: 'proj-saas.webp',         emoji: '💻' },
+  { id: 'law',        en: 'Law / Professional',     fr: 'Droit / Professionnel',     img: 'proj-law.webp',          emoji: '⚖️' },
   { id: 'custom',     en: 'Custom / Other',         fr: 'Personnalisé / Autre',      img: '',                      emoji: '✨' },
 ];
 
