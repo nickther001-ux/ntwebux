@@ -189,12 +189,6 @@ export default function About() {
     lang,
   );
   const manifestoCTA = bi('Submit your vision. Let\'s build the machine.', 'Soumettez votre vision. Construisons la machine.', lang);
-  const badges = [
-    bi('Mechanical Engineering', 'Génie Mécanique', lang),
-    bi('Computer Science', 'Informatique', lang),
-    bi('Concordia University', 'Université Concordia', lang),
-  ];
-
   const philoEyebrow = bi('Our Philosophy', 'Notre Philosophie', lang);
   const philoTitle   = bi('Three pillars of technical architecture.', 'Trois piliers de l\'architecture technique.', lang);
   const philoSub     = bi(
@@ -434,24 +428,6 @@ export default function About() {
                   }}>
                     {manifestoP2}
                   </p>
-                </div>
-
-                {/* Credential badges */}
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginBottom: '44px' }}>
-                  {badges.map((b) => (
-                    <span key={b} style={{
-                      padding: '6px 14px',
-                      background: 'rgba(59,130,246,0.08)',
-                      border: '1px solid rgba(59,130,246,0.22)',
-                      borderRadius: '999px',
-                      fontSize: '11px', fontWeight: 600,
-                      color: '#93c5fd',
-                      letterSpacing: '0.04em',
-                      fontFamily: "'Courier New', ui-monospace, monospace",
-                    }}>
-                      {b}
-                    </span>
-                  ))}
                 </div>
 
                 {/* Divider */}
