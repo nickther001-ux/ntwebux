@@ -334,10 +334,10 @@ export default function BusinessSolutions() {
         <main>
           {/* ══ HERO — Landio 4-layer composition ════════════════ */}
           {/* Layer 1: Dark canvas */}
-          <section className="relative w-full overflow-hidden bg-[#020617] min-h-[80vh] flex flex-col items-center justify-center pt-32 pb-20 px-4">
+          <section className="relative w-full min-h-[80vh] flex flex-col items-center justify-center pt-32 pb-20 px-4">
 
             {/* Layer 2: Framer glow */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] max-w-[800px] h-[400px] bg-blue-600/20 rounded-full blur-[120px] pointer-events-none -z-10" />
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] max-w-[800px] h-[500px] bg-blue-600/15 rounded-full blur-[140px] pointer-events-none -z-10" />
 
             {/* Layer 4: Glass top badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 text-sm font-semibold text-blue-400 uppercase tracking-widest mb-8 backdrop-blur-sm z-10">
