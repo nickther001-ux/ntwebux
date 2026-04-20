@@ -115,7 +115,7 @@ function App() {
       <HelmetProvider>
         <LanguageProvider>
           <TooltipProvider>
-            <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+            <WouterRouter base={import.meta.env.PROD ? '' : import.meta.env.BASE_URL.replace(/\/$/, "")}>
               <Switch>
                 <Route path="/" component={Home} />
                 <Route path="/services" component={ServicesPortfolio} />
