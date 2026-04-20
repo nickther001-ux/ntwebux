@@ -31,7 +31,7 @@ const NODES: {
   {
     id: '02',
     title:  { en: 'INTELLIGENCE',  fr: 'INTELLIGENCE' },
-    stack:  'GPT-4o / Claude 3.5 Sonnet',
+    stack:  'Custom AI / Natural Language Processing',
     status: 'ACTIVE',
     metric: { en: '< 2s Response Latency', fr: '< 2s Latence de Réponse' },
   },
@@ -47,7 +47,7 @@ const NODES: {
     title:  { en: 'GLOBAL SYNC',   fr: 'SYNC GLOBAL' },
     stack:  'Bilingual L10n / Multi-Currency',
     status: 'SYNCED',
-    metric: { en: 'Montreal · Toronto · Paris · Abidjan', fr: 'Montréal · Toronto · Paris · Abidjan' },
+    metric: { en: 'Montreal · Paris · Japan', fr: 'Montréal · Paris · Japon' },
   },
 ];
 

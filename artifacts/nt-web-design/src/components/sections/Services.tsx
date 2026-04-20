@@ -399,30 +399,7 @@ function BentoCard({ s, i, learnMore, onClick }: BentoCardProps) {
           <s.icon size={isLarge ? 26 : 20} />
         </div>
 
-        {/* Tech-spec badges (top-right) */}
-        {s.badges && s.badges.length > 0 ? (
-          <div style={{
-            display: 'flex', flexWrap: 'wrap', gap: '5px',
-            justifyContent: 'flex-end',
-            maxWidth: isLarge ? '70%' : '70%',
-          }}>
-            {s.badges.map((b) => (
-              <span key={b} style={{
-                fontSize: '10px', fontWeight: 600, letterSpacing: '0.04em',
-                padding: '3px 8px',
-                borderRadius: '999px',
-                background: 'rgba(255,255,255,0.04)',
-                border: '1px solid rgba(255,255,255,0.09)',
-                color: 'rgba(255,255,255,0.62)',
-                whiteSpace: 'nowrap',
-                fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace',
-                lineHeight: 1.4,
-              }}>{b}</span>
-            ))}
-          </div>
-        ) : (
-          <span style={{ fontSize: isLarge ? '40px' : '28px', fontWeight: 800, color: 'rgba(255,255,255,0.05)', letterSpacing: '-0.04em', lineHeight: 1 }}>{s.id}</span>
-        )}
+        <span style={{ fontSize: isLarge ? '40px' : '28px', fontWeight: 800, color: 'rgba(255,255,255,0.05)', letterSpacing: '-0.04em', lineHeight: 1 }}>{s.id}</span>
       </div>
 
       <div style={{ position: 'relative', zIndex: 2, marginTop: 'auto' }}>
@@ -443,24 +420,6 @@ function BentoCard({ s, i, learnMore, onClick }: BentoCardProps) {
         <div style={{ fontSize: '12px', color: `rgb(${glow})`, fontWeight: 600, letterSpacing: '0.02em', opacity: 0.9 }}>{learnMore}</div>
       </div>
 
-      {/* Technical spec footer */}
-      {s.techFooter && (
-        <div style={{
-          position: 'relative', zIndex: 2,
-          marginTop: '16px',
-          paddingTop: '12px',
-          borderTop: '1px solid rgba(255,255,255,0.06)',
-          fontFamily: "'Courier New', ui-monospace, SFMono-Regular, monospace",
-          fontSize: '10px',
-          fontWeight: 500,
-          letterSpacing: '0.06em',
-          color: 'rgba(148,163,184,0.38)',
-          lineHeight: 1.4,
-          userSelect: 'none',
-        }}>
-          {s.techFooter}
-        </div>
-      )}
     </motion.button>
   );
 }
