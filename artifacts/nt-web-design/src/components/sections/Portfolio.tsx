@@ -28,7 +28,7 @@ const PROJECTS = [
     wide: false,
   },
   {
-    img: `${BASE}/portfolio/proj-law.webp`,
+    img: `${BASE}/portfolio/proj-law.png`,
     category: { en: 'Professional Services', fr: 'Services Professionnels' },
     title: { en: 'Beaumont & Associés', fr: 'Beaumont & Associés' },
     tags: { en: ['Web Design', 'SEO'], fr: ['Web Design', 'SEO'] },
