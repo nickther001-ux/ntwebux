@@ -170,8 +170,8 @@ export default function About() {
   const founderLabel = bi('The Architect', 'L\'Architecte', lang);
   const founderTitle = bi('Founder & Technical Director', 'Fondateur & Directeur Technique', lang);
   const founderBody  = bi(
-    'A technical architect driven by the rigour of Mechanical Engineering and Computer Science from Concordia University. Jean applies a systems-engineering approach to digital infrastructure, ensuring that every NT Digital Group deployment is built for high-performance, scalability, and technical longevity.',
-    'Un architecte technique porté par la rigueur du génie mécanique et de l\'informatique de l\'Université Concordia. Jean applique une approche d\'ingénierie systèmes à l\'infrastructure numérique, garantissant que chaque déploiement de NT Digital Group est conçu pour la haute performance, la scalabilité et la longévité technique.',
+    'A technical architect driven by the rigour of Mechanical Engineering and Computer Science from Concordia University. Nickson applies a systems-engineering approach to digital infrastructure, ensuring that every NT Digital Group deployment is built for high-performance, scalability, and technical longevity.',
+    'Un architecte technique porté par la rigueur du génie mécanique et de l\'informatique de l\'Université Concordia. Nickson applique une approche d\'ingénierie systèmes à l\'infrastructure numérique, garantissant que chaque déploiement de NT Digital Group est conçu pour la haute performance, la scalabilité et la longévité technique.',
     lang,
   );
   const badges = [
