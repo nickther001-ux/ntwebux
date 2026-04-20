@@ -4,42 +4,57 @@ import { useLanguage } from '@/lib/i18n';
 type LangKey = 'en' | 'fr';
 function bi(obj: { en: string; fr: string }, lang: LangKey) { return obj[lang]; }
 
-type StatusCode = 'LIVE' | 'DEPLO' | 'SYNC';
+/* ── Node data ─────────────────────────────────────────────────── */
+type NodeStatus = 'OPTIMIZED' | 'ACTIVE' | 'ENCRYPTED' | 'SYNCED';
 
-const STATUS_COLOR: Record<StatusCode, string> = {
-  LIVE:  '#22c55e',
-  DEPLO: '#3b82f6',
-  SYNC:  '#a78bfa',
+const STATUS_COLOR: Record<NodeStatus, { text: string; glow: string; bg: string }> = {
+  OPTIMIZED: { text: '#22d3ee',  glow: 'rgba(34,211,238,0.35)',  bg: 'rgba(34,211,238,0.06)'  },
+  ACTIVE:    { text: '#22c55e',  glow: 'rgba(34,197,94,0.35)',   bg: 'rgba(34,197,94,0.06)'   },
+  ENCRYPTED: { text: '#a78bfa',  glow: 'rgba(167,139,250,0.35)', bg: 'rgba(167,139,250,0.06)' },
+  SYNCED:    { text: '#3b82f6',  glow: 'rgba(59,130,246,0.35)',  bg: 'rgba(59,130,246,0.06)'  },
 };
 
-const deployments: {
-  status: StatusCode;
-  label: { en: string; fr: string };
-  client: { en: string; fr: string };
+const NODES: {
+  id: string;
+  title: { en: string; fr: string };
+  stack: string;
+  status: NodeStatus;
+  metric: { en: string; fr: string };
 }[] = [
   {
-    status: 'LIVE',
-    label:  { en: 'AI-Integrated CRM',             fr: 'CRM Intégré IA' },
-    client: { en: 'High-Performance Contractor — Montréal', fr: 'Entrepreneur Haute Performance — Montréal' },
+    id: '01',
+    title:  { en: 'FOUNDATIONS',   fr: 'FONDATIONS' },
+    stack:  'Next.js 15 / React / Tailwind CSS',
+    status: 'OPTIMIZED',
+    metric: { en: '100 Lighthouse Performance', fr: '100 Performance Lighthouse' },
   },
   {
-    status: 'DEPLO',
-    label:  { en: 'Multi-Tenant HR SaaS',           fr: 'SaaS RH Multi-Tenant' },
-    client: { en: 'Recruitment Firm — West Africa', fr: 'Cabinet de Recrutement — Afrique de l\'Ouest' },
+    id: '02',
+    title:  { en: 'INTELLIGENCE',  fr: 'INTELLIGENCE' },
+    stack:  'GPT-4o / Claude 3.5 Sonnet',
+    status: 'ACTIVE',
+    metric: { en: '< 2s Response Latency', fr: '< 2s Latence de Réponse' },
   },
   {
-    status: 'SYNC',
-    label:  { en: 'Bilingual E-Commerce Engine',    fr: 'Moteur E-Commerce Bilingue' },
-    client: { en: 'International Logistics Hub',    fr: 'Hub Logistique International' },
+    id: '03',
+    title:  { en: 'INFRASTRUCTURE', fr: 'INFRASTRUCTURE' },
+    stack:  'PostgreSQL / Vercel Edge / AWS',
+    status: 'ENCRYPTED',
+    metric: { en: '99.9% Uptime SLA', fr: '99.9% SLA de Disponibilité' },
+  },
+  {
+    id: '04',
+    title:  { en: 'GLOBAL SYNC',   fr: 'SYNC GLOBAL' },
+    stack:  'Bilingual L10n / Multi-Currency',
+    status: 'SYNCED',
+    metric: { en: 'Montreal · Toronto · Paris · Abidjan', fr: 'Montréal · Toronto · Paris · Abidjan' },
   },
 ];
 
+/* ── Component ─────────────────────────────────────────────────── */
 export function ActiveDeployments() {
   const { lang } = useLanguage();
   const l = lang as LangKey;
-
-  const title  = bi({ en: 'ACTIVE DEPLOYMENTS', fr: 'DÉPLOIEMENTS ACTIFS' }, l);
-  const sub    = bi({ en: 'Live systems under NT Digital Group architecture.', fr: 'Systèmes actifs sous architecture NT Digital Group.' }, l);
 
   return (
     <section style={{ width: '100%', padding: '0 24px 100px' }}>
@@ -50,101 +65,165 @@ export function ActiveDeployments() {
           viewport={{ once: true, margin: '-60px' }}
           transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
         >
-          {/* Header */}
-          <div style={{ marginBottom: '28px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
-              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '7px', fontSize: '10px', fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#22c55e', background: 'rgba(34,197,94,0.08)', border: '1px solid rgba(34,197,94,0.2)', borderRadius: '20px', padding: '3px 12px' }}>
-                <span style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#22c55e', display: 'inline-block', animation: 'adep-pulse 1.4s infinite' }} />
-                {title}
+
+          {/* ── Header ── */}
+          <div style={{ marginBottom: '32px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
+              {/* Pulsing blue dot */}
+              <span style={{ position: 'relative', width: '8px', height: '8px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                <span style={{ position: 'absolute', inset: 0, borderRadius: '50%', background: 'rgba(59,130,246,0.35)', animation: 'sysreg-ring 2s ease-in-out infinite' }} />
+                <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#3b82f6', boxShadow: '0 0 6px rgba(59,130,246,0.8)', display: 'block', position: 'relative', zIndex: 1 }} />
+              </span>
+              <span style={{
+                fontFamily: '"SF Mono","Fira Code","Cascadia Code","Courier New",monospace',
+                fontSize: '11px',
+                fontWeight: 700,
+                letterSpacing: '0.18em',
+                textTransform: 'uppercase',
+                color: 'rgba(255,255,255,0.55)',
+              }}>
+                {bi({ en: '[SYSTEM_SPECIFICATIONS]', fr: '[SPÉCIFICATIONS_SYSTÈME]' }, l)}
               </span>
             </div>
-            <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.3)', margin: 0, fontFamily: "'Courier New', ui-monospace, monospace", letterSpacing: '0.04em' }}>
-              {sub}
+            <p style={{
+              fontSize: '13px',
+              color: 'rgba(255,255,255,0.28)',
+              margin: 0,
+              fontFamily: '"SF Mono","Fira Code","Cascadia Code","Courier New",monospace',
+              letterSpacing: '0.05em',
+            }}>
+              {bi({ en: 'Engineering benchmarks for the borderless enterprise.', fr: 'Références d\'ingénierie pour l\'entreprise sans frontières.' }, l)}
             </p>
           </div>
 
-          {/* Table */}
-          <div style={{
-            background: 'rgba(5,12,28,0.7)',
+          {/* ── 4-column grid ── */}
+          <div className="sysreg-grid" style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(4, 1fr)',
+            gap: '1px',
+            background: 'rgba(255,255,255,0.07)',
             border: '1px solid rgba(255,255,255,0.07)',
-            borderRadius: '16px',
+            borderRadius: '18px',
             overflow: 'hidden',
-            backdropFilter: 'blur(16px)',
-            WebkitBackdropFilter: 'blur(16px)',
           }}>
-            {/* Table header */}
-            <div style={{
-              display: 'grid', gridTemplateColumns: '90px 1fr 1fr',
-              padding: '12px 24px',
-              borderBottom: '1px solid rgba(255,255,255,0.06)',
-              background: 'rgba(255,255,255,0.02)',
-            }}>
-              {(['STATUS', 'SYSTEM', bi({ en: 'CLIENT', fr: 'CLIENT' }, l)] as string[]).map((h) => (
-                <span key={h} style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.14em', color: 'rgba(255,255,255,0.2)', fontFamily: "'Courier New', ui-monospace, monospace" }}>
-                  {h}
-                </span>
-              ))}
-            </div>
-
-            {/* Rows */}
-            {deployments.map((d, i) => {
-              const color = STATUS_COLOR[d.status];
-              const isLive = d.status === 'LIVE';
+            {NODES.map((node, i) => {
+              const s = STATUS_COLOR[node.status];
               return (
                 <motion.div
-                  key={i}
-                  initial={{ opacity: 0, x: -8 }}
-                  whileInView={{ opacity: 1, x: 0 }}
+                  key={node.id}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 + 0.15, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ delay: i * 0.08 + 0.1, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                   style={{
-                    display: 'grid', gridTemplateColumns: '90px 1fr 1fr',
-                    padding: '18px 24px',
-                    borderBottom: i < deployments.length - 1 ? '1px solid rgba(255,255,255,0.05)' : 'none',
-                    alignItems: 'center',
-                    transition: 'background 0.15s',
+                    background: 'rgba(5,12,28,0.82)',
+                    backdropFilter: 'blur(16px)',
+                    WebkitBackdropFilter: 'blur(16px)',
+                    padding: '28px 24px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '14px',
+                    transition: 'background 0.2s',
                   }}
-                  onMouseEnter={e => (e.currentTarget as HTMLDivElement).style.background = 'rgba(255,255,255,0.02)'}
-                  onMouseLeave={e => (e.currentTarget as HTMLDivElement).style.background = 'transparent'}
+                  onMouseEnter={e => (e.currentTarget as HTMLDivElement).style.background = 'rgba(10,20,45,0.92)'}
+                  onMouseLeave={e => (e.currentTarget as HTMLDivElement).style.background = 'rgba(5,12,28,0.82)'}
                 >
+                  {/* Node ID + Title */}
+                  <div>
+                    <div style={{
+                      fontFamily: '"SF Mono","Fira Code","Cascadia Code","Courier New",monospace',
+                      fontSize: '10px',
+                      fontWeight: 700,
+                      letterSpacing: '0.14em',
+                      color: 'rgba(255,255,255,0.2)',
+                      marginBottom: '6px',
+                    }}>
+                      NODE {node.id}
+                    </div>
+                    <div style={{
+                      fontFamily: '"SF Mono","Fira Code","Cascadia Code","Courier New",monospace',
+                      fontSize: '13px',
+                      fontWeight: 700,
+                      letterSpacing: '0.1em',
+                      color: '#ffffff',
+                    }}>
+                      {bi(node.title, l)}
+                    </div>
+                  </div>
+
+                  {/* Stack */}
+                  <div style={{
+                    fontFamily: '"SF Mono","Fira Code","Cascadia Code","Courier New",monospace',
+                    fontSize: '11px',
+                    color: 'rgba(255,255,255,0.45)',
+                    letterSpacing: '0.04em',
+                    lineHeight: 1.6,
+                    borderTop: '1px solid rgba(255,255,255,0.06)',
+                    paddingTop: '14px',
+                  }}>
+                    {node.stack}
+                  </div>
+
                   {/* Status badge */}
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '7px' }}>
-                    {isLive && (
-                      <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: color, display: 'inline-block', flexShrink: 0, animation: 'adep-pulse 1.4s infinite', boxShadow: `0 0 6px ${color}` }} />
-                    )}
-                    {!isLive && (
-                      <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: color, display: 'inline-block', flexShrink: 0, opacity: 0.7 }} />
-                    )}
-                    <span style={{ fontFamily: "'Courier New', ui-monospace, monospace", fontSize: '11px', fontWeight: 700, letterSpacing: '0.08em', color }}>
-                      [{d.status}]
+                  <div style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    alignSelf: 'flex-start',
+                    padding: '3px 10px',
+                    background: s.bg,
+                    border: `1px solid ${s.text}30`,
+                    borderRadius: '6px',
+                  }}>
+                    <span style={{
+                      width: '5px', height: '5px', borderRadius: '50%',
+                      background: s.text,
+                      boxShadow: `0 0 5px ${s.glow}`,
+                      display: 'inline-block',
+                      flexShrink: 0,
+                      animation: 'sysreg-dot 2s ease-in-out infinite',
+                    }} />
+                    <span style={{
+                      fontFamily: '"SF Mono","Fira Code","Cascadia Code","Courier New",monospace',
+                      fontSize: '10px',
+                      fontWeight: 700,
+                      letterSpacing: '0.12em',
+                      color: s.text,
+                    }}>
+                      [{node.status}]
                     </span>
                   </div>
 
-                  {/* System name */}
-                  <span style={{ fontSize: '13px', fontWeight: 600, color: '#fff', letterSpacing: '-0.01em' }}>
-                    {bi(d.label, l)}
-                  </span>
-
-                  {/* Client */}
-                  <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.38)', fontFamily: "'Courier New', ui-monospace, monospace", letterSpacing: '0.02em' }}>
-                    {bi(d.client, l)}
-                  </span>
+                  {/* Metric */}
+                  <div style={{
+                    fontFamily: '"SF Mono","Fira Code","Cascadia Code","Courier New",monospace',
+                    fontSize: '11px',
+                    color: 'rgba(255,255,255,0.28)',
+                    letterSpacing: '0.04em',
+                    marginTop: 'auto',
+                    paddingTop: '4px',
+                  }}>
+                    {bi(node.metric, l)}
+                  </div>
                 </motion.div>
               );
             })}
           </div>
+
         </motion.div>
       </div>
 
       <style>{`
-        @keyframes adep-pulse {
-          0%, 100% { opacity: 1; transform: scale(1); }
-          50%       { opacity: 0.35; transform: scale(0.65); }
+        @keyframes sysreg-ring {
+          0%,100% { transform: scale(1);   opacity: 0.5; }
+          50%      { transform: scale(2.8); opacity: 0;   }
         }
-        @media (max-width: 600px) {
-          .adep-grid { grid-template-columns: 80px 1fr !important; }
-          .adep-client { display: none !important; }
+        @keyframes sysreg-dot {
+          0%,100% { opacity: 1;    }
+          50%      { opacity: 0.45; }
         }
+        @media (max-width: 860px) { .sysreg-grid { grid-template-columns: repeat(2,1fr) !important; } }
+        @media (max-width: 480px) { .sysreg-grid { grid-template-columns: 1fr !important; } }
       `}</style>
     </section>
   );
