@@ -60,18 +60,18 @@ export function Process() {
           <div style={{ fontSize: '12px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(147,197,253,0.6)', marginBottom: '14px' }}>
             {lang === 'fr' ? 'Prêt à Commencer ?' : 'Ready to Get Started?'}
           </div>
-          <h3 style={{ fontSize: 'clamp(1.4rem,3vw,2rem)', fontWeight: 800, color: '#fff', marginBottom: '12px', letterSpacing: '-0.02em', lineHeight: 1.15 }}>
+          <h3 style={{ fontSize: 'clamp(1.5rem,3vw,2.1rem)', fontWeight: 800, color: '#fff', marginBottom: '12px', letterSpacing: '-0.04em', lineHeight: 1.1 }}>
             {lang === 'fr'
-              ? <>Votre projet mérite une<br /><span className="gradient-text">vraie stratégie.</span></>
-              : <>Your project deserves a<br /><span className="gradient-text">real strategy.</span></>}
+              ? <span className="gradient-text">Scalez sans les Bavardages.</span>
+              : <span className="gradient-text">Scale Without the Small Talk.</span>}
           </h3>
-          <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.4)', maxWidth: '420px', margin: '0 auto 28px', lineHeight: 1.7 }}>
+          <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.45)', maxWidth: '420px', margin: '0 auto 28px', lineHeight: 1.7, letterSpacing: '-0.01em' }}>
             {lang === 'fr'
-              ? "Réservez un appel de découverte gratuit de 30 minutes. Aucun engagement, que de la valeur."
-              : "Book a free 30-minute discovery call. No commitment, just value."}
+              ? "Emploi du temps chargé ? Pas de temps à perdre au téléphone. Dites-nous ce que vous voulez, nous nous occupons d'élargir votre vision."
+              : "Busy schedule? No time to be on the phone. Just tell us what you want, and we will expand your vision."}
           </p>
-          <a href="#contact" className="btn-violet" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '14px 32px', fontSize: '14px', fontWeight: 600, borderRadius: '10px', textDecoration: 'none' }}>
-            {lang === 'fr' ? 'Réserver un Appel Gratuit' : 'Book a Free Call'} →
+          <a href="#contact" className="btn-violet" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '14px 32px', fontSize: '14px', fontWeight: 700, borderRadius: '10px', textDecoration: 'none', letterSpacing: '-0.01em' }}>
+            {lang === 'fr' ? 'Réserver un Appel →' : 'Book a Call →'}
           </a>
         </motion.div>
       </div>
