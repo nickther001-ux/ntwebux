@@ -372,7 +372,7 @@ export default function About() {
                   color: 'rgba(255,255,255,0.95)',
                   marginBottom: '6px',
                 }}>
-                  Jean Nickson Thermidor
+                  Nickson Thermidor
                 </h2>
                 <div style={{
                   fontSize: '13px', fontWeight: 500,
