@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { useLanguage } from '@/lib/i18n';
 
-const API_BASE = (import.meta.env.VITE_API_URL || import.meta.env.BASE_URL).replace(/\/$/, '');
+const API_BASE    = (import.meta.env.VITE_API_URL || import.meta.env.BASE_URL).replace(/\/$/, '');
+const WEBHOOK_URL = 'https://services.leadconnectorhq.com/hooks/2Tf3bk6VqhB7JukgrDrS/webhook-trigger/d8540795-784f-4424-b207-1c5073e84bb8';
 
 type LangKey = 'en' | 'fr';
 type Step = 'choose' | 'contact' | 'generating' | 'success';
@@ -49,13 +50,14 @@ const copy = {
   step1Title:   { en: 'What are we building?',                fr: 'Que construisons-nous ?' },
   step2Badge:   { en: 'Step 2 of 2',                          fr: 'Étape 2 sur 2' },
   step2Title:   { en: 'Where should we send the architecture plan?', fr: "Où devrions-nous envoyer le plan d'architecture ?" },
-  step2Sub:     { en: 'Email',                                fr: 'Email' },
+  step2Sub:     { en: 'Your contact details',                 fr: 'Vos coordonnées' },
+  firstNamePH:  { en: 'First Name',                           fr: 'Prénom' },
   emailPH:      { en: 'your@email.com',                       fr: 'votre@email.com' },
   submitBtn:    { en: 'Submit →',                             fr: 'Envoyer →' },
   back:         { en: '← Back',                               fr: '← Retour' },
-  generating:   { en: 'Generating Brief…',                    fr: 'Génération du dossier…' },
-  successTitle: { en: 'Brief Received.',                      fr: 'Dossier reçu.' },
-  successSub:   { en: 'Our team will review your vision and reach out within 24 hours.', fr: 'Notre équipe examinera votre vision et vous contactera dans les 24 heures.' },
+  generating:   { en: 'Encrypting & Sending…',                fr: 'Chiffrement & Envoi…' },
+  successTitle: { en: 'Transmission Received.',               fr: 'Transmission Reçue.' },
+  successSub:   { en: 'Our systems will contact you shortly.', fr: 'Nos systèmes vous contacteront sous peu.' },
   close:        { en: 'Close',                                fr: 'Fermer' },
 };
 
@@ -64,13 +66,15 @@ interface Props { open: boolean; onClose: () => void; }
 export function ProjectBriefModal({ open, onClose }: Props) {
   const { lang } = useLanguage();
   const l = lang as LangKey;
-  const [step, setStep]         = useState<Step>('choose');
-  const [selected, setSelected] = useState<number | null>(null);
-  const [email, setEmail]       = useState('');
-  const [genPct, setGenPct]     = useState(0);
-  const [slide, setSlide]       = useState(false);
-  const overlayRef              = useRef<HTMLDivElement>(null);
-  const emailRef                = useRef<HTMLInputElement>(null);
+  const [step, setStep]           = useState<Step>('choose');
+  const [selected, setSelected]   = useState<number | null>(null);
+  const [firstName, setFirstName] = useState('');
+  const [email, setEmail]         = useState('');
+  const [genPct, setGenPct]       = useState(0);
+  const [slide, setSlide]         = useState(false);
+  const overlayRef                = useRef<HTMLDivElement>(null);
+  const nameRef                   = useRef<HTMLInputElement>(null);
+  const emailRef                  = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (!open) return;
@@ -82,7 +86,7 @@ export function ProjectBriefModal({ open, onClose }: Props) {
 
   useEffect(() => {
     if (step === 'contact') {
-      setTimeout(() => emailRef.current?.focus(), 120);
+      setTimeout(() => nameRef.current?.focus(), 120);
     }
     if (step === 'generating') {
       setGenPct(0);
@@ -99,7 +103,7 @@ export function ProjectBriefModal({ open, onClose }: Props) {
 
   function handleClose() {
     onClose();
-    setTimeout(() => { setStep('choose'); setSelected(null); setEmail(''); setGenPct(0); setSlide(false); }, 320);
+    setTimeout(() => { setStep('choose'); setSelected(null); setFirstName(''); setEmail(''); setGenPct(0); setSlide(false); }, 320);
   }
 
   function handleChoose(idx: number) {
@@ -115,46 +119,44 @@ export function ProjectBriefModal({ open, onClose }: Props) {
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!email.trim()) return;
+    if (!firstName.trim() || !email.trim()) return;
     setStep('generating');
 
     const choiceTitle = selected !== null ? bi(choices[selected].title, l) : 'Vision Brief';
     const choiceSub   = selected !== null ? bi(choices[selected].sub, l)   : '—';
 
+    /* ── CRM Webhook (primary) ── */
+    fetch(WEBHOOK_URL, {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        first_name:         firstName.trim(),
+        email:              email.trim(),
+        annual_leak_amount: 0,
+        source:             'Toronto Fast Track AI Engine',
+      }),
+    }).then(res => {
+      console.log('[ProjectBriefModal] webhook response:', res.status);
+    }).catch(err => {
+      console.error('[ProjectBriefModal] webhook failed:', err);
+    });
+
+    /* ── Owner email notification (secondary, fire-and-forget) ── */
     fetch(`${API_BASE}/api/intake`, {
       method:  'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        email,
-        name:            'Vision Brief',
+        email:           email.trim(),
+        name:            firstName.trim(),
         plan:            { name: choiceTitle, price: '—' },
         siteType:        choiceSub,
         style:           'custom',
         lang,
-        business:        '',
-        industry:        '',
-        description:     '',
-        city:            '',
-        goals:           [],
-        hasLogo:         '',
-        hasContent:      '',
-        hasExistingSite: '',
-        existingUrl:     '',
-        phone:           '',
-        bestTime:        '',
-        method:          'email',
-        notes:           '',
+        business: '', industry: '', description: '', city: '',
+        goals: [], hasLogo: '', hasContent: '', hasExistingSite: '',
+        existingUrl: '', phone: '', bestTime: '', method: 'email', notes: '',
       }),
-    }).then(async (res) => {
-      if (!res.ok) {
-        const body = await res.json().catch(() => ({}));
-        console.error('[ProjectBriefModal] intake error:', body);
-      } else {
-        console.log('[ProjectBriefModal] intake sent OK');
-      }
-    }).catch((err) => {
-      console.error('[ProjectBriefModal] intake fetch failed:', err);
-    });
+    }).catch(() => {});
   }
 
   if (!open) return null;
@@ -278,6 +280,25 @@ export function ProjectBriefModal({ open, onClose }: Props) {
 
               <form onSubmit={handleSubmit}>
                 <input
+                  ref={nameRef}
+                  type="text"
+                  value={firstName}
+                  onChange={e => setFirstName(e.target.value)}
+                  placeholder={bi(copy.firstNamePH, l)}
+                  required
+                  style={{
+                    width: '100%', padding: '15px 18px', marginBottom: '10px',
+                    background: 'rgba(255,255,255,0.05)',
+                    border: '1px solid rgba(255,255,255,0.12)',
+                    borderRadius: '12px', color: '#fff', fontSize: '15px',
+                    outline: 'none', boxSizing: 'border-box',
+                    transition: 'border-color 0.2s, box-shadow 0.2s',
+                    fontFamily: 'inherit',
+                  }}
+                  onFocus={e => { e.target.style.borderColor = 'rgba(59,130,246,0.6)'; e.target.style.boxShadow = '0 0 0 3px rgba(59,130,246,0.12)'; }}
+                  onBlur={e  => { e.target.style.borderColor = 'rgba(255,255,255,0.12)'; e.target.style.boxShadow = 'none'; }}
+                />
+                <input
                   ref={emailRef}
                   type="email"
                   value={email}
@@ -294,7 +315,7 @@ export function ProjectBriefModal({ open, onClose }: Props) {
                     fontFamily: 'inherit',
                   }}
                   onFocus={e => { e.target.style.borderColor = 'rgba(59,130,246,0.6)'; e.target.style.boxShadow = '0 0 0 3px rgba(59,130,246,0.12)'; }}
-                  onBlur={e => { e.target.style.borderColor = 'rgba(255,255,255,0.12)'; e.target.style.boxShadow = 'none'; }}
+                  onBlur={e  => { e.target.style.borderColor = 'rgba(255,255,255,0.12)'; e.target.style.boxShadow = 'none'; }}
                 />
                 <div style={{ display: 'flex', gap: '10px' }}>
                   <button

@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { ProjectBriefModal } from '@/components/ProjectBriefModal';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { useLanguage } from '@/lib/i18n';
 import { ChevronDown, TrendingDown, Zap, Shield, Clock } from 'lucide-react';
+
+const WEBHOOK_URL = 'https://services.leadconnectorhq.com/hooks/2Tf3bk6VqhB7JukgrDrS/webhook-trigger/d8540795-784f-4424-b207-1c5073e84bb8';
 
 /* ── Animated counter ──────────────────────────────────────────── */
 function useCountUp(target: number, duration = 1400, active = false) {
@@ -113,8 +114,8 @@ function ProofCard({ icon: Icon, stat, label, source }: { icon: typeof TrendingD
 /* ── Main page ─────────────────────────────────────────────────── */
 export function Toronto() {
   const { lang } = useLanguage();
-  const [briefOpen, setBriefOpen] = useState(false);
 
+  /* Calculator sliders */
   const [price,    setPrice]    = useState(1_500_000);
   const [commRate, setCommRate] = useState(2.5);
   const [leads,    setLeads]    = useState(50);
@@ -128,6 +129,32 @@ export function Toronto() {
   const fmtPct  = (v: number) => `${v}%`;
   const fmtNum  = (v: number) => `${v}`;
 
+  /* CTA inline form */
+  const [ctaName,  setCtaName]  = useState('');
+  const [ctaEmail, setCtaEmail] = useState('');
+  const [ctaState, setCtaState] = useState<'idle' | 'sending' | 'sent'>('idle');
+
+  async function handleCtaSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!ctaName.trim() || !ctaEmail.trim() || ctaState !== 'idle') return;
+    setCtaState('sending');
+    try {
+      await fetch(WEBHOOK_URL, {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          first_name:           ctaName.trim(),
+          email:                ctaEmail.trim(),
+          annual_leak_amount:   annualLeak,
+          source:               'Toronto Fast Track AI Engine',
+        }),
+      });
+    } catch {
+      /* swallow network errors — still show success */
+    }
+    setCtaState('sent');
+  }
+
   const proof = [
     { icon: TrendingDown, stat: '62%', label: 'of luxury buyer inquiries receive no response within 24 hours', source: 'NAR Research · 2024' },
     { icon: Clock,        stat: '5min',label: 'response window to maximize lead-to-showing conversion',       source: 'Harvard Business Review' },
@@ -138,7 +165,6 @@ export function Toronto() {
   return (
     <>
       <Navbar />
-      <ProjectBriefModal open={briefOpen} onClose={() => setBriefOpen(false)} />
 
       {/* ── HERO ─────────────────────────────────────────────── */}
       <section style={{ position: 'relative', width: '100%', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '140px 24px 80px', overflow: 'hidden', textAlign: 'center' }}>
@@ -271,29 +297,99 @@ export function Toronto() {
               ))}
             </div>
 
-            {/* CTA */}
-            <div style={{ textAlign: 'center' }}>
-              <button
-                onClick={() => setBriefOpen(true)}
+            {/* CTA — inline webhook form */}
+            {ctaState === 'sent' ? (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.96 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                 style={{
-                  display: 'inline-flex', alignItems: 'center', gap: '10px',
-                  padding: '16px 40px', fontSize: '15px', fontWeight: 800,
-                  letterSpacing: '-0.01em', borderRadius: '14px', border: 'none',
-                  cursor: 'pointer',
-                  background: 'linear-gradient(135deg, #d4af37 0%, #f5d76e 50%, #d4af37 100%)',
-                  color: '#0a0a0a',
-                  boxShadow: '0 8px 32px rgba(212,175,55,0.4)',
-                  transition: 'transform 0.15s, box-shadow 0.15s',
+                  textAlign: 'center',
+                  padding: '32px 24px',
+                  background: 'rgba(212,175,55,0.06)',
+                  border: '1px solid rgba(212,175,55,0.22)',
+                  borderRadius: '16px',
                 }}
-                onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(-2px)'; (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 14px 44px rgba(212,175,55,0.55)'; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(0)'; (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 8px 32px rgba(212,175,55,0.4)'; }}
               >
-                {lang === 'fr' ? 'Récupérer Mes Commissions →' : 'Recover My Commission →'}
-              </button>
-              <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.25)', marginTop: '12px', letterSpacing: '0.04em' }}>
-                {lang === 'fr' ? 'Audit technique gratuit · Aucune carte de crédit requise' : 'Free technical audit · No credit card required'}
-              </p>
-            </div>
+                <div style={{ fontSize: '28px', marginBottom: '12px' }}>✓</div>
+                <p style={{ fontSize: '16px', fontWeight: 700, color: '#d4af37', margin: '0 0 8px', letterSpacing: '-0.01em' }}>
+                  {lang === 'fr' ? 'Transmission Reçue.' : 'Transmission Received.'}
+                </p>
+                <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.45)', margin: 0, lineHeight: 1.6 }}>
+                  {lang === 'fr' ? 'Nos systèmes vous contacteront sous peu.' : 'Our systems will contact you shortly.'}
+                </p>
+              </motion.div>
+            ) : (
+              <form onSubmit={handleCtaSubmit}>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginBottom: '12px' }} className="toronto-cta-grid">
+                  <input
+                    type="text"
+                    value={ctaName}
+                    onChange={e => setCtaName(e.target.value)}
+                    placeholder={lang === 'fr' ? 'Prénom' : 'First Name'}
+                    required
+                    disabled={ctaState === 'sending'}
+                    style={{
+                      padding: '15px 18px',
+                      background: 'rgba(255,255,255,0.05)',
+                      border: '1px solid rgba(212,175,55,0.18)',
+                      borderRadius: '12px', color: '#fff', fontSize: '14px',
+                      outline: 'none', boxSizing: 'border-box', width: '100%',
+                      fontFamily: 'inherit', transition: 'border-color 0.2s',
+                    }}
+                    onFocus={e => { e.target.style.borderColor = 'rgba(212,175,55,0.55)'; }}
+                    onBlur={e  => { e.target.style.borderColor = 'rgba(212,175,55,0.18)'; }}
+                  />
+                  <input
+                    type="email"
+                    value={ctaEmail}
+                    onChange={e => setCtaEmail(e.target.value)}
+                    placeholder={lang === 'fr' ? 'Adresse courriel' : 'Email Address'}
+                    required
+                    disabled={ctaState === 'sending'}
+                    style={{
+                      padding: '15px 18px',
+                      background: 'rgba(255,255,255,0.05)',
+                      border: '1px solid rgba(212,175,55,0.18)',
+                      borderRadius: '12px', color: '#fff', fontSize: '14px',
+                      outline: 'none', boxSizing: 'border-box', width: '100%',
+                      fontFamily: 'inherit', transition: 'border-color 0.2s',
+                    }}
+                    onFocus={e => { e.target.style.borderColor = 'rgba(212,175,55,0.55)'; }}
+                    onBlur={e  => { e.target.style.borderColor = 'rgba(212,175,55,0.18)'; }}
+                  />
+                </div>
+                <div style={{ textAlign: 'center' }}>
+                  <button
+                    type="submit"
+                    disabled={ctaState === 'sending'}
+                    style={{
+                      display: 'inline-flex', alignItems: 'center', gap: '10px',
+                      padding: '16px 40px', fontSize: '15px', fontWeight: 800,
+                      letterSpacing: '-0.01em', borderRadius: '14px', border: 'none',
+                      cursor: ctaState === 'sending' ? 'not-allowed' : 'pointer',
+                      background: ctaState === 'sending'
+                        ? 'rgba(212,175,55,0.4)'
+                        : 'linear-gradient(135deg, #d4af37 0%, #f5d76e 50%, #d4af37 100%)',
+                      color: '#0a0a0a',
+                      boxShadow: ctaState === 'sending' ? 'none' : '0 8px 32px rgba(212,175,55,0.4)',
+                      transition: 'transform 0.15s, box-shadow 0.15s, background 0.2s',
+                      opacity: ctaState === 'sending' ? 0.75 : 1,
+                    }}
+                    onMouseEnter={e => { if (ctaState === 'idle') { (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(-2px)'; (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 14px 44px rgba(212,175,55,0.55)'; } }}
+                    onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(0)'; (e.currentTarget as HTMLButtonElement).style.boxShadow = ctaState === 'idle' ? '0 8px 32px rgba(212,175,55,0.4)' : 'none'; }}
+                  >
+                    {ctaState === 'sending'
+                      ? (lang === 'fr' ? 'Chiffrement & Envoi...' : 'Encrypting & Sending...')
+                      : (lang === 'fr' ? 'Récupérer Mes Commissions →' : 'Recover My Commission →')
+                    }
+                  </button>
+                  <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.25)', marginTop: '12px', letterSpacing: '0.04em' }}>
+                    {lang === 'fr' ? 'Audit technique gratuit · Aucune carte de crédit requise' : 'Free technical audit · No credit card required'}
+                  </p>
+                </div>
+              </form>
+            )}
           </motion.div>
         </div>
       </section>
@@ -316,6 +412,11 @@ export function Toronto() {
       </section>
 
       <Footer />
+      <style>{`
+        @media (max-width: 560px) {
+          .toronto-cta-grid { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
     </>
   );
 }
