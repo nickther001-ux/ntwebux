@@ -167,13 +167,28 @@ export default function About() {
     lang,
   );
 
-  const founderLabel = bi('The Architect', 'L\'Architecte', lang);
-  const founderTitle = bi('Founder & Technical Director', 'Fondateur & Directeur Technique', lang);
-  const founderBody  = bi(
-    'A technical architect driven by the rigour of Mechanical Engineering and Computer Science from Concordia University. Nickson applies a systems-engineering approach to digital infrastructure, ensuring that every NT Digital Group deployment is built for high-performance, scalability, and technical longevity.',
-    'Un architecte technique porté par la rigueur du génie mécanique et de l\'informatique de l\'Université Concordia. Nickson applique une approche d\'ingénierie systèmes à l\'infrastructure numérique, garantissant que chaque déploiement de NT Digital Group est conçu pour la haute performance, la scalabilité et la longévité technique.',
+  const manifestoLabel = bi('The Architect\'s Manifesto', 'Le Manifeste de l\'Architecte', lang);
+  const manifestoLead  = bi(
+    'Stop building websites. Start engineering revenue engines.',
+    'Arrêtez de construire des sites web. Commencez à concevoir des moteurs de revenus.',
     lang,
   );
+  const manifestoP1 = bi(
+    'The digital industry is bloated with templates, slow code, and "designers" who don\'t understand how a business actually functions. I don\'t build brochures; I architect systems.',
+    'L\'industrie numérique est saturée de modèles génériques, de code lent et de « designers » qui ne comprennent pas réellement le fonctionnement d\'une entreprise. Je ne construis pas des brochures ; j\'architecture des systèmes.',
+    lang,
+  );
+  const manifestoP2 = bi(
+    'Drawing from a foundation in Mechanical Engineering and Computer Science at Concordia University, I treat every line of code with the same rigour as a physical blueprint. If a system isn\'t recoverable, scalable, and revenue-positive, it shouldn\'t exist.',
+    'Issu d\'une formation en génie mécanique et en informatique à l\'Université Concordia, je traite chaque ligne de code avec la même rigueur qu\'un plan physique. Si un système n\'est pas récupérable, scalable et générateur de revenus, il ne devrait pas exister.',
+    lang,
+  );
+  const manifestoClosing = bi(
+    'I am not here to hold your hand through a 30-minute discovery call. I am here to audit your systems, plug your revenue leaks, and expand your vision.',
+    'Je ne suis pas là pour vous accompagner lors d\'un appel découverte de 30 minutes. Je suis là pour auditer vos systèmes, colmater vos fuites de revenus et élargir votre vision.',
+    lang,
+  );
+  const manifestoCTA = bi('Submit your vision. Let\'s build the machine.', 'Soumettez votre vision. Construisons la machine.', lang);
   const badges = [
     bi('Mechanical Engineering', 'Génie Mécanique', lang),
     bi('Computer Science', 'Informatique', lang),
@@ -191,50 +206,40 @@ export default function About() {
   const pillars = [
     {
       accentColor: CARD_ACCENT[0],
-      label: bi('NT/PILLAR/01', 'NT/PILIER/01', lang),
+      label: bi('NT/STANDARD/01', 'NT/STANDARD/01', lang),
       icon: <Cpu size={20} color={CARD_ACCENT[0]} strokeWidth={1.6} />,
-      title: bi('Structural Integrity', 'Intégrité Structurelle', lang),
+      title: bi('Precision over Bloat', 'Précision avant tout', lang),
       desc:  bi(
-        'We build custom codebases using Next.js and Postgres, treated with the same precision as physical blueprints — zero shortcuts, zero bloat.',
-        'Nous construisons des bases de code sur mesure avec Next.js et Postgres, traités avec la même précision que des plans physiques — aucun raccourci, aucun superflu.',
+        'No generic templates. We build custom, high-performance foundations using Next.js and Postgres — engineered to spec, zero shortcuts, zero bloat.',
+        'Aucun modèle générique. Nous construisons des fondations sur mesure et hautes performances avec Next.js et Postgres — conçues avec précision, sans raccourcis, sans superflu.',
         lang,
       ),
     },
     {
       accentColor: CARD_ACCENT[1],
-      label: bi('NT/PILLAR/02', 'NT/PILIER/02', lang),
+      label: bi('NT/STANDARD/02', 'NT/STANDARD/02', lang),
       icon: <BarChart2 size={20} color={CARD_ACCENT[1]} strokeWidth={1.6} />,
-      title: bi('Automated Logic', 'Logique Automatisée', lang),
+      title: bi('Logic over Aesthetics', 'Logique avant l\'esthétique', lang),
       desc:  bi(
-        'Our AI systems are designed as Revenue Engines — operating with mathematical predictability. Every automation has a defined input, output, and measurable ROI.',
-        'Nos systèmes IA sont conçus comme des moteurs de revenus — fonctionnant avec une prévisibilité mathématique. Chaque automatisation a une entrée, une sortie et un ROI mesurable définis.',
+        'We don\'t just "make it look good." We engineer AI-driven lead recovery systems that ensure you never miss a revenue opportunity.',
+        'Nous ne nous contentons pas de « rendre ça beau ». Nous concevons des systèmes de récupération de leads pilotés par l\'IA pour que vous ne manquiez jamais une opportunité de revenus.',
         lang,
       ),
     },
     {
       accentColor: CARD_ACCENT[2],
-      label: bi('NT/PILLAR/03', 'NT/PILIER/03', lang),
+      label: bi('NT/STANDARD/03', 'NT/STANDARD/03', lang),
       icon: <Globe size={20} color={CARD_ACCENT[2]} strokeWidth={1.6} />,
-      title: bi('Global Sync', 'Synchronisation Mondiale', lang),
+      title: bi('Borderless Infrastructure', 'Infrastructure Sans Frontières', lang),
       desc:  bi(
-        'Bridging Montreal, Japan, and the world with one unified, bilingual technical standard: Quality. EST · JST · GMT — one architecture, no compromises.',
-        'Connecter Montréal, le Japon et le monde entier grâce à un seul standard technique bilingue unifié : la Qualité. EST · JST · GMT — une architecture, sans compromis.',
+        'Bridging the gap between the North American market and emerging global hubs in Africa with a 24/7 technical presence.',
+        'Combler le fossé entre le marché nord-américain et les pôles mondiaux émergents en Afrique avec une présence technique 24h/24 et 7j/7.',
         lang,
       ),
     },
   ];
 
-  const closingEyebrow = bi('Our Standard', 'Notre Standard', lang);
-  const closingTitle   = bi(
-    'Enterprise-grade infrastructure. Independent-operator price.',
-    'Infrastructure de niveau entreprise. Tarif pour opérateur indépendant.',
-    lang,
-  );
-  const closingBody = bi(
-    'NT Digital Group exists to give the next generation of borderless operators access to the same technical stack that global enterprises rely on — without the complexity or the price tag.',
-    'NT Digital Group existe pour donner à la prochaine génération d\'opérateurs sans frontières accès à la même infrastructure technique que les grandes entreprises mondiales — sans la complexité ni le prix.',
-    lang,
-  );
+  const closingEyebrow = bi('NT Digital Group', 'NT Digital Group', lang);
 
   return (
     <>
@@ -355,44 +360,42 @@ export default function About() {
                 fontSize: '10px', fontWeight: 700,
                 letterSpacing: '0.14em', textTransform: 'uppercase',
                 color: '#60a5fa',
-                marginBottom: '28px',
+                marginBottom: '32px',
                 display: 'flex', alignItems: 'center', gap: '8px',
                 position: 'relative', zIndex: 1,
               }}>
                 <div style={{ width: 16, height: '1px', background: '#3b82f6' }} />
-                {founderLabel}
+                {manifestoLabel}
               </div>
 
-              <div style={{ maxWidth: '680px', position: 'relative', zIndex: 1 }}>
-                <h2 style={{
-                  fontSize: 'clamp(26px,4vw,42px)',
-                  fontWeight: 800,
-                  letterSpacing: '-0.03em',
-                  lineHeight: 1.1,
-                  color: 'rgba(255,255,255,0.95)',
-                  marginBottom: '6px',
-                }}>
-                  Nickson Thermidor
-                </h2>
-                <div style={{
-                  fontSize: '13px', fontWeight: 500,
-                  color: 'rgba(255,255,255,0.38)',
-                  letterSpacing: '0.04em',
-                  marginBottom: '28px',
-                }}>
-                  {founderTitle}
-                </div>
+              <div style={{ maxWidth: '720px', position: 'relative', zIndex: 1 }}>
 
+                {/* Lead line */}
                 <p style={{
-                  fontSize: 'clamp(14px,1.6vw,16px)',
-                  lineHeight: 1.78,
-                  color: 'rgba(255,255,255,0.60)',
-                  marginBottom: '36px',
+                  fontSize: 'clamp(20px,2.8vw,28px)',
+                  fontWeight: 800,
+                  letterSpacing: '-0.025em',
+                  lineHeight: 1.3,
+                  color: 'rgba(255,255,255,0.95)',
+                  marginBottom: '28px',
+                  background: 'linear-gradient(135deg,#60a5fa 0%,#22d3ee 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
                 }}>
-                  {founderBody}
+                  {manifestoLead}
                 </p>
 
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
+                {/* Body paragraphs */}
+                <p style={{ fontSize: 'clamp(14px,1.55vw,16px)', lineHeight: 1.82, color: 'rgba(255,255,255,0.58)', marginBottom: '20px' }}>
+                  {manifestoP1}
+                </p>
+                <p style={{ fontSize: 'clamp(14px,1.55vw,16px)', lineHeight: 1.82, color: 'rgba(255,255,255,0.58)', marginBottom: '36px' }}>
+                  {manifestoP2}
+                </p>
+
+                {/* Badges */}
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginBottom: '40px' }}>
                   {badges.map((b) => (
                     <span key={b} style={{
                       padding: '6px 14px',
@@ -407,6 +410,43 @@ export default function About() {
                     </span>
                   ))}
                 </div>
+
+                {/* Divider */}
+                <div style={{ height: '1px', background: 'rgba(255,255,255,0.07)', marginBottom: '32px' }} />
+
+                {/* Closing statement */}
+                <p style={{ fontSize: 'clamp(14px,1.55vw,16px)', lineHeight: 1.82, color: 'rgba(255,255,255,0.55)', marginBottom: '28px', fontStyle: 'italic' }}>
+                  {manifestoClosing}
+                </p>
+
+                {/* Signature */}
+                <div style={{
+                  display: 'flex', alignItems: 'center', gap: '14px',
+                  marginBottom: '32px',
+                }}>
+                  <div style={{ flex: 1, height: '1px', background: 'rgba(255,255,255,0.08)' }} />
+                  <span style={{
+                    fontFamily: "'Courier New', ui-monospace, monospace",
+                    fontSize: '13px', fontWeight: 600,
+                    color: 'rgba(255,255,255,0.45)',
+                    letterSpacing: '0.08em',
+                    whiteSpace: 'nowrap',
+                  }}>
+                    — Nickson Thermidor —
+                  </span>
+                  <div style={{ flex: 1, height: '1px', background: 'rgba(255,255,255,0.08)' }} />
+                </div>
+
+                {/* CTA line */}
+                <p style={{
+                  fontFamily: "'Courier New', ui-monospace, monospace",
+                  fontSize: '13px', fontWeight: 700,
+                  letterSpacing: '0.06em',
+                  color: '#22d3ee',
+                  opacity: 0.8,
+                }}>
+                  {manifestoCTA}
+                </p>
               </div>
 
               {/* monospace spec tag */}
@@ -507,14 +547,18 @@ export default function About() {
                 color: 'rgba(255,255,255,0.90)',
                 marginBottom: '20px',
               }}>
-                {closingTitle}
+                {bi('The NT Digital Group Standard', 'Le Standard NT Digital Group', lang)}
               </h2>
               <p style={{
                 fontSize: '15px',
                 lineHeight: 1.74,
                 color: 'rgba(255,255,255,0.44)',
               }}>
-                {closingBody}
+                {bi(
+                  'Precision over Bloat. Logic over Aesthetics. Borderless Infrastructure.',
+                  'Précision avant le superflu. Logique avant l\'esthétique. Infrastructure sans frontières.',
+                  lang,
+                )}
               </p>
             </motion.div>
           </section>
