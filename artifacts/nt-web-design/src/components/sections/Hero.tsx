@@ -195,12 +195,10 @@ export function Hero({ onStart }: { onStart?: () => void } = {}) {
               source: 'HubSpot Research · 2024' },
             { v: '53%',  num: 53,   suffix: '%',   l: 'des utilisateurs quittent après 3s', sub: 'un site lent est une fondation brisée',
               detail: 'Nous concevons pour une performance sub-seconde — score 100 Lighthouse, déployé sur Vercel Edge pour une latence minimale partout dans le monde.',
-              source: 'Google Data · 2024',
-              tech: '[PERF: 100 LIGHTHOUSE / VERCEL EDGE]' },
+              source: 'Google Data · 2024' },
             { v: '100×', num: 100,  suffix: '×',   l: 'plus de conversions en moins de 5 min', sub: 'la vitesse de réponse détermine le client',
               detail: 'Nos systèmes IA interceptent les leads en quelques secondes, vous garantissant d\'être toujours le premier à répondre — avant la concurrence.',
-              source: 'Harvard Business Review',
-              tech: '[AI: GPT-4o / SMS-LATENCY <2s]' },
+              source: 'Harvard Business Review' },
           ] : [
             { v: '72%',  num: 72,   suffix: '%',   l: 'of businesses have a website',    sub: 'as of 2024–2025',
               detail: 'In the U.S. and Canada, nearly 3 out of 4 businesses now run a professional online presence to acquire and retain customers.',
@@ -216,12 +214,10 @@ export function Hero({ onStart }: { onStart?: () => void } = {}) {
               source: 'HubSpot Research · 2024' },
             { v: '53%',  num: 53,   suffix: '%',   l: 'of mobile users abandon sites over 3s', sub: 'a slow site is a broken foundation',
               detail: 'We engineer for sub-second performance — 100 Lighthouse score, deployed on Vercel Edge for minimal latency everywhere on the planet.',
-              source: 'Google Data · 2024',
-              tech: '[PERF: 100 LIGHTHOUSE / VERCEL EDGE]' },
+              source: 'Google Data · 2024' },
             { v: '100×', num: 100,  suffix: '×',   l: 'higher conversion if reached in 5 min', sub: 'speed to lead determines the client',
               detail: 'Our AI systems catch leads in seconds, ensuring you are always the first to respond — before any competitor even sees the notification.',
-              source: 'Harvard Business Review',
-              tech: '[AI: GPT-4o / SMS-LATENCY <2s]' },
+              source: 'Harvard Business Review' },
           ]).map((s, i) => (
             <StatCard key={s.v} {...s} delay={0.55 + i * 0.12} />
           ))}
