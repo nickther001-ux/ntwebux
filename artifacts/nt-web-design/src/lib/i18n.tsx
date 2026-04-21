@@ -158,12 +158,12 @@ const translations: Translations = {
         ],
         aiPlans: [
           {
-            name: "Starter", price: "97", cycle: "/ month",
+            name: "Starter", price: "297", cycle: "/ month",
             features: ["Basic CRM", "AI Web Chat", "Email Support"],
-            cta: "Start Free Trial", featured: false
+            cta: "Get Started", featured: false
           },
           {
-            name: "Professional", price: "297", cycle: "/ month",
+            name: "Professional", price: "497", cycle: "/ month",
             badge: "Most Popular",
             features: ["Full AI Text-Back", "Auto-Booking", "Review Engine"],
             cta: "Claim Beta Spot", featured: true
@@ -337,12 +337,12 @@ const translations: Translations = {
         ],
         aiPlans: [
           {
-            name: "Starter", price: "97", cycle: "/ mois",
+            name: "Starter", price: "297", cycle: "/ mois",
             features: ["CRM de base", "Chat Web IA", "Support par email"],
-            cta: "Essai Gratuit", featured: false
+            cta: "Commencer", featured: false
           },
           {
-            name: "Professional", price: "297", cycle: "/ mois",
+            name: "Professional", price: "497", cycle: "/ mois",
             badge: "Le plus populaire",
             features: ["AI Text-Back complet", "Réservation auto", "Moteur d'avis clients"],
             cta: "Réserver Bêta", featured: true
