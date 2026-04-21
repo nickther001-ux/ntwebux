@@ -28,7 +28,7 @@ const fadeUp = (delay = 0) => ({
 
 export default function ServicesPortfolio() {
   const { t, lang } = useLanguage();
-  const [activePlan, setActivePlan] = useState<{ name: string; price: string | number } | null>(null);
+  const [activePlan, setActivePlan] = useState<{ name: string; price: string | number; isSaas?: boolean } | null>(null);
   const [track, setTrack] = useState<'web' | 'ai'>('web');
   const svc   = t('portfolio.services') as any;
   const work  = t('portfolio.work')     as any;
@@ -205,7 +205,7 @@ export default function ServicesPortfolio() {
 
                   <div style={{ marginTop: '32px' }}>
                     <button
-                      onClick={() => setActivePlan({ name: plan.name, price: plan.price })}
+                      onClick={() => setActivePlan({ name: plan.name, price: plan.price, isSaas: isAi })}
                       className={featured ? 'btn-violet' : 'btn-outline'}
                       style={{
                         padding: '13px 18px',

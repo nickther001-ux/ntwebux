@@ -20,6 +20,20 @@ const SITE_TYPES = [
   { id: 'custom',     en: 'Custom / Other',         fr: 'Personnalisé / Autre',      img: '',                      emoji: '✨' },
 ];
 
+/* ─── SaaS product type options (Enterprise SaaS plans) ────────── */
+const SAAS_TYPES = [
+  { id: 'crm',         en: 'CRM & Customer Hub',         fr: 'CRM & Hub Client',              img: '', emoji: '🧩' },
+  { id: 'ai-chat',     en: 'AI Web Chat & Text-Back',    fr: 'Chat Web IA & Réponses Auto',  img: '', emoji: '💬' },
+  { id: 'ai-voice',    en: 'AI Voice Agent',             fr: 'Agent Vocal IA',                img: '', emoji: '🎙️' },
+  { id: 'booking',     en: 'Auto-Booking & Scheduling',  fr: 'Réservation & Planification',  img: '', emoji: '📅' },
+  { id: 'reviews',     en: 'Review & Reputation Engine', fr: 'Moteur d\'avis & Réputation',  img: '', emoji: '⭐' },
+  { id: 'leadgen',     en: 'Lead Gen & Outreach',        fr: 'Génération de Leads',           img: '', emoji: '🎯' },
+  { id: 'multitenant', en: 'Multi-tenant SaaS Platform', fr: 'Plateforme SaaS Multi-tenant',  img: '', emoji: '🏛️' },
+  { id: 'workflow',    en: 'Internal Ops & Workflow',    fr: 'Opérations & Workflow Interne', img: '', emoji: '⚙️' },
+  { id: 'whatsapp',    en: 'WhatsApp Automation',        fr: 'Automatisation WhatsApp',       img: '', emoji: '📲' },
+  { id: 'custom',      en: 'Custom / Other',             fr: 'Personnalisé / Autre',          img: '', emoji: '✨' },
+];
+
 const GOALS_EN = [
   'Generate leads & calls', 'Sell products online', 'Online booking / reservations',
   'Showcase portfolio', 'Brand awareness', 'Replace an old website', 'Other',
@@ -51,7 +65,7 @@ const inp: React.CSSProperties = {
 };
 
 /* ─── Types ─────────────────────────────────────────────────────── */
-interface Plan { name: string; price: string | number; }
+interface Plan { name: string; price: string | number; isSaas?: boolean; }
 
 interface FormData {
   siteType: string;
@@ -93,6 +107,9 @@ export function OnboardingModal({ plan, onClose }: Props) {
   const fr = lang === 'fr';
 
   if (!plan) return null;
+
+  const isSaas = !!plan.isSaas;
+  const TYPES  = isSaas ? SAAS_TYPES : SITE_TYPES;
 
   const totalSteps = 4;
   const progress   = ((step) / totalSteps) * 100;
@@ -157,15 +174,19 @@ export function OnboardingModal({ plan, onClose }: Props) {
     <motion.div key="s0" {...slide(dir)} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
       <div>
         <h3 style={{ fontSize: '20px', fontWeight: 800, marginBottom: '6px' }}>
-          {fr ? 'Quel type de site web souhaitez-vous?' : 'What type of website do you need?'}
+          {isSaas
+            ? (fr ? 'Quel produit SaaS souhaitez-vous déployer?' : 'What SaaS product do you need?')
+            : (fr ? 'Quel type de site web souhaitez-vous?'      : 'What type of website do you need?')}
         </h3>
         <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.45)', lineHeight: 1.6 }}>
-          {fr ? 'Choisissez le plus proche de votre vision — vous pourrez personnaliser ensuite.' : 'Pick the closest match — you can customize everything after.'}
+          {isSaas
+            ? (fr ? 'Choisissez le module principal — nous bâtirons toute votre stack autour.' : 'Pick the core module — we\'ll architect your full stack around it.')
+            : (fr ? 'Choisissez le plus proche de votre vision — vous pourrez personnaliser ensuite.' : 'Pick the closest match — you can customize everything after.')}
         </p>
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '10px' }}>
-        {SITE_TYPES.map(type => (
+        {TYPES.map(type => (
           <button
             key={type.id}
             onClick={() => set('siteType', type.id)}
@@ -207,7 +228,7 @@ export function OnboardingModal({ plan, onClose }: Props) {
         ))}
       </div>
 
-      {data.siteType && (
+      {data.siteType && !isSaas && (
         <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
           <p style={{ fontSize: '13px', fontWeight: 600, color: 'rgba(255,255,255,0.55)' }}>
             {fr ? 'Voulez-vous utiliser un de nos modèles ou une création 100% personnalisée?' : 'Would you prefer a template-based design or a fully custom creation?'}
