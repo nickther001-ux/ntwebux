@@ -10,11 +10,11 @@ interface Translations {
 
 const translations: Translations = {
   en: {
-    nav: { services: "Services", process: "Process", whyUs: "Why Us", contact: "Contact", quote: "Get a Free Quote" },
+    nav: { services: "Services", process: "Process", whyUs: "Why Us", contact: "Contact", quote: "Get a Free Audit" },
     hero: {
       eyebrow: "Web Design Studio",
       h1_1: "YOUR", h1_2: "BUSINESS", h1_3: "ONLINE.", h1_4: "DONE RIGHT.",
-      sub: "High-Performance Digital Foundations + AI Lead Recovery for Borderless Enterprises. We build the systems that catch the money your business is currently leaking.",
+      sub: "We build your web presence and automate your client acquisition — bilingual, AI-powered, delivered in under 14 days.",
       btn1: "Start My Project", btn2: "See How It Works",
       mockBadge: "+340% Avg. Traffic Increase"
     },
@@ -141,7 +141,7 @@ const translations: Translations = {
         webPlans: [
           {
             name: "Starter", price: "997", cycle: "One-time project fee",
-            features: ["5-page responsive website", "Custom design", "Basic SEO", "Contact form"],
+            features: ["5-page responsive website", "Custom design", "Basic SEO", "Contact form", "Delivered in 10 business days", "Includes 2 revision rounds"],
             cta: "Start Project", featured: false
           },
           {
@@ -153,7 +153,7 @@ const translations: Translations = {
           {
             name: "Enterprise", price: "Custom", cycle: "Tailored scope",
             features: ["Unlimited pages", "Custom web apps", "Dedicated project manager", "SLA & priority support"],
-            cta: "Talk to Sales", featured: false, isCustom: true
+            cta: "Let's Talk", featured: false, isCustom: true
           }
         ],
         aiPlans: [
@@ -191,11 +191,11 @@ const translations: Translations = {
     }
   },
   fr: {
-    nav: { services: "Services", process: "Processus", whyUs: "Pourquoi Nous", contact: "Contact", quote: "Devis Gratuit" },
+    nav: { services: "Services", process: "Processus", whyUs: "Pourquoi Nous", contact: "Contact", quote: "Obtenir un audit gratuit" },
     hero: {
       eyebrow: "Studio Web Design",
       h1_1: "VOTRE", h1_2: "ENTREPRISE", h1_3: "EN LIGNE.", h1_4: "BIEN FAIT.",
-      sub: "Fondations Numériques Haute Performance + Récupération de Leads IA pour Entreprises Sans Frontières. Nous construisons les systèmes qui récupèrent l'argent que votre entreprise perd actuellement.",
+      sub: "On construit votre présence web et on automatise votre acquisition de clients — bilingue, propulsé par l'IA, livré en moins de 14 jours.",
       btn1: "Démarrer Mon Projet", btn2: "Comment Ça Marche",
       mockBadge: "+340% de Trafic en Moyenne"
     },
@@ -320,7 +320,7 @@ const translations: Translations = {
         webPlans: [
           {
             name: "Starter", price: "997", cycle: "Tarif unique du projet",
-            features: ["Site 5 pages responsive", "Design personnalisé", "SEO de base", "Formulaire de contact"],
+            features: ["Site 5 pages responsive", "Design personnalisé", "SEO de base", "Formulaire de contact", "Livré en 10 jours ouvrables", "Inclut 2 rondes de révision"],
             cta: "Démarrer le Projet", featured: false
           },
           {
@@ -332,7 +332,7 @@ const translations: Translations = {
           {
             name: "Enterprise", price: "Sur mesure", cycle: "Portée sur mesure",
             features: ["Pages illimitées", "Applications web sur mesure", "Chef de projet dédié", "SLA & support prioritaire"],
-            cta: "Parler aux Ventes", featured: false, isCustom: true
+            cta: "Réserver un appel", featured: false, isCustom: true
           }
         ],
         aiPlans: [

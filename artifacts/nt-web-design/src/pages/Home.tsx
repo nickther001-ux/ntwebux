@@ -6,10 +6,12 @@ import { TrustBar } from "@/components/sections/TrustBar";
 import { Stats } from "@/components/sections/Stats";
 import { Services } from "@/components/sections/Services";
 import { Portfolio } from "@/components/sections/Portfolio";
+import { NTBusinessSuite } from "@/components/sections/NTBusinessSuite";
 import { Process } from "@/components/sections/Process";
 import { WhyUs } from "@/components/sections/WhyUs";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { Contact } from "@/components/sections/Contact";
+import { FounderSection } from "@/components/sections/FounderSection";
 import { Footer } from "@/components/Footer";
 import { ROICalculator } from "@/components/ROICalculator";
 import { ActiveDeployments } from "@/components/sections/ActiveDeployments";
@@ -80,10 +82,12 @@ export default function Home() {
           <ActiveDeployments />
           <ROICalculator />
           <Portfolio />
+          <NTBusinessSuite />
           <Process />
           <WhyUs />
           <Testimonials />
           <Contact />
+          <FounderSection />
         </main>
         <Footer />
       </div>

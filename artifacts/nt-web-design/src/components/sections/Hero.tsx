@@ -114,7 +114,7 @@ export function Hero({ onStart }: { onStart?: () => void } = {}) {
         <motion.div custom={0} variants={fadeUp} initial="hidden" animate="show" style={{ display: 'flex', justifyContent: 'center', marginBottom: '32px' }}>
           <span className="pill-label">
             <Sparkles size={11} />
-            {lang === 'fr' ? 'Studio d\'Architecture Technique' : 'Technical Architecture Studio'}
+            {lang === 'fr' ? 'Agence IA + Plateforme tout-en-un pour entrepreneurs' : 'AI Agency + All-in-One Platform for Service Businesses'}
           </span>
         </motion.div>
 
@@ -134,7 +134,7 @@ export function Hero({ onStart }: { onStart?: () => void } = {}) {
           }}
         >
           {lang === 'fr' ? (
-            <>Nous concevons des<br /><span className="gradient-text">Moteurs de Revenus.</span></>
+            <>On propulse<br /><span className="gradient-text">votre croissance.</span></>
           ) : (
             <>We Engineer<br /><span className="gradient-text">Revenue Engines.</span></>
           )}
@@ -172,54 +172,36 @@ export function Hero({ onStart }: { onStart?: () => void } = {}) {
           </a>
         </motion.div>
 
-        {/* Industry reality cards */}
+        {/* Reality cards */}
         <motion.div
           custom={4}
           variants={fadeUp}
           initial="hidden"
           animate="show"
-          style={{ marginTop: '72px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '16px' }}
+          style={{ marginTop: '72px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '16px' }}
         >
           {(lang === 'fr' ? [
-            { v: '72%',  num: 72,   suffix: '%',   l: 'des entreprises ont un site',      sub: 'en 2024–2025',
-              detail: 'Aux États-Unis et au Canada, près de 3 entreprises sur 4 disposent désormais d\u2019une présence en ligne professionnelle pour acquérir et fidéliser leurs clients.',
-              source: 'Forbes Advisor · 2024' },
-            { v: '28%',  num: 28,   suffix: '%',   l: 'des PME n\'ont toujours pas',      sub: 'de présence en ligne',
-              detail: 'Cela représente plus de 9 millions de petites entreprises qui passent à côté de clients qui les cherchent activement sur Google chaque jour.',
-              source: 'Statista · 2024' },
-            { v: '1Md+', num: null, suffix: '',    l: 'de sites web actifs',              sub: 'dans le monde',
-              detail: 'Pour vous démarquer, votre site doit être rapide, sécurisé, optimisé SEO et conçu pour la conversion — pas juste « en ligne ».',
-              source: 'Internet Live Stats · 2025' },
-            { v: '3×',   num: 3,    suffix: '×',   l: 'plus de prospects',                sub: 'avec un site pro',
-              detail: 'Les entreprises avec un site professionnel et bien optimisé génèrent en moyenne 3 fois plus de demandes qualifiées que celles avec un site basique ou aucun site.',
-              source: 'HubSpot Research · 2024' },
-            { v: '53%',  num: 53,   suffix: '%',   l: 'des utilisateurs quittent après 3s', sub: 'un site lent est une fondation brisée',
-              detail: 'Nous concevons pour une performance sub-seconde — score 100 Lighthouse, déployé sur Vercel Edge pour une latence minimale partout dans le monde.',
-              source: 'Google Data · 2024' },
-            { v: '100×', num: 100,  suffix: '×',   l: 'plus de conversions en moins de 5 min', sub: 'la vitesse de réponse détermine le client',
-              detail: 'Nos systèmes IA interceptent les leads en quelques secondes, vous garantissant d\'être toujours le premier à répondre — avant la concurrence.',
-              source: 'Harvard Business Review' },
+            { v: '14 jours', num: null, suffix: '', l: 'Délai moyen de livraison', sub: 'de la découverte au lancement',
+              detail: "Nous travaillons à la vitesse d'une startup — de l'appel de découverte au site en ligne en moins de 14 jours ouvrables.",
+              source: 'Délai garanti NT Digital' },
+            { v: 'Bilingue', num: null, suffix: '', l: 'Français + Anglais, natif', sub: '100% natif dans les deux langues',
+              detail: 'Tous nos livrables — site, contenu, automatisations — sont entièrement natifs en français et en anglais. Aucune traduction automatique.',
+              source: 'Standard NT Digital' },
+            { v: 'Loi 25', num: null, suffix: '', l: 'Conforme à la Loi 25', sub: 'Conformité vie privée Québec',
+              detail: 'Chaque projet que nous livrons respecte la Loi 25 du Québec : politique de confidentialité, consentement aux cookies et pratiques de collecte de données.',
+              source: 'Conformité Québec · 2024' },
           ] : [
-            { v: '72%',  num: 72,   suffix: '%',   l: 'of businesses have a website',    sub: 'as of 2024–2025',
-              detail: 'In the U.S. and Canada, nearly 3 out of 4 businesses now run a professional online presence to acquire and retain customers.',
-              source: 'Forbes Advisor · 2024' },
-            { v: '28%',  num: 28,   suffix: '%',   l: 'of small businesses still don\'t', sub: 'have an online presence',
-              detail: 'That\u2019s over 9 million small businesses missing out on customers actively searching for them on Google every single day.',
-              source: 'Statista · 2024' },
-            { v: '1B+',  num: null, suffix: '',    l: 'active websites worldwide',        sub: 'and growing daily',
-              detail: 'To stand out, your site must be fast, secure, SEO-optimized and built to convert — not just “online”.',
-              source: 'Internet Live Stats · 2025' },
-            { v: '3×',   num: 3,    suffix: '×',   l: 'more leads',                      sub: 'with a pro website',
-              detail: 'Businesses with a professional, well-optimized website generate on average 3× more qualified inquiries than those with a basic site or no site at all.',
-              source: 'HubSpot Research · 2024' },
-            { v: '53%',  num: 53,   suffix: '%',   l: 'of mobile users abandon sites over 3s', sub: 'a slow site is a broken foundation',
-              detail: 'We engineer for sub-second performance — 100 Lighthouse score, deployed on Vercel Edge for minimal latency everywhere on the planet.',
-              source: 'Google Data · 2024' },
-            { v: '100×', num: 100,  suffix: '×',   l: 'higher conversion if reached in 5 min', sub: 'speed to lead determines the client',
-              detail: 'Our AI systems catch leads in seconds, ensuring you are always the first to respond — before any competitor even sees the notification.',
-              source: 'Harvard Business Review' },
+            { v: '14 days', num: null, suffix: '', l: 'Average project delivery', sub: 'from discovery to live',
+              detail: 'We work at startup speed — from discovery call to live site in under 14 business days. No waiting months for a website.',
+              source: 'NT Digital Guaranteed SLA' },
+            { v: 'Bilingual', num: null, suffix: '', l: 'French + English, fully native', sub: '100% native in both languages',
+              detail: 'Every deliverable — site, copy, automations — is natively bilingual in French and English. No machine translation. No hybrid copy.',
+              source: 'NT Digital Standard' },
+            { v: 'Law 25', num: null, suffix: '', l: 'Quebec privacy compliant', sub: 'Built for Law 25 from day one',
+              detail: 'Every project we deliver is Law 25 compliant: privacy policy, cookie consent, and data collection practices built in from the start.',
+              source: 'Quebec Privacy Law · 2024' },
           ]).map((s, i) => (
-            <StatCard key={s.v} {...s} delay={0.55 + i * 0.12} />
+            <StatCard key={i} {...s} delay={0.55 + i * 0.12} />
           ))}
         </motion.div>
       </motion.div>

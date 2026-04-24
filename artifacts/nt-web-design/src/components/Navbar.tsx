@@ -56,7 +56,7 @@ export function Navbar() {
     { href: isHome ? '#portfolio' : '/#portfolio', label: lang === 'fr' ? 'Portfolio' : 'Portfolio' },
     { href: isHome ? '#process' : '/#process', label: lang === 'fr' ? 'Processus' : 'Process' },
     { href: '/services', label: lang === 'fr' ? 'Tarifs' : 'Pricing', isPage: true },
-    { href: '/business', label: lang === 'fr' ? 'Logiciels' : 'Business Software', isPage: true },
+    { href: '/business', label: lang === 'fr' ? 'Logiciels' : 'Business Software', isPage: true, highlight: true },
     { href: isHome ? '#roi-calculator' : '/#roi-calculator', label: lang === 'fr' ? 'Audit ROI' : 'ROI Audit' },
     { href: isHome ? '#contact' : '/#contact', label: 'Contact' },
   ];
@@ -125,11 +125,22 @@ export function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                style={linkStyle}
+                style={(link as any).highlight ? { ...linkStyle, color: '#93c5fd' } : linkStyle}
                 onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = '#fff')}
-                onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.65)')}
+                onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = (link as any).highlight ? '#93c5fd' : 'rgba(255,255,255,0.65)')}
               >
-                {link.label}
+                {(link as any).highlight ? (
+                  <span style={{
+                    display: 'inline-flex', alignItems: 'center', gap: '5px',
+                    padding: '2px 7px',
+                    background: 'rgba(59,130,246,0.12)',
+                    border: '1px solid rgba(59,130,246,0.35)',
+                    borderRadius: '999px',
+                    color: '#93c5fd',
+                  }}>
+                    {link.label}
+                  </span>
+                ) : link.label}
               </Link>
             ) : (
               <a

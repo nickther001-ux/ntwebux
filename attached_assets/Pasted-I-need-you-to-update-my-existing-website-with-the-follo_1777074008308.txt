@@ -1,0 +1,71 @@
+I need you to update my existing website with the following changes. Do not rebuild from scratch — work with the existing codebase.
+1. NAVIGATION BAR
+
+Change the primary CTA button from "Get a Free Quote" to "Get a Free Audit" in both English and French ("Obtenir un audit gratuit")
+Visually highlight the "Business Software" nav item with a subtle blue accent border or badge so it stands out from the other nav links
+Make sure the EN/FR language toggle is switching all page content, not just labels
+
+2. HERO SECTION
+
+Change the small category label above the headline from "Technical Architecture Studio" to:
+
+EN: "AI Agency + All-in-One Platform for Service Businesses"
+FR: "Agence IA + Plateforme tout-en-un pour entrepreneurs"
+
+
+Keep the headline "We Engineer Revenue Engines" in English
+Add a French version of the headline: "On propulse votre croissance."
+Replace the subheading "High-Performance Digital Foundations + AI Lead Recovery for Borderless Enterprises. We build the systems that catch the money your business is currently leaking." with:
+
+EN: "We build your web presence and automate your client acquisition — bilingual, AI-powered, delivered in under 14 days."
+FR: "On construit votre présence web et on automatise votre acquisition de clients — bilingue, propulsé par l'IA, livré en moins de 14 jours."
+
+
+Replace the existing industry stat cards (72%, 28%, 1B+) with these 3 new ones:
+
+Card 1: "14 days" / "Average project delivery"
+Card 2: "Bilingual" / "French + English, fully native"
+Card 3: "Law 25 Ready" / "Quebec privacy compliant"
+
+
+
+3. PORTFOLIO SECTION
+
+Under each portfolio project card, add a one-line result tag in small text. For AudreyRh.com add: "Launched in 11 days — bilingual, dual-audience architecture." For Maison Luxe Boutique add: "Full e-commerce store, Shopify integrated."
+
+4. PRICING SECTION
+
+Make "Enterprise AI (Monthly SaaS)" the DEFAULT active tab instead of "Digital Foundations (Project)"
+On the Starter ($997) project tier, add two extra bullet points: "Delivered in 10 business days" and "Includes 2 revision rounds"
+Change the Enterprise tier CTA button from "Talk to Sales" to "Let's Talk" (EN) / "Réserver un appel" (FR)
+
+5. NEW SECTION — NT Business Suite (add this between Portfolio and Pricing)
+Create a new full-width section with:
+
+Headline EN: "Your automated back-office — included."
+Headline FR: "Votre back-office automatisé — tout inclus."
+Subheading EN: "CRM, AI receptionist, lead reactivation, reputation management, email & SMS automation — one subscription, fully in French."
+Subheading FR: "CRM, réceptionniste IA, relance de clients, gestion de réputation, automatisation courriel et SMS — un seul abonnement, entièrement en français."
+3 feature cards with icons:
+
+"AI Receptionist" / "Answers calls 24/7, books appointments, follows up automatically"
+"Lead Reactivation" / "Re-engage dormant clients with automated bilingual sequences"
+"Reputation Management" / "Auto-request reviews, auto-reply, monitor your Google rating"
+
+
+CTA button: "See NT Business Suite" linking to the Business Software page/section
+
+6. NEW SECTION — Founder/About (add this above the footer)
+Create a simple clean section with:
+
+Headline EN: "Built by a founder, for founders."
+Headline FR: "Construit par un entrepreneur, pour les entrepreneurs."
+Body EN: "NT Digital Group is a Montreal-based AI agency and SaaS platform built from the ground up by one founder — using the same AI systems we build for our clients. No bloated teams. No inflated overhead. Just results."
+Body FR: "NT Digital Group est une agence IA et plateforme SaaS basée à Montréal, construite de A à Z par un seul fondateur — avec les mêmes systèmes IA qu'on déploie pour nos clients. Pas d'équipes surdimensionnées. Pas de frais gonflés. Que des résultats."
+Add a small badge below that reads: "Basé à Montréal · Bilingue · Conforme à la Loi 25"
+
+7. GLOBAL
+
+Make sure every section has a French equivalent when the FR toggle is active
+Do not change any existing animations, color scheme, fonts, or layout structure
+Do not touch the navigation logo or existing links

@@ -11,6 +11,7 @@ const PROJECTS = [
     category: { en: 'HR Consulting', fr: 'Conseil RH' },
     title: { en: 'AudreyRh.com', fr: 'AudreyRh.com' },
     tags: { en: ['HR Consultant', 'Personal Brand'], fr: ['Conseil RH', 'Image personnelle'] },
+    result: { en: 'Launched in 11 days — bilingual, dual-audience architecture.', fr: 'Lancé en 11 jours — architecture bilingue, double audience.' },
     wide: true,
   },
   {
@@ -18,6 +19,7 @@ const PROJECTS = [
     category: { en: 'E-Commerce', fr: 'E-Commerce' },
     title: { en: 'Maison Luxe Boutique', fr: 'Maison Luxe Boutique' },
     tags: { en: ['E-Commerce', 'Shopify'], fr: ['E-Commerce', 'Shopify'] },
+    result: { en: 'Full e-commerce store, Shopify integrated.', fr: 'Boutique e-commerce complète, intégration Shopify.' },
     wide: false,
   },
   {
@@ -353,6 +355,18 @@ function ProjectCard({
                 </span>
               ))}
             </div>
+            {(project as any).result && (
+              <div style={{
+                marginTop: '8px',
+                fontSize: '11px',
+                fontWeight: 500,
+                color: '#67e8f9',
+                opacity: 0.85,
+                lineHeight: 1.4,
+              }}>
+                ✦ {(project as any).result[lang as 'en' | 'fr']}
+              </div>
+            )}
           </div>
           <div style={{
             width: '32px', height: '32px', borderRadius: '50%', flexShrink: 0,

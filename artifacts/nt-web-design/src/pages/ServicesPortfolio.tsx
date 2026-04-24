@@ -29,7 +29,7 @@ const fadeUp = (delay = 0) => ({
 export default function ServicesPortfolio() {
   const { t, lang } = useLanguage();
   const [activePlan, setActivePlan] = useState<{ name: string; price: string | number; isSaas?: boolean } | null>(null);
-  const [track, setTrack] = useState<'web' | 'ai'>('web');
+  const [track, setTrack] = useState<'web' | 'ai'>('ai');
   const svc   = t('portfolio.services') as any;
   const work  = t('portfolio.work')     as any;
   const webPlans: any[] = svc.webPlans ?? [];
