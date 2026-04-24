@@ -1,0 +1,46 @@
+Update the existing website with the following changes. Do not rebuild from scratch — work with the existing codebase. Do not change any animations, color scheme, fonts, logo, or existing navigation links.
+1. HERO SECTION — Update the subheading
+Replace the current subheading text with:
+
+EN: "We build your custom bilingual website and automate your client acquisition. Most sites go live in 3 days. Complex builds take a little longer — never months."
+FR: "On construit votre site web bilingue sur mesure et on automatise votre acquisition de clients. La plupart de nos sites sont en ligne en 3 jours. Les projets complexes prennent un peu plus — jamais des mois."
+
+2. HERO SECTION — Replace the 3 stat cards
+Replace the existing stat cards (72%, 28%, 1B+) with these 3 new cards:
+
+Card 1: Main text "Avg. 3 days" / Sub-text "Most sites delivered in 72 hours"
+Card 2: Main text "Bilingual" / Sub-text "French + English, fully native"
+Card 3: Main text "Law 25 Ready" / Sub-text "Quebec privacy compliant"
+
+3. PRICING SECTION — Add delivery timeline under each tier name
+Under each pricing tier title add a small delivery badge or subtitle line in muted text:
+
+Starter ($997): add "Typically delivered in 2–3 business days"
+Growth ($2,497): add "Typically delivered in 4–6 business days"
+Enterprise (Custom): add "Timeline scoped per project"
+
+Make sure these appear in both EN and FR:
+
+FR Starter: "Livré en 2–3 jours ouvrables en moyenne"
+FR Growth: "Livré en 4–6 jours ouvrables en moyenne"
+FR Enterprise: "Délai établi selon la portée du projet"
+
+4. PROCESS SECTION — Add a delivery transparency block
+In the Process section (or just above the Pricing section if Process doesn't exist as a visible section), add a simple full-width statement block with:
+
+EN headline: "We tell you exactly how long your build will take — before we start."
+FR headline: "On vous dit exactement combien de temps prendra votre projet — avant de commencer."
+EN subtext: "No vague timelines. No missed deadlines. Every project gets a clear delivery window based on its complexity, confirmed before work begins."
+FR subtext: "Pas de délais vagues. Pas de retards. Chaque projet reçoit une fenêtre de livraison claire basée sur sa complexité, confirmée avant le début des travaux."
+
+5. NEW DELIVERY TABLE — Add inside or just below the Pricing section
+Add a clean 3-column comparison table with this data:
+Project typeTypical deliveryStarting atStarter — 5-page site2–3 business days$997Growth — up to 10 pages + CMS4–6 business days$2,497Enterprise — custom web appScoped per projectCustom
+FR version:
+Type de projetDélai moyenÀ partir deStarter — site 5 pages2–3 jours ouvrables997 $Croissance — jusqu'à 10 pages + CMS4–6 jours ouvrables2 497 $Entreprise — application web sur mesureSelon la portéeSur mesure
+Style the table to match the existing dark theme of the site. Show EN or FR version based on the active language toggle.
+6. GLOBAL
+
+All new text must respect the existing EN/FR language toggle
+Do not touch the navigation, logo, animations, or color scheme
+Match all font sizes and weights to the existing design system on the site

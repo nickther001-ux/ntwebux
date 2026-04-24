@@ -181,8 +181,8 @@ export function Hero({ onStart }: { onStart?: () => void } = {}) {
           style={{ marginTop: '72px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '16px' }}
         >
           {(lang === 'fr' ? [
-            { v: '14 jours', num: null, suffix: '', l: 'Délai moyen de livraison', sub: 'de la découverte au lancement',
-              detail: "Nous travaillons à la vitesse d'une startup — de l'appel de découverte au site en ligne en moins de 14 jours ouvrables.",
+            { v: 'Moy. 3 jours', num: null, suffix: '', l: 'La plupart des sites livrés en 72h', sub: 'rapide, fiable, sans surprise',
+              detail: 'La plupart de nos sites sont en ligne en 3 jours ouvrables. Les projets plus complexes prennent un peu plus — jamais des mois.',
               source: 'Délai garanti NT Digital' },
             { v: 'Bilingue', num: null, suffix: '', l: 'Français + Anglais, natif', sub: '100% natif dans les deux langues',
               detail: 'Tous nos livrables — site, contenu, automatisations — sont entièrement natifs en français et en anglais. Aucune traduction automatique.',
@@ -191,13 +191,13 @@ export function Hero({ onStart }: { onStart?: () => void } = {}) {
               detail: 'Chaque projet que nous livrons respecte la Loi 25 du Québec : politique de confidentialité, consentement aux cookies et pratiques de collecte de données.',
               source: 'Conformité Québec · 2024' },
           ] : [
-            { v: '14 days', num: null, suffix: '', l: 'Average project delivery', sub: 'from discovery to live',
-              detail: 'We work at startup speed — from discovery call to live site in under 14 business days. No waiting months for a website.',
+            { v: 'Avg. 3 days', num: null, suffix: '', l: 'Most sites delivered in 72 hours', sub: 'fast, reliable, no surprises',
+              detail: 'Most of our sites go live within 3 business days. More complex builds take a little longer — never months.',
               source: 'NT Digital Guaranteed SLA' },
             { v: 'Bilingual', num: null, suffix: '', l: 'French + English, fully native', sub: '100% native in both languages',
               detail: 'Every deliverable — site, copy, automations — is natively bilingual in French and English. No machine translation. No hybrid copy.',
               source: 'NT Digital Standard' },
-            { v: 'Law 25', num: null, suffix: '', l: 'Quebec privacy compliant', sub: 'Built for Law 25 from day one',
+            { v: 'Law 25 Ready', num: null, suffix: '', l: 'Quebec privacy compliant', sub: 'Built for Law 25 from day one',
               detail: 'Every project we deliver is Law 25 compliant: privacy policy, cookie consent, and data collection practices built in from the start.',
               source: 'Quebec Privacy Law · 2024' },
           ]).map((s, i) => (

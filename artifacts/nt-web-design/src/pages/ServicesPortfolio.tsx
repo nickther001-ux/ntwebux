@@ -136,6 +136,21 @@ export default function ServicesPortfolio() {
             </div>
           </div>
 
+          {track === 'web' && (
+            <div style={{ textAlign: 'center', marginBottom: '48px', padding: '28px 32px', background: 'rgba(59,130,246,0.05)', border: '1px solid rgba(59,130,246,0.15)', borderRadius: '16px' }}>
+              <div style={{ fontSize: 'clamp(15px, 2.2vw, 18px)', fontWeight: 700, color: '#fff', marginBottom: '10px' }}>
+                {lang === 'fr'
+                  ? 'On vous dit exactement combien de temps prendra votre projet — avant de commencer.'
+                  : 'We tell you exactly how long your build will take — before we start.'}
+              </div>
+              <div style={{ fontSize: '14px', color: 'rgba(255,255,255,0.5)', maxWidth: '640px', margin: '0 auto', lineHeight: 1.7 }}>
+                {lang === 'fr'
+                  ? "Pas de délais vagues. Pas de retards. Chaque projet reçoit une fenêtre de livraison claire basée sur sa complexité, confirmée avant le début des travaux."
+                  : "No vague timelines. No missed deadlines. Every project gets a clear delivery window based on its complexity, confirmed before work begins."}
+              </div>
+            </div>
+          )}
+
           <div
             key={track}
             style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px', alignItems: 'stretch' }}
@@ -181,7 +196,12 @@ export default function ServicesPortfolio() {
                     <Icon size={20} strokeWidth={1.6} />
                   </div>
 
-                  <div style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.45)', textTransform: 'uppercase', marginBottom: '10px' }}>{plan.name}</div>
+                  <div style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.45)', textTransform: 'uppercase', marginBottom: '8px' }}>{plan.name}</div>
+                  {!isAi && (plan as any).delivery && (
+                    <div style={{ fontSize: '11px', color: '#67e8f9', fontWeight: 500, marginBottom: '10px', opacity: 0.85 }}>
+                      ⏱ {(plan as any).delivery}
+                    </div>
+                  )}
 
                   <div style={{ display: 'flex', alignItems: 'baseline', gap: '4px', marginBottom: '6px', flexWrap: 'wrap' }}>
                     {!isCustom && <span style={{ fontSize: '22px', fontWeight: 700, color: '#93c5fd', lineHeight: 1 }}>$</span>}
@@ -230,6 +250,45 @@ export default function ServicesPortfolio() {
               );
             })}
           </div>
+
+          {track === 'web' && (
+            <div style={{ marginTop: '52px' }}>
+              <div style={{ borderRadius: '16px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.07)' }}>
+                <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+                  <thead>
+                    <tr style={{ background: 'rgba(59,130,246,0.08)', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
+                      <th style={{ padding: '14px 20px', fontSize: '11px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', textAlign: 'left' }}>
+                        {lang === 'fr' ? 'Type de projet' : 'Project type'}
+                      </th>
+                      <th style={{ padding: '14px 20px', fontSize: '11px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', textAlign: 'left' }}>
+                        {lang === 'fr' ? 'Délai moyen' : 'Typical delivery'}
+                      </th>
+                      <th style={{ padding: '14px 20px', fontSize: '11px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', textAlign: 'left' }}>
+                        {lang === 'fr' ? 'À partir de' : 'Starting at'}
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {(lang === 'fr' ? [
+                      { type: 'Starter — site 5 pages', delivery: '2–3 jours ouvrables', price: '997 $' },
+                      { type: "Croissance — jusqu'à 10 pages + CMS", delivery: '4–6 jours ouvrables', price: '2 497 $' },
+                      { type: 'Entreprise — application web sur mesure', delivery: 'Selon la portée', price: 'Sur mesure' },
+                    ] : [
+                      { type: 'Starter — 5-page site', delivery: '2–3 business days', price: '$997' },
+                      { type: 'Growth — up to 10 pages + CMS', delivery: '4–6 business days', price: '$2,497' },
+                      { type: 'Enterprise — custom web app', delivery: 'Scoped per project', price: 'Custom' },
+                    ]).map((row, i) => (
+                      <tr key={i} style={{ borderBottom: i < 2 ? '1px solid rgba(255,255,255,0.05)' : 'none', background: i % 2 === 0 ? 'rgba(255,255,255,0.01)' : 'transparent' }}>
+                        <td style={{ padding: '16px 20px', fontSize: '13.5px', color: 'rgba(255,255,255,0.8)', fontWeight: 500 }}>{row.type}</td>
+                        <td style={{ padding: '16px 20px', fontSize: '13.5px', color: '#67e8f9', fontWeight: 600 }}>{row.delivery}</td>
+                        <td style={{ padding: '16px 20px', fontSize: '13.5px', color: '#93c5fd', fontWeight: 700 }}>{row.price}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
         </div>
       </section>
 

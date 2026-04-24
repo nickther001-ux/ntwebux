@@ -14,7 +14,7 @@ const translations: Translations = {
     hero: {
       eyebrow: "Web Design Studio",
       h1_1: "YOUR", h1_2: "BUSINESS", h1_3: "ONLINE.", h1_4: "DONE RIGHT.",
-      sub: "We build your web presence and automate your client acquisition — bilingual, AI-powered, delivered in under 14 days.",
+      sub: "We build your custom bilingual website and automate your client acquisition. Most sites go live in 3 days. Complex builds take a little longer — never months.",
       btn1: "Start My Project", btn2: "See How It Works",
       mockBadge: "+340% Avg. Traffic Increase"
     },
@@ -140,18 +140,18 @@ const translations: Translations = {
         },
         webPlans: [
           {
-            name: "Starter", price: "997", cycle: "One-time project fee",
-            features: ["5-page responsive website", "Custom design", "Basic SEO", "Contact form", "Delivered in 10 business days", "Includes 2 revision rounds"],
+            name: "Starter", price: "997", cycle: "One-time project fee", delivery: "Typically delivered in 2–3 business days",
+            features: ["5-page responsive website", "Custom design", "Basic SEO", "Contact form", "Includes 2 revision rounds"],
             cta: "Start Project", featured: false
           },
           {
-            name: "Growth", price: "2,497", cycle: "One-time project fee",
+            name: "Growth", price: "2,497", cycle: "One-time project fee", delivery: "Typically delivered in 4–6 business days",
             badge: "Most Popular",
             features: ["Up to 10 pages", "CMS integration", "E-commerce ready", "Advanced SEO"],
             cta: "Start Project", featured: true
           },
           {
-            name: "Enterprise", price: "Custom", cycle: "Tailored scope",
+            name: "Enterprise", price: "Custom", cycle: "Tailored scope", delivery: "Timeline scoped per project",
             features: ["Unlimited pages", "Custom web apps", "Dedicated project manager", "SLA & priority support"],
             cta: "Let's Talk", featured: false, isCustom: true
           }
@@ -195,7 +195,7 @@ const translations: Translations = {
     hero: {
       eyebrow: "Studio Web Design",
       h1_1: "VOTRE", h1_2: "ENTREPRISE", h1_3: "EN LIGNE.", h1_4: "BIEN FAIT.",
-      sub: "On construit votre présence web et on automatise votre acquisition de clients — bilingue, propulsé par l'IA, livré en moins de 14 jours.",
+      sub: "On construit votre site web bilingue sur mesure et on automatise votre acquisition de clients. La plupart de nos sites sont en ligne en 3 jours. Les projets complexes prennent un peu plus — jamais des mois.",
       btn1: "Démarrer Mon Projet", btn2: "Comment Ça Marche",
       mockBadge: "+340% de Trafic en Moyenne"
     },
@@ -319,18 +319,18 @@ const translations: Translations = {
         },
         webPlans: [
           {
-            name: "Starter", price: "997", cycle: "Tarif unique du projet",
-            features: ["Site 5 pages responsive", "Design personnalisé", "SEO de base", "Formulaire de contact", "Livré en 10 jours ouvrables", "Inclut 2 rondes de révision"],
+            name: "Starter", price: "997", cycle: "Tarif unique du projet", delivery: "Livré en 2–3 jours ouvrables en moyenne",
+            features: ["Site 5 pages responsive", "Design personnalisé", "SEO de base", "Formulaire de contact", "Inclut 2 rondes de révision"],
             cta: "Démarrer le Projet", featured: false
           },
           {
-            name: "Growth", price: "2 497", cycle: "Tarif unique du projet",
+            name: "Growth", price: "2 497", cycle: "Tarif unique du projet", delivery: "Livré en 4–6 jours ouvrables en moyenne",
             badge: "Le plus populaire",
             features: ["Jusqu'à 10 pages", "Intégration CMS", "Prêt pour e-commerce", "SEO avancé"],
             cta: "Démarrer le Projet", featured: true
           },
           {
-            name: "Enterprise", price: "Sur mesure", cycle: "Portée sur mesure",
+            name: "Enterprise", price: "Sur mesure", cycle: "Portée sur mesure", delivery: "Délai établi selon la portée du projet",
             features: ["Pages illimitées", "Applications web sur mesure", "Chef de projet dédié", "SLA & support prioritaire"],
             cta: "Réserver un appel", featured: false, isCustom: true
           }
