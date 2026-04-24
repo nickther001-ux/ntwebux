@@ -14,6 +14,7 @@ interface TestimonialItem {
   metricLabel: string;
   img: string;
   industry: string;
+  stars?: number;
 }
 
 /* Highlight numeric/result phrases inside a quote.
@@ -35,6 +36,8 @@ function highlightMetrics(quote: string): Array<string | { mark: string }> {
 }
 
 /* ── Animated star rating counter ──────────────────────────────── */
+const AVG_RATING = 4.7;
+
 function StarRatingCounter({ label }: { label: string }) {
   const [count, setCount]     = useState(0);
   const [started, setStarted] = useState(false);
@@ -54,13 +57,13 @@ function StarRatingCounter({ label }: { label: string }) {
   useEffect(() => {
     if (!started) return;
     setCount(0);
-    const DURATION = 3200;
-    const STEPS    = 160;
+    const DURATION = 2800;
+    const STEPS    = 140;
     const INTERVAL = DURATION / STEPS;
     let step = 0;
     const iv = setInterval(() => {
       step++;
-      setCount(Math.min(step * (5 / STEPS), 5));
+      setCount(Math.min(step * (AVG_RATING / STEPS), AVG_RATING));
       if (step >= STEPS) clearInterval(iv);
     }, INTERVAL);
     return () => clearInterval(iv);
@@ -121,6 +124,35 @@ function StarRatingCounter({ label }: { label: string }) {
   );
 }
 
+/* ── Per-card star row with partial fill ─────────────────────── */
+function CardStars({ rating = 5 }: { rating?: number }) {
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: '3px', marginLeft: 'auto', flexShrink: 0 }}>
+      {[1, 2, 3, 4, 5].map(i => {
+        const fill = Math.min(Math.max(rating - (i - 1), 0), 1); // 0, 0.5, or 1
+        const id = `star-grad-${i}-${rating}`;
+        return (
+          <svg key={i} width="11" height="11" viewBox="0 0 24 24">
+            <defs>
+              <linearGradient id={id} x1="0" x2="1" y1="0" y2="0">
+                <stop offset={`${fill * 100}%`} stopColor="#fbbf24" />
+                <stop offset={`${fill * 100}%`} stopColor="rgba(255,255,255,0.15)" />
+              </linearGradient>
+            </defs>
+            <polygon
+              points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"
+              fill={`url(#${id})`}
+            />
+          </svg>
+        );
+      })}
+      <span style={{ fontSize: '10px', fontWeight: 700, color: 'rgba(255,255,255,0.4)', marginLeft: '4px' }}>
+        {rating.toFixed(1)}
+      </span>
+    </div>
+  );
+}
+
 /* Industry → icon mapping (works in both EN and FR) */
 function industryIcon(industry: string) {
   const i = industry.toLowerCase();
@@ -141,9 +173,8 @@ export function Testimonials() {
 
   /* Bilingual chrome strings */
   const eyebrow = lang === 'fr' ? 'Témoignages' : 'Testimonials';
-  const ratingLabel = lang === 'fr' ? 'Note Clients' : 'Client Rating';
-  const verifiedLabel = lang === 'fr' ? 'Vérifié' : 'Verified';
-  const tickerLabel   = lang === 'fr' ? 'Industries servies' : 'Industries served';
+  const ratingLabel = lang === 'fr' ? 'Note Moy. Clients' : 'Avg. Client Rating';
+  const tickerLabel = lang === 'fr' ? 'Industries servies' : 'Industries served';
   const heading = lang === 'fr'
     ? <><span className="gradient-text">Résultats réels.</span><br />Clients réels.</>
     : <><span className="gradient-text">Real results.</span><br />Real clients.</>;
@@ -248,25 +279,10 @@ export function Testimonials() {
                       <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                         {item.name}
                       </span>
-                      {/* Verified checkmark */}
-                      <span className="wol-verified" title={verifiedLabel} aria-label={verifiedLabel}>
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                          <path d="M12 2 L14.39 4.42 L17.74 3.79 L18.91 6.99 L22 8.5 L21.09 11.79 L23 14.5 L20.39 16.79 L20.5 20 L17.21 19.91 L15.5 22.62 L12 21 L8.5 22.62 L6.79 19.91 L3.5 20 L3.61 16.79 L1 14.5 L2.91 11.79 L2 8.5 L5.09 6.99 L6.26 3.79 L9.61 4.42 Z"
-                            fill="#22d3ee" stroke="rgba(34,211,238,0.5)" strokeWidth="0.5" strokeLinejoin="round" />
-                          <path d="M8 12.2 L11 15.2 L16.2 9.5" stroke="#02040a" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-                        </svg>
-                      </span>
                     </div>
                     <div className="wol-author-role">{item.role}</div>
                   </div>
-                  {/* 5 stars */}
-                  <div className="wol-stars">
-                    {[1, 2, 3, 4, 5].map(j => (
-                      <svg key={j} width="11" height="11" viewBox="0 0 24 24" fill="#fbbf24">
-                        <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />
-                      </svg>
-                    ))}
-                  </div>
+                  <CardStars rating={item.stars} />
                 </footer>
               </motion.article>
             );
