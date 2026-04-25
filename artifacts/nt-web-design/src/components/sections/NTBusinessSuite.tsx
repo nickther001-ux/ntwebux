@@ -486,7 +486,7 @@ export function NTBusinessSuite() {
           font-size: 9.5px; line-height: 1.5; color: #22d3ee;
           animation: bs-console-scroll 18s linear infinite;
         }
-        .bs-console__line { white-space: nowrap; opacity: 0.85; }
+        .bs-console__line { white-space: nowrap; opacity: 0.12; }
         @keyframes bs-console-scroll {
           from { transform: translateY(0); }
           to   { transform: translateY(-50%); }
@@ -503,8 +503,8 @@ export function NTBusinessSuite() {
         .bs-console__mask {
           position: absolute; inset: 0;
           background: linear-gradient(180deg,
-            rgba(4,10,22,0.88) 0%, rgba(4,10,22,0.15) 25%,
-            rgba(4,10,22,0.15) 75%, rgba(4,10,22,0.92) 100%
+            rgba(4,10,22,0.92) 0%, rgba(4,10,22,0.80) 25%,
+            rgba(4,10,22,0.80) 75%, rgba(4,10,22,0.95) 100%
           );
         }
 
