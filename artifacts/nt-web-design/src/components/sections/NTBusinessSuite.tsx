@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useLanguage } from '@/lib/i18n';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MessageSquare, CalendarCheck, Star, ArrowRight, Check, Zap, BarChart2, Smartphone, Users, ChevronDown, PhoneCall, AlertCircle, TrendingUp } from 'lucide-react';
+import { MessageSquare, CalendarCheck, Star, ArrowRight, Check, Zap, BarChart2, Users, ChevronDown, PhoneCall, AlertCircle, TrendingUp } from 'lucide-react';
 import { BSuiteIntakeModal } from '@/components/BSuiteIntakeModal';
 
 type Lang = 'en' | 'fr';
@@ -129,25 +129,6 @@ function StarsViz() {
   );
 }
 
-/* ─── Mobile phone viz ────────────────────────────────────── */
-function MobileViz({ lang }: { lang: Lang }) {
-  const n1 = lang === 'fr' ? 'Nouveau lead' : 'New Lead';
-  const n2 = lang === 'fr' ? 'Appel manqué' : 'Missed Call';
-  return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', padding: '16px' }} aria-hidden="true">
-      <div style={{ width: '110px', background: '#0a1020', borderRadius: '16px', border: '2px solid rgba(255,255,255,0.12)', padding: '8px', boxShadow: '0 12px 40px rgba(0,0,0,0.6)' }}>
-        <div style={{ height: '8px', background: 'rgba(255,255,255,0.06)', borderRadius: '4px', margin: '0 auto 8px', width: '40px' }} />
-        {[{ c: '#22d3ee', t: n1 }, { c: '#a78bfa', t: n2 }].map((item, i) => (
-          <div key={i} style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: '8px', padding: '6px 8px', marginBottom: '6px' }}>
-            <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: item.c, marginBottom: '4px' }} />
-            <div style={{ fontSize: '8px', color: 'rgba(255,255,255,0.6)', lineHeight: 1.3 }}>{item.t}</div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
 /* ─── Analytics bars viz ──────────────────────────────────── */
 function AnalyticsViz() {
   const bars = [35, 48, 55, 42, 68, 72, 88];
@@ -171,7 +152,6 @@ const FEATURES_EN = [
   { icon: MessageSquare, color: '167,139,250', title: 'Two-Way SMS & Email', sub: 'Have real conversations, at scale',     desc: "Full two-way communication hub. Reply to leads via SMS or email from one dashboard — the AI drafts responses so you just approve and send.", roi: '4× faster lead response time',          viz: 'chat' },
   { icon: BarChart2,     color: '251,191,36',  title: 'Reputation Dashboard', sub: 'One view of your entire reputation',   desc: "Monitor all your Google, Facebook, and industry reviews in one place. Respond instantly and flag negative reviews before they cost you leads.", roi: 'Avg. 4.9★ rating after 90 days',        viz: 'stars' },
   { icon: TrendingUp,    color: '34,211,153',  title: 'Analytics & Reporting', sub: "Know what's working, every single day", desc: "Daily performance reports delivered to your inbox. Track leads by source, conversion rates, revenue attributed, and team response times.", roi: 'Full pipeline visibility, daily',       viz: 'analytics' },
-  { icon: Smartphone,    color: '148,163,184', title: 'Mobile App', sub: 'Run your business from your phone',             desc: "Full access to your CRM, pipeline, conversations, and calendar from iOS or Android. Get push notifications the moment a lead engages.", roi: 'Business runs from your pocket',        viz: 'mobile' },
 ];
 const FEATURES_FR = [
   { icon: MessageSquare, color: '34,211,238', title: 'Réponse SMS IA', sub: 'Chaque appel manqué devient une conversation', desc: "Notre IA détecte les appels manqués en quelques secondes et déclenche un SMS conversationnel — qualifiant le lead avant qu'il appelle votre concurrent.", roi: '+22 % de ventes récupérées en moyenne', viz: 'console' },
@@ -181,7 +161,6 @@ const FEATURES_FR = [
   { icon: MessageSquare, color: '167,139,250', title: 'SMS & Email Bidirectionnel', sub: 'De vraies conversations, à grande échelle', desc: "Hub de communication bilingue complet. Répondez aux leads par SMS ou email depuis un seul tableau de bord — l\'IA rédige les réponses.", roi: 'Temps de réponse 4× plus rapide', viz: 'chat' },
   { icon: BarChart2,     color: '251,191,36',  title: 'Tableau de Bord Réputation', sub: 'Une vue sur toute votre réputation', desc: "Surveillez tous vos avis Google, Facebook et sectoriels en un seul endroit. Répondez instantanément et signalez les avis négatifs avant qu'ils vous coûtent des leads.", roi: 'Note moy. 4,9★ après 90 jours', viz: 'stars' },
   { icon: TrendingUp,    color: '34,211,153',  title: 'Analytique & Rapports', sub: 'Sachez ce qui fonctionne chaque jour', desc: "Rapports de performance quotidiens livrés dans votre boîte mail. Suivez les leads par source, les taux de conversion et les revenus attribués.", roi: 'Visibilité complète du pipeline, chaque jour', viz: 'analytics' },
-  { icon: Smartphone,    color: '148,163,184', title: 'Application Mobile', sub: 'Gérez votre entreprise depuis votre téléphone', desc: "Accès complet à votre CRM, pipeline, conversations et agenda depuis iOS ou Android. Recevez des notifications dès qu'un lead s'engage.", roi: 'Votre entreprise dans votre poche', viz: 'mobile' },
 ];
 
 function FeatureViz({ type, lang, color }: { type: string; lang: Lang; color: string }) {
@@ -193,18 +172,18 @@ function FeatureViz({ type, lang, color }: { type: string; lang: Lang; color: st
   if (type === 'stars')    return <div style={wrapStyle}><StarsViz /></div>;
   if (type === 'pipeline') return <div style={wrapStyle}><PipelineViz lang={lang} /></div>;
   if (type === 'chat')     return <div style={wrapStyle}><ChatViz lang={lang} /></div>;
-  if (type === 'mobile')   return <div style={wrapStyle}><MobileViz lang={lang} /></div>;
+
   return <div style={{ ...wrapStyle, display: 'flex', alignItems: 'center', justifyContent: 'center' }}><AnalyticsViz /></div>;
 }
 
 /* ─── Pricing plans ───────────────────────────────────────── */
 const PLANS_EN = [
-  { id: 'starter' as Tier, name: 'Starter',      price: '297', badge: null,          popular: false, features: ['CRM & contact management','AI web chat widget','Missed-call text-back (SMS)','Lead capture forms','1 pipeline · Up to 500 contacts','Mobile app access'] },
+  { id: 'starter' as Tier, name: 'Starter',      price: '297', badge: null,          popular: false, features: ['CRM & contact management','AI web chat widget','Missed-call text-back (SMS)','Lead capture forms','1 pipeline · Up to 500 contacts'] },
   { id: 'pro'     as Tier, name: 'Professional', price: '497', badge: 'Most Popular', popular: true,  features: ['Everything in Starter','Full AI text & email automation','Auto-booking & calendar integration','Google review request engine','Two-way SMS & email conversations','Unlimited pipelines · Up to 2,500 contacts','Reputation dashboard'] },
   { id: 'full'    as Tier, name: 'Full Scope',   price: '899', badge: null,          popular: false, features: ['Everything in Professional','Custom AI voice agent (inbound)','WhatsApp automation','Multi-location setup','Advanced analytics dashboard','Unlimited contacts','White-glove support + strategy call'] },
 ];
 const PLANS_FR = [
-  { id: 'starter' as Tier, name: 'Démarrage',    price: '297', badge: null,             popular: false, features: ['CRM & gestion des contacts','Widget chat IA','Réponse SMS aux appels manqués','Formulaires de capture de leads','1 pipeline · Jusqu\'à 500 contacts','Application mobile'] },
+  { id: 'starter' as Tier, name: 'Démarrage',    price: '297', badge: null,             popular: false, features: ['CRM & gestion des contacts','Widget chat IA','Réponse SMS aux appels manqués','Formulaires de capture de leads','1 pipeline · Jusqu\'à 500 contacts'] },
   { id: 'pro'     as Tier, name: 'Professionnel',price: '497', badge: 'Plus Populaire', popular: true,  features: ['Tout du Démarrage','Automatisation IA SMS & email','Réservation auto & agenda','Moteur d\'avis Google','SMS & email bidirectionnel','Pipelines illimités · 2 500 contacts','Tableau de bord réputation'] },
   { id: 'full'    as Tier, name: 'Full Scope',   price: '899', badge: null,             popular: false, features: ['Tout du Professionnel','Agent vocal IA (entrant)','Automatisation WhatsApp','Multi-adresses','Tableau de bord analytique avancé','Contacts illimités','Support blanc-gant + appel stratégie'] },
 ];
@@ -212,7 +191,7 @@ const PLANS_FR = [
 /* ─── FAQ ─────────────────────────────────────────────────── */
 const FAQ_EN = [
   { q: 'How long does setup take?', a: 'Our team configures your entire system within 72 hours of signup. You get a dedicated onboarding call and we handle all technical setup.' },
-  { q: 'Do I need to install any software?', a: 'No. NT Business Suite is fully cloud-based. You access everything through a web browser or our mobile app — nothing to install.' },
+  { q: 'Do I need to install any software?', a: 'No. NT Business Suite is fully cloud-based. You access everything through a web browser — nothing to install.' },
   { q: 'Does it work for my industry?', a: 'Yes. We serve construction, HVAC, plumbing, legal, real estate, dental, medical, restaurants, auto services, and more. If you take phone calls and book appointments, it works for you.' },
   { q: 'What if I want to cancel?', a: 'No contracts, no lock-in. Cancel anytime with 30 days notice. We\'ll export all your data so you own everything.' },
   { q: 'Is it bilingual (EN/FR)?', a: 'Yes. NT Business Suite is fully bilingual — English and French — natively. No machine translation. Ideal for Quebec-based businesses.' },
@@ -220,7 +199,7 @@ const FAQ_EN = [
 ];
 const FAQ_FR = [
   { q: 'Combien de temps dure la configuration ?', a: 'Notre équipe configure votre système complet dans les 72 heures suivant l\'inscription. Vous bénéficiez d\'un appel d\'intégration dédié et nous gérons toute la configuration technique.' },
-  { q: 'Dois-je installer un logiciel ?', a: 'Non. NT Business Suite est entièrement en nuage. Vous accédez à tout via un navigateur web ou notre application mobile — rien à installer.' },
+  { q: 'Dois-je installer un logiciel ?', a: 'Non. NT Business Suite est entièrement en nuage. Vous accédez à tout via un navigateur web — rien à installer.' },
   { q: 'Fonctionne-t-il pour mon secteur ?', a: 'Oui. Nous servons la construction, le CVAC, la plomberie, le juridique, l\'immobilier, les soins dentaires, médicaux, les restaurants, les services automobiles et plus. Si vous prenez des appels et prenez des rendez-vous, ça fonctionne.' },
   { q: 'Et si je veux annuler ?', a: 'Sans contrat, sans engagement. Annulez n\'importe quand avec 30 jours de préavis. Nous exporterons toutes vos données — vous êtes propriétaire de tout.' },
   { q: 'Est-il bilingue (EN/FR) ?', a: 'Oui. NT Business Suite est entièrement bilingue — anglais et français — nativement. Pas de traduction automatique. Idéal pour les entreprises basées au Québec.' },
