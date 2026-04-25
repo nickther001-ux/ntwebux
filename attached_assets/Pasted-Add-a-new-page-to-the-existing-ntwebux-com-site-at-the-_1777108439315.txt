@@ -1,0 +1,149 @@
+Add a new page to the existing ntwebux.com site at the route /business-suite (or /suite-affaires for French). This is NOT a standalone site — it's a new page that uses the existing navigation, design system, and language toggle from the main site.
+INTEGRATION WITH EXISTING SITE
+
+Use the existing navigation bar from the homepage — add "Business Software" as an active/highlighted nav item when on this page
+Use the exact same dark navy background, blue accent color, fonts, card styles, and component library already on ntwebux.com
+The EN/FR toggle in the nav should switch all content on this page just like it does on the homepage
+Keep the same footer from the homepage
+
+PAGE ROUTE & TITLE
+
+EN route: /business-suite
+FR route: /suite-affaires
+Page title: EN "NT Business Suite — AI Operating System for Service Businesses" | FR "NT Business Suite — Système d'exploitation IA pour entreprises de services"
+
+PRIMARY CTA — SMART INTAKE FORM
+Every primary CTA button should say:
+
+EN: "Get Started — 2 Minutes →"
+FR: "Commencer — 2 minutes →"
+
+Below the button add small muted text:
+
+EN: "Fill out the form. We'll call you within 24 hours with a custom demo."
+FR: "Remplissez le formulaire. On vous rappelle sous 24h avec une démo personnalisée."
+
+When clicked, the button should either:
+
+Open a modal overlay with the form inside (preferred — keeps them on the page)
+OR scroll down to a contact form section at the bottom of the page
+OR link to the existing Contact page but pre-fill the subject as "NT Business Suite — Interest"
+
+THE INTAKE FORM FIELDS (in order)
+Form headline:
+
+EN: "Tell us about your business — takes 2 minutes"
+FR: "Parlez-nous de votre entreprise — prend 2 minutes"
+
+Field 1: Name (text input, required)
+
+EN label: "Your name"
+FR label: "Votre nom"
+
+Field 2: Business name (text input, required)
+
+EN label: "Business name"
+FR label: "Nom de l'entreprise"
+
+Field 3: Phone number (text input, required)
+
+EN label: "Phone number"
+FR label: "Numéro de téléphone"
+
+Field 4: Email (email input, required)
+
+EN label: "Email"
+FR label: "Courriel"
+
+Field 5: Business type (dropdown select, required)
+
+EN label: "What type of business?"
+FR label: "Quel type d'entreprise ?"
+Options EN: Construction / HVAC & Plumbing / Medical & Wellness / Dental / Legal / Real Estate / Restaurant / Auto Services / Other
+Options FR: Construction / CVAC & Plomberie / Médical & Bien-être / Dentaire / Juridique / Immobilier / Restauration / Services automobiles / Autre
+
+Field 6: Biggest challenge (textarea, required)
+
+EN label: "What's your biggest challenge right now? (e.g., missed calls, no follow-up system, need more reviews)"
+FR label: "Quel est votre plus grand défi en ce moment ? (ex: appels manqués, pas de système de suivi, besoin de plus d'avis)"
+Placeholder EN: "Be specific — it helps us show you exactly what you need."
+Placeholder FR: "Soyez précis — ça nous aide à vous montrer exactement ce dont vous avez besoin."
+
+Field 7: Which tier interests you? (radio buttons, optional)
+
+EN label: "Which plan are you interested in?"
+FR label: "Quel forfait vous intéresse ?"
+Options: Starter ($297/mo) / Professional ($497/mo) / Full Scope ($899/mo) / Not sure yet
+Options FR: Démarrage (297 $/mois) / Professionnel (497 $/mois) / Portée complète (899 $/mois) / Pas encore sûr
+
+Submit button:
+
+EN: "Submit — We'll Call You Within 24 Hours →"
+FR: "Soumettre — On vous rappelle sous 24h →"
+
+Below submit button (small muted text):
+
+EN: "We respect your time. No spam. No pushy sales calls. Just a real conversation about whether NT Business Suite is a fit for your business."
+FR: "On respecte votre temps. Pas de spam. Pas de vente agressive. Juste une vraie conversation pour voir si NT Business Suite convient à votre entreprise."
+
+FORM BEHAVIOR
+
+On submit, show a success message overlay:
+
+EN: "Got it! We'll review your info and call you within 24 hours. Check your email — we just sent you a confirmation."
+FR: "Reçu ! On examine vos informations et on vous appelle sous 24h. Vérifiez votre courriel — on vient de vous envoyer une confirmation."
+
+
+Form data should be sent to the same backend/email handler as the existing ntwebux.com contact form
+Subject line of the email sent to you: "NT Business Suite Lead — [Business Name]"
+
+SECONDARY CTA
+Secondary CTA button (in hero, final CTA section) should say:
+
+EN: "See How It Works"
+FR: "Voir comment ça fonctionne"
+Action: smooth-scrolls to the "How It Works" section
+
+PRICING SECTION ADJUSTMENT
+Keep the three pricing tiers as written ($297 Starter, $497 Professional, $899 Full Scope).
+Each pricing card CTA should be:
+
+All three tiers: EN "Get Started — 2 Minutes →" | FR "Commencer — 2 minutes →"
+Clicking opens the same intake form modal, with the "Which tier interests you?" field pre-selected to match the card they clicked from
+
+CONTENT STRUCTURE
+Use the full NT Business Suite copy from earlier in this conversation — all sections:
+
+Hero (with primary CTA "Get Started — 2 Minutes")
+Problem (3 pain cards)
+Solution intro
+Features (8 feature blocks in alternating left-right layout)
+How It Works (3 numbered steps)
+Pricing (3 tiers with FAQ accordion below)
+Comparison table (NT Business Suite vs typical separate tools)
+About/Trust section
+Final CTA (with form CTA + secondary "See How It Works")
+Footer (use existing site footer)
+
+MOBILE RESPONSIVENESS
+
+The intake form modal must be fully mobile-optimized (easy to fill on a phone while standing on a job site)
+All form fields stack vertically on mobile
+Text inputs and dropdowns are sized for thumb-friendly tapping
+Form fits within viewport — no awkward scrolling within a modal
+All sections stack cleanly on mobile (375px width)
+
+DO NOT:
+
+Do not create a separate standalone site
+Do not change the existing homepage or other pages
+Do not add Calendly or any third-party booking widget
+Do not add any free trial offers, founding member offers, or direct payment forms
+Do not add any content beyond what's specified
+
+OUTPUT:
+Confirm when the page is built and ready, and tell me:
+
+What route the page is accessible at
+Whether the form sends to the existing contact form email or needs a new endpoint
+Any missing integrations (email handler, form backend, etc.)
