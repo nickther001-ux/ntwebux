@@ -15,6 +15,11 @@ const WORK_IMAGES: Record<string, string> = {
   'Excavation Tremblay Inc.':   `${BASE}/portfolio/proj-construction.webp`,
   'Physio Optimal':             `${BASE}/portfolio/proj-medical.webp`,
   "Saveurs d'Haïti MTL":       `${BASE}/portfolio/proj-restaurant.webp`,
+  'FieldOps Pro':               `${BASE}/portfolio/proj-saas.webp`,
+  'Silas AI Assistant':         `${BASE}/portfolio/proj-saas.webp`,
+  'Silas Assistant IA':         `${BASE}/portfolio/proj-saas.webp`,
+  'LeadFlow CRM Engine':        `${BASE}/portfolio/proj-ecommerce.webp`,
+  'Moteur CRM LeadFlow':        `${BASE}/portfolio/proj-ecommerce.webp`,
 };
 
 const WEB_ICONS = [Layers, Sparkles, Crown];
@@ -36,11 +41,12 @@ export default function ServicesPortfolio() {
   const work  = t('portfolio.work')     as any;
   const webPlans: any[] = svc.webPlans ?? [];
   const aiPlans:  any[] = svc.aiPlans  ?? [];
+  const isAi = track === 'ai';
   const plans = track === 'web' ? webPlans : aiPlans;
   const ICONS = track === 'web' ? WEB_ICONS : AI_ICONS;
-  const items: any[] = work.items;
+  const items: any[] = isAi ? (work.aiItems ?? work.items) : work.items;
+  const workDesc: string = isAi ? (work.aiDesc ?? work.desc) : work.desc;
   const popularLabel = lang === 'fr' ? 'Le plus populaire' : 'Most Popular';
-  const isAi = track === 'ai';
 
   const PT = "Project Showcase | NT Digital Group | SaaS & AI Engineering";
   const PD = "Explore our latest case studies, from custom AI integrations to scalable software architectures. See how we deliver elite digital infrastructure at speed.";
@@ -315,7 +321,7 @@ export default function ServicesPortfolio() {
             <h2 style={{ fontSize: 'clamp(2rem,5vw,3.5rem)', fontWeight: 800, letterSpacing: '-0.02em', marginTop: '14px', marginBottom: '16px' }}>
               {work.title1} <span className="gradient-text">{work.title2}</span>
             </h2>
-            <p style={{ fontSize: '16px', color: 'rgba(255,255,255,0.45)', maxWidth: '520px', margin: '0 auto', lineHeight: 1.7 }}>{work.desc}</p>
+            <p style={{ fontSize: '16px', color: 'rgba(255,255,255,0.45)', maxWidth: '520px', margin: '0 auto', lineHeight: 1.7 }}>{workDesc}</p>
           </motion.div>
 
           {/* Work items with image previews */}

@@ -219,6 +219,12 @@ const translations: Translations = {
           { tag: "Health Clinic", title: "Physio Optimal", desc: "Integrated online booking and optimized local SEO.", large: false },
           { tag: "Restaurant & Catering", title: "Saveurs d'Haïti MTL", desc: "Online menu, reservations and takeout orders integrated.", large: false }
         ],
+        aiDesc: "Real SaaS products and AI integrations we've shipped — from multi-tenant platforms to automated revenue engines.",
+        aiItems: [
+          { tag: "SaaS Platform", title: "FieldOps Pro", desc: "Multi-tenant field service management SaaS with AI scheduling, real-time GPS tracking, and automated invoicing.", large: true },
+          { tag: "AI Integration", title: "Silas AI Assistant", desc: "Custom GPT-powered chat agent with CRM sync, multilingual support, and context-aware lead qualification.", large: false },
+          { tag: "Automation Suite", title: "LeadFlow CRM Engine", desc: "End-to-end lead nurturing: SMS/email sequences, auto-booking, Google review funnel, and reputation dashboard.", large: false }
+        ],
         ctaText: "Have a project in mind?",
         ctaBtn: "Let's Talk →"
       }
@@ -431,6 +437,12 @@ const translations: Translations = {
           { tag: "Excavation & Construction", title: "Excavation Tremblay Inc.", desc: "Site vitrine bilingue avec formulaire de soumission et galerie de projets.", large: true },
           { tag: "Clinique Santé", title: "Physio Optimal", desc: "Prise de rendez-vous en ligne intégrée et SEO local optimisé.", large: false },
           { tag: "Restaurant & Traiteur", title: "Saveurs d'Haïti MTL", desc: "Menu en ligne, réservations et commandes à emporter intégrés.", large: false }
+        ],
+        aiDesc: "De vrais produits SaaS et intégrations IA qu'on a livrés — de plateformes multi-tenant à des moteurs de revenus automatisés.",
+        aiItems: [
+          { tag: "Plateforme SaaS", title: "FieldOps Pro", desc: "SaaS de gestion de terrain multi-tenant avec planification IA, suivi GPS en temps réel et facturation automatisée.", large: true },
+          { tag: "Intégration IA", title: "Silas Assistant IA", desc: "Agent de chat propulsé par GPT avec synchronisation CRM, support multilingue et qualification de leads contextuelle.", large: false },
+          { tag: "Suite d'automatisation", title: "Moteur CRM LeadFlow", desc: "Gestion complète des leads : séquences SMS/email, réservation automatique, tunnel d'avis Google et tableau de bord réputation.", large: false }
         ],
         ctaText: "Un projet en tête ?",
         ctaBtn: "Discutons-en →"
