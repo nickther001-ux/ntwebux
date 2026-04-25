@@ -34,9 +34,12 @@ const copy = {
     en: ['Select your biggest challenge…', 'Missed calls & lost leads', 'No-shows & cancellations', 'Manual scheduling overhead', 'Slow follow-up / review requests', 'Other'],
     fr: ['Sélectionnez votre défi principal…', 'Appels manqués & prospects perdus', 'No-shows & annulations', 'Charge de planification manuelle', 'Suivi lent / demandes d\'avis', 'Autre'],
   },
-  submitBtn:   { en: 'Request Technical Audit', fr: 'Demander un Audit Technique' },
-  submitting:  { en: 'Sending…', fr: 'Envoi…' },
+  fieldEmail:  { en: 'Email Address', fr: 'Adresse courriel' },
+  submitBtn:   { en: 'Book Infrastructure Audit', fr: 'Réserver un Audit Infra' },
+  submitting:  { en: 'Routing to NT Digital…', fr: 'Redirection vers NT Digital…' },
+  submitDone:  { en: 'Audit Requested!', fr: 'Audit Demandé !' },
   successMsg:  { en: 'Request received. Our architect will contact you within 24 hours.', fr: 'Demande reçue. Notre architecte vous contactera dans les 24 heures.' },
+  errorMsg:    { en: 'Something went wrong. Please try again.', fr: 'Une erreur est survenue. Veuillez réessayer.' },
   backBtn:     { en: '← Recalculate', fr: '← Recalculer' },
 };
 
@@ -59,13 +62,18 @@ export function ROICalculator() {
   const [diagLine, setDiagLine]       = useState(0);
   const [company, setCompany]         = useState('');
   const [phone, setPhone]             = useState('');
+  const [email, setEmail]             = useState('');
   const [pain, setPain]               = useState('');
-  const [sending, setSending]         = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitDone, setSubmitDone]   = useState(false);
   const [sent, setSent]               = useState(false);
+  const [submitError, setSubmitError] = useState('');
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const monthlyLost = jobValue * missedCalls * 4;
-  const yearlyGain  = monthlyLost * 12 * teamSize;
+  const monthlyLost        = jobValue * missedCalls * 4;
+  const yearlyGain         = monthlyLost * 12 * teamSize;
+  const annualLeakage      = yearlyGain;
+  const projectedRecovery  = Math.round(yearlyGain * 0.82);
   const subscriptionAnnual = SUBSCRIPTION * 12;
   const roi = Math.round((yearlyGain - subscriptionAnnual) / subscriptionAnnual * 100);
 
@@ -113,11 +121,48 @@ export function ROICalculator() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!company.trim() || !phone.trim() || !pain || pain === copy.painOptions.en[0] || pain === copy.painOptions.fr[0]) return;
-    setSending(true);
-    await new Promise(r => setTimeout(r, 1200));
-    setSending(false);
-    setSent(true);
+    if (!email.trim() || !company.trim() || !phone.trim() || !pain || pain === copy.painOptions.en[0] || pain === copy.painOptions.fr[0]) return;
+
+    setIsSubmitting(true);
+    setSubmitError('');
+
+    try {
+      const form = new FormData();
+      form.append('email', email.trim());
+      form.append('company', company.trim());
+      form.append('phone', phone.trim());
+      form.append('pain_point', pain);
+      form.append('annual_leakage', String(annualLeakage));
+      form.append('projected_recovery', String(projectedRecovery));
+
+      const res = await fetch('https://formspree.io/f/mojyrrje', {
+        method: 'POST',
+        body: form,
+        headers: { Accept: 'application/json' },
+      });
+
+      if (!res.ok) throw new Error('submission_failed');
+
+      setIsSubmitting(false);
+      setSubmitDone(true);
+
+      timerRef.current = setTimeout(() => {
+        setSent(true);
+        setSubmitDone(false);
+        timerRef.current = setTimeout(() => {
+          setStage('calc');
+          setSent(false);
+          setEmail('');
+          setCompany('');
+          setPhone('');
+          setPain('');
+        }, 2500);
+      }, 800);
+
+    } catch {
+      setIsSubmitting(false);
+      setSubmitError(bi(copy.errorMsg, l));
+    }
   }
 
   const sliders = [
@@ -280,6 +325,25 @@ export function ROICalculator() {
                 </div>
 
                 <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+
+                  {/* Email */}
+                  <div>
+                    <label style={{ display: 'block', fontSize: '11px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', marginBottom: '8px' }}>
+                      {bi(copy.fieldEmail, l)}
+                    </label>
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={e => setEmail(e.target.value)}
+                      placeholder={l === 'fr' ? 'vous@entreprise.com' : 'you@company.com'}
+                      required
+                      style={{ width: '100%', padding: '12px 16px', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: '#fff', fontSize: '14px', outline: 'none', boxSizing: 'border-box', transition: 'border-color 0.2s' }}
+                      onFocus={e => (e.target.style.borderColor = 'rgba(59,130,246,0.5)')}
+                      onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.1)')}
+                    />
+                  </div>
+
+                  {/* Company */}
                   <div>
                     <label style={{ display: 'block', fontSize: '11px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', marginBottom: '8px' }}>
                       {bi(copy.fieldCompany, l)}
@@ -296,6 +360,7 @@ export function ROICalculator() {
                     />
                   </div>
 
+                  {/* Phone */}
                   <div>
                     <label style={{ display: 'block', fontSize: '11px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', marginBottom: '8px' }}>
                       {bi(copy.fieldPhone, l)}
@@ -312,6 +377,7 @@ export function ROICalculator() {
                     />
                   </div>
 
+                  {/* Pain point */}
                   <div>
                     <label style={{ display: 'block', fontSize: '11px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', marginBottom: '8px' }}>
                       {bi(copy.fieldPain, l)}
@@ -332,25 +398,43 @@ export function ROICalculator() {
                     </select>
                   </div>
 
+                  {/* Error message */}
+                  {submitError && (
+                    <p style={{ fontSize: '13px', color: '#f87171', margin: '0', padding: '10px 14px', background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.2)', borderRadius: '8px' }}>
+                      {submitError}
+                    </p>
+                  )}
+
                   <div style={{ display: 'flex', gap: '12px', alignItems: 'center', marginTop: '8px', flexWrap: 'wrap' }}>
                     <button
                       type="submit"
-                      disabled={sending}
+                      disabled={isSubmitting || submitDone}
                       style={{
                         flex: 1, minWidth: '180px', padding: '14px 28px', fontSize: '14px', fontWeight: 700,
-                        letterSpacing: '-0.01em', borderRadius: '12px', border: 'none', cursor: sending ? 'not-allowed' : 'pointer',
-                        background: sending ? 'rgba(59,130,246,0.5)' : 'linear-gradient(135deg, #1d4ed8, #3b82f6)',
-                        color: '#fff', boxShadow: sending ? 'none' : '0 8px 28px rgba(59,130,246,0.38)',
-                        transition: 'all 0.2s',
+                        letterSpacing: '-0.01em', borderRadius: '12px', border: 'none',
+                        cursor: isSubmitting || submitDone ? 'not-allowed' : 'pointer',
+                        background: submitDone
+                          ? 'linear-gradient(135deg, #16a34a, #22c55e)'
+                          : isSubmitting
+                            ? 'rgba(59,130,246,0.5)'
+                            : 'linear-gradient(135deg, #1d4ed8, #3b82f6)',
+                        color: '#fff',
+                        boxShadow: isSubmitting ? 'none' : submitDone ? '0 8px 28px rgba(34,197,94,0.38)' : '0 8px 28px rgba(59,130,246,0.38)',
+                        transition: 'all 0.25s',
                       }}
                     >
-                      {sending ? bi(copy.submitting, l) : bi(copy.submitBtn, l)}
+                      {submitDone
+                        ? bi(copy.submitDone, l)
+                        : isSubmitting
+                          ? bi(copy.submitting, l)
+                          : bi(copy.submitBtn, l)}
                     </button>
                     <button
                       type="button"
                       onClick={() => setStage('calc')}
-                      style={{ padding: '14px 20px', fontSize: '13px', fontWeight: 600, borderRadius: '12px', border: '1px solid rgba(255,255,255,0.12)', background: 'transparent', color: 'rgba(255,255,255,0.45)', cursor: 'pointer', transition: 'all 0.2s', whiteSpace: 'nowrap' }}
-                      onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(255,255,255,0.3)'; (e.currentTarget as HTMLButtonElement).style.color = 'rgba(255,255,255,0.7)'; }}
+                      disabled={isSubmitting}
+                      style={{ padding: '14px 20px', fontSize: '13px', fontWeight: 600, borderRadius: '12px', border: '1px solid rgba(255,255,255,0.12)', background: 'transparent', color: 'rgba(255,255,255,0.45)', cursor: isSubmitting ? 'not-allowed' : 'pointer', transition: 'all 0.2s', whiteSpace: 'nowrap' }}
+                      onMouseEnter={e => { if (!isSubmitting) { (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(255,255,255,0.3)'; (e.currentTarget as HTMLButtonElement).style.color = 'rgba(255,255,255,0.7)'; }}}
                       onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(255,255,255,0.12)'; (e.currentTarget as HTMLButtonElement).style.color = 'rgba(255,255,255,0.45)'; }}
                     >
                       {bi(copy.backBtn, l)}
