@@ -56,7 +56,7 @@ export function Navbar() {
     { href: isHome ? '#portfolio' : '/#portfolio', label: lang === 'fr' ? 'Portfolio' : 'Portfolio' },
     { href: isHome ? '#process' : '/#process', label: lang === 'fr' ? 'Processus' : 'Process' },
     { href: '/services', label: lang === 'fr' ? 'Tarifs' : 'Pricing', isPage: true },
-    { href: '/business', label: lang === 'fr' ? 'Logiciels' : 'Business Software', isPage: true, highlight: true },
+    { href: isHome ? '#business-suite' : '/#business-suite', label: lang === 'fr' ? 'Suite' : 'Business Suite', highlight: true },
     { href: isHome ? '#roi-calculator' : '/#roi-calculator', label: lang === 'fr' ? 'Audit ROI' : 'ROI Audit' },
     { href: isHome ? '#contact' : '/#contact', label: 'Contact' },
   ];
