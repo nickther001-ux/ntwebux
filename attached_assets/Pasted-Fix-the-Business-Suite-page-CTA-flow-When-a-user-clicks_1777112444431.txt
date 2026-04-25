@@ -1,0 +1,80 @@
+Fix the Business Suite page CTA flow. When a user clicks "Get Started", "Claim Beta Spot", or "Let's Talk" on any pricing tier, do NOT show a "What SaaS product do you need?" module picker. Instead, open a simple contact form modal.
+REMOVE:
+
+The entire "What SaaS product do you need?" modal with module selection cards
+Any multi-step configurator or product builder flow
+
+REPLACE WITH:
+A simple single-step contact form modal that opens when any pricing CTA is clicked.
+MODAL DESIGN:
+
+Dark background overlay
+Centered card (max-width 500px)
+Close X button in top right corner
+Same dark card style as the rest of the site
+
+FORM FIELDS:
+Headline:
+
+EN: "Tell us about your business"
+FR: "Parlez-nous de votre entreprise"
+
+Field 1: Name (text input, required)
+
+EN placeholder: "Your name"
+FR placeholder: "Votre nom"
+
+Field 2: Business name (text input, required)
+
+EN placeholder: "Business name"
+FR placeholder: "Nom de l'entreprise"
+
+Field 3: Phone (text input, required)
+
+EN placeholder: "Phone number"
+FR placeholder: "Numéro de téléphone"
+
+Field 4: Email (email input, required)
+
+EN placeholder: "Email"
+FR placeholder: "Courriel"
+
+Field 5: Selected plan (display-only field, NOT editable)
+
+Label EN: "Plan you selected"
+Label FR: "Forfait sélectionné"
+Value is auto-filled based on which pricing card button they clicked:
+
+Starter card → displays "Starter — $297/mo"
+Professional card → displays "Professional — $497/mo"
+Full Scope card → displays "Full Scope — $899/mo"
+
+
+Style this field differently (lighter background, italic text) to make it clear it's read-only
+
+Field 6: Biggest challenge (textarea, required)
+
+EN placeholder: "What's your biggest challenge right now? (e.g., missed calls, no follow-up system, need more reviews)"
+FR placeholder: "Quel est votre plus grand défi en ce moment ? (ex: appels manqués, pas de système de suivi, besoin de plus d'avis)"
+
+Submit button:
+
+EN: "Submit — We'll Call You Within 24 Hours →"
+FR: "Soumettre — On vous rappelle sous 24h →"
+
+Below submit button (small muted text):
+
+EN: "No spam. No pushy sales. Just a real conversation."
+FR: "Pas de spam. Pas de vente agressive. Juste une vraie conversation."
+
+ON SUBMIT:
+
+Show success message: EN "Got it! We'll call you within 24 hours." | FR "Reçu ! On vous rappelle sous 24h."
+Send form data to the same email/backend as the existing contact form
+Email subject: "NT Business Suite Lead — [Selected Plan] — [Business Name]"
+
+IMPORTANT:
+
+This is a SINGLE-STEP form. No "Step 1 of 4" progress bar.
+No module selection. No configurator. No "build your stack" flow.
+The tier they clicked is the tier they want. Just capture their info and you'll call them.

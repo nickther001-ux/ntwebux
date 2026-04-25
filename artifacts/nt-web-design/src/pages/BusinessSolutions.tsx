@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { ROICalculator } from "@/components/ROICalculator";
-import { SoftwareIntakeModal } from "@/components/SoftwareIntakeModal";
+import { BSuiteIntakeModal } from "@/components/BSuiteIntakeModal";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/lib/i18n";
 import { ArrowRight, Zap, MessageSquare, CalendarCheck, Star } from "lucide-react";
@@ -1182,7 +1182,7 @@ export default function BusinessSolutions() {
         <Footer />
       </div>
 
-      <SoftwareIntakeModal open={modalOpen} onClose={() => setModalOpen(false)} />
+      <BSuiteIntakeModal open={modalOpen} onClose={() => setModalOpen(false)} lang={lang as 'en' | 'fr'} />
     </>
   );
 }
