@@ -6,6 +6,7 @@ import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { Globe, Layers, Crown, Sparkles, Cpu, Rocket, ArrowRight, Check } from 'lucide-react';
 import { OnboardingModal } from '@/components/OnboardingModal';
+import { LetsTalkModal } from '@/components/LetsTalkModal';
 
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
 
@@ -29,6 +30,7 @@ const fadeUp = (delay = 0) => ({
 export default function ServicesPortfolio() {
   const { t, lang } = useLanguage();
   const [activePlan, setActivePlan] = useState<{ name: string; price: string | number; isSaas?: boolean } | null>(null);
+  const [letsTalkOpen, setLetsTalkOpen] = useState(false);
   const [track, setTrack] = useState<'web' | 'ai'>('ai');
   const svc   = t('portfolio.services') as any;
   const work  = t('portfolio.work')     as any;
@@ -230,7 +232,13 @@ export default function ServicesPortfolio() {
 
                   <div style={{ marginTop: '32px' }}>
                     <button
-                      onClick={() => setActivePlan({ name: plan.name, price: plan.price, isSaas: isAi })}
+                      onClick={() => {
+                        if (isAi && plan.name === 'Full Scope') {
+                          setLetsTalkOpen(true);
+                        } else {
+                          setActivePlan({ name: plan.name, price: plan.price, isSaas: isAi });
+                        }
+                      }}
                       className={featured ? 'btn-violet' : 'btn-outline'}
                       style={{
                         padding: '13px 18px',
@@ -388,6 +396,12 @@ export default function ServicesPortfolio() {
       <OnboardingModal
         plan={activePlan}
         onClose={() => setActivePlan(null)}
+      />
+
+      {/* Full Scope contact modal */}
+      <LetsTalkModal
+        open={letsTalkOpen}
+        onClose={() => setLetsTalkOpen(false)}
       />
     </div>
     </>
