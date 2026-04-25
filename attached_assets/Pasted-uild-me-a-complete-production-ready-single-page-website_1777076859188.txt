@@ -1,0 +1,302 @@
+uild me a complete, production-ready single-page website for suite.ntwebux.com using the copy below. This is a separate standalone site from ntwebux.com but must share the same visual identity — same dark navy background, same font system, same blue accent color, same card style, same overall premium dark aesthetic.
+TECH REQUIREMENTS
+
+Single HTML file with embedded CSS and JS
+Fully responsive — mobile first
+EN/FR language toggle that switches ALL content on the page
+Smooth scroll between sections
+No external frameworks except what is needed
+Host-ready for Render as a static site
+
+DESIGN SYSTEM — match ntwebux.com exactly
+
+Background: deep navy #0a0f1e
+Primary accent: electric blue #3b7fd4
+Text primary: white #ffffff
+Text secondary: #94a3b8
+Card background: #111827 with 1px border #1e2d45
+Font: Inter or system sans-serif
+Border radius on cards: 12px
+Buttons: filled blue for primary, outline white for secondary
+Section padding: 100px vertical on desktop, 60px on mobile
+
+NAVIGATION
+Fixed top navigation bar with:
+
+Left: NT logo (use a styled "NT" monogram in a dark square, same style as ntwebux.com) + "Business Suite" text beside it in small caps
+Center: Features | Pricing | How It Works | Book a Demo (smooth scroll links)
+Right: EN/FR toggle + "Start Free Trial" blue CTA button
+Nav background: semi-transparent dark navy with backdrop blur on scroll
+On mobile: hamburger menu that opens a full-width dropdown
+
+SECTION 1 — HERO
+Full viewport height hero section with:
+
+Small category badge above headline: pill shape with subtle border
+
+EN: "AI-Powered Business Operating System"
+FR: "Système d'exploitation IA pour entreprises"
+
+
+Large bold headline (60px desktop, 36px mobile):
+
+EN: "Stop losing clients to a phone that goes unanswered."
+FR: "Arrêtez de perdre des clients à cause d'un téléphone sans réponse."
+
+
+Subheading (18px, secondary color, max-width 640px centered):
+
+EN: "NT Business Suite handles your calls, follows up your leads, books your appointments, and manages your reputation — automatically, 24/7, in French and English."
+FR: "NT Business Suite répond à vos appels, relance vos prospects, prend vos rendez-vous et gère votre réputation — automatiquement, 24h/24, en français et en anglais."
+
+
+Two CTA buttons side by side:
+
+Primary (filled blue): EN "Start Your Free Trial →" | FR "Commencer l'essai gratuit →"
+Secondary (outline): EN "See It In Action" | FR "Voir une démonstration"
+
+
+Small trust line below buttons (13px muted):
+
+EN: "No contracts. No setup headaches. Cancel anytime."
+FR: "Sans engagement. Sans tracas. Annulez en tout temps."
+
+
+Three stat badges in a row below trust line:
+
+Badge 1: "24/7" / EN: "Always on" | FR: "Toujours actif"
+Badge 2: "Bilingual" / EN: "French + English native" | FR: "Français + anglais natif"
+Badge 3: "5 min" / EN: "Setup in 5 minutes" | FR: "Configuré en 5 minutes"
+
+
+Subtle animated gradient orb or particle effect in background — keep it minimal, no heavy WebGL
+
+SECTION 2 — PROBLEM
+
+Section label (small caps, blue, centered)
+Headline (centered):
+
+EN: "Your business is leaking money every single day."
+FR: "Votre entreprise perd de l'argent chaque jour."
+
+
+3 cards in a row (stack on mobile), each with an icon, headline, and body text:
+
+Card 1 icon: phone with X
+
+EN headline: "Missed calls = missed revenue"
+EN body: "Every unanswered call is a potential client choosing your competitor. The average service business misses 35% of inbound calls during peak hours."
+FR headline: "Appels manqués = revenus perdus"
+FR body: "Chaque appel sans réponse est un client potentiel qui choisit votre concurrent. En moyenne, une entreprise manque 35% de ses appels entrants aux heures de pointe."
+
+Card 2 icon: clock/timer
+
+EN headline: "Leads go cold in minutes"
+EN body: "If you don't follow up within 5 minutes, your chances of converting drop by 80%. Most businesses follow up in hours — or not at all."
+FR headline: "Les prospects refroidissent en quelques minutes"
+FR body: "Si vous ne relancez pas dans les 5 minutes, vos chances de conversion chutent de 80%. La plupart des entreprises relancent en heures — ou pas du tout."
+
+Card 3 icon: star/rating
+
+EN headline: "Your Google rating is costing you clients"
+EN body: "87% of consumers read reviews before choosing a local business. If you're not managing your reviews, competitors are winning clients you never knew you lost."
+FR headline: "Votre note Google vous coûte des clients"
+FR body: "87% des consommateurs lisent les avis avant de choisir une entreprise. Si vous ne gérez pas vos avis, vos concurrents gagnent des clients que vous n'avez jamais su perdre."
+
+SECTION 3 — SOLUTION
+
+Section label centered:
+
+EN: "Introducing NT Business Suite"
+FR: "Découvrez NT Business Suite"
+
+
+Large headline centered:
+
+EN: "Your entire back-office — automated."
+FR: "Votre back-office au complet — automatisé."
+
+
+Subheading centered (max-width 600px):
+
+EN: "One platform. CRM, AI receptionist, lead automation, reputation management, booking, email and SMS — all connected, all running while you focus on your work."
+FR: "Une seule plateforme. CRM, réceptionniste IA, automatisation des leads, gestion de réputation, prise de rendez-vous, courriel et SMS — tout connecté, tout en marche pendant que vous travaillez."
+
+
+
+SECTION 4 — FEATURES
+8 feature blocks in an alternating left/right layout (icon left, text right then flip):
+
+Each block has: icon, headline, body paragraph, and a small tag badge
+
+Feature 1 — AI Receptionist (icon: microphone/phone AI)
+
+EN headline: "Never miss another call."
+EN body: "Our AI voice receptionist answers every inbound call in under 3 seconds — 24 hours a day, 7 days a week. It qualifies the caller, answers common questions, and books appointments directly into your calendar. In French, English, or both."
+EN tag: "Powered by AI Voice Technology"
+FR headline: "Ne manquez plus jamais un appel."
+FR body: "Notre réceptionniste vocale IA répond à chaque appel entrant en moins de 3 secondes — 24h/24, 7j/7. Elle qualifie l'appelant, répond aux questions courantes et prend les rendez-vous directement dans votre agenda. En français, en anglais, ou dans les deux langues."
+FR tag: "Propulsé par la technologie vocale IA"
+
+Feature 2 — Missed Call Text-Back (icon: SMS bubble)
+
+EN headline: "A missed call is not a lost client — not anymore."
+EN body: "The moment someone calls and you can't answer, NT Business Suite automatically sends them a personalized text within seconds. The conversation continues. The lead stays warm."
+FR headline: "Un appel manqué n'est plus un client perdu."
+FR body: "Dès qu'un appel arrive sans réponse, NT Business Suite envoie automatiquement un message texte personnalisé en quelques secondes. La conversation continue. Le prospect reste chaud."
+
+Feature 3 — Lead Reactivation (icon: refresh/recycle arrows)
+
+EN headline: "Your best leads are already in your database."
+EN body: "NT Business Suite's reactivation engine automatically re-engages past contacts with personalized bilingual sequences. On average, our clients recover 15–30% of their dormant list within 30 days."
+FR headline: "Vos meilleurs prospects sont déjà dans votre base de données."
+FR body: "Le moteur de réactivation relance automatiquement vos anciens contacts avec des séquences bilingues personnalisées. En moyenne, nos clients récupèrent 15 à 30% de leur liste dormante en 30 jours."
+
+Feature 4 — Reputation Management (icon: star)
+
+EN headline: "More 5-star reviews. Less effort."
+EN body: "After every completed job, NT Business Suite automatically sends a review request by SMS or email. Our AI drafts personalized responses for you to approve in one click."
+FR headline: "Plus d'avis 5 étoiles. Moins d'efforts."
+FR body: "Après chaque travail complété, NT Business Suite envoie automatiquement une demande d'avis par SMS ou courriel. Notre IA rédige des réponses personnalisées que vous approuvez en un clic."
+
+Feature 5 — CRM & Pipeline (icon: kanban/pipeline)
+
+EN headline: "Every lead. Every client. Every conversation — in one place."
+EN body: "A clear visual pipeline of every lead and client. See exactly where every opportunity stands. Set follow-up reminders. Never let a hot lead slip through the cracks again."
+FR headline: "Chaque prospect. Chaque client. Chaque conversation — au même endroit."
+FR body: "Un pipeline visuel clair de chaque prospect et client. Voyez exactement où en est chaque opportunité. Définissez des rappels de suivi. Ne laissez plus jamais un prospect chaud passer entre les mailles."
+
+Feature 6 — Email & SMS Automation (icon: lightning bolt)
+
+EN headline: "The right message, to the right person, at the right time — automatically."
+EN body: "Automated email and SMS sequences that nurture leads, onboard clients, send reminders, and follow up after service — all in the background."
+FR headline: "Le bon message, à la bonne personne, au bon moment — automatiquement."
+FR body: "Des séquences automatisées de courriels et SMS qui nourrissent vos prospects, accueillent vos clients, envoient des rappels et assurent le suivi — tout en arrière-plan."
+
+Feature 7 — Auto-Booking (icon: calendar)
+
+EN headline: "Let clients book themselves — any time of day."
+EN body: "Your AI receptionist and website chat widget book appointments directly into your calendar. No back-and-forth. No phone tag. Clients book, you show up."
+FR headline: "Laissez les clients se réserver eux-mêmes — à toute heure."
+FR body: "Votre réceptionniste IA et le widget de clavardage réservent des rendez-vous directement dans votre agenda. Pas d'allers-retours. Les clients réservent, vous vous présentez."
+
+Feature 8 — Social DM Automation (icon: Instagram/Facebook bubble)
+
+EN headline: "Turn Instagram and Facebook messages into booked appointments."
+EN body: "When a potential client sends you a DM, an AI-powered conversation responds instantly, qualifies them, and moves them toward booking — without you lifting a finger."
+FR headline: "Transformez vos messages Instagram et Facebook en rendez-vous confirmés."
+FR body: "Quand un client potentiel vous envoie un message direct, une conversation IA répond instantanément, le qualifie et l'amène vers une réservation — sans que vous leviez le petit doigt."
+
+SECTION 5 — HOW IT WORKS
+3 numbered steps in a horizontal row (stack on mobile), large step numbers in blue:
+Step 1:
+
+EN headline: "We set everything up for you."
+EN body: "After signup, our team builds your entire account — pipelines, automations, AI receptionist, review sequences — customized for your business. You don't touch a single setting."
+FR headline: "On configure tout pour vous."
+FR body: "Après votre inscription, notre équipe configure l'ensemble de votre compte — pipelines, automatisations, réceptionniste IA, séquences d'avis — personnalisé pour votre entreprise."
+
+Step 2:
+
+EN headline: "Connect your existing tools in minutes."
+EN body: "NT Business Suite integrates with your phone number, Google Business Profile, website, Facebook, Instagram, and calendar. No complicated tech. No developer needed."
+FR headline: "Connectez vos outils existants en quelques minutes."
+FR body: "NT Business Suite s'intègre avec votre numéro de téléphone, profil Google, site web, Facebook, Instagram et agenda. Pas de technologie compliquée."
+
+Step 3:
+
+EN headline: "Watch your business run itself."
+EN body: "From day one, the system works in the background — answering calls, following up leads, collecting reviews, booking appointments. You get a weekly report showing what it did for you."
+FR headline: "Regardez votre entreprise se gérer toute seule."
+FR body: "Dès le premier jour, le système travaille en arrière-plan — répond aux appels, relance les prospects, collecte les avis, prend les rendez-vous. Vous recevez un rapport hebdomadaire."
+
+SECTION 6 — PRICING
+Tab toggle: Monthly / Annual (annual shows 20% discount)
+Three pricing cards:
+Card 1 — Starter / Démarrage — $297 CAD/mo
+Features: Basic CRM & contacts / AI web chat / Missed-call text-back / Lead forms / 1 pipeline / 500 contacts / Mobile app / Email support
+CTA: EN "Get Started →" | FR "Commencer →"
+Note: EN "No contracts. Cancel anytime." | FR "Sans engagement. Annulez en tout temps."
+Card 2 — Professional / Professionnel — $497 CAD/mo — MOST POPULAR badge
+Features: Everything in Starter / Full AI email & SMS automation / Auto-booking & calendar sync / Google review engine / AI review responses / 2-way SMS & email / Facebook & Instagram DM automation / Unlimited pipelines / 2,500 contacts / Reputation dashboard / Priority support
+CTA: EN "Claim Your Spot →" | FR "Réclamer votre place →"
+Note: EN "Most popular for growing service businesses." | FR "Le plus populaire pour les entreprises en croissance."
+Card 3 — Full Scope / Portée complète — $899 CAD/mo
+Features: Everything in Professional / Custom AI voice agent (bilingual) / WhatsApp automation / Multi-location setup / Advanced analytics / Custom onboarding call / AI content generation / Unlimited contacts / Monthly strategy call / API access / White-glove support
+CTA: EN "Let's Talk →" | FR "Réserver un appel →"
+Note: EN "Built for operators scaling across multiple locations." | FR "Conçu pour les opérateurs multi-emplacements."
+Below pricing cards add 4 FAQ accordion items using the copy from the document above (Is there a setup fee / Can I cancel / Is it available in French / What businesses is it for)
+SECTION 7 — COMPARISON TABLE
+Headline:
+
+EN: "Stop paying for 6 tools that don't talk to each other."
+FR: "Arrêtez de payer pour 6 outils qui ne communiquent pas entre eux."
+
+Subheading:
+
+EN: "The average service business spends $800–$1,500/month across separate tools. NT Business Suite replaces all of them for a fraction of the cost."
+FR: "L'entreprise de services moyenne dépense 800 $ à 1 500 $/mois sur des outils séparés. NT Business Suite les remplace tous à une fraction du coût."
+
+Render this as a styled dark table with 3 columns: Feature | NT Business Suite | Typical separate tools
+Highlight the NT Business Suite column with a blue accent header. Use checkmark icons for "Included" and grey dash for n/a.
+FeatureNT Business SuiteSeparate toolsCRMIncluded$49–$150/moAI Voice ReceptionistIncluded$200–$500/moReview ManagementIncluded$150–$300/moSMS & Email AutomationIncluded$100–$300/moBooking & SchedulingIncluded$30–$80/moSocial DM AutomationIncluded$50–$150/moBilingual FR+ENNativeRarely availableDone-for-you setupIncludedDIY onlyMonthly total$297–$899$579–$1,480+
+SECTION 8 — ABOUT
+Simple centered section:
+
+EN headline: "Built by a founder who uses it every day."
+FR headline: "Construit par un fondateur qui l'utilise chaque jour."
+EN body: "NT Business Suite is a product of NT Digital Group — a Montreal-based AI agency built from the ground up by one founder, using the same systems we deploy for our clients. We built it because we couldn't find a bilingual, done-for-you, Quebec-ready platform that actually served service businesses the way they needed to be served. We built it ourselves. And now it's yours."
+FR body: "NT Business Suite est un produit de NT Digital Group — une agence IA basée à Montréal, construite de A à Z par un seul fondateur, avec les mêmes systèmes qu'on déploie pour nos clients. On l'a construit parce qu'on ne trouvait pas une plateforme bilingue, clé en main et adaptée au Québec. On l'a construit nous-mêmes. Et maintenant, il est à vous."
+
+Row of 5 trust badges below body text:
+
+Basé à Montréal · Based in Montreal
+Bilingue natif · Natively Bilingual
+Conforme Loi 25 · Law 25 Compliant
+Propulsé par l'IA · AI-Powered
+Sans engagement · No Contracts
+
+SECTION 9 — FINAL CTA
+Full-width section with blue gradient background (dark blue to slightly lighter blue, very subtle):
+
+EN headline: "Your competitors are already automating. Are you?"
+FR headline: "Vos concurrents automatisent déjà. Et vous ?"
+EN subheading: "Every day without NT Business Suite is a day of missed calls, cold leads, and lost revenue. Start your free trial — we'll have everything set up within 48 hours."
+FR subheading: "Chaque jour sans NT Business Suite est un jour d'appels manqués, de prospects refroidis et de revenus perdus. Commencez votre essai gratuit — on configure tout en 48 heures."
+Primary CTA: EN "Start Free Trial — No Credit Card Required →" | FR "Commencer l'essai gratuit — Aucune carte requise →"
+Secondary CTA: EN "Book a 15-Minute Demo" | FR "Réserver une démo de 15 minutes"
+
+FOOTER
+
+Left: NT Business Suite logo + tagline
+
+EN: "The AI operating system for service businesses. Built in Montreal."
+FR: "Le système d'exploitation IA pour les entreprises de services. Construit à Montréal."
+
+
+Center: nav links (Features, Pricing, How It Works, Book a Demo, Privacy Policy, Terms)
+Right: EN/FR toggle + social icons placeholder
+Bottom bar: legal note
+
+EN: "NT Business Suite is a product of NT Digital Group (NT Web Design). All rights reserved."
+FR: "NT Business Suite est un produit de NT Digital Group (NT Web Design). Tous droits réservés."
+
+
+
+LANGUAGE TOGGLE BEHAVIOR
+
+Default language: FR (since primary market is Quebec)
+All text on every section switches instantly on toggle click
+Toggle state persists on page reload using localStorage
+Active language is visually indicated on the toggle button
+
+FINAL INSTRUCTIONS
+
+Output a single complete HTML file
+All CSS embedded in a style tag in the head
+All JS embedded in a script tag before closing body
+No placeholder images — use CSS shapes, gradients, or SVG icons only
+All icons can be simple SVG inline icons in the matching blue or white color
+Make sure the page looks complete and professional at 375px mobile width and 1280px desktop width
+Do not add any features or sections not listed above
+When done, confirm the file is ready and tell me what to name it and where to deploy on Render
