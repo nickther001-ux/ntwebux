@@ -826,9 +826,12 @@ export function Services() {
           }
         }
         @media (max-width: 768px) {
+          /* NO filter here — filter on a parent creates a shared compositing
+             surface that traps children and kills will-change: transform GPU
+             promotion, stopping the scroll animation on mobile.
+             Readability is handled solely by the heavier showreel-mask overlay. */
           .showreel-grid {
-            filter: blur(5px);
-            opacity: 0.45;
+            opacity: 0.40;
           }
         }
         .showreel-col {
