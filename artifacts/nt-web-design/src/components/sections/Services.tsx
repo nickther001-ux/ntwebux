@@ -161,7 +161,6 @@ const PILLARS_FR: Pillar[] = [
     bullets: [
       'Développement de plateformes et d\'outils métiers propriétaires.',
       'Infrastructure logicielle privée, sécurisée et hautement évolutive.',
-      'Propriété totale de votre code et de vos données.',
     ],
     details: [
       'Intégrations API avec votre stack technologique existant.',
@@ -260,7 +259,6 @@ const PILLARS_EN: Pillar[] = [
     bullets: [
       'Development of proprietary platforms and business tools.',
       'Private, secure, and highly scalable software infrastructure.',
-      'Full ownership of your code and your data.',
     ],
     details: [
       'API integrations with your existing technology stack.',
