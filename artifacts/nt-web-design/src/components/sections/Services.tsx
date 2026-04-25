@@ -442,7 +442,7 @@ export function Services() {
     {
       icon: Globe,
       eyebrow: lang === 'fr' ? 'International' : 'International',
-      title:   lang === 'fr' ? 'Fondations Numériques' : 'Digital Foundations',
+      title:   lang === 'fr' ? 'Fondations Web' : 'Website Foundations',
       desc:    lang === 'fr' ? 'Tout pour bâtir et faire croître votre présence en ligne — partout dans le monde.'
                               : 'Everything to build and grow your online presence — anywhere in the world.',
       items: foundations,

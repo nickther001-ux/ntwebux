@@ -12,7 +12,7 @@ function fmtCAD(n: number) { return '$' + Math.round(n).toLocaleString('en-CA');
 
 const PILLARS = [
   {
-    key: 'Digital Foundations',
+    key: 'Website Foundations',
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
         <rect x="2" y="3" width="20" height="14" rx="2" stroke="currentColor" strokeWidth="1.7"/>
@@ -20,7 +20,7 @@ const PILLARS = [
         <path d="M6 8h12M6 12h8" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"/>
       </svg>
     ),
-    title:    { en: 'Digital Foundations',      fr: 'Fondations Numériques' },
+    title:    { en: 'Website Foundations',      fr: 'Fondations Web' },
     sub:      { en: 'High-Performance Web Infrastructure', fr: 'Infrastructure Web Haute Performance' },
     target:   { en: 'Global Authority',         fr: 'Autorité Mondiale' },
     accentColor: '#22d3ee',

@@ -90,14 +90,14 @@ const translations: Translations = {
       scaleChip: "Scale a Foundation",
       automateChip: "Automate Revenue",
       rules: {
-        price:    "Our Digital Foundations start at $997, and our AI OS starts at $297/month. Would you like to see the pricing table?",
+        price:    "Our Website Foundations start at $997, and our AI OS starts at $297/month. Would you like to see the pricing table?",
         ai:       "We specialize in AI Text-Back and Auto-Booking systems that recover lost revenue. You can calculate your potential ROI using our Audit tool on this page.",
         website:  "We build high-performance, bilingual sites with a Silicon Valley aesthetic. Check our showreel in the Foundations section above.",
         hello:    "I am Silas 2.5, the NT Digital assistant. I can help you navigate our services or book a technical consultation with our team.",
-        scale:    "Digital Foundations start with Website Design, eCommerce, and CMS — all built with a Silicon Valley aesthetic and delivered in 72 hours.",
+        scale:    "Website Foundations start with Website Design, eCommerce, and CMS — all built with a Silicon Valley aesthetic and delivered in 72 hours.",
         automate: "Our AI OS includes Text-Back automation, auto-booking, and review management — starting at $297/month. Use the ROI Audit above to see your numbers.",
         global:   "We operate a borderless agency model with hubs in Montreal and Japan. This allows us to offer 24/7 technical architecture and bilingual (FR/EN) solutions that bridge the gap between markets.",
-        quality:  "We don't use generic templates. Every Digital Foundation we build is bespoke, using high-performance frameworks like Next.js to ensure Silicon Valley-level speed and security.",
+        quality:  "We don't use generic templates. Every Website Foundation we build is bespoke, using high-performance frameworks like Next.js to ensure Silicon Valley-level speed and security.",
         why:      "Most agencies build websites; we build revenue engines. We combine world-class aesthetics with AI automations like Text-Back to ensure every missed call is recovered as a lead.",
         timeline: "We move at startup speed. Foundations are typically delivered in 72 hours. We can begin your AI implementation immediately after a quick technical audit.",
         audit:    "You should try our ROI calculator on the main page. Most of our clients discover they are losing thousands of dollars a month in missed calls before we step in.",
@@ -135,7 +135,7 @@ const translations: Translations = {
         title2: "no surprises",
         desc: "Every package includes hosting, maintenance, and support. You pay once — we handle the rest.",
         toggle: {
-          web: "Digital Foundations (Project)",
+          web: "Website Foundations (Project)",
           ai:  "Enterprise AI (Monthly SaaS)"
         },
         webPlans: [
@@ -309,14 +309,14 @@ const translations: Translations = {
       scaleChip: "Construire des Fondations",
       automateChip: "Automatiser mes Revenus",
       rules: {
-        price:    "Nos Fondations Numériques débutent à 997 $, et notre IA OS commence à 297 $/mois. Souhaitez-vous voir le tableau des tarifs ?",
+        price:    "Nos Fondations Web débutent à 997 $, et notre IA OS commence à 297 $/mois. Souhaitez-vous voir le tableau des tarifs ?",
         ai:       "Nous sommes spécialisés dans les systèmes IA Text-Back et de réservation automatique qui récupèrent les revenus perdus. Calculez votre ROI potentiel avec l'outil d'audit sur cette page.",
         website:  "Nous créons des sites haute performance et bilingues avec une esthétique Silicon Valley. Consultez notre showreel dans la section Fondations ci-dessus.",
         hello:    "Je suis Silas 2.5, l'assistant NT Digital. Je peux vous aider à naviguer dans nos services ou à réserver une consultation technique.",
-        scale:    "Les Fondations Numériques incluent le design web, l'e-commerce et le CMS — livrés en 72h avec une esthétique Silicon Valley.",
+        scale:    "Les Fondations Web incluent le design web, l'e-commerce et le CMS — livrés en 72h avec une esthétique Silicon Valley.",
         automate: "Notre IA OS inclut l'automatisation Text-Back, la réservation automatique et la gestion des avis — à partir de 297 $/mois. Utilisez l'Audit ROI ci-dessus.",
         global:   "Nous opérons un modèle d'agence sans frontières avec des bureaux à Montréal et au Japon. Cela nous permet d'offrir une architecture technique 24h/24 et des solutions bilingues (FR/EN) qui créent des ponts entre les marchés.",
-        quality:  "Nous n'utilisons pas de templates génériques. Chaque Fondation Numérique est sur mesure, construite avec des frameworks haute performance comme Next.js pour garantir vitesse et sécurité de niveau Silicon Valley.",
+        quality:  "Nous n'utilisons pas de templates génériques. Chaque Fondation Web est sur mesure, construite avec des frameworks haute performance comme Next.js pour garantir vitesse et sécurité de niveau Silicon Valley.",
         why:      "La plupart des agences créent des sites web ; nous, nous construisons des moteurs de revenus. Nous combinons une esthétique de classe mondiale avec des automatisations IA comme le Text-Back pour transformer chaque appel manqué en prospect.",
         timeline: "Nous avançons à la vitesse d'une startup. Les Fondations sont livrées en 72 heures. Nous pouvons démarrer votre implémentation IA immédiatement après un audit technique rapide.",
         audit:    "Essayez notre calculateur ROI sur la page principale. La plupart de nos clients découvrent qu'ils perdent des milliers de dollars par mois en appels manqués avant que nous intervenions.",
@@ -354,7 +354,7 @@ const translations: Translations = {
         title2: "sans surprise",
         desc: "Chaque forfait inclut l'hébergement, la maintenance et le support. Vous payez une fois, on s'occupe du reste.",
         toggle: {
-          web: "Fondations Numériques (Projet)",
+          web: "Fondations Web (Projet)",
           ai:  "IA Entreprise (SaaS Mensuel)"
         },
         webPlans: [
