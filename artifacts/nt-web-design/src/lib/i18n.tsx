@@ -117,7 +117,7 @@ const translations: Translations = {
       aiLinks: [
         { label: "AI Text-Back",    href: "/business-suite" },
         { label: "SaaS Development", href: "/business-suite" },
-        { label: "ROI Audit",       href: "/#roi-calculator" },
+        { label: "ROI Audit",       href: "/roi" },
       ],
       companyLabel: "Company",
       companyLinks: [
@@ -336,7 +336,7 @@ const translations: Translations = {
       aiLinks: [
         { label: "IA Text-Back",     href: "/business-suite" },
         { label: "Développement SaaS", href: "/business-suite" },
-        { label: "Audit ROI",        href: "/#roi-calculator" },
+        { label: "Audit ROI",        href: "/roi" },
       ],
       companyLabel: "Entreprise",
       companyLinks: [

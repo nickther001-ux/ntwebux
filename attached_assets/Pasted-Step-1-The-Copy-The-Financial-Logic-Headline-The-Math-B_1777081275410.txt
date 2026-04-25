@@ -1,0 +1,36 @@
+Step 1: The Copy (The Financial Logic)
+Headline: The Math Behind the Infrastructure
+Subheadline: Software is an expense. Custom automation is an asset. Here is exactly how NT Digital Group systems pay for themselves within the first 90 days.
+
+Card 1: Lead Leakage Recovery
+
+The Problem: The average service business misses 20% of inbound calls.
+
+The Engine: Our AI Text-Back system engages missed calls in < 60 seconds.
+
+The ROI: If your average client lifetime value is $2,000, recovering just 3 lost leads a month adds $72,000 to your annual bottom line.
+
+Card 2: Operational Efficiency (Time = Capital)
+
+The Problem: Your team wastes 15+ hours a week on manual follow-ups, scheduling, and data entry.
+
+The Engine: Custom CRM integrations and Auto-Booking pipelines.
+
+The ROI: Reclaim 60 hours a month per employee. Redirect that time toward closing deals instead of administrative maintenance.
+
+Card 3: Acquisition Cost Reduction
+
+The Problem: Paying for ads is renting traffic.
+
+The Engine: Sub-second load times and automated Review Engines.
+
+The ROI: Dominate local search organically. Lower your Customer Acquisition Cost (CAC) by converting traffic you already own through elite technical SEO.
+
+Call to Action (CTA):
+
+Button: Calculate Your Potential ROI ➔ (Routes to your contact form or scheduling link).
+
+Step 2: The Replit Execution Command
+To get this built instantly without messing with layout files yourself, open your Replit AI pane and paste this exact command:
+
+"Build a new React component called ROIPage. It should have a dark, high-contrast tech aesthetic that matches the 'AI Text-Back' cards. Use a bold, centered headline: 'The Math Behind the Infrastructure'. Below the headline, create a responsive 3-column CSS grid. In each column, place a card detailing the financial ROI of our services: Card 1 is 'Lead Leakage Recovery', Card 2 is 'Operational Efficiency', and Card 3 is 'Acquisition Cost Reduction'. Use Tailwind CSS for styling. Add a glowing primary CTA button at the bottom that says 'Calculate Your Potential ROI'. Make sure the text is highly legible with proper contrast against the dark background."
