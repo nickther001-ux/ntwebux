@@ -190,6 +190,15 @@ export function Hero({ onStart }: { onStart?: () => void } = {}) {
             { v: 'Loi 25', num: null, suffix: '', l: 'Conforme à la Loi 25', sub: 'Conformité vie privée Québec',
               detail: 'Chaque projet que nous livrons respecte la Loi 25 du Québec : politique de confidentialité, consentement aux cookies et pratiques de collecte de données.',
               source: 'Conformité Québec · 2024' },
+            { v: '28%', num: 28, suffix: '%', l: 'des PME sans présence en ligne', sub: 'plus de 9 millions d\'entreprises',
+              detail: 'Plus de 9 millions de petites entreprises passent à côté de clients qui les cherchent activement sur Google chaque jour — faute de site web.',
+              source: 'Statista · 2024' },
+            { v: '72%', num: 72, suffix: '%', l: 'des entreprises ont un site', sub: 'en 2024–2025',
+              detail: 'Aux États-Unis et au Canada, près de 3 entreprises sur 4 ont une présence en ligne professionnelle. Votre concurrence, probablement.',
+              source: 'Forbes Advisor · 2024' },
+            { v: '3×', num: null, suffix: '', l: 'plus de prospects avec un site pro', sub: 'vs. sans site ou site basique',
+              detail: 'Les entreprises avec un site professionnel et bien optimisé génèrent en moyenne 3 fois plus de demandes qualifiées que celles sans site.',
+              source: 'HubSpot Research · 2024' },
           ] : [
             { v: 'Avg. 3 days', num: null, suffix: '', l: 'Most sites delivered in 72 hours', sub: 'fast, reliable, no surprises',
               detail: 'Most of our sites go live within 3 business days. More complex builds take a little longer — never months.',
@@ -200,6 +209,15 @@ export function Hero({ onStart }: { onStart?: () => void } = {}) {
             { v: 'Law 25 Ready', num: null, suffix: '', l: 'Quebec privacy compliant', sub: 'Built for Law 25 from day one',
               detail: 'Every project we deliver is Law 25 compliant: privacy policy, cookie consent, and data collection practices built in from the start.',
               source: 'Quebec Privacy Law · 2024' },
+            { v: '28%', num: 28, suffix: '%', l: 'of small businesses have no website', sub: 'over 9 million companies',
+              detail: 'Over 9 million small businesses are missing out on customers actively searching for them on Google every day — simply because they have no site.',
+              source: 'Statista · 2024' },
+            { v: '72%', num: 72, suffix: '%', l: 'of businesses have a website', sub: 'as of 2024–2025',
+              detail: 'In the U.S. and Canada, nearly 3 out of 4 businesses now run a professional online presence. Your competition, probably.',
+              source: 'Forbes Advisor · 2024' },
+            { v: '3×', num: null, suffix: '', l: 'more leads with a pro website', sub: 'vs. no site or a basic one',
+              detail: 'Businesses with a professional, well-optimized website generate on average 3× more qualified inquiries than those with a basic site or no site at all.',
+              source: 'HubSpot Research · 2024' },
           ]).map((s, i) => (
             <StatCard key={i} {...s} delay={0.55 + i * 0.12} />
           ))}
