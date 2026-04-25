@@ -73,6 +73,11 @@ interface Pillar {
   title: string;
   hook: string;
   bullets: string[];
+  details: string[];           // extra bullets shown only in modal
+  deliverableLabel: string;
+  deliverables: string[];      // "What's Included" list
+  stat: string;                // headline metric
+  statLabel: string;
   bottomLine: string;
   bottomLineLabel: string;
   glowA: string;
@@ -94,6 +99,21 @@ const PILLARS_FR: Pillar[] = [
       'Architecture technique optimisée pour dominer le SEO.',
       'Design UX calibré pour convertir les visiteurs en clients.',
     ],
+    details: [
+      'Design responsive mobile-first sur tous les appareils et résolutions.',
+      'Bilingue EN/FR 100 % natif — aucune traduction automatique.',
+      'Infrastructure de confidentialité conforme à la Loi 25, incluse dès le départ.',
+      'Balisage de données structurées pour les résultats enrichis Google.',
+    ],
+    deliverableLabel: 'Ce qui est inclus',
+    deliverables: [
+      'Configuration du domaine personnalisé + DNS',
+      'Google Search Console, Analytics & sitemap',
+      'Politique de confidentialité + bannière de cookies',
+      'Support post-lancement de 30 jours inclus',
+    ],
+    stat: '72h',
+    statLabel: 'délai de livraison moyen',
     bottomLine: 'Pour les entreprises exigeant une vitrine numérique de classe mondiale.',
     bottomLineLabel: 'Pour qui',
     glowA: '34,211,238',
@@ -111,6 +131,21 @@ const PILLARS_FR: Pillar[] = [
       'Relances SMS et prise de rendez-vous en moins de 60 secondes.',
       'Automatisation des suivis pour stopper les fuites de revenus.',
     ],
+    details: [
+      'Moteur d\'avis Google automatique déclenché à la fin de chaque contrat.',
+      'Conversations SMS & email bidirectionnelles en temps réel.',
+      'CRM multi-pipelines avec score et priorisation des leads.',
+      'Séquences de relance WhatsApp et multicanal.',
+    ],
+    deliverableLabel: 'Ce qui est inclus',
+    deliverables: [
+      'Onboarding complet du système en moins de 72h',
+      'Appel de configuration dédié avec votre équipe',
+      'Rapport mensuel de performance et pipeline',
+      'Accès à l\'application mobile inclus',
+    ],
+    stat: '+22 %',
+    statLabel: 'de ventes récupérées en moyenne',
     bottomLine: 'Pour les équipes à forte commission (Immobilier, Juridique, Construction).',
     bottomLineLabel: 'Pour qui',
     glowA: '167,139,250',
@@ -128,6 +163,21 @@ const PILLARS_FR: Pillar[] = [
       'Infrastructure logicielle privée, sécurisée et hautement évolutive.',
       'Propriété totale de votre code et de vos données.',
     ],
+    details: [
+      'Intégrations API avec votre stack technologique existant.',
+      'Contrôle d\'accès basé sur les rôles et gestion des utilisateurs.',
+      'Infrastructure cloud scalable (AWS / GCP / Vercel).',
+      'Maintenance continue et sprints de fonctionnalités disponibles.',
+    ],
+    deliverableLabel: 'Ce qui est inclus',
+    deliverables: [
+      'Code source livré dans votre dépôt',
+      'Documentation technique complète',
+      'Garantie de 90 jours post-lancement',
+      'Formation de votre équipe sur la prise en main',
+    ],
+    stat: '100 %',
+    statLabel: 'propriété du code — aucun vendor lock-in',
     bottomLine: 'Pour les startups et PME nécessitant une logique d\'affaires unique.',
     bottomLineLabel: 'Pour qui',
     glowA: '52,211,153',
@@ -148,6 +198,21 @@ const PILLARS_EN: Pillar[] = [
       'Technical architecture optimized to dominate SEO.',
       'UX design calibrated to convert visitors into clients.',
     ],
+    details: [
+      'Mobile-first responsive design across every device and resolution.',
+      'Bilingual EN/FR built natively — zero machine translation.',
+      'Law 25 compliant privacy infrastructure included from day one.',
+      'Structured data markup for Google rich snippets and AI overviews.',
+    ],
+    deliverableLabel: "What's Included",
+    deliverables: [
+      'Custom domain + DNS configuration',
+      'Google Search Console, Analytics & sitemap setup',
+      'Privacy policy + cookie consent banner',
+      '30-day post-launch support included',
+    ],
+    stat: '72h',
+    statLabel: 'average delivery turnaround',
     bottomLine: 'For businesses demanding a world-class digital storefront.',
     bottomLineLabel: 'Built for',
     glowA: '34,211,238',
@@ -165,6 +230,21 @@ const PILLARS_EN: Pillar[] = [
       'SMS follow-ups and appointment booking in under 60 seconds.',
       'Automated nurture sequences to stop revenue leaks.',
     ],
+    details: [
+      'Google review request engine triggered at job completion.',
+      'Two-way SMS & email conversations in real time.',
+      'Multi-pipeline CRM with lead scoring and prioritization.',
+      'WhatsApp and multi-channel follow-up sequences.',
+    ],
+    deliverableLabel: "What's Included",
+    deliverables: [
+      'Full system onboarded in under 72 hours',
+      'Dedicated setup call with your team',
+      'Monthly performance & pipeline report',
+      'Mobile app access included',
+    ],
+    stat: '+22%',
+    statLabel: 'avg. closed deals recovered',
     bottomLine: 'For high-commission teams — Real Estate, Legal, Construction.',
     bottomLineLabel: 'Built for',
     glowA: '167,139,250',
@@ -182,6 +262,21 @@ const PILLARS_EN: Pillar[] = [
       'Private, secure, and highly scalable software infrastructure.',
       'Full ownership of your code and your data.',
     ],
+    details: [
+      'API integrations with your existing technology stack.',
+      'Role-based access control and user management.',
+      'Scalable cloud infrastructure (AWS / GCP / Vercel).',
+      'Ongoing maintenance retainer and feature sprints available.',
+    ],
+    deliverableLabel: "What's Included",
+    deliverables: [
+      'Source code delivered to your repository',
+      'Full technical documentation',
+      '90-day post-launch warranty on all custom builds',
+      'Team onboarding and handover session',
+    ],
+    stat: '100%',
+    statLabel: 'code ownership — zero vendor lock-in',
     bottomLine: 'For startups and SMEs requiring unique business logic.',
     bottomLineLabel: 'Built for',
     glowA: '52,211,153',
@@ -458,6 +553,21 @@ function PillarCard({ pillar, index, ctaLabel, onClick }: {
 }
 
 /* ─── Modal ───────────────────────────────────────────────── */
+function BulletItem({ text, color }: { text: string; color: string }) {
+  return (
+    <li style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
+      <div style={{
+        width: '18px', height: '18px', borderRadius: '50%', flexShrink: 0, marginTop: '2px',
+        background: `rgba(${color},0.15)`, border: `1px solid rgba(${color},0.35)`,
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+      }}>
+        <Check size={10} color={`rgb(${color})`} strokeWidth={3} />
+      </div>
+      <span style={{ fontSize: '13.5px', color: 'rgba(255,255,255,0.7)', lineHeight: 1.65 }}>{text}</span>
+    </li>
+  );
+}
+
 function PillarModal({ pillar, ctaLabel, onClose, lang }: {
   pillar: Pillar;
   ctaLabel: string;
@@ -471,78 +581,114 @@ function PillarModal({ pillar, ctaLabel, onClose, lang }: {
           <motion.div
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             onClick={onClose}
-            style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.75)', backdropFilter: 'blur(8px)', zIndex: 200 }}
+            style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.78)', backdropFilter: 'blur(10px)', zIndex: 200 }}
           />
-          <div style={{ position: 'fixed', inset: 0, zIndex: 201, display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none', padding: '24px' }}>
+          <div style={{ position: 'fixed', inset: 0, zIndex: 201, display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none', padding: '20px' }}>
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 16 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 16 }}
               transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
               style={{
-                pointerEvents: 'all', width: '90vw', maxWidth: '480px',
-                background: '#111', border: `1px solid rgba(${pillar.glowA},0.25)`,
-                borderRadius: '24px', padding: '40px 36px',
-                boxShadow: `0 24px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(${pillar.glowA},0.1)`,
+                pointerEvents: 'all', width: '90vw', maxWidth: '560px',
+                maxHeight: '90vh', overflowY: 'auto',
+                background: 'linear-gradient(160deg, #0e1422 0%, #0a0f1a 100%)',
+                border: `1px solid rgba(${pillar.glowA},0.28)`,
+                borderRadius: '24px',
+                boxShadow: `0 24px 80px rgba(0,0,0,0.8), 0 0 0 1px rgba(${pillar.glowA},0.1), inset 0 1px 0 rgba(255,255,255,0.05)`,
                 position: 'relative',
+                scrollbarWidth: 'none',
               }}
             >
-              <button onClick={onClose} style={{ position: 'absolute', top: '18px', right: '22px', background: 'none', border: 'none', color: 'rgba(255,255,255,0.4)', cursor: 'pointer' }}
-                onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
-                onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.4)')}>
-                <X size={20} />
-              </button>
+              {/* Ambient glow top-left */}
+              <div aria-hidden style={{
+                position: 'absolute', top: 0, left: 0, width: '280px', height: '280px', pointerEvents: 'none', borderRadius: '24px',
+                background: `radial-gradient(circle, rgba(${pillar.glowA},0.14) 0%, rgba(${pillar.glowA},0) 70%)`,
+                filter: 'blur(32px)',
+              }} />
 
-              {/* Header */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '28px' }}>
-                <div style={{
-                  width: '52px', height: '52px', borderRadius: '14px', flexShrink: 0,
-                  background: `rgba(${pillar.glowA},0.14)`, border: `1px solid rgba(${pillar.glowA},0.3)`,
-                  display: 'flex', alignItems: 'center', justifyContent: 'center', color: `rgb(${pillar.glowA})`,
-                }}>
-                  <pillar.icon size={24} />
-                </div>
-                <div>
-                  <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: `rgba(${pillar.glowA},0.65)`, marginBottom: '5px' }}>
-                    {lang === 'fr' ? 'PILIER' : 'PILLAR'} {pillar.id}
+              <div style={{ padding: '36px 36px 32px', position: 'relative' }}>
+
+                {/* Close */}
+                <button onClick={onClose} style={{ position: 'absolute', top: '20px', right: '24px', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: 'rgba(255,255,255,0.5)', cursor: 'pointer', width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.color = '#fff'; (e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.12)'; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.color = 'rgba(255,255,255,0.5)'; (e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.06)'; }}>
+                  <X size={16} />
+                </button>
+
+                {/* Header */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '20px' }}>
+                  <div style={{
+                    width: '52px', height: '52px', borderRadius: '14px', flexShrink: 0,
+                    background: `rgba(${pillar.glowA},0.14)`, border: `1px solid rgba(${pillar.glowA},0.3)`,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', color: `rgb(${pillar.glowA})`,
+                  }}>
+                    <pillar.icon size={24} />
                   </div>
-                  <div style={{ fontSize: '20px', fontWeight: 800, color: '#fff', letterSpacing: '-0.025em' }}>{pillar.title}</div>
-                </div>
-              </div>
-
-              {/* Hook */}
-              <p style={{ fontSize: '15px', color: `rgba(${pillar.glowA},0.85)`, fontStyle: 'italic', fontWeight: 500, marginBottom: '24px', lineHeight: 1.6 }}>
-                {pillar.hook}
-              </p>
-
-              {/* Bullets */}
-              <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 24px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                {pillar.bullets.map((b, i) => (
-                  <li key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
-                    <div style={{
-                      width: '18px', height: '18px', borderRadius: '50%', flexShrink: 0, marginTop: '2px',
-                      background: `rgba(${pillar.glowA},0.15)`, border: `1px solid rgba(${pillar.glowA},0.35)`,
-                      display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    }}>
-                      <Check size={10} color={`rgb(${pillar.glowA})`} strokeWidth={3} />
+                  <div>
+                    <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: `rgba(${pillar.glowA},0.65)`, marginBottom: '4px' }}>
+                      {lang === 'fr' ? 'PILIER' : 'PILLAR'} {pillar.id}
                     </div>
-                    <span style={{ fontSize: '14px', color: 'rgba(255,255,255,0.7)', lineHeight: 1.65 }}>{b}</span>
-                  </li>
-                ))}
-              </ul>
-
-              {/* Bottom Line */}
-              <div style={{ padding: '14px 18px', borderRadius: '10px', background: `rgba(${pillar.glowA},0.08)`, border: `1px solid rgba(${pillar.glowA},0.18)`, marginBottom: '28px' }}>
-                <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: `rgba(${pillar.glowA},0.6)`, marginBottom: '5px' }}>
-                  {pillar.bottomLineLabel}
+                    <div style={{ fontSize: '19px', fontWeight: 800, color: '#fff', letterSpacing: '-0.025em', lineHeight: 1.2 }}>{pillar.title}</div>
+                  </div>
                 </div>
-                <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.7)', lineHeight: 1.55, margin: 0 }}>{pillar.bottomLine}</p>
-              </div>
 
-              <a href="#contact" onClick={onClose} className="btn-violet"
-                style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', width: '100%', padding: '14px 0', fontSize: '14px', fontWeight: 600, borderRadius: '12px', textDecoration: 'none' }}>
-                {ctaLabel} <ArrowRight size={15} />
-              </a>
+                {/* Hook */}
+                <p style={{ fontSize: '14.5px', color: `rgba(${pillar.glowA},0.85)`, fontStyle: 'italic', fontWeight: 500, marginBottom: '22px', lineHeight: 1.6 }}>
+                  {pillar.hook}
+                </p>
+
+                {/* All bullets (core + details) */}
+                <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 22px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                  {[...pillar.bullets, ...pillar.details].map((b, i) => (
+                    <BulletItem key={i} text={b} color={pillar.glowA} />
+                  ))}
+                </ul>
+
+                {/* Divider */}
+                <div style={{ height: '1px', background: `rgba(${pillar.glowA},0.12)`, margin: '22px 0' }} />
+
+                {/* Stat badge */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '22px' }}>
+                  <span style={{
+                    fontSize: '28px', fontWeight: 800, color: `rgb(${pillar.glowA})`,
+                    letterSpacing: '-0.04em', lineHeight: 1,
+                    textShadow: `0 0 24px rgba(${pillar.glowA},0.5)`,
+                  }}>{pillar.stat}</span>
+                  <span style={{ fontSize: '12px', color: `rgba(${pillar.glowA},0.65)`, fontWeight: 600, lineHeight: 1.4 }}>
+                    {pillar.statLabel}
+                  </span>
+                </div>
+
+                {/* What's Included */}
+                <div style={{ padding: '18px 20px', borderRadius: '14px', background: `rgba(${pillar.glowA},0.06)`, border: `1px solid rgba(${pillar.glowA},0.16)`, marginBottom: '16px' }}>
+                  <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: `rgba(${pillar.glowA},0.7)`, marginBottom: '12px' }}>
+                    {pillar.deliverableLabel}
+                  </div>
+                  <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                    {pillar.deliverables.map((d, i) => (
+                      <li key={i} style={{ display: 'flex', alignItems: 'center', gap: '9px', fontSize: '13px', color: 'rgba(255,255,255,0.65)' }}>
+                        <div style={{ width: '5px', height: '5px', borderRadius: '50%', flexShrink: 0, background: `rgb(${pillar.glowA})`, opacity: 0.7 }} />
+                        {d}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Built for */}
+                <div style={{ padding: '14px 18px', borderRadius: '10px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)', marginBottom: '24px' }}>
+                  <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.35)', marginBottom: '5px' }}>
+                    {pillar.bottomLineLabel}
+                  </div>
+                  <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.6)', lineHeight: 1.55, margin: 0 }}>{pillar.bottomLine}</p>
+                </div>
+
+                <a href="#contact" onClick={onClose} className="btn-violet"
+                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', width: '100%', padding: '14px 0', fontSize: '14px', fontWeight: 600, borderRadius: '12px', textDecoration: 'none' }}>
+                  {ctaLabel} <ArrowRight size={15} />
+                </a>
+
+              </div>
             </motion.div>
           </div>
         </>
