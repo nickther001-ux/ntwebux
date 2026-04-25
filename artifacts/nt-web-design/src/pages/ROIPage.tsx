@@ -3,7 +3,8 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { useLanguage } from "@/lib/i18n";
 import { motion } from "framer-motion";
-import { PhoneMissed, Clock, TrendingUp, ArrowRight, Zap } from "lucide-react";
+import { PhoneMissed, Clock, TrendingUp, Zap } from "lucide-react";
+import { ROICalculator } from "@/components/ROICalculator";
 
 /* ─── Copy ──────────────────────────────────────────────────── */
 const copy = {
@@ -298,34 +299,10 @@ export default function ROIPage() {
                 })}
               </div>
 
-              {/* ── CTA ── */}
-              <motion.div
-                custom={5} variants={fadeUp} initial="hidden" animate="show"
-                style={{ textAlign: "center" }}
-              >
-                <a
-                  href="#contact"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    window.location.href = "/#contact";
-                  }}
-                  style={{
-                    display: "inline-flex", alignItems: "center", gap: "10px",
-                    padding: "16px 36px",
-                    background: "linear-gradient(135deg, #1d4ed8 0%, #3b82f6 100%)",
-                    borderRadius: "999px",
-                    fontSize: "15px", fontWeight: 700, color: "#fff",
-                    textDecoration: "none", letterSpacing: "-0.01em",
-                    boxShadow: "0 0 32px rgba(59,130,246,0.35)",
-                    transition: "opacity 0.2s, transform 0.2s",
-                  }}
-                  onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.opacity = "0.88"; (e.currentTarget as HTMLAnchorElement).style.transform = "translateY(-2px)"; }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.opacity = "1"; (e.currentTarget as HTMLAnchorElement).style.transform = "translateY(0)"; }}
-                >
-                  {bi(copy.cta, l)}
-                  <ArrowRight size={16} />
-                </a>
-              </motion.div>
+              {/* ── ROI Calculator ── */}
+              <div id="roi-calc">
+                <ROICalculator />
+              </div>
 
             </div>
           </section>
