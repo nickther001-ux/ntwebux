@@ -230,7 +230,52 @@ function PillarCard({ pillar, index, ctaLabel, onClick }: {
       {pillar.schemaGrid && (
         <>
           <div className="ai-schema-grid" aria-hidden="true" />
-          <div className="ai-schema-nodes" aria-hidden="true" />
+          <svg className="ai-schema-svg" viewBox="0 0 400 460" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <defs>
+              <linearGradient id="sg-line-h" x1="0" x2="1" y1="0" y2="0">
+                <stop offset="0%"   stopColor="#34d399" stopOpacity="0"/>
+                <stop offset="40%"  stopColor="#34d399" stopOpacity="0.7"/>
+                <stop offset="100%" stopColor="#34d399" stopOpacity="0"/>
+              </linearGradient>
+              <linearGradient id="sg-line-v" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0%"   stopColor="#34d399" stopOpacity="0"/>
+                <stop offset="40%"  stopColor="#34d399" stopOpacity="0.6"/>
+                <stop offset="100%" stopColor="#34d399" stopOpacity="0"/>
+              </linearGradient>
+              <filter id="sg-glow"><feGaussianBlur stdDeviation="3"/></filter>
+            </defs>
+
+            {/* Horizontal scan lines that sweep down */}
+            <rect x="0" y="0" width="400" height="1.5" fill="url(#sg-line-h)" className="ai-schema-scan-h" />
+            <rect x="0" y="0" width="400" height="1.5" fill="url(#sg-line-h)" className="ai-schema-scan-h" style={{ animationDelay: '-1.6s' }} />
+
+            {/* Vertical scan line sweeping right */}
+            <rect x="0" y="0" width="1.5" height="460" fill="url(#sg-line-v)" className="ai-schema-scan-v" />
+
+            {/* Connection nodes — glowing dots at grid intersections */}
+            {([
+              [84,92],[168,92],[252,92],[336,92],
+              [84,184],[252,184],
+              [168,276],[336,276],
+              [84,368],[252,368],
+            ] as [number,number][]).map(([cx,cy],i) => (
+              <g key={i}>
+                <circle cx={cx} cy={cy} r="8" fill="rgba(52,211,153,0.06)" filter="url(#sg-glow)" className="ai-schema-node-ring" style={{ animationDelay: `${i * 0.3}s` }} />
+                <circle cx={cx} cy={cy} r="2.5" fill="#34d399" className="ai-schema-node-dot" style={{ animationDelay: `${i * 0.3}s` }} />
+              </g>
+            ))}
+
+            {/* Horizontal connector lines */}
+            <line x1="84"  y1="92"  x2="336" y2="92"  stroke="rgba(52,211,153,0.18)" strokeWidth="0.6" strokeDasharray="4 8" />
+            <line x1="84"  y1="184" x2="252" y2="184" stroke="rgba(52,211,153,0.18)" strokeWidth="0.6" strokeDasharray="4 8" />
+            <line x1="168" y1="276" x2="336" y2="276" stroke="rgba(52,211,153,0.18)" strokeWidth="0.6" strokeDasharray="4 8" />
+            <line x1="84"  y1="368" x2="252" y2="368" stroke="rgba(52,211,153,0.18)" strokeWidth="0.6" strokeDasharray="4 8" />
+            {/* Vertical connector lines */}
+            <line x1="84"  y1="92"  x2="84"  y2="368" stroke="rgba(52,211,153,0.12)" strokeWidth="0.6" strokeDasharray="4 12" />
+            <line x1="252" y1="92"  x2="252" y2="368" stroke="rgba(52,211,153,0.12)" strokeWidth="0.6" strokeDasharray="4 12" />
+            <line x1="168" y1="92"  x2="168" y2="276" stroke="rgba(52,211,153,0.12)" strokeWidth="0.6" strokeDasharray="4 12" />
+            <line x1="336" y1="92"  x2="336" y2="276" stroke="rgba(52,211,153,0.12)" strokeWidth="0.6" strokeDasharray="4 12" />
+          </svg>
         </>
       )}
 
@@ -239,24 +284,77 @@ function PillarCard({ pillar, index, ctaLabel, onClick }: {
         <>
           <div className="ai-neural-mesh" aria-hidden="true" />
           <svg className="ai-neural-svg" viewBox="0 0 400 460" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-            <g stroke="rgba(167,139,250,0.18)" strokeWidth="0.6" fill="none">
+            <defs>
+              <radialGradient id="nm-node-glow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%"   stopColor="#a78bfa" stopOpacity="1" />
+                <stop offset="100%" stopColor="#a78bfa" stopOpacity="0" />
+              </radialGradient>
+              <filter id="nm-blur"><feGaussianBlur stdDeviation="2.5"/></filter>
+            </defs>
+
+            {/* Edges */}
+            <g stroke="rgba(167,139,250,0.30)" strokeWidth="0.8" fill="none">
               <line x1="60"  y1="80"  x2="200" y2="160" />
-              <line x1="200" y1="160" x2="340" y2="90" />
+              <line x1="200" y1="160" x2="340" y2="90"  />
               <line x1="200" y1="160" x2="100" y2="280" />
               <line x1="200" y1="160" x2="300" y2="280" />
               <line x1="100" y1="280" x2="300" y2="280" />
               <line x1="100" y1="280" x2="80"  y2="400" />
               <line x1="300" y1="280" x2="320" y2="400" />
+              <line x1="60"  y1="80"  x2="340" y2="90"  />
+              <line x1="80"  y1="400" x2="320" y2="400" />
             </g>
-            <g fill="rgba(167,139,250,0.8)">
-              <circle cx="60"  cy="80"  r="2.5" className="ai-neural-node" style={{ animationDelay: '0s'   }} />
-              <circle cx="200" cy="160" r="3"   className="ai-neural-node" style={{ animationDelay: '0.5s' }} />
-              <circle cx="340" cy="90"  r="2.5" className="ai-neural-node" style={{ animationDelay: '1s'   }} />
-              <circle cx="100" cy="280" r="2.5" className="ai-neural-node" style={{ animationDelay: '1.5s' }} />
-              <circle cx="300" cy="280" r="2.5" className="ai-neural-node" style={{ animationDelay: '2s'   }} />
-              <circle cx="80"  cy="400" r="2"   className="ai-neural-node" style={{ animationDelay: '2.5s' }} />
-              <circle cx="320" cy="400" r="2"   className="ai-neural-node" style={{ animationDelay: '3s'   }} />
-            </g>
+
+            {/* Animated data packets along edges */}
+            <circle r="3" fill="#c4b5fd">
+              <animateMotion dur="2.4s" repeatCount="indefinite" begin="0s">
+                <mpath xlinkHref="#nm-path-1"/>
+              </animateMotion>
+              <animate attributeName="opacity" values="0;1;1;0" dur="2.4s" repeatCount="indefinite" begin="0s"/>
+            </circle>
+            <circle r="3" fill="#818cf8">
+              <animateMotion dur="2.0s" repeatCount="indefinite" begin="0.8s">
+                <mpath xlinkHref="#nm-path-2"/>
+              </animateMotion>
+              <animate attributeName="opacity" values="0;1;1;0" dur="2.0s" repeatCount="indefinite" begin="0.8s"/>
+            </circle>
+            <circle r="2.5" fill="#a78bfa">
+              <animateMotion dur="2.8s" repeatCount="indefinite" begin="1.4s">
+                <mpath xlinkHref="#nm-path-3"/>
+              </animateMotion>
+              <animate attributeName="opacity" values="0;1;1;0" dur="2.8s" repeatCount="indefinite" begin="1.4s"/>
+            </circle>
+            <circle r="2.5" fill="#c4b5fd">
+              <animateMotion dur="1.9s" repeatCount="indefinite" begin="0.3s">
+                <mpath xlinkHref="#nm-path-4"/>
+              </animateMotion>
+              <animate attributeName="opacity" values="0;1;1;0" dur="1.9s" repeatCount="indefinite" begin="0.3s"/>
+            </circle>
+
+            {/* Hidden paths for packet motion */}
+            <path id="nm-path-1" d="M60,80 L200,160 L300,280" fill="none" />
+            <path id="nm-path-2" d="M340,90 L200,160 L100,280 L80,400" fill="none" />
+            <path id="nm-path-3" d="M200,160 L300,280 L320,400" fill="none" />
+            <path id="nm-path-4" d="M100,280 L300,280 L320,400" fill="none" />
+
+            {/* Node glow rings */}
+            <circle cx="200" cy="160" r="14" fill="rgba(167,139,250,0.08)" className="ai-neural-ring" style={{ animationDelay: '0s' }} />
+            <circle cx="100" cy="280" r="10" fill="rgba(167,139,250,0.08)" className="ai-neural-ring" style={{ animationDelay: '0.7s' }} />
+            <circle cx="300" cy="280" r="10" fill="rgba(167,139,250,0.08)" className="ai-neural-ring" style={{ animationDelay: '1.4s' }} />
+
+            {/* Nodes */}
+            <circle cx="60"  cy="80"  r="3"   fill="#a78bfa" className="ai-neural-node" style={{ animationDelay: '0s'   }} />
+            <circle cx="200" cy="160" r="4.5" fill="#c4b5fd" className="ai-neural-node" style={{ animationDelay: '0.4s' }} />
+            <circle cx="340" cy="90"  r="3"   fill="#a78bfa" className="ai-neural-node" style={{ animationDelay: '0.9s' }} />
+            <circle cx="100" cy="280" r="3.5" fill="#a78bfa" className="ai-neural-node" style={{ animationDelay: '1.3s' }} />
+            <circle cx="300" cy="280" r="3.5" fill="#a78bfa" className="ai-neural-node" style={{ animationDelay: '1.8s' }} />
+            <circle cx="80"  cy="400" r="2.5" fill="#818cf8" className="ai-neural-node" style={{ animationDelay: '2.2s' }} />
+            <circle cx="320" cy="400" r="2.5" fill="#818cf8" className="ai-neural-node" style={{ animationDelay: '2.7s' }} />
+
+            {/* Node halos (blur layer) */}
+            <circle cx="200" cy="160" r="6" fill="url(#nm-node-glow)" filter="url(#nm-blur)" opacity="0.7" />
+            <circle cx="100" cy="280" r="5" fill="url(#nm-node-glow)" filter="url(#nm-blur)" opacity="0.5" />
+            <circle cx="300" cy="280" r="5" fill="url(#nm-node-glow)" filter="url(#nm-blur)" opacity="0.5" />
           </svg>
         </>
       )}
@@ -605,53 +703,98 @@ export function Services() {
         .ai-schema-grid {
           position: absolute; inset: -2px;
           background-image:
-            linear-gradient(rgba(52,211,153,0.07) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(52,211,153,0.07) 1px, transparent 1px);
-          background-size: 28px 28px; opacity: 0.45; pointer-events: none; z-index: 0;
-          animation: ai-grid-scroll 28s linear infinite;
-          mask-image: radial-gradient(ellipse at 50% 60%, #000 30%, transparent 95%);
-          -webkit-mask-image: radial-gradient(ellipse at 50% 60%, #000 30%, transparent 95%);
+            linear-gradient(rgba(52,211,153,0.10) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(52,211,153,0.10) 1px, transparent 1px);
+          background-size: 84px 92px; opacity: 0.6; pointer-events: none; z-index: 0;
+          animation: ai-grid-scroll 24s linear infinite;
+          mask-image: radial-gradient(ellipse at 50% 45%, #000 50%, transparent 95%);
+          -webkit-mask-image: radial-gradient(ellipse at 50% 45%, #000 50%, transparent 95%);
         }
         @keyframes ai-grid-scroll {
           from { background-position: 0 0; }
-          to   { background-position: 0 -560px; }
+          to   { background-position: 0 -368px; }
         }
-        .ai-schema-nodes {
-          position: absolute; inset: 0;
-          background-image:
-            radial-gradient(circle at 14% 22%, rgba(52,211,153,0.55) 0 1.4px, transparent 2px),
-            radial-gradient(circle at 78% 18%, rgba(52,211,153,0.55) 0 1.4px, transparent 2px),
-            radial-gradient(circle at 30% 64%, rgba(52,211,153,0.55) 0 1.4px, transparent 2px),
-            radial-gradient(circle at 70% 78%, rgba(52,211,153,0.55) 0 1.4px, transparent 2px),
-            radial-gradient(circle at 50% 42%, rgba(52,211,153,0.55) 0 1.4px, transparent 2px);
-          opacity: 0.05; pointer-events: none; z-index: 0;
-          animation: ai-grid-scroll 28s linear infinite;
+        .ai-schema-svg {
+          position: absolute; inset: 0; width: 100%; height: 100%;
+          pointer-events: none; z-index: 1; opacity: 0.9;
+        }
+        .ai-schema-scan-h {
+          animation: sg-sweep-down 3.2s ease-in-out infinite;
+        }
+        @keyframes sg-sweep-down {
+          0%   { transform: translateY(0);    opacity: 0; }
+          10%  { opacity: 1; }
+          90%  { opacity: 1; }
+          100% { transform: translateY(460px); opacity: 0; }
+        }
+        .ai-schema-scan-v {
+          animation: sg-sweep-right 4.5s ease-in-out infinite;
+        }
+        @keyframes sg-sweep-right {
+          0%   { transform: translateX(0);    opacity: 0; }
+          10%  { opacity: 1; }
+          90%  { opacity: 1; }
+          100% { transform: translateX(400px); opacity: 0; }
+        }
+        .ai-schema-node-ring {
+          transform-box: fill-box; transform-origin: center;
+          animation: sg-ring-pulse 2.8s ease-in-out infinite;
+        }
+        .ai-schema-node-dot {
+          transform-box: fill-box; transform-origin: center;
+          animation: sg-dot-pulse 2.8s ease-in-out infinite;
+          filter: drop-shadow(0 0 5px rgba(52,211,153,0.9));
+        }
+        @keyframes sg-ring-pulse {
+          0%, 100% { opacity: 0.15; transform: scale(0.8); }
+          50%      { opacity: 0.5;  transform: scale(1.6); }
+        }
+        @keyframes sg-dot-pulse {
+          0%, 100% { opacity: 0.35; transform: scale(0.75); }
+          50%      { opacity: 1;    transform: scale(1.3); }
         }
 
         /* ─── Neural mesh (pillar 02) ───────────────────────── */
         .ai-neural-mesh {
           position: absolute; inset: 0;
-          background-image: radial-gradient(circle, rgba(167,139,250,0.16) 1px, transparent 1.5px);
-          background-size: 22px 22px; opacity: 0.55; pointer-events: none; z-index: 0;
-          mask-image: radial-gradient(ellipse at 50% 50%, #000 40%, transparent 92%);
-          -webkit-mask-image: radial-gradient(ellipse at 50% 50%, #000 40%, transparent 92%);
+          background-image: radial-gradient(circle, rgba(167,139,250,0.20) 1px, transparent 1.5px);
+          background-size: 22px 22px; opacity: 0.65; pointer-events: none; z-index: 0;
+          animation: nm-mesh-drift 12s ease-in-out infinite alternate;
+          mask-image: radial-gradient(ellipse at 50% 50%, #000 55%, transparent 95%);
+          -webkit-mask-image: radial-gradient(ellipse at 50% 50%, #000 55%, transparent 95%);
+        }
+        @keyframes nm-mesh-drift {
+          from { background-position: 0 0; }
+          to   { background-position: 22px 22px; }
         }
         .ai-neural-svg {
           position: absolute; inset: 0; width: 100%; height: 100%;
-          pointer-events: none; z-index: 0; opacity: 0.8;
+          pointer-events: none; z-index: 1; opacity: 1;
         }
         .ai-neural-node {
           transform-box: fill-box; transform-origin: center;
           animation: ai-node-pulse 2.6s ease-in-out infinite;
-          filter: drop-shadow(0 0 4px rgba(167,139,250,0.7));
+          filter: drop-shadow(0 0 6px rgba(167,139,250,0.9));
         }
         @keyframes ai-node-pulse {
-          0%, 100% { opacity: 0.3; transform: scale(0.8); }
+          0%, 100% { opacity: 0.4; transform: scale(0.85); }
           50%      { opacity: 1;   transform: scale(1.5); }
+        }
+        .ai-neural-ring {
+          transform-box: fill-box; transform-origin: center;
+          animation: nm-ring-expand 2.8s ease-out infinite;
+        }
+        @keyframes nm-ring-expand {
+          0%   { opacity: 0.5; transform: scale(0.8); }
+          70%  { opacity: 0;   transform: scale(2.4); }
+          100% { opacity: 0;   transform: scale(2.4); }
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .showreel-col, .showreel-speedlines, .ai-schema-grid, .ai-schema-nodes, .ai-neural-node {
+          .showreel-col, .showreel-speedlines,
+          .ai-schema-grid, .ai-schema-scan-h, .ai-schema-scan-v,
+          .ai-schema-node-ring, .ai-schema-node-dot,
+          .ai-neural-mesh, .ai-neural-node, .ai-neural-ring {
             animation: none !important;
           }
         }
