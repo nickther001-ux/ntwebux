@@ -789,6 +789,17 @@ export function Services() {
           .pillars-grid { grid-template-columns: 1fr !important; }
         }
 
+        /* ─── Mobile: lift compositing constraints ───────────
+           backdrop-filter on the card creates a stacking context
+           that traps children and prevents GPU layer promotion.
+           Remove it on mobile so animations can run freely.    */
+        @media (max-width: 768px) {
+          .pillar-card {
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+          }
+        }
+
         /* ─── Digital Showreel ──────────────────────────────── */
         .showreel {
           position: absolute; inset: 0; overflow: hidden; border-radius: 24px; z-index: 0; pointer-events: none;
@@ -803,22 +814,39 @@ export function Services() {
         .showreel-grid {
           position: absolute; inset: 0;
           display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 12px;
-          z-index: 1;
-          filter: blur(2.4px) saturate(1.1); opacity: 0.78;
-          transform: perspective(1000px) rotateX(2deg);
-          mix-blend-mode: lighten;
+          z-index: 1; opacity: 0.78;
+          /* Desktop only: decorative 3D + blend — omitted on mobile to
+             avoid trapping child GPU layers in a shared compositing surface */
+        }
+        @media (min-width: 769px) {
+          .showreel-grid {
+            filter: blur(2px) saturate(1.1);
+            mix-blend-mode: lighten;
+            transform: perspective(1000px) rotateX(2deg);
+          }
         }
         .showreel-col {
           display: flex; flex-direction: column; gap: 10px;
+          /* translateZ(0) promotes each column to its own GPU layer
+             so the browser doesn't need to rasterize all three together */
           will-change: transform;
+          transform: translateZ(0);
+          -webkit-transform: translateZ(0);
           animation-name: showreel-scroll;
           animation-timing-function: linear;
           animation-iteration-count: infinite;
+          -webkit-animation-name: showreel-scroll;
+          -webkit-animation-timing-function: linear;
+          -webkit-animation-iteration-count: infinite;
         }
         .showreel-col:nth-child(2) { margin-top: -28px; }
         @keyframes showreel-scroll {
           from { transform: translate3d(0, 0, 0); }
           to   { transform: translate3d(0, -50%, 0); }
+        }
+        @-webkit-keyframes showreel-scroll {
+          from { -webkit-transform: translate3d(0, 0, 0); }
+          to   { -webkit-transform: translate3d(0, -50%, 0); }
         }
         .showreel-speedlines {
           position: absolute; inset: 0; z-index: 2; pointer-events: none;
@@ -852,6 +880,7 @@ export function Services() {
             linear-gradient(rgba(52,211,153,0.10) 1px, transparent 1px),
             linear-gradient(90deg, rgba(52,211,153,0.10) 1px, transparent 1px);
           background-size: 84px 92px; opacity: 0.6; pointer-events: none; z-index: 0;
+          will-change: background-position;
           animation: ai-grid-scroll 24s linear infinite;
           mask-image: radial-gradient(ellipse at 50% 45%, #000 50%, transparent 95%);
           -webkit-mask-image: radial-gradient(ellipse at 50% 45%, #000 50%, transparent 95%);
@@ -863,41 +892,68 @@ export function Services() {
         .ai-schema-svg {
           position: absolute; inset: 0; width: 100%; height: 100%;
           pointer-events: none; z-index: 1; opacity: 0.9;
+          transform: translateZ(0); -webkit-transform: translateZ(0);
         }
         .ai-schema-scan-h {
           animation: sg-sweep-down 3.2s ease-in-out infinite;
+          -webkit-animation: sg-sweep-down 3.2s ease-in-out infinite;
         }
         @keyframes sg-sweep-down {
-          0%   { transform: translateY(0);    opacity: 0; }
+          0%   { transform: translateY(0);     opacity: 0; }
           10%  { opacity: 1; }
           90%  { opacity: 1; }
           100% { transform: translateY(460px); opacity: 0; }
         }
+        @-webkit-keyframes sg-sweep-down {
+          0%   { -webkit-transform: translateY(0);     opacity: 0; }
+          10%  { opacity: 1; }
+          90%  { opacity: 1; }
+          100% { -webkit-transform: translateY(460px); opacity: 0; }
+        }
         .ai-schema-scan-v {
           animation: sg-sweep-right 4.5s ease-in-out infinite;
+          -webkit-animation: sg-sweep-right 4.5s ease-in-out infinite;
         }
         @keyframes sg-sweep-right {
-          0%   { transform: translateX(0);    opacity: 0; }
+          0%   { transform: translateX(0);     opacity: 0; }
           10%  { opacity: 1; }
           90%  { opacity: 1; }
           100% { transform: translateX(400px); opacity: 0; }
         }
+        @-webkit-keyframes sg-sweep-right {
+          0%   { -webkit-transform: translateX(0);     opacity: 0; }
+          10%  { opacity: 1; }
+          90%  { opacity: 1; }
+          100% { -webkit-transform: translateX(400px); opacity: 0; }
+        }
         .ai-schema-node-ring {
-          transform-box: fill-box; transform-origin: center;
+          transform-box: fill-box; -webkit-transform-box: fill-box;
+          transform-origin: center;
           animation: sg-ring-pulse 2.8s ease-in-out infinite;
+          -webkit-animation: sg-ring-pulse 2.8s ease-in-out infinite;
         }
         .ai-schema-node-dot {
-          transform-box: fill-box; transform-origin: center;
+          transform-box: fill-box; -webkit-transform-box: fill-box;
+          transform-origin: center;
           animation: sg-dot-pulse 2.8s ease-in-out infinite;
+          -webkit-animation: sg-dot-pulse 2.8s ease-in-out infinite;
           filter: drop-shadow(0 0 5px rgba(52,211,153,0.9));
         }
         @keyframes sg-ring-pulse {
           0%, 100% { opacity: 0.15; transform: scale(0.8); }
           50%      { opacity: 0.5;  transform: scale(1.6); }
         }
+        @-webkit-keyframes sg-ring-pulse {
+          0%, 100% { opacity: 0.15; -webkit-transform: scale(0.8); }
+          50%      { opacity: 0.5;  -webkit-transform: scale(1.6); }
+        }
         @keyframes sg-dot-pulse {
           0%, 100% { opacity: 0.35; transform: scale(0.75); }
           50%      { opacity: 1;    transform: scale(1.3); }
+        }
+        @-webkit-keyframes sg-dot-pulse {
+          0%, 100% { opacity: 0.35; -webkit-transform: scale(0.75); }
+          50%      { opacity: 1;    -webkit-transform: scale(1.3); }
         }
 
         /* ─── Neural mesh (pillar 02) ───────────────────────── */
@@ -905,7 +961,9 @@ export function Services() {
           position: absolute; inset: 0;
           background-image: radial-gradient(circle, rgba(167,139,250,0.20) 1px, transparent 1.5px);
           background-size: 22px 22px; opacity: 0.65; pointer-events: none; z-index: 0;
+          will-change: background-position;
           animation: nm-mesh-drift 12s ease-in-out infinite alternate;
+          -webkit-animation: nm-mesh-drift 12s ease-in-out infinite alternate;
           mask-image: radial-gradient(ellipse at 50% 50%, #000 55%, transparent 95%);
           -webkit-mask-image: radial-gradient(ellipse at 50% 50%, #000 55%, transparent 95%);
         }
@@ -913,27 +971,45 @@ export function Services() {
           from { background-position: 0 0; }
           to   { background-position: 22px 22px; }
         }
+        @-webkit-keyframes nm-mesh-drift {
+          from { background-position: 0 0; }
+          to   { background-position: 22px 22px; }
+        }
         .ai-neural-svg {
           position: absolute; inset: 0; width: 100%; height: 100%;
           pointer-events: none; z-index: 1; opacity: 1;
+          transform: translateZ(0); -webkit-transform: translateZ(0);
         }
         .ai-neural-node {
-          transform-box: fill-box; transform-origin: center;
+          transform-box: fill-box; -webkit-transform-box: fill-box;
+          transform-origin: center;
           animation: ai-node-pulse 2.6s ease-in-out infinite;
+          -webkit-animation: ai-node-pulse 2.6s ease-in-out infinite;
           filter: drop-shadow(0 0 6px rgba(167,139,250,0.9));
         }
         @keyframes ai-node-pulse {
           0%, 100% { opacity: 0.4; transform: scale(0.85); }
           50%      { opacity: 1;   transform: scale(1.5); }
         }
+        @-webkit-keyframes ai-node-pulse {
+          0%, 100% { opacity: 0.4; -webkit-transform: scale(0.85); }
+          50%      { opacity: 1;   -webkit-transform: scale(1.5); }
+        }
         .ai-neural-ring {
-          transform-box: fill-box; transform-origin: center;
+          transform-box: fill-box; -webkit-transform-box: fill-box;
+          transform-origin: center;
           animation: nm-ring-expand 2.8s ease-out infinite;
+          -webkit-animation: nm-ring-expand 2.8s ease-out infinite;
         }
         @keyframes nm-ring-expand {
           0%   { opacity: 0.5; transform: scale(0.8); }
           70%  { opacity: 0;   transform: scale(2.4); }
           100% { opacity: 0;   transform: scale(2.4); }
+        }
+        @-webkit-keyframes nm-ring-expand {
+          0%   { opacity: 0.5; -webkit-transform: scale(0.8); }
+          70%  { opacity: 0;   -webkit-transform: scale(2.4); }
+          100% { opacity: 0;   -webkit-transform: scale(2.4); }
         }
 
         @media (prefers-reduced-motion: reduce) {
