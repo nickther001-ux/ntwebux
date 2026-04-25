@@ -210,9 +210,14 @@ export default function ServicesPortfolio() {
                       <span style={{ fontSize: '14px', fontWeight: 600, color: 'rgba(255,255,255,0.45)', marginLeft: '2px' }}>/mo</span>
                     )}
                   </div>
-                  <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', marginBottom: '26px', minHeight: '16px' }}>
+                  <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', marginBottom: (plan as any).note ? '10px' : '26px', minHeight: '16px' }}>
                     {isAi ? '' : plan.cycle}
                   </div>
+                  {(plan as any).note && (
+                    <div style={{ fontSize: '11.5px', color: 'rgba(255,255,255,0.35)', fontStyle: 'italic', marginBottom: '20px', lineHeight: 1.5 }}>
+                      {(plan as any).note}
+                    </div>
+                  )}
 
                   <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 auto', display: 'flex', flexDirection: 'column', gap: '12px' }}>
                     {plan.features.map((f: string) => (

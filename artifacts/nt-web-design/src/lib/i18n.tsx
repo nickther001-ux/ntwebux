@@ -159,19 +159,53 @@ const translations: Translations = {
         aiPlans: [
           {
             name: "Starter", price: "297", cycle: "/ month",
-            features: ["Basic CRM", "AI Web Chat", "Email Support"],
+            note: "No contracts. Cancel anytime.",
+            features: [
+              "CRM & contact management",
+              "AI web chat widget",
+              "Missed-call text-back (SMS)",
+              "Lead capture forms",
+              "Email support",
+              "1 pipeline",
+              "Up to 500 contacts",
+              "Mobile app access"
+            ],
             cta: "Get Started", featured: false
           },
           {
             name: "Professional", price: "497", cycle: "/ month",
             badge: "Most Popular",
-            features: ["Full AI Text-Back", "Auto-Booking", "Review Engine"],
+            note: "Most popular for growing service businesses.",
+            features: [
+              "Everything in Starter",
+              "Full AI text & email automation",
+              "Auto-booking & calendar integration",
+              "Google review request engine",
+              "2-way SMS & email conversations",
+              "Social media DM integration (Facebook, Instagram)",
+              "Unlimited pipelines",
+              "Up to 2,500 contacts",
+              "Reputation dashboard",
+              "Priority support"
+            ],
             cta: "Claim Beta Spot", featured: true
           },
           {
             name: "Full Scope", price: "899", cycle: "/ month",
-            features: ["Custom AI Voice Agents", "Multi-tenant SaaS setup", "WhatsApp Support"],
-            cta: "Talk to Sales", featured: false
+            note: "Built for operators scaling across multiple locations.",
+            features: [
+              "Everything in Professional",
+              "Custom AI voice agent (inbound calls)",
+              "WhatsApp automation",
+              "Multi-location or multi-tenant setup",
+              "Advanced reporting & analytics dashboard",
+              "Custom onboarding & dedicated setup call",
+              "AI content generation (emails, SMS, social posts)",
+              "Unlimited contacts",
+              "White-glove support with monthly strategy call",
+              "API access & custom integrations"
+            ],
+            cta: "Let's Talk", featured: false
           }
         ]
       },
@@ -338,19 +372,53 @@ const translations: Translations = {
         aiPlans: [
           {
             name: "Starter", price: "297", cycle: "/ mois",
-            features: ["CRM de base", "Chat Web IA", "Support par email"],
+            note: "Sans engagement. Annulez en tout temps.",
+            features: [
+              "CRM & gestion des contacts",
+              "Widget de chat web IA",
+              "Texto de rappel automatique (SMS)",
+              "Formulaires de capture de leads",
+              "Support par email",
+              "1 pipeline",
+              "Jusqu'à 500 contacts",
+              "Accès application mobile"
+            ],
             cta: "Commencer", featured: false
           },
           {
             name: "Professional", price: "497", cycle: "/ mois",
             badge: "Le plus populaire",
-            features: ["AI Text-Back complet", "Réservation auto", "Moteur d'avis clients"],
-            cta: "Réserver Bêta", featured: true
+            note: "Le plus populaire pour les entreprises en croissance.",
+            features: [
+              "Tout ce qui est dans Starter",
+              "Automatisation IA complète (texto & email)",
+              "Réservation auto & intégration calendrier",
+              "Moteur de demandes d'avis Google",
+              "Conversations SMS & email bidirectionnelles",
+              "Intégration DM réseaux sociaux (Facebook, Instagram)",
+              "Pipelines illimités",
+              "Jusqu'à 2 500 contacts",
+              "Tableau de bord réputation",
+              "Support prioritaire"
+            ],
+            cta: "Réclamer ma place bêta", featured: true
           },
           {
             name: "Full Scope", price: "899", cycle: "/ mois",
-            features: ["Agents vocaux IA sur mesure", "SaaS multi-tenant", "Support WhatsApp"],
-            cta: "Parler aux Ventes", featured: false
+            note: "Conçu pour les opérateurs qui évoluent sur plusieurs sites.",
+            features: [
+              "Tout ce qui est dans Professional",
+              "Agent vocal IA sur mesure (appels entrants)",
+              "Automatisation WhatsApp",
+              "Configuration multi-sites ou multi-tenant",
+              "Tableau de bord analytique avancé",
+              "Intégration personnalisée & appel de démarrage dédié",
+              "Génération de contenu IA (emails, SMS, publications)",
+              "Contacts illimités",
+              "Support blanc avec appel stratégique mensuel",
+              "Accès API & intégrations sur mesure"
+            ],
+            cta: "Réserver un appel", featured: false
           }
         ]
       },
