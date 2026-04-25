@@ -55,9 +55,9 @@ function ShowreelBackground() {
     <div className="showreel" aria-hidden="true">
       <div className="showreel-ambient" />
       <div className="showreel-grid">
-        <Col items={colA} dur={5.05} />
-        <Col items={colB} dur={3.9} delay={1.2} />
-        <Col items={colC} dur={5.85} delay={0.6} />
+        <Col items={colA} dur={2.8} />
+        <Col items={colB} dur={2.2} delay={0.7} />
+        <Col items={colC} dur={3.2} delay={0.3} />
       </div>
       <div className="showreel-speedlines" />
       <div className="showreel-mask" />
@@ -463,7 +463,7 @@ function PillarCard({ pillar, index, ctaLabel, onClick }: {
       }} />
 
       {/* Content */}
-      <div style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', height: '100%', padding: '40px 36px 36px' }}>
+      <div className="pillar-content" style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', height: '100%', padding: '40px 36px 36px' }}>
 
         {/* Top row: number + icon + tag */}
         <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: '32px' }}>
@@ -796,6 +796,9 @@ export function Services() {
             backdrop-filter: none !important;
             -webkit-backdrop-filter: none !important;
           }
+          .pillar-content {
+            padding: 28px 20px 24px !important;
+          }
         }
 
         /* ─── Digital Showreel ──────────────────────────────── */
@@ -812,15 +815,20 @@ export function Services() {
         .showreel-grid {
           position: absolute; inset: 0;
           display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 12px;
-          z-index: 1; opacity: 0.78;
-          /* Desktop only: decorative 3D + blend — omitted on mobile to
-             avoid trapping child GPU layers in a shared compositing surface */
+          z-index: 1; opacity: 0.55;
         }
         @media (min-width: 769px) {
           .showreel-grid {
-            filter: blur(2px) saturate(1.1);
+            filter: blur(7px) saturate(0.9);
             mix-blend-mode: lighten;
             transform: perspective(1000px) rotateX(2deg);
+            opacity: 0.60;
+          }
+        }
+        @media (max-width: 768px) {
+          .showreel-grid {
+            filter: blur(5px);
+            opacity: 0.45;
           }
         }
         .showreel-col {
@@ -865,10 +873,20 @@ export function Services() {
           position: absolute; inset: 0; z-index: 3; pointer-events: none;
           background:
             linear-gradient(180deg,
-              rgba(2,4,10,0.55) 0%, rgba(2,4,10,0.20) 30%,
-              rgba(2,4,10,0.65) 70%, rgba(2,4,10,0.95) 100%
+              rgba(2,4,10,0.70) 0%, rgba(2,4,10,0.52) 30%,
+              rgba(2,4,10,0.75) 70%, rgba(2,4,10,0.97) 100%
             ),
-            radial-gradient(ellipse at 0% 100%, rgba(2,4,10,0.85), transparent 55%);
+            radial-gradient(ellipse at 0% 100%, rgba(2,4,10,0.90), transparent 55%);
+        }
+        @media (max-width: 768px) {
+          .showreel-mask {
+            background:
+              linear-gradient(180deg,
+                rgba(2,4,10,0.82) 0%, rgba(2,4,10,0.68) 30%,
+                rgba(2,4,10,0.82) 70%, rgba(2,4,10,0.98) 100%
+              ),
+              radial-gradient(ellipse at 0% 100%, rgba(2,4,10,0.92), transparent 55%);
+          }
         }
 
         /* ─── Schema grid (pillar 03) ───────────────────────── */
