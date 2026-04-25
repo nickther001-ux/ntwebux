@@ -8,6 +8,7 @@ import { Toaster } from "@/components/ui/toaster";
 import Home from "@/pages/Home";
 import ServicesPortfolio from "@/pages/ServicesPortfolio";
 import BusinessSolutions from "@/pages/BusinessSolutions";
+import BusinessSuite from "@/pages/BusinessSuite";
 import IndustryPage from "@/pages/IndustryPage";
 import LocationPage from "@/pages/LocationPage";
 import Privacy from "@/pages/Privacy";
@@ -120,6 +121,7 @@ function App() {
                 <Route path="/" component={Home} />
                 <Route path="/services" component={ServicesPortfolio} />
                 <Route path="/business" component={BusinessSolutions} />
+                <Route path="/business-suite" component={BusinessSuite} />
                 <Route path="/industry/:slug" component={IndustryPage} />
                 <Route path="/locations/:slug" component={LocationPage} />
                 <Route path="/privacy" component={Privacy} />
