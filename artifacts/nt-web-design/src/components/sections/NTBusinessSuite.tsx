@@ -272,23 +272,23 @@ function VoiceViz({ lang }: { lang: Lang }) {
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', background: 'rgba(8,12,28,0.92)', overflow: 'hidden' }} aria-hidden="true">
 
       {/* Status bar */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '7px 12px 5px', borderBottom: '1px solid rgba(255,255,255,0.06)', flexShrink: 0 }}>
-        <span style={{ fontSize: '8.5px', fontWeight: 700, color: 'rgba(255,255,255,0.45)', letterSpacing: '0.02em' }}>9:41</span>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '8px 14px 6px', borderBottom: '1px solid rgba(255,255,255,0.06)', flexShrink: 0 }}>
+        <span style={{ fontSize: '11px', fontWeight: 700, color: 'rgba(255,255,255,0.45)', letterSpacing: '0.02em' }}>9:41</span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
           <motion.div
             animate={listening ? { opacity: [0.6, 1, 0.6] } : { opacity: 0.25 }}
             transition={listening ? { duration: 1.1, repeat: Infinity } : { duration: 0.3 }}
-            style={{ width: '5px', height: '5px', borderRadius: '50%', background: listening ? 'rgba(52,211,153,1)' : 'rgba(255,255,255,0.3)' }}
+            style={{ width: '7px', height: '7px', borderRadius: '50%', background: listening ? 'rgba(52,211,153,1)' : 'rgba(255,255,255,0.3)' }}
           />
-          <span style={{ fontSize: '8.5px', fontWeight: 700, color: listening ? 'rgba(52,211,153,0.95)' : 'rgba(255,255,255,0.3)', letterSpacing: '0.07em' }}>
+          <span style={{ fontSize: '11px', fontWeight: 700, color: listening ? 'rgba(52,211,153,0.95)' : 'rgba(255,255,255,0.3)', letterSpacing: '0.07em' }}>
             {listening ? listeningTx : endedTx}
           </span>
         </div>
-        <span style={{ fontSize: '8px', color: 'rgba(255,255,255,0.3)', letterSpacing: '-0.05em' }}>▮▮▮</span>
+        <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.3)', letterSpacing: '-0.03em' }}>▮▮▮</span>
       </div>
 
       {/* Pulsing orb */}
-      <div style={{ display: 'flex', justifyContent: 'center', padding: '7px 0 4px', flexShrink: 0 }}>
+      <div style={{ display: 'flex', justifyContent: 'center', padding: '8px 0 5px', flexShrink: 0 }}>
         <motion.div
           animate={listening
             ? { scale: [1, 1.2, 1], opacity: [0.6, 1, 0.6] }
@@ -296,13 +296,13 @@ function VoiceViz({ lang }: { lang: Lang }) {
           transition={listening
             ? { duration: 1.3, repeat: Infinity, ease: 'easeInOut' }
             : { duration: 0.4 }}
-          style={{ fontSize: '20px', color: 'rgba(139,92,246,0.95)', lineHeight: 1, userSelect: 'none' }}
+          style={{ fontSize: '26px', color: 'rgba(139,92,246,0.95)', lineHeight: 1, userSelect: 'none' }}
         >✳</motion.div>
       </div>
 
       {/* Transcript */}
-      <div style={{ flex: 1, padding: '0 10px 4px', display: 'flex', flexDirection: 'column', gap: '5px', overflow: 'hidden', justifyContent: 'flex-end' }}>
-        <div style={{ fontSize: '7.5px', fontWeight: 700, color: 'rgba(255,255,255,0.28)', letterSpacing: '0.07em', textTransform: 'uppercase', marginBottom: '1px' }}>
+      <div style={{ flex: 1, padding: '0 14px 6px', display: 'flex', flexDirection: 'column', gap: '7px', overflow: 'hidden', justifyContent: 'flex-end' }}>
+        <div style={{ fontSize: '10px', fontWeight: 700, color: 'rgba(255,255,255,0.28)', letterSpacing: '0.07em', textTransform: 'uppercase', marginBottom: '2px' }}>
           ← {transcriptTx}
         </div>
         <AnimatePresence mode="popLayout">
@@ -315,13 +315,13 @@ function VoiceViz({ lang }: { lang: Lang }) {
             >
               {l.who === 'client' ? (
                 <div>
-                  <span style={{ fontSize: '8px', fontWeight: 700, color: 'rgba(255,255,255,0.8)' }}>{l.name}: </span>
-                  <span style={{ fontSize: '8px', color: 'rgba(255,255,255,0.58)' }}>"{l.t}"</span>
+                  <span style={{ fontSize: '11px', fontWeight: 700, color: 'rgba(255,255,255,0.85)' }}>{l.name}: </span>
+                  <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.62)' }}>"{l.t}"</span>
                 </div>
               ) : (
                 <div>
-                  <span style={{ fontSize: '8px', fontWeight: 700, color: 'rgba(139,92,246,1)' }}>{agentLabel}: </span>
-                  <span style={{ fontSize: '8px', color: 'rgba(139,92,246,0.78)' }}>"{l.t}"</span>
+                  <span style={{ fontSize: '11px', fontWeight: 700, color: 'rgba(139,92,246,1)' }}>{agentLabel}: </span>
+                  <span style={{ fontSize: '11px', color: 'rgba(139,92,246,0.82)' }}>"{l.t}"</span>
                 </div>
               )}
             </motion.div>
@@ -330,9 +330,9 @@ function VoiceViz({ lang }: { lang: Lang }) {
       </div>
 
       {/* Bottom bar */}
-      <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)', padding: '5px 12px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0 }}>
-        <span style={{ fontSize: '8.5px', color: 'rgba(255,255,255,0.2)' }}>{continueTx}</span>
-        <span style={{ fontSize: '12px', opacity: 0.25 }}>🎙</span>
+      <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)', padding: '7px 14px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0 }}>
+        <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.22)' }}>{continueTx}</span>
+        <span style={{ fontSize: '15px', opacity: 0.25 }}>🎙</span>
       </div>
     </div>
   );
@@ -398,7 +398,7 @@ function FeatureViz({ type, lang, color }: { type: string; lang: Lang; color: st
   if (type === 'stars')    return <div style={wrapStyle}><StarsViz /></div>;
   if (type === 'pipeline') return <div style={wrapStyle}><PipelineViz lang={lang} /></div>;
   if (type === 'chat')     return <div style={wrapStyle}><ChatViz lang={lang} /></div>;
-  if (type === 'voice')    return <div style={wrapStyle}><VoiceViz lang={lang} /></div>;
+  if (type === 'voice')    return <div style={{ ...wrapStyle, height: '230px' }}><VoiceViz lang={lang} /></div>;
 
   return <div style={{ ...wrapStyle, display: 'flex', alignItems: 'center', justifyContent: 'center' }}><AnalyticsViz /></div>;
 }
