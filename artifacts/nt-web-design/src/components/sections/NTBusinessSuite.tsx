@@ -220,6 +220,124 @@ function ChatViz({ lang }: { lang: Lang }) {
   );
 }
 
+/* ─── Voice agent viz ─────────────────────────────────────── */
+function VoiceViz({ lang }: { lang: Lang }) {
+  type Line = { who: 'client' | 'agent'; name?: string; t: string };
+  const lines: Line[] = lang === 'fr'
+    ? [
+        { who: 'client', name: 'Marie D.', t: "Bonjour, j'ai besoin d'un devis — rénovation cuisine." },
+        { who: 'agent',                    t: "Bien sûr ! Matins ou après-midis pour l'estimation ?" },
+        { who: 'client', name: 'Marie D.', t: "Les matins, de préférence." },
+        { who: 'agent',                    t: "Parfait — jeudi 9 h confirmé. Rappel envoyé ✓" },
+      ]
+    : [
+        { who: 'client', name: 'Sean K.',  t: "Hi, I need a quote for a kitchen renovation." },
+        { who: 'agent',                    t: "Of course! Morning or afternoon for the estimate?" },
+        { who: 'client', name: 'Sean K.',  t: "Mornings work best for me." },
+        { who: 'agent',                    t: "Perfect — Thursday 9 AM confirmed. Reminder sent ✓" },
+      ];
+
+  const agentLabel  = lang === 'fr' ? 'Agent Vocal' : 'Voice Agent';
+  const listeningTx = lang === 'fr' ? 'EN ÉCOUTE'  : 'LISTENING';
+  const endedTx     = lang === 'fr' ? 'TERMINÉ'    : 'ENDED';
+  const transcriptTx = lang === 'fr' ? 'Transcription' : 'Call Transcript';
+  const continueTx  = lang === 'fr' ? "Continuer l'appel" : 'Continue call';
+
+  const [visibleCount, setVisibleCount] = useState(0);
+  const [listening, setListening]       = useState(true);
+
+  useEffect(() => {
+    let active = true;
+    const tids: ReturnType<typeof setTimeout>[] = [];
+    function enq(fn: () => void, ms: number) { tids.push(setTimeout(fn, ms)); }
+
+    function runCycle() {
+      if (!active) return;
+      setVisibleCount(0);
+      setListening(true);
+
+      let t = 0;
+      enq(() => { if (active) setVisibleCount(1); },                  t += 800);
+      enq(() => { if (active) setVisibleCount(2); },                  t += 1050);
+      enq(() => { if (active) setVisibleCount(3); },                  t += 900);
+      enq(() => { if (active) { setVisibleCount(4); setListening(false); } }, t += 1050);
+      enq(runCycle,                                                    t += 2400);
+    }
+
+    runCycle();
+    return () => { active = false; tids.forEach(clearTimeout); };
+  }, []);
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', background: 'rgba(8,12,28,0.92)', overflow: 'hidden' }} aria-hidden="true">
+
+      {/* Status bar */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '7px 12px 5px', borderBottom: '1px solid rgba(255,255,255,0.06)', flexShrink: 0 }}>
+        <span style={{ fontSize: '8.5px', fontWeight: 700, color: 'rgba(255,255,255,0.45)', letterSpacing: '0.02em' }}>9:41</span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+          <motion.div
+            animate={listening ? { opacity: [0.6, 1, 0.6] } : { opacity: 0.25 }}
+            transition={listening ? { duration: 1.1, repeat: Infinity } : { duration: 0.3 }}
+            style={{ width: '5px', height: '5px', borderRadius: '50%', background: listening ? 'rgba(52,211,153,1)' : 'rgba(255,255,255,0.3)' }}
+          />
+          <span style={{ fontSize: '8.5px', fontWeight: 700, color: listening ? 'rgba(52,211,153,0.95)' : 'rgba(255,255,255,0.3)', letterSpacing: '0.07em' }}>
+            {listening ? listeningTx : endedTx}
+          </span>
+        </div>
+        <span style={{ fontSize: '8px', color: 'rgba(255,255,255,0.3)', letterSpacing: '-0.05em' }}>▮▮▮</span>
+      </div>
+
+      {/* Pulsing orb */}
+      <div style={{ display: 'flex', justifyContent: 'center', padding: '7px 0 4px', flexShrink: 0 }}>
+        <motion.div
+          animate={listening
+            ? { scale: [1, 1.2, 1], opacity: [0.6, 1, 0.6] }
+            : { scale: 1, opacity: 0.2 }}
+          transition={listening
+            ? { duration: 1.3, repeat: Infinity, ease: 'easeInOut' }
+            : { duration: 0.4 }}
+          style={{ fontSize: '20px', color: 'rgba(139,92,246,0.95)', lineHeight: 1, userSelect: 'none' }}
+        >✳</motion.div>
+      </div>
+
+      {/* Transcript */}
+      <div style={{ flex: 1, padding: '0 10px 4px', display: 'flex', flexDirection: 'column', gap: '5px', overflow: 'hidden', justifyContent: 'flex-end' }}>
+        <div style={{ fontSize: '7.5px', fontWeight: 700, color: 'rgba(255,255,255,0.28)', letterSpacing: '0.07em', textTransform: 'uppercase', marginBottom: '1px' }}>
+          ← {transcriptTx}
+        </div>
+        <AnimatePresence mode="popLayout">
+          {lines.slice(0, visibleCount).map((l, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
+            >
+              {l.who === 'client' ? (
+                <div>
+                  <span style={{ fontSize: '8px', fontWeight: 700, color: 'rgba(255,255,255,0.8)' }}>{l.name}: </span>
+                  <span style={{ fontSize: '8px', color: 'rgba(255,255,255,0.58)' }}>"{l.t}"</span>
+                </div>
+              ) : (
+                <div>
+                  <span style={{ fontSize: '8px', fontWeight: 700, color: 'rgba(139,92,246,1)' }}>{agentLabel}: </span>
+                  <span style={{ fontSize: '8px', color: 'rgba(139,92,246,0.78)' }}>"{l.t}"</span>
+                </div>
+              )}
+            </motion.div>
+          ))}
+        </AnimatePresence>
+      </div>
+
+      {/* Bottom bar */}
+      <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)', padding: '5px 12px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0 }}>
+        <span style={{ fontSize: '8.5px', color: 'rgba(255,255,255,0.2)' }}>{continueTx}</span>
+        <span style={{ fontSize: '12px', opacity: 0.25 }}>🎙</span>
+      </div>
+    </div>
+  );
+}
+
 /* ─── Stars rating viz ────────────────────────────────────── */
 function StarsViz() {
   return (
@@ -260,6 +378,7 @@ const FEATURES_EN = [
   { icon: MessageSquare, color: '167,139,250', title: 'Two-Way SMS & Email', sub: 'Have real conversations, at scale',     desc: "Full two-way communication hub. Reply to leads via SMS or email from one dashboard — the AI drafts responses so you just approve and send.", roi: '4× faster lead response time',          viz: 'chat' },
   { icon: BarChart2,     color: '251,191,36',  title: 'Reputation Dashboard', sub: 'One view of your entire reputation',   desc: "Monitor all your Google, Facebook, and industry reviews in one place. Respond instantly and flag negative reviews before they cost you leads.", roi: 'Avg. 4.9★ rating after 90 days',        viz: 'stars' },
   { icon: TrendingUp,    color: '34,211,153',  title: 'Analytics & Reporting', sub: "Know what's working, every single day", desc: "Daily performance reports delivered to your inbox. Track leads by source, conversion rates, revenue attributed, and team response times.", roi: 'Full pipeline visibility, daily',       viz: 'analytics' },
+  { icon: PhoneCall,     color: '139,92,246',  title: 'AI Voice Agent', sub: 'Never miss an inbound call again',           desc: "Our AI voice agent answers every call 24/7 — qualifying leads, booking estimates, and answering FAQs in natural conversation. Full call transcript delivered to your dashboard.", roi: '100% of inbound calls answered',       viz: 'voice' },
 ];
 const FEATURES_FR = [
   { icon: MessageSquare, color: '34,211,238', title: 'Réponse SMS IA', sub: 'Chaque appel manqué devient une conversation', desc: "Notre IA détecte les appels manqués en quelques secondes et déclenche un SMS conversationnel — qualifiant le lead avant qu'il appelle votre concurrent.", roi: '+22 % de ventes récupérées en moyenne', viz: 'console' },
@@ -269,6 +388,7 @@ const FEATURES_FR = [
   { icon: MessageSquare, color: '167,139,250', title: 'SMS & Email Bidirectionnel', sub: 'De vraies conversations, à grande échelle', desc: "Hub de communication bilingue complet. Répondez aux leads par SMS ou email depuis un seul tableau de bord — l\'IA rédige les réponses.", roi: 'Temps de réponse 4× plus rapide', viz: 'chat' },
   { icon: BarChart2,     color: '251,191,36',  title: 'Tableau de Bord Réputation', sub: 'Une vue sur toute votre réputation', desc: "Surveillez tous vos avis Google, Facebook et sectoriels en un seul endroit. Répondez instantanément et signalez les avis négatifs avant qu'ils vous coûtent des leads.", roi: 'Note moy. 4,9★ après 90 jours', viz: 'stars' },
   { icon: TrendingUp,    color: '34,211,153',  title: 'Analytique & Rapports', sub: 'Sachez ce qui fonctionne chaque jour', desc: "Rapports de performance quotidiens livrés dans votre boîte mail. Suivez les leads par source, les taux de conversion et les revenus attribués.", roi: 'Visibilité complète du pipeline, chaque jour', viz: 'analytics' },
+  { icon: PhoneCall,     color: '139,92,246',  title: 'Agent Vocal IA', sub: 'Ne manquez plus jamais un appel entrant',  desc: "Notre agent vocal IA répond à chaque appel 24h/24 — qualifie les leads, réserve des estimations et répond aux FAQ en conversation naturelle. Transcription complète livrée dans votre tableau de bord.", roi: '100 % des appels entrants répondus', viz: 'voice' },
 ];
 
 function FeatureViz({ type, lang, color }: { type: string; lang: Lang; color: string }) {
@@ -280,6 +400,7 @@ function FeatureViz({ type, lang, color }: { type: string; lang: Lang; color: st
   if (type === 'stars')    return <div style={wrapStyle}><StarsViz /></div>;
   if (type === 'pipeline') return <div style={wrapStyle}><PipelineViz lang={lang} /></div>;
   if (type === 'chat')     return <div style={wrapStyle}><ChatViz lang={lang} /></div>;
+  if (type === 'voice')    return <div style={wrapStyle}><VoiceViz lang={lang} /></div>;
 
   return <div style={{ ...wrapStyle, display: 'flex', alignItems: 'center', justifyContent: 'center' }}><AnalyticsViz /></div>;
 }
