@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useLanguage } from '@/lib/i18n';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageSquare, CalendarCheck, Star, ArrowRight, Check, Zap, BarChart2, Users, ChevronDown, PhoneCall, AlertCircle, TrendingUp } from 'lucide-react';
@@ -95,19 +95,109 @@ function PipelineViz({ lang }: { lang: Lang }) {
 }
 
 /* ─── SMS chat viz ────────────────────────────────────────── */
+function TypingDots() {
+  return (
+    <div style={{ display: 'flex', gap: '4px', alignItems: 'center', padding: '2px 0' }}>
+      {[0, 1, 2].map(i => (
+        <motion.div
+          key={i}
+          style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'rgba(255,255,255,0.55)' }}
+          animate={{ y: [0, -4, 0] }}
+          transition={{ duration: 0.55, repeat: Infinity, delay: i * 0.15, ease: 'easeInOut' }}
+        />
+      ))}
+    </div>
+  );
+}
+
 function ChatViz({ lang }: { lang: Lang }) {
   const msgs = lang === 'fr'
-    ? [{ out: true, t: 'Merci pour votre appel ! Puis-je vous aider ?' }, { out: false, t: 'Oui, je cherche un devis pour peinture.' }, { out: true, t: 'Super ! Je peux vous proposer des créneaux demain.' }]
-    : [{ out: true, t: 'Thanks for calling! Can I help you today?' }, { out: false, t: "Yes, looking for a painting quote." }, { out: true, t: 'Great! I can offer you slots tomorrow.' }];
+    ? [
+        { out: true,  t: 'Merci pour votre appel ! Puis-je vous aider ?' },
+        { out: false, t: 'Oui, je cherche un devis pour peinture.' },
+        { out: true,  t: 'Super ! Je peux vous proposer des créneaux demain.' },
+      ]
+    : [
+        { out: true,  t: 'Thanks for calling! Can I help you today?' },
+        { out: false, t: 'Yes, looking for a painting quote.' },
+        { out: true,  t: 'Great! I can offer you slots tomorrow.' },
+      ];
+
+  const [visibleCount, setVisibleCount] = useState(0);
+  // null = no indicator, true = right (outgoing), false = left (incoming)
+  const [typingOut, setTypingOut] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    let active = true;
+    const tids: ReturnType<typeof setTimeout>[] = [];
+
+    function enq(fn: () => void, ms: number) {
+      tids.push(setTimeout(fn, ms));
+    }
+
+    function runCycle() {
+      if (!active) return;
+      setVisibleCount(0);
+      setTypingOut(null);
+
+      let t = 0;
+      // msg 1 — outgoing (right)
+      enq(() => { if (active) setTypingOut(true); },                          t += 400);
+      enq(() => { if (active) { setTypingOut(null); setVisibleCount(1); } },  t += 950);
+      // msg 2 — incoming (left)
+      enq(() => { if (active) setTypingOut(false); },                         t += 650);
+      enq(() => { if (active) { setTypingOut(null); setVisibleCount(2); } },  t += 950);
+      // msg 3 — outgoing (right)
+      enq(() => { if (active) setTypingOut(true); },                          t += 650);
+      enq(() => { if (active) { setTypingOut(null); setVisibleCount(3); } },  t += 950);
+      // pause, then loop
+      enq(runCycle,                                                            t += 2400);
+    }
+
+    runCycle();
+    return () => { active = false; tids.forEach(clearTimeout); };
+  }, []);
+
+  const bubble = (out: boolean): React.CSSProperties => ({
+    maxWidth: '82%',
+    padding: '8px 12px',
+    borderRadius: out ? '12px 12px 2px 12px' : '12px 12px 12px 2px',
+    background: out ? 'rgba(99,102,241,0.35)' : 'rgba(255,255,255,0.07)',
+    border: out ? '1px solid rgba(99,102,241,0.4)' : '1px solid rgba(255,255,255,0.09)',
+    fontSize: '11px',
+    color: 'rgba(255,255,255,0.82)',
+    lineHeight: 1.45,
+  });
+
   return (
-    <div style={{ padding: '16px', display: 'flex', flexDirection: 'column', gap: '8px', justifyContent: 'center', height: '100%' }} aria-hidden="true">
-      {msgs.map((m, i) => (
-        <div key={i} style={{ display: 'flex', justifyContent: m.out ? 'flex-end' : 'flex-start' }}>
-          <div style={{ maxWidth: '80%', padding: '8px 12px', borderRadius: m.out ? '12px 12px 2px 12px' : '12px 12px 12px 2px', background: m.out ? 'rgba(99,102,241,0.35)' : 'rgba(255,255,255,0.07)', border: m.out ? '1px solid rgba(99,102,241,0.4)' : '1px solid rgba(255,255,255,0.08)', fontSize: '11px', color: 'rgba(255,255,255,0.8)', lineHeight: 1.4 }}>
-            {m.t}
-          </div>
-        </div>
-      ))}
+    <div style={{ padding: '14px 16px', display: 'flex', flexDirection: 'column', gap: '8px', justifyContent: 'flex-end', height: '100%' }} aria-hidden="true">
+      <AnimatePresence mode="popLayout">
+        {msgs.slice(0, visibleCount).map((m, i) => (
+          <motion.div
+            key={`msg-${i}`}
+            initial={{ opacity: 0, y: 8, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+            style={{ display: 'flex', justifyContent: m.out ? 'flex-end' : 'flex-start' }}
+          >
+            <div style={bubble(m.out)}>{m.t}</div>
+          </motion.div>
+        ))}
+        {typingOut !== null && (
+          <motion.div
+            key="typing"
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            style={{ display: 'flex', justifyContent: typingOut ? 'flex-end' : 'flex-start' }}
+          >
+            <div style={{ ...bubble(typingOut), padding: '8px 14px' }}>
+              <TypingDots />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
