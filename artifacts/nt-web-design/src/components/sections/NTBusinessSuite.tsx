@@ -111,90 +111,108 @@ function TypingDots() {
 }
 
 function ChatViz({ lang }: { lang: Lang }) {
-  const msgs = lang === 'fr'
+  type MsgItem = { role: 'user' | 'ai'; t: string };
+
+  const msgs: MsgItem[] = lang === 'fr'
     ? [
-        { out: true,  t: 'Merci pour votre appel ! Puis-je vous aider ?' },
-        { out: false, t: 'Oui, je cherche un devis pour peinture.' },
-        { out: true,  t: 'Super ! Je peux vous proposer des créneaux demain.' },
+        { role: 'user', t: "J'ai manqué un appel pendant mon chantier." },
+        { role: 'ai',   t: "Déjà géré — SMS envoyé en 12 s. Client cherche un devis peinture." },
+        { role: 'user', t: "Il a réservé ?" },
+        { role: 'ai',   t: "Oui. Jeudi 10 h 30 — confirmé dans votre agenda Google." },
       ]
     : [
-        { out: true,  t: 'Thanks for calling! Can I help you today?' },
-        { out: false, t: 'Yes, looking for a painting quote.' },
-        { out: true,  t: 'Great! I can offer you slots tomorrow.' },
+        { role: 'user', t: "Got a missed call while I was on a job site." },
+        { role: 'ai',   t: "Handled — texted them back in 12 s. They need a painting quote." },
+        { role: 'user', t: "Did they book?" },
+        { role: 'ai',   t: "Yes. Thursday 10:30 AM — confirmed in your Google Calendar." },
       ];
 
   const [visibleCount, setVisibleCount] = useState(0);
-  // null = no indicator, true = right (outgoing), false = left (incoming)
-  const [typingOut, setTypingOut] = useState<boolean | null>(null);
+  const [showTyping, setShowTyping] = useState(false);
 
   useEffect(() => {
     let active = true;
     const tids: ReturnType<typeof setTimeout>[] = [];
-
-    function enq(fn: () => void, ms: number) {
-      tids.push(setTimeout(fn, ms));
-    }
+    function enq(fn: () => void, ms: number) { tids.push(setTimeout(fn, ms)); }
 
     function runCycle() {
       if (!active) return;
       setVisibleCount(0);
-      setTypingOut(null);
+      setShowTyping(false);
 
       let t = 0;
-      // msg 1 — outgoing (right)
-      enq(() => { if (active) setTypingOut(true); },                          t += 400);
-      enq(() => { if (active) { setTypingOut(null); setVisibleCount(1); } },  t += 950);
-      // msg 2 — incoming (left)
-      enq(() => { if (active) setTypingOut(false); },                         t += 650);
-      enq(() => { if (active) { setTypingOut(null); setVisibleCount(2); } },  t += 950);
-      // msg 3 — outgoing (right)
-      enq(() => { if (active) setTypingOut(true); },                          t += 650);
-      enq(() => { if (active) { setTypingOut(null); setVisibleCount(3); } },  t += 950);
-      // pause, then loop
-      enq(runCycle,                                                            t += 2400);
+      // user msg 0
+      enq(() => { if (active) setVisibleCount(1); },                            t += 350);
+      // AI typing, then AI msg 1
+      enq(() => { if (active) setShowTyping(true); },                           t += 650);
+      enq(() => { if (active) { setShowTyping(false); setVisibleCount(2); } },  t += 1050);
+      // user msg 2
+      enq(() => { if (active) setVisibleCount(3); },                            t += 750);
+      // AI typing, then AI msg 3
+      enq(() => { if (active) setShowTyping(true); },                           t += 650);
+      enq(() => { if (active) { setShowTyping(false); setVisibleCount(4); } },  t += 1050);
+      // pause then loop
+      enq(runCycle,                                                              t += 2400);
     }
 
     runCycle();
     return () => { active = false; tids.forEach(clearTimeout); };
   }, []);
 
-  const bubble = (out: boolean): React.CSSProperties => ({
-    maxWidth: '82%',
-    padding: '8px 12px',
-    borderRadius: out ? '12px 12px 2px 12px' : '12px 12px 12px 2px',
-    background: out ? 'rgba(99,102,241,0.35)' : 'rgba(255,255,255,0.07)',
-    border: out ? '1px solid rgba(99,102,241,0.4)' : '1px solid rgba(255,255,255,0.09)',
-    fontSize: '11px',
-    color: 'rgba(255,255,255,0.82)',
-    lineHeight: 1.45,
-  });
+  const agentLabel = lang === 'fr' ? 'Agent IA' : 'AI Agent';
 
   return (
-    <div style={{ padding: '14px 16px', display: 'flex', flexDirection: 'column', gap: '8px', justifyContent: 'flex-end', height: '100%' }} aria-hidden="true">
+    <div style={{ padding: '12px 14px', display: 'flex', flexDirection: 'column', gap: '9px', justifyContent: 'flex-end', height: '100%', overflow: 'hidden' }} aria-hidden="true">
       <AnimatePresence mode="popLayout">
-        {msgs.slice(0, visibleCount).map((m, i) => (
-          <motion.div
-            key={`msg-${i}`}
-            initial={{ opacity: 0, y: 8, scale: 0.96 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-            style={{ display: 'flex', justifyContent: m.out ? 'flex-end' : 'flex-start' }}
-          >
-            <div style={bubble(m.out)}>{m.t}</div>
-          </motion.div>
-        ))}
-        {typingOut !== null && (
+        {msgs.slice(0, visibleCount).map((m, i) =>
+          m.role === 'user' ? (
+            /* ── User: right-side pill bubble ── */
+            <motion.div
+              key={`u-${i}`}
+              initial={{ opacity: 0, x: 10, scale: 0.96 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              transition={{ duration: 0.26, ease: [0.22, 1, 0.36, 1] }}
+              style={{ display: 'flex', justifyContent: 'flex-end' }}
+            >
+              <div style={{
+                maxWidth: '80%', padding: '8px 13px',
+                borderRadius: '18px 18px 4px 18px',
+                background: 'rgba(255,255,255,0.09)',
+                border: '1px solid rgba(255,255,255,0.14)',
+                fontSize: '11px', color: 'rgba(255,255,255,0.88)', lineHeight: 1.45,
+              }}>{m.t}</div>
+            </motion.div>
+          ) : (
+            /* ── AI: label + plain text, no bubble ── */
+            <motion.div
+              key={`a-${i}`}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+              style={{ display: 'flex', flexDirection: 'column', gap: '3px', alignItems: 'flex-start' }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '9px', fontWeight: 700, color: 'rgba(167,139,250,0.95)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
+                <span>✦</span><span>{agentLabel}</span>
+              </div>
+              <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.72)', lineHeight: 1.5 }}>{m.t}</div>
+            </motion.div>
+          )
+        )}
+
+        {/* ── AI typing indicator ── */}
+        {showTyping && (
           <motion.div
             key="typing"
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            style={{ display: 'flex', justifyContent: typingOut ? 'flex-end' : 'flex-start' }}
+            transition={{ duration: 0.18 }}
+            style={{ display: 'flex', flexDirection: 'column', gap: '3px', alignItems: 'flex-start' }}
           >
-            <div style={{ ...bubble(typingOut), padding: '8px 14px' }}>
-              <TypingDots />
+            <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '9px', fontWeight: 700, color: 'rgba(167,139,250,0.95)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
+              <span>✦</span><span>{agentLabel}</span>
             </div>
+            <TypingDots />
           </motion.div>
         )}
       </AnimatePresence>
