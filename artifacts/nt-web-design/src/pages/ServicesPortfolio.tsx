@@ -51,7 +51,7 @@ export default function ServicesPortfolio() {
   const PT = "Project Showcase | NT Digital Group | SaaS & AI Engineering";
   const PD = "Explore our latest case studies, from custom AI integrations to scalable software architectures. See how we deliver elite digital infrastructure at speed.";
   const PU = "https://ntwebux.com/portfolio";
-  const PI = "https://ntwebux.com/logo.png";
+  const PI = "https://ntwebux.com/logo.png?v=2";
 
   return (
     <>

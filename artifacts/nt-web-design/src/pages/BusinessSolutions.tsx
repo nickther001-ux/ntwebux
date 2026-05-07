@@ -325,7 +325,7 @@ export default function BusinessSolutions() {
         <meta property="og:description" content={DESC_TAG} />
         <meta property="og:url"         content="https://ntwebux.com/business" />
         <meta property="og:site_name"   content="NT Web Design" />
-        <meta property="og:image"       content="https://ntwebux.com/logo.png" />
+        <meta property="og:image"       content="https://ntwebux.com/logo.png?v=2" />
       </Helmet>
 
       <div className="relative w-full min-h-screen">

@@ -19,7 +19,7 @@ import { OnboardingModal } from "@/components/OnboardingModal";
 const TITLE = "NT Web Design";
 const DESC  = "Premium web design and AI-driven solutions delivered in exactly 72 hours. Specializing in high-performance websites and SaaS for startups in Canada & USA. 100% code ownership.";
 const URL   = "https://ntwebux.com/";
-const IMG   = "https://ntwebux.com/logo.png";
+const IMG   = "https://ntwebux.com/logo.png?v=2";
 
 const SCHEMA = JSON.stringify({
   "@context": "https://schema.org",

@@ -6,7 +6,7 @@ import { Footer } from "@/components/Footer";
 const TITLE = "NT Business Suite — AI Revenue Platform";
 const DESC  = "The all-in-one AI operating system for service businesses. AI Text-Back, Auto-Booking, and Review Engine — stop losing leads to voicemail.";
 const URL   = "https://ntwebux.com/business-suite";
-const IMG   = "https://ntwebux.com/logo.png";
+const IMG   = "https://ntwebux.com/logo.png?v=2";
 
 export default function BusinessSuite() {
   return (
