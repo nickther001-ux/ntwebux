@@ -3,6 +3,7 @@ import cors from "cors";
 import path from "path";
 import router from "./routes/index.js";
 import { stripeWebhookHandler } from "./routes/stripeWebhook.js";
+import messengerWebhookRouter from "./routes/messengerWebhook.js";
 
 const app: Express = express();
 
@@ -23,6 +24,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api", router);
+app.use("/webhook", messengerWebhookRouter);
 
 /* ── SPA static file serving ──────────────────────────────────────────────
    Serve the built React app for all non-API routes so that deep links like
