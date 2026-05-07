@@ -81,7 +81,7 @@ const PROJECTS = [
   {
     img: `${BASE}/portfolio/proj-restaurant.webp`,
     category: { en: 'Restaurant', fr: 'Restaurant' },
-    title: { en: 'Le Quartier Brasserie', fr: 'Le Quartier Brasserie' },
+    title: { en: 'Brasserie Gusto', fr: 'Brasserie Gusto' },
     tags: { en: ['Brand Identity', 'Web Design'], fr: ['Image de marque', 'Web Design'] },
     wide: false,
   },
