@@ -3,7 +3,6 @@ import cors from "cors";
 import path from "path";
 import router from "./routes/index.js";
 import { stripeWebhookHandler } from "./routes/stripeWebhook.js";
-import messengerWebhookRouter from "./routes/messengerWebhook.js";
 
 const app: Express = express();
 
@@ -24,7 +23,34 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api", router);
-app.use("/webhook", messengerWebhookRouter);
+
+app.get('/webhook', (req, res) => {
+  const mode      = req.query['hub.mode'];
+  const token     = req.query['hub.verify_token'];
+  const challenge = req.query['hub.challenge'];
+
+  if (mode && token) {
+    if (mode === 'subscribe' && token === process.env.VERIFY_TOKEN) {
+      console.log('WEBHOOK_VERIFIED');
+      res.status(200).send(challenge);
+    } else {
+      res.sendStatus(403);
+    }
+  }
+});
+
+app.post('/webhook', (req, res) => {
+  const body = req.body;
+  if (body.object === 'page') {
+    body.entry.forEach((entry: Record<string, unknown>) => {
+      const webhook_event = (entry.messaging as unknown[])[0];
+      console.log('Message Received:', webhook_event);
+    });
+    res.status(200).send('EVENT_RECEIVED');
+  } else {
+    res.sendStatus(404);
+  }
+});
 
 /* ── SPA static file serving ──────────────────────────────────────────────
    Serve the built React app for all non-API routes so that deep links like
