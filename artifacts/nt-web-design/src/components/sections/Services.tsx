@@ -181,7 +181,6 @@ const PILLARS_FR: Pillar[] = [
     bottomLineLabel: 'Pour qui',
     glowA: '52,211,153',
     glowB: '16,185,129',
-    schemaGrid: true,
   },
 ];
 
@@ -279,7 +278,6 @@ const PILLARS_EN: Pillar[] = [
     bottomLineLabel: 'Built for',
     glowA: '52,211,153',
     glowB: '16,185,129',
-    schemaGrid: true,
   },
 ];
 
