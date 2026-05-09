@@ -16,6 +16,8 @@
 
 html {
   scroll-behavior: smooth;
+  /* Offset anchor targets below the fixed navbar */
+  scroll-padding-top: 88px;
 }
 
 :root {
@@ -55,6 +57,10 @@ html {
     /* Native momentum scroll on iOS */
     -webkit-overflow-scrolling: touch;
     overflow-x: hidden;
+    /* Prevent pull-to-refresh bounce & lateral overscroll jank */
+    overscroll-behavior: none;
+    /* Tell the browser this element handles vertical panning only */
+    touch-action: pan-y;
   }
 
   #root {
@@ -133,13 +139,11 @@ html {
 
   .glass {
     background: rgba(255,255,255,0.035);
-    border: 1px solid rgba(255,255,255,0.10); /* border-white/10 */
-    /* 8px blur: visually identical on dark bg, ~2× cheaper GPU composite than 16px */
+    border: 1px solid rgba(255,255,255,0.10);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    /* Isolate on its own compositor layer so scroll doesn't repaint the card */
+    /* translateZ only — no will-change; promoting every card wastes GPU memory */
     transform: translateZ(0);
-    will-change: transform;
   }
 
   /* On mobile: drop backdrop-filter entirely — causes GPU read-back every frame */
