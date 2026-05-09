@@ -75,8 +75,8 @@ export default function Home() {
         <Navbar />
         <main>
           <Hero onStart={() => setActivePlan({ name: 'Custom Project', price: 'Custom' })} />
-          <TrustBar />
           <TwoPathSection />
+          <TrustBar />
           <Services />
           <ActiveDeployments />
           <ROICalculator />
