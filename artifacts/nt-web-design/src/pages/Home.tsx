@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/sections/Hero";
 import { TrustBar } from "@/components/sections/TrustBar";
-import { Stats } from "@/components/sections/Stats";
+import { TwoPathSection } from "@/components/sections/TwoPathSection";
 import { Services } from "@/components/sections/Services";
 import { Portfolio } from "@/components/sections/Portfolio";
 import { Process } from "@/components/sections/Process";
@@ -76,7 +76,7 @@ export default function Home() {
         <main>
           <Hero onStart={() => setActivePlan({ name: 'Custom Project', price: 'Custom' })} />
           <TrustBar />
-          <Stats />
+          <TwoPathSection />
           <Services />
           <ActiveDeployments />
           <ROICalculator />
