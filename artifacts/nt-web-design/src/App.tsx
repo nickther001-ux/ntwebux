@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { MotionConfig } from "framer-motion";
 import { Switch, Route, Router as WouterRouter } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { HelmetProvider } from "react-helmet-async";
@@ -54,6 +55,7 @@ function App() {
   }, []);
 
   return (
+    <MotionConfig transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}>
     <QueryClientProvider client={queryClient}>
       {/* ── Landio-style animated blur orbs ── */}
       {/* isolation:isolate + transform:translateZ(0) puts this on its own GPU
@@ -139,6 +141,7 @@ function App() {
         </LanguageProvider>
       </HelmetProvider>
     </QueryClientProvider>
+    </MotionConfig>
   );
 }
 
