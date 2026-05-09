@@ -5,7 +5,7 @@ import { useLocation } from 'wouter';
 
 const COPY = {
   en: {
-    eyebrow: 'How Can We Help You Scale',
+    eyebrow: 'How We Help You Scale',
     heading: 'Two ways to grow your business with NT Digital Group.',
     left: {
       eyebrow: 'The Software',
@@ -55,13 +55,16 @@ export function TwoPathSection() {
           transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
           style={{ textAlign: 'center', marginBottom: '40px' }}
         >
-          <p style={{
-            fontSize: '11px', fontWeight: 700, letterSpacing: '0.13em',
-            textTransform: 'uppercase', color: 'rgba(34,211,238,0.7)',
-            marginBottom: '12px',
+          <h2 style={{
+            fontSize: 'clamp(2rem, 4vw, 2.75rem)',
+            fontWeight: 800,
+            color: '#fff',
+            letterSpacing: '-0.03em',
+            lineHeight: 1.15,
+            marginBottom: '14px',
           }}>
             {t.eyebrow}
-          </p>
+          </h2>
           <p style={{
             fontSize: 'clamp(15px, 2vw, 17px)',
             color: 'rgba(255,255,255,0.45)',
