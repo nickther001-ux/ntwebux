@@ -5,6 +5,7 @@ import { useLocation } from 'wouter';
 
 const COPY = {
   en: {
+    eyebrow: 'How Can We Help You Scale',
     heading: 'Two ways to grow your business with NT Digital Group.',
     left: {
       eyebrow: 'The Software',
@@ -20,6 +21,7 @@ const COPY = {
     },
   },
   fr: {
+    eyebrow: "Comment Pouvons-Nous Vous Aider à Grandir",
     heading: "Deux façons de faire croître votre entreprise avec NT Digital Group.",
     left: {
       eyebrow: "Le Logiciel",
@@ -45,22 +47,29 @@ export function TwoPathSection() {
     <section style={{ width: '100%', padding: '80px 24px 72px', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
       <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
 
-        {/* Heading */}
-        <motion.p
+        {/* Eyebrow + Heading */}
+        <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-40px' }}
           transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-          style={{
-            textAlign: 'center',
+          style={{ textAlign: 'center', marginBottom: '40px' }}
+        >
+          <p style={{
+            fontSize: '11px', fontWeight: 700, letterSpacing: '0.13em',
+            textTransform: 'uppercase', color: 'rgba(34,211,238,0.7)',
+            marginBottom: '12px',
+          }}>
+            {t.eyebrow}
+          </p>
+          <p style={{
             fontSize: 'clamp(15px, 2vw, 17px)',
             color: 'rgba(255,255,255,0.45)',
-            marginBottom: '40px',
             fontWeight: 400,
-          }}
-        >
-          {t.heading}
-        </motion.p>
+          }}>
+            {t.heading}
+          </p>
+        </motion.div>
 
         {/* Two cards */}
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }} className="two-path-grid">
