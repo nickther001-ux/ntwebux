@@ -6,7 +6,7 @@ import { TrustBar } from "@/components/sections/TrustBar";
 import { TwoPathSection } from "@/components/sections/TwoPathSection";
 
 import { Services } from "@/components/sections/Services";
-import { Portfolio } from "@/components/sections/Portfolio";
+
 import { Process } from "@/components/sections/Process";
 import { WhyUs } from "@/components/sections/WhyUs";
 import { Testimonials } from "@/components/sections/Testimonials";
@@ -80,7 +80,6 @@ export default function Home() {
           <TrustBar />
           <Services />
           <ROICalculator />
-          <Portfolio />
           <Process />
           <WhyUs />
           <Testimonials />

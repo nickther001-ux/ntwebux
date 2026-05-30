@@ -53,7 +53,7 @@ export function Navbar() {
 
   const links = [
     { href: isHome ? '#services' : '/#services', label: 'Services' },
-    { href: isHome ? '#portfolio' : '/#portfolio', label: lang === 'fr' ? 'Portfolio' : 'Portfolio' },
+    { href: '/portfolio', label: lang === 'fr' ? 'Portfolio' : 'Portfolio', isPage: true },
     { href: isHome ? '#process' : '/#process', label: lang === 'fr' ? 'Processus' : 'Process' },
     { href: '/services', label: lang === 'fr' ? 'Tarifs' : 'Pricing', isPage: true },
     { href: '/business-suite', label: lang === 'fr' ? 'Suite' : 'Business Suite', isPage: true, highlight: true },
