@@ -13,7 +13,6 @@ import { Testimonials } from "@/components/sections/Testimonials";
 import { Contact } from "@/components/sections/Contact";
 import { FounderSection } from "@/components/sections/FounderSection";
 import { Footer } from "@/components/Footer";
-import { ROICalculator } from "@/components/ROICalculator";
 
 import { OnboardingModal } from "@/components/OnboardingModal";
 
@@ -79,7 +78,6 @@ export default function Home() {
           <TwoPathSection />
           <TrustBar />
           <Services />
-          <ROICalculator />
           <Process />
           <WhyUs />
           <Testimonials />
