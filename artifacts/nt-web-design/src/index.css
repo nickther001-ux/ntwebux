@@ -3,7 +3,7 @@
 
 @theme inline {
   --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  --color-background: #0c2340;   /* medium deep blue */
+  --color-background: #020617;   /* slate-950 */
   --color-foreground: #ffffff;
   --color-muted: rgba(255,255,255,0.45);
   --color-card: rgba(255,255,255,0.035);
@@ -49,7 +49,7 @@ html {
   body {
     width: 100%;
     min-height: 100%;
-    background-color: #0c2340;   /* medium deep blue */
+    background-color: #020617;   /* slate-950 */
     color: #ffffff;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
