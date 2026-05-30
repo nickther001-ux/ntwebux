@@ -98,9 +98,9 @@ export function Navbar() {
         {/* Logo */}
         <a href={isHome ? '#' : '/'} style={{ display: 'flex', alignItems: 'center', gap: '6px', textDecoration: 'none', flexShrink: 0 }}>
           <img
-            src={`${import.meta.env.BASE_URL}icon.png`}
+            src={`${import.meta.env.BASE_URL}nt-logo-mark.png`}
             alt="NTWebUX"
-            style={{ height: '34px', width: 'auto', objectFit: 'contain', display: 'block' }}
+            style={{ height: '38px', width: 'auto', objectFit: 'contain', display: 'block' }}
           />
         </a>
 
@@ -289,7 +289,7 @@ export function Navbar() {
             {/* Top bar — logo + close */}
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 24px', height: '68px', borderBottom: '1px solid rgba(255,255,255,0.06)', flexShrink: 0 }}>
               <a href={isHome ? '#' : '/'} style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none' }} onClick={() => setOpen(false)}>
-                <img src={`${import.meta.env.BASE_URL}icon.png`} alt="NTWebUX" style={{ height: '34px', width: 'auto', objectFit: 'contain', display: 'block' }} />
+                <img src={`${import.meta.env.BASE_URL}nt-logo-mark.png`} alt="NTWebUX" style={{ height: '38px', width: 'auto', objectFit: 'contain', display: 'block' }} />
               </a>
               <button
                 onClick={() => setOpen(false)}
