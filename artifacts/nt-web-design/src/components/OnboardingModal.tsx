@@ -20,6 +20,17 @@ const SITE_TYPES = [
   { id: 'custom',     en: 'Custom / Other',         fr: 'Personnalisé / Autre',      img: '',                      emoji: '✨' },
 ];
 
+/* ─── Visual style options ──────────────────────────────────────── */
+const VISUAL_STYLES = [
+  { id: 'modern',     emoji: '⚡', en: 'Modern',            fr: 'Moderne',             desc_en: 'Clean lines, bold contrast, forward-looking',      desc_fr: 'Lignes épurées, contraste fort, avant-gardiste' },
+  { id: 'minimalist', emoji: '🪶', en: 'Minimalist',        fr: 'Minimaliste',         desc_en: 'Lots of space, subtle details, refined',            desc_fr: 'Beaucoup d\'espace, détails subtils, raffiné' },
+  { id: 'cleanest',   emoji: '✦',  en: 'Simplest / Cleanest', fr: 'Simple / Épuré',   desc_en: 'Ultra-clean, zero distraction, pure function',       desc_fr: 'Ultra-épuré, sans distraction, fonctionnel' },
+  { id: 'luxurious',  emoji: '💎', en: 'Luxurious / Premium', fr: 'Luxueux / Premium', desc_en: 'Rich textures, gold accents, high-end feel',         desc_fr: 'Textures riches, accents dorés, prestige' },
+  { id: 'animated',   emoji: '🎬', en: 'Animated / Dynamic', fr: 'Animé / Dynamique',  desc_en: 'Motion, parallax, micro-interactions throughout',    desc_fr: 'Mouvement, parallaxe, micro-interactions' },
+  { id: 'bold',       emoji: '🔥', en: 'Bold / Eye-catching', fr: 'Audacieux / Impact', desc_en: 'Big type, strong colors, commanding presence',      desc_fr: 'Grande typo, couleurs fortes, impact immédiat' },
+  { id: 'classic',    emoji: '🏛️', en: 'Classic / Elegant',  fr: 'Classique / Élégant', desc_en: 'Timeless layout, serif fonts, trusted & refined',   desc_fr: 'Mise en page intemporelle, sérif, élégant' },
+];
+
 /* ─── SaaS product type options (Enterprise SaaS plans) ────────── */
 const SAAS_TYPES = [
   { id: 'crm',         en: 'CRM & Customer Hub',         fr: 'CRM & Hub Client',              img: '', emoji: '🧩' },
@@ -70,6 +81,7 @@ interface Plan { name: string; price: string | number; isSaas?: boolean; }
 interface FormData {
   siteType: string;
   style: string; // 'sample' | 'custom'
+  visualStyles: string[]; // multi-select look & feel
   name: string;
   business: string;
   industry: string;
@@ -88,9 +100,10 @@ interface FormData {
 }
 
 const EMPTY: FormData = {
-  siteType: '', style: '', name: '', business: '', industry: '', description: '',
-  city: '', goals: [], hasLogo: '', hasContent: '', hasExistingSite: '',
-  existingUrl: '', email: '', phone: '', bestTime: '', method: '', notes: '',
+  siteType: '', style: '', visualStyles: [], name: '', business: '', industry: '',
+  description: '', city: '', goals: [], hasLogo: '', hasContent: '',
+  hasExistingSite: '', existingUrl: '', email: '', phone: '', bestTime: '',
+  method: '', notes: '',
 };
 
 /* ─── Component ─────────────────────────────────────────────────── */
@@ -111,7 +124,7 @@ export function OnboardingModal({ plan, onClose }: Props) {
   const isSaas = !!plan.isSaas;
   const TYPES  = isSaas ? SAAS_TYPES : SITE_TYPES;
 
-  const totalSteps = 4;
+  const totalSteps = 5;
   const progress   = ((step) / totalSteps) * 100;
 
   /* helpers */
@@ -120,6 +133,10 @@ export function OnboardingModal({ plan, onClose }: Props) {
     ...p,
     goals: p.goals.includes(g) ? p.goals.filter(x => x !== g) : [...p.goals, g],
   }));
+  const toggleStyle = (s: string) => setData(p => ({
+    ...p,
+    visualStyles: p.visualStyles.includes(s) ? p.visualStyles.filter(x => x !== s) : [...p.visualStyles, s],
+  }));
 
   const goNext = () => { setDir(1); setStep(s => s + 1); };
   const goPrev = () => { setDir(-1); setStep(s => s - 1); };
@@ -127,8 +144,9 @@ export function OnboardingModal({ plan, onClose }: Props) {
   /* step validation */
   const canNext = () => {
     if (step === 0) return !!data.siteType;
-    if (step === 1) return !!(data.name && data.email);
-    if (step === 2) return data.goals.length > 0;
+    if (step === 1) return data.visualStyles.length > 0;
+    if (step === 2) return !!(data.name && data.email);
+    if (step === 3) return data.goals.length > 0;
     return true;
   };
 
@@ -241,8 +259,80 @@ export function OnboardingModal({ plan, onClose }: Props) {
       )}
     </motion.div>,
 
-    /* ── STEP 1: About You ── */
-    <motion.div key="s1" {...slide(dir)} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+    /* ── STEP 1: Style & Feel ── */
+    <motion.div key="s1" {...slide(dir)} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+      <div>
+        <h3 style={{ fontSize: '20px', fontWeight: 800, marginBottom: '6px' }}>
+          {fr ? 'Comment voulez-vous qu\'il se sente et ressemble?' : 'How do you want it to look and feel?'}
+        </h3>
+        <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.45)', lineHeight: 1.6 }}>
+          {fr ? 'Choisissez un ou plusieurs styles qui correspondent à votre vision.' : 'Pick one or more styles that match your vision.'}
+        </p>
+      </div>
+
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '10px' }}>
+        {VISUAL_STYLES.map(vs => {
+          const selected = data.visualStyles.includes(vs.id);
+          return (
+            <button
+              key={vs.id}
+              onClick={() => toggleStyle(vs.id)}
+              style={{
+                borderRadius: '14px', border: '2px solid', padding: '14px 14px 12px',
+                borderColor: selected ? '#3b82f6' : 'rgba(255,255,255,0.07)',
+                background: selected ? 'rgba(59,130,246,0.1)' : 'rgba(255,255,255,0.03)',
+                cursor: 'pointer', textAlign: 'left', transition: 'all 0.18s',
+                boxShadow: selected ? '0 0 0 1px rgba(59,130,246,0.3)' : 'none',
+                position: 'relative',
+              }}
+            >
+              {selected && (
+                <div style={{ position: 'absolute', top: '10px', right: '10px', width: '18px', height: '18px', borderRadius: '50%', background: '#3b82f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <Check size={10} color="#fff" />
+                </div>
+              )}
+              <div style={{ fontSize: '22px', marginBottom: '6px' }}>{vs.emoji}</div>
+              <div style={{ fontSize: '13px', fontWeight: 800, color: selected ? '#93c5fd' : 'rgba(255,255,255,0.85)', marginBottom: '3px' }}>
+                {fr ? vs.fr : vs.en}
+              </div>
+              <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.38)', lineHeight: 1.4 }}>
+                {fr ? vs.desc_fr : vs.desc_en}
+              </div>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Confirmation summary */}
+      {data.visualStyles.length > 0 && (
+        <motion.div
+          initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
+          style={{
+            padding: '14px 16px', borderRadius: '12px',
+            background: 'rgba(59,130,246,0.08)', border: '1px solid rgba(59,130,246,0.2)',
+          }}
+        >
+          <p style={{ margin: 0, fontSize: '13px', color: '#93c5fd', fontWeight: 600, lineHeight: 1.6 }}>
+            {fr
+              ? `Parfait — j'ai noté votre type de site et votre direction de style. Ensuite, nous demanderons votre contenu et vos objectifs.`
+              : `Perfect — I've got your website type and style direction. Next, we'll ask for content and goals.`}
+          </p>
+          <div style={{ marginTop: '8px', display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+            {data.visualStyles.map(id => {
+              const vs = VISUAL_STYLES.find(v => v.id === id)!;
+              return (
+                <span key={id} style={{ fontSize: '11px', fontWeight: 700, padding: '3px 10px', borderRadius: '99px', background: 'rgba(59,130,246,0.18)', color: '#93c5fd', border: '1px solid rgba(59,130,246,0.3)' }}>
+                  {vs.emoji} {fr ? vs.fr : vs.en}
+                </span>
+              );
+            })}
+          </div>
+        </motion.div>
+      )}
+    </motion.div>,
+
+    /* ── STEP 2: About You ── */
+    <motion.div key="s2" {...slide(dir)} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
       <div>
         <h3 style={{ fontSize: '20px', fontWeight: 800, marginBottom: '6px' }}>
           {fr ? 'Parlez-nous de vous' : 'Tell us about yourself'}
@@ -303,8 +393,8 @@ export function OnboardingModal({ plan, onClose }: Props) {
       </div>
     </motion.div>,
 
-    /* ── STEP 2: Goals & Assets ── */
-    <motion.div key="s2" {...slide(dir)} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+    /* ── STEP 3: Goals & Assets ── */
+    <motion.div key="s3" {...slide(dir)} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
       <div>
         <h3 style={{ fontSize: '20px', fontWeight: 800, marginBottom: '6px' }}>
           {fr ? 'Vos objectifs & ressources' : 'Your goals & assets'}
@@ -417,8 +507,8 @@ export function OnboardingModal({ plan, onClose }: Props) {
       </div>
     </motion.div>,
 
-    /* ── STEP 3: How to Reach You ── */
-    <motion.div key="s3" {...slide(dir)} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+    /* ── STEP 4: How to Reach You ── */
+    <motion.div key="s4" {...slide(dir)} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
       <div>
         <h3 style={{ fontSize: '20px', fontWeight: 800, marginBottom: '6px' }}>
           {fr ? 'Comment vous joindre?' : 'How can we reach you?'}
