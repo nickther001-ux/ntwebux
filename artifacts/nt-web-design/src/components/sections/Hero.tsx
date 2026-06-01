@@ -114,7 +114,7 @@ export function Hero({ onStart }: { onStart?: () => void } = {}) {
         <motion.div custom={0} variants={fadeUp} initial="hidden" animate="show" style={{ display: 'flex', justifyContent: 'center', marginBottom: '32px' }}>
           <span className="pill-label">
             <Sparkles size={11} />
-            {lang === 'fr' ? 'Agence IA + Plateforme tout-en-un pour entrepreneurs' : 'AI Agency + All-in-One Platform for Service Businesses'}
+            {lang === 'fr' ? 'Plateforme tout-en-un pour entrepreneurs' : 'All-in-One Platform for Service Businesses'}
           </span>
         </motion.div>
 
