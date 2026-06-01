@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { useLanguage } from '@/lib/i18n';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
-import { Layers, Crown, Sparkles, Cpu, Rocket, Check } from 'lucide-react';
+import { Globe, Layers, Crown, Sparkles, Cpu, Rocket, Check } from 'lucide-react';
 import { OnboardingModal } from '@/components/OnboardingModal';
 import { LetsTalkModal } from '@/components/LetsTalkModal';
 
@@ -29,6 +29,7 @@ export default function ServicesPortfolio() {
   const svc   = t('portfolio.services') as any;
   const webPlans: any[] = svc.webPlans ?? [];
   const aiPlans:  any[] = svc.aiPlans  ?? [];
+  const isAi = track === 'ai';
   const plans = track === 'web' ? webPlans : aiPlans;
   const ICONS = track === 'web' ? WEB_ICONS : AI_ICONS;
   const popularLabel = lang === 'fr' ? 'Le plus populaire' : 'Most Popular';
