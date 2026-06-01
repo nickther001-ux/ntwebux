@@ -4,23 +4,12 @@ import { motion } from 'framer-motion';
 import { useLanguage } from '@/lib/i18n';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
-import { Globe, Layers, Crown, Sparkles, Cpu, Rocket, ArrowRight, Check } from 'lucide-react';
+import { Layers, Crown, Sparkles, Cpu, Rocket, Check } from 'lucide-react';
 import { OnboardingModal } from '@/components/OnboardingModal';
 import { LetsTalkModal } from '@/components/LetsTalkModal';
 
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
 
-const WORK_IMAGES: Record<string, string> = {
-  'Tremblay Excavation Inc.':   `${BASE}/portfolio/proj-construction.webp`,
-  'Excavation Tremblay Inc.':   `${BASE}/portfolio/proj-construction.webp`,
-  'Physio Optimal':             `${BASE}/portfolio/proj-medical.webp`,
-  "Saveurs d'Haïti MTL":       `${BASE}/portfolio/proj-restaurant.webp`,
-  'FieldOps Pro':               `${BASE}/portfolio/proj-saas.webp`,
-  'Silas AI Assistant':         `${BASE}/portfolio/proj-saas.webp`,
-  'Silas Assistant IA':         `${BASE}/portfolio/proj-saas.webp`,
-  'LeadFlow CRM Engine':        `${BASE}/portfolio/proj-ecommerce.webp`,
-  'Moteur CRM LeadFlow':        `${BASE}/portfolio/proj-ecommerce.webp`,
-};
 
 const WEB_ICONS = [Layers, Sparkles, Crown];
 const AI_ICONS  = [Cpu,    Rocket,    Crown];
@@ -38,14 +27,10 @@ export default function ServicesPortfolio() {
   const [letsTalkOpen, setLetsTalkOpen] = useState(false);
   const [track, setTrack] = useState<'web' | 'ai'>('ai');
   const svc   = t('portfolio.services') as any;
-  const work  = t('portfolio.work')     as any;
   const webPlans: any[] = svc.webPlans ?? [];
   const aiPlans:  any[] = svc.aiPlans  ?? [];
-  const isAi = track === 'ai';
   const plans = track === 'web' ? webPlans : aiPlans;
   const ICONS = track === 'web' ? WEB_ICONS : AI_ICONS;
-  const items: any[] = isAi ? (work.aiItems ?? work.items) : work.items;
-  const workDesc: string = isAi ? (work.aiDesc ?? work.desc) : work.desc;
   const popularLabel = lang === 'fr' ? 'Le plus populaire' : 'Most Popular';
 
   const PT = "Project Showcase | NT Digital Group | SaaS & AI Engineering";
@@ -311,79 +296,6 @@ export default function ServicesPortfolio() {
         </div>
       </section>
 
-      {/* ── PORTFOLIO / WORK ── */}
-      <section style={{ padding: '0 24px 140px', borderTop: '1px solid rgba(255,255,255,0.06)', position: 'relative' }}>
-        <div style={{ position: 'absolute', top: '20%', left: '50%', transform: 'translateX(-50%)', width: '700px', height: '400px', background: 'radial-gradient(ellipse, rgba(59,130,246,0.07) 0%, transparent 70%)', pointerEvents: 'none' }} />
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-
-          <motion.div {...fadeUp(0)} style={{ textAlign: 'center', padding: '80px 0 60px' }}>
-            <span className="pill-label" style={{ marginBottom: '20px', display: 'inline-flex' }}>{work.eyebrow}</span>
-            <h2 style={{ fontSize: 'clamp(2rem,5vw,3.5rem)', fontWeight: 800, letterSpacing: '-0.02em', marginTop: '14px', marginBottom: '16px' }}>
-              {work.title1} <span className="gradient-text">{work.title2}</span>
-            </h2>
-            <p style={{ fontSize: '16px', color: 'rgba(255,255,255,0.45)', maxWidth: '520px', margin: '0 auto', lineHeight: 1.7 }}>{workDesc}</p>
-          </motion.div>
-
-          {/* Work items with image previews */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr 1fr', gap: '16px' }} className="work-grid">
-            {items.map((item, i) => {
-              const previewImg = WORK_IMAGES[item.title];
-              return (
-                <motion.div
-                  key={item.title}
-                  {...fadeUp(i * 0.1)}
-                  className="glass glass-hover"
-                  style={{ borderRadius: '18px', overflow: 'hidden', display: 'flex', flexDirection: 'column', position: 'relative' }}
-                >
-                  {/* Portfolio image */}
-                  <div style={{ position: 'relative', height: i === 0 ? '220px' : '160px', overflow: 'hidden', flexShrink: 0 }}>
-                    {previewImg ? (
-                      <>
-                        <img
-                          src={previewImg}
-                          alt={item.title}
-                          loading="lazy"
-                          style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top', display: 'block' }}
-                        />
-                        {/* Cover browser chrome + page header (Framer branding area) */}
-                        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '56px', background: '#02040a', zIndex: 2 }} />
-                        {/* Smooth fade-in from top cover to content */}
-                        <div style={{ position: 'absolute', top: '56px', left: 0, right: 0, height: '20px', background: 'linear-gradient(to bottom, #02040a, transparent)', zIndex: 2 }} />
-                        {/* Blur any watermark at bottom */}
-                        <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '32px', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)', background: 'rgba(2,4,10,0.65)', zIndex: 2 }} />
-                      </>
-                    ) : (
-                      <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, rgba(59,130,246,0.15), rgba(30,58,138,0.2))', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <Globe size={40} color="rgba(59,130,246,0.3)" />
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Content */}
-                  <div style={{ padding: '22px 24px 24px', flex: 1, display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                    <span style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#60a5fa' }}>{item.tag}</span>
-                    <h3 style={{ fontSize: i === 0 ? '20px' : '17px', fontWeight: 800, color: '#fff', margin: 0, lineHeight: 1.2 }}>{item.title}</h3>
-                    <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.45)', lineHeight: 1.65, margin: 0, flex: 1 }}>{item.desc}</p>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginTop: '4px' }}>
-                      <a href="/#contact" style={{ fontSize: '12px', fontWeight: 600, color: '#60a5fa', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                        {lang === 'fr' ? 'Projet similaire' : 'Similar project'} <ArrowRight size={12} />
-                      </a>
-                    </div>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
-
-          {/* Bottom CTA */}
-          <motion.div {...fadeUp(0.2)} style={{ textAlign: 'center', marginTop: '60px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px' }}>
-            <p style={{ fontSize: '18px', color: 'rgba(255,255,255,0.55)' }}>{work.ctaText}</p>
-            <a href="/#contact" className="btn-violet" style={{ padding: '16px 32px', fontSize: '15px', textDecoration: 'none', gap: '8px', borderRadius: '12px' }}>
-              {work.ctaBtn} <ArrowRight size={16} />
-            </a>
-          </motion.div>
-        </div>
-      </section>
 
       <Footer />
 
