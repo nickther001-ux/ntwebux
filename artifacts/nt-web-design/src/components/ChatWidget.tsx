@@ -88,7 +88,7 @@ function ChatView({ lang, onBack, t }: { lang: string; onBack: () => void; t: (k
   const WELCOME: Message = {
     role: "bot",
     content: chat.welcome,
-    chips: [chat.scaleChip, chat.automateChip],
+    chips: [chat.path1, chat.path2, chat.path3],
   };
 
   const [messages, setMessages] = useState<Message[]>([]);
