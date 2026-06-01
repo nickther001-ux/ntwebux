@@ -32,7 +32,7 @@ const PROJECTS = [
   {
     img: `${BASE}/portfolio/proj-law.png`,
     category: { en: 'Professional Services', fr: 'Services Professionnels' },
-    title: { en: 'Beaumont & Associés', fr: 'Beaumont & Associés' },
+    title: { en: 'St-Juste & Associés', fr: 'St-Juste & Associés' },
     tags: { en: ['Web Design', 'SEO'], fr: ['Web Design', 'SEO'] },
     wide: false,
   },
