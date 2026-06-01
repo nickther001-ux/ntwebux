@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { useLanguage } from '@/lib/i18n';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
-import { Globe, Layers, Crown, Sparkles, Cpu, Rocket, Check } from 'lucide-react';
+import { Globe, Layers, Crown, Sparkles, Cpu, Rocket, ArrowRight, Check } from 'lucide-react';
 import { OnboardingModal } from '@/components/OnboardingModal';
 import { LetsTalkModal } from '@/components/LetsTalkModal';
 
