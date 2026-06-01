@@ -86,10 +86,10 @@ const PROJECTS = [
     wide: false,
   },
   {
-    img: `${BASE}/portfolio/proj-law.webp`,
-    category: { en: 'Legal Services', fr: 'Services Juridiques' },
-    title: { en: 'Dubois Legal Group', fr: 'Cabinet Dubois' },
-    tags: { en: ['Law Firm', 'Professional'], fr: ['Cabinet d\'avocats', 'Professionnel'] },
+    img: `${BASE}/portfolio/proj-living-lights.webp`,
+    category: { en: 'Exterior Lighting', fr: 'Éclairage Extérieur' },
+    title: { en: 'Living Lights', fr: 'Living Lights' },
+    tags: { en: ['LED Lighting', 'eCommerce'], fr: ['Éclairage LED', 'Commerce en ligne'] },
     wide: false,
   },
   {
