@@ -275,11 +275,11 @@ export default function ServicesPortfolio() {
                   </thead>
                   <tbody>
                     {(lang === 'fr' ? [
-                      { type: 'Starter — site 5 pages', delivery: '2–3 jours ouvrables', price: '997 $' },
+                      { type: 'Starter — site 5 pages', delivery: '2–3 jours ouvrables', price: '500 $' },
                       { type: "Croissance — jusqu'à 10 pages + CMS", delivery: '4–6 jours ouvrables', price: '2 497 $' },
                       { type: 'Entreprise — application web sur mesure', delivery: 'Selon la portée', price: 'Sur mesure' },
                     ] : [
-                      { type: 'Starter — 5-page site', delivery: '2–3 business days', price: '$997' },
+                      { type: 'Starter — 5-page site', delivery: '2–3 business days', price: '$500' },
                       { type: 'Growth — up to 10 pages + CMS', delivery: '4–6 business days', price: '$2,497' },
                       { type: 'Enterprise — custom web app', delivery: 'Scoped per project', price: 'Custom' },
                     ]).map((row, i) => (

@@ -91,7 +91,7 @@ const translations: Translations = {
       path2: "AI Revenue Engines",
       path3: "SaaS & Custom Systems",
       rules: {
-        price:    "Our Website Foundations start at $997, and our AI Revenue Engines start at $297/month. Which path fits your goal best?",
+        price:    "Our Website Foundations start at $500, and our AI Revenue Engines start at $297/month. Which path fits your goal best?",
         ai:       "AI Revenue Engines cover Text-Back automation, auto-booking, and lead recovery. Which path are you leaning toward — AI Revenue Engines, Digital Foundations, or SaaS & Custom Systems?",
         website:  "We build high-performance, bilingual sites delivered in 72 hours. Is that a Digital Foundations project, or something more custom?",
         hello:    "I'm Silas 2.5, your NT Digital onboarding guide. What are you trying to achieve right now? (1. Digital Foundations · 2. AI Revenue Engines · 3. SaaS & Custom Systems)",
@@ -141,7 +141,7 @@ const translations: Translations = {
         },
         webPlans: [
           {
-            name: "Starter", price: "997", cycle: "One-time project fee", delivery: "Typically delivered in 2–3 business days",
+            name: "Starter", price: "500", cycle: "One-time project fee", delivery: "Typically delivered in 2–3 business days",
             features: ["5-page responsive website", "Custom design", "Basic SEO", "Contact form", "Includes 2 revision rounds"],
             cta: "Start Project", featured: false
           },
@@ -311,7 +311,7 @@ const translations: Translations = {
       path2: "Moteurs de Revenus IA",
       path3: "SaaS & Systèmes Sur Mesure",
       rules: {
-        price:    "Nos Fondations Numériques débutent à 997 $, et nos Moteurs de Revenus IA à 297 $/mois. Quel chemin correspond le mieux à votre objectif ?",
+        price:    "Nos Fondations Numériques débutent à 500 $, et nos Moteurs de Revenus IA à 297 $/mois. Quel chemin correspond le mieux à votre objectif ?",
         ai:       "Les Moteurs de Revenus IA couvrent le Text-Back, la réservation automatique et la récupération de leads. Vers quel chemin vous orientez-vous — IA, Fondations, ou SaaS ?",
         website:  "Nous construisons des sites haute performance bilingues livrés en 72h. Est-ce un projet de Fondations Numériques ou quelque chose de plus sur mesure ?",
         hello:    "Je suis Silas 2.5, votre guide d'intégration NT Digital. Qu'essayez-vous d'accomplir ? (1. Fondations Numériques · 2. Moteurs de Revenus IA · 3. SaaS & Systèmes Sur Mesure)",
@@ -361,7 +361,7 @@ const translations: Translations = {
         },
         webPlans: [
           {
-            name: "Starter", price: "997", cycle: "Tarif unique du projet", delivery: "Livré en 2–3 jours ouvrables en moyenne",
+            name: "Starter", price: "500", cycle: "Tarif unique du projet", delivery: "Livré en 2–3 jours ouvrables en moyenne",
             features: ["Site 5 pages responsive", "Design personnalisé", "SEO de base", "Formulaire de contact", "Inclut 2 rondes de révision"],
             cta: "Démarrer le Projet", featured: false
           },
