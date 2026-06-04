@@ -1,10 +1,12 @@
+import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { useLanguage } from "@/lib/i18n";
 import { motion } from "framer-motion";
-import { PhoneMissed, Clock, TrendingUp, Zap } from "lucide-react";
+import { PhoneMissed, Clock, TrendingUp, Zap, ArrowRight } from "lucide-react";
 import { ROICalculator } from "@/components/ROICalculator";
+import { OnboardingModal } from "@/components/OnboardingModal";
 
 /* ─── Copy ──────────────────────────────────────────────────── */
 const copy = {
@@ -137,9 +139,12 @@ function CardRow({ label, text, colorHex }: { label: string; text: string; color
   );
 }
 
+const DEFAULT_PLAN = { name: "New Project", price: "500" };
+
 export default function ROIPage() {
   const { lang } = useLanguage();
   const l = lang as Lang;
+  const [modalOpen, setModalOpen] = useState(false);
 
   return (
     <>
@@ -308,8 +313,34 @@ export default function ROIPage() {
           </section>
         </main>
 
+        {/* ── Start My Project CTA ── */}
+        <section style={{ padding: '80px 24px', textAlign: 'center', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+          <div style={{ maxWidth: '560px', margin: '0 auto', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px' }}>
+            <p style={{ fontSize: '13px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#60a5fa' }}>
+              {lang === 'fr' ? 'Prêt à récupérer vos revenus?' : 'Ready to recover your revenue?'}
+            </p>
+            <h2 style={{ fontSize: 'clamp(1.6rem,4vw,2.6rem)', fontWeight: 800, letterSpacing: '-0.02em', margin: 0 }}>
+              {lang === 'fr' ? 'Démarrez votre projet' : 'Start your project'}
+            </h2>
+            <p style={{ fontSize: '15px', color: 'rgba(255,255,255,0.45)', lineHeight: 1.7, margin: 0 }}>
+              {lang === 'fr'
+                ? 'Systèmes IA qui s\'autofinancent en 90 jours. Commençons.'
+                : 'AI systems that pay for themselves within 90 days. Let\'s build yours.'}
+            </p>
+            <button
+              onClick={() => setModalOpen(true)}
+              className="btn-violet"
+              style={{ padding: '14px 32px', fontSize: '15px', fontWeight: 700, borderRadius: '12px', display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}
+            >
+              {lang === 'fr' ? 'Démarrer Mon Projet' : 'Start My Project'} <ArrowRight size={16} />
+            </button>
+          </div>
+        </section>
+
         <Footer />
       </div>
+
+      <OnboardingModal plan={modalOpen ? DEFAULT_PLAN : null} onClose={() => setModalOpen(false)} />
     </>
   );
 }

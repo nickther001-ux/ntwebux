@@ -518,11 +518,19 @@ export function OnboardingModal({ plan, onClose }: Props) {
         </p>
       </div>
 
-      <div>
-        <label style={{ display: 'block', fontSize: '11px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.35)', marginBottom: '6px' }}>
-          {fr ? 'Téléphone / WhatsApp' : 'Phone / WhatsApp'}
-        </label>
-        <input value={data.phone} onChange={e => set('phone', e.target.value)} type="tel" placeholder="+1 (514) 000-0000" style={inp} />
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+        <div>
+          <label style={{ display: 'block', fontSize: '11px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.35)', marginBottom: '6px' }}>
+            Email *
+          </label>
+          <input value={data.email} onChange={e => set('email', e.target.value)} type="email" placeholder="you@example.com" style={inp} />
+        </div>
+        <div>
+          <label style={{ display: 'block', fontSize: '11px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.35)', marginBottom: '6px' }}>
+            {fr ? 'Téléphone / WhatsApp' : 'Phone / WhatsApp'}
+          </label>
+          <input value={data.phone} onChange={e => set('phone', e.target.value)} type="tel" placeholder="+1 (514) 000-0000" style={inp} />
+        </div>
       </div>
 
       <div>
