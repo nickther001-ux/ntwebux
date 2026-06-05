@@ -607,8 +607,8 @@ export function NTBusinessSuite() {
   const s = {
     ctaSubtext: { en: 'Fill out the form. We\'ll call you within 24 hours with a custom demo.', fr: 'Remplissez le formulaire. On vous rappelle sous 24h avec une démo personnalisée.' },
     secondaryCta: { en: 'See How It Works', fr: 'Voir comment ça fonctionne' },
-    heroBadge: { en: 'AI Operating System', fr: 'Système d\'Exploitation IA' },
-    heroH1: { en: <>The AI Operating System for<br /><span style={{ background: 'linear-gradient(135deg,#60a5fa,#a5b4fc)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Service Businesses</span></>, fr: <>Le Système d'Exploitation IA pour<br /><span style={{ background: 'linear-gradient(135deg,#60a5fa,#a5b4fc)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>les Entreprises de Services</span></> },
+    heroBadge: { en: 'Operating System', fr: 'Système d\'Exploitation' },
+    heroH1: { en: <>The Operating System for<br /><span style={{ background: 'linear-gradient(135deg,#60a5fa,#a5b4fc)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Service Businesses</span></>, fr: <>Le Système d'Exploitation pour<br /><span style={{ background: 'linear-gradient(135deg,#60a5fa,#a5b4fc)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>les Entreprises de Services</span></> },
     heroSub: { en: 'Stop losing leads to voicemail. Automate your follow-ups, bookings, and Google reviews — all from one platform, set up in 72 hours.', fr: 'Stoppez la fuite de prospects vers la messagerie. Automatisez vos relances, réservations et avis Google — depuis une seule plateforme, configurée en 72 heures.' },
     problemBadge: { en: 'The Problem', fr: 'Le Problème' },
     problemH: { en: 'Running a service business is hard enough.', fr: 'Gérer une entreprise de services est déjà assez difficile.' },
