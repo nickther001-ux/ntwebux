@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { MotionConfig } from "framer-motion";
-import { Switch, Route, Router as WouterRouter } from "wouter";
+import { Switch, Route, Router as WouterRouter, useLocation } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { HelmetProvider } from "react-helmet-async";
 import { LanguageProvider } from "@/lib/i18n";
@@ -39,6 +39,14 @@ function useSmoothAnchorScroll() {
     document.addEventListener("click", handle);
     return () => document.removeEventListener("click", handle);
   }, []);
+}
+
+function ScrollToTop() {
+  const [location] = useLocation();
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
+  }, [location]);
+  return null;
 }
 
 function App() {
@@ -121,6 +129,7 @@ function App() {
         <LanguageProvider>
           <TooltipProvider>
             <WouterRouter base={import.meta.env.PROD ? '' : import.meta.env.BASE_URL.replace(/\/$/, "")}>
+              <ScrollToTop />
               <Switch>
                 <Route path="/" component={Home} />
                 <Route path="/services" component={ServicesPortfolio} />
