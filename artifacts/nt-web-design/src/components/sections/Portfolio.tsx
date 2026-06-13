@@ -292,7 +292,7 @@ function ProjectCard({
       }}
     >
       {/* Image */}
-      <div className="portfolio-img" style={{ position: 'relative', overflow: 'hidden', aspectRatio: project.wide ? '21/9' : '16/9' }}>
+      <div className="portfolio-img" style={{ position: 'relative', overflow: 'hidden', aspectRatio: project.wide ? '21/8' : '4/3' }}>
         <img
           src={project.img}
           alt={project.title[lang as 'en' | 'fr']}
