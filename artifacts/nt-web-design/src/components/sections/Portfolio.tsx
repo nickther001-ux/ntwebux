@@ -11,7 +11,7 @@ const PROJECTS = [
     category: { en: 'HR Consulting', fr: 'Conseil RH' },
     title: { en: 'AudreyRh.com', fr: 'AudreyRh.com' },
     tags: { en: ['HR Consultant', 'Personal Brand'], fr: ['Conseil RH', 'Image personnelle'] },
-    result: { en: 'Launched in 11 days — bilingual, dual-audience architecture.', fr: 'Lancé en 11 jours — architecture bilingue, double audience.' },
+    buildTime: { en: '5 days', fr: '5 jours' },
     wide: true,
   },
   {
@@ -19,7 +19,7 @@ const PROJECTS = [
     category: { en: 'E-Commerce', fr: 'E-Commerce' },
     title: { en: 'Maison Luxe Boutique', fr: 'Maison Luxe Boutique' },
     tags: { en: ['E-Commerce', 'Shopify'], fr: ['E-Commerce', 'Shopify'] },
-    result: { en: 'Full e-commerce store, Shopify integrated.', fr: 'Boutique e-commerce complète, intégration Shopify.' },
+    buildTime: { en: '6 days', fr: '6 jours' },
     wide: false,
   },
   {
@@ -27,6 +27,7 @@ const PROJECTS = [
     category: { en: 'SaaS', fr: 'SaaS' },
     title: { en: 'Flux Analytics Platform', fr: 'Plateforme Flux Analytics' },
     tags: { en: ['Dashboard', 'SaaS UI'], fr: ['Tableau de bord', 'SaaS UI'] },
+    buildTime: { en: '7 days', fr: '7 jours' },
     wide: false,
   },
   {
@@ -34,6 +35,7 @@ const PROJECTS = [
     category: { en: 'Professional Services', fr: 'Services Professionnels' },
     title: { en: 'St-Juste & Associés', fr: 'St-Juste & Associés' },
     tags: { en: ['Web Design', 'SEO'], fr: ['Web Design', 'SEO'] },
+    buildTime: { en: '3 days', fr: '3 jours' },
     wide: false,
   },
   {
@@ -41,6 +43,7 @@ const PROJECTS = [
     category: { en: 'Health & Fitness', fr: 'Santé & Fitness' },
     title: { en: 'Apex Fitness Studio', fr: 'Apex Fitness Studio' },
     tags: { en: ['Web Design', 'Booking'], fr: ['Web Design', 'Réservation'] },
+    buildTime: { en: '4 days', fr: '4 jours' },
     wide: false,
   },
   {
@@ -48,6 +51,7 @@ const PROJECTS = [
     category: { en: 'Real Estate', fr: 'Immobilier' },
     title: { en: 'Prestige Realty Group', fr: 'Prestige Realty Group' },
     tags: { en: ['Real Estate', 'CMS'], fr: ['Immobilier', 'CMS'] },
+    buildTime: { en: '5 days', fr: '5 jours' },
     wide: false,
   },
   {
@@ -55,6 +59,7 @@ const PROJECTS = [
     category: { en: 'Tech Startup', fr: 'Startup Tech' },
     title: { en: 'Orion Launch Platform', fr: 'Plateforme Orion Launch' },
     tags: { en: ['Landing Page', 'SaaS'], fr: ['Page de lancement', 'SaaS'] },
+    buildTime: { en: '7 days', fr: '7 jours' },
     wide: true,
   },
   {
@@ -62,6 +67,7 @@ const PROJECTS = [
     category: { en: 'Healthcare', fr: 'Santé' },
     title: { en: 'Clinique Santé Moderne', fr: 'Clinique Santé Moderne' },
     tags: { en: ['Medical', 'Booking'], fr: ['Médical', 'Réservation'] },
+    buildTime: { en: '4 days', fr: '4 jours' },
     wide: false,
   },
   {
@@ -69,6 +75,7 @@ const PROJECTS = [
     category: { en: 'Photography', fr: 'Photographie' },
     title: { en: 'Lumière Studio Portfolio', fr: 'Portfolio Lumière Studio' },
     tags: { en: ['Portfolio', 'Gallery'], fr: ['Portfolio', 'Galerie'] },
+    buildTime: { en: '3 days', fr: '3 jours' },
     wide: false,
   },
   {
@@ -76,6 +83,7 @@ const PROJECTS = [
     category: { en: 'Construction', fr: 'Construction' },
     title: { en: 'Bâtisseurs Nordiques Inc.', fr: 'Bâtisseurs Nordiques Inc.' },
     tags: { en: ['Corporate', 'Web Design'], fr: ['Corporate', 'Web Design'] },
+    buildTime: { en: '6 days', fr: '6 jours' },
     wide: false,
   },
   {
@@ -83,6 +91,7 @@ const PROJECTS = [
     category: { en: 'Restaurant', fr: 'Restaurant' },
     title: { en: 'Brasserie Gusto', fr: 'Brasserie Gusto' },
     tags: { en: ['Brand Identity', 'Web Design'], fr: ['Image de marque', 'Web Design'] },
+    buildTime: { en: '4 days', fr: '4 jours' },
     wide: false,
   },
   {
@@ -90,6 +99,7 @@ const PROJECTS = [
     category: { en: 'Exterior Lighting', fr: 'Éclairage Extérieur' },
     title: { en: 'Living Lights', fr: 'Living Lights' },
     tags: { en: ['LED Lighting', 'eCommerce'], fr: ['Éclairage LED', 'Commerce en ligne'] },
+    buildTime: { en: '5 days', fr: '5 jours' },
     wide: false,
   },
   {
@@ -97,6 +107,7 @@ const PROJECTS = [
     category: { en: 'Wellness & Beauty', fr: 'Bien-être & Beauté' },
     title: { en: 'Éclat Beauty Studio', fr: 'Studio Beauté Éclat' },
     tags: { en: ['Booking System', 'Branding'], fr: ['Réservation', 'Image de marque'] },
+    buildTime: { en: '4 days', fr: '4 jours' },
     wide: false,
   },
 ];
@@ -334,11 +345,29 @@ function ProjectCard({
       </div>
 
       {/* Card footer */}
-      <div style={{ padding: '16px 18px 18px' }}>
+      <div style={{ padding: '14px 18px 16px' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px' }}>
-          <div>
-            <div style={{ fontSize: '15px', fontWeight: 700, color: '#fff', marginBottom: '8px', lineHeight: 1.3 }}>
-              {project.title[lang as 'en' | 'fr']}
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '7px', flexWrap: 'wrap' }}>
+              <div style={{ fontSize: '15px', fontWeight: 700, color: '#fff', lineHeight: 1.3 }}>
+                {project.title[lang as 'en' | 'fr']}
+              </div>
+              {(project as any).buildTime && (
+                <span style={{
+                  display: 'inline-flex', alignItems: 'center', gap: '4px',
+                  fontSize: '9px', fontWeight: 700,
+                  color: '#34d399',
+                  background: 'rgba(52,211,153,0.08)',
+                  border: '1px solid rgba(52,211,153,0.2)',
+                  borderRadius: '100px',
+                  padding: '2px 7px',
+                  letterSpacing: '0.06em',
+                  whiteSpace: 'nowrap',
+                  flexShrink: 0,
+                }}>
+                  ⚡ {(project as any).buildTime[lang as 'en' | 'fr']}
+                </span>
+              )}
             </div>
             <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
               {project.tags[lang as 'en' | 'fr'].map(tag => (
@@ -355,18 +384,6 @@ function ProjectCard({
                 </span>
               ))}
             </div>
-            {(project as any).result && (
-              <div style={{
-                marginTop: '8px',
-                fontSize: '11px',
-                fontWeight: 500,
-                color: '#67e8f9',
-                opacity: 0.85,
-                lineHeight: 1.4,
-              }}>
-                ✦ {(project as any).result[lang as 'en' | 'fr']}
-              </div>
-            )}
           </div>
           <div style={{
             width: '32px', height: '32px', borderRadius: '50%', flexShrink: 0,
