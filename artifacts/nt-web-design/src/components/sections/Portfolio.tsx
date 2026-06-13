@@ -31,11 +31,11 @@ const PROJECTS = [
     wide: false,
   },
   {
-    img: `${BASE}/portfolio/proj-law.png`,
-    category: { en: 'Professional Services', fr: 'Services Professionnels' },
-    title: { en: 'St-Juste & Associés', fr: 'St-Juste & Associés' },
-    tags: { en: ['Web Design', 'SEO'], fr: ['Web Design', 'SEO'] },
-    buildTime: { en: '3 days', fr: '3 jours' },
+    img: `${BASE}/portfolio/proj-ace-esthetique.webp`,
+    category: { en: 'Car Detailing', fr: 'Détailing Auto' },
+    title: { en: 'Ace Esthétique', fr: 'Ace Esthétique' },
+    tags: { en: ['Web Design', 'Booking'], fr: ['Web Design', 'Réservation'] },
+    buildTime: { en: '72 hours', fr: '72 heures' },
     wide: false,
   },
   {
