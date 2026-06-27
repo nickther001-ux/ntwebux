@@ -731,7 +731,7 @@ export function Services() {
           gridTemplateColumns: 'repeat(3, 1fr)',
           gap: '16px',
         }} className="pillars-grid">
-          {pillars.map((pillar, i) => (
+          {pillars.map((pillar: any, i: number) => (
             <PillarCard
               key={pillar.id}
               pillar={pillar}
