@@ -57,15 +57,56 @@ const translations: Translations = {
         { title: "SEO Built-In", desc: "Every site is optimized to rank from day one." }
       ]
     },
+    scrollColumns: {
+      title: "Built for how you actually work",
+      columns: [
+        [
+          { title: "100% Code Ownership", desc: "Full source, no lock-in." },
+          { title: "72h Delivery", desc: "Live in three days, not six weeks." },
+          { title: "AI-Driven Builds", desc: "Modern tooling, built in." },
+          { title: "Canada & USA Ready", desc: "Built for North American speed." }
+        ],
+        [
+          { title: "Booking Automation", desc: "Clients confirm their own slot." },
+          { title: "SMS Reminders", desc: "Fewer no-shows, less chasing." },
+          { title: "Centralized CRM", desc: "Every client, one place." },
+          { title: "Lead Follow-Up", desc: "Auto-nurture until they convert." }
+        ],
+        [
+          { title: "Custom CRM", desc: "Built around how you work." },
+          { title: "Real Dashboards", desc: "See what's actually happening." },
+          { title: "API Integrations", desc: "Connect the tools you already use." },
+          { title: "Ongoing Support", desc: "Direct line, no ticket queue." }
+        ]
+      ]
+    },
+    competitorComparison: {
+      eyebrow: "Competitor Comparison",
+      title: "Why Compromise on Speed & Quality?",
+      subtitle: "See how traditional web agencies stack up against the NT WebUX model.",
+      colUs: "NT WebUX",
+      colUsSub: "Our Model",
+      colThem: "Traditional Agencies",
+      colThemSub: "Typical Experience",
+      featuresLabel: "Features",
+      rows: [
+        { feature: "Turnaround Time", us: "72 Hours", them: "4 to 12+ Weeks" },
+        { feature: "Source Code Ownership", us: "Full Ownership", them: "Restricted / Platform Locked", usCheck: true, themX: true },
+        { feature: "AI & Modern Integrations", us: "Seamless (Built-in)", them: "Extra Cost / Add-on" },
+        { feature: "Hidden Fees & Retainers", us: "None (One-time build)", them: "Mandatory Monthly Retainers", usCheck: true, themX: true },
+        { feature: "Direct Developer Access", us: "Direct (1-on-1)", them: "Account Manager (Middleman)" }
+      ],
+      cta: "Start Your Build Today"
+    },
     testimonials: {
       title: "Don't just take our word for it.",
       items: [
-        { quote: "They revamped our entire digital presence. Lead form submissions nearly doubled in the first month and the site went live in under 72 hours. Genuinely surprised by the pace.", name: "Jean-Michel Tremblay", role: "Owner, Tremblay Excavation Inc.", metric: "~2× leads", metricLabel: "first 30 days", img: "proj-construction.webp", industry: "Construction", stars: 4.8 },
-        { quote: "Our booking system went from phone-only to mostly online. We went from scrambling for appointments to running closer to 87% capacity most weeks. Big shift for us.", name: "Dr. Aline Côté", role: "Founder, Physio Optimal", metric: "87% capacity", metricLabel: "avg since launch", img: "proj-medical.webp", industry: "Healthcare", stars: 4.9 },
-        { quote: "NT Web UX built our online presence from scratch. We're taking reservations and takeout orders around the clock now — revenue is up roughly 38% since we launched.", name: "Marie-Claire Joseph", role: "Owner, Saveurs d'Haïti MTL", metric: "+38% revenue", metricLabel: "since launch", img: "proj-restaurant.webp", industry: "Restaurant", stars: 4.0 },
-        { quote: "We went from zero online presence to consistently fully booked in about 7 weeks. There were some growing pains early on, but the ROI has been real. Would recommend.", name: "Karine Beaumont", role: "CEO, Beaumont Wellness Clinic", metric: "7 weeks", metricLabel: "to fully booked", img: "proj-wellness.webp", industry: "Wellness", stars: 4.5 },
-        { quote: "They built our SaaS dashboard from scratch and it looks polished. Clients notice the design quality. A few revision rounds but they got it right in the end.", name: "Alexis Fontaine", role: "Co-Founder, Flux Analytics", metric: "4.9★", metricLabel: "avg client rating", img: "proj-saas.webp", industry: "SaaS", stars: 5.0 },
-        { quote: "The bilingual site they built helped us reach both markets properly. Organic traffic climbed around 61% over three months — better than I expected.", name: "Marc-André Ouellet", role: "Owner, Bâtisseurs Nordiques Inc.", metric: "+61% traffic", metricLabel: "organic, 3 months", img: "proj-construction2.webp", industry: "Construction", stars: 4.7 }
+        { quote: "They revamped our entire digital presence. Lead form submissions nearly doubled in the first month and the site went live in under 72 hours. Genuinely surprised by the pace.", name: "Jean-Michel Tremblay", role: "Owner, Tremblay Excavation Inc.", metric: "~2× leads", metricLabel: "first 30 days", img: "proj-construction.webp", industry: "🏗️ Construction", stars: 4.8 },
+        { quote: "Our booking system went from phone-only to mostly online. We went from scrambling for appointments to running closer to 87% capacity most weeks. Big shift for us.", name: "Dr. Aline Côté", role: "Founder, Physio Optimal", metric: "87% capacity", metricLabel: "avg since launch", img: "proj-medical.webp", industry: "⚕️ Healthcare", stars: 4.9 },
+        { quote: "NT Web UX built our online presence from scratch. We're taking reservations and takeout orders around the clock now — revenue is up roughly 38% since we launched.", name: "Marie-Claire Joseph", role: "Owner, Saveurs d'Haïti MTL", metric: "+38% revenue", metricLabel: "since launch", img: "proj-restaurant.webp", industry: "🍽️ Restaurant", stars: 4.0 },
+        { quote: "We went from zero online presence to consistently fully booked in about 7 weeks. There were some growing pains early on, but the ROI has been real. Would recommend.", name: "Karine Beaumont", role: "CEO, Beaumont Wellness Clinic", metric: "7 weeks", metricLabel: "to fully booked", img: "proj-wellness.webp", industry: "🌿 Wellness", stars: 4.5 },
+        { quote: "They built our SaaS dashboard from scratch and it looks polished. Clients notice the design quality. A few revision rounds but they got it right in the end.", name: "Alexis Fontaine", role: "Co-Founder, Flux Analytics", metric: "4.9★", metricLabel: "avg client rating", img: "proj-saas.webp", industry: "☁️ SaaS", stars: 5.0 },
+        { quote: "The bilingual site they built helped us reach both markets properly. Organic traffic climbed around 61% over three months — better than I expected.", name: "Marc-André Ouellet", role: "Owner, Bâtisseurs Nordiques Inc.", metric: "+61% traffic", metricLabel: "organic, 3 months", img: "proj-construction2.webp", industry: "🏗️ Construction", stars: 4.7 }
       ]
     },
     contact: {
@@ -91,7 +132,7 @@ const translations: Translations = {
       path2: "AI Revenue Engines",
       path3: "SaaS & Custom Systems",
       rules: {
-        price:    "Our Website Foundations start at $500, and our AI Revenue Engines start at $297/month. Which path fits your goal best?",
+        price:    "Our Website Foundations start at $800, and our AI Revenue Engines start at $297/month. Which path fits your goal best?",
         ai:       "AI Revenue Engines cover Text-Back automation, auto-booking, and lead recovery. Which path are you leaning toward — AI Revenue Engines, Digital Foundations, or SaaS & Custom Systems?",
         website:  "We build high-performance, bilingual sites delivered in 72 hours. Is that a Digital Foundations project, or something more custom?",
         hello:    "I'm Silas 2.5, your NT Digital onboarding guide. What are you trying to achieve right now? (1. Digital Foundations · 2. AI Revenue Engines · 3. SaaS & Custom Systems)",
@@ -141,7 +182,7 @@ const translations: Translations = {
         },
         webPlans: [
           {
-            name: "Starter", price: "500", cycle: "One-time project fee", delivery: "Typically delivered in 2–3 business days",
+            name: "Starter", price: "800", cycle: "One-time project fee", delivery: "Typically delivered in 2–3 business days",
             features: ["5-page responsive website", "Custom design", "Basic SEO", "Contact form", "Includes 2 revision rounds"],
             cta: "Start Project", featured: false
           },
@@ -277,15 +318,56 @@ const translations: Translations = {
         { title: "SEO Intégré", desc: "Chaque site est optimisé pour se classer dès le premier jour." }
       ]
     },
+    scrollColumns: {
+      title: "Conçu pour ta façon de travailler",
+      columns: [
+        [
+          { title: "Propriété du Code à 100%", desc: "Code source complet, sans dépendance." },
+          { title: "Livraison en 72h", desc: "En ligne en trois jours, pas six semaines." },
+          { title: "Conçu avec l'IA", desc: "Outils modernes, intégrés directement." },
+          { title: "Prêt Canada & USA", desc: "Optimisé pour la vitesse nord-américaine." }
+        ],
+        [
+          { title: "Réservation Automatisée", desc: "Les clients confirment leur propre créneau." },
+          { title: "Rappels SMS", desc: "Moins de rendez-vous manqués, moins de relances." },
+          { title: "CRM Centralisé", desc: "Tous vos clients, un seul endroit." },
+          { title: "Suivi des Leads", desc: "Relance automatique jusqu'à la conversion." }
+        ],
+        [
+          { title: "CRM Sur Mesure", desc: "Conçu selon votre façon de travailler." },
+          { title: "Tableaux de Bord Réels", desc: "Voyez ce qui se passe réellement." },
+          { title: "Intégrations API", desc: "Connectez les outils que vous utilisez déjà." },
+          { title: "Support Continu", desc: "Ligne directe, pas de file d'attente." }
+        ]
+      ]
+    },
+    competitorComparison: {
+      eyebrow: "Comparaison Concurrentielle",
+      title: "Pourquoi Compromettre Vitesse et Qualité?",
+      subtitle: "Voyez comment les agences web traditionnelles se comparent au modèle NT WebUX.",
+      colUs: "NT WebUX",
+      colUsSub: "Notre Modèle",
+      colThem: "Agences Traditionnelles",
+      colThemSub: "Expérience Typique",
+      featuresLabel: "Fonctionnalités",
+      rows: [
+        { feature: "Délai de Livraison", us: "72 Heures", them: "4 à 12+ Semaines" },
+        { feature: "Propriété du Code Source", us: "Pleine Propriété", them: "Restreint / Verrouillé par Plateforme", usCheck: true, themX: true },
+        { feature: "IA & Intégrations Modernes", us: "Inclus de Base", them: "Coût Supplémentaire / Module" },
+        { feature: "Frais Cachés & Abonnements", us: "Aucun (Paiement Unique)", them: "Abonnements Mensuels Obligatoires", usCheck: true, themX: true },
+        { feature: "Accès Direct au Développeur", us: "Direct (1-à-1)", them: "Gestionnaire de Compte (Intermédiaire)" }
+      ],
+      cta: "Démarrez Votre Projet"
+    },
     testimonials: {
       title: "Ne nous croyez pas sur parole.",
       items: [
-        { quote: "Ils ont complètement repensé notre présence numérique. Nos demandes ont quasi doublé le premier mois et le site était en ligne en moins de 72 heures. Honnêtement surpris par la rapidité.", name: "Jean-Michel Tremblay", role: "Propriétaire, Tremblay Excavation Inc.", metric: "~2× clients", metricLabel: "premiers 30 jours", img: "proj-construction.webp", industry: "Construction", stars: 4.8 },
-        { quote: "Notre système de réservation est passé du téléphone au majoritairement en ligne. On tourne autour de 87% de capacité la plupart des semaines. Un vrai changement pour la clinique.", name: "Dre. Aline Côté", role: "Fondatrice, Physio Optimal", metric: "87% capacité", metricLabel: "moy. depuis lancement", img: "proj-medical.webp", industry: "Santé", stars: 4.9 },
-        { quote: "NT Web UX a créé notre présence en ligne de zéro. On prend des réservations et commandes en continu maintenant — les revenus ont augmenté d'environ 38% depuis le lancement.", name: "Marie-Claire Joseph", role: "Propriétaire, Saveurs d'Haïti MTL", metric: "+38% revenus", metricLabel: "depuis le lancement", img: "proj-restaurant.webp", industry: "Restaurant", stars: 4.0 },
-        { quote: "On est passé de zéro présence en ligne à régulièrement complet en environ 7 semaines. Quelques ajustements au départ, mais le retour sur investissement est bien réel. Je recommande.", name: "Karine Beaumont", role: "PDG, Clinique Beaumont Santé", metric: "7 semaines", metricLabel: "pour complet", img: "proj-wellness.webp", industry: "Bien-être", stars: 4.5 },
-        { quote: "Ils ont construit notre tableau de bord SaaS de zéro et le résultat est soigné. Nos clients remarquent la qualité du design. Quelques allers-retours, mais ils ont livré.", name: "Alexis Fontaine", role: "Co-Fondateur, Flux Analytics", metric: "4.9★", metricLabel: "satisfaction client", img: "proj-saas.webp", industry: "SaaS", stars: 5.0 },
-        { quote: "Le site bilingue qu'ils ont construit nous a vraiment aidés à atteindre les deux marchés. Notre trafic organique a grimpé d'environ 61% en trois mois — mieux que prévu.", name: "Marc-André Ouellet", role: "Propriétaire, Bâtisseurs Nordiques Inc.", metric: "+61% trafic", metricLabel: "organique, 3 mois", img: "proj-construction2.webp", industry: "Construction", stars: 4.7 }
+        { quote: "Ils ont complètement repensé notre présence numérique. Nos demandes ont quasi doublé le premier mois et le site était en ligne en moins de 72 heures. Honnêtement surpris par la rapidité.", name: "Jean-Michel Tremblay", role: "Propriétaire, Tremblay Excavation Inc.", metric: "~2× clients", metricLabel: "premiers 30 jours", img: "proj-construction.webp", industry: "🏗️ Construction", stars: 4.8 },
+        { quote: "Notre système de réservation est passé du téléphone au majoritairement en ligne. On tourne autour de 87% de capacité la plupart des semaines. Un vrai changement pour la clinique.", name: "Dre. Aline Côté", role: "Fondatrice, Physio Optimal", metric: "87% capacité", metricLabel: "moy. depuis lancement", img: "proj-medical.webp", industry: "⚕️ Santé", stars: 4.9 },
+        { quote: "NT Web UX a créé notre présence en ligne de zéro. On prend des réservations et commandes en continu maintenant — les revenus ont augmenté d'environ 38% depuis le lancement.", name: "Marie-Claire Joseph", role: "Propriétaire, Saveurs d'Haïti MTL", metric: "+38% revenus", metricLabel: "depuis le lancement", img: "proj-restaurant.webp", industry: "🍽️ Restaurant", stars: 4.0 },
+        { quote: "On est passé de zéro présence en ligne à régulièrement complet en environ 7 semaines. Quelques ajustements au départ, mais le retour sur investissement est bien réel. Je recommande.", name: "Karine Beaumont", role: "PDG, Clinique Beaumont Santé", metric: "7 semaines", metricLabel: "pour complet", img: "proj-wellness.webp", industry: "🌿 Bien-être", stars: 4.5 },
+        { quote: "Ils ont construit notre tableau de bord SaaS de zéro et le résultat est soigné. Nos clients remarquent la qualité du design. Quelques allers-retours, mais ils ont livré.", name: "Alexis Fontaine", role: "Co-Fondateur, Flux Analytics", metric: "4.9★", metricLabel: "satisfaction client", img: "proj-saas.webp", industry: "☁️ SaaS", stars: 5.0 },
+        { quote: "Le site bilingue qu'ils ont construit nous a vraiment aidés à atteindre les deux marchés. Notre trafic organique a grimpé d'environ 61% en trois mois — mieux que prévu.", name: "Marc-André Ouellet", role: "Propriétaire, Bâtisseurs Nordiques Inc.", metric: "+61% trafic", metricLabel: "organique, 3 mois", img: "proj-construction2.webp", industry: "🏗️ Construction", stars: 4.7 }
       ]
     },
     contact: {
@@ -311,7 +393,7 @@ const translations: Translations = {
       path2: "Moteurs de Revenus IA",
       path3: "SaaS & Systèmes Sur Mesure",
       rules: {
-        price:    "Nos Fondations Numériques débutent à 500 $, et nos Moteurs de Revenus IA à 297 $/mois. Quel chemin correspond le mieux à votre objectif ?",
+        price:    "Nos Fondations Numériques débutent à 800 $, et nos Moteurs de Revenus IA à 297 $/mois. Quel chemin correspond le mieux à votre objectif ?",
         ai:       "Les Moteurs de Revenus IA couvrent le Text-Back, la réservation automatique et la récupération de leads. Vers quel chemin vous orientez-vous — IA, Fondations, ou SaaS ?",
         website:  "Nous construisons des sites haute performance bilingues livrés en 72h. Est-ce un projet de Fondations Numériques ou quelque chose de plus sur mesure ?",
         hello:    "Je suis Silas 2.5, votre guide d'intégration NT Digital. Qu'essayez-vous d'accomplir ? (1. Fondations Numériques · 2. Moteurs de Revenus IA · 3. SaaS & Systèmes Sur Mesure)",
@@ -361,7 +443,7 @@ const translations: Translations = {
         },
         webPlans: [
           {
-            name: "Starter", price: "500", cycle: "Tarif unique du projet", delivery: "Livré en 2–3 jours ouvrables en moyenne",
+            name: "Starter", price: "800", cycle: "Tarif unique du projet", delivery: "Livré en 2–3 jours ouvrables en moyenne",
             features: ["Site 5 pages responsive", "Design personnalisé", "SEO de base", "Formulaire de contact", "Inclut 2 rondes de révision"],
             cta: "Démarrer le Projet", featured: false
           },

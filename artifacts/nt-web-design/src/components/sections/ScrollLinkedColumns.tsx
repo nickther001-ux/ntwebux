@@ -1,30 +1,10 @@
 import React from "react";
+import { useLanguage } from "@/lib/i18n";
 
 interface CardItem {
   title: string;
   desc: string;
 }
-
-const COLUMN_CONTENT: CardItem[][] = [
-  [
-    { title: "100% Code Ownership", desc: "Full source, no lock-in." },
-    { title: "72h Delivery", desc: "Live in three days, not six weeks." },
-    { title: "AI-Driven Builds", desc: "Modern tooling, built in." },
-    { title: "Canada & USA Ready", desc: "Built for North American speed." },
-  ],
-  [
-    { title: "Booking Automation", desc: "Clients confirm their own slot." },
-    { title: "SMS Reminders", desc: "Fewer no-shows, less chasing." },
-    { title: "Centralized CRM", desc: "Every client, one place." },
-    { title: "Lead Follow-Up", desc: "Auto-nurture until they convert." },
-  ],
-  [
-    { title: "Custom CRM", desc: "Built around how you work." },
-    { title: "Real Dashboards", desc: "See what's actually happening." },
-    { title: "API Integrations", desc: "Connect the tools you already use." },
-    { title: "Ongoing Support", desc: "Direct line, no ticket queue." },
-  ],
-];
 
 const COLUMN_CONFIG: { duration: number; direction: "up" | "down" }[] = [
   { duration: 22, direction: "up" },
@@ -68,6 +48,10 @@ function Column({
 }
 
 export const ScrollLinkedColumns = () => {
+  const { t } = useLanguage();
+  const title: string = t("scrollColumns.title");
+  const COLUMN_CONTENT: CardItem[][] = t("scrollColumns.columns");
+
   return (
     <section
       className="relative w-full overflow-hidden bg-[#030712] py-20"
@@ -92,7 +76,7 @@ export const ScrollLinkedColumns = () => {
 
       <div className="relative z-10 mx-auto mb-14 max-w-xl px-6 text-center">
         <h2 className="text-4xl font-black tracking-tight text-zinc-50 md:text-5xl">
-          Built for how you actually work
+          {title}
         </h2>
       </div>
 

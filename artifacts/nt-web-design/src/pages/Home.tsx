@@ -1,6 +1,6 @@
 import { CompetitorComparison } from "@/components/sections/CompetitorComparison";
-import { ScrollLinkedColumns } from "@/components/sections/ScrollLinkedColumns";
 import { AnimatedWhyUs } from "@/components/sections/AnimatedWhyUs";
+import { ScrollLinkedColumns } from "@/components/sections/ScrollLinkedColumns";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
@@ -56,7 +56,7 @@ export default function Home() {
         <meta property="og:title"       content={TITLE} />
         <meta property="og:description" content={DESC} />
         <meta property="og:image"       content={IMG} />
-        <meta property="og:locale"      content="en_加拿" />
+        <meta property="og:locale"      content="en_CA" />
         <meta property="og:site_name"   content="NT Web Design" />
         <meta name="twitter:card"        content="summary_large_image" />
         <meta name="twitter:title"       content={TITLE} />
@@ -64,7 +64,7 @@ export default function Home() {
         <meta name="twitter:image"       content={IMG} />
       </Helmet>
 
-      <div className="relative w-full min-h-screen">
+      <div className="relative w-full min-h-screen bg-[#030712] text-zinc-50">
         <Navbar />
         <main>
           <Hero onStart={() => setActivePlan({ name: 'Custom Project', price: 'Custom' })} />

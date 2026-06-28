@@ -292,7 +292,7 @@ function ProjectCard({
       }}
     >
       {/* Image */}
-      <div className="portfolio-img" style={{ position: 'relative', overflow: 'hidden', aspectRatio: project.wide ? '21/9' : '16/9' }}>
+      <div className="portfolio-img" style={{ position: 'relative', overflow: 'hidden', aspectRatio: (project as any).ratio || (project.wide ? '21/9' : '16/9'), background: '#0a1628' }}>
         <img
           src={project.img}
           alt={project.title[lang as 'en' | 'fr']}
@@ -483,8 +483,7 @@ export function Portfolio() {
         @media (max-width: 600px) {
           .portfolio-grid { grid-template-columns: 1fr !important; }
           .portfolio-grid > [data-wide="true"] { grid-column: span 1 !important; }
-          .portfolio-grid > [data-wide="true"] .portfolio-img { aspect-ratio: 16/9 !important; }
-          .portfolio-grid img { width: 100% !important; height: 100% !important; object-fit: cover !important; }
+          .portfolio-grid img { width: 100% !important; height: 100% !important; object-fit: contain !important; }
         }
       `}</style>
     </section>
