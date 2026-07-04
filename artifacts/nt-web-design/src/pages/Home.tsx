@@ -13,6 +13,7 @@ import { Process } from "@/components/sections/Process";
 import { Contact } from "@/components/sections/Contact";
 import { FounderSection } from "@/components/sections/FounderSection";
 import { Footer } from "@/components/Footer";
+import { CursorGlow } from "@/components/CursorGlow";
 import { OnboardingModal } from "@/components/OnboardingModal";
 
 const TITLE = "NT Web Design";
@@ -65,6 +66,8 @@ export default function Home() {
       </Helmet>
 
       <div className="relative w-full min-h-screen bg-[#030712] text-zinc-50">
+        <CursorGlow />
+        
         <Navbar />
         <main>
           <Hero onStart={() => setActivePlan({ name: 'Custom Project', price: 'Custom' })} />
