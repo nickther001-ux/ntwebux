@@ -118,7 +118,7 @@ const PILLARS_FR: Pillar[] = [
     bottomLineLabel: 'Pour qui',
     glowA: '34,211,238',
     glowB: '59,130,246',
-    showreel: true,
+    showreel: false,
   },
   {
     id: '02',
@@ -150,7 +150,7 @@ const PILLARS_FR: Pillar[] = [
     bottomLineLabel: 'Pour qui',
     glowA: '167,139,250',
     glowB: '99,102,241',
-    neuralMesh: true,
+    neuralMesh: false,
   },
   {
     id: '03',
@@ -215,7 +215,7 @@ const PILLARS_EN: Pillar[] = [
     bottomLineLabel: 'Built for',
     glowA: '34,211,238',
     glowB: '59,130,246',
-    showreel: true,
+    showreel: false,
   },
   {
     id: '02',
@@ -247,7 +247,7 @@ const PILLARS_EN: Pillar[] = [
     bottomLineLabel: 'Built for',
     glowA: '167,139,250',
     glowB: '99,102,241',
-    neuralMesh: true,
+    neuralMesh: false,
   },
   {
     id: '03',
@@ -475,10 +475,7 @@ function PillarCard({ pillar, index, ctaLabel, onClick }: {
             }}>
               <pillar.icon size={22} />
             </div>
-            <span style={{
-              fontSize: '11px', fontWeight: 700, letterSpacing: '0.14em',
-              textTransform: 'uppercase', color: `rgba(${pillar.glowA},0.8)`,
-            }}>{pillar.tag}</span>
+            
           </div>
           <span style={{
             fontSize: '52px', fontWeight: 800,
@@ -503,11 +500,11 @@ function PillarCard({ pillar, index, ctaLabel, onClick }: {
           fontWeight: 500,
           lineHeight: 1.6,
           marginBottom: '28px',
-          fontStyle: 'italic',
+          fontStyle: 'normal',
         }}>{pillar.hook}</p>
 
         {/* Bullets */}
-        <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 auto', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+        <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
           {pillar.bullets.map((b, i) => (
             <li key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
               <div style={{
@@ -528,8 +525,8 @@ function PillarCard({ pillar, index, ctaLabel, onClick }: {
           marginTop: '32px',
           padding: '16px 20px',
           borderRadius: '12px',
-          background: `rgba(${pillar.glowA},0.07)`,
-          border: `1px solid rgba(${pillar.glowA},0.18)`,
+          background: 'transparent',
+          borderTop: '1px solid rgba(255,255,255,0.1)', borderBottom: 'none', borderLeft: 'none', borderRight: 'none',
         }}>
           <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: `rgba(${pillar.glowA},0.6)`, marginBottom: '6px' }}>
             {pillar.bottomLineLabel}
@@ -630,7 +627,7 @@ function PillarModal({ pillar, ctaLabel, onClose, lang }: {
                 </div>
 
                 {/* Hook */}
-                <p style={{ fontSize: '14.5px', color: `rgba(${pillar.glowA},0.85)`, fontStyle: 'italic', fontWeight: 500, marginBottom: '22px', lineHeight: 1.6 }}>
+                <p style={{ fontSize: '14.5px', color: `rgba(${pillar.glowA},0.85)`, fontStyle: 'normal', fontWeight: 500, marginBottom: '22px', lineHeight: 1.6 }}>
                   {pillar.hook}
                 </p>
 
