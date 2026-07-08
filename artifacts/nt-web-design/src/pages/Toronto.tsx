@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Navbar } from '@/components/Navbar';
-import { Footer } from '@/components/Footer';
+import { Footer } from '@/components/Footer'; 
+import { OnboardingModal } from '@/components/OnboardingModal';
 import { useLanguage } from '@/lib/i18n';
-import { ChevronDown, TrendingDown, Zap, Shield, Clock } from 'lucide-react';
+import { ArrowRight,  ChevronDown, TrendingDown, Zap, Shield, Clock  } from 'lucide-react';
 
 const WEBHOOK_URL = 'https://services.leadconnectorhq.com/hooks/2Tf3bk6VqhB7JukgrDrS/webhook-trigger/41f0b6df-352c-434a-ad27-755e16556fc3';
 
@@ -411,12 +412,36 @@ export function Toronto() {
         </div>
       </section>
 
-      <Footer />
+      
+        {/* ── Start My Project CTA ── */}
+        <section style={{ padding: '80px 24px', textAlign: 'center', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+          <div style={{ maxWidth: '560px', margin: '0 auto', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px' }}>
+            <p style={{ fontSize: '13px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#60a5fa' }}>
+              Ready to get started?
+            </p>
+            <h2 style={{ fontSize: 'clamp(1.6rem,4vw,2.6rem)', fontWeight: 800, letterSpacing: '-0.02em', margin: 0 }}>
+              Start your project
+            </h2>
+            <p style={{ fontSize: '15px', color: 'rgba(255,255,255,0.45)', lineHeight: 1.7, margin: 0 }}>
+              Bilingual, fast, and built to convert. Most sites go live in 72 hours.
+            </p>
+            <button
+              onClick={() => setModalOpen(true)}
+              className="btn-violet"
+              style={{ padding: '14px 32px', fontSize: '15px', fontWeight: 700, borderRadius: '12px', display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}
+            >
+              Start My Project <ArrowRight size={16} />
+            </button>
+          </div>
+        </section>
+
+        <Footer />
       <style>{`
         @media (max-width: 560px) {
           .toronto-cta-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>
+      <OnboardingModal plan={modalOpen ? DEFAULT_PLAN : null} onClose={() => setModalOpen(false)} />
     </>
   );
 }
