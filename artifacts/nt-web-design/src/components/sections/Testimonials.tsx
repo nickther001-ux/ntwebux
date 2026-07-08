@@ -44,12 +44,18 @@ function TestimonialCard({ item }: { item: TestimonialItem }) {
 }
 
 function Column({ items, direction }: { items: TestimonialItem[]; direction: 'scroll-down' | 'scroll-up' }) {
-  const track = [...items, ...items];
-  return (
-    <div className={`testimonial-col ${direction}`}>
-      {track.map((item, i) => (
+  const Track = () => (
+    <div className="testimonial-track" style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', paddingBottom: '1.5rem' }}>
+      {Array(4).fill(items).flat().map((item, i) => (
         <TestimonialCard key={i} item={item} />
       ))}
+    </div>
+  );
+
+  return (
+    <div className={direction === 'scroll-down' ? 'nt-anim-down' : 'nt-anim-up'}>
+      <Track />
+      <Track />
     </div>
   );
 }
@@ -66,10 +72,41 @@ export const Testimonials = () => {
 
   return (
     <section className="testimonials-wrapper">
+      
       <div className="fade-overlay top-fade"></div>
       <div className="fade-overlay bottom-fade"></div>
 
-      <div className="testimonials-grid">
+      <style>{`
+    @keyframes nt-slide-down {
+      0% { transform: translateY(-50%); }
+      100% { transform: translateY(0%); }
+    }
+    @keyframes nt-slide-up {
+      0% { transform: translateY(0%); }
+      100% { transform: translateY(-50%); }
+    }
+    .nt-anim-down {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      padding: 0;
+      height: max-content;
+      will-change: transform;
+      animation: nt-slide-down 35s linear infinite !important;
+    }
+    .nt-anim-up {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      padding: 0;
+      height: max-content;
+      will-change: transform;
+      animation: nt-slide-up 35s linear infinite !important;
+    }
+    
+    .fade-overlay { display: none !important; }
+  `}</style>
+      <div className="testimonials-grid" style={{ WebkitMaskImage: 'linear-gradient(180deg, transparent 0%, rgba(0,0,0,1) 10%, rgba(0,0,0,1) 90%, transparent 100%)', maskImage: 'linear-gradient(180deg, transparent 0%, rgba(0,0,0,1) 10%, rgba(0,0,0,1) 90%, transparent 100%)' }}>
         {columns.map((col, i) => (
           <Column key={i} items={col.items} direction={col.direction} />
         ))}

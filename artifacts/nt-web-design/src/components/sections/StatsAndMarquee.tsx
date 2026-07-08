@@ -1,11 +1,35 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, useTransform, animate, useInView } from 'framer-motion';
 import { useLanguage } from '@/lib/i18n';
 
 const MARQUEE_ITEMS = [
   'Web Design', '◆', 'E-Commerce', '◆', 'SEO Ready', '◆', 'Mobile First',
   '◆', 'Fast Delivery', '◆', 'Branding', '◆', 'AI Powered', '◆', 'Bilingual',
 ];
+
+function Counter({ text }: { text: string }) {
+  const ref = React.useRef(null);
+  const isInView = useInView(ref, { once: true });
+  
+  // Split numbers from symbols (e.g., "200" and "+")
+  const match = typeof text === 'string' ? text.match(/^([0-9.]+)(.*)$/) : null;
+  
+  const count = useMotionValue(0);
+  const num = match ? parseFloat(match[1]) : 0;
+  const isFloat = match ? match[1].includes('.') : false;
+  
+  // Tally up to the target number
+  const display = useTransform(count, (v) => match ? (isFloat ? v.toFixed(1) : Math.round(v)) : text);
+  
+  React.useEffect(() => {
+    if (isInView && match) {
+      animate(count, num, { duration: 7, ease: "easeOut" });
+    }
+  }, [isInView, num, count, match]);
+  
+  if (!match) return <span ref={ref}>{text}</span>;
+  return <span ref={ref}><motion.span>{display}</motion.span>{match[2]}</span>;
+}
 
 export function StatsAndMarquee() {
   const { t } = useLanguage();
@@ -19,7 +43,6 @@ export function StatsAndMarquee() {
 
   return (
     <div className="relative z-10">
-      {/* Stats Row — glass panel */}
       <div style={{
         borderTop: '1px solid rgba(255,255,255,0.06)',
         borderBottom: '1px solid rgba(255,255,255,0.06)',
@@ -56,7 +79,7 @@ export function StatsAndMarquee() {
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
               }}>
-                {stat.v}
+                <Counter text={stat.v} />
               </div>
               <div style={{
                 fontSize: '10px',
@@ -72,7 +95,6 @@ export function StatsAndMarquee() {
         </div>
       </div>
 
-      {/* Marquee band — Landio dark style */}
       <div style={{
         overflow: 'hidden',
         borderBottom: '1px solid rgba(255,255,255,0.06)',
@@ -81,13 +103,11 @@ export function StatsAndMarquee() {
         padding: '14px 0',
         position: 'relative',
       }}>
-        {/* Left fade */}
         <div style={{
           position: 'absolute', left: 0, top: 0, bottom: 0, width: '80px',
           background: 'linear-gradient(to right, rgba(2,4,10,0.95), transparent)',
           zIndex: 2, pointerEvents: 'none',
         }} />
-        {/* Right fade */}
         <div style={{
           position: 'absolute', right: 0, top: 0, bottom: 0, width: '80px',
           background: 'linear-gradient(to left, rgba(2,4,10,0.95), transparent)',
@@ -103,7 +123,6 @@ export function StatsAndMarquee() {
           }}
           className="marquee-track"
         >
-          {/* Double repeat for seamless -50% loop */}
           {[1, 2].map((g) => (
             <div key={g} style={{ display: 'flex', alignItems: 'center', gap: 0 }}>
               {MARQUEE_ITEMS.map((item, i) => (
