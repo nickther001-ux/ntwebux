@@ -43,7 +43,7 @@ html {
     width: 100%;
     min-height: 100%;
     /* Use hidden instead of clip — clip has inconsistent scroll behaviour on Android/iOS */
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
   }
 
   body {
@@ -56,13 +56,13 @@ html {
     -moz-osx-font-smoothing: grayscale;
     /* Native momentum scroll on iOS */
     -webkit-overflow-scrolling: touch;
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
   }
 
   #root {
     width: 100%;
     min-height: 100vh;
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
   }
 
   /* Grain texture — low z-index, pointer-events:none, no will-change (fixed, never moves) */

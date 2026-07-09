@@ -7,7 +7,6 @@ import { useLanguage } from "@/lib/i18n";
 import { Helmet } from "react-helmet-async";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/sections/Hero";
-import { ScrollRevealStats } from "@/components/sections/ScrollRevealStats";
 import { TrustBar } from "@/components/sections/TrustBar";
 import { TwoPathSection } from "@/components/sections/TwoPathSection";
 import { Services } from "@/components/sections/Services";
@@ -16,11 +15,10 @@ import { Contact } from "@/components/sections/Contact";
 import { FounderSection } from "@/components/sections/FounderSection";
 import { Footer } from "@/components/Footer";
 import { ScrollProgress } from "@/components/ScrollProgress";
-import { SmoothScroll } from "@/components/SmoothScroll";
-import { ScrollTextBand } from "@/components/ScrollTextBand";
 import { RevealSection } from "@/components/RevealSection";
 import { CursorGlow } from "@/components/CursorGlow";
 import { OnboardingModal } from "@/components/OnboardingModal";
+import { ScrollTilt } from "@/components/ScrollTilt";
 
 const TITLE = "NT Web Design";
 const DESC  = "Premium web design and AI-driven solutions delivered in exactly 72 hours. Specializing in high-performance websites and SaaS for startups in Canada & USA. 100% code ownership.";
@@ -80,25 +78,23 @@ export default function Home() {
         <main>
           <Hero onStart={() => setActivePlan({ name: 'Custom Project', price: 'Custom' })} />
 
-          <RevealSection variant="fadeIn">
-            <TrustBar />
-          </RevealSection>
+          <ScrollTilt>
+            <RevealSection variant="fadeIn">
+              <TrustBar />
+            </RevealSection>
+          </ScrollTilt>
 
-          <RevealSection variant="scale">
-            <ScrollRevealStats lang={lang} />
-          </RevealSection>
-
-          <RevealSection variant="fadeUp" delay={0.05}>
-            <TwoPathSection />
-          </RevealSection>
+          <ScrollTilt>
+            <RevealSection variant="fadeUp" delay={0.05}>
+              <TwoPathSection />
+            </RevealSection>
+          </ScrollTilt>
 
           <RevealSection variant="fadeUp" delay={0.05}>
             <Services />
           </RevealSection>
 
-          <RevealSection variant="slideLeft">
-            <Process />
-          </RevealSection>
+          <Process />
 
           <RevealSection variant="scale">
             <ScrollLinkedColumns />
@@ -123,6 +119,7 @@ export default function Home() {
           <RevealSection variant="fadeUp" delay={0.1}>
             <FounderSection />
           </RevealSection>
+
         </main>
         <Footer />
       </div>
