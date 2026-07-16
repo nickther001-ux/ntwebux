@@ -1,4 +1,3 @@
-cat > artifacts/nt-web-design/src/pages/Home.tsx << 'EOF'
 import { CompetitorComparison } from "@/components/sections/CompetitorComparison";
 import { AnimatedWhyUs } from "@/components/sections/AnimatedWhyUs";
 import { ScrollLinkedColumns } from "@/components/sections/ScrollLinkedColumns";
@@ -91,4 +90,3 @@ export default function Home() {
     </>
   );
 }
-EOF
