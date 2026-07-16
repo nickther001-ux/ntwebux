@@ -19,6 +19,7 @@ import { RevealSection } from "@/components/RevealSection";
 import { CursorGlow } from "@/components/CursorGlow";
 import { OnboardingModal } from "@/components/OnboardingModal";
 import { ScrollTilt } from "@/components/ScrollTilt";
+import LogoBar from "@/components/LogoBar";
 
 const TITLE = "NT Web Design";
 const DESC  = "Premium web design and AI-driven solutions delivered in exactly 72 hours. Specializing in high-performance websites and SaaS for startups in Canada & USA. 100% code ownership.";
@@ -77,6 +78,7 @@ export default function Home() {
         <Navbar />
         <main>
           <Hero onStart={() => setActivePlan({ name: 'Custom Project', price: 'Custom' })} />
+          <LogoBar />
 
           <ScrollTilt>
             <RevealSection variant="fadeIn">
