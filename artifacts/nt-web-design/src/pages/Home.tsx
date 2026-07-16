@@ -79,11 +79,7 @@ export default function Home() {
           <Hero onStart={() => setActivePlan({ name: 'Custom Project', price: 'Custom' })} />
           <LogoBar />
 
-          <ScrollTilt>
-            <RevealSection variant="fadeUp" delay={0.05}>
-              <TwoPathSection />
-            </RevealSection>
-          </ScrollTilt>
+          <TwoPathSection />
 
           <RevealSection variant="fadeUp" delay={0.05}>
             <Services />
