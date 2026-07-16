@@ -1,3 +1,7 @@
+cat > artifacts/nt-web-design/src/pages/Home.tsx << 'EOF'
+import { CompetitorComparison } from "@/components/sections/CompetitorComparison";
+import { AnimatedWhyUs } from "@/components/sections/AnimatedWhyUs";
+import { ScrollLinkedColumns } from "@/components/sections/ScrollLinkedColumns";
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Navbar } from "@/components/Navbar";
@@ -69,7 +73,14 @@ export default function Home() {
           <TrustBar />
           <Services />
           <Process />
+
+          <ScrollLinkedColumns />
+
+          {/* Your cloned tall cards sliding horizontally! */}
+          <AnimatedWhyUs />
+
           <Testimonials />
+          <CompetitorComparison />
           <Contact />
           <FounderSection />
         </main>
@@ -80,3 +91,4 @@ export default function Home() {
     </>
   );
 }
+EOF
