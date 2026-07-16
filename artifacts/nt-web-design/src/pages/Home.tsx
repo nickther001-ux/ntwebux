@@ -7,7 +7,6 @@ import { useLanguage } from "@/lib/i18n";
 import { Helmet } from "react-helmet-async";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/sections/Hero";
-import { TrustBar } from "@/components/sections/TrustBar";
 import { TwoPathSection } from "@/components/sections/TwoPathSection";
 import { Services } from "@/components/sections/Services";
 import { Process } from "@/components/sections/Process";
@@ -79,12 +78,6 @@ export default function Home() {
         <main>
           <Hero onStart={() => setActivePlan({ name: 'Custom Project', price: 'Custom' })} />
           <LogoBar />
-
-          <ScrollTilt>
-            <RevealSection variant="fadeIn">
-              <TrustBar />
-            </RevealSection>
-          </ScrollTilt>
 
           <ScrollTilt>
             <RevealSection variant="fadeUp" delay={0.05}>
