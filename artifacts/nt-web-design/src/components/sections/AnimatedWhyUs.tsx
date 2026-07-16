@@ -1,38 +1,14 @@
 import React from "react";
-const cards = [
-  { title: "Code Ownership", desc: "You own 100% of your source code. No vendor lock-in." },
-  { title: "72h Delivery", desc: "High-performance websites built and shipped in just 3 days." },
-  { title: "AI-Driven", desc: "Modern AI solutions integrated directly into your workflow." },
-  { title: "Canada & USA", desc: "Optimized for the North American market and speed." },
-];
+import { useLanguage } from "@/lib/i18n";
+
 export const AnimatedWhyUs = () => {
+  const { t } = useLanguage();
+  const title: string = t("whyUs.title");
+
   return (
-    <section className="py-20 overflow-hidden bg-black text-white">
-      <div className="container mx-auto px-4 mb-10">
-        <h2 className="text-3xl md:text-5xl font-bold text-center">Why Choose Us?</h2>
-      </div>
-      <div className="relative flex overflow-x-hidden">
-        <div className="flex animate-marquee whitespace-nowrap">
-          {[...cards, ...cards].map((card, idx) => (
-            <div
-              key={idx}
-              className="w-80 h-96 mx-4 p-8 bg-zinc-900 border border-zinc-800 rounded-3xl flex flex-col justify-between shrink-0"
-            >
-              <h3 className="text-2xl font-bold">{card.title}</h3>
-              <p className="text-zinc-400 mt-4">{card.desc}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-      <style>{`
-        @keyframes marquee {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        .animate-marquee {
-          animation: marquee 20s linear infinite;
-        }
-      `}</style>
+    <section className="relative w-full overflow-hidden bg-[#030712] py-20 text-center text-white">
+      <div className="pointer-events-none absolute top-0 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-blue-600/20 blur-[110px]" />
+      <h2 className="relative z-10 text-4xl md:text-5xl font-bold">{title}</h2>
     </section>
   );
 };

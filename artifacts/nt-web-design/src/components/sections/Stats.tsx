@@ -2,7 +2,7 @@ import { useLanguage } from '@/lib/i18n';
 import { motion, useInView } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 
-function useCountUp(target: number, duration = 2000, inView = false) {
+function useCountUp(target: number, duration = 7000, inView = false) {
   const [count, setCount] = useState(0);
   const started = useRef(false);
 
@@ -15,7 +15,7 @@ function useCountUp(target: number, duration = 2000, inView = false) {
     function tick(now: number) {
       const elapsed = now - startTime;
       const progress = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
+      const eased = progress < 0.7 ? progress * (1 / 0.7) * 0.85 : 0.85 + (1 - Math.pow(1 - ((progress - 0.7) / 0.3), 4)) * 0.15;
       setCount(Math.round(eased * target));
       if (progress < 1) requestAnimationFrame(tick);
     }
