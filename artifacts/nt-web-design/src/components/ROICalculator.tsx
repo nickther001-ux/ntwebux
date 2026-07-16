@@ -50,8 +50,6 @@ function formatDollar(n: number, lang: LangKey) {
   return lang === 'fr' ? `${formatted} $` : `$${formatted}`;
 }
 
-const API_BASE = (import.meta.env.VITE_API_URL || import.meta.env.BASE_URL).replace(/\/$/, '');
-
 export function ROICalculator() {
   const { lang } = useLanguage();
   const l = lang as LangKey;
@@ -129,16 +127,18 @@ export function ROICalculator() {
     setSubmitError('');
 
     try {
-      const res = await fetch(`${API_BASE}/api/contact`, {
+      const form = new FormData();
+      form.append('email', email.trim());
+      form.append('company', company.trim());
+      form.append('phone', phone.trim());
+      form.append('pain_point', pain);
+      form.append('annual_leakage', String(annualLeakage));
+      form.append('projected_recovery', String(projectedRecovery));
+
+      const res = await fetch('https://formspree.io/f/mojyrrje', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: company.trim(),
-          email: email.trim(),
-          phone: phone.trim(),
-          service: 'FieldOps Pro (from ROI Audit)',
-          message: `Pain point: ${pain}\nAnnual leakage: ${(annualLeakage || 0).toLocaleString()}\nProjected recovery: ${(projectedRecovery || 0).toLocaleString()}`
-        })
+        body: form,
+        headers: { Accept: 'application/json' },
       });
 
       if (!res.ok) throw new Error('submission_failed');

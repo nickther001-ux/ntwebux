@@ -1,115 +1,268 @@
 import React from 'react';
-import { useLanguage } from '@/lib/i18n';
-
-interface TestimonialItem {
-  quote: string;
-  name: string;
-  role: string;
-  metric: string;
-  metricLabel: string;
-  industry: string;
-  stars: number;
-}
-
-function getInitials(name: string) {
-  const parts = name.split(' ').filter(Boolean);
-  return ((parts[0]?.[0] || '') + (parts[1]?.[0] || '')).toUpperCase();
-}
-
-function TestimonialCard({ item }: { item: TestimonialItem }) {
-  const filled = Math.min(5, Math.max(0, Math.round(item.stars)));
-  return (
-    <div className="testimonial-card">
-      <div className="card-top-bar">
-        <span className="industry-badge">{item.industry}</span>
-      </div>
-      <h3 className="stat-highlight">
-        <span className="stat-main">{item.metric}</span> <span className="stat-sub">{item.metricLabel}</span>
-      </h3>
-      <p className="quote">"{item.quote}"</p>
-      <div className="card-footer">
-        <div className="author-info">
-          <div className="initials-avatar">{getInitials(item.name)}</div>
-          <div className="author-text">
-            <div className="name">{item.name}</div>
-            <div className="title">{item.role}</div>
-          </div>
-        </div>
-        <div className="rating">
-          {'★'.repeat(filled)}{'☆'.repeat(5 - filled)} <span className="rating-num">{item.stars.toFixed(1)}</span>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function Column({ items, direction }: { items: TestimonialItem[]; direction: 'scroll-down' | 'scroll-up' }) {
-  const Track = () => (
-    <div className="testimonial-track" style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', paddingBottom: '1.5rem' }}>
-      {Array(4).fill(items).flat().map((item, i) => (
-        <TestimonialCard key={i} item={item} />
-      ))}
-    </div>
-  );
-
-  return (
-    <div className={direction === 'scroll-down' ? 'nt-anim-down' : 'nt-anim-up'}>
-      <Track />
-      <Track />
-    </div>
-  );
-}
 
 export const Testimonials = () => {
-  const { t } = useLanguage();
-  const items: TestimonialItem[] = t('testimonials.items');
-
-  const columns: { items: TestimonialItem[]; direction: 'scroll-down' | 'scroll-up' }[] = [
-    { items: items.slice(0, 2), direction: 'scroll-down' },
-    { items: items.slice(2, 4), direction: 'scroll-up' },
-    { items: items.slice(4, 6), direction: 'scroll-down' },
-  ];
-
   return (
     <section className="testimonials-wrapper">
-      
       <div className="fade-overlay top-fade"></div>
       <div className="fade-overlay bottom-fade"></div>
 
-      <style>{`
-    @keyframes nt-slide-down {
-      0% { transform: translateY(-50%); }
-      100% { transform: translateY(0%); }
-    }
-    @keyframes nt-slide-up {
-      0% { transform: translateY(0%); }
-      100% { transform: translateY(-50%); }
-    }
-    .nt-anim-down {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      padding: 0;
-      height: max-content;
-      will-change: transform;
-      animation: nt-slide-down 35s linear infinite !important;
-    }
-    .nt-anim-up {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      padding: 0;
-      height: max-content;
-      will-change: transform;
-      animation: nt-slide-up 35s linear infinite !important;
-    }
-    
-    .fade-overlay { display: none !important; }
-  `}</style>
-      <div className="testimonials-grid" style={{ WebkitMaskImage: 'linear-gradient(180deg, transparent 0%, rgba(0,0,0,1) 10%, rgba(0,0,0,1) 90%, transparent 100%)', maskImage: 'linear-gradient(180deg, transparent 0%, rgba(0,0,0,1) 10%, rgba(0,0,0,1) 90%, transparent 100%)' }}>
-        {columns.map((col, i) => (
-          <Column key={i} items={col.items} direction={col.direction} />
-        ))}
+      <div className="testimonials-grid">
+
+        {/* COLUMN 1: Scrolls Down */}
+        <div className="testimonial-col scroll-down">
+          {/* Card 1 */}
+          <div className="testimonial-card">
+            <div className="card-top-bar">
+              <span className="industry-badge">🏗️ Construction</span>
+            </div>
+            <h3 className="stat-highlight">
+              <span className="stat-main">~2x leads</span> <span className="stat-sub">first 30 days</span>
+            </h3>
+            <p className="quote">"They revamped our entire digital presence. Lead form submissions nearly doubled in the first month and the site went live in under 72 hours. Genuinely surprised by the pace."</p>
+            <div className="card-footer">
+              <div className="author-info">
+                <div className="initials-avatar">JT</div>
+                <div className="author-text">
+                  <div className="name">Jean-Michel Tremblay</div>
+                  <div className="title">Owner, Tremblay Excavation Inc.</div>
+                </div>
+              </div>
+              <div className="rating">★★★★★ <span className="rating-num">4.8</span></div>
+            </div>
+          </div>
+
+          {/* Card 2 */}
+          <div className="testimonial-card">
+            <div className="card-top-bar">
+              <span className="industry-badge">⚕️ Healthcare</span>
+            </div>
+            <h3 className="stat-highlight">
+              <span className="stat-main">87% capacity</span> <span className="stat-sub">avg since launch</span>
+            </h3>
+            <p className="quote">"Our booking system went from phone-only to mostly online. We went from scrambling for appointments to running closer to 87% capacity most weeks. Big shift for us."</p>
+            <div className="card-footer">
+              <div className="author-info">
+                <div className="initials-avatar">DA</div>
+                <div className="author-text">
+                  <div className="name">Dr. Aline Côté</div>
+                  <div className="title">Founder, Physio Optimal</div>
+                </div>
+              </div>
+              <div className="rating">★★★★★ <span className="rating-num">4.9</span></div>
+            </div>
+          </div>
+
+          {/* DUPLICATES FOR INFINITE SCROLL */}
+          <div className="testimonial-card">
+            <div className="card-top-bar">
+              <span className="industry-badge">🏗️ Construction</span>
+            </div>
+            <h3 className="stat-highlight">
+              <span className="stat-main">~2x leads</span> <span className="stat-sub">first 30 days</span>
+            </h3>
+            <p className="quote">"They revamped our entire digital presence. Lead form submissions nearly doubled in the first month and the site went live in under 72 hours. Genuinely surprised by the pace."</p>
+            <div className="card-footer">
+              <div className="author-info">
+                <div className="initials-avatar">JT</div>
+                <div className="author-text">
+                  <div className="name">Jean-Michel Tremblay</div>
+                  <div className="title">Owner, Tremblay Excavation Inc.</div>
+                </div>
+              </div>
+              <div className="rating">★★★★★ <span className="rating-num">4.8</span></div>
+            </div>
+          </div>
+          <div className="testimonial-card">
+            <div className="card-top-bar">
+              <span className="industry-badge">⚕️ Healthcare</span>
+            </div>
+            <h3 className="stat-highlight">
+              <span className="stat-main">87% capacity</span> <span className="stat-sub">avg since launch</span>
+            </h3>
+            <p className="quote">"Our booking system went from phone-only to mostly online. We went from scrambling for appointments to running closer to 87% capacity most weeks. Big shift for us."</p>
+            <div className="card-footer">
+              <div className="author-info">
+                <div className="initials-avatar">DA</div>
+                <div className="author-text">
+                  <div className="name">Dr. Aline Côté</div>
+                  <div className="title">Founder, Physio Optimal</div>
+                </div>
+              </div>
+              <div className="rating">★★★★★ <span className="rating-num">4.9</span></div>
+            </div>
+          </div>
+        </div>
+
+        {/* COLUMN 2: Scrolls Up */}
+        <div className="testimonial-col scroll-up">
+          {/* Card 3 */}
+          <div className="testimonial-card">
+            <div className="card-top-bar">
+              <span className="industry-badge">🍽️ Restaurant</span>
+            </div>
+            <h3 className="stat-highlight">
+              <span className="stat-main">+38% revenue</span> <span className="stat-sub">since launch</span>
+            </h3>
+            <p className="quote">"NT Web UX built our online presence from scratch. We're taking reservations and takeout orders around the clock now — revenue is up roughly 38% since we launched."</p>
+            <div className="card-footer">
+              <div className="author-info">
+                <div className="initials-avatar">MJ</div>
+                <div className="author-text">
+                  <div className="name">Marie-Claire Joseph</div>
+                  <div className="title">Owner, Saveurs D'Haïti MTL</div>
+                </div>
+              </div>
+              <div className="rating">★★★★☆ <span className="rating-num">4.0</span></div>
+            </div>
+          </div>
+
+          {/* Card 4 */}
+          <div className="testimonial-card">
+            <div className="card-top-bar">
+              <span className="industry-badge">🌿 Wellness</span>
+            </div>
+            <h3 className="stat-highlight">
+              <span className="stat-main">7 weeks</span> <span className="stat-sub">to fully booked</span>
+            </h3>
+            <p className="quote">"We went from zero online presence to consistently fully booked in about 7 weeks. There were some growing pains early on, but the ROI has been real. Would recommend."</p>
+            <div className="card-footer">
+              <div className="author-info">
+                <div className="initials-avatar">KB</div>
+                <div className="author-text">
+                  <div className="name">Karine Beaumont</div>
+                  <div className="title">CEO, Beaumont Wellness Clinic</div>
+                </div>
+              </div>
+              <div className="rating">★★★★★ <span className="rating-num">4.5</span></div>
+            </div>
+          </div>
+
+          {/* DUPLICATES FOR INFINITE SCROLL */}
+          <div className="testimonial-card">
+            <div className="card-top-bar">
+              <span className="industry-badge">🍽️ Restaurant</span>
+            </div>
+            <h3 className="stat-highlight">
+              <span className="stat-main">+38% revenue</span> <span className="stat-sub">since launch</span>
+            </h3>
+            <p className="quote">"NT Web UX built our online presence from scratch. We're taking reservations and takeout orders around the clock now — revenue is up roughly 38% since we launched."</p>
+            <div className="card-footer">
+              <div className="author-info">
+                <div className="initials-avatar">MJ</div>
+                <div className="author-text">
+                  <div className="name">Marie-Claire Joseph</div>
+                  <div className="title">Owner, Saveurs D'Haïti MTL</div>
+                </div>
+              </div>
+              <div className="rating">★★★★☆ <span className="rating-num">4.0</span></div>
+            </div>
+          </div>
+          <div className="testimonial-card">
+            <div className="card-top-bar">
+              <span className="industry-badge">🌿 Wellness</span>
+            </div>
+            <h3 className="stat-highlight">
+              <span className="stat-main">7 weeks</span> <span className="stat-sub">to fully booked</span>
+            </h3>
+            <p className="quote">"We went from zero online presence to consistently fully booked in about 7 weeks. There were some growing pains early on, but the ROI has been real. Would recommend."</p>
+            <div className="card-footer">
+              <div className="author-info">
+                <div className="initials-avatar">KB</div>
+                <div className="author-text">
+                  <div className="name">Karine Beaumont</div>
+                  <div className="title">CEO, Beaumont Wellness Clinic</div>
+                </div>
+              </div>
+              <div className="rating">★★★★★ <span className="rating-num">4.5</span></div>
+            </div>
+          </div>
+        </div>
+
+        {/* COLUMN 3: Scrolls Down */}
+        <div className="testimonial-col scroll-down">
+          {/* Card 5 */}
+          <div className="testimonial-card">
+            <div className="card-top-bar">
+              <span className="industry-badge">☁️ SAAS</span>
+            </div>
+            <h3 className="stat-highlight">
+              <span className="stat-main">4.9★</span> <span className="stat-sub">avg client rating</span>
+            </h3>
+            <p className="quote">"They built our SaaS dashboard from scratch and it looks polished. Clients notice the design quality. A few revision rounds but they got it right in the end."</p>
+            <div className="card-footer">
+              <div className="author-info">
+                <div className="initials-avatar">AF</div>
+                <div className="author-text">
+                  <div className="name">Alexis Fontaine</div>
+                  <div className="title">Co-Founder, Flux Analytics</div>
+                </div>
+              </div>
+              <div className="rating">★★★★★ <span className="rating-num">5.0</span></div>
+            </div>
+          </div>
+
+          {/* Card 6 */}
+          <div className="testimonial-card">
+            <div className="card-top-bar">
+              <span className="industry-badge">🏗️ Construction</span>
+            </div>
+            <h3 className="stat-highlight">
+              <span className="stat-main">+61% traffic</span> <span className="stat-sub">organic, 3 months</span>
+            </h3>
+            <p className="quote">"The bilingual site they built helped us reach both markets properly. Organic traffic climbed around 61% over three months — better than I expected."</p>
+            <div className="card-footer">
+              <div className="author-info">
+                <div className="initials-avatar">MO</div>
+                <div className="author-text">
+                  <div className="name">Marc-André Ouellet</div>
+                  <div className="title">Owner, Bâtisseurs Nordiques Inc.</div>
+                </div>
+              </div>
+              <div className="rating">★★★★★ <span className="rating-num">4.7</span></div>
+            </div>
+          </div>
+
+          {/* DUPLICATES FOR INFINITE SCROLL */}
+           <div className="testimonial-card">
+            <div className="card-top-bar">
+              <span className="industry-badge">☁️ SAAS</span>
+            </div>
+            <h3 className="stat-highlight">
+              <span className="stat-main">4.9★</span> <span className="stat-sub">avg client rating</span>
+            </h3>
+            <p className="quote">"They built our SaaS dashboard from scratch and it looks polished. Clients notice the design quality. A few revision rounds but they got it right in the end."</p>
+            <div className="card-footer">
+              <div className="author-info">
+                <div className="initials-avatar">AF</div>
+                <div className="author-text">
+                  <div className="name">Alexis Fontaine</div>
+                  <div className="title">Co-Founder, Flux Analytics</div>
+                </div>
+              </div>
+              <div className="rating">★★★★★ <span className="rating-num">5.0</span></div>
+            </div>
+          </div>
+          <div className="testimonial-card">
+            <div className="card-top-bar">
+              <span className="industry-badge">🏗️ Construction</span>
+            </div>
+            <h3 className="stat-highlight">
+              <span className="stat-main">+61% traffic</span> <span className="stat-sub">organic, 3 months</span>
+            </h3>
+            <p className="quote">"The bilingual site they built helped us reach both markets properly. Organic traffic climbed around 61% over three months — better than I expected."</p>
+            <div className="card-footer">
+              <div className="author-info">
+                <div className="initials-avatar">MO</div>
+                <div className="author-text">
+                  <div className="name">Marc-André Ouellet</div>
+                  <div className="title">Owner, Bâtisseurs Nordiques Inc.</div>
+                </div>
+              </div>
+              <div className="rating">★★★★★ <span className="rating-num">4.7</span></div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
   );

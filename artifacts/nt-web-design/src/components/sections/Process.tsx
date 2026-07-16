@@ -1,113 +1,113 @@
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-import { useRef } from "react";
-
-const processSteps = [
-  { 
-    title: "Discovery Call", 
-    desc: "We learn about your business, goals, and target audience to craft the perfect strategy." 
-  },
-  { 
-    title: "Design & Strategy", 
-    desc: "We create wireframes and high-fidelity mockups for your approval." 
-  },
-  { 
-    title: "Build & Test", 
-    desc: "We develop the site using modern tech, ensuring it's fast, secure, and bug-free." 
-  },
-  { 
-    title: "Launch & Grow", 
-    desc: "We deploy your new digital asset and help you scale your online presence." 
-  }
-];
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { useLanguage } from '@/lib/i18n';
+import { ProjectBriefModal } from '@/components/ProjectBriefModal';
 
 export function Process() {
-  const targetRef = useRef<HTMLDivElement>(null);
-  
-  const { scrollYProgress } = useScroll({ 
-    target: targetRef,
-    offset: ["start start", "end end"]
-  });
-  
-  // 1. Rigid, instant lock for the Y-axis. This entirely eliminates the shaky environment.
-  const y = useTransform(scrollYProgress, [0, 1], ["0vh", "300vh"]);
-  
-  // 2. Smooth spring physics strictly applied to the horizontal X-axis slide.
-  const smoothProgress = useSpring(scrollYProgress, { 
-    stiffness: 400, 
-    damping: 40, 
-    mass: 0.2 
-  });
-  
-  // Translates exactly to the end of the content minus viewport width
-  const x = useTransform(smoothProgress, [0, 1], ["0%", "calc(-100% + 100vw)"]);
+  const { t, lang } = useLanguage();
+  const steps = t('process.steps') as { title: string; desc: string }[];
+  const eyebrow = lang === 'fr' ? 'Comment Nous Travaillons' : 'How We Work';
+  const [briefOpen, setBriefOpen] = useState(false);
 
   return (
-    <section ref={targetRef} style={{ height: "400vh", position: "relative" }}>
-      
-      <motion.div style={{ 
-        y, 
-        height: "100vh", 
-        display: "flex", 
-        flexDirection: "column", 
-        justifyContent: "center", 
-        overflow: "hidden",
-        position: "absolute",
-        top: 0,
-        left: 0,
-        right: 0
-      }}>
-        
-        <div style={{ textAlign: "center", marginBottom: "60px", padding: "0 20px" }}>
-          <span style={{ textTransform: "uppercase", fontSize: "12px", letterSpacing: "2px", color: "#9ca3af", fontWeight: 600 }}>
-            How We Work
-          </span>
-          <h2 style={{ fontSize: "40px", fontWeight: 800, color: "white", marginTop: "12px" }}>
-            A streamlined process.
+    <section id="process" style={{ width: '100%', padding: '120px 24px', position: 'relative', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+      <div style={{ position: 'absolute', top: '50%', right: 0, width: '500px', height: '500px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(147,197,253,0.07) 0%, transparent 65%)', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
+
+      <div style={{ maxWidth: '1200px', margin: '0 auto', position: 'relative' }}>
+        {/* Header */}
+        <div style={{ textAlign: 'center', marginBottom: '80px' }}>
+          <span className="pill-label" style={{ display: 'inline-flex', marginBottom: '24px' }}>{eyebrow}</span>
+          <h2 style={{ fontSize: 'clamp(2rem,5vw,3.5rem)', fontWeight: 800, letterSpacing: '-0.02em', marginTop: '16px' }}>
+            {t('process.title')}
           </h2>
+          <p style={{ fontSize: '16px', color: 'rgba(255,255,255,0.45)', marginTop: '16px', maxWidth: '520px', margin: '16px auto 0', lineHeight: 1.7 }}>
+            {t('process.desc')}
+          </p>
         </div>
 
-        {/* Premium Layout: max-content allows cards to sit next to each other with a defined gap */}
-        <motion.div style={{ x, display: "flex", gap: "32px", padding: "0 10vw", width: "max-content" }}>
-          {processSteps.map((step, i) => (
-            <div key={i} className="glass" style={{ 
-              width: "420px", // Fixed width for each card
-              backgroundColor: "rgba(255,255,255,0.02)", 
-              border: "1px solid rgba(255,255,255,0.06)", 
-              borderRadius: "20px", 
-              padding: "48px",
-              flexShrink: 0
-            }}>
-              <div style={{ 
-                fontSize: "12px", 
-                color: "#60a5fa", 
-                textTransform: "uppercase", 
-                letterSpacing: "1px", 
-                marginBottom: "16px",
-                fontWeight: 600
+        {/* Steps */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '24px', position: 'relative' }} className="process-grid">
+          <div style={{ position: 'absolute', top: '28px', left: '12%', right: '12%', height: '1px', background: 'linear-gradient(90deg, transparent, rgba(59,130,246,0.3), transparent)' }} className="connector-line" />
+
+          {steps.map((step, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ delay: i * 0.12, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              style={{ position: 'relative', zIndex: 1, padding: '0 8px' }}
+            >
+              <div style={{
+                width: '56px', height: '56px', borderRadius: '50%',
+                background: 'rgba(59,130,246,0.1)', border: '1px solid rgba(59,130,246,0.25)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                fontSize: '18px', fontWeight: 800, color: '#93c5fd', marginBottom: '24px',
               }}>
-                Step 0{i + 1} of 04
+                0{i + 1}
               </div>
-              <h3 style={{ fontSize: "32px", color: "white", fontWeight: 800, marginBottom: "16px" }}>
-                {step.title}
-              </h3>
-              <p style={{ fontSize: "16px", color: "#9ca3af", lineHeight: 1.6 }}>
-                {step.desc}
-              </p>
-            </div>
+              <h3 style={{ fontSize: '15px', fontWeight: 700, color: '#fff', marginBottom: '10px' }}>{step.title}</h3>
+              <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.45)', lineHeight: 1.7 }}>{step.desc}</p>
+            </motion.div>
           ))}
-        </motion.div>
-        
-        <div style={{ marginTop: "60px", display: "flex", flexDirection: "column", alignItems: "center", gap: "12px" }}>
-          <div style={{ width: "120px", height: "2px", backgroundColor: "rgba(255,255,255,0.1)", borderRadius: "2px", overflow: "hidden" }}>
-             <motion.div style={{ 
-               height: "100%", 
-               backgroundColor: "#60a5fa", 
-               width: useTransform(smoothProgress, [0, 1], ["0%", "100%"]) 
-             }} />
-          </div>
         </div>
 
-      </motion.div>
+        {/* Bottom CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+          style={{ marginTop: '80px', textAlign: 'center', padding: '48px 40px', background: 'rgba(59,130,246,0.04)', border: '1px solid rgba(59,130,246,0.12)', borderRadius: '20px' }}
+        >
+          <div style={{ fontSize: '12px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(147,197,253,0.6)', marginBottom: '14px' }}>
+            {lang === 'fr' ? 'Prêt à Commencer ?' : 'Ready to Get Started?'}
+          </div>
+          <h3 style={{ fontSize: 'clamp(1.5rem,3vw,2.1rem)', fontWeight: 800, color: '#fff', marginBottom: '12px', letterSpacing: '-0.04em', lineHeight: 1.1 }}>
+            {lang === 'fr'
+              ? <span className="gradient-text">Scalez sans les Bavardages.</span>
+              : <span className="gradient-text">Scale Without the Small Talk.</span>}
+          </h3>
+          <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.45)', maxWidth: '420px', margin: '0 auto 28px', lineHeight: 1.7, letterSpacing: '-0.01em' }}>
+            {lang === 'fr'
+              ? "Emploi du temps chargé ? Pas de temps à perdre au téléphone. Dites-nous ce que vous voulez, nous nous occupons d'élargir votre vision."
+              : "Busy schedule? No time to be on the phone. Just tell us what you want, and we will expand your vision."}
+          </p>
+          <button
+            onClick={() => setBriefOpen(true)}
+            style={{
+              display: 'inline-flex', alignItems: 'center', gap: '8px',
+              padding: '15px 36px', fontSize: '14px', fontWeight: 700,
+              letterSpacing: '-0.01em', borderRadius: '12px', border: 'none',
+              cursor: 'pointer',
+              background: 'linear-gradient(135deg, #1d4ed8 0%, #3b82f6 100%)',
+              color: '#fff',
+              boxShadow: '0 0 0 1px rgba(59,130,246,0.35), 0 8px 32px rgba(59,130,246,0.45), 0 0 56px rgba(59,130,246,0.22)',
+              transition: 'box-shadow 0.2s, transform 0.15s',
+            }}
+            onMouseEnter={e => {
+              (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 0 0 1px rgba(59,130,246,0.5), 0 12px 40px rgba(59,130,246,0.6), 0 0 72px rgba(59,130,246,0.32)';
+              (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(-2px)';
+            }}
+            onMouseLeave={e => {
+              (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 0 0 1px rgba(59,130,246,0.35), 0 8px 32px rgba(59,130,246,0.45), 0 0 56px rgba(59,130,246,0.22)';
+              (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(0)';
+            }}
+          >
+            {lang === 'fr' ? 'Soumettre votre Vision →' : 'Start Your Brief →'}
+          </button>
+        </motion.div>
+      </div>
+
+      <ProjectBriefModal open={briefOpen} onClose={() => setBriefOpen(false)} />
+
+      <style>{`
+        @media(max-width:768px){ 
+          .process-grid { grid-template-columns: repeat(2,1fr) !important; }
+          .connector-line { display: none; }
+        }
+        @media(max-width:480px){ .process-grid { grid-template-columns: 1fr !important; } }
+      `}</style>
     </section>
   );
 }

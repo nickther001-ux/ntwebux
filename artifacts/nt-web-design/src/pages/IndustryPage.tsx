@@ -1,10 +1,8 @@
-import { useState } from 'react';
 import { useParams, Link } from 'wouter';
 import { motion } from 'framer-motion';
 import { ArrowRight, CheckCircle2, ArrowLeft } from 'lucide-react';
 import { Navbar } from '@/components/Navbar';
-import { Footer } from '@/components/Footer'; 
-import { OnboardingModal } from '@/components/OnboardingModal';
+import { Footer } from '@/components/Footer';
 import { Contact } from '@/components/sections/Contact';
 import { getIndustryPage, INDUSTRY_PAGES } from '@/lib/seo-pages';
 import { useSEO } from '@/lib/useSEO';
@@ -15,10 +13,7 @@ const fadeUp = {
   show: (i: number) => ({ opacity: 1, y: 0, transition: { delay: i * 0.1, duration: 0.55, ease: [0.22, 1, 0.36, 1] } }),
 };
 
-const DEFAULT_PLAN = { name: "New Project", price: "500" };
-
 export default function IndustryPage() {
-  const [modalOpen, setModalOpen] = useState(false);
   const { slug } = useParams<{ slug: string }>();
   const page = getIndustryPage(slug ?? '');
 
@@ -142,30 +137,7 @@ export default function IndustryPage() {
 
         <Contact />
       </main>
-      
-        {/* ── Start My Project CTA ── */}
-        <section style={{ padding: '80px 24px', textAlign: 'center', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-          <div style={{ maxWidth: '560px', margin: '0 auto', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px' }}>
-            <p style={{ fontSize: '13px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#60a5fa' }}>
-              Ready to get started?
-            </p>
-            <h2 style={{ fontSize: 'clamp(1.6rem,4vw,2.6rem)', fontWeight: 800, letterSpacing: '-0.02em', margin: 0 }}>
-              Start your project
-            </h2>
-            <p style={{ fontSize: '15px', color: 'rgba(255,255,255,0.45)', lineHeight: 1.7, margin: 0 }}>
-              Bilingual, fast, and built to convert. Most sites go live in 72 hours.
-            </p>
-            <button
-              onClick={() => setModalOpen(true)}
-              className="btn-violet"
-              style={{ padding: '14px 32px', fontSize: '15px', fontWeight: 700, borderRadius: '12px', display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}
-            >
-              Start My Project <ArrowRight size={16} />
-            </button>
-          </div>
-        </section>
-
-        <Footer />
+      <Footer />
     </div>
   );
 }

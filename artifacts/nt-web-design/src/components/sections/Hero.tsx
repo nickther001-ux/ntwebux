@@ -1,5 +1,4 @@
-import { motion, useInView, useScroll, useTransform } from 'framer-motion'; 
-import { Magnetic } from '@/components/Magnetic';
+import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import { useLanguage } from '@/lib/i18n';
 import { useEffect, useRef, useState } from 'react';
