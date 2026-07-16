@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion';
 import { Cpu, Code2, ArrowRight } from 'lucide-react';
 import { useLanguage } from '@/lib/i18n';
 import { useLocation } from 'wouter';
@@ -48,13 +47,7 @@ export function TwoPathSection() {
       <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
 
         {/* Eyebrow + Heading */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-40px' }}
-          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-          style={{ textAlign: 'center', marginBottom: '40px' }}
-        >
+        <div style={{ textAlign: 'center', marginBottom: '40px' }}>
           <h2 style={{
             fontSize: 'clamp(2rem, 4vw, 2.75rem)',
             fontWeight: 800,
@@ -72,18 +65,13 @@ export function TwoPathSection() {
           }}>
             {t.heading}
           </p>
-        </motion.div>
+        </div>
 
         {/* Two cards */}
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }} className="two-path-grid">
 
           {/* Left — NT Business Suite */}
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-40px' }}
-            transition={{ duration: 0.6, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
-            style={{
+          <div style={{
               background: 'rgba(255,255,255,0.03)',
               border: '1px solid rgba(255,255,255,0.07)',
               borderRadius: '20px',
@@ -149,15 +137,10 @@ export function TwoPathSection() {
             >
               {t.left.cta} <ArrowRight size={15} />
             </button>
-          </motion.div>
+          </div>
 
           {/* Right — Custom Development */}
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-40px' }}
-            transition={{ duration: 0.6, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-            style={{
+          <div style={{
               background: 'rgba(255,255,255,0.03)',
               border: '1px solid rgba(255,255,255,0.07)',
               borderRadius: '20px',
@@ -228,7 +211,7 @@ export function TwoPathSection() {
             >
               {t.right.cta} <ArrowRight size={15} />
             </button>
-          </motion.div>
+          </div>
 
         </div>
       </div>
