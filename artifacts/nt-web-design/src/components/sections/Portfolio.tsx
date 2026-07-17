@@ -131,7 +131,7 @@ const PROJECTS = [
       fr: ["Développement", "Infrastructure"],
     },
     buildTime: { en: "4 days", fr: "4 jours" },
-    wide: true,
+    wide: false,
   },
   {
     img: `${BASE}/portfolio/proj-seriousinc.png`,
@@ -139,7 +139,7 @@ const PROJECTS = [
     title: { en: "SeriousInc.ca", fr: "SeriousInc.ca" },
     tags: { en: ["Web Design", "Multi-Brand"], fr: ["Web Design", "Multi-Marque"] },
     buildTime: { en: "6 days", fr: "6 jours" },
-    wide: true,
+    wide: false,
   },
 ];
 
