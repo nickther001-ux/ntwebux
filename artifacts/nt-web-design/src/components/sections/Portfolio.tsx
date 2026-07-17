@@ -444,6 +444,16 @@ function ProjectCard({
           }}
         />
 
+        {/* Right-edge shadow — hides any image artifact/scrollbar */}
+        <div style={{
+          position: "absolute",
+          top: 0, right: 0, bottom: 0,
+          width: "32px",
+          background: "linear-gradient(to left, rgba(0,0,0,0.55), transparent)",
+          pointerEvents: "none",
+          zIndex: 1,
+        }} />
+
         {/* Hover overlay */}
         <div
           style={{
