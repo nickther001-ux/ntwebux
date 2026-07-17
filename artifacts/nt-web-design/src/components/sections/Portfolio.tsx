@@ -7,14 +7,6 @@ const BASE = import.meta.env.BASE_URL.replace(/\/$/, "");
 
 const PROJECTS = [
   {
-    img: `${BASE}/portfolio/proj-seriousinc.png`,
-    category: { en: "Fitness & Sports", fr: "Fitness & Sports" },
-    title: { en: "SeriousInc.ca", fr: "SeriousInc.ca" },
-    tags: { en: ["Web Design", "Multi-Brand"], fr: ["Web Design", "Multi-Marque"] },
-    buildTime: { en: "6 days", fr: "6 jours" },
-    wide: true,
-  },
-  {
     img: `${BASE}/portfolio/proj-audreyrh-v3.png`,
     category: { en: "HR Consulting", fr: "Conseil RH" },
     title: { en: "AudreyRh.com", fr: "AudreyRh.com" },
@@ -139,6 +131,14 @@ const PROJECTS = [
       fr: ["Développement", "Infrastructure"],
     },
     buildTime: { en: "4 days", fr: "4 jours" },
+    wide: true,
+  },
+  {
+    img: `${BASE}/portfolio/proj-seriousinc.png`,
+    category: { en: "Fitness & Sports", fr: "Fitness & Sports" },
+    title: { en: "SeriousInc.ca", fr: "SeriousInc.ca" },
+    tags: { en: ["Web Design", "Multi-Brand"], fr: ["Web Design", "Multi-Marque"] },
+    buildTime: { en: "6 days", fr: "6 jours" },
     wide: true,
   },
 ];
