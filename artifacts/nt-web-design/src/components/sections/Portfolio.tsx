@@ -140,6 +140,7 @@ const PROJECTS = [
     tags: { en: ["Web Design", "Multi-Brand"], fr: ["Web Design", "Multi-Marque"] },
     buildTime: { en: "6 days", fr: "6 jours" },
     wide: false,
+    span: 2,
   },
 ];
 
@@ -409,7 +410,7 @@ function ProjectCard({
         background: "rgba(255,255,255,0.03)",
         border: "1px solid rgba(255,255,255,0.07)",
         cursor: "pointer",
-        gridColumn: project.wide ? "span 2" : "span 1",
+        gridColumn: `span ${(project as any).span ?? (project.wide ? 2 : 1)}`,
         transition: "border-color 0.25s, box-shadow 0.25s",
         borderColor: hovered
           ? "rgba(59,130,246,0.35)"
