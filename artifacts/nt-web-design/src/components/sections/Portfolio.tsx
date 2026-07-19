@@ -390,16 +390,8 @@ function ProjectCard({
   const [hovered, setHovered] = useState(false);
 
   return (
-    <motion.div
+    <div
       data-wide={project.wide ? "true" : undefined}
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{
-        delay: index * 0.07,
-        duration: 0.55,
-        ease: [0.22, 1, 0.36, 1],
-      }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       onClick={onOpen}
@@ -606,7 +598,7 @@ function ProjectCard({
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
 
