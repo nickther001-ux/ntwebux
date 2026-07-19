@@ -751,8 +751,7 @@ export function Portfolio() {
         }
         @media (max-width: 600px) {
           .portfolio-grid { grid-template-columns: 1fr !important; }
-          .portfolio-grid > [data-wide="true"] { grid-column: span 1 !important; }
-          .portfolio-grid img { width: 100% !important; height: 100% !important; object-fit: contain !important; }
+          .portfolio-grid > * { grid-column: span 1 !important; }
         }
       `}</style>
     </section>
