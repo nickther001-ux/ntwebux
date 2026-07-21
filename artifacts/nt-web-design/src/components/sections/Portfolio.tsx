@@ -209,6 +209,9 @@ function Lightbox({
         style={{
           maxWidth: "900px",
           width: "100%",
+          maxHeight: "calc(100vh - 48px)",
+          display: "flex",
+          flexDirection: "column",
           background: "#0a1628",
           border: "1px solid rgba(59,130,246,0.2)",
           borderRadius: "20px",
@@ -217,15 +220,15 @@ function Lightbox({
         }}
       >
         {/* Image */}
-        <div style={{ position: "relative", background: "#060d1a" }}>
+        <div style={{ position: "relative", background: "#060d1a", flex: 1, minHeight: 0, overflow: "hidden" }}>
           <img
             src={p.img}
             alt={p.title[l]}
             loading="lazy"
             style={{
               width: "100%",
+              height: "100%",
               display: "block",
-              maxHeight: "520px",
               objectFit: "cover",
             }}
           />
