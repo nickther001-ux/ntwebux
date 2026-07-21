@@ -114,6 +114,7 @@ const PROJECTS = [
     },
     buildTime: { en: "5 days", fr: "5 jours" },
     wide: false,
+    url: "https://pixelsclient.onrender.com",
   },
   {
     img: `${BASE}/portfolio/proj-wellness.webp`,
