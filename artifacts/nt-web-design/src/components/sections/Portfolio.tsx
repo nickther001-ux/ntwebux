@@ -606,35 +606,51 @@ function ProjectCard({
               ))}
             </div>
           </div>
-          <div
-            onClick={(e) => {
-              if ((project as any).url) {
-                e.stopPropagation();
-                window.open((project as any).url, "_blank", "noopener,noreferrer");
-              }
-            }}
-            style={{
-              width: "32px",
-              height: "32px",
-              borderRadius: "50%",
-              flexShrink: 0,
-              background: hovered
-                ? "rgba(59,130,246,0.15)"
-                : "rgba(255,255,255,0.04)",
-              border: `1px solid ${hovered ? "rgba(59,130,246,0.35)" : "rgba(255,255,255,0.08)"}`,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              transition: "background 0.2s, border-color 0.2s",
-              cursor: (project as any).url ? "pointer" : "default",
-            }}
-          >
-            <ArrowUpRight
-              size={14}
-              color={hovered ? "#93c5fd" : "rgba(255,255,255,0.3)"}
-              style={{ transition: "color 0.2s" }}
-            />
-          </div>
+          {(project as any).url ? (
+            <a
+              href={(project as any).url}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              style={{
+                width: "32px",
+                height: "32px",
+                borderRadius: "50%",
+                flexShrink: 0,
+                background: hovered
+                  ? "rgba(59,130,246,0.15)"
+                  : "rgba(255,255,255,0.04)",
+                border: `1px solid ${hovered ? "rgba(59,130,246,0.35)" : "rgba(255,255,255,0.08)"}`,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                transition: "background 0.2s, border-color 0.2s",
+                textDecoration: "none",
+              }}
+            >
+              <ArrowUpRight
+                size={14}
+                color={hovered ? "#93c5fd" : "rgba(255,255,255,0.3)"}
+                style={{ transition: "color 0.2s" }}
+              />
+            </a>
+          ) : (
+            <div
+              style={{
+                width: "32px",
+                height: "32px",
+                borderRadius: "50%",
+                flexShrink: 0,
+                background: "rgba(255,255,255,0.04)",
+                border: "1px solid rgba(255,255,255,0.08)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <ArrowUpRight size={14} color="rgba(255,255,255,0.3)" />
+            </div>
+          )}
         </div>
       </div>
     </div>
