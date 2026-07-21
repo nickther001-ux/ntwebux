@@ -256,7 +256,7 @@ export function Navbar() {
         .navbar-mobile-right { display: flex; }
         .navbar-mobile-lang { display: flex; }
         .navbar-mobile-btn { display: flex; align-items: center; }
-        @media (min-width: 960px) {
+        @media (min-width: 1100px) {
           .navbar-desktop { display: flex; }
           .navbar-mobile-right { display: none; }
         }
