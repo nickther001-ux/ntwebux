@@ -16,6 +16,7 @@ const PROJECTS = [
     },
     buildTime: { en: "5 days", fr: "5 jours" },
     wide: true,
+    url: "https://audreyrh.com",
   },
   {
     img: `${BASE}/portfolio/proj-ecommerce.webp`,
@@ -24,6 +25,7 @@ const PROJECTS = [
     tags: { en: ["E-Commerce", "Shopify"], fr: ["E-Commerce", "Shopify"] },
     buildTime: { en: "6 days", fr: "6 jours" },
     wide: false,
+    url: "https://www.maisonluxeboutique.com/",
   },
   {
     img: `${BASE}/portfolio/proj-saas.webp`,
@@ -40,6 +42,7 @@ const PROJECTS = [
     tags: { en: ["Web Design", "Booking"], fr: ["Web Design", "Réservation"] },
     buildTime: { en: "72 hours", fr: "72 heures" },
     wide: false,
+    url: "https://acesthetique.ca",
   },
   {
     img: `${BASE}/portfolio/proj-fitness.webp`,
@@ -48,6 +51,7 @@ const PROJECTS = [
     tags: { en: ["Web Design", "Booking"], fr: ["Web Design", "Réservation"] },
     buildTime: { en: "4 days", fr: "4 jours" },
     wide: false,
+    url: "https://play.google.com/store/apps/details?id=com.marianatek.apexspinandfitness&hl=en_CA",
   },
   {
     img: `${BASE}/portfolio/proj-realestate.webp`,
@@ -92,7 +96,7 @@ const PROJECTS = [
   {
     img: `${BASE}/portfolio/proj-restaurant.webp`,
     category: { en: "Restaurant", fr: "Restaurant" },
-    title: { en: "Brasserie Gusto", fr: "Brasserie Gusto" },
+    title: { en: "Brasserie Italia", fr: "Brasserie Italia" },
     tags: {
       en: ["Brand Identity", "Web Design"],
       fr: ["Image de marque", "Web Design"],
@@ -141,6 +145,7 @@ const PROJECTS = [
     buildTime: { en: "6 days", fr: "6 jours" },
     wide: false,
     span: 2,
+    url: "https://seriousinc.ca",
   },
 ];
 
@@ -310,7 +315,34 @@ function Lightbox({
             </div>
           </div>
 
+          {/* Visit Website */}
+          <div style={{ display: "flex", gap: "8px", flexShrink: 0, alignItems: "center" }}>
+            {(p as any).url && (
+              <a
+                href={(p as any).url}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "6px",
+                  padding: "8px 14px",
+                  borderRadius: "10px",
+                  background: "rgba(59,130,246,0.1)",
+                  border: "1px solid rgba(59,130,246,0.3)",
+                  color: "#93c5fd",
+                  fontSize: "13px",
+                  fontWeight: 600,
+                  textDecoration: "none",
+                  whiteSpace: "nowrap",
+                }}
+              >
+                Visit Site <ArrowUpRight size={13} />
+              </a>
+            )}
+
           {/* Prev / Next */}
+          </div>
           <div style={{ display: "flex", gap: "8px", flexShrink: 0 }}>
             <button
               onClick={onPrev}
@@ -575,6 +607,12 @@ function ProjectCard({
             </div>
           </div>
           <div
+            onClick={(e) => {
+              if ((project as any).url) {
+                e.stopPropagation();
+                window.open((project as any).url, "_blank", "noopener,noreferrer");
+              }
+            }}
             style={{
               width: "32px",
               height: "32px",
@@ -588,6 +626,7 @@ function ProjectCard({
               alignItems: "center",
               justifyContent: "center",
               transition: "background 0.2s, border-color 0.2s",
+              cursor: (project as any).url ? "pointer" : "default",
             }}
           >
             <ArrowUpRight
