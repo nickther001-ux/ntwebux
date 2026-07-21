@@ -426,7 +426,13 @@ function ProjectCard({
       data-wide={project.wide ? "true" : undefined}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      onClick={onOpen}
+      onClick={() => {
+        if ((project as any).url) {
+          window.open((project as any).url, "_blank", "noopener,noreferrer");
+        } else {
+          onOpen();
+        }
+      }}
       style={{
         position: "relative",
         borderRadius: "16px",
