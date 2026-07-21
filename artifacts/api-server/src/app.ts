@@ -52,10 +52,11 @@ app.post('/webhook', (req, res) => {
 });
 
 /* ── SPA static file serving ──────────────────────────────────────────────
-   Serve the built React app for all non-API routes so that deep links like
-   /toronto work on hard refresh regardless of which static host is used.
-   The server is run from the workspace root, so process.cwd() is reliable. */
-const spaRoot = path.resolve(process.cwd(), "artifacts/nt-web-design/dist/public");
+   Use __dirname (absolute path of this compiled file) rather than process.cwd()
+   so the path is correct regardless of which directory the server is launched
+   from. In production the CWD is the artifact's own folder, not the workspace
+   root, which made process.cwd()-relative paths resolve incorrectly. */
+const spaRoot = path.resolve(__dirname, "../../nt-web-design/dist/public");
 
 app.use(express.static(spaRoot));
 
