@@ -135,9 +135,9 @@ export function Hero({ onStart }: { onStart?: () => void } = {}) {
           }}
         >
           {lang === 'fr' ? (
-            <>On propulse<br /><span className="gradient-text">votre croissance.</span></>
+            <>On propulse<br /><span className="gradient-text font-serif italic font-normal tracking-wide lowercase">votre croissance.</span></>
           ) : (
-            <>We Engineer<br /><span className="gradient-text">Revenue Engines.</span></>
+            <>We Engineer<br /><span className="gradient-text font-serif italic font-normal tracking-wide lowercase">revenue engines.</span></>
           )}
         </motion.h1>
 
