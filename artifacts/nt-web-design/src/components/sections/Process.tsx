@@ -1,4 +1,4 @@
-import { useLanguage } from "../LanguageContext";
+import { useLanguage } from "../../lib/i18n";
 
 const processSteps = {
   en: [

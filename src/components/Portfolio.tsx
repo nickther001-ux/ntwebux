@@ -36,7 +36,7 @@ export default function Portfolio() {
           transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
           viewport={{ once: true, margin: '-80px' }}
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">Nos Réalisations <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400 font-extrabold">Clients</span>
             Clients actifs
           </h2>
           <p className="text-gray-400 text-lg max-w-xl mx-auto">
@@ -54,7 +54,7 @@ export default function Portfolio() {
           {projects.map((project, idx) => (
             <motion.div
               key={idx}
-              className="bg-gray-900 border border-white/8 rounded-2xl p-6 flex flex-col"
+              className="bg-gray-900/40 backdrop-blur-md border border-white/10 rounded-2xl p-6 flex flex-col hover:border-blue-500/30 transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(59,130,246,0.15)]"
               variants={fadeInUp}
               transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
               whileHover={{ y: -6, transition: { duration: 0.25 } }}
@@ -66,7 +66,7 @@ export default function Portfolio() {
                   </p>
                   <h3 className="text-white font-bold text-xl">{project.name}</h3>
                 </div>
-                <span className="bg-green-500/10 border border-green-500/20 text-green-400 text-xs font-medium px-2.5 py-1 rounded-full">
+                <span className="bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-medium px-2.5 py-1 rounded-full">
                   {project.tag}
                 </span>
               </div>
@@ -76,7 +76,7 @@ export default function Portfolio() {
                   href={`https://${project.url}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-4 text-blue-400 hover:text-blue-300 text-sm font-medium transition-colors"
+                  className="mt-4 text-indigo-400 hover:text-indigo-300 text-sm font-medium transition-colors"
                 >
                   {project.url} →
                 </a>
