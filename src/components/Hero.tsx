@@ -28,7 +28,7 @@ export default function Hero() {
           variants={itemVariant}
           transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
         >
-          Infrastructure Web{' '}
+          Infrastructure Web & Solutions{' '}
           <span className="text-blue-500">Premium</span>
         </motion.h1>
 
