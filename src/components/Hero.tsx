@@ -29,7 +29,7 @@ export default function Hero() {
           transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
         >
           Infrastructure Web & Solutions{' '}
-          <span className="text-blue-500">Premium</span>
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-violet-400 font-extrabold">Premium</span>
         </motion.h1>
 
         <motion.p
@@ -47,7 +47,7 @@ export default function Hero() {
         >
           <motion.a
             href="#contact"
-            className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors w-full sm:w-auto text-center"
+            className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_25px_rgba(99,102,241,0.4)] active:scale-[0.98] w-full sm:w-auto text-center"
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.97 }}
           >
