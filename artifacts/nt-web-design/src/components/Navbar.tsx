@@ -304,9 +304,7 @@ export function Navbar() {
               {links.map((link, i) => {
                 const innerContent = (
                   <>
-                    <span style={{ fontSize: '11px', fontWeight: 700, color: 'rgba(59,130,246,0.5)', letterSpacing: '0.08em', width: '20px', flexShrink: 0 }}>
-                      {String(i + 1).padStart(2, '0')}
-                    </span>
+                    
                     <span className="mob-link-text" style={{ fontSize: '26px', fontWeight: 800, color: '#fff', letterSpacing: '-0.02em', lineHeight: 1, transition: 'color 0.2s' }}>
                       {link.label}
                     </span>
