@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, BookOpen, Check, Download, CheckCircle2 } from 'lucide-react';
 import { useLanguage } from '@/lib/i18n';
 
-const API_BASE = (import.meta.env.VITE_API_URL || import.meta.env.BASE_URL).replace(/\/$/, "");
+const API_BASE = (import.meta.env.VITE_API_URL || import.meta.env.BASE_URL || '').replace(/\/$/, '');
 
 export function LeadMagnetModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   const { lang } = useLanguage();
@@ -83,12 +83,12 @@ export function LeadMagnetModal({ isOpen, onClose }: { isOpen: boolean; onClose:
                   <CheckCircle2 size={28} />
                 </div>
                 <h3 style={{ fontSize: '22px', fontWeight: 800, color: '#fff', marginBottom: '8px' }}>
-                  {isFr ? 'Accès Débloqué !' : 'Access Unlocked!'}
+                  {isFr ? "Accès Débloqué !" : "Access Unlocked!"}
                 </h3>
                 <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.6)', lineHeight: 1.6, marginBottom: '24px' }}>
                   {isFr
-                    ? 'Votre guide PDF est prêt. Cliquez ci-dessous pour télécharger votre exemplaire gratuit.'
-                    : 'Your PDF guide is ready. Click below to download your free copy.'}
+                    ? "Votre guide PDF est prêt. Cliquez ci-dessous pour télécharger votre exemplaire gratuit."
+                    : "Your PDF guide is ready. Click below to download your free copy."}
                 </p>
                 <a
                   href={`${import.meta.env.BASE_URL}robots.txt`}
@@ -96,32 +96,32 @@ export function LeadMagnetModal({ isOpen, onClose }: { isOpen: boolean; onClose:
                   className="btn-violet"
                   style={{ width: '100%', padding: '14px', fontSize: '14px', fontWeight: 700, borderRadius: '12px', textDecoration: 'none', display: 'inline-flex', gap: '8px', alignItems: 'center', justifyContent: 'center' }}
                 >
-                  <Download size={16} /> {isFr ? 'Télécharger le PDF Gratuit' : 'Download Free PDF'}
+                  <Download size={16} /> {isFr ? "Télécharger le PDF Gratuit" : "Download Free PDF"}
                 </a>
               </div>
             ) : (
               <div>
                 <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '4px 12px', background: 'rgba(59,130,246,0.12)', border: '1px solid rgba(59,130,246,0.3)', borderRadius: '999px', fontSize: '11px', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#93c5fd', marginBottom: '16px' }}>
-                  <BookOpen size={12} /> {isFr ? 'Guide Gratuit 2026' : 'Free 2026 Playbook'}
+                  <BookOpen size={12} /> {isFr ? "Guide Gratuit 2026" : "Free 2026 Playbook"}
                 </div>
 
                 <h3 style={{ fontSize: '24px', fontWeight: 800, color: '#fff', letterSpacing: '-0.02em', lineHeight: 1.3, marginBottom: '10px' }}>
                   {isFr
-                    ? "Guide d\'Automatisation PME & Acquisition 2026"
-                    : '2026 Local Business Automation Playbook'}
+                    ? "Guide d'Automatisation PME & Acquisition 2026"
+                    : "2026 Local Business Automation Playbook"}
                 </h3>
 
                 <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.55)', lineHeight: 1.6, marginBottom: '20px' }}>
                   {isFr
-                    ? 'Découvrez comment les entreprises de services réduisent leurs coûts de 40% et captent des leads 24h/24.'
-                    : 'Discover how local service businesses cut operational overhead by 40% and capture 24/7 client leads.'}
+                    ? "Découvrez comment les entreprises de services réduisent leurs coûts de 40% et captent des leads 24h/24."
+                    : "Discover how local service businesses cut operational overhead by 40% and capture 24/7 client leads."}
                 </p>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '24px' }}>
                   {[
-                    isFr ? 'Réduction de 40 % des coûts d'exploitation' : '40% reduction in operational overhead',
-                    isFr ? 'Capture de leads IA 24h/24 & SMS automatique' : '24/7 AI lead capture & instant SMS text-back',
-                    isFr ? 'Blueprint de site bilingue haute conversion' : 'High-converting bilingual website blueprint',
+                    isFr ? "Réduction de 40 % des coûts d'exploitation" : "40% reduction in operational overhead",
+                    isFr ? "Capture de leads IA 24h/24 & SMS automatique" : "24/7 AI lead capture & instant SMS text-back",
+                    isFr ? "Blueprint de site bilingue haute conversion" : "High-converting bilingual website blueprint",
                   ].map((item, i) => (
                     <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', color: 'rgba(255,255,255,0.75)' }}>
                       <div style={{ width: '18px', height: '18px', borderRadius: '50%', background: 'rgba(59,130,246,0.15)', border: '1px solid rgba(59,130,246,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
@@ -136,7 +136,7 @@ export function LeadMagnetModal({ isOpen, onClose }: { isOpen: boolean; onClose:
                   <input
                     type="email"
                     required
-                    placeholder={isFr ? 'Entrez votre adresse email professionnelle...' : 'Enter your business email address...'}
+                    placeholder={isFr ? "Entrez votre adresse email professionnelle..." : "Enter your business email address..."}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     style={{
@@ -151,7 +151,7 @@ export function LeadMagnetModal({ isOpen, onClose }: { isOpen: boolean; onClose:
                     className="btn-violet"
                     style={{ width: '100%', padding: '13px', fontSize: '14px', fontWeight: 700, borderRadius: '12px', cursor: 'pointer' }}
                   >
-                    {submitting ? (isFr ? 'Envoi...' : 'Sending...') : (isFr ? 'Télécharger le Guide →' : 'Get Instant Access →')}
+                    {submitting ? (isFr ? "Envoi..." : "Sending...") : (isFr ? "Télécharger le Guide →" : "Get Instant Access →")}
                   </button>
                 </form>
               </div>
