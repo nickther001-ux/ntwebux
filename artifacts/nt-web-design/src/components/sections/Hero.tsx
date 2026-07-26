@@ -49,7 +49,7 @@ function StatCard({ v, num, suffix, l, sub, detail, source, tech, delay }: { v: 
       <div style={{ fontSize: '15px', color: 'rgba(255,255,255,0.9)', marginTop: '12px', fontWeight: 700, lineHeight: 1.35 }}>{l}</div>
       <div style={{ fontSize: '13px', color: 'rgba(255,255,255,0.5)', marginTop: '4px', lineHeight: 1.4 }}>{sub}</div>
       <div style={{
-        fontSize: '13px', color: 'rgba(255,255,255,0.65)',
+        fontSize: '13px', color: 'rgba(255,255,255,0.78)',
         marginTop: '14px', paddingTop: '12px',
         borderTop: '1px solid rgba(255,255,255,0.07)',
         lineHeight: 1.6,
@@ -135,9 +135,9 @@ export function Hero({ onStart }: { onStart?: () => void } = {}) {
           }}
         >
           {lang === 'fr' ? (
-            <>On propulse<br /><span className="gradient-text font-serif italic font-normal tracking-wide lowercase">votre croissance.</span></>
+            <>On propulse<br /><span className="gradient-text font-serif italic font-normal tracking-wide" style={{ textShadow: '0 0 35px rgba(59,130,246,0.45)' }}>Votre Croissance.</span></>
           ) : (
-            <>We Engineer<br /><span className="gradient-text font-serif italic font-normal tracking-wide lowercase">revenue engines.</span></>
+            <>We Engineer<br /><span className="gradient-text font-serif italic font-normal tracking-wide" style={{ textShadow: '0 0 35px rgba(59,130,246,0.45)' }}>Revenue Engines.</span></>
           )}
         </motion.h1>
 
