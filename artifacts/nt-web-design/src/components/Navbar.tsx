@@ -416,12 +416,12 @@ export function Navbar() {
 
               {/* CTA */}
               <a
-                href={isHome ? '#contact' : '/#contact'}
+                onClick={() => setPlaybookOpen(true)}
                 onClick={(e) => handleAnchorClick(e, isHome ? '#contact' : '')}
                 className="btn-violet"
                 style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', padding: '16px', fontSize: '15px', fontWeight: 700, borderRadius: '12px', textDecoration: 'none' }}
               >
-                {t('nav.quote')} <ArrowRight size={15} />
+                📘 {lang === 'fr' ? 'Guide 2026 (PDF)' : 'Get 2026 Playbook 📘'} <ArrowRight size={15} />
               </a>
 
               <p style={{ textAlign: 'center', fontSize: '11px', color: 'rgba(255,255,255,0.18)', margin: 0 }}>NT Web UX · Global · info@ntwebux.com</p>
@@ -434,7 +434,7 @@ export function Navbar() {
 
       {/* ⌘K command palette */}
       <CommandPalette open={cmdOpen} onClose={() => setCmdOpen(false)} />
-    </header>
       <LeadMagnetModal isOpen={playbookOpen} onClose={() => setPlaybookOpen(false)} />
+    </header>
   );
 }
