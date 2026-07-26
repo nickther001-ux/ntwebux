@@ -506,7 +506,7 @@ const FEATURES_FR = [
 function FeatureViz({ type, lang, color }: { type: string; lang: Lang; color: string }) {
   const lines = lang === 'fr' ? CONSOLE_FR : CONSOLE_EN;
   const accent = `rgb(${color})`;
-  const wrapStyle: React.CSSProperties = { position: 'relative', borderRadius: '16px', overflow: 'hidden', background: 'rgba(255,255,255,0.02)', border: `1px solid rgba(${color},0.2)`, height: '180px', flexShrink: 0 };
+  const wrapStyle: React.CSSProperties = { position: 'relative', borderRadius: '16px', overflow: 'hidden', background: 'transparent', border: `1px solid rgba(${color},0.2)`, height: '180px', flexShrink: 0 };
   if (type === 'console') return <div style={wrapStyle}><LiveConsole lines={lines} /></div>;
   if (type === 'analytics') return <div style={wrapStyle}><GhostAnalytics label={lang === 'fr' ? 'Trafic Organique' : 'Organic Traffic'} /></div>;
   if (type === 'stars')    return <div style={wrapStyle}><StarsViz /></div>;
@@ -550,7 +550,7 @@ const FAQ_FR = [
 function FaqItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
   return (
-    <div style={{ border: '1px solid rgba(255,255,255,0.07)', borderRadius: '12px', overflow: 'hidden', transition: 'border-color 0.2s' }}
+    <div style={{ border: '1px solid rgba(255,255,255,0.05)', borderRadius: '12px', overflow: 'hidden', transition: 'border-color 0.2s' }}
       onMouseEnter={e => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.14)')}
       onMouseLeave={e => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)')}>
       <button onClick={() => setOpen(!open)} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', padding: '18px 20px', background: 'rgba(255,255,255,0.02)', border: 'none', cursor: 'pointer', textAlign: 'left', gap: '12px' }}>
@@ -778,7 +778,7 @@ export function NTBusinessSuite() {
               { n: '03', t: bi(s.step3T, l), d: bi(s.step3D, l) },
             ].map((step, i) => (
               <motion.div key={i} custom={i} variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-40px' }}
-                style={{ padding: '32px 28px', borderRadius: '18px', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)', position: 'relative' }}>
+                style={{ padding: '32px 28px', borderRadius: '18px',  position: 'relative' }}>
                 <div style={{ fontSize: '48px', fontWeight: 900, color: 'rgba(59,130,246,0.15)', letterSpacing: '-0.04em', lineHeight: 1, marginBottom: '16px' }}>{step.n}</div>
                 <h3 style={{ fontSize: '17px', fontWeight: 700, color: '#fff', marginBottom: '10px', letterSpacing: '-0.02em' }}>{step.t}</h3>
                 <p style={{ fontSize: '13.5px', color: 'rgba(255,255,255,0.55)', lineHeight: 1.65, margin: 0 }}>{step.d}</p>
@@ -798,7 +798,7 @@ export function NTBusinessSuite() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '16px', alignItems: 'start' }} className="bs-3col">
             {plans.map((plan, i) => (
               <motion.div key={i} custom={i} variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-40px' }}
-                style={{ padding: '32px 28px', borderRadius: '20px', background: plan.popular ? 'linear-gradient(160deg,rgba(59,130,246,0.14),rgba(99,102,241,0.08))' : 'rgba(255,255,255,0.02)', border: plan.popular ? '1px solid rgba(99,102,241,0.4)' : '1px solid rgba(255,255,255,0.07)', position: 'relative', boxShadow: plan.popular ? '0 0 40px rgba(99,102,241,0.15)' : 'none' }}>
+                className="glass-card" style={{ padding: '32px 28px', borderRadius: '20px', background: plan.popular ? 'linear-gradient(160deg,rgba(59,130,246,0.14),rgba(99,102,241,0.08))' : 'rgba(255,255,255,0.02)', border: plan.popular ? '1px solid rgba(99,102,241,0.4)' : '1px solid rgba(255,255,255,0.07)', position: 'relative', boxShadow: plan.popular ? '0 0 40px rgba(99,102,241,0.15)' : 'none' }}>
                 {plan.badge && <div style={{ position: 'absolute', top: '-12px', left: '50%', transform: 'translateX(-50%)', padding: '4px 14px', background: 'linear-gradient(135deg,#4f46e5,#7c3aed)', borderRadius: '999px', fontSize: '10px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#fff', whiteSpace: 'nowrap' }}>{plan.badge}</div>}
                 <div style={{ marginBottom: '20px' }}>
                   <div style={{ fontSize: '13px', fontWeight: 700, color: 'rgba(255,255,255,0.5)', marginBottom: '8px' }}>{plan.name}</div>
