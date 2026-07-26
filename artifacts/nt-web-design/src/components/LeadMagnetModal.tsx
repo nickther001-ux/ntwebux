@@ -107,7 +107,7 @@ export function LeadMagnetModal({ isOpen, onClose }: { isOpen: boolean; onClose:
 
                 <h3 style={{ fontSize: '24px', fontWeight: 800, color: '#fff', letterSpacing: '-0.02em', lineHeight: 1.3, marginBottom: '10px' }}>
                   {isFr
-                    ? 'Guide d'Automatisation PME & Acquisition 2026'
+                    ? "Guide d\'Automatisation PME & Acquisition 2026"
                     : '2026 Local Business Automation Playbook'}
                 </h3>
 
