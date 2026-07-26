@@ -71,9 +71,7 @@ export function TwoPathSection() {
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }} className="two-path-grid">
 
           {/* Left — NT Business Suite */}
-          <div style={{
-              background: 'rgba(255,255,255,0.03)',
-              border: '1px solid rgba(255,255,255,0.07)',
+          <div className="glass-card" style={{
               borderRadius: '20px',
               padding: '40px 36px',
               display: 'flex',
@@ -140,9 +138,7 @@ export function TwoPathSection() {
           </div>
 
           {/* Right — Custom Development */}
-          <div style={{
-              background: 'rgba(255,255,255,0.03)',
-              border: '1px solid rgba(255,255,255,0.07)',
+          <div className="glass-card" style={{
               borderRadius: '20px',
               padding: '40px 36px',
               display: 'flex',
