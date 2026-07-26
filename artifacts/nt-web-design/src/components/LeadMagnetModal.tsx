@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, BookOpen, Check, Download, CheckCircle2 } from 'lucide-react';
 import { useLanguage } from '@/lib/i18n';
 
-const API_BASE = (import.meta.env.VITE_API_URL || import.meta.env.BASE_URL).replace(//$/, "");
+const API_BASE = (import.meta.env.VITE_API_URL || import.meta.env.BASE_URL).replace(/\/$/, "");
 
 export function LeadMagnetModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   const { lang } = useLanguage();
