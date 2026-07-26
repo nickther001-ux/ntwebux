@@ -417,7 +417,6 @@ export function Navbar() {
               {/* CTA */}
               <a
                 onClick={() => setPlaybookOpen(true)}
-                onClick={(e) => handleAnchorClick(e, isHome ? '#contact' : '')}
                 className="btn-violet"
                 style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', padding: '16px', fontSize: '15px', fontWeight: 700, borderRadius: '12px', textDecoration: 'none' }}
               >
