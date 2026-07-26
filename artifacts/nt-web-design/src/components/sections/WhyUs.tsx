@@ -38,7 +38,7 @@ function AnimatedStat({ raw, label, big = false, inView }: StatProps) {
   const count = useCountUp(target, big ? 1600 : 1400, inView);
 
   return (
-    <div style={big ? {} : { padding: '16px', background: 'rgba(255,255,255,0.04)', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.06)' }}>
+    <div className={big ? "" : "glass-card"} style={big ? {} : { padding: '16px', borderRadius: '10px' }}>
       <div style={big
         ? { fontSize: '80px', fontWeight: 900, background: 'linear-gradient(135deg,#93c5fd,#bfdbfe)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', lineHeight: 1, marginBottom: '12px' }
         : { fontSize: '22px', fontWeight: 800, color: '#93c5fd' }
@@ -87,7 +87,7 @@ export function WhyUs() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: '-60px' }}
                 transition={{ delay: i * 0.1, duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-                className="glass glass-hover"
+                className="glass-card"
                 style={{ display: 'flex', alignItems: 'flex-start', gap: '16px', padding: '18px 20px', borderRadius: '12px', cursor: 'default' }}
               >
                 <div style={{ width: '28px', height: '28px', borderRadius: '50%', background: 'rgba(59,130,246,0.15)', border: '1px solid rgba(59,130,246,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: '1px' }}>
