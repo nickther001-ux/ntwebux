@@ -477,10 +477,7 @@ function PillarCard({ pillar, index, ctaLabel, onClick }: {
             </div>
             
           </div>
-          <span style={{
-            fontSize: '52px', fontWeight: 800,
-            color: 'rgba(255,255,255,0.04)', letterSpacing: '-0.05em', lineHeight: 1,
-          }}>{pillar.id}</span>
+          
         </div>
 
         {/* Title */}

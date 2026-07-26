@@ -71,16 +71,7 @@ export function Process() {
               borderRadius: "20px",
               padding: "40px 36px",
             }}>
-              <div style={{
-                fontSize: "12px",
-                color: "#60a5fa",
-                textTransform: "uppercase",
-                letterSpacing: "1px",
-                marginBottom: "16px",
-                fontWeight: 600,
-              }}>
-                {lbl.step} 0{i + 1} {lbl.of} 04
-              </div>
+              
               <h3 style={{ fontSize: "28px", color: "white", fontWeight: 800, marginBottom: "14px" }}>
                 {step.title}
               </h3>
