@@ -195,9 +195,21 @@ export function Navbar() {
           <button
             onClick={() => setPlaybookOpen(true)}
             className="btn-violet"
-            style={{ padding: '9px 20px', fontSize: '13px', fontWeight: 600, letterSpacing: '0.02em', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+            style={{
+              padding: '8px 18px',
+              fontSize: '13px',
+              fontWeight: 600,
+              whiteSpace: 'nowrap',
+              borderRadius: '999px',
+              cursor: 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '6px',
+              height: '38px',
+            }}
           >
-            📘 {lang === 'fr' ? 'Guide 2026 (PDF)' : 'Get 2026 Playbook 📘'}
+            📘 {lang === 'fr' ? 'Guide 2026' : '2026 Playbook'}
           </button>
         </div>
 
@@ -242,20 +254,7 @@ export function Navbar() {
             ))}
           </div>
 
-          <button
-            onClick={() => setPlaybookOpen(true)}
-            style={{
-              display: 'inline-flex', alignItems: 'center', gap: '4px',
-              padding: '5px 10px',
-              background: 'rgba(59,130,246,0.15)',
-              border: '1px solid rgba(59,130,246,0.3)',
-              borderRadius: '999px',
-              color: '#93c5fd', fontSize: '11px', fontWeight: 700,
-              cursor: 'pointer', whiteSpace: 'nowrap', marginRight: '6px',
-            }}
-          >
-            📘 {lang === 'fr' ? 'Guide' : 'Playbook 📘'}
-          </button>
+          
           <button
             className="navbar-mobile-btn"
             onClick={() => setOpen(!open)}
