@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, BookOpen, Check, Download, CheckCircle2 } from 'lucide-react';
 import { useLanguage } from '@/lib/i18n';
@@ -36,42 +37,48 @@ export function LeadMagnetModal({ isOpen, onClose }: { isOpen: boolean; onClose:
 
   const isFr = lang === 'fr';
 
-  return (
+  if (typeof document === 'undefined') return null;
+
+  return createPortal(
     <AnimatePresence>
       {isOpen && (
-        <div style={{ position: 'fixed', inset: 0, zIndex: 100, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px' }}>
+        <div style={{ position: 'fixed', inset: 0, zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px' }}>
+          {/* Backdrop overlay */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.75)', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)' }}
+            style={{ position: 'absolute', inset: 0, background: 'rgba(2, 6, 23, 0.88)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)' }}
           />
 
+          {/* Opaque Solid Dark Modal Card */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.92, y: 16 }}
+            initial={{ opacity: 0, scale: 0.94, y: 16 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.92, y: 16 }}
-            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="glass-card"
+            exit={{ opacity: 0, scale: 0.94, y: 16 }}
+            transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
             style={{
               position: 'relative',
               width: '100%',
-              maxWidth: '520px',
+              maxWidth: '500px',
               padding: '36px 32px',
               borderRadius: '24px',
-              zIndex: 101,
-              boxShadow: '0 20px 60px rgba(0,0,0,0.6)',
+              background: '#090e1a',
+              border: '1px solid rgba(255,255,255,0.12)',
+              boxShadow: '0 25px 70px rgba(0,0,0,0.8), 0 0 40px rgba(59,130,246,0.12)',
+              zIndex: 10000,
             }}
           >
+            {/* Close Button */}
             <button
               onClick={onClose}
               style={{
-                position: 'absolute', top: '16px', right: '16px',
-                width: '32px', height: '32px', borderRadius: '50%',
-                background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)',
+                position: 'absolute', top: '18px', right: '18px',
+                width: '34px', height: '34px', borderRadius: '50%',
+                background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                color: 'rgba(255,255,255,0.6)', cursor: 'pointer',
+                color: 'rgba(255,255,255,0.7)', cursor: 'pointer',
               }}
             >
               <X size={16} />
@@ -79,13 +86,13 @@ export function LeadMagnetModal({ isOpen, onClose }: { isOpen: boolean; onClose:
 
             {success ? (
               <div style={{ textAlign: 'center', padding: '12px 0' }}>
-                <div style={{ width: '56px', height: '56px', borderRadius: '50%', background: 'rgba(34,197,94,0.15)', border: '1px solid rgba(34,197,94,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px', color: '#34d399' }}>
-                  <CheckCircle2 size={28} />
+                <div style={{ width: '60px', height: '60px', borderRadius: '50%', background: 'rgba(34,197,94,0.15)', border: '1px solid rgba(34,197,94,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px', color: '#34d399' }}>
+                  <CheckCircle2 size={32} />
                 </div>
                 <h3 style={{ fontSize: '22px', fontWeight: 800, color: '#fff', marginBottom: '8px' }}>
                   {isFr ? "Accès Débloqué !" : "Access Unlocked!"}
                 </h3>
-                <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.6)', lineHeight: 1.6, marginBottom: '24px' }}>
+                <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.65)', lineHeight: 1.6, marginBottom: '24px' }}>
                   {isFr
                     ? "Votre guide PDF est prêt. Cliquez ci-dessous pour télécharger votre exemplaire gratuit."
                     : "Your PDF guide is ready. Click below to download your free copy."}
@@ -101,7 +108,8 @@ export function LeadMagnetModal({ isOpen, onClose }: { isOpen: boolean; onClose:
               </div>
             ) : (
               <div>
-                <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '4px 12px', background: 'rgba(59,130,246,0.12)', border: '1px solid rgba(59,130,246,0.3)', borderRadius: '999px', fontSize: '11px', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#93c5fd', marginBottom: '16px' }}>
+                {/* Header Badge */}
+                <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '4px 12px', background: 'rgba(59,130,246,0.12)', border: '1px solid rgba(59,130,246,0.3)', borderRadius: '999px', fontSize: '11px', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#93c5fd', marginBottom: '18px' }}>
                   <BookOpen size={12} /> {isFr ? "Guide Gratuit 2026" : "Free 2026 Playbook"}
                 </div>
 
@@ -111,28 +119,30 @@ export function LeadMagnetModal({ isOpen, onClose }: { isOpen: boolean; onClose:
                     : "2026 Local Business Automation Playbook"}
                 </h3>
 
-                <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.55)', lineHeight: 1.6, marginBottom: '20px' }}>
+                <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.6)', lineHeight: 1.6, marginBottom: '22px' }}>
                   {isFr
                     ? "Découvrez comment les entreprises de services réduisent leurs coûts de 40% et captent des leads 24h/24."
                     : "Discover how local service businesses cut operational overhead by 40% and capture 24/7 client leads."}
                 </p>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '24px' }}>
+                {/* Checklist */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '26px' }}>
                   {[
                     isFr ? "Réduction de 40 % des coûts d'exploitation" : "40% reduction in operational overhead",
                     isFr ? "Capture de leads IA 24h/24 & SMS automatique" : "24/7 AI lead capture & instant SMS text-back",
                     isFr ? "Blueprint de site bilingue haute conversion" : "High-converting bilingual website blueprint",
                   ].map((item, i) => (
-                    <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', color: 'rgba(255,255,255,0.75)' }}>
-                      <div style={{ width: '18px', height: '18px', borderRadius: '50%', background: 'rgba(59,130,246,0.15)', border: '1px solid rgba(59,130,246,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                        <Check size={11} color="#93c5fd" />
+                    <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '13.5px', color: 'rgba(255,255,255,0.85)' }}>
+                      <div style={{ width: '20px', height: '20px', borderRadius: '50%', background: 'rgba(59,130,246,0.18)', border: '1px solid rgba(59,130,246,0.35)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                        <Check size={11} color="#93c5fd" strokeWidth={3} />
                       </div>
                       {item}
                     </div>
                   ))}
                 </div>
 
-                <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                {/* Input Form */}
+                <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
                   <input
                     type="email"
                     required
@@ -140,8 +150,8 @@ export function LeadMagnetModal({ isOpen, onClose }: { isOpen: boolean; onClose:
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     style={{
-                      width: '100%', padding: '13px 16px',
-                      background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.12)',
+                      width: '100%', padding: '14px 16px',
+                      background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.14)',
                       borderRadius: '12px', fontSize: '14px', color: '#fff', outline: 'none',
                     }}
                   />
@@ -149,7 +159,7 @@ export function LeadMagnetModal({ isOpen, onClose }: { isOpen: boolean; onClose:
                     type="submit"
                     disabled={submitting}
                     className="btn-violet"
-                    style={{ width: '100%', padding: '13px', fontSize: '14px', fontWeight: 700, borderRadius: '12px', cursor: 'pointer' }}
+                    style={{ width: '100%', padding: '14px', fontSize: '14px', fontWeight: 700, borderRadius: '12px', cursor: 'pointer' }}
                   >
                     {submitting ? (isFr ? "Envoi..." : "Sending...") : (isFr ? "Télécharger le Guide →" : "Get Instant Access →")}
                   </button>
@@ -159,6 +169,7 @@ export function LeadMagnetModal({ isOpen, onClose }: { isOpen: boolean; onClose:
           </motion.div>
         </div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 }
