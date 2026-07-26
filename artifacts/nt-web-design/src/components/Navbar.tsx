@@ -5,6 +5,7 @@ import { Menu, X, ArrowRight, Search } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLocation, Link } from 'wouter';
 import { CommandPalette } from '@/components/CommandPalette';
+import { LeadMagnetModal } from '@/components/LeadMagnetModal';
 
 /* Smooth-scroll to an anchor id, compensating for the fixed navbar height */
 const NAVBAR_OFFSET = 88; // px — navbar height + comfortable gap
@@ -21,6 +22,7 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [cmdOpen, setCmdOpen] = useState(false);
+  const [playbookOpen, setPlaybookOpen] = useState(false);
   const [location, navigate] = useLocation();
   const isHome = location === '/';
   const isMac = typeof navigator !== 'undefined' && /Mac|iPhone|iPad/i.test(navigator.platform);
@@ -190,14 +192,13 @@ export function Navbar() {
               fontFamily: 'inherit',
             }}>{isMac ? '⌘K' : 'Ctrl+K'}</span>
           </button>
-          <a
-            href={isHome ? '#contact' : '/#contact'}
-            onClick={(e) => handleAnchorClick(e, isHome ? '#contact' : '')}
+          <button
+            onClick={() => setPlaybookOpen(true)}
             className="btn-violet"
-            style={{ padding: '9px 20px', fontSize: '13px', fontWeight: 600, letterSpacing: '0.02em' }}
+            style={{ padding: '9px 20px', fontSize: '13px', fontWeight: 600, letterSpacing: '0.02em', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
           >
-            {t('nav.quote')}
-          </a>
+            📘 {lang === 'fr' ? 'Guide 2026 (PDF)' : 'Get 2026 Playbook 📘'}
+          </button>
         </div>
 
         {/* Mobile right — search + lang toggle + hamburger */}
@@ -434,5 +435,6 @@ export function Navbar() {
       {/* ⌘K command palette */}
       <CommandPalette open={cmdOpen} onClose={() => setCmdOpen(false)} />
     </header>
+      <LeadMagnetModal isOpen={playbookOpen} onClose={() => setPlaybookOpen(false)} />
   );
 }
