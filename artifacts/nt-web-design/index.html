@@ -8,10 +8,13 @@
       "@context": "https://schema.org",
       "@type": "ProfessionalService",
       "name": "NT WebUX",
+      "legalName": "NT Digital Group Inc.",
       "url": "https://ntwebux.com",
-      "logo": "https://ntwebux.com/nt-favicon.png",
+      "logo": "https://ntwebux.com/nt-logo-mark.png",
       "image": "https://ntwebux.com/opengraph.jpg",
-      "description": "Custom web application architecture, user experience design, and automated business workflows for service-based businesses.",
+      "telephone": "+14388067640",
+      "email": "info@ntwebux.com",
+      "description": "Custom bilingual web design, 72-hour website builds, and automated AI business suites for service businesses in Canada and USA.",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Montreal",
@@ -23,12 +26,53 @@
         "latitude": "45.5017",
         "longitude": "-73.5673"
       },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "08:00",
+          "closes": "20:00"
+        }
+      ],
       "sameAs": [
         "https://www.linkedin.com/company/nt-digital-group"
       ],
-      "priceRange": "$"
+      "priceRange": "$",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Web Design & Business Automation",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "72-Hour Custom Web Development",
+              "description": "Bilingual web development built from scratch in 3 days."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "NT Business Suite",
+              "description": "All-in-one CRM, AI web chat, SMS text-back, and automated client acquisition system."
+            }
+          }
+        ]
+      }
     }
     </script>
+    
+    <!-- Bilingual Alternate Links -->
+    <link rel="alternate" hreflang="en" href="https://ntwebux.com/?lang=en" />
+    <link rel="alternate" hreflang="fr" href="https://ntwebux.com/?lang=fr" />
+    <link rel="alternate" hreflang="x-default" href="https://ntwebux.com/" />
+
+    <!-- Regional Geo-Targeting Tags -->
+    <meta name="geo.region" content="CA-QC" />
+    <meta name="geo.placename" content="Montreal" />
+    <meta name="geo.position" content="45.5017;-73.5673" />
+    <meta name="ICBM" content="45.5017, -73.5673" />
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />

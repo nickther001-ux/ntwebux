@@ -20,8 +20,8 @@ import { OnboardingModal } from "@/components/OnboardingModal";
 import { ScrollTilt } from "@/components/ScrollTilt";
 import LogoBar from "@/components/LogoBar";
 
-const TITLE = "NT Web Design";
-const DESC  = "Premium web design and AI-driven solutions delivered in exactly 72 hours. Specializing in high-performance websites and SaaS for startups in Canada & USA. 100% code ownership.";
+const TITLE = "NT WebUX | Custom Web Design Montreal & 72-Hour Web Development";
+const DESC  = "Custom bilingual web design & AI business automation delivered in 72 hours. Specialized in high-performance websites and client acquisition systems in Montreal, Quebec, Canada & USA.";
 const URL   = "https://ntwebux.com/";
 const IMG   = "https://ntwebux.com/logo.png?v=2";
 
