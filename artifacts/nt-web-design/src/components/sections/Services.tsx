@@ -296,11 +296,9 @@ function PillarCard({ pillar, index, ctaLabel, onClick }: {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
       transition={{ delay: index * 0.1, duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-      className="pillar-card"
+      className="pillar-card glass-card"
       style={{
         position: 'relative',
-        background: 'rgba(255,255,255,0.02)',
-        border: '1px solid rgba(255,255,255,0.06)',
         borderRadius: '24px',
         padding: '0',
         textAlign: 'left',
