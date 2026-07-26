@@ -1,6 +1,6 @@
 import { motion, useInView, useScroll, useTransform } from 'framer-motion'; 
 import { Magnetic } from '@/components/Magnetic';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight, Zap } from 'lucide-react';
 import { useLanguage } from '@/lib/i18n';
 import { useEffect, useRef, useState } from 'react';
 
@@ -114,7 +114,7 @@ export function Hero({ onStart }: { onStart?: () => void } = {}) {
         {/* Badge */}
         <motion.div custom={0} variants={fadeUp} initial="hidden" animate="show" style={{ display: 'flex', justifyContent: 'center', marginBottom: '32px' }}>
           <span className="pill-label">
-            <Sparkles size={11} />
+            <Zap size={11} className="text-blue-400" />
             {lang === 'fr' ? 'Plateforme tout-en-un pour entrepreneurs' : 'All-in-One Platform for Service Businesses'}
           </span>
         </motion.div>

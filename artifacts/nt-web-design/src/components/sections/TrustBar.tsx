@@ -1,5 +1,5 @@
 import { useLanguage } from '@/lib/i18n';
-import { HardHat, Stethoscope, ShoppingBag, Cloud, Building2, Scale, Users, Sparkles } from 'lucide-react';
+import { HardHat, Stethoscope, ShoppingBag, Cloud, Building2, Scale, Users, Flame } from 'lucide-react';
 
 const INDUSTRIES_EN = [
   { icon: HardHat,     label: 'CoreBuild',    sub: 'Construction' },
@@ -9,7 +9,7 @@ const INDUSTRIES_EN = [
   { icon: Building2,   label: 'Haventra',     sub: 'Real Estate' },
   { icon: Scale,       label: 'Civitas',      sub: 'Legal' },
   { icon: Users,       label: 'AudreyRH',     sub: 'HR' },
-  { icon: Sparkles,    label: 'Goalz',        sub: 'Fitness' },
+  { icon: Flame,    label: 'Goalz',        sub: 'Fitness' },
 ];
 
 const INDUSTRIES_FR = [
@@ -20,7 +20,7 @@ const INDUSTRIES_FR = [
   { icon: Building2,   label: 'Haventra',     sub: 'Immobilier' },
   { icon: Scale,       label: 'Civitas',      sub: 'Juridique' },
   { icon: Users,       label: 'AudreyRH',     sub: 'RH' },
-  { icon: Sparkles,    label: 'Goalz',        sub: 'Fitness' },
+  { icon: Flame,    label: 'Goalz',        sub: 'Fitness' },
 ];
 
 export function TrustBar() {

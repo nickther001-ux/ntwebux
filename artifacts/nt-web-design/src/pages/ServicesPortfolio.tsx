@@ -4,14 +4,14 @@ import { motion } from 'framer-motion';
 import { useLanguage } from '@/lib/i18n';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
-import { Globe, Layers, Crown, Sparkles, Cpu, Rocket, ArrowRight, Check } from 'lucide-react';
+import { Globe, Layers, Crown, Zap, Cpu, Rocket, ArrowRight, Check } from 'lucide-react';
 import { OnboardingModal } from '@/components/OnboardingModal';
 import { LetsTalkModal } from '@/components/LetsTalkModal';
 
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 
-const WEB_ICONS = [Layers, Sparkles, Crown];
+const WEB_ICONS = [Layers, Zap, Crown];
 const AI_ICONS  = [Cpu,    Rocket,    Crown];
 
 const fadeUp = (delay = 0) => ({
