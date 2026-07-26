@@ -6,7 +6,7 @@ export const CompetitorComparison = () => {
   const rows: { feature: string; us: string; them: string; usCheck?: boolean; themX?: boolean }[] = t('competitorComparison.rows');
 
   return (
-    <section className="py-24 bg-[#030712] text-white relative overflow-hidden">
+    <section className="py-24 bg-transparent text-white relative overflow-hidden">
       <div className="max-w-6xl mx-auto px-6 relative z-10">
 
         <div className="text-center max-w-2xl mx-auto mb-16">
@@ -19,7 +19,7 @@ export const CompetitorComparison = () => {
           </p>
         </div>
 
-        <div className="glass rounded-2xl overflow-hidden border border-border/60">
+        <div className="glass-card rounded-2xl overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
