@@ -65,10 +65,7 @@ export function Process() {
 
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "24px" }}>
           {steps.map((step, i) => (
-            <div key={i} style={{
-              backgroundColor: "rgba(255,255,255,0.02)",
-              border: "1px solid rgba(255,255,255,0.06)",
-              borderRadius: "20px",
+            <div key={i} className="glass-card" style={{
               padding: "40px 36px",
             }}>
               
