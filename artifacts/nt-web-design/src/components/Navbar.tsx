@@ -242,6 +242,20 @@ export function Navbar() {
           </div>
 
           <button
+            onClick={() => setPlaybookOpen(true)}
+            style={{
+              display: 'inline-flex', alignItems: 'center', gap: '4px',
+              padding: '5px 10px',
+              background: 'rgba(59,130,246,0.15)',
+              border: '1px solid rgba(59,130,246,0.3)',
+              borderRadius: '999px',
+              color: '#93c5fd', fontSize: '11px', fontWeight: 700,
+              cursor: 'pointer', whiteSpace: 'nowrap', marginRight: '6px',
+            }}
+          >
+            📘 {lang === 'fr' ? 'Guide' : 'Playbook 📘'}
+          </button>
+          <button
             className="navbar-mobile-btn"
             onClick={() => setOpen(!open)}
             style={{ background: 'none', border: 'none', color: '#fff', cursor: 'pointer', padding: '4px' }}
@@ -363,6 +377,21 @@ export function Navbar() {
               transition={{ delay: 0.35, duration: 0.38 }}
               style={{ padding: '24px 28px 40px', borderTop: '1px solid rgba(255,255,255,0.06)', display: 'flex', flexDirection: 'column', gap: '16px', flexShrink: 0 }}
             >
+              
+              {/* Playbook Download CTA */}
+              <button
+                onClick={() => { setPlaybookOpen(true); setOpen(false); }}
+                className="btn-violet"
+                style={{
+                  width: '100%', padding: '13px', fontSize: '13px', fontWeight: 700,
+                  borderRadius: '12px', cursor: 'pointer', display: 'flex',
+                  alignItems: 'center', justifyContent: 'center', gap: '8px',
+                  background: 'linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%)', color: '#fff',
+                }}
+              >
+                📘 {lang === 'fr' ? 'Télécharger le Guide 2026 (PDF)' : 'Download 2026 Playbook (PDF)'}
+              </button>
+    
               {/* Language toggle */}
               <div style={{ display: 'flex', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '10px', overflow: 'hidden' }}>
                 {(['en', 'fr'] as const).map((l) => (
