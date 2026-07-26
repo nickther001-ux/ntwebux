@@ -31,7 +31,7 @@ function StatCard({ v, num, suffix, l, sub, detail, source, tech, delay }: { v: 
   return (
     <motion.div
       ref={ref}
-      className="glass"
+      className="glass-card"
       initial={{ opacity: 0, y: 18 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay, duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
