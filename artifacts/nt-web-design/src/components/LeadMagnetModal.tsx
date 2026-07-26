@@ -98,7 +98,7 @@ export function LeadMagnetModal({ isOpen, onClose }: { isOpen: boolean; onClose:
                     : "Your PDF guide is ready. Click below to download your free copy."}
                 </p>
                 <a
-                  href={`${import.meta.env.BASE_URL}robots.txt`}
+                  href={`${import.meta.env.BASE_URL}NT-WebUX-2026-Automation-Playbook.pdf`}
                   download="NT-WebUX-2026-Automation-Playbook.pdf"
                   className="btn-violet"
                   style={{ width: '100%', padding: '14px', fontSize: '14px', fontWeight: 700, borderRadius: '12px', textDecoration: 'none', display: 'inline-flex', gap: '8px', alignItems: 'center', justifyContent: 'center' }}
