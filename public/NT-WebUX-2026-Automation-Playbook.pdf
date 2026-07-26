@@ -1,286 +1,422 @@
 %PDF-1.4
 1 0 obj
-<<
-  /Type /Catalog
-  /Pages 2 0 R
->>
+<< /Type /Catalog /Pages 2 0 R >>
 endobj
 
 2 0 obj
-<<
-  /Type /Pages
-  /Kids [3 0 R 7 0 R 8 0 R 9 0 R]
-  /Count 4
->>
+<< /Type /Pages /Kids [3 0 R 7 0 R 8 0 R 9 0 R 10 0 R 11 0 R 12 0 R] /Count 7 >>
 endobj
 
 3 0 obj
-<<
-  /Type /Page
-  /Parent 2 0 R
-  /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >>
-  /MediaBox [0 0 612 792]
-  /Contents 6 0 R
->>
+<< /Type /Page /Parent 2 0 R /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /MediaBox [0 0 612 792] /Contents 6 0 R >>
 endobj
 
-4 0 obj
-<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
-endobj
-
-5 0 obj
-<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
-endobj
+4 0 obj << /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >> endobj
+5 0 obj << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> endobj
 
 6 0 obj
-<< /Length 1250 >>
+<< /Length 1600 >>
 stream
 BT
-/F1 24 Tf
+/F1 22 Tf
 50 720 Td
-(NT WebUX - 2026 Local Business Automation Playbook) Tj
-/F2 13 Tf
-0 -28 Td
-(How Service Businesses Cut Overhead by 40% & Dominate Local Acquisition) Tj
+(NT WebUX - 2026 Local Business Automation Masterclass) Tj
+/F2 12 Tf
+0 -26 Td
+(The Complete Executive Blueprint for Scaling Service Businesses in North America) Tj
 0 -15 Td
-(Author: Nick T. | Founder & Principal Architect, NT WebUX) Tj
-0 -45 Td
-/F1 16 Tf
-(EXECUTIVE SUMMARY & THE 2026 LANDSCAPE) Tj
-/F2 11 Tf
+(Author: Nick T. | Founder & Principal Architect, NT WebUX (Montreal, QC)) Tj
+0 -40 Td
+/F1 15 Tf
+(EXECUTIVE PREFACE: THE 2026 DIGITAL PARADIGM) Tj
+/F2 10.5 Tf
 0 -22 Td
-(In 2026, local service businesses face unprecedented competition. Traditional marketing) Tj
+(In 2026, local service businesses face a fundamental shift in client acquisition.) Tj
 0 -15 Td
-(drives clicks, but over 40% of prospective clients leave before booking due to friction,) Tj
+(Traditional marketing campaigns generate traffic, but over 40% of prospective clients) Tj
 0 -15 Td
-(unanswered phone calls, or slow loading websites.) Tj
-0 -30 Td
-/F1 14 Tf
-(The 5-Minute Lead Response Rule) Tj
-/F2 11 Tf
+(abandon the booking process due to slow websites, unanswered phone calls, or lack of) Tj
+0 -15 Td
+(immediate follow-up.) Tj
+0 -28 Td
+/F1 13 Tf
+(The 5-Minute Lead Response Rule & Conversion Dynamics) Tj
+/F2 10.5 Tf
 0 -20 Td
-(Studies show that reaching out to a new lead within 5 minutes increases conversion odds) Tj
+(MIT and Harvard Business Review research confirms that responding to an inbound lead) Tj
 0 -15 Td
-(by 391%. Waiting just 30 minutes reduces conversion probability by over 80%.) Tj
+(within 5 minutes increases conversion probability by 391%. Delaying response by just) Tj
+0 -15 Td
+(30 minutes reduces conversion odds by over 80%. In competitive industries such as) Tj
+0 -15 Td
+(contracting, legal, medical, and real estate, the first business to respond wins the contract.) Tj
 0 -30 Td
-/F1 14 Tf
-(What You Will Learn In This Playbook:) Tj
-/F2 11 Tf
+/F1 13 Tf
+(Masterclass Table of Contents:) Tj
+/F2 10.5 Tf
 0 -20 Td
-(- Chapter 1: The Leaky Bucket Problem in Local Service Businesses) Tj
+(Section 1: The Leaky Bucket Thesis & Mathematical Loss Formulas) Tj
 0 -16 Td
-(- Chapter 2: The 24/7 AI Lead Capture & Instant SMS Text-Back Engine) Tj
+(Section 2: The 24/7 AI Lead Capture & Instant Missed-Call Text-Back Engine) Tj
 0 -16 Td
-(- Chapter 3: High-Converting Bilingual Web Architecture (EN/FR)) Tj
+(Section 3: High-Converting Custom Web Architecture vs. Legacy Builders) Tj
 0 -16 Td
-(- Chapter 4: 72-Hour Implementation Roadmap & ROI Calculation) Tj
+(Section 4: Bilingual Market Expansion (English & French Localization)) Tj
+0 -16 Td
+(Section 5: Automated Reputation & Review Generation Systems) Tj
+0 -16 Td
+(Section 6: The 72-Hour Deployment Roadmap & Financial Payback Model) Tj
 0 -50 Td
-/F2 10 Tf
-(Page 1 of 4 | NT WebUX Montreal & North America | https://ntwebux.com) Tj
+/F2 9.5 Tf
+(Page 1 of 7 | NT WebUX Executive Playbook | https://ntwebux.com) Tj
 ET
 endstream
 endobj
 
 7 0 obj
-<<
-  /Type /Page
-  /Parent 2 0 R
-  /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >>
-  /MediaBox [0 0 612 792]
-  /Contents 10 0 R
->>
+<< /Type /Page /Parent 2 0 R /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /MediaBox [0 0 612 792] /Contents 13 0 R >>
 endobj
 
-10 0 obj
-<< /Length 1350 >>
+13 0 obj
+<< /Length 1700 >>
 stream
 BT
-/F1 16 Tf
+/F1 15 Tf
 50 730 Td
-(CHAPTER 1: THE LEAKY BUCKET IN LOCAL BUSINESSES) Tj
-/F2 11 Tf
+(SECTION 1: THE LEAKY BUCKET THESIS & FINANCIAL LOSS FORMULA) Tj
+/F2 10.5 Tf
 0 -24 Td
-(Most service businesses (contractors, dental, legal, HVAC, real estate, consulting)) Tj
+(Every business incurs marketing costs to acquire visitors. However, traditional funnel) Tj
 0 -15 Td
-(spend thousands of dollars monthly on Google Ads or Social Media campaigns, only to) Tj
+(architectures leak revenue at three critical touchpoints:) Tj
+0 -25 Td
+/F1 12 Tf
+(1. The Field Call Bottleneck (35% Lead Loss)) Tj
+/F2 10.5 Tf
+0 -18 Td
+(When business owners or field crews are actively working on job sites, incoming calls) Tj
 0 -15 Td
-(waste leads due to operational bottlenecks.) Tj
+(go directly to voicemail. Industry data indicates that 82% of prospects who reach a) Tj
+0 -15 Td
+(voicemail hang up immediately and place a call to a direct competitor.) Tj
+0 -25 Td
+/F1 12 Tf
+(2. Page Load Latency Friction (25% Traffic Loss)) Tj
+/F2 10.5 Tf
+0 -18 Td
+(Modern mobile consumers expect instant interaction. Google research reveals that web) Tj
+0 -15 Td
+(pages taking more than 2.5 seconds to render lose over 53% of mobile visitors before) Tj
+0 -15 Td
+(the primary headline is even read.) Tj
+0 -25 Td
+/F1 12 Tf
+(3. Single-Language Market Isolation (40% Market Exclusion)) Tj
+/F2 10.5 Tf
+0 -18 Td
+(In major economic hubs like Montreal, Quebec, Ottawa, and European markets, operating) Tj
+0 -15 Td
+(an un-localized website locks out non-native speakers, forfeiting half your local market.) Tj
 0 -30 Td
 /F1 13 Tf
-(The Three Major Points of Lead Loss:) Tj
-/F2 11 Tf
+(The Annual Revenue Loss Formula:) Tj
+/F2 10.5 Tf
 0 -20 Td
-(1. Unanswered Field Calls: When crews or owners are on job sites, phone calls go to) Tj
-0 -15 Td
-(   voicemail. Over 80% of caller prospects hang up and call the next competitor.) Tj
-0 -22 Td
-(2. Slow Website Speed: Websites taking over 3 seconds to load lose 53% of mobile) Tj
-0 -15 Td
-(   traffic before the user even sees the service offering.) Tj
-0 -22 Td
-(3. Single-Language Barriers: In markets like Montreal, Quebec, and bilingual hubs,) Tj
-0 -15 Td
-(   lacking native French and English options turns away 50% of local prospects.) Tj
-0 -40 Td
-/F1 16 Tf
-(CHAPTER 2: THE 24/7 AI LEAD CAPTURE & TEXT-BACK ENGINE) Tj
-/F2 11 Tf
-0 -24 Td
-(Automated Missed-Call Text-Back ensures zero leads drop through the cracks.) Tj
-0 -20 Td
-(Automated Workflow Diagram:) Tj
+(Annual Lost Revenue = (Monthly Inbound Leads x 0.40 Missed Ratio) x Average Ticket Size x 12) Tj
+0 -18 Td
+(Example: A contractor receiving 30 monthly inquiries ($3,000 average job value) loses:) Tj
 0 -16 Td
-("[Incoming Call] -> [Unanswered / Busy] -> [AI Engine Triggers SMS in 10 Seconds]") Tj
-0 -20 Td
-(Exact Automated SMS Script:) Tj
-0 -16 Td
-("Hi! Thanks for calling NT Digital Group. We are currently on a job site but want to) Tj
-0 -15 Td
-( assist you right away. What project or estimate can we help you with today?") Tj
+(30 leads x 0.40 missed = 12 lost leads/mo -> 12 x $3,000 = $36,000/mo ($432,000/year lost!).) Tj
 0 -50 Td
-/F2 10 Tf
-(Page 2 of 4 | NT WebUX Montreal & North America | https://ntwebux.com) Tj
+/F2 9.5 Tf
+(Page 2 of 7 | NT WebUX Executive Playbook | https://ntwebux.com) Tj
 ET
 endstream
 endobj
 
 8 0 obj
-<<
-  /Type /Page
-  /Parent 2 0 R
-  /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >>
-  /MediaBox [0 0 612 792]
-  /Contents 11 0 R
->>
+<< /Type /Page /Parent 2 0 R /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /MediaBox [0 0 612 792] /Contents 14 0 R >>
 endobj
 
-11 0 obj
-<< /Length 1350 >>
+14 0 obj
+<< /Length 1700 >>
 stream
 BT
-/F1 16 Tf
+/F1 15 Tf
 50 730 Td
-(CHAPTER 3: HIGH-CONVERTING BILINGUAL WEB ARCHITECTURE) Tj
-/F2 11 Tf
+(SECTION 2: 24/7 AI LEAD CAPTURE & INSTANT TEXT-BACK ENGINE) Tj
+/F2 10.5 Tf
 0 -24 Td
-(Generic website builders (Wix, Squarespace, bloated WordPress plugins) introduce heavy) Tj
+(To solve the field call bottleneck, modern businesses deploy an automated Missed-Call) Tj
 0 -15 Td
-(code bloat that destroys Google SEO ranks and delays user interaction.) Tj
-0 -30 Td
-/F1 13 Tf
-(The 4 Pillars of NT WebUX Architecture:) Tj
-/F2 11 Tf
-0 -20 Td
-(A. Sub-2-Second Load Times: Built on custom React, Vite, and edge CDN rendering.) Tj
+(Text-Back engine integrated directly into their phone system and CRM.) Tj
+0 -25 Td
+/F1 12 Tf
+(Technical Workflow Architecture:) Tj
+/F2 10.5 Tf
 0 -18 Td
-(B. Dynamic Geo-Targeting: Dedicated city landing pages (Montreal, Laval, Toronto, Paris)) Tj
+([Inbound Call Received] -> [Unanswered after 4 Rings / Line Busy]) Tj
 0 -15 Td
-(   that capture high-intent local search queries.) Tj
+("-> [Twilio / Webhook Triggers Automated SMS Engine within 8 Seconds]") Tj
+0 -15 Td
+("-> [Prospect Receives Personalized Qualification Text on Mobile]") Tj
+0 -15 Td
+("-> [AI Chatbot Pre-Qualifies Budget & Schedules Appointment directly into CRM]") Tj
+0 -25 Td
+/F1 12 Tf
+(Proven Conversational SMS Script Template:) Tj
+/F2 10.5 Tf
 0 -18 Td
-(C. Structured LocalBusiness Microdata: Injected JSON-LD Schema that tells Google's) Tj
+("Hi [Client Name]! Thank you for contacting NT Digital. We are currently assisting clients) Tj
 0 -15 Td
-(   search algorithms exactly where your business operates.) Tj
+(on-site but want to handle your inquiry right away. Are you looking for a new web project,) Tj
+0 -15 Td
+(software suite automation, or a free estimate?") Tj
+0 -25 Td
+/F1 12 Tf
+(Multi-Channel AI Web Assistant Integration:) Tj
+/F2 10.5 Tf
 0 -18 Td
-(D. Frictionless Booking Widgets: Embedded interactive quote calculators that pre-qualify) Tj
+(Complementing SMS text-back, an embedded AI Web Assistant on your site answers client) Tj
 0 -15 Td
-(   prospects before your sales team makes the first phone call.) Tj
-0 -40 Td
-/F1 16 Tf
-(CHAPTER 4: 72-HOUR DEPLOYMENT & ROI BREAKDOWN) Tj
-/F2 11 Tf
-0 -24 Td
-(Speed of execution is everything. NT WebUX delivers fully bespoke web architecture) Tj
+(questions 24/7, collects project requirements, and books discovery calls directly into) Tj
 0 -15 Td
-(in 72 hours — not weeks or months.) Tj
-0 -20 Td
-(ROI Example Calculation:) Tj
-0 -16 Td
-(- Average Client Contract Value: $3,000) Tj
-0 -15 Td
-(- Extra Booked Clients per Month via AI Capture & Speed: 4 clients ($12,000/mo)) Tj
-0 -15 Td
-(- Annual Revenue Boost: $144,000 / year on a standard single-time setup.) Tj
+(your calendar without human intervention.) Tj
 0 -50 Td
-/F2 10 Tf
-(Page 3 of 4 | NT WebUX Montreal & North America | https://ntwebux.com) Tj
+/F2 9.5 Tf
+(Page 3 of 7 | NT WebUX Executive Playbook | https://ntwebux.com) Tj
 ET
 endstream
 endobj
 
 9 0 obj
-<<
-  /Type /Page
-  /Parent 2 0 R
-  /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >>
-  /MediaBox [0 0 612 792]
-  /Contents 12 0 R
->>
+<< /Type /Page /Parent 2 0 R /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /MediaBox [0 0 612 792] /Contents 15 0 R >>
+endobj
+
+15 0 obj
+<< /Length 1700 >>
+stream
+BT
+/F1 15 Tf
+50 730 Td
+(SECTION 3: CUSTOM WEB ARCHITECTURE VS. LEGACY BUILDERS) Tj
+/F2 10.5 Tf
+0 -24 Td
+(Legacy website builders (Wix, Squarespace, bloated WordPress themes) introduce hundreds) Tj
+0 -15 Td
+(of unnecessary JavaScript files, uncompressed CSS, and slow server response times.) Tj
+0 -25 Td
+/F1 12 Tf
+(Why Custom React & Vite Architecture Outperforms Template Builders:) Tj
+/F2 10.5 Tf
+0 -18 Td
+(1. Instant Edge Rendering: Pages load in under 1.2 seconds globally via CDN distribution,) Tj
+0 -15 Td
+(   ensuring 100/100 Google Lighthouse performance scores.) Tj
+0 -18 Td
+(2. Structured Schema.org Microdata: Embedded JSON-LD schema feeds search engines) Tj
+0 -15 Td
+(   exact data regarding services, geographic service areas, prices, and reviews.) Tj
+0 -18 Td
+(3. High-Contrast Dark Cyber Aesthetic: Custom glassmorphism styling and micro-animations) Tj
+0 -15 Td
+(   create a high-value $50k visual impression that justifies higher pricing.) Tj
+0 -18 Td
+(4. Zero Plugin Vulnerabilities: No security patches, plugin conflicts, or site crashes.) Tj
+0 -30 Td
+/F1 13 Tf
+(Performance Benchmark Comparison Table:) Tj
+/F2 10.5 Tf
+0 -20 Td
+(Metric                 | Legacy WordPress / Wix | NT WebUX Custom React Architecture) Tj
+0 -15 Td
+(-------------------------------------------------------------------------------------) Tj
+0 -15 Td
+(Average Load Time     | 4.2 Seconds            | 0.8 Seconds) Tj
+0 -15 Td
+(Google Mobile Score    | 45 / 100               | 99 / 100) Tj
+0 -15 Td
+(Conversion Rate       | 1.8%                   | 4.6%) Tj
+0 -50 Td
+/F2 9.5 Tf
+(Page 4 of 7 | NT WebUX Executive Playbook | https://ntwebux.com) Tj
+ET
+endstream
+endobj
+
+10 0 obj
+<< /Type /Page /Parent 2 0 R /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /MediaBox [0 0 612 792] /Contents 16 0 R >>
+endobj
+
+16 0 obj
+<< /Length 1700 >>
+stream
+BT
+/F1 15 Tf
+50 730 Td
+(SECTION 4: BILINGUAL MARKET EXPANSION (EN & FR LOCALIZATION)) Tj
+/F2 10.5 Tf
+0 -24 Td
+(In bilingual territories such as Montreal, Greater Quebec, Ottawa, and international hubs,) Tj
+0 -15 Td
+(offering a seamless English/French experience is not just optional — it doubles your market.) Tj
+0 -25 Td
+/F1 12 Tf
+(Key Bilingual Implementation Pillars:) Tj
+/F2 10.5 Tf
+0 -18 Td
+(A. One-Click Instant Language Switcher: Zero page reload language toggle with state) Tj
+0 -15 Td
+(   persistence across sessions.) Tj
+0 -18 Td
+(B. Hreflang Tag Optimization: Tells Google search bots which language version to rank) Tj
+0 -15 Td
+(   for English vs. French search queries.) Tj
+0 -18 Td
+(C. Geo-Targeted City Pages: City-specific pages (/locations/montreal, /locations/laval,) Tj
+0 -15 Td
+(   /locations/toronto, /locations/paris) optimized for local keyword intent.) Tj
+0 -35 Td
+/F1 15 Tf
+(SECTION 5: AUTOMATED REPUTATION & REVIEW GENERATION) Tj
+/F2 10.5 Tf
+0 -24 Td
+(Online reviews are the single biggest ranking factor for local Google Map Pack listings.) Tj
+0 -20 Td
+(Automated Review Request Workflow:) Tj
+0 -16 Td
+("[Job Completed / Invoice Paid] -> [Automated SMS/Email sent to Client in 2 Hours]") Tj
+0 -16 Td
+("-> [5-Star Review Link directs straight to Google Business Profile]") Tj
+0 -16 Td
+("-> [Private Feedback Form captures any issues before public posting]") Tj
+0 -50 Td
+/F2 9.5 Tf
+(Page 5 of 7 | NT WebUX Executive Playbook | https://ntwebux.com) Tj
+ET
+endstream
+endobj
+
+11 0 obj
+<< /Type /Page /Parent 2 0 R /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /MediaBox [0 0 612 792] /Contents 17 0 R >>
+endobj
+
+17 0 obj
+<< /Length 1700 >>
+stream
+BT
+/F1 15 Tf
+50 730 Td
+(SECTION 6: 72-HOUR DEPLOYMENT ROADMAP & FINANCIAL ROI) Tj
+/F2 10.5 Tf
+0 -24 Td
+(Traditional web agencies take 3 to 6 months to deliver projects. NT WebUX operates on) Tj
+0 -15 Td
+(a streamlined 72-Hour Rapid Architecture Model.) Tj
+0 -25 Td
+/F1 12 Tf
+(The 3-Day Execution Timeline:) Tj
+/F2 10.5 Tf
+0 -18 Td
+(Day 1: Brand System & Blueprinting (Color tokens, copy framing, CRM webhook routing)) Tj
+0 -16 Td
+(Day 2: Component Engineering (Glass-card UI, mobile responsiveness, AI chat widget)) Tj
+0 -16 Td
+(Day 3: Speed Optimization & Launch (Lighthouse audits, SEO schema injection, domain deployment)) Tj
+0 -30 Td
+/F1 13 Tf
+(Comprehensive Financial ROI Model:) Tj
+/F2 10.5 Tf
+0 -20 Td
+(Investment: $2,500 One-Time Setup) Tj
+0 -16 Td
+(- Conservative Monthly Captured Leads via AI Text-Back & Speed: 5 leads/month) Tj
+0 -16 Td
+(- Close Rate on Qualified Leads: 40% (2 booked clients/month)) Tj
+0 -16 Td
+(- Average Job Value: $3,500) Tj
+0 -16 Td
+(- Additional Monthly Revenue: $7,000 / month) Tj
+0 -16 Td
+(- Additional Annual Revenue: $84,000 / year) Tj
+0 -16 Td
+(- First-Year ROI: 3,360% Return on Investment!) Tj
+0 -50 Td
+/F2 9.5 Tf
+(Page 6 of 7 | NT WebUX Executive Playbook | https://ntwebux.com) Tj
+ET
+endstream
 endobj
 
 12 0 obj
-<< /Length 1100 >>
+<< /Type /Page /Parent 2 0 R /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /MediaBox [0 0 612 792] /Contents 18 0 R >>
+endobj
+
+18 0 obj
+<< /Length 1450 >>
 stream
 BT
-/F1 18 Tf
+/F1 17 Tf
 50 730 Td
-(TAKE ACTION: UPGRADE YOUR DIGITAL INFRASTRUCTURE) Tj
-/F2 11 Tf
-0 -26 Td
-(Ready to stop leaking qualified client leads and upgrade your online presence?) Tj
+(TAKE ACTION: UPGRADE YOUR BUSINESS DIGITAL ENGINE) Tj
+/F2 10.5 Tf
+0 -24 Td
+(Thank you for reading the 2026 Local Business Automation Playbook. Your next step) Tj
 0 -15 Td
-(NT WebUX builds custom websites, automated CRM systems, and AI text-back engines) Tj
-0 -15 Td
-(for service businesses ready to dominate their local market.) Tj
-0 -35 Td
-/F1 14 Tf
-(Get In Touch With Our Montreal Architecture Team:) Tj
-/F2 11 Tf
+(is transforming your online presence into a high-converting revenue engine.) Tj
+0 -30 Td
+/F1 13 Tf
+(Schedule Your 15-Minute Discovery Architecture Call:) Tj
+/F2 10.5 Tf
 0 -22 Td
 (- Official Website: https://ntwebux.com) Tj
 0 -16 Td
 (- Direct Email: info@ntwebux.com) Tj
 0 -16 Td
-(- Phone / Text: +1 (438) 806-7640) Tj
+(- Phone / SMS: +1 (438) 806-7640) Tj
 0 -16 Td
-(- Headquarters: Montreal, QC, Canada | Serving North America & Europe) Tj
+(- Location: Montreal, QC, Canada | Serving North America & Europe) Tj
 0 -40 Td
 /F1 13 Tf
-(Special Client Offer:) Tj
-/F2 11 Tf
+(Exclusive Reader Bonus:) Tj
+/F2 10.5 Tf
 0 -20 Td
-(Mention this 2026 Playbook PDF when booking your discovery call to receive a free) Tj
+(Mention code "PLAYBOOK2026" during your initial consultation to receive a complimentary) Tj
 0 -15 Td
-(Custom Website Performance & Local SEO Audit ($500 Value).) Tj
-0 -60 Td
-/F1 12 Tf
+(Full Website Speed & Local SEO Competitive Audit ($500 Value).) Tj
+0 -70 Td
+/F1 11 Tf
 (Copyright 2026 NT Digital Group / NT WebUX. All Rights Reserved.) Tj
-0 -18 Td
-/F2 10 Tf
-(Page 4 of 4 | NT WebUX Montreal & North America | https://ntwebux.com) Tj
+0 -16 Td
+/F2 9.5 Tf
+(Page 7 of 7 | NT WebUX Executive Playbook | https://ntwebux.com) Tj
 ET
 endstream
 endobj
 
 xref
-0 13
+0 19
 0000000000 65535 f 
 0000000009 00000 n 
-0000000058 00000 n 
-0000000133 00000 n 
-0000000280 00000 n 
-0000000358 00000 n 
-0000000431 00000 n 
-0000001740 00000 n 
-0000001887 00000 n 
-0000002034 00000 n 
-0000002181 00000 n 
-0000003590 00000 n 
-0000004999 00000 n 
+0000000067 00000 n 
+0000000164 00000 n 
+0000000311 00000 n 
+0000000389 00000 n 
+0000000462 00000 n 
+0000002150 00000 n 
+0000003938 00000 n 
+0000005726 00000 n 
+0000007514 00000 n 
+0000009302 00000 n 
+0000011090 00000 n 
+0000012628 00000 n 
+0000014416 00000 n 
+0000016204 00000 n 
+0000017992 00000 n 
+0000019780 00000 n 
+0000021568 00000 n 
 trailer
-<<
-  /Size 13
-  /Root 1 0 R
->>
+<< /Size 19 /Root 1 0 R >>
 startxref
-6150
+23100
 %%EOF
