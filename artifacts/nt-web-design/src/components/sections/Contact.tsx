@@ -145,7 +145,7 @@ export function Contact() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="glass" style={{ borderRadius: '20px', padding: '36px' }}
+            className="glass-card" style={{ borderRadius: '20px', padding: '36px' }}
           >
             {success ? (
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '360px', textAlign: 'center', gap: '16px' }}>
