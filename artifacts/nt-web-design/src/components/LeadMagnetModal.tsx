@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, BookOpen, Check, Download, CheckCircle2 } from 'lucide-react';
+import { X, BookOpen, Check, ExternalLink, CheckCircle2 } from 'lucide-react';
 import { useLanguage } from '@/lib/i18n';
 
 const API_BASE = (import.meta.env.VITE_API_URL || import.meta.env.BASE_URL || '').replace(/\/$/, '');
@@ -18,7 +18,7 @@ export function LeadMagnetModal({ isOpen, onClose }: { isOpen: boolean; onClose:
     setSubmitting(true);
 
     try {
-      // 1. Dispatch instant lead email alert to info@ntwebux.com via Formspree API
+      // 1. Dispatch lead notification to info@ntwebux.com
       await fetch('https://formspree.io/f/xknlqrqv', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
@@ -40,15 +40,19 @@ export function LeadMagnetModal({ isOpen, onClose }: { isOpen: boolean; onClose:
           email,
           recipient: 'info@ntwebux.com',
           service: '2026 Playbook Download',
-          message: 'Client downloaded 2026 Local Business Automation Playbook PDF',
+          message: 'Client requested 2026 Local Business Automation Playbook PDF',
         }),
       });
     } catch {
-      // Fallthrough for instant user download UX
+      // Fallthrough
     }
 
     setSubmitting(false);
     setSuccess(true);
+
+    // 3. Automatically open PDF in a new browser tab for instant in-browser viewing
+    const pdfUrl = `${import.meta.env.BASE_URL || '/'}NT_WebUX_2026_Masterclass_Playbook.pdf`;
+    window.open(pdfUrl, '_blank');
   };
 
   const isFr = lang === 'fr';
@@ -73,12 +77,8 @@ export function LeadMagnetModal({ isOpen, onClose }: { isOpen: boolean; onClose:
             exit={{ opacity: 0, scale: 0.94, y: 16 }}
             transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
             style={{
-              position: 'relative',
-              width: '100%',
-              maxWidth: '500px',
-              padding: '36px 32px',
-              borderRadius: '24px',
-              background: '#090e1a',
+              position: 'relative', width: '100%', maxWidth: '500px',
+              padding: '36px 32px', borderRadius: '24px', background: '#090e1a',
               border: '1px solid rgba(255,255,255,0.12)',
               boxShadow: '0 25px 70px rgba(0,0,0,0.8), 0 0 40px rgba(59,130,246,0.12)',
               zIndex: 10000,
@@ -103,20 +103,21 @@ export function LeadMagnetModal({ isOpen, onClose }: { isOpen: boolean; onClose:
                   <CheckCircle2 size={32} />
                 </div>
                 <h3 style={{ fontSize: '22px', fontWeight: 800, color: '#fff', marginBottom: '8px' }}>
-                  {isFr ? "Accès Débloqué !" : "Access Unlocked!"}
+                  {isFr ? "Guide Ouvert dans un Nouvel Onglet !" : "Playbook Unlocked!"}
                 </h3>
                 <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.65)', lineHeight: 1.6, marginBottom: '24px' }}>
                   {isFr
-                    ? "Votre guide PDF est prêt. Cliquez ci-dessous pour télécharger votre exemplaire gratuit."
-                    : "Your PDF guide is ready. Click below to download your free copy."}
+                    ? "Le guide s'est ouvert dans un nouvel onglet. Vous pouvez également cliquer ci-dessous pour le consulter ou le télécharger."
+                    : "The Playbook has opened in a new browser tab. You can also view or download it directly below."}
                 </p>
                 <a
-                  href={`${import.meta.env.BASE_URL}NT-WebUX-2026-Automation-Playbook.pdf`}
-                  download="NT-WebUX-2026-Automation-Playbook.pdf"
+                  href={`${import.meta.env.BASE_URL || '/'}NT_WebUX_2026_Masterclass_Playbook.pdf`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="btn-violet"
                   style={{ width: '100%', padding: '14px', fontSize: '14px', fontWeight: 700, borderRadius: '12px', textDecoration: 'none', display: 'inline-flex', gap: '8px', alignItems: 'center', justifyContent: 'center' }}
                 >
-                  <Download size={16} /> {isFr ? "Télécharger le PDF Gratuit" : "Download Free PDF"}
+                  <ExternalLink size={16} /> {isFr ? "Ouvrir / Télécharger le PDF" : "View / Download PDF"}
                 </a>
               </div>
             ) : (
@@ -125,10 +126,8 @@ export function LeadMagnetModal({ isOpen, onClose }: { isOpen: boolean; onClose:
                   <BookOpen size={12} /> {isFr ? "Guide Gratuit 2026" : "Free 2026 Playbook"}
                 </div>
 
-                <h3 style={{ fontSize: '24px', fontWeight: 800, color: '#fff', letterSpacing: '-0.02em', lineHeight: 1.3, marginBottom: '10px' }}>
-                  {isFr
-                    ? "Guide d'Automatisation PME & Acquisition 2026"
-                    : "2026 Local Business Automation Playbook"}
+                <h3 style={{ fontSize: '24px', fontWeight 800, color: '#fff', letterSpacing: '-0.02em', lineHeight: 1.3, marginBottom: '10px' }}>
+                  {isFr ? "Guide d'Automatisation PME 2026" : "2026 Local Business Automation Playbook"}
                 </h3>
 
                 <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.6)', lineHeight: 1.6, marginBottom: '22px' }}>
@@ -171,7 +170,7 @@ export function LeadMagnetModal({ isOpen, onClose }: { isOpen: boolean; onClose:
                     className="btn-violet"
                     style={{ width: '100%', padding: '14px', fontSize: '14px', fontWeight: 700, borderRadius: '12px', cursor: 'pointer' }}
                   >
-                    {submitting ? (isFr ? "Envoi..." : "Sending...") : (isFr ? "Télécharger le Guide →" : "Get Instant Access →")}
+                    {submitting ? (isFr ? "Chargement..." : "Opening...") : (isFr ? "Consulter le Guide →" : "Access Playbook Now →")}
                   </button>
                 </form>
               </div>

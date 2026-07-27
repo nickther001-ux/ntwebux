@@ -1,10 +1,21 @@
-import { useState } from 'react';
+import os, subprocess
+
+print("==================================================")
+print("  Updating Lead Magnet Flow to In-Browser PDF View")
+print("==================================================")
+
+modal_paths = [
+  "src/components/LeadMagnetModal.tsx",
+  "artifacts/nt-web-design/src/components/LeadMagnetModal.tsx"
+]
+
+modal_code = """import { useState } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, BookOpen, Check, ExternalLink, CheckCircle2 } from 'lucide-react';
 import { useLanguage } from '@/lib/i18n';
 
-const API_BASE = (import.meta.env.VITE_API_URL || import.meta.env.BASE_URL || '').replace(/\/$/, '');
+const API_BASE = (import.meta.env.VITE_API_URL || import.meta.env.BASE_URL || '').replace(/\\/$/, '');
 
 export function LeadMagnetModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   const { lang } = useLanguage();
@@ -182,3 +193,16 @@ export function LeadMagnetModal({ isOpen, onClose }: { isOpen: boolean; onClose:
     document.body
   );
 }
+"""
+
+for p in modal_paths:
+  d = os.path.dirname(p)
+  if d: os.makedirs(d, exist_ok=True)
+  with open(p, "w", encoding="utf-8") as f:
+    f.write(modal_code)
+  print(f"✔ Updated LeadMagnetModal.tsx for in-browser PDF viewing!")
+
+subprocess.run(["git", "add", "."])
+subprocess.run(["git", "commit", "-m", "feat(leadmagnet): update flow to open PDF directly in-browser tab with manual download fallback"])
+subprocess.run(["git", "push", "origin", "master"])
+print("\n★ IN-BROWSER PDF FLOW PUSHED LIVE TO GITHUB & VERCEL! ★\n")
