@@ -126,7 +126,7 @@ export function LeadMagnetModal({ isOpen, onClose }: { isOpen: boolean; onClose:
                   <BookOpen size={12} /> {isFr ? "Guide Gratuit 2026" : "Free 2026 Playbook"}
                 </div>
 
-                <h3 style={{ fontSize: '24px', fontWeight 800, color: '#fff', letterSpacing: '-0.02em', lineHeight: 1.3, marginBottom: '10px' }}>
+                <h3 style={{ fontSize: '24px', fontWeight: 800, color: '#fff', letterSpacing: '-0.02em', lineHeight: 1.3, marginBottom: '10px' }}>
                   {isFr ? "Guide d'Automatisation PME 2026" : "2026 Local Business Automation Playbook"}
                 </h3>
 
