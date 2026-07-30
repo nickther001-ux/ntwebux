@@ -56,7 +56,7 @@ app.post('/webhook', (req, res) => {
    so the path is correct regardless of which directory the server is launched
    from. In production the CWD is the artifact's own folder, not the workspace
    root, which made process.cwd()-relative paths resolve incorrectly. */
-const spaRoot = path.resolve(__dirname, "../../nt-web-design/dist/public");
+const spaRoot = path.resolve(import.meta.dirname, "../../nt-web-design/dist/public");
 
 app.use(express.static(spaRoot));
 

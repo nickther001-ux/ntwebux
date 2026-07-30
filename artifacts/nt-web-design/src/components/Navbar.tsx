@@ -60,6 +60,7 @@ export function Navbar() {
     { href: '/services', label: lang === 'fr' ? 'Tarifs' : 'Pricing', isPage: true },
     { href: '/business-suite', label: lang === 'fr' ? 'Suite' : 'Business Suite', isPage: true, highlight: true },
     { href: '/roi', label: lang === 'fr' ? 'Audit ROI' : 'ROI Audit', isPage: true },
+    { href: '/bill96', label: lang === 'fr' ? 'Audit Loi 96' : 'Bill 96 Audit', isPage: true },
     { href: isHome ? '#contact' : '/#contact', label: 'Contact' },
   ];
 

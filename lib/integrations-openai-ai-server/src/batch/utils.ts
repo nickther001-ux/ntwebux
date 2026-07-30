@@ -74,9 +74,7 @@ export async function batchProcess<T, R>(
             if (isRateLimitError(error)) {
               throw error;
             }
-            throw new Error(
-              error instanceof Error ? error : new Error(String(error))
-            );
+            throw error instanceof Error ? error : new Error(String(error));
           }
         },
         { retries, minTimeout, maxTimeout, factor: 2 }
@@ -114,9 +112,7 @@ export async function batchProcessWithSSE<T, R>(
           factor: 2,
           onFailedAttempt: (error) => {
             if (!isRateLimitError(error)) {
-              throw new Error(
-                error instanceof Error ? error : new Error(String(error))
-              );
+              throw error instanceof Error ? error : new Error(String(error));
             }
           },
         }

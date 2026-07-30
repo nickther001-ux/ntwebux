@@ -1,3 +1,5 @@
+import Bill96Scanner from "@/pages/Bill96Scanner";
+
 import { useEffect } from "react";
 import { MotionConfig } from "framer-motion";
 import { Switch, Route, Router as WouterRouter, useLocation } from "wouter";
@@ -143,6 +145,7 @@ function App() {
                 <Route path="/toronto" component={Toronto} />
                 <Route path="/portfolio" component={PortfolioPage} />
                 <Route path="/digital-policy" component={Privacy} />
+                <Route path="/bill96" component={Bill96Scanner} />
                 <Route component={NotFound} />
               </Switch>
             </WouterRouter>
