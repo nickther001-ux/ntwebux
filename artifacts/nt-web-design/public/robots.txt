@@ -1,8 +1,31 @@
+# robots.txt
+# Optimized for search engines and AI generative engines (ChatGPT, Claude, Gemini, Perplexity)
+
+# Whitelist standard web search engine spiders
 User-agent: *
 Allow: /
 
-# Exclude internal build artifacts
-Disallow: /api/
-Disallow: /*.json$
+# Explicitly allow and unblock AI search crawlers for chat indexing and web retrieval
+User-agent: GPTBot
+Allow: /
 
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+# XML Sitemap Link
 Sitemap: https://ntwebux.com/sitemap.xml

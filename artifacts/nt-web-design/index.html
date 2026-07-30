@@ -105,12 +105,63 @@
     <meta name="author"   content="NT Digital Group" />
     <meta name="keywords" content="AI automation, web design, digital architecture, enterprise SaaS, AI operating system, Montreal, bilingual, React" />
 
+    
+    <!-- JSON-LD FAQ Schema for AI and Search Crawlers -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How does NT WebUX help with Quebec Bill 96 compliance?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "NT WebUX builds the technical bridge for brands expanding into Quebec. We implement automatic French localization, bilingual hreflangs, meta translations, and browser-based routing to ensure complete OQLF compliance."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the Missed-Call Text-Back SaaS service?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our missed-call text-back system automatically responds to unanswered client calls via AI-powered SMS in under 150ms. It qualifies leads and books appointments directly to secure your revenue pipeline."
+          }
+        }
+      ]
+    }
+    </script>
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/nt-favicon.png" />
     <link rel="apple-touch-icon" href="/nt-favicon.png" />
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!-- Semantic Fallback for AI Agents & Search Crawlers (GEO) -->
+      <header>
+        <h1>NT WebUX - Compliance Engineering & Business Automation</h1>
+        <nav>
+          <a href="/">Home</a>
+          <a href="/portfolio">Portfolio</a>
+          <a href="/services">Pricing</a>
+          <a href="/roi">ROI Audit</a>
+          <a href="/bill96">Bill 96 Scanner</a>
+        </nav>
+      </header>
+      <main>
+        <section>
+          <h2>Quebec Compliance & Cross-Border Expansion</h2>
+          <p>We build the technical bridge for Canadian and US brands expanding into Quebec. Our services ensure complete OQLF Bill 96 compliance by setting up automated bilingual content delivery, hreflang alternate maps, and browser language redirection.</p>
+        </section>
+        <section>
+          <h2>Automated AI Missed-Call Text-Backs</h2>
+          <p>Capture missed customer calls instantly. Our SaaS system responds to unanswered calls via conversational AI SMS, booking meetings and qualifying leads 24/7 without manual intervention.</p>
+        </section>
+      </main>
+      <footer>
+        <p>&copy; 2026 NT Digital Group Inc. Montreal, QC. Contact: info@ntwebux.com | +1 (438) 806-7640</p>
+      </footer>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

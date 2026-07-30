@@ -1,4 +1,5 @@
 import Bill96Scanner from "@/pages/Bill96Scanner";
+import SolutionPage from "@/pages/SolutionPage";
 
 import { useEffect } from "react";
 import { MotionConfig } from "framer-motion";
@@ -146,6 +147,7 @@ function App() {
                 <Route path="/portfolio" component={PortfolioPage} />
                 <Route path="/digital-policy" component={Privacy} />
                 <Route path="/bill96" component={Bill96Scanner} />
+                <Route path="/solutions/:niche/:location" component={SolutionPage} />
                 <Route component={NotFound} />
               </Switch>
             </WouterRouter>
