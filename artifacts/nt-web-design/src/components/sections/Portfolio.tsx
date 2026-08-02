@@ -5,7 +5,7 @@ import { ArrowUpRight, X, ChevronLeft, ChevronRight } from "lucide-react";
 
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, "");
 
-const PROJECTS = [
+const RAW_PROJECTS = [
   {
     img: `${BASE}/portfolio/proj-audreyrh-v3.png`,
     category: { en: "HR Consulting", fr: "Conseil RH" },
@@ -86,9 +86,10 @@ const PROJECTS = [
     wide: false,
   },
   {
-    img: `${BASE}/portfolio/proj-construction.webp`,
+    img: `${BASE}/portfolio/proj-renocasa.png`,
     category: { en: "Construction", fr: "Construction" },
-    title: { en: "Bâtisseurs Nordiques Inc.", fr: "Bâtisseurs Nordiques Inc." },
+    title: { en: "Reno Casa Group", fr: "Reno Casa Group" },
+    url: "https://renocasagroup.ca",
     tags: { en: ["Corporate", "Web Design"], fr: ["Corporate", "Web Design"] },
     buildTime: { en: "6 days", fr: "6 jours" },
     wide: false,
@@ -149,6 +150,8 @@ const PROJECTS = [
     url: "https://seriousinc.ca",
   },
 ];
+
+const PROJECTS = RAW_PROJECTS.filter(p => p && p.title && p.title.en && !p.title.en.includes("SeriousInc"));
 
 /* ── Lightbox ─────────────────────────────────────────── */
 function Lightbox({

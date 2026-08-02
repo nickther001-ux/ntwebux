@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useRoute } from "wouter";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { useLanguage } from "@/lib/i18n";
@@ -40,9 +41,25 @@ const STAGES_FR = [
   "Exécution des heuristiques et génération du rapport de conformité..."
 ];
 
-export default function Bill96Scanner() {
+function capitalize(str: string) {
+  if (!str) return "";
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+}
+
+export default function SolutionPage() {
   const { lang } = useLanguage();
   const isFr = lang === "fr";
+
+  const [, params] = useRoute("/solutions/:niche/:location");
+  const rawNiche = params?.niche || "business";
+  const rawLocation = params?.location || "canada";
+
+  const niche = capitalize(rawNiche.replace("-", " "));
+  const location = capitalize(rawLocation.replace("-", " "));
+
+  const isQuebec = ["Montreal", "Quebec", "Laval", "Sherbrooke", "Gatineau", "Longueuil"].some(
+    (city) => location.toLowerCase().includes(city.toLowerCase())
+  );
 
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
@@ -91,7 +108,7 @@ export default function Bill96Scanner() {
           throw new Error(isFr ? "Le serveur a renvoyé une réponse non valide. Vérifiez vos routes d'API." : "Server returned non-JSON response. Check your API route or proxy settings.");
         }
         const errData = await response.json();
-        throw new Error(errData.error || (isFr ? "Échec de l'audit de conformité." : "Failed to complete website compliance scan."));
+        throw new Error(errData.error || (isFr ? "Échec de l'audit." : "Failed to complete website compliance scan."));
       }
 
       const data: ScanResult = await response.json();
@@ -113,12 +130,12 @@ export default function Bill96Scanner() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          firstName: leadName.split(" ")[0] || "Scanner",
+          firstName: leadName.split(" ")[0] || "SEO Niche",
           lastName: leadName.split(" ").slice(1).join(" ") || "Lead",
           email: leadEmail,
           phone: result.contactPhone || "",
-          service: "Bill 96 Compliance Scanner Lead",
-          message: `Lead scanned website: ${result.url}. Compliance Score: ${result.complianceScore}%.\nFailures: ${JSON.stringify(result.structuralFailures)}`
+          service: `Niche Solution Landing page - ${niche} in ${location}`,
+          message: `Lead scanned website: ${result.url}. Current Compliance Score: ${result.complianceScore}%.\nFailures recorded:\n${JSON.stringify(result.structuralFailures, null, 2)}`
         })
       });
 
@@ -153,16 +170,59 @@ export default function Bill96Scanner() {
       <main className="max-w-4xl mx-auto px-6 py-24 relative z-10">
         <div className="text-center mb-12">
           <span className="text-[#00AADD] text-xs font-semibold tracking-widest uppercase bg-[#00AADD]/10 px-3 py-1 rounded-full">
-            {isFr ? "Renseignements sur la croissance sortante" : "Outbound Growth Intelligence"}
+            {isFr ? "Solutions de croissance localisées" : "Localized Growth Solutions"}
           </span>
           <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white mt-4 mb-4 leading-tight">
-            {isFr ? "Scanner de Conformité Loi 96 Québec" : "Quebec Bill 96 Compliance Scanner"}
-          </h1>
-          <p className="text-sm md:text-base text-gray-400 max-w-2xl mx-auto leading-relaxed mt-4">
             {isFr 
-              ? "Sous les règlements de l'OQLF du Québec, les sites commerciaux ciblant le marché québécois doivent donner la priorité au français. Auditez vos pages d'accueil instantanément."
-              : "Under Quebec's OQLF regulations, commercial websites targeting the Quebec market must prioritize French. Audit your homepage assets instantly."
+              ? `${niche} à ${location} : Sécurisez votre moteur de revenus au Québec`
+              : `${niche} in ${location}: Secure Your Quebec Revenue Engine`
             }
+          </h1>
+          
+          <p className="text-sm md:text-base text-gray-400 max-w-2xl mx-auto leading-relaxed mt-4">
+            {isQuebec ? (
+              isFr 
+                ? `Opérer en tant que ${niche.toLowerCase()} à ${location} signifie que votre site web est soumis à des contrôles de conformité linguistique stricts (Loi 96 / OQLF). Sécurisez vos actifs et automatisez vos réservations.`
+                : `Operating as a ${niche.toLowerCase()} in ${location} means your digital footprint is subject to strict OQLF Bill 96 language compliance checks. Ensure your business is secure from heavy fines while implementing automated missed-call booking to capture every inbound lead.`
+            ) : (
+              isFr 
+                ? `Étendre votre marque de ${niche.toLowerCase()} au marché québécois depuis ${location} est un excellent vecteur de croissance, mais franchir les barrières linguistiques régionales peut s'avérer complexe. NT WebUX agit comme votre passerelle technique.`
+                : `Expanding your ${niche.toLowerCase()} brand into the Quebec market from ${location} is a massive growth vector, but navigating regional language requirements can be a major entry barrier. NT WebUX acts as your technical bridge—automating your bilingual customer experience and compliance checks.`
+            )}
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+          <div className="bg-[#0b1222]/50 border border-white/5 p-8 rounded-2xl">
+            <h3 className="text-lg font-bold text-white mb-2">
+              {isFr ? "📞 Text-Back sur Appels Manqués" : "📞 Missed-Call Text-Back SaaS"}
+            </h3>
+            <p className="text-sm text-gray-400 leading-relaxed">
+              {isFr 
+                ? "Lorsqu'un prospect appelle votre entreprise et que vous êtes occupé, notre système lui envoie instantanément un SMS automatisé par IA en moins de 150 ms pour planifier un rendez-vous immédiatement."
+                : "When a local lead calls your business and you are busy, our system instantly texts them back within seconds using AI. We book appointments directly, preventing them from calling your competitors."
+              }
+            </p>
+          </div>
+          <div className="bg-[#0b1222]/50 border border-white/5 p-8 rounded-2xl">
+            <h3 className="text-lg font-bold text-white mb-2">
+              {isFr ? "⚖️ Passerelle de Conformité Loi 96" : "⚖️ Bill 96 Compliance Bridge"}
+            </h3>
+            <p className="text-sm text-gray-400 leading-relaxed">
+              {isFr 
+                ? "Assurez-vous que votre site web satisfait automatiquement aux exigences linguistiques de l'OQLF. Nous mettons en œuvre des redirections de langue, des hreflangs bilingues et des métadonnées conformes."
+                : "Ensure your website automatically satisfies language requirements. We implement root redirects, bilingual hreflangs, and translated descriptions to protect your business."
+              }
+            </p>
+          </div>
+        </div>
+
+        <div className="text-center mb-6">
+          <h2 className="text-2xl font-bold text-white">
+            {isFr ? "Testez instantanément la conformité de votre site web" : "Test Your Website Compliance Instantly"}
+          </h2>
+          <p className="text-xs text-gray-500 mt-1">
+            {isFr ? "Auditez les en-têtes de langue et la densité de vocabulaire de votre page d'accueil en direct." : "Audit your website homepage lang parameters and stopword density live."}
           </p>
         </div>
 
@@ -269,8 +329,8 @@ export default function Bill96Scanner() {
                   </h3>
                   <p className="text-xs text-gray-500 mt-2">
                     {result.complianceScore >= 80 
-                      ? (isFr ? "Votre site satisfait la plupart des règles de l'OQLF." : "Your site meets most key OQLF localization checks.")
-                      : (isFr ? "Défaillances de conformité importantes détectées. Vulnérabilité aux inspections." : "Significant compliance failures detected. Potential vulnerability to user reports.")
+                      ? (isFr ? "Votre site satisfait la plupart des règles de l'OQLF." : "Your site meets most key OQLF localization checks. Minor tweaks might be needed.")
+                      : (isFr ? "Défaillances de conformité importantes détectées. Risques d'inspections de l'OQLF." : "Significant compliance failures detected. Potential vulnerability to user reports.")
                     }
                   </p>
                 </div>
@@ -370,7 +430,7 @@ export default function Bill96Scanner() {
                 <div className="bg-[#0b1222]/80 backdrop-blur-xl border border-white/5 p-8 rounded-2xl relative overflow-hidden">
                   <div className="absolute inset-0 bg-[#00AADD]/5 pointer-events-none" />
                   <h3 className="text-lg font-bold text-white relative z-10">
-                    {isFr ? "Corrigez vos vulnérabilités Loi 96" : "Fix your Bill 96 Compliance Vulnerabilities"}
+                    {isFr ? "Corrigez vos vulnérabilités de conformité Loi 96" : "Fix your Bill 96 Compliance Vulnerabilities"}
                   </h3>
                   <p className="text-xs text-gray-400 mt-2 relative z-10 leading-relaxed">
                     {isFr
@@ -417,7 +477,7 @@ export default function Bill96Scanner() {
                         animate={{ opacity: 1, scale: 1 }}
                         className="mt-6 p-4 bg-green-500/10 border border-green-500/20 text-green-400 rounded-lg text-sm text-center relative z-10"
                       >
-                        📬 **{isFr ? "Demande de plan envoyée !" : "Audit plan request sent!"}** {isFr ? "Nous vous contacterons à " : "We will contact you at "} {leadEmail} {isFr ? " avec votre plan de correction." : " with your localized blueprint."}
+                        📬 **{isFr ? "Demande de plan envoyée !" : "Audit plan request sent!"}** {isFr ? "Nous vous contacterons à " : "We will contact you at "} {leadEmail} {isFr ? " avec votre plan de correction." : " avec votre plan de correction."}
                       </motion.div>
                     )}
                   </AnimatePresence>
