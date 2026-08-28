@@ -148,16 +148,26 @@ const RAW_PROJECTS = [
     wide: false,
     span: 2,
     url: "https://seriousinc.ca",
-  },
+  },,
   {
-    img: `${BASE}/portfolio/proj-renocasa.png`,
+    img: `${BASE}/portfolio/groupcasa.png`,
     category: { en: "Construction", fr: "Construction" },
-    title: { en: "RenoCasa Group", fr: "RenoCasa Group" },
+    title: { en: "Groupe Casano Inc.", fr: "Groupe Casano Inc." },
     tags: { en: ["Corporate", "Web Design"], fr: ["Corporate", "Web Design"] },
     buildTime: { en: "6 days", fr: "6 jours" },
     wide: false,
-    url: "https://renocasagroup.ca",
-  },
+    url: "https://groupcasano.ca"
+  }
+,
+  {
+    img: `${BASE}/portfolio/groupcasa.png`,
+    category: { en: "Construction", fr: "Construction" },
+    title: { en: "Groupe Casano Inc.", fr: "Groupe Casano Inc." },
+    tags: { en: ["Corporate", "Web Design"], fr: ["Corporate", "Web Design"] },
+    buildTime: { en: "6 days", fr: "6 jours" },
+    wide: false,
+    url: "https://groupcasano.ca"
+  }
 ];
 
 const PROJECTS = RAW_PROJECTS.filter(p => p && p.title && p.title.en && !p.title.en.includes("SeriousInc"));
