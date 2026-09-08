@@ -3,6 +3,10 @@
     {
       "source": "/api/:path*",
       "destination": "https://your-backend-api-domain.com/api/:path*"
+    },
+    {
+      "source": "/((?!api/).*)",
+      "destination": "/index.html"
     }
   ]
 }
