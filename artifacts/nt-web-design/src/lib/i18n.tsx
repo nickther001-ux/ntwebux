@@ -14,8 +14,8 @@ const translations: Translations = {
     hero: {
       eyebrow: "Web Design Studio",
       h1_1: "YOUR", h1_2: "BUSINESS", h1_3: "ONLINE.", h1_4: "DONE RIGHT.",
-      sub: "We build your custom bilingual website and automate your client acquisition. Most sites go live in 3 days. Complex builds take a little longer — never months.",
-      btn1: "Start My Project", btn2: "See How It Works",
+      sub: "Fully responsive, high-converting websites launched in 72 hours — not months. No inflated retainers, no scope creep. Just a lean, focused sprint built by senior web architects.",
+      btn1: "Launch in 72 Hours", btn2: "View Our Work",
       mockBadge: "+340% Avg. Traffic Increase"
     },
     stats: {
@@ -277,8 +277,8 @@ const translations: Translations = {
     hero: {
       eyebrow: "Studio Web Design",
       h1_1: "VOTRE", h1_2: "ENTREPRISE", h1_3: "EN LIGNE.", h1_4: "BIEN FAIT.",
-      sub: "On construit votre site web bilingue sur mesure et on automatise votre acquisition de clients. La plupart de nos sites sont en ligne en 3 jours. Les projets complexes prennent un peu plus — jamais des mois.",
-      btn1: "Démarrer Mon Projet", btn2: "Comment Ça Marche",
+      sub: "Des sites web performants et entièrement adaptatifs, en ligne en 72 heures — pas en mois. Aucun forfait gonflé, aucun dérapage. Un sprint rigoureux mené par des architectes web expérimentés.",
+      btn1: "Réservez votre sprint 72h", btn2: "Voir nos réalisations",
       mockBadge: "+340% de Trafic en Moyenne"
     },
     stats: {
