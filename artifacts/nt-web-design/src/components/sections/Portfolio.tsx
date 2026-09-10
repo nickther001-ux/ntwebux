@@ -86,7 +86,7 @@ const RAW_PROJECTS = [
     wide: false,
   },
   {
-    img: `${BASE}/portfolio/groupcasa.png`,
+    img: `${BASE}/portfolio/casanogroup.png`,
     category: { en: "Construction", fr: "Construction" },
     title: { en: "Groupe Casano Inc.", fr: "Groupe Casano Inc." },
     tags: { en: ["Corporate", "Web Design"], fr: ["Corporate", "Web Design"] },
