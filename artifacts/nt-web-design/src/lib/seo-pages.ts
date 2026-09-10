@@ -163,6 +163,19 @@ export const INDUSTRY_PAGES: IndustryPage[] = [
 
 export const LOCATION_PAGES: LocationPage[] = [
   {
+    slug: 'montreal-web-design',
+    city: 'Montréal',
+    province: 'Québec',
+    badge: 'Montréal, QC',
+    accent: '#3b82f6',
+    metaTitle: 'Conception de Site Web Montréal — Lancement en 72h | NT Web UX',
+    metaDesc: 'Agence web à Montréal spécialisée dans le lancement de sites professionnels en 72 heures. Sites bilingues, sur mesure, optimisés pour la conversion et le référencement local.',
+    h1: 'Agence Web Montréal — Votre Site en Ligne en 72 Heures',
+    intro: "Montréal est un marché exigeant où chaque jour sans présence en ligne coûte des clients. NT Web UX conçoit des sites web sur mesure, bilingues et performants pour les entreprises montréalaises — livrés en 72 heures, sans compromis sur la qualité.",
+    neighborhoods: ['Plateau-Mont-Royal', 'Ville-Marie', 'Rosemont', 'Verdun', 'Outremont', 'Griffintown', 'Hochelaga', 'Ahuntsic'],
+  },
+
+  {
     slug: 'toronto-web-design',
     city: 'Toronto',
     province: 'Ontario',
