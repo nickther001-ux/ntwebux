@@ -137,7 +137,7 @@ const RAW_PROJECTS = [
       fr: ["Développement", "Infrastructure"],
     },
     buildTime: { en: "4 days", fr: "4 jours" },
-    wide: false,
+    wide: true,
   },
   {
     img: `${BASE}/portfolio/proj-seriousinc.png`,
