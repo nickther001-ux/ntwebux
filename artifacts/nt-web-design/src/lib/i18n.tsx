@@ -544,7 +544,16 @@ interface LanguageContextProps {
 const LanguageContext = createContext<LanguageContextProps | undefined>(undefined);
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [lang, setLang] = useState<Language>('en');
+  const [lang, setLangState] = useState<Language>(() => {
+    if (typeof window !== 'undefined') {
+      return (localStorage.getItem('nt_lang') as Language) || 'en';
+    }
+    return 'en';
+  });
+  const setLang = (l: Language) => {
+    localStorage.setItem('nt_lang', l);
+    setLangState(l);
+  };
 
   const t = (path: string) => {
     const keys = path.split('.');
