@@ -379,19 +379,7 @@ export function Navbar() {
               style={{ padding: '24px 28px 40px', borderTop: '1px solid rgba(255,255,255,0.06)', display: 'flex', flexDirection: 'column', gap: '16px', flexShrink: 0 }}
             >
               
-              {/* Playbook Download CTA */}
-              <button
-                onClick={() => { setPlaybookOpen(true); setOpen(false); }}
-                className="btn-violet"
-                style={{
-                  width: '100%', padding: '13px', fontSize: '13px', fontWeight: 700,
-                  borderRadius: '12px', cursor: 'pointer', display: 'flex',
-                  alignItems: 'center', justifyContent: 'center', gap: '8px',
-                  background: 'linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%)', color: '#fff',
-                }}
-              >
-                📘 {lang === 'fr' ? 'Télécharger le Guide 2026 (PDF)' : 'Download 2026 Playbook (PDF)'}
-              </button>
+
     
               {/* Language toggle */}
               <div style={{ display: 'flex', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '10px', overflow: 'hidden' }}>
