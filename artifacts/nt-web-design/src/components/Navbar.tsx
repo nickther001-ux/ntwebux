@@ -245,7 +245,7 @@ export function Navbar() {
                   padding: '5px 10px',
                   fontSize: '11px', fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase',
                   background: lang === l ? 'rgba(59,130,246,0.3)' : 'transparent',
-                  color: lang === l ? '#93c5fd' : 'rgba(255,255,255,0.45)',
+                  color: lang === l ? '#93c5fd' : 'rgba(255,255,255,0.75)',
                   border: 'none',
                   borderRight: i === 0 ? '1px solid rgba(255,255,255,0.1)' : 'none',
                   cursor: 'pointer',
