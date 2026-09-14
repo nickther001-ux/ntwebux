@@ -60,6 +60,7 @@ const RAW_PROJECTS = [
     tags: { en: ["Real Estate", "CMS"], fr: ["Immobilier", "CMS"] },
     buildTime: { en: "5 days", fr: "5 jours" },
     wide: false,
+    url: "https://www.prestigeprorealty.com/",
   },
   {
     img: `${BASE}/portfolio/proj-startup.webp`,
