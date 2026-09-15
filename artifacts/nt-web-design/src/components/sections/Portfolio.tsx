@@ -139,6 +139,7 @@ const RAW_PROJECTS = [
     },
     buildTime: { en: "4 days", fr: "4 jours" },
     wide: true,
+    url: "https://new-ayti.vercel.app/",
   },
   {
     img: `${BASE}/portfolio/proj-seriousinc.png`,
