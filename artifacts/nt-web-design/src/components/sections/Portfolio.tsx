@@ -77,6 +77,7 @@ const RAW_PROJECTS = [
     tags: { en: ["Medical", "Booking"], fr: ["Médical", "Réservation"] },
     buildTime: { en: "4 days", fr: "4 jours" },
     wide: false,
+    url: "https://www.physio-7.ch/",
   },
   {
     img: `${BASE}/portfolio/proj-photography.webp`,
