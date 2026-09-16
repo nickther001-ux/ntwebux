@@ -41,7 +41,7 @@ export function RevealSection({
     <motion.div
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-60px" }}
+      viewport={{ once: true, margin: "0px" }}
       variants={{
         hidden: (variants[variant] as any).hidden,
         visible: {
