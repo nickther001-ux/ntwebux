@@ -797,6 +797,7 @@ export function Portfolio() {
             display: "grid",
             gridTemplateColumns: "repeat(3, 1fr)",
             gap: "16px",
+            alignItems: "start",
           }}
           className="portfolio-grid"
         >
