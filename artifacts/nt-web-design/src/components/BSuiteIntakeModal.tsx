@@ -97,10 +97,11 @@ export function BSuiteIntakeModal({ open, onClose, preselectedTier = '', lang }:
 
     const [firstName, ...rest] = name.trim().split(' ');
     try {
-      const res = await fetch(`${API_BASE}/api/contact`, {
+      const res = await fetch("https://api.web3forms.com/submit", {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ firstName, lastName: rest.join(' ') || undefined, email, phone, message }),
+        body: JSON.stringify({
+          access_key: "c4b7aadc-73a9-4932-884a-3876a0139512", firstName, lastName: rest.join(' ') || undefined, email, phone, message }),
       });
       if (!res.ok) throw new Error('api_fail');
       setSuccess(true);

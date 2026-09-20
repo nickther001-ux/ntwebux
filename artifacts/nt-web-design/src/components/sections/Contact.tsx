@@ -57,7 +57,7 @@ export function Contact() {
   const onSubmit = async (data: FormData) => {
     setSubmitting(true);
     try {
-      const res = await fetch(`${API_BASE}/api/contact`, {
+      const res = await fetch("https://api.web3forms.com/submit", {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),

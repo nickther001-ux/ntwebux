@@ -89,10 +89,11 @@ export function SoftwareIntakeModal({ open, onClose }: Props) {
     setSubmitting(true);
     const [firstName, ...rest] = name.trim().split(' ');
     try {
-      await fetch(`${API_BASE}/api/contact`, {
+      await fetch("https://api.web3forms.com/submit", {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          access_key: "c4b7aadc-73a9-4932-884a-3876a0139512",
           firstName,
           lastName: rest.join(' ') || undefined,
           email: contactPref === 'email' ? email : `${phone}@phone.placeholder`,

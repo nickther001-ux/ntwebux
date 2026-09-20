@@ -69,10 +69,11 @@ export function LetsTalkModal({ open, onClose }: Props) {
     setSubmitting(true);
     try {
       const message = `[Full Scope Inquiry]\nName: ${name}\nBest way to reach: ${reach} — ${contact}\n\nWhat they need:\n${needs}`;
-      const res = await fetch(`${API_BASE}/api/contact`, {
+      const res = await fetch("https://api.web3forms.com/submit", {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ firstName: name, email: reach === 'email' ? contact : 'n/a', phone: reach !== 'email' ? contact : '', message }),
+        body: JSON.stringify({
+          access_key: "c4b7aadc-73a9-4932-884a-3876a0139512", firstName: name, email: reach === 'email' ? contact : 'n/a', phone: reach !== 'email' ? contact : '', message }),
       });
       if (res.ok) { setSuccess(true); }
       else { setError(fr ? 'Erreur. Veuillez réessayer.' : 'Error. Please try again.'); }
