@@ -73,7 +73,12 @@ export function LetsTalkModal({ open, onClose }: Props) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          access_key: "c4b7aadc-73a9-4932-884a-3876a0139512", firstName: name, email: reach === 'email' ? contact : 'n/a', phone: reach !== 'email' ? contact : '', message }),
+          access_key: 'c4b7aadc-73a9-4932-884a-3876a0139512',
+          name: name,
+          email: reach === 'email' ? contact : 'unknown@lead.com',
+          phone: reach !== 'email' ? contact : '',
+          message: message,
+        }),
       });
       if (res.ok) { setSuccess(true); }
       else { setError(fr ? 'Erreur. Veuillez réessayer.' : 'Error. Please try again.'); }

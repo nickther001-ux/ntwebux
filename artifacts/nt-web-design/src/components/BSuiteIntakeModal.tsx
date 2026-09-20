@@ -101,7 +101,12 @@ export function BSuiteIntakeModal({ open, onClose, preselectedTier = '', lang }:
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          access_key: "c4b7aadc-73a9-4932-884a-3876a0139512", firstName, lastName: rest.join(' ') || undefined, email, phone, message }),
+          access_key: 'c4b7aadc-73a9-4932-884a-3876a0139512',
+          name: name.trim(),
+          email,
+          phone: phone || 'Not provided',
+          message,
+        }),
       });
       if (!res.ok) throw new Error('api_fail');
       setSuccess(true);
