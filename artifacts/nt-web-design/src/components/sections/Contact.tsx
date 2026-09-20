@@ -60,7 +60,7 @@ export function Contact() {
       const res = await fetch("https://api.web3forms.com/submit", {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ access_key: 'c4b7aadc-73a9-4932-884a-3876a0139512', ...data }),
+        body: JSON.stringify({ access_key: 'c4b7aadc-73a9-4932-884a-3876a0139512', name: ((data.firstName || '') + ' ' + (data.lastName || '')).trim() || 'Website Visitor', email: data.email, phone: data.phone || '', service: data.service || '', message: data.message }),
       });
       if (res.ok) {
         setSuccess(true);
