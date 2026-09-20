@@ -74,6 +74,7 @@ export function LetsTalkModal({ open, onClose }: Props) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           access_key: 'c4b7aadc-73a9-4932-884a-3876a0139512',
+          botcheck: false,
           name: name,
           email: reach === 'email' ? contact : 'unknown@lead.com',
           phone: reach !== 'email' ? contact : '',

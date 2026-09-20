@@ -133,7 +133,8 @@ export function ROICalculator() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          access_key: "c4b7aadc-73a9-4932-884a-3876a0139512",
+          access_key: 'c4b7aadc-73a9-4932-884a-3876a0139512',
+          botcheck: false,
           name: company.trim(),
           email: email.trim(),
           phone: phone.trim(),
