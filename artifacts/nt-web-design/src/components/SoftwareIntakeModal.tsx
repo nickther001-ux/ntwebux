@@ -95,6 +95,7 @@ export function SoftwareIntakeModal({ open, onClose }: Props) {
         body: JSON.stringify({
           access_key: 'c4b7aadc-73a9-4932-884a-3876a0139512',
           botcheck: false,
+          botcheck: false,
           firstName,
           lastName: rest.join(' ') || undefined,
           email: contactPref === 'email' ? email : `${phone}@phone.placeholder`,

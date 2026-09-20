@@ -103,6 +103,7 @@ export function BSuiteIntakeModal({ open, onClose, preselectedTier = '', lang }:
         body: JSON.stringify({
           access_key: 'c4b7aadc-73a9-4932-884a-3876a0139512',
           botcheck: false,
+          botcheck: false,
           name: name.trim(),
           email,
           phone: phone || 'Not provided',

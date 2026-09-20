@@ -25,6 +25,7 @@ export function LeadMagnetModal({ isOpen, onClose }: { isOpen: boolean; onClose:
         body: JSON.stringify({
           access_key: 'c4b7aadc-73a9-4932-884a-3876a0139512',
           botcheck: false,
+          botcheck: false,
           _replyto: email,
           recipient: 'info@ntwebux.com',
           client_email: email,
@@ -40,6 +41,7 @@ export function LeadMagnetModal({ isOpen, onClose }: { isOpen: boolean; onClose:
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           access_key: 'c4b7aadc-73a9-4932-884a-3876a0139512',
+          botcheck: false,
           botcheck: false,
           email,
           recipient: 'info@ntwebux.com',

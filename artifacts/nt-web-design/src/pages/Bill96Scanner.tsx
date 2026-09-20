@@ -84,6 +84,7 @@ export default function Bill96Scanner() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           access_key: 'c4b7aadc-73a9-4932-884a-3876a0139512',
+          botcheck: false,
           botcheck: false, url })
       });
 
@@ -116,6 +117,7 @@ export default function Bill96Scanner() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           access_key: 'c4b7aadc-73a9-4932-884a-3876a0139512',
+          botcheck: false,
           botcheck: false,
           firstName: leadName.split(" ")[0] || "Scanner",
           lastName: leadName.split(" ").slice(1).join(" ") || "Lead",
