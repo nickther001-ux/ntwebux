@@ -12,7 +12,7 @@ export default async function handler(req, res) {
 
   try {
     await resend.emails.send({
-      from: 'NT Digital Group <noreply@ntwebux.com>',
+      from: 'NT Digital Group <onboarding@resend.dev>',
       to: 'support@ntwebux.com',
       subject: `New Lead: ${service || 'Contact Form'} — ${name || email}`,
       html: `
