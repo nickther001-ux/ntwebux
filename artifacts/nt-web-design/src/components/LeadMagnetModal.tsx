@@ -57,7 +57,7 @@ export function LeadMagnetModal({ isOpen, onClose }: { isOpen: boolean; onClose:
     setSuccess(true);
 
     // 3. Automatically open PDF in a new browser tab for instant in-browser viewing
-    const pdfUrl = `${import.meta.env.BASE_URL || '/'}NT_WebUX_2026_Masterclass_Playbook.pdf`;
+    const pdfUrl = `${import.meta.env.BASE_URL || '/'}${isFr ? 'NT_WebUX_2027_Guide_Automatisation_FR.pdf' : 'NT_WebUX_2027_Automation_Guide_EN.pdf'}`;
     window.open(pdfUrl, '_blank');
   };
 
@@ -117,7 +117,7 @@ export function LeadMagnetModal({ isOpen, onClose }: { isOpen: boolean; onClose:
                     : "The Playbook has opened in a new browser tab. You can also view or download it directly below."}
                 </p>
                 <a
-                  href={`${import.meta.env.BASE_URL || '/'}NT_WebUX_2026_Masterclass_Playbook.pdf`}
+                  href={`${import.meta.env.BASE_URL || '/'}${isFr ? 'NT_WebUX_2027_Guide_Automatisation_FR.pdf' : 'NT_WebUX_2027_Automation_Guide_EN.pdf'}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-violet"
