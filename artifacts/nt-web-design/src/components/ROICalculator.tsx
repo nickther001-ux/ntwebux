@@ -129,12 +129,10 @@ export function ROICalculator() {
     setSubmitError('');
 
     try {
-      const res = await fetch("https://api.web3forms.com/submit", {
+      const res = await fetch("/api/contact", {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          access_key: 'c4b7aadc-73a9-4932-884a-3876a0139512',
-          botcheck: false,
           botcheck: false,
           name: company.trim(),
           email: email.trim(),

@@ -100,8 +100,6 @@ export default function SolutionPage() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          access_key: 'c4b7aadc-73a9-4932-884a-3876a0139512',
-          botcheck: false,
           botcheck: false, url })
       });
 
@@ -129,12 +127,10 @@ export default function SolutionPage() {
 
     setSubmittingLead(true);
     try {
-      const response = await fetch("https://api.web3forms.com/submit", {
+      const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          access_key: 'c4b7aadc-73a9-4932-884a-3876a0139512',
-          botcheck: false,
           botcheck: false,
           firstName: leadName.split(" ")[0] || "SEO Niche",
           lastName: leadName.split(" ").slice(1).join(" ") || "Lead",

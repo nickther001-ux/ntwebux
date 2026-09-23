@@ -23,8 +23,6 @@ export function LeadMagnetModal({ isOpen, onClose }: { isOpen: boolean; onClose:
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify({
-          access_key: 'c4b7aadc-73a9-4932-884a-3876a0139512',
-          botcheck: false,
           botcheck: false,
           _replyto: email,
           recipient: 'info@ntwebux.com',
@@ -36,12 +34,10 @@ export function LeadMagnetModal({ isOpen, onClose }: { isOpen: boolean; onClose:
       });
 
       // 2. Dispatch to backend API
-      await fetch("https://api.web3forms.com/submit", {
+      await fetch("/api/contact", {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          access_key: 'c4b7aadc-73a9-4932-884a-3876a0139512',
-          botcheck: false,
           botcheck: false,
           email,
           recipient: 'info@ntwebux.com',
