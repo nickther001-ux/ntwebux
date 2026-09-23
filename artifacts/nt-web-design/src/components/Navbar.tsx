@@ -210,7 +210,7 @@ export function Navbar() {
               height: '38px',
             }}
           >
-            📘 {lang === 'fr' ? 'Guide 2026' : '2026 Playbook'}
+            📘 {lang === 'fr' ? 'Guide 2027' : '2027 Playbook'}
           </button>
         </div>
 
@@ -408,7 +408,7 @@ export function Navbar() {
                 className="btn-violet"
                 style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', padding: '16px', fontSize: '15px', fontWeight: 700, borderRadius: '12px', textDecoration: 'none' }}
               >
-                📘 {lang === 'fr' ? 'Guide 2026 (PDF)' : 'Get 2026 Playbook 📘'} <ArrowRight size={15} />
+                📘 {lang === 'fr' ? 'Guide 2027 (PDF)' : 'Get 2027 Playbook 📘'} <ArrowRight size={15} />
               </a>
 
               <p style={{ textAlign: 'center', fontSize: '11px', color: 'rgba(255,255,255,0.18)', margin: 0 }}>NT Web UX · Global · info@ntwebux.com</p>
