@@ -1,5 +1,6 @@
 import { useEffect, useState, type CSSProperties } from 'react';
 import { useLanguage } from '@/lib/i18n';
+import { Facebook, Instagram } from 'lucide-react';
 
 /* ── Live Digital Clock ─────────────────────────────────────── */
 function LiveClock({ timezone }: { timezone: string }) {
@@ -188,6 +189,32 @@ export function Footer() {
           <p style={{ fontSize: '11px', color: 'rgba(255,255,255,0.22)', letterSpacing: '0.04em', margin: 0 }}>
             {ft.copy}
           </p>
+
+          {/* Social Icons */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+            <a
+              href="https://www.facebook.com/profile.php?id=100063491834855"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook NT Web UX"
+              style={{ color: 'rgba(255,255,255,0.42)', transition: 'color 0.18s', display: 'inline-flex' }}
+              onMouseEnter={(e) => { e.currentTarget.style.color = '#00C8FF'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.color = 'rgba(255,255,255,0.42)'; }}
+            >
+              <Facebook size={18} strokeWidth={1.8} />
+            </a>
+            <a
+              href="https://www.instagram.com/ntwebux/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram NT Web UX"
+              style={{ color: 'rgba(255,255,255,0.42)', transition: 'color 0.18s', display: 'inline-flex' }}
+              onMouseEnter={(e) => { e.currentTarget.style.color = '#00C8FF'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.color = 'rgba(255,255,255,0.42)'; }}
+            >
+              <Instagram size={18} strokeWidth={1.8} />
+            </a>
+          </div>
 
           {/* System Status */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
