@@ -115,7 +115,7 @@ export function Hero({ onStart }: { onStart?: () => void } = {}) {
         <motion.div custom={0} variants={fadeUp} initial="hidden" animate="show" style={{ display: 'flex', justifyContent: 'center', marginBottom: '32px' }}>
           <span className="pill-label">
             <Zap size={11} className="text-blue-400" />
-            {lang === 'fr' ? 'Plateforme tout-en-un pour entrepreneurs' : 'All-in-One Platform for Service Businesses'}
+            {lang === 'fr' ? 'Agence web bilingue · Montréal' : 'Bilingual Web Agency · Montreal'}
           </span>
         </motion.div>
 
@@ -135,9 +135,9 @@ export function Hero({ onStart }: { onStart?: () => void } = {}) {
           }}
         >
           {lang === 'fr' ? (
-            <>On propulse<br /><span className="gradient-text font-serif italic font-normal tracking-wide" style={{ textShadow: '0 0 35px rgba(59,130,246,0.45)' }}>Votre Croissance.</span></>
+            <>Site web professionnel<br /><span className="gradient-text font-serif italic font-normal tracking-wide" style={{ textShadow: '0 0 35px rgba(59,130,246,0.45)' }}>livré en 72h.</span></>
           ) : (
-            <>We Engineer<br /><span className="gradient-text font-serif italic font-normal tracking-wide" style={{ textShadow: '0 0 35px rgba(59,130,246,0.45)' }}>Revenue Engines.</span></>
+            <>Your professional website<br /><span className="gradient-text font-serif italic font-normal tracking-wide" style={{ textShadow: '0 0 35px rgba(59,130,246,0.45)' }}>delivered in 72h.</span></>
           )}
         </motion.h1>
 

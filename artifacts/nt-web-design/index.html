@@ -1,23 +1,24 @@
 <!doctype html>
-<html lang="en" style="background:#060d1a;color-scheme:dark;">
+<html lang="fr" style="background:#060d1a;color-scheme:dark;">
   <head>
 
-    <!-- JSON-LD Schema Markup for Search Algorithms -->
+    <!-- JSON-LD Schema Markup -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "ProfessionalService",
-      "name": "NT WebUX",
+      "@id": "https://ntwebux.com/#business",
+      "name": "NT Web UX",
       "legalName": "NT Digital Group Inc.",
       "url": "https://ntwebux.com",
       "logo": "https://ntwebux.com/nt-logo-mark.png",
       "image": "https://ntwebux.com/opengraph.jpg",
       "telephone": "+14388067640",
       "email": "info@ntwebux.com",
-      "description": "Custom bilingual web design, 72-hour website builds, and automated AI business suites for service businesses in Canada and USA.",
+      "description": "Agence web bilingue basée à Montréal. Création de sites web professionnels, SEO inclus, livrés en 72 heures pour entrepreneurs et PME partout au Canada.",
       "address": {
         "@type": "PostalAddress",
-        "addressLocality": "Montreal",
+        "addressLocality": "Montréal",
         "addressRegion": "QC",
         "addressCountry": "CA"
       },
@@ -26,28 +27,47 @@
         "latitude": "45.5017",
         "longitude": "-73.5673"
       },
+      "areaServed": [
+        { "@type": "Country", "name": "Canada" },
+        { "@type": "AdministrativeArea", "name": "Québec" },
+        { "@type": "AdministrativeArea", "name": "Ontario" },
+        { "@type": "AdministrativeArea", "name": "Alberta" },
+        { "@type": "AdministrativeArea", "name": "British Columbia" },
+        { "@type": "City", "name": "Montréal" },
+        { "@type": "City", "name": "Toronto" },
+        { "@type": "City", "name": "Ottawa" },
+        { "@type": "City", "name": "Vancouver" },
+        { "@type": "City", "name": "Calgary" }
+      ],
+      "knowsLanguage": ["fr-CA", "en-CA"],
       "openingHoursSpecification": [
         {
           "@type": "OpeningHoursSpecification",
           "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-          "opens": "08:00",
-          "closes": "20:00"
+          "opens": "09:00",
+          "closes": "17:00"
         }
       ],
       "sameAs": [
         "https://www.linkedin.com/company/nt-digital-group"
       ],
-      "priceRange": "$",
+      "priceRange": "$$",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5.0",
+        "reviewCount": "9",
+        "bestRating": "5"
+      },
       "hasOfferCatalog": {
         "@type": "OfferCatalog",
-        "name": "Web Design & Business Automation",
+        "name": "Services de création web et d'automatisation",
         "itemListElement": [
           {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "name": "72-Hour Custom Web Development",
-              "description": "Bilingual web development built from scratch in 3 days."
+              "name": "Création de site web en 72 heures",
+              "description": "Site web professionnel bilingue sur mesure, SEO configuré, livré en 72 heures pour entrepreneurs et PME au Canada."
             }
           },
           {
@@ -55,17 +75,25 @@
             "itemOffered": {
               "@type": "Service",
               "name": "NT Business Suite",
-              "description": "All-in-one CRM, AI web chat, SMS text-back, and automated client acquisition system."
+              "description": "Plateforme tout-en-un : CRM, chat IA, SMS text-back, et automatisation d acquisition client."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Automatisation IA",
+              "description": "Mise en place d automatisations par intelligence artificielle sur mesure pour PME et agences."
             }
           }
         ]
       }
     }
     </script>
-    
+
     <!-- Bilingual Alternate Links -->
-    <link rel="alternate" hreflang="en" href="https://ntwebux.com/?lang=en" />
-    <link rel="alternate" hreflang="fr" href="https://ntwebux.com/?lang=fr" />
+    <link rel="alternate" hreflang="en-ca" href="https://ntwebux.com/?lang=en" />
+    <link rel="alternate" hreflang="fr-ca" href="https://ntwebux.com/?lang=fr" />
     <link rel="alternate" hreflang="x-default" href="https://ntwebux.com/" />
 
     <!-- Regional Geo-Targeting Tags -->
@@ -77,36 +105,36 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Title & description (overridden per-page by react-helmet-async) -->
-    <title>NT Web UX | High-Performance Web Apps & Revenue Engines</title>
-    <meta name="description" content="We engineer custom web applications, SaaS platforms, and automated revenue engines for scaling businesses in Canada, USA and Worldwide. Bâtissons votre infrastructure numérique." />
+    <!-- Title & description -->
+    <title>Création site web au Canada en 72h | NT Web UX — Agence bilingue Montréal</title>
+    <meta name="description" content="Agence web bilingue basée à Montréal, au service des entrepreneurs et PME partout au Canada. Site professionnel sur mesure, SEO inclus, livré en 72 heures." />
     <link rel="canonical" href="https://ntwebux.com/" />
 
-    <!-- OpenGraph — LinkedIn, WhatsApp, X previews -->
+    <!-- OpenGraph -->
     <meta property="og:type"         content="website" />
     <meta property="og:url"          content="https://ntwebux.com/" />
-    <meta property="og:title"        content="NT Digital Group | The Global Operating System for Service Businesses" />
-    <meta property="og:description"  content="Technical architecture and AI automation for borderless enterprises. We engineer the digital foundations for high-performance service businesses in Montreal and beyond." />
-    <meta property="og:image"        content="https://ntwebux.com/opengraph.jpg?v=3" />
+    <meta property="og:title"        content="Création site web au Canada en 72h | NT Web UX — Agence bilingue" />
+    <meta property="og:description"  content="Agence web bilingue basée à Montréal. Sites professionnels sur mesure pour entrepreneurs et PME partout au Canada, livrés en 72 heures." />
+    <meta property="og:image"        content="https://ntwebux.com/opengraph.jpg?v=4" />
     <meta property="og:image:width"  content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt"    content="NT Digital Group — Digital Architecture & AI Automation" />
-    <meta property="og:locale"       content="en_CA" />
-    <meta property="og:site_name"    content="NT Digital Group" />
+    <meta property="og:image:alt"    content="NT Web UX — Agence web bilingue à Montréal, sites livrés en 72 heures" />
+    <meta property="og:locale"       content="fr_CA" />
+    <meta property="og:locale:alternate" content="en_CA" />
+    <meta property="og:site_name"    content="NT Web UX" />
 
     <!-- Twitter / X Card -->
     <meta name="twitter:card"        content="summary_large_image" />
-    <meta name="twitter:title"       content="NT Digital Group | The Global Operating System for Service Businesses" />
-    <meta name="twitter:description" content="Technical architecture and AI automation for borderless enterprises. We engineer the digital foundations for high-performance service businesses in Montreal and beyond." />
-    <meta name="twitter:image"       content="https://ntwebux.com/opengraph.jpg?v=3" />
+    <meta name="twitter:title"       content="Création site web au Canada en 72h | NT Web UX" />
+    <meta name="twitter:description" content="Agence web bilingue à Montréal. Site professionnel sur mesure, livré en 72 heures pour les PME partout au Canada." />
+    <meta name="twitter:image"       content="https://ntwebux.com/opengraph.jpg?v=4" />
 
     <!-- Additional SEO signals -->
-    <meta name="robots"   content="index, follow" />
-    <meta name="author"   content="NT Digital Group" />
-    <meta name="keywords" content="AI automation, web design, digital architecture, enterprise SaaS, AI operating system, Montreal, bilingual, React" />
+    <meta name="robots"   content="index, follow, max-image-preview:large" />
+    <meta name="author"   content="NT Web UX — NT Digital Group Inc." />
+    <meta name="keywords" content="création site web Montréal, agence web Canada, site web 72h, web design Montreal, agence web bilingue, création site web Toronto, création site web Ottawa, site web PME Canada, bilingual web design agency Canada" />
 
-    
-    <!-- JSON-LD FAQ Schema for AI and Search Crawlers -->
+    <!-- JSON-LD FAQ Schema -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -114,23 +142,40 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "How does NT WebUX help with Quebec Bill 96 compliance?",
+          "name": "Combien de temps pour créer un site web avec NT Web UX?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "NT WebUX builds the technical bridge for brands expanding into Quebec. We implement automatic French localization, bilingual hreflangs, meta translations, and browser-based routing to ensure complete OQLF compliance."
+            "text": "Nous livrons votre site web professionnel en 72 heures après la validation du brief initial. Design sur mesure, SEO configuré, bilingue FR/EN si requis."
           }
         },
         {
           "@type": "Question",
-          "name": "What is the Missed-Call Text-Back SaaS service?",
+          "name": "NT Web UX travaille-t-elle avec des clients en dehors de Montréal?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Our missed-call text-back system automatically responds to unanswered client calls via AI-powered SMS in under 150ms. It qualifies leads and books appointments directly to secure your revenue pipeline."
+            "text": "Oui. Nous sommes basés à Montréal mais nous servons des entrepreneurs et PME partout au Canada — Toronto, Ottawa, Vancouver, Calgary et au-delà. Notre bilinguisme natif FR/EN est un atout pour les marchés canadiens."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Comment NT Web UX aide avec la Loi 96 au Québec?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "NT Web UX bâtit l infrastructure technique pour les marques qui s étendent au Québec. Nous implémentons la localisation française automatique, les hreflang bilingues, les traductions de méta et le routage navigateur pour une conformité OQLF complète."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Qu est-ce que le service Missed-Call Text-Back SaaS?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Notre système de rappel textuel automatique répond aux appels manqués par SMS alimenté par IA en moins de 150ms. Il qualifie les prospects et prend des rendez-vous directement pour sécuriser votre pipeline de revenus."
           }
         }
       ]
     }
     </script>
+
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/nt-favicon.png" />
     <link rel="apple-touch-icon" href="/nt-favicon.png" />
