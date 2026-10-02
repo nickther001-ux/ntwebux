@@ -20,7 +20,7 @@ export default async function handler(req, res) {
     const resend = new Resend(process.env.RESEND_API_KEY);
     const { data, error } = await resend.emails.send({
       from: 'NT Web UX <onboarding@resend.dev>',
-      to: 'info@ntwebux.com',
+      to: 'support@ntwebux.com',
       reply_to: email,
       subject,
       html,
