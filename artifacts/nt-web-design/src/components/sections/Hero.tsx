@@ -90,7 +90,7 @@ export function Hero({ onStart }: { onStart?: () => void } = {}) {
   return (
     <section ref={sectionRef} style={{ position: 'relative', width: '100%', paddingTop: '120px', paddingBottom: '90px', overflow: 'hidden', textAlign: 'center' }}>
       {/* Dot grid */}
-      <div className="dot-grid" style={{ position: 'absolute', inset: 0, opacity: 0.6, pointerEvents: 'none' }} />
+      <div className="dot-grid" style={{ position: 'absolute', inset: 0, opacity: 0, pointerEvents: 'none' }} />
 
       {/* Tight focal glow behind headline — adds depth on top of the body glow */}
       <div style={{

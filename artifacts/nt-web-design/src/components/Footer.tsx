@@ -36,9 +36,7 @@ function LiveClock({ timezone }: { timezone: string }) {
 
 /* ── Constants ───────────────────────────────────────────────── */
 const HUBS = [
-  { city: 'Montreal', tz: 'America/Toronto', label: 'EST' },
-  { city: 'Paris',    tz: 'Europe/Paris',    label: 'CET' },
-  { city: 'Japan',    tz: 'Asia/Tokyo',      label: 'JST' },
+  { city: 'Montréal', tz: 'America/Toronto', label: 'EST' },
 ];
 
 const COL_HEAD: CSSProperties = {
