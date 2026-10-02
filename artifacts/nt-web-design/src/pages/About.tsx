@@ -158,42 +158,42 @@ export default function About() {
   /* ── copy ─────────────────────────────────────────────────── */
   const metaTitle = bi('About — NT Digital Group', 'À Propos — NT Digital Group', lang);
   const metaDesc  = bi(
-    'NT Digital Group is a technical architecture studio — applying engineering precision from Concordia University to AI, SaaS, and global digital infrastructure.',
-    'NT Digital Group est un studio d\'architecture technique — appliquant la rigueur de l\'ingénierie de l\'Université Concordia à l\'IA, au SaaS et aux infrastructures numériques mondiales.',
+    'NT Web UX is a bilingual web agency in Montreal — delivering professional websites in 72 hours for entrepreneurs and SMBs across Canada.',
+    'NT Web UX est une agence web bilingue basée à Montréal — livraison de sites web professionnels en 72 heures pour entrepreneurs et PME partout au Canada.',
     lang,
   );
 
-  const eyebrow  = bi('Technical Architecture Studio', 'Studio d\'Architecture Technique', lang);
-  const heroH1a  = bi('Engineering the', 'Ingénierie du', lang);
-  const heroH1b  = bi('Digital Borderless.', 'Numérique Sans Frontières.', lang);
+  const eyebrow  = bi('Bilingual Web Agency · Montreal', 'Agence web bilingue · Montréal', lang);
+  const heroH1a  = bi('Websites that', 'Des sites web', lang);
+  const heroH1b  = bi('work for you.', 'qui travaillent.', lang);
   const heroSub  = bi(
-    'We are technical architects — not just web designers. Every deployment is engineered with the same rigour as structural infrastructure: built to spec, built to last.',
-    'Nous sommes des architectes techniques — pas juste des designers web. Chaque déploiement est conçu avec la même rigueur qu\'une infrastructure structurelle : conforme aux spécifications, conçu pour durer.',
+    'I build professional websites in 72 hours — custom, bilingual, SEO-ready. For entrepreneurs and SMBs across Canada who need a site that brings in real business.',
+    'Je bâtis des sites web professionnels en 72 heures — sur mesure, bilingues, SEO prêt. Pour entrepreneurs et PME partout au Canada qui veulent un site qui ramène vraiment des clients.',
     lang,
   );
 
-  const manifestoLabel = bi('The Architect\'s Manifesto', 'Le Manifeste de l\'Architecte', lang);
+  const manifestoLabel = bi('Why NT Web UX', 'Pourquoi NT Web UX', lang);
   const manifestoLead  = bi(
-    'Stop building websites. Start engineering revenue engines.',
-    'Arrêtez de construire des sites web. Commencez à concevoir des moteurs de revenus.',
+    'A website is not a brochure. It is the hardest-working tool in your business.',
+    'Un site web, ce n\'est pas une brochure. C\'est l\'outil qui travaille le plus fort dans ton entreprise.',
     lang,
   );
   const manifestoP1 = bi(
     'The digital industry is bloated with templates, slow code, and "designers" who don\'t understand how a business actually functions. I don\'t build brochures; I architect systems.',
-    'L\'industrie numérique est saturée de modèles génériques, de code lent et de « designers » qui ne comprennent pas réellement le fonctionnement d\'une entreprise. Je ne construis pas des brochures ; j\'architecture des systèmes.',
+    'L\'industrie du web est pleine de templates génériques, de délais interminables, et d\'agences qui disparaissent après le lancement. J\'ai bâti NT Web UX pour faire les choses autrement — rapidement, humainement, et avec responsabilité.',
     lang,
   );
   const manifestoP2 = bi(
-    'Drawing from a foundation in Mechanical Engineering and Computer Science at Concordia University, I treat every line of code with the same rigour as a physical blueprint. If a system isn\'t recoverable, scalable, and revenue-positive, it shouldn\'t exist.',
-    'Issu d\'une formation en génie mécanique et en informatique à l\'Université Concordia, je traite chaque ligne de code avec la même rigueur qu\'un plan physique. Si un système n\'est pas récupérable, scalable et générateur de revenus, il ne devrait pas exister.',
+    'With a background in Mechanical Engineering and Computer Science at Concordia University, I bring the same rigor to every project — whether it is a landing page or a full platform. If a website does not bring you clients, it serves no purpose.',
+    'Avec un background en génie mécanique et en informatique à l\'Université Concordia, j\'apporte la même rigueur à chaque projet — qu\'il soit une landing page ou une plateforme complète. Si un site web ne te ramène pas de clients, il ne sert à rien.',
     lang,
   );
   const manifestoClosing = bi(
-    'I am not here to hold your hand through a 30-minute discovery call. I am here to audit your systems, plug your revenue leaks, and expand your vision.',
-    'Je ne suis pas là pour vous accompagner lors d\'un appel découverte de 30 minutes. Je suis là pour auditer vos systèmes, colmater vos fuites de revenus et élargir votre vision.',
+    'Here is how it works: we talk for 15 minutes about your project. If we are the right fit, your site is live 72 hours later. If we are not, I will point you to someone who is. Simple, honest, no bullshit.',
+    'Voici comment ça marche : on jase 15 minutes de ton projet. Si on est le bon fit, 72h plus tard ton site est en ligne. Si on ne l\'est pas, je te réfère à quelqu\'un qui l\'est. Simple, honnête, pas de bullshit.',
     lang,
   );
-  const manifestoCTA = bi('Submit your vision. Let\'s build the machine.', 'Soumettez votre vision. Construisons la machine.', lang);
+  const manifestoCTA = bi('Send us your request.', 'Envoie-nous ta requête.', lang);
   const philoEyebrow = bi('Our Philosophy', 'Notre Philosophie', lang);
   const philoTitle   = bi('Three pillars of technical architecture.', 'Trois piliers de l\'architecture technique.', lang);
   const philoSub     = bi(
