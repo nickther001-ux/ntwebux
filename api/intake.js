@@ -1,43 +1,110 @@
-import { Resend } from 'resend';
-
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   const d = req.body || {};
-  if (!d.email) return res.status(400).json({ error: 'Email is required' });
-
-  if (!process.env.RESEND_API_KEY) {
-    return res.status(500).json({ error: 'Email service not configured' });
-  }
-
   const isFr = d.lang === 'fr';
-  const planName = d.plan?.name || 'Starter';
-  const emoji = d.method === 'WhatsApp' ? '💬' : d.method === 'Email' ? '📧' : '📞';
-  const subject = `${emoji} ${isFr ? 'Nouveau lead' : 'New lead'} — ${d.business || d.name || 'Unnamed'} | ${planName}`;
+  const key = process.env.RESEND_API_KEY;
+  if (!key) return res.status(500).json({ error: 'Missing RESEND_API_KEY' });
 
-  const row = (label, value) => value
-    ? `<tr><td style="padding:6px 12px;color:#64748b;font-size:13px;width:160px;">${label}</td><td style="padding:6px 12px;color:#0f172a;font-size:14px;font-weight:500;">${Array.isArray(value) ? value.join(', ') : value}</td></tr>`
-    : '';
+  const methodLabel = {
+    whatsapp: isFr ? 'WhatsApp' : 'WhatsApp',
+    email: isFr ? 'Courriel' : 'Email',
+    phone: isFr ? 'Appel téléphonique' : 'Phone call',
+    video: isFr ? 'Appel vidéo' : 'Video call'
+  }[d.method] || d.method || '—';
 
-  const html = `<!doctype html><html><body style="font-family:-apple-system,sans-serif;background:#f8fafc;margin:0;padding:24px;"><div style="max-width:640px;margin:0 auto;background:#fff;border-radius:12px;overflow:hidden;border:1px solid #e2e8f0;"><div style="background:linear-gradient(135deg,#0066ff,#00c8ff);padding:28px 32px;color:#fff;"><div style="font-size:12px;letter-spacing:0.14em;text-transform:uppercase;opacity:0.75;margin-bottom:6px;">${isFr ? 'Nouveau lead' : 'New lead'} · NT Web UX</div><div style="font-size:24px;font-weight:800;line-height:1.2;">${d.business || d.name || 'Unnamed Business'}</div><div style="margin-top:6px;font-size:14px;opacity:0.85;">${planName}</div></div><div style="padding:20px 24px;"><table style="width:100%;border-collapse:collapse;">${row('Name', d.name)}${row('Business', d.business)}${row('Email', `<a href="mailto:${d.email}" style="color:#0066ff;text-decoration:none;">${d.email}</a>`)}${row('Phone', d.phone)}${row('City', d.city)}${row('Site type', d.siteType)}${row('Style', d.style)}${row('Visual styles', d.visualStyles)}${row('Goals', d.goals)}${row('Description', d.description)}${row('Has logo', d.hasLogo)}${row('Has content', d.hasContent)}${row('Existing site', d.hasExistingSite)}${row(isFr ? 'Méthode' : 'Method', `<strong style="color:#0066ff;">${d.method || '-'}</strong>`)}${row('Best time', d.bestTime)}</table>${d.notes ? `<div style="margin-top:16px;background:#f1f5f9;border-left:3px solid #0066ff;padding:12px 14px;border-radius:6px;color:#334155;font-size:14px;line-height:1.5;white-space:pre-wrap;">${d.notes}</div>` : ''}</div></div></body></html>`;
+  // 1. Admin notification
+  const adminHtml = `
+    <h2>Nouvelle demande — Lancement 72h</h2>
+    <p><strong>Nom:</strong> ${d.name || '—'}</p>
+    <p><strong>Entreprise:</strong> ${d.company || '—'}</p>
+    <p><strong>Courriel:</strong> ${d.email || '—'}</p>
+    <p><strong>Téléphone:</strong> ${d.phone || '—'}</p>
+    <p><strong>Méthode préférée:</strong> ${methodLabel}</p>
+    <p><strong>Langue:</strong> ${isFr ? 'Français' : 'English'}</p>
+    <p><strong>Projet:</strong></p>
+    <p>${(d.project || '—').replace(/\n/g, '<br>')}</p>
+  `;
 
   try {
-    const resend = new Resend(process.env.RESEND_API_KEY);
-    const { data, error } = await resend.emails.send({
-      from: 'NT Web UX <noreply@ntwebux.com>',
-      to: 'info@ntwebux.com',
-      reply_to: d.email,
-      subject,
-      html,
+    const adminRes = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${key}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        from: 'NT Web UX <noreply@ntwebux.com>',
+        to: ['info@ntwebux.com'],
+        reply_to: d.email,
+        subject: `Nouvelle demande — ${d.name || 'Client'} (${d.company || 'N/A'})`,
+        html: adminHtml
+      })
     });
-
-    if (error) {
-      console.error('Resend error:', error);
-      return res.status(500).json({ error: error.message || 'Email send failed' });
+    if (!adminRes.ok) {
+      const err = await adminRes.text();
+      return res.status(500).json({ error: 'Email failed', detail: err });
     }
-
-    return res.status(200).json({ success: true, method: d.method || 'Email', id: data?.id });
-  } catch (err) {
-    return res.status(500).json({ error: err.message });
+  } catch (e) {
+    return res.status(500).json({ error: 'Email failed', detail: String(e) });
   }
+
+  // 2. Client confirmation — single language, professional tone
+  const firstName = (d.name || '').split(' ')[0] || (isFr ? 'Bonjour' : 'Hello');
+
+  const clientSubject = isFr
+    ? `Nous avons bien reçu votre demande`
+    : `We've received your request`;
+
+  const clientHtml = isFr ? `
+    <div style="font-family: -apple-system, Segoe UI, Helvetica, Arial, sans-serif; max-width: 560px; margin: 0 auto; color: #1a1a1a; line-height: 1.6;">
+      <p>Bonjour ${firstName},</p>
+
+      <p>Merci d'avoir pris le temps de nous écrire. Votre demande concernant <strong>${d.company || 'votre projet'}</strong> est bien enregistrée.</p>
+
+      <p>Je reviens vers vous par <strong>${methodLabel.toLowerCase()}</strong> dans les 24 prochaines heures pour discuter de vos besoins et confirmer les prochaines étapes.</p>
+
+      <p>Si entre-temps vous souhaitez ajouter des précisions, répondez simplement à ce courriel.</p>
+
+      <p>Au plaisir d'échanger,</p>
+
+      <p style="margin-top: 24px;">
+        <strong>Nickson Thermidor</strong><br>
+        NT Web UX<br>
+        <a href="https://ntwebux.com" style="color: #0066FF; text-decoration: none;">ntwebux.com</a>
+      </p>
+    </div>
+  ` : `
+    <div style="font-family: -apple-system, Segoe UI, Helvetica, Arial, sans-serif; max-width: 560px; margin: 0 auto; color: #1a1a1a; line-height: 1.6;">
+      <p>Hello ${firstName},</p>
+
+      <p>Thank you for reaching out. Your request regarding <strong>${d.company || 'your project'}</strong> has been received.</p>
+
+      <p>I'll be in touch by <strong>${methodLabel.toLowerCase()}</strong> within the next 24 hours to discuss your needs and confirm the next steps.</p>
+
+      <p>If you'd like to add any details in the meantime, feel free to reply to this email.</p>
+
+      <p>Looking forward to speaking with you,</p>
+
+      <p style="margin-top: 24px;">
+        <strong>Nickson Thermidor</strong><br>
+        NT Web UX<br>
+        <a href="https://ntwebux.com" style="color: #0066FF; text-decoration: none;">ntwebux.com</a>
+      </p>
+    </div>
+  `;
+
+  // Fire-and-forget
+  if (d.email) {
+    fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${key}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        from: 'NT Web UX <noreply@ntwebux.com>',
+        to: [d.email],
+        reply_to: 'info@ntwebux.com',
+        subject: clientSubject,
+        html: clientHtml
+      })
+    }).catch(() => {});
+  }
+
+  return res.status(200).json({ ok: true });
 }
