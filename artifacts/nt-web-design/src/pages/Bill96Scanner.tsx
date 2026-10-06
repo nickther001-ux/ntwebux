@@ -416,7 +416,7 @@ export default function Bill96Scanner() {
                         animate={{ opacity: 1, scale: 1 }}
                         className="mt-6 p-4 bg-green-500/10 border border-green-500/20 text-green-400 rounded-lg text-sm text-center relative z-10"
                       >
-                        📬 **{isFr ? "Demande de plan envoyée !" : "Audit plan request sent!"}** {isFr ? "Nous vous contacterons à " : "We will contact you at "} {leadEmail} {isFr ? " avec votre plan de correction." : " with your localized blueprint."}
+                        📬 <strong>{isFr ? "Demande envoyée !" : "Request sent!"}</strong> {isFr ? "Votre rapport et plan de correction arrivent à " : "Your report and fix plan is on its way to "} <strong>{leadEmail}</strong>{isFr ? "." : "."}
                       </motion.div>
                     )}
                   </AnimatePresence>
