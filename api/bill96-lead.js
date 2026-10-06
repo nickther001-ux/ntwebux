@@ -222,7 +222,7 @@ export default async function handler(req, res) {
               ? 'Nous corrigeons tous les points ci-dessus en 72 heures, sans que vous ayez à toucher au code.'
               : 'We fix all of the above in 72 hours — you never touch the code.'}
           </p>
-          <a href="https://ntwebux.com/pricing" style="display:inline-block;background:#0066FF;color:white;text-decoration:none;padding:12px 28px;border-radius:100px;font-weight:700;font-size:14px;margin:4px;">
+          <a href="https://ntwebux.com/#pricing" style="display:inline-block;background:#0066FF;color:white;text-decoration:none;padding:12px 28px;border-radius:100px;font-weight:700;font-size:14px;margin:4px;">
             ${isFr ? 'Voir les forfaits' : 'See pricing'}
           </a>
           <a href="${mailtoLink}" style="display:inline-block;background:white;color:#0066FF;text-decoration:none;padding:12px 28px;border-radius:100px;font-weight:700;font-size:14px;border:1px solid #0066FF;margin:4px;">
