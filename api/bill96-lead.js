@@ -234,8 +234,8 @@ export default async function handler(req, res) {
 
         <p style="font-size:13px;color:#666;line-height:1.5;margin:0;">
           ${isFr ? 'Cordialement,' : 'Kind regards,'}<br>
-          <strong style="color:#1a1a1a;">Nickson Thermidor</strong><br>
-          NT Web UX — ${isFr ? 'Agence web bilingue' : 'Bilingual web agency'}<br>
+          <strong style="color:#1a1a1a;">${isFr ? "L'équipe NT Web UX" : "The NT Web UX team"}</strong><br>
+          ${isFr ? 'Agence web bilingue' : 'Bilingual web agency'}<br>
           <a href="https://ntwebux.com" style="color:#0066FF;text-decoration:none;">ntwebux.com</a>
         </p>
       </div>
