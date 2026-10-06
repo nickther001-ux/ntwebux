@@ -93,17 +93,21 @@ export default async function handler(req, res) {
 
   // Fire-and-forget
   if (d.email) {
-    fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: { 'Authorization': `Bearer ${key}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        from: 'NT Web UX <noreply@ntwebux.com>',
-        to: [d.email],
-        reply_to: 'info@ntwebux.com',
-        subject: clientSubject,
-        html: clientHtml
-      })
-    }).catch(() => {});
+    try {
+      await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${key}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          from: 'NT Web UX <noreply@ntwebux.com>',
+          to: [d.email],
+          reply_to: 'info@ntwebux.com',
+          subject: clientSubject,
+          html: clientHtml
+        })
+      });
+    } catch (e) {
+      console.error('Client confirmation failed:', e);
+    }
   }
 
   return res.status(200).json({ ok: true });

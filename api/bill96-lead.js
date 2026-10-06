@@ -247,17 +247,30 @@ export default async function handler(req, res) {
     </div>
   `;
 
-  fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: { 'Authorization': `Bearer ${key}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      from: 'NT Web UX <noreply@ntwebux.com>',
-      to: [email],
-      reply_to: 'info@ntwebux.com',
-      subject: clientSubject,
-      html: clientHtml
-    })
-  }).catch(() => {});
+  // Await client email so Vercel doesn't kill the function before Resend finishes
+  let clientEmailOk = false;
+  let clientEmailErr = null;
+  try {
+    const clientRes = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${key}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        from: 'NT Web UX <noreply@ntwebux.com>',
+        to: [email],
+        reply_to: 'info@ntwebux.com',
+        subject: clientSubject,
+        html: clientHtml
+      })
+    });
+    clientEmailOk = clientRes.ok;
+    if (!clientRes.ok) {
+      clientEmailErr = await clientRes.text();
+      console.error('Client email failed:', clientEmailErr);
+    }
+  } catch (e) {
+    clientEmailErr = String(e);
+    console.error('Client email threw:', clientEmailErr);
+  }
 
-  return res.status(200).json({ ok: true });
+  return res.status(200).json({ ok: true, clientEmailOk, clientEmailErr });
 }
