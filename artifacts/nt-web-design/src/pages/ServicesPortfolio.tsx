@@ -82,7 +82,7 @@ export default function ServicesPortfolio() {
 
       {/* ── PRICING PLANS ── */}
       <section style={{ padding: '0 24px 140px', position: 'relative' }}>
-        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+        <div id="pricing" style={{ maxWidth: '1100px', margin: '0 auto', scrollMarginTop: '100px' }}>
 
           {/* Track toggle */}
           <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '56px' }}>
