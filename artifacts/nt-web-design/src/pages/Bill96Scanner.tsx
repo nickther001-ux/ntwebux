@@ -382,7 +382,7 @@ export default function Bill96Scanner() {
                     {!leadSuccess ? (
                       <motion.form
                         onSubmit={handleLeadSubmit}
-                        className="mt-6 flex flex-col md:flex-row gap-3 relative z-10"
+                        className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-3 relative z-10"
                       >
                         <input
                           type="text"
@@ -390,7 +390,7 @@ export default function Bill96Scanner() {
                           placeholder={isFr ? "Votre Nom" : "Your Name"}
                           value={leadName}
                           onChange={(e) => setLeadName(e.target.value)}
-                          className="px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-[#00AADD]/60 text-sm flex-1"
+                          className="px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-[#00AADD]/60 text-sm"
                         />
                         <input
                           type="email"
@@ -398,12 +398,12 @@ export default function Bill96Scanner() {
                           placeholder={isFr ? "Votre Adresse Courriel" : "Your Email Address"}
                           value={leadEmail}
                           onChange={(e) => setLeadEmail(e.target.value)}
-                          className="px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-[#00AADD]/60 text-sm flex-1"
+                          className="px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-[#00AADD]/60 text-sm"
                         />
                         <button
                           type="submit"
                           disabled={submittingLead}
-                          className="px-6 py-3 bg-[#00AADD] text-black font-semibold text-sm rounded-lg hover:opacity-90 disabled:opacity-50 transition-opacity whitespace-nowrap w-full md:w-auto"
+                          className="md:col-span-2 px-6 py-3 bg-[#00AADD] text-black font-semibold text-sm rounded-lg hover:opacity-90 disabled:opacity-50 transition-opacity w-full"
                         >
                           {submittingLead 
                             ? (isFr ? "Demande en cours..." : "Requesting...") 
