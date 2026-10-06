@@ -215,7 +215,7 @@ export function Navbar() {
         </div>
 
         {/* Mobile right — search + lang toggle + hamburger */}
-        <div className="navbar-mobile-right" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <div className="navbar-mobile-right" style={{ alignItems: 'center', gap: '8px' }}>
           <button
             onClick={() => setCmdOpen(true)}
             aria-label="Search"
