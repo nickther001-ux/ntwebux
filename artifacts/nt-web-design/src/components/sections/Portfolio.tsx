@@ -69,6 +69,7 @@ const RAW_PROJECTS = [
     tags: { en: ["Landing Page", "SaaS"], fr: ["Page de lancement", "SaaS"] },
     buildTime: { en: "7 days", fr: "7 jours" },
     wide: true,
+    url: "https://www.codewords.ai/",
   },
   {
     img: `${BASE}/portfolio/proj-medical.webp`,
