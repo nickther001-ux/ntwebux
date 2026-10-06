@@ -110,17 +110,14 @@ export default function Bill96Scanner() {
 
     setSubmittingLead(true);
     try {
-      const response = await fetch("/api/contact", {
+      const response = await fetch("/api/bill96-lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          botcheck: false,
-          firstName: leadName.split(" ")[0] || "Scanner",
-          lastName: leadName.split(" ").slice(1).join(" ") || "Lead",
+          name: leadName,
           email: leadEmail,
-          phone: result.contactPhone || "",
-          service: "Bill 96 Compliance Scanner Lead",
-          message: `Lead scanned website: ${result.url}. Compliance Score: ${result.complianceScore}%.\nFailures: ${JSON.stringify(result.structuralFailures)}`
+          lang: isFr ? 'fr' : 'en',
+          scanResult: result
         })
       });
 
