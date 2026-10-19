@@ -96,6 +96,17 @@ export function Contact() {
           <p style={{ fontSize: '16px', color: 'rgba(255,255,255,0.45)', marginTop: '16px', maxWidth: '480px', margin: '16px auto 0', lineHeight: 1.7 }}>
             {t('contact.desc')}
           </p>
+          <div data-nt="contact-72h" style={{ display: 'flex', justifyContent: 'center', marginTop: '24px' }}>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '9px 18px', borderRadius: '999px', fontSize: '13px', fontWeight: 700, letterSpacing: '0.04em', color: '#93c5fd', background: 'rgba(59,130,246,0.12)', border: '1px solid rgba(59,130,246,0.35)' }}>
+              ⚡ {lang === 'fr' ? 'Lancement en 72 heures' : 'Launch in 72 hours'}
+            </span>
+          </div>
+          <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.45)', marginTop: '16px', lineHeight: 1.7 }}>
+            {lang === 'fr' ? 'Ou pour toute question ou demande, contactez-nous : ' : 'Or for questions and inquiries, contact us: '}
+            <a href="mailto:info@ntwebux.com" style={{ color: '#93c5fd', textDecoration: 'none', fontWeight: 600 }}>info@ntwebux.com</a>
+            {' · '}
+            <a href="tel:+14388067640" style={{ color: '#93c5fd', textDecoration: 'none', fontWeight: 600 }}>(438) 806-7640</a>
+          </p>
         </motion.div>
 
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.3fr', gap: '48px', alignItems: 'start' }} className="contact-grid">
