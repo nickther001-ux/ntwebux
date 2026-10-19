@@ -5,6 +5,8 @@ import { CheckCircle2, ArrowRight, Phone, Mail } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
+import { createPortal } from 'react-dom';
+import { OnboardingModal } from '@/components/OnboardingModal';
 
 const API_BASE = (import.meta.env.VITE_API_URL || import.meta.env.BASE_URL).replace(/\/$/, "");
 
@@ -42,7 +44,8 @@ const labelStyle: React.CSSProperties = {
   marginBottom: '8px',
 };
 
-export function Contact() {
+export function Contact({ onStart }: { onStart?: () => void }) {
+  const [localPlan, setLocalPlan] = useState<{ name: string; price: string | number } | null>(null);
   const { t, lang } = useLanguage();
   const [success, setSuccess] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -97,10 +100,16 @@ export function Contact() {
             {t('contact.desc')}
           </p>
           <div data-nt="contact-72h" style={{ display: 'flex', justifyContent: 'center', marginTop: '24px' }}>
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '9px 18px', borderRadius: '999px', fontSize: '13px', fontWeight: 700, letterSpacing: '0.04em', color: '#93c5fd', background: 'rgba(59,130,246,0.12)', border: '1px solid rgba(59,130,246,0.35)' }}>
-              ⚡ {lang === 'fr' ? 'Lancement en 72 heures' : 'Launch in 72 hours'}
-            </span>
+            <button
+              type="button"
+              onClick={() => (onStart ? onStart() : setLocalPlan({ name: 'Custom Project', price: 'Custom' }))}
+              className="btn-violet"
+              style={{ padding: '14px 28px', fontSize: '15px', gap: '8px', display: 'inline-flex', alignItems: 'center', cursor: 'pointer', border: 'none' }}
+            >
+              {lang === 'fr' ? 'Lancement en 72 heures' : 'Launch in 72 hours'} <ArrowRight size={16} />
+            </button>
           </div>
+          {!onStart && localPlan && createPortal(<OnboardingModal plan={localPlan} onClose={() => setLocalPlan(null)} />, document.body)}
           <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.45)', marginTop: '16px', lineHeight: 1.7 }}>
             {lang === 'fr' ? 'Ou pour toute question ou demande, contactez-nous : ' : 'Or for questions and inquiries, contact us: '}
             <a href="mailto:info@ntwebux.com" style={{ color: '#93c5fd', textDecoration: 'none', fontWeight: 600 }}>info@ntwebux.com</a>

@@ -104,7 +104,7 @@ export default function Home() {
           </RevealSection>
 
           <RevealSection variant="fadeUp">
-            <Contact />
+            <Contact onStart={() => setActivePlan({ name: 'Custom Project', price: 'Custom' })} />
           </RevealSection>
 
           <RevealSection variant="fadeUp" delay={0.1}>
