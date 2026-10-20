@@ -81,15 +81,15 @@ export const KINDS: { id: ProjectKind; icon: typeof Globe; fr: string; en: strin
 
 const T = {
   fr: {
-    hero: 'Commencez par une idée. Vous pourrez tout changer ensuite.',
-    placeholder: 'Décrivez votre idée, on lui donne vie…',
+    hero: 'Cadrez votre projet de 72 heures en 30 secondes.',
+    placeholder: "ex. Entreprise de CVC à Montréal avec 4 camions, besoin de réservation en ligne et d'un CRM…",
     tryThese: 'Pas sûr par où commencer ? Essayez l’un de ceux-ci',
     examples: [
-      'Site bilingue pour ma clinique dentaire avec rendez-vous',
-      'Boutique en ligne pour mes bijoux faits main',
-      'Site pour mon restaurant avec réservations',
-      'Site pour mon cabinet comptable avec capture de leads',
-      'Site vitrine pour un courtier immobilier',
+      'Clinique multi-succursales avec rendez-vous en ligne et rappels SMS',
+      'Entrepreneur en CVC avec soumissions en ligne et CRM',
+      'Cabinet comptable avec portail client et capture de leads',
+      'Boutique en ligne bilingue avec paiements et inventaire',
+      'Agence immobilière avec inscriptions et suivi automatisé',
     ],
     thinking: 'Analyse de votre projet…',
     noted: 'Bien reçu. J’ai déjà noté :',
@@ -112,15 +112,15 @@ const T = {
     none: '—',
   },
   en: {
-    hero: 'Start with one prompt. You can change everything later.',
-    placeholder: 'Describe your idea, we will bring it to life…',
+    hero: 'Scope your 72-hour project in 30 seconds.',
+    placeholder: "e.g. HVAC company in Montreal with 4 trucks that needs online booking and a CRM…",
     tryThese: 'Not sure where to start? Try one of these',
     examples: [
-      'Bilingual site for my dental clinic with booking',
-      'Online store for my handmade jewelry',
-      'Restaurant website with reservations',
-      'Accounting firm site with lead capture',
-      'Listing site for a real estate agent',
+      'Multi-location clinic with online booking and SMS reminders',
+      'HVAC contractor with online quotes and CRM sync',
+      'Accounting firm with a client portal and lead capture',
+      'Bilingual online store with payments and inventory',
+      'Real estate agency with listings and automated follow-up',
     ],
     thinking: 'Analyzing your project…',
     noted: 'Got it. I already noted:',
@@ -396,7 +396,7 @@ export default function AIProjectIntake({
             <div style={{ ...S.rim, ...(boxFocus ? S.rimFocus : boxHover ? S.rimHover : {}) }} onMouseEnter={() => setBoxHover(true)} onMouseLeave={() => setBoxHover(false)} onFocusCapture={() => setBoxFocus(true)} onBlurCapture={() => setBoxFocus(false)}>
               <div style={S.box}>
                 <textarea
-                  autoFocus value={prompt} onChange={e => setPrompt(e.target.value)} placeholder={ph || t.placeholder} rows={3}
+                  autoFocus autoComplete="off" spellCheck={false} value={prompt} onChange={e => setPrompt(e.target.value)} placeholder={ph || t.placeholder} rows={3}
                   onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); startFromPrompt(prompt); } }}
                   style={S.textarea} aria-label={t.placeholder}
                 />
