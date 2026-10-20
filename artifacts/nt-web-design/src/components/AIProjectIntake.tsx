@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   ArrowUp, Mic, Globe, Smartphone, Bot, Shuffle, X, Check, Loader2, Plus, Layers, Paperclip,
-  Briefcase, UtensilsCrossed, Stethoscope, ShoppingBag, Palette, Home, HelpCircle,
+  Briefcase, UtensilsCrossed, Stethoscope, ShoppingBag, Palette, Home, HelpCircle, Wrench, ArrowUpRight,
 } from 'lucide-react';
 
 /* ─── Types ─────────────────────────────────────────────── */
@@ -43,6 +43,8 @@ const C = {
   danger: '#F87171',
 };
 
+const EX_ICONS = [Stethoscope, Wrench, Briefcase, ShoppingBag, Home];
+
 /* ─── Copy ──────────────────────────────────────────────── */
 export const SITE_TYPES: { id: SiteType; icon: typeof Globe; fr: string; en: string }[] = [
   { id: 'business', icon: Briefcase, fr: 'Entreprise / Services', en: 'Business / Company' },
@@ -81,7 +83,7 @@ const T = {
   fr: {
     hero: 'Commencez par une idée. Vous pourrez tout changer ensuite.',
     placeholder: 'Décrivez votre idée, on lui donne vie…',
-    tryThese: 'Pas sûr par où commencer ? Essayez',
+    tryThese: 'Pas sûr par où commencer ? Essayez l’un de ceux-ci',
     examples: [
       'Site bilingue pour ma clinique dentaire avec rendez-vous',
       'Boutique en ligne pour mes bijoux faits main',
@@ -112,7 +114,7 @@ const T = {
   en: {
     hero: 'Start with one prompt. You can change everything later.',
     placeholder: 'Describe your idea, we will bring it to life…',
-    tryThese: 'Not sure where to start? Try these',
+    tryThese: 'Not sure where to start? Try one of these',
     examples: [
       'Bilingual site for my dental clinic with booking',
       'Online store for my handmade jewelry',
@@ -339,6 +341,24 @@ export default function AIProjectIntake({
   const progress = step === 'done' ? 100 : Math.round((answered.size / FLOW.length) * 100);
   const examples = [0, 1, 2, 3].map(i => t.examples[(exampleOffset + i) % t.examples.length]);
   const canSend = !!prompt.trim();
+  const [boxHover, setBoxHover] = useState(false);
+  const [boxFocus, setBoxFocus] = useState(false);
+  const [ph, setPh] = useState('');
+
+  useEffect(() => {
+    if (step !== 'home' || prompt || boxFocus) return;
+    let i = 0, j = 1, alive = true;
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    const list = T[lang].examples;
+    const tick = () => {
+      if (!alive) return;
+      const full = list[i % list.length];
+      if (j <= full.length) { setPh(full.slice(0, j)); j++; timer = setTimeout(tick, 45); }
+      else { timer = setTimeout(() => { j = 1; i++; tick(); }, 1800); }
+    };
+    tick();
+    return () => { alive = false; if (timer) clearTimeout(timer); };
+  }, [step, prompt, boxFocus, lang]);
 
   return (
     <section style={S.page}>
@@ -357,7 +377,8 @@ export default function AIProjectIntake({
           <motion.h1 initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} style={S.hero}>{t.hero}</motion.h1>
 
           <div style={S.composerWrap}>
-            <div style={S.tabs} role="tablist">
+            <div aria-hidden style={S.glow} />
+            <div style={S.tabsRow}><div style={S.tabs} role="tablist">
               {KINDS.map(k => {
                 const active = data.projectKind === k.id;
                 return (
@@ -370,12 +391,12 @@ export default function AIProjectIntake({
                   </button>
                 );
               })}
-            </div>
+            </div></div>
 
-            <div style={S.rim}>
+            <div style={{ ...S.rim, ...(boxFocus ? S.rimFocus : boxHover ? S.rimHover : {}) }} onMouseEnter={() => setBoxHover(true)} onMouseLeave={() => setBoxHover(false)} onFocusCapture={() => setBoxFocus(true)} onBlurCapture={() => setBoxFocus(false)}>
               <div style={S.box}>
                 <textarea
-                  autoFocus value={prompt} onChange={e => setPrompt(e.target.value)} placeholder={t.placeholder} rows={4}
+                  autoFocus value={prompt} onChange={e => setPrompt(e.target.value)} placeholder={ph || t.placeholder} rows={3}
                   onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); startFromPrompt(prompt); } }}
                   style={S.textarea} aria-label={t.placeholder}
                 />
@@ -419,10 +440,8 @@ export default function AIProjectIntake({
               {t.tryThese} <Shuffle size={16} />
             </button>
             <div style={S.chips}>
-              {examples.map((ex, i) => (
-                <button key={ex} onClick={() => setPrompt(ex)} style={S.chip}>
-                  <span style={{ ...S.orb, background: ORBS[(i + exampleOffset) % ORBS.length] }} /> {ex}
-                </button>
+              {examples.map((ex) => (
+                <ExampleChip key={ex} label={ex} Icon={EX_ICONS[Math.max(0, t.examples.indexOf(ex)) % EX_ICONS.length]} onClick={() => setPrompt(ex)} />
               ))}
             </div>
           </div>
@@ -602,6 +621,21 @@ function PrimaryBtn({ label, onClick, disabled, icon, inline }: {
   );
 }
 
+function ExampleChip({ label, Icon, onClick }: { label: string; Icon: typeof Globe; onClick: () => void }) {
+  const [hot, setHot] = useState(false);
+  return (
+    <button onClick={onClick} onMouseEnter={() => setHot(true)} onMouseLeave={() => setHot(false)} onFocus={() => setHot(true)} onBlur={() => setHot(false)}
+      style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '10px 16px', borderRadius: 999,
+        border: `1px solid ${hot ? 'rgba(59,130,246,0.5)' : 'rgba(255,255,255,0.10)'}`,
+        background: hot ? 'rgba(59,130,246,0.10)' : 'rgba(255,255,255,0.05)', color: C.text,
+        fontSize: 'clamp(14px, 1.15vw, 18px)', cursor: 'pointer', fontFamily: FONT, transition: 'border-color .2s, background .2s' }}>
+      <Icon size={16} strokeWidth={1.8} color={C.muted} />
+      {label}
+      <ArrowUpRight size={14} color={C.muted} style={{ opacity: hot ? 1 : 0, width: hot ? 14 : 0, marginLeft: hot ? -2 : -10, overflow: 'hidden', flexShrink: 0, transition: 'all .2s ease' }} />
+    </button>
+  );
+}
+
 /* ─── Styles ────────────────────────────────────────────── */
 const FONT = '"Inter", "SF Pro Display", ui-sans-serif, system-ui, -apple-system, sans-serif';
 
@@ -613,33 +647,41 @@ const S: Record<string, CSSProperties> = {
   cloud: { position: 'absolute', borderRadius: '50%', background: 'rgba(90,140,230,0.12)', filter: 'blur(40px)' },
 
   homeWrap: { position: 'relative', zIndex: 1, maxWidth: 1460, margin: '0 auto', minHeight: '100vh', boxSizing: 'border-box',
-    padding: 'clamp(64px, 10vh, 110px) clamp(16px, 5vw, 64px) 64px', display: 'flex', flexDirection: 'column',
-    alignItems: 'center', gap: 'clamp(28px, 4vh, 44px)' },
+    padding: 'clamp(48px, 7vh, 88px) clamp(16px, 5vw, 64px) 56px', display: 'flex', flexDirection: 'column',
+    alignItems: 'center', gap: 'clamp(20px, 3vh, 32px)' },
   hero: { margin: 0, textAlign: 'center', fontSize: 'clamp(30px, 4.2vw, 52px)', fontWeight: 600, letterSpacing: '-0.055em',
     lineHeight: 1.08, color: C.heading },
 
-  composerWrap: { width: '100%', maxWidth: 1440 },
-  tabs: { display: 'flex', gap: 'clamp(6px, 1vw, 12px)', paddingLeft: 'clamp(10px, 2.5vw, 40px)', overflowX: 'auto', scrollbarWidth: 'none' },
-  tab: { display: 'flex', alignItems: 'center', gap: 'clamp(6px, 1vw, 12px)', height: 'clamp(46px, 6vw, 68px)', padding: '0 clamp(12px, 3vw, 54px)', border: 'none', flexShrink: 0, whiteSpace: 'nowrap',
-    borderRadius: '16px 16px 0 0', background: C.tabOff, color: C.muted, fontSize: 'clamp(15px, 1.3vw, 21px)', fontWeight: 600,
-    fontFamily: FONT, cursor: 'pointer', marginBottom: -1 },
-  tabActive: { background: C.rim, color: C.heading },
+  composerWrap: { position: 'relative', width: '100%', maxWidth: 1440 },
+  tabsRow: { display: 'flex', justifyContent: 'center', marginBottom: 12, position: 'relative', zIndex: 1 },
+  tabs: { display: 'inline-flex', gap: 4, padding: 4, maxWidth: '100%', overflowX: 'auto', scrollbarWidth: 'none',
+    background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.10)', borderRadius: 14 },
+  tab: { display: 'flex', alignItems: 'center', gap: 8, height: 'clamp(40px, 4.5vw, 48px)', padding: '0 clamp(12px, 2vw, 22px)', border: 'none', flexShrink: 0, whiteSpace: 'nowrap',
+    borderRadius: 10, background: 'transparent', color: C.muted, fontSize: 'clamp(14px, 1.1vw, 17px)', fontWeight: 600,
+    fontFamily: FONT, cursor: 'pointer', transition: 'background .2s, color .2s' },
+  tabActive: { background: 'rgba(255,255,255,0.10)', color: C.heading, boxShadow: '0 1px 2px rgba(0,0,0,0.35)' },
   newBadge: { background: '#E11D2E', color: '#fff', fontSize: 'clamp(11px, .95vw, 15px)', fontWeight: 900, letterSpacing: '.04em',
     padding: '3px 10px', borderRadius: 7, border: '2px solid #fff', transform: 'rotate(-6deg)', fontStyle: 'italic', lineHeight: 1.2 },
 
-  rim: { background: C.rim, borderRadius: 30, padding: 7, boxShadow: '0 0 0 1px rgba(0,140,255,0.18), 0 30px 80px rgba(0,40,120,0.35)' },
-  box: { background: C.panel, borderRadius: 24, padding: 'clamp(18px, 2.2vw, 30px)', minHeight: 'clamp(200px, 26vh, 300px)',
+  rim: { position: 'relative', zIndex: 1, background: C.rim, borderRadius: 30, padding: 7, transition: 'box-shadow .25s',
+    boxShadow: '0 0 0 1px rgba(0,140,255,0.18), inset 0 1px 0 0 rgba(255,255,255,0.12), 0 30px 80px rgba(0,40,120,0.35)' },
+  rimHover: { boxShadow: '0 0 0 1px rgba(59,130,246,0.40), inset 0 1px 0 0 rgba(255,255,255,0.12), 0 30px 80px rgba(0,40,120,0.35)' },
+  rimFocus: { boxShadow: '0 0 0 1.5px #3b82f6, inset 0 1px 0 0 rgba(255,255,255,0.12), 0 0 40px rgba(59,130,246,0.25), 0 30px 80px rgba(0,40,120,0.35)' },
+  glow: { position: 'absolute', left: '50%', top: '58%', width: '72%', height: '70%', transform: 'translate(-50%, -50%)',
+    background: 'rgba(37,99,235,0.16)', filter: 'blur(100px)', pointerEvents: 'none', zIndex: 0 },
+  box: { background: C.panel, borderRadius: 24, padding: 'clamp(18px, 2.2vw, 30px)', minHeight: 'clamp(150px, 20vh, 225px)',
     display: 'flex', flexDirection: 'column', boxSizing: 'border-box' },
   textarea: { flex: 1, width: '100%', resize: 'none', background: 'transparent', border: 'none', outline: 'none', color: C.text,
-    fontSize: 'clamp(17px, 1.5vw, 25px)', lineHeight: 1.5, fontFamily: FONT, minHeight: 110 },
+    fontSize: 'clamp(17px, 1.5vw, 25px)', lineHeight: 1.5, fontFamily: FONT, minHeight: 80 },
   boxActions: { display: 'flex', justifyContent: 'space-between', alignItems: 'center' },
   plusBtn: { width: 48, height: 48, borderRadius: 12, border: 'none', background: 'transparent', color: C.text, cursor: 'pointer',
     display: 'flex', alignItems: 'center', justifyContent: 'center' },
   micBtn: { width: 44, height: 44, border: 'none', background: 'transparent', cursor: 'pointer',
     display: 'flex', alignItems: 'center', justifyContent: 'center' },
-  sendBtn: { width: 90, height: 60, borderRadius: 30, border: 'none', background: '#1B2A45', color: '#5A7DB5',
-    display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'not-allowed', transition: 'background .2s, color .2s' },
-  sendOn: { background: C.accent, color: C.onAccent, cursor: 'pointer', boxShadow: '0 6px 24px rgba(29,206,160,0.35)' },
+  sendBtn: { width: 90, height: 60, borderRadius: 30, border: 'none', background: 'linear-gradient(135deg, #1d4ed8, #3b82f6)', color: '#fff',
+    opacity: .55, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'not-allowed',
+    boxShadow: '0 4px 18px rgba(59,130,246,0.25)', transition: 'opacity .2s, box-shadow .2s' },
+  sendOn: { opacity: 1, cursor: 'pointer', boxShadow: '0 8px 28px rgba(59,130,246,0.5)' },
   fileChip: { display: 'inline-flex', alignItems: 'center', gap: 6, padding: '6px 10px', borderRadius: 999, background: C.rim,
     fontSize: 13, color: C.text },
   fileX: { background: 'none', border: 'none', color: C.muted, cursor: 'pointer', display: 'flex', padding: 0 },
