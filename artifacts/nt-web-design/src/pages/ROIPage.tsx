@@ -19,9 +19,8 @@ const copy = {
   cards: [
     {
       icon: PhoneMissed,
-      color: "34,211,238",
-      colorHex: "#22d3ee",
-      num: "01",
+      color: "96,165,250",
+      colorHex: "#60a5fa",
       title: { en: "Lead Leakage Recovery", fr: "Récupération des Leads Perdus" },
       problem: {
         en: "The average service business misses 20% of inbound calls.",
@@ -40,9 +39,8 @@ const copy = {
     },
     {
       icon: Clock,
-      color: "99,102,241",
-      colorHex: "#818cf8",
-      num: "02",
+      color: "96,165,250",
+      colorHex: "#60a5fa",
       title: { en: "Operational Efficiency", fr: "Efficacité Opérationnelle" },
       problem: {
         en: "Your team wastes 15+ hours a week on manual follow-ups, scheduling, and data entry.",
@@ -61,9 +59,8 @@ const copy = {
     },
     {
       icon: TrendingUp,
-      color: "52,211,153",
-      colorHex: "#34d399",
-      num: "03",
+      color: "96,165,250",
+      colorHex: "#60a5fa",
       title: { en: "Acquisition Cost Reduction", fr: "Réduction du Coût d'Acquisition" },
       problem: {
         en: "Paying for ads is renting traffic. You stop paying, the traffic stops.",
@@ -110,7 +107,7 @@ function Chip({ label, color }: { label: string; color: string }) {
       letterSpacing: "0.13em",
       textTransform: "uppercase",
       color,
-      background: `rgba(${color === "#22d3ee" ? "34,211,238" : color === "#818cf8" ? "99,102,241" : "52,211,153"},0.12)`,
+      background: `rgba(96,165,250,0.12)`,
       border: `1px solid ${color}33`,
     }}>
       {label}
@@ -244,12 +241,6 @@ export default function ROIPage() {
                           }}>
                             <Icon size={20} color={card.colorHex} />
                           </div>
-                          <span style={{
-                            fontSize: "11px", fontWeight: 700, letterSpacing: "0.1em",
-                            color: "rgba(255,255,255,0.18)",
-                          }}>
-                            {card.num}
-                          </span>
                         </div>
 
                         <h2 style={{
