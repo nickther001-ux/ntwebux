@@ -212,7 +212,7 @@ export function ROICalculator() {
               {sliders.map((s) => (
                 <div key={s.key}>
                   <label style={{ display: 'block', fontSize: '13px', fontWeight: 600, color: 'rgba(255,255,255,0.8)', marginBottom: '10px' }}>{s.label}</label>
-                  <input type="range" min={s.min} max={s.max} step={s.step} value={s.value} onChange={(e) => s.onChange(Number(e.target.value))} style={{ width: '100%', accentColor: '#3b82f6', cursor: 'pointer', height: '4px' }} />
+                  <input type="range" className="roi-slider" min={s.min} max={s.max} step={s.step} value={s.value} onChange={(e) => s.onChange(Number(e.target.value))} style={{ width: '100%' }} />
                   <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', color: 'rgba(255,255,255,0.25)', marginTop: '4px' }}>
                     <span>{s.min}</span><span>{s.max}</span>
                   </div>
@@ -490,6 +490,30 @@ export function ROICalculator() {
       </div>
 
       <style>{`
+        .roi-slider {
+          -webkit-appearance: none; appearance: none;
+          width: 100%; height: 26px; background: transparent; cursor: pointer; outline: none; margin: 0;
+        }
+        .roi-slider::-webkit-slider-runnable-track {
+          height: 6px; border-radius: 99px; background: rgba(255,255,255,0.14);
+        }
+        .roi-slider::-webkit-slider-thumb {
+          -webkit-appearance: none; appearance: none; box-sizing: border-box;
+          width: 22px; height: 22px; margin-top: -8px; border-radius: 50%;
+          background: #3b82f6; border: 2px solid #fff;
+          box-shadow: 0 2px 10px rgba(59,130,246,0.55); cursor: grab;
+          transition: transform .12s, box-shadow .12s;
+        }
+        .roi-slider:hover::-webkit-slider-thumb { box-shadow: 0 2px 16px rgba(59,130,246,0.85); }
+        .roi-slider:active::-webkit-slider-thumb { cursor: grabbing; transform: scale(1.12); }
+        .roi-slider:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px rgba(59,130,246,0.35); }
+        .roi-slider::-moz-range-track { height: 6px; border-radius: 99px; background: rgba(255,255,255,0.14); }
+        .roi-slider::-moz-range-thumb {
+          box-sizing: border-box; width: 22px; height: 22px; border-radius: 50%;
+          background: #3b82f6; border: 2px solid #fff;
+          box-shadow: 0 2px 10px rgba(59,130,246,0.55); cursor: grab;
+        }
+        .roi-slider:active::-moz-range-thumb { cursor: grabbing; }
         @keyframes pulse-dot {
           0%, 100% { opacity: 1; transform: scale(1); }
           50%       { opacity: 0.4; transform: scale(0.75); }
