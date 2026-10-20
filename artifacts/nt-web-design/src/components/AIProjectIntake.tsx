@@ -39,7 +39,7 @@ const C = {
   // ntwebux.com palette — swap `accent` here to rebrand everything at once
   bg: '#060A14', panel: '#0B1526', panel2: '#0E1A2E', rim: '#14243F', tabOff: '#0A1322',
   border: 'rgba(0,140,255,0.16)', text: '#D8E8FF', heading: '#F2F7FF', muted: '#7E95BF',
-  accent: '#1DCEA0', accentDim: 'rgba(29,206,160,0.12)', accentBorder: 'rgba(29,206,160,0.45)', onAccent: '#03241B',
+  accent: '#3b82f6', accentDim: 'rgba(59,130,246,0.14)', accentBorder: 'rgba(59,130,246,0.50)', onAccent: '#FFFFFF',
   danger: '#F87171',
 };
 
@@ -346,7 +346,7 @@ export default function AIProjectIntake({
   const [ph, setPh] = useState('');
 
   useEffect(() => {
-    if (step !== 'home' || prompt || boxFocus) return;
+    if (step !== 'home' || prompt) return;
     let i = 0, j = 1, alive = true;
     let timer: ReturnType<typeof setTimeout> | undefined;
     const list = T[lang].examples;
@@ -358,7 +358,7 @@ export default function AIProjectIntake({
     };
     tick();
     return () => { alive = false; if (timer) clearTimeout(timer); };
-  }, [step, prompt, boxFocus, lang]);
+  }, [step, prompt, lang]);
 
   return (
     <section style={S.page}>
@@ -614,10 +614,12 @@ function PrimaryBtn({ label, onClick, disabled, icon, inline }: {
   label: string; onClick?: () => void; disabled?: boolean; icon?: ReactNode; inline?: boolean;
 }) {
   return (
-    <button type={onClick ? 'button' : 'submit'} onClick={onClick} disabled={disabled}
-      style={{ ...S.primary, width: inline ? 'auto' : '100%', opacity: disabled ? .6 : 1 }}>
-      {label} {icon ?? <ArrowUp size={18} style={{ transform: 'rotate(90deg)' }} />}
-    </button>
+    <div style={{ display: 'flex', justifyContent: inline ? 'flex-start' : 'flex-end', marginTop: 16 }}>
+      <button type={onClick ? 'button' : 'submit'} onClick={onClick} disabled={disabled}
+        style={{ ...S.primary, height: 48, padding: '0 28px', opacity: disabled ? .6 : 1 }}>
+        {label} {icon ?? <ArrowUp size={18} style={{ transform: 'rotate(90deg)' }} />}
+      </button>
+    </div>
   );
 }
 
@@ -660,8 +662,8 @@ const S: Record<string, CSSProperties> = {
     borderRadius: 10, background: 'transparent', color: C.muted, fontSize: 'clamp(14px, 1.1vw, 17px)', fontWeight: 600,
     fontFamily: FONT, cursor: 'pointer', transition: 'background .2s, color .2s' },
   tabActive: { background: 'rgba(255,255,255,0.10)', color: C.heading, boxShadow: '0 1px 2px rgba(0,0,0,0.35)' },
-  newBadge: { background: '#E11D2E', color: '#fff', fontSize: 'clamp(11px, .95vw, 15px)', fontWeight: 900, letterSpacing: '.04em',
-    padding: '3px 10px', borderRadius: 7, border: '2px solid #fff', transform: 'rotate(-6deg)', fontStyle: 'italic', lineHeight: 1.2 },
+  newBadge: { background: 'rgba(59,130,246,0.18)', color: '#93c5fd', fontSize: '10px', fontWeight: 700, letterSpacing: '.08em',
+    padding: '3px 9px', borderRadius: 999, border: '1px solid rgba(59,130,246,0.35)', lineHeight: 1.3 },
 
   rim: { position: 'relative', zIndex: 1, background: C.rim, borderRadius: 30, padding: 7, transition: 'box-shadow .25s',
     boxShadow: '0 0 0 1px rgba(0,140,255,0.18), inset 0 1px 0 0 rgba(255,255,255,0.12), 0 30px 80px rgba(0,40,120,0.35)' },
@@ -694,12 +696,12 @@ const S: Record<string, CSSProperties> = {
     fontFamily: FONT },
   orb: { width: 30, height: 30, borderRadius: '50%', flexShrink: 0, display: 'inline-block', boxShadow: '0 0 12px rgba(0,170,238,0.35)' },
 
-  chatWrap: { position: 'relative', zIndex: 1, maxWidth: 1100, margin: '0 auto', height: '100vh', boxSizing: 'border-box',
-    padding: 'clamp(20px, 4vh, 40px) clamp(16px, 4vw, 40px)', display: 'flex', flexDirection: 'column', gap: 16 },
+  chatWrap: { position: 'relative', zIndex: 1, width: '100%', maxWidth: 760, margin: '0 auto', minHeight: '100vh', boxSizing: 'border-box',
+    padding: 'clamp(24px, 5vh, 48px) clamp(16px, 4vw, 32px)', display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 20 },
   chatTop: { display: 'flex', alignItems: 'center', gap: 16 },
   progressTrack: { flex: 1, height: 4, background: C.rim, borderRadius: 2, overflow: 'hidden' },
   progressBar: { height: '100%', background: C.accent, borderRadius: 2 },
-  chat: { flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: 16, padding: '8px 4px' },
+  chat: { flex: 'none', maxHeight: '42vh', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: 16, padding: '8px 4px' },
   bubbleAi: { maxWidth: '78%', background: C.panel, border: `1px solid ${C.border}`, padding: '14px 18px',
     borderRadius: '6px 20px 20px 20px', fontSize: 17, lineHeight: 1.55 },
   bubbleUser: { maxWidth: '78%', background: C.accentDim, border: `1px solid ${C.accentBorder}`, padding: '14px 18px', borderRadius: '20px 6px 20px 20px', fontSize: 17, lineHeight: 1.55 },
