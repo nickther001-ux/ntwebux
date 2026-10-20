@@ -17,8 +17,15 @@ const copy = {
   people:      { en: 'people',                fr: 'personnes' },
   monthlyLost: { en: 'Monthly Revenue Lost',  fr: 'Revenus perdus par mois' },
   yearlyGain:  { en: 'Yearly Opportunity',    fr: 'Opportunité annuelle' },
-  roiLabel:    { en: 'FieldOps Pro Estimated ROI', fr: 'ROI estimé de FieldOps Pro' },
+  roiLabel:    { en: 'NT Business Suite Estimated ROI', fr: 'ROI estimé de NT Business Suite' },
   roiNote:     { en: 'Based on a $297/mo subscription', fr: "Basé sur un abonnement de 297 $/mois" },
+
+  recovered:     { en: 'Recovered Revenue',            fr: 'Revenus récupérés' },
+  recoveredNote: { en: 'based on a realistic 25% automated lead recovery rate', fr: 'basé sur un taux réaliste de récupération automatisée de 25 %' },
+  labor:         { en: 'Labor Hours Reclaimed',        fr: 'Heures de travail récupérées' },
+  laborNote:     { en: '~4 hrs/week/employee saved, valued at $35/hr', fr: '~4 h/semaine/employé économisées, valeur de 35 $/h' },
+  netValue:      { en: 'Estimated Net Value Created',  fr: 'Valeur nette estimée créée' },
+  perYear:       { en: '/yr',                          fr: '/an' },
   plugBtn:     { en: 'Plug the Leak →',       fr: 'Colmater la Fuite →' },
 
   diagLine1:   { en: '[SYSTEM] Analyzing Revenue Gaps...', fr: '[SYSTÈME] Analyse des pertes de revenus...' },
@@ -73,11 +80,15 @@ export function ROICalculator() {
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const monthlyLost        = jobValue * missedCalls * 4;
-  const yearlyGain         = monthlyLost * 12 * teamSize;
-  const annualLeakage      = yearlyGain;
-  const projectedRecovery  = Math.round(yearlyGain * 0.82);
+  const recoveredRevenue   = Math.round(missedCalls * 52 * 0.25 * jobValue);
+  const annualLaborSavings = Math.round(teamSize * 4 * 52 * 35);
+  const totalAnnualBenefit = recoveredRevenue + annualLaborSavings;
   const subscriptionAnnual = SUBSCRIPTION * 12;
-  const roi = Math.round((yearlyGain - subscriptionAnnual) / subscriptionAnnual * 100);
+  const netROIValue        = totalAnnualBenefit - subscriptionAnnual;
+  const roi                = Math.round((netROIValue / subscriptionAnnual) * 100);
+  const annualLeakage      = jobValue * missedCalls * 52;
+  const projectedRecovery  = recoveredRevenue;
+  const recoveredMonthly   = Math.round(recoveredRevenue / 12);
 
   useEffect(() => {
     if (stage !== 'diag') return;
@@ -137,7 +148,7 @@ export function ROICalculator() {
           name: company.trim(),
           email: email.trim(),
           phone: phone.trim(),
-          service: 'FieldOps Pro (from ROI Audit)',
+          service: 'NT Business Suite (from ROI Audit)',
           message: `Pain point: ${pain}\nAnnual leakage: ${(annualLeakage || 0).toLocaleString()}\nProjected recovery: ${(projectedRecovery || 0).toLocaleString()}`
         })
       });
@@ -215,9 +226,24 @@ export function ROICalculator() {
                 <p style={{ fontSize: 'clamp(24px, 5vw, 32px)', fontWeight: 800, color: '#ef4444', margin: 0, letterSpacing: '-0.02em' }}>{formatDollar(monthlyLost, l)}</p>
               </div>
               <div style={{ padding: '20px', background: 'rgba(34,197,94,0.08)', border: '1px solid rgba(34,197,94,0.2)', borderRadius: '16px' }}>
-                <p style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#4ade80', margin: '0 0 8px' }}>{bi(copy.yearlyGain, l)}</p>
-                <p style={{ fontSize: 'clamp(24px, 5vw, 32px)', fontWeight: 800, color: '#22c55e', margin: 0, letterSpacing: '-0.02em' }}>{formatDollar(yearlyGain, l)}</p>
+                <p style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#4ade80', margin: '0 0 8px' }}>{bi(copy.netValue, l)}</p>
+                <p style={{ fontSize: 'clamp(24px, 5vw, 32px)', fontWeight: 800, color: '#22c55e', margin: 0, letterSpacing: '-0.02em' }}>{formatDollar(totalAnnualBenefit, l)}{bi(copy.perYear, l)}</p>
               </div>
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '24px' }}>
+              {[
+                { label: bi(copy.recovered, l), value: recoveredRevenue,   note: bi(copy.recoveredNote, l) },
+                { label: bi(copy.labor, l),     value: annualLaborSavings, note: bi(copy.laborNote, l) },
+              ].map((r) => (
+                <div key={r.label} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '16px', padding: '14px 18px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px' }}>
+                  <div>
+                    <p style={{ fontSize: '13px', fontWeight: 700, color: 'rgba(255,255,255,0.85)', margin: '0 0 2px' }}>{r.label}</p>
+                    <p style={{ fontSize: '11px', color: 'rgba(255,255,255,0.4)', margin: 0 }}>{r.note}</p>
+                  </div>
+                  <p style={{ fontSize: '18px', fontWeight: 800, color: '#fff', margin: 0, whiteSpace: 'nowrap' }}>{formatDollar(r.value, l)}{bi(copy.perYear, l)}</p>
+                </div>
+              ))}
             </div>
 
             <div style={{ textAlign: 'center', padding: '28px', background: 'linear-gradient(135deg, #1d4ed8 0%, #2563eb 50%, #3b82f6 100%)', borderRadius: '16px', boxShadow: '0 8px 32px rgba(59,130,246,0.35)', marginBottom: '24px' }}>
@@ -316,7 +342,7 @@ export function ROICalculator() {
                   <h2 style={{ fontSize: 'clamp(20px, 4vw, 30px)', fontWeight: 800, letterSpacing: '-0.03em', margin: '0 0 8px', color: '#fff', lineHeight: 1.2 }}>
                     {bi(copy.bridgeTitle, l)}{' '}
                     <span style={{ background: 'linear-gradient(135deg, #22c55e, #4ade80)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-                      {formatDollar(monthlyLost, l)}
+                      {formatDollar(recoveredMonthly, l)}
                     </span>
                     {' '}{bi(copy.bridgeOf, l)}
                   </h2>
